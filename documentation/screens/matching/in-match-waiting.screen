@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../master-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="160" width="263" height="113"/>
+  <widgets xsi:type="model:Image" x="196" y="169" width="77" height="48" src="images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="288" y="170" width="145" height="93" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="288" width="263" height="32"/>
+  <widgets xsi:type="model:Text" x="197" y="297" width="243" text="{busy-cursor}Dang cho xep tran dau ...">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" x="464" y="188" width="494" text="Thoi diem,Su kien&#xA;8:00:00,[c0ld] dang cho"/>
+  <widgets xsi:type="model:WidgetGroup" x="464" y="160">
+    <widgets xsi:type="model:Panel" width="493" height="22"/>
+    <widgets xsi:type="model:Label" x="6" width="74" text="*Dien bien*">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Button" x="186" y="332" text="&lt;&lt; Thoat khoi League II"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

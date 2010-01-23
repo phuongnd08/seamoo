@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="228" width="263" height="97"/>
+  <widgets xsi:type="model:Image" x="196" y="237" width="77" height="48" src="images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="288" y="238" width="145" height="87" text="Show your knowledge of vocabulary, grammar and listening ability">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="340" width="263" height="65"/>
+  <widgets xsi:type="model:Text" x="196" y="350" width="243" height="47" text="Linh vuc hien dang co _120_ thanh vien tham gia tranh tai. Nguoi dang dan dau la _mrc0ld_">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="472" y="232">
+    <widgets xsi:type="model:Panel" width="489" background="#e5e5e5"/>
+    <widgets xsi:type="model:Image" x="10" y="10" src="images/funny-baby.jpg"/>
+    <widgets xsi:type="model:Text" x="80" y="10" width="399" height="67" text="[Amateur League]&#xA;Giai dau danh cho nhung nguoi lan dau tham du&#xA;Ban dang co _40_ diem. Ban con *20* ngay de tich luy *300* diem de co the thang hang len *League II*">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Button" x="78" y="71" text="Tham gia"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="472" y="340">
+    <widgets xsi:type="model:Panel" width="489" height="145" background="#e5e5e5"/>
+    <widgets xsi:type="model:Image" x="10" y="10" width="63" height="45" src="images/england_flag_02.gif"/>
+    <widgets xsi:type="model:Text" x="80" y="10" width="399" height="95" text="[League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League&#xA;Ban dang co _40_ diem. Ban con *20* ngay de tich luy *100* diem de co the tru hang hoac tich luy du *300* diem de co the tham du League I">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Button" x="80" y="110" text="Tham gia"/>
+    <widgets xsi:type="model:TextField" x="24" y="21" text="2nd"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="472" y="494">
+    <widgets xsi:type="model:Panel" width="489" height="78" background="#e5e5e5"/>
+    <widgets xsi:type="model:Image" x="10" y="10" width="63" height="45" src="images/england_flag_02.gif"/>
+    <widgets xsi:type="model:Text" x="80" y="10" width="399" height="67" text="[League I]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o League II&#xA;_Ban chua duoc quyen tham gia giai dau nay_">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" x="24" y="21" text="1st"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="472" y="584" width="489" height="78" background="#e5e5e5"/>
+  <widgets xsi:type="model:Image" x="482" y="594" width="63" height="45" src="images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="552" y="594" width="399" height="67" text="[Pro League]&#xA;Giai dau  chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Pro League&#xA;_Ban chua duoc quyen tham gia giai dau nay_">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" x="496" y="605" text="Pro"/>
+  <widgets xsi:type="model:Panel" x="472" y="674" width="489" height="106" background="#e5e5e5"/>
+  <widgets xsi:type="model:Image" x="482" y="684" width="63" height="45" src="images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="552" y="684" width="399" height="81" text="[Free League]&#xA;xxxx">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" x="495" y="695" text="Free"/>
+  <widgets xsi:type="model:Label" x="191" y="160" text="English">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="191" y="213" width="769"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

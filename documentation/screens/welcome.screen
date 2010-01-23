@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="186" y="160">
+    <widgets xsi:type="model:Panel" width="263"/>
+    <widgets xsi:type="model:Image" x="10" y="9" width="77" height="48" src="images/england_flag_02.gif"/>
+    <widgets xsi:type="model:Text" x="102" y="10" width="151" height="80" text="[English]&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="456" y="160" width="263"/>
+  <widgets xsi:type="model:Image" x="466" y="169" width="79" height="48" src="images/math.jpg"/>
+  <widgets xsi:type="model:Text" x="558" y="170" width="151" height="80" text="[Toán học]&#xA;Thể hiện sự hiểu biết cùng với khả năng suy luận toán học của bạn">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

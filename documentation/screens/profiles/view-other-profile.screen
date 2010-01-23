@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../master-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="228" width="263" height="289"/>
+  <widgets xsi:type="model:Image" x="196" y="237" width="68" height="64" src="../images/Mr_Cold.JPG"/>
+  <widgets xsi:type="model:Text" x="280" y="239" width="153" height="46" text="*Phuong Nguyen*&#xA;The hien mot dang cap pro">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" x="464" y="256" width="494" text="#,Thoi diem,Dau voi,Ket qua,&#xA;1,2009/12/02-08:00,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|2,2009/12/02-08:05,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;3,2009/12/02-08:10,[thinh_pro] &amp; [azura] &amp; [akanu],3rd,[Xem]&#xA;|4,2009/12/02-08:15,[thinh_pro] &amp; [azura] &amp; [akanu],4th,[Xem]&#xA;5,2009/12/02-08:20,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|6,2009/12/02-08:25,[thinh_pro] &amp; [azura] &amp; [akanu],2nd,[Xem]&#xA;7,2009/12/02-08:30,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|8,2009/12/02-08:35,[thinh_pro] &amp; [azura] &amp; [akanu],2nd,[Xem]&#xA;9,2009/12/02-08:40,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|10,2009/12/02-08:45,[thinh_pro] &amp; [azura] &amp; [akanu],3rd,[Xem]&#xA;"/>
+  <widgets xsi:type="model:Panel" x="464" y="228" width="493" height="22"/>
+  <widgets xsi:type="model:Label" x="470" y="228" width="331" text="*Cac tran dau da tham gia* (235)">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="521" width="262" height="106"/>
+  <widgets xsi:type="model:Text" x="195" y="529" width="244" height="99" text="*Quyen tham gia*&#xA;[League II] &amp; [Amateur League]&#xA;&#xA;*Thanh tich hien tai*&#xA;[League Two] 40,&#xA;[Amateur League] 80">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" x="197" y="308" width="242" height="198" text="#,Thong tin&#xA;Tuoi, *23*&#xA;Thay lan cuoi,*24* phut truoc day&#xA;Danh tieng,*120* diem&#xA;Cap,*3*&#xA;Quyen,Xem ho so cua &#xA;,user khac&#xA;,Sua cau hoi {help} &#xA;,cua [Amateur League]&#xA;"/>
+  <widgets xsi:type="model:LinkBar" x="700" y="497" text="&lt;Prev,1,2,...,19,20,Next>">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="464" y="531" width="493" height="22"/>
+  <widgets xsi:type="model:Label" x="470" y="531" width="331" text="*Cac giai dau da tham gia* (235)">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" x="464" y="564" width="494" text="#,Giai doan,Giai dau,Ket qua&#xA;1,2009/12/01-2010/12/31,[League Two],*Dang thi dau* (40)&#xA;|2,2009/11/01-209/11/30,[Amateur League],Thang hang (330)&#xA;3,2009/10/01-2009/10/31,[League Two],Tut hang (80)&#xA;|4,2009/09/01-2009/09/30,[League One],Thang hang (400)&#xA;5,2009/08/01-2009/08/31,[League One],Tru hang (130)&#xA;|6,2009/07/01-2009/07/31,[Pro League],Tru hang (150)&#xA;"/>
+  <widgets xsi:type="model:LinkBar" x="700" y="722" text="&lt;Prev,1,2,...,19,20,Next>">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="191" y="160" text="c0ld">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="191" y="213" width="769"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="571"/>
+    <guides position="532"/>
+  </vRuler>
+  <font/>
+</model:Screen>

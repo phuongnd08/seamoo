@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="191" y="160" text="Login voi Open ID cua ban">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="191" y="213" width="769"/>
+  <widgets xsi:type="model:Panel" x="198" y="257" height="46"/>
+  <widgets xsi:type="model:Image" x="208" y="264" src="images/google.png"/>
+  <widgets xsi:type="model:Panel" x="310" y="257" height="46"/>
+  <widgets xsi:type="model:Image" x="320" y="272" src="images/yahoo.png"/>
+  <widgets xsi:type="model:Panel" x="422" y="257" height="46"/>
+  <widgets xsi:type="model:Image" x="431" y="269" src="images/myopenid.png"/>
+  <widgets xsi:type="model:Panel" x="535" y="257" height="46"/>
+  <widgets xsi:type="model:Image" x="545" y="264" src="images/aol.png"/>
+  <widgets xsi:type="model:Panel" x="198" y="321" width="26" height="24"/>
+  <widgets xsi:type="model:Image" x="203" y="325" src="images/livejournal.png"/>
+  <widgets xsi:type="model:Panel" x="235" y="321" width="26" height="24"/>
+  <widgets xsi:type="model:Image" x="240" y="325" src="images/wordpress.png"/>
+  <widgets xsi:type="model:Panel" x="271" y="321" width="26" height="24"/>
+  <widgets xsi:type="model:Image" x="276" y="325" src="images/blogger.png"/>
+  <widgets xsi:type="model:Panel" x="307" y="321" width="26" height="24"/>
+  <widgets xsi:type="model:Image" x="312" y="325" src="images/verisign.png"/>
+  <widgets xsi:type="model:Panel" x="343" y="321" width="26" height="24"/>
+  <widgets xsi:type="model:Image" x="348" y="325" src="images/claimid.png"/>
+  <widgets xsi:type="model:Panel" x="379" y="321" width="26" height="24"/>
+  <widgets xsi:type="model:Image" x="384" y="325" src="images/clickpass.png"/>
+  <widgets xsi:type="model:Panel" x="417" y="321" width="26" height="24"/>
+  <widgets xsi:type="model:Image" x="422" y="325" src="images/google_profile.png"/>
+  <widgets xsi:type="model:Label" x="198" y="224" text="Chon nha cung cap">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="198" y="368" width="437" height="49" text="Neu ban khong su dung dich vu cua mot trong cac nha cung cap tren, [click vao day de dang ky voi myOpenID]">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="696" y="225">
+    <widgets xsi:type="model:Panel" width="264" height="144"/>
+    <widgets xsi:type="model:Text" x="4" y="4" width="256" height="136" text="*Open ID*&#xA;Open ID la mot bo _username_ va _password_ duy nhat cho phep ban tham gia vao rat nhieu website. Hien nay cac nha cung cap lon nhu Google, Yahoo, Microsoft deu cung cap Open ID.&#xA;Neu nhu ban su dung Google hay Yahoo thi` tai khoan email cua ban chinh la mot tai khoan Open ID.">
+      <font/>
+    </widgets>
+  </widgets>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

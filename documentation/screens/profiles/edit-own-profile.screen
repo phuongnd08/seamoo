@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../master-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Image" x="210" y="232" width="113" height="105" src="../images/Mr_Cold.JPG"/>
+  <widgets xsi:type="model:Table" x="352" y="232" width="609" height="425" text="#,Thong tin&#xA;&#xA;Display Name,&#xA;&#xA;Email,&#xA;&#xA;Ngay sinh,&#xA;,(Khong bao gio duoc hien thi\, chi dung de tinh tuoi)&#xA;&#xA;Website,&#xA;&#xA;Quote,&#xA;&#xA;About me,&#xA;"/>
+  <widgets xsi:type="model:Text" x="10" y="10" text="1,2009/12/02-08:00,[thinh_pro] &amp; [azura] &amp; [akanu],1st">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="200" y="160" text="c0ld - Edit">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="200" y="213" width="769"/>
+  <widgets xsi:type="model:Link" x="220" y="343" text="Change Picture">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" x="488" y="273" width="169" text="c0ld"/>
+  <widgets xsi:type="model:TextField" x="488" y="315" width="169" text="c0ld@gmail.com"/>
+  <widgets xsi:type="model:Combo" x="568" y="357" text="Ngay 18"/>
+  <widgets xsi:type="model:Combo" x="488" y="357" text="Thang 1"/>
+  <widgets xsi:type="model:Combo" x="650" y="357" text="Nam 1980"/>
+  <widgets xsi:type="model:Button" x="744" y="355" text="{calendar}"/>
+  <widgets xsi:type="model:TextField" x="488" y="418" width="169" text="http://c0ld.blogspot.com"/>
+  <widgets xsi:type="model:TextField" x="488" y="462" width="169" text="Distrust all one true way"/>
+  <widgets xsi:type="model:TextArea" x="488" y="504" width="313" height="113" text="Ambitious guy of destiny"/>
+  <widgets xsi:type="model:Button" x="488" y="624" text="Save"/>
+  <widgets xsi:type="model:Button" x="544" y="624" text="Cancel"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>
