@@ -3,3 +3,5 @@
 *#
 *~?
 *~??
+war/WEB-INF/lib/\*.*
+war/WEB-INF/class/\*.*
