@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Window" x="368" y="32" width="289" height="371" text="Giới hạn tự khóa"/>
+  <widgets xsi:type="model:Label" x="378" y="61" text="Chọn các tag của bạn">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" x="379" y="85" width="266" height="276" text="{unchecked},&#xA;{checked},Grammar&#xA;{unchecked},Pronunciation&#xA;{checked},Vocabulary" selection="2" verticalScrollbar="true"/>
+  <widgets xsi:type="model:Button" x="432" y="368" width="63" text="Cancel"/>
+  <widgets xsi:type="model:Button" x="515" y="368" width="70" text="Xác nhận"/>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

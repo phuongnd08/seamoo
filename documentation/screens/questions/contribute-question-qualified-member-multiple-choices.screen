@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="contribute-question-qualified-master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Combo" x="296" y="341" width="208" text="Nhan dang doan hoi thoai"/>
+  <widgets xsi:type="model:Panel" x="192" y="376" width="563" height="64"/>
+  <widgets xsi:type="model:Label" x="203" y="378" width="142" text="*Doan hoi thoai*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="192" y="446" width="563" height="58"/>
+  <widgets xsi:type="model:Label" x="199" y="450" width="64" text="*Noi dung doan hoi thoai*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" x="204" y="472" width="332" text="Hello Michael, How are you to day?"/>
+  <widgets xsi:type="model:WidgetGroup" x="192" y="512">
+    <widgets xsi:type="model:Panel" width="561" height="78"/>
+    <widgets xsi:type="model:Label" x="12" y="3" width="66" text="*Tu khoa* ">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" x="10" y="47" width="541" text="grammar"/>
+    <widgets xsi:type="model:Label" x="12" y="25" width="471" text="Noi tu-khoa-dai bang dau gach (-), dung dau cach de phan toi da 5 tu khoa (grammar pronunciation)">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Button" x="192" y="598" width="68" text="Cancel"/>
+  <widgets xsi:type="model:Button" x="270" y="598" width="68" text="Lưu"/>
+  <widgets xsi:type="model:Label" x="204" y="400" text="(Chua co)">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="270" y="399" text="Upload doan hoi thoai"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="372"/>
+  </vRuler>
+  <font/>
+</model:Screen>

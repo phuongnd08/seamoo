@@ -3,23 +3,27 @@
   <widgets xsi:type="model:Master" x="176" y="40">
     <screen href="../master-logged-in.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="160" width="263" height="113"/>
-  <widgets xsi:type="model:Image" x="196" y="169" width="77" height="48" src="images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="288" y="170" width="145" height="93" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League">
+  <widgets xsi:type="model:Panel" x="186" y="244" width="263" height="113"/>
+  <widgets xsi:type="model:Image" x="196" y="253" width="85" height="56" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="288" y="254" width="145" height="93" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="288" width="263" height="32"/>
-  <widgets xsi:type="model:Text" x="197" y="297" width="243" text="{busy-cursor}Dang cho xep tran dau ...">
+  <widgets xsi:type="model:Panel" x="186" y="372" width="263" height="32"/>
+  <widgets xsi:type="model:Text" x="197" y="381" width="243" text="{busy-cursor}Dang cho xep tran dau ...">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Table" x="464" y="188" width="494" text="Thoi diem,Su kien&#xA;8:00:00,[c0ld] dang cho"/>
-  <widgets xsi:type="model:WidgetGroup" x="464" y="160">
+  <widgets xsi:type="model:Table" x="464" y="272" width="494" text="Thoi diem,Su kien&#xA;8:00:00,[c0ld] dang cho"/>
+  <widgets xsi:type="model:WidgetGroup" x="464" y="244">
     <widgets xsi:type="model:Panel" width="493" height="22"/>
     <widgets xsi:type="model:Label" x="6" width="74" text="*Dien bien*">
       <font/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:Button" x="186" y="332" text="&lt;&lt; Thoat khoi League II"/>
+  <widgets xsi:type="model:Button" x="186" y="416" text="&lt;&lt; Thoat khoi League II"/>
+  <widgets xsi:type="model:Label" x="192" y="168" text="Tranh tai">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="edit-question-master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="191" y="248" width="557" height="73"/>
+  <widgets xsi:type="model:Image" x="201" y="257" width="84" height="54" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="293" y="258" width="444" height="22" text="[English] > [League II] > *Question*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="190" y="324" width="557" height="37"/>
+  <widgets xsi:type="model:Label" x="201" y="328" width="136" text="*Cau hoi*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="190" y="368" width="557" height="88"/>
+  <widgets xsi:type="model:Text" x="196" y="372" width="541" height="20" text="Fill in the blank">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="189" y="464" width="557" height="22"/>
+  <widgets xsi:type="model:Label" x="196" y="464" width="58" text="*Cau tra loi*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" x="189" y="712" width="556" text="Thoi diem,&#xA;2009/12/20 08:20,[mrcold] tao ra cau hoi,[Xem]&#xA;2009/12/21 09:14,[thinh_pro] sua cau hoi,[Xem]"/>
+  <widgets xsi:type="model:Panel" x="189" y="684" width="557" height="22"/>
+  <widgets xsi:type="model:Label" x="196" y="684" width="284" text="*Lich su*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="189" y="493" width="556" height="22"/>
+  <widgets xsi:type="model:Text" x="196" y="498" width="270" text="is">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextArea" x="196" y="391" width="548" height="54" text="Choose a proper form of BE&#xA;She \[...] a woman"/>
+  <widgets xsi:type="model:Panel" x="189" y="523" width="555" height="80"/>
+  <widgets xsi:type="model:Label" x="201" y="528" width="131" text="*Tu khoa* ">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" x="199" y="572" width="541" text="grammar"/>
+  <widgets xsi:type="model:Label" x="201" y="550" width="536" text="Noi tu-khoa-dai bang dau gach (-), dung dau cach de phan toi da 5 tu khoa (grammar pronunciation)">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="189" y="611" width="71" text="Cancel"/>
+  <widgets xsi:type="model:Button" x="267" y="611" width="65" text="Lưu"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

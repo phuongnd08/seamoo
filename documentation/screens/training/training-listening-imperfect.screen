@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="training-master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="192" y="264" width="493" height="22"/>
+  <widgets xsi:type="model:Label" x="198" y="264" width="290" text="*Cau hoi* [Grammar]">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="192" y="432" text="Câu tiếp theo >>"/>
+  <widgets xsi:type="model:Panel" x="193" y="291" width="492" height="44"/>
+  <widgets xsi:type="model:Text" x="199" y="301" width="475" text="Listening to the audio {play}{pause}">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="193" y="342" width="493" height="22"/>
+  <widgets xsi:type="model:Label" x="199" y="342" width="290" text="*Gõ ra những gì bạn nghe được*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" x="193" y="374" width="406" text="Hello, I'm Micheal"/>
+  <widgets xsi:type="model:Label" x="608" y="374" text="90%">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" x="193" y="403" width="406" text="Hello, I'm Michael"/>
+  <widgets xsi:type="model:Label" x="608" y="403" text="{check}">
+    <font/>
+  </widgets>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

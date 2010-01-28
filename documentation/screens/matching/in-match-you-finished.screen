@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../master-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="246" width="263" height="113"/>
+  <widgets xsi:type="model:Image" x="196" y="255" width="84" height="63" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="288" y="256" width="145" height="93" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="374" width="263" height="32"/>
+  <widgets xsi:type="model:Text" x="197" y="383" width="243" text="Ban vua thi dau voi">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" x="464" y="278" width="494" text="Thoi diem,Su kien&#xA;8:00:00,[c0ld] dang cho&#xA;8:00:01,[thinh_pro] tham gia tran dau&#xA;8:00:02,[ken] &amp; [ajeruzu] tham gia tran dau&#xA;...,...&#xA;8:05:20,[c0ld] da tra loi cau hoi thu 20"/>
+  <widgets xsi:type="model:WidgetGroup" x="464" y="250">
+    <widgets xsi:type="model:Panel" width="493" height="22"/>
+    <widgets xsi:type="model:Label" x="6" width="74" text="*Dien bien*">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="186" y="414">
+    <widgets xsi:type="model:Panel" width="263" height="49"/>
+    <widgets xsi:type="model:Text" x="54" y="10" width="198" height="34" text="[thinh_pro]&#xA;Song la khong cho doi">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Icon" x="10" y="12" icon="user (large)"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="469" width="263" height="49"/>
+  <widgets xsi:type="model:Text" x="240" y="479" width="198" height="34" text="[ken]&#xA;Mot doi phu du">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Icon" x="196" y="481" icon="user (large)"/>
+  <widgets xsi:type="model:WidgetGroup" x="186" y="526">
+    <widgets xsi:type="model:Panel" width="263" height="49"/>
+    <widgets xsi:type="model:Text" x="54" y="10" width="198" height="34" text="[ajeruzu]&#xA;Song la khong cho doi">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Icon" x="10" y="12" icon="user (large)"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="464" y="414" width="493" height="22"/>
+  <widgets xsi:type="model:Label" x="470" y="414" width="74" text="*Ket qua*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="464" y="441">
+    <widgets xsi:type="model:Panel" width="493" height="22"/>
+    <widgets xsi:type="model:Label" x="6" text="Ket qua chi co sau khi tran dau ket thuc.">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Button" x="464" y="469" width="161" text="Dau tiep tran khac >>"/>
+  <widgets xsi:type="model:Label" x="192" y="168" text="Tranh tai">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

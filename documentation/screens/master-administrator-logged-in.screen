@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="99" y="17">
+    <screen href="master-skeleton.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:LinkBar" x="608" y="15" text=",About,FAQ, Admin">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="531" y="14" text="{email} [c0ld], 15k">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

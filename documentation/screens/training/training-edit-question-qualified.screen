@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Window" x="368" y="32" width="289" height="313" text="Sửa câu hỏi"/>
+  <widgets xsi:type="model:Button" x="424" y="310" width="63" text="Cancel"/>
+  <widgets xsi:type="model:Button" x="507" y="310" width="70" text="Gửi đi"/>
+  <widgets xsi:type="model:Text" x="378" y="61" width="263" height="84" text="Bạn không thể sửa câu hỏi cấp độ của bạn chưa cho phép. Tuy nhiên bạn có thể báo sai sót này vơi các thành viên khác ở cấp độ cao hơn để câu hỏi được sửa (Xem [nguyên tắc cộng đồng của SeaMoo])">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="378" y="147" text="*Báo câu hỏi bị lỗi*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="378" y="169" text="Chi tiết lỗi">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextArea" x="378" y="191" width="255" height="90" text="..."/>
+  <widgets xsi:type="model:Label" x="378" y="284" text="Cần ít nhất 10 kí tự">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

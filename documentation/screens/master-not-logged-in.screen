@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="99" y="3">
+    <screen href="master-skeleton.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:LinkBar" x="656" y="2" text="Login,About,FAQ">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="99" y="37" width="193" height="68" background="#090ff9"/>
+  <widgets xsi:type="model:Text" x="130" y="47" text="SEAMOO" foreground="#ffffff">
+    <font size="20" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="135" y="78" text="Noi si tu tranh tai" foreground="#fdfa00">
+    <font bold="true"/>
+  </widgets>
+  <hRuler/>
+  <vRuler>
+    <guides position="249"/>
+  </vRuler>
+  <font/>
+</model:Screen>

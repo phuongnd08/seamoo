@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="238" width="775" height="65"/>
+  <widgets xsi:type="model:Image" x="196" y="247" width="84" height="45" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="288" y="248" width="662" height="22" text="[English] > [League II] > *Questions*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="308" width="775" height="66"/>
+  <widgets xsi:type="model:Text" x="240" y="318" width="709" height="55" text="*Lỗi*&#xA;Chỉ có thành viên có tiếng mới được phép xem trực tiếp câu hỏi của [League II]. Hãy tham gia và thể hiện kiến thức của bạn để có quyền truy cập đến kho câu hỏi của [League II]">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Icon" x="196" y="320" icon="delete (large)"/>
+  <widgets xsi:type="model:Label" x="192" y="168" text="Xem cau hoi">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="295"/>
+  </vRuler>
+  <font/>
+</model:Screen>

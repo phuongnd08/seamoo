@@ -3,56 +3,60 @@
   <widgets xsi:type="model:Master" x="176" y="40">
     <screen href="../master-logged-in.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="160" width="263" height="113"/>
-  <widgets xsi:type="model:Image" x="196" y="169" width="77" height="48" src="images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="288" y="170" width="145" height="93" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League">
+  <widgets xsi:type="model:Panel" x="184" y="248" width="263" height="113"/>
+  <widgets xsi:type="model:Image" x="194" y="257" width="85" height="54" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="286" y="258" width="145" height="93" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="288" width="263" height="32"/>
-  <widgets xsi:type="model:Text" x="197" y="297" width="243" text="Ban dang thi dau voi">
+  <widgets xsi:type="model:Panel" x="184" y="376" width="263" height="32"/>
+  <widgets xsi:type="model:Text" x="195" y="385" width="243" text="Ban dang thi dau voi">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Table" x="466" y="364" width="494" text="Thoi diem,Su kien&#xA;8:00:00,[c0ld] dang cho&#xA;8:00:01,[thinh_pro] tham gia tran dau&#xA;8:00:02,[ken] &amp; [ajeruzu] tham gia tran dau"/>
-  <widgets xsi:type="model:WidgetGroup" x="466" y="336">
+  <widgets xsi:type="model:Table" x="464" y="452" width="494" text="Thoi diem,Su kien&#xA;8:00:00,[c0ld] dang cho&#xA;8:00:01,[thinh_pro] tham gia tran dau&#xA;8:00:02,[ken] &amp; [ajeruzu] tham gia tran dau"/>
+  <widgets xsi:type="model:WidgetGroup" x="464" y="424">
     <widgets xsi:type="model:Panel" width="493" height="22"/>
     <widgets xsi:type="model:Label" x="6" width="74" text="*Dien bien*">
       <font/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="186" y="328">
+  <widgets xsi:type="model:WidgetGroup" x="184" y="416">
     <widgets xsi:type="model:Panel" width="263" height="49"/>
     <widgets xsi:type="model:Text" x="54" y="10" width="198" height="34" text="[thinh_pro]&#xA;Song la khong cho doi">
       <font/>
     </widgets>
     <widgets xsi:type="model:Icon" x="10" y="12" icon="user (large)"/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="383" width="263" height="49"/>
-  <widgets xsi:type="model:Text" x="240" y="393" width="198" height="34" text="[ken]&#xA;Mot doi phu du">
+  <widgets xsi:type="model:Panel" x="184" y="471" width="263" height="49"/>
+  <widgets xsi:type="model:Text" x="238" y="481" width="198" height="34" text="[ken]&#xA;Mot doi phu du">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Icon" x="196" y="395" icon="user (large)"/>
-  <widgets xsi:type="model:WidgetGroup" x="186" y="440">
+  <widgets xsi:type="model:Icon" x="194" y="483" icon="user (large)"/>
+  <widgets xsi:type="model:WidgetGroup" x="184" y="528">
     <widgets xsi:type="model:Panel" width="263" height="49"/>
     <widgets xsi:type="model:Text" x="54" y="10" width="198" height="34" text="[ajeruzu]&#xA;Song la khong cho doi">
       <font/>
     </widgets>
     <widgets xsi:type="model:Icon" x="10" y="12" icon="user (large)"/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="466" y="163" width="493" height="22"/>
-  <widgets xsi:type="model:Label" x="472" y="163" width="290" text="*Cau hoi* (1/20) [Grammar]">
+  <widgets xsi:type="model:Panel" x="464" y="251" width="493" height="22"/>
+  <widgets xsi:type="model:Label" x="470" y="251" width="290" text="*Cau hoi* (1/20) [Grammar]">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="466" y="189" width="492" height="44"/>
-  <widgets xsi:type="model:Text" x="472" y="199" width="475" text="What is the proper preposition here:&#xA;I look \[...\] her">
+  <widgets xsi:type="model:Panel" x="464" y="277" width="492" height="44"/>
+  <widgets xsi:type="model:Text" x="470" y="287" width="475" text="What is the proper preposition here:&#xA;I look \[...\] her">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="466" y="240" width="493" height="22"/>
-  <widgets xsi:type="model:Label" x="472" y="240" width="290" text="*Dien cau tra loi dung*">
+  <widgets xsi:type="model:Panel" x="464" y="328" width="493" height="22"/>
+  <widgets xsi:type="model:Label" x="470" y="328" width="290" text="*Dien cau tra loi dung*">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Button" x="466" y="301" text="Bo qua >>"/>
-  <widgets xsi:type="model:TextField" x="466" y="272" width="430" text="Text field"/>
-  <widgets xsi:type="model:Button" x="904" y="271" width="54" text="Tra loi"/>
+  <widgets xsi:type="model:Button" x="464" y="389" text="Bo qua >>"/>
+  <widgets xsi:type="model:TextField" x="464" y="360" width="430" text="Text field"/>
+  <widgets xsi:type="model:Button" x="902" y="359" text="Tra loi"/>
+  <widgets xsi:type="model:Label" x="192" y="168" text="Tranh tai">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

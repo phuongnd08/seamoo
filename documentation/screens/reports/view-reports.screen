@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../master-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="184" y="216" text="Cap nhap lai danh sach"/>
+  <widgets xsi:type="model:Label" x="352" y="217" text="{reload} Dang cap nhap lai danh sach">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="184" y="248" width="781" height="288"/>
+  <widgets xsi:type="model:Label" x="190" y="248" width="362" text="*Chua xu li*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:LinkBar" x="645" y="510" text="&lt;&lt;prev,\[1],2,3,...,10,11,next>>">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" x="184" y="272" width="781" text="#,Gui boi,Thoi diem,Cau hoi,Mo ta,&#xA;1,[thinh_pro],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[\[xu li]]&#xA;|2,[thinh_pro],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[\[xu li]]&#xA;3,[lucia],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[\[xu li]]&#xA;|4,[lucia],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[\[xu li]]&#xA;5,[lucia],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[\[xu li]]&#xA;|6,[anelka],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[\[xu li]]&#xA;7,[anelka],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[\[xu li]]&#xA;|8,[anelka],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[\[xu li]]&#xA;9,[anelka],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[\[xu li]]&#xA;|10,[ajurazi],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[\[xu li]]"/>
+  <widgets xsi:type="model:Panel" x="184" y="544" width="781" height="288"/>
+  <widgets xsi:type="model:Label" x="190" y="544" width="362" text="*Dang xu li*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:LinkBar" x="645" y="806" text="&lt;&lt;prev,\[1],2,3,...,10,11,next>>">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" x="184" y="568" width="781" text="#,Gui boi,Thoi diem,Cau hoi,Mo ta,Dang xu li boi&#xA;1,[thinh_pro],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[mrcold]&#xA;|2,[thinh_pro],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[lu-ko-vic]&#xA;3,[lucia],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[azong-ho]&#xA;|4,[lucia],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[ludazena]&#xA;5,[lucia],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[kiricuka]&#xA;|6,[anelka],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[hello-world]&#xA;7,[anelka],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[onyka]&#xA;|8,[anelka],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[xuak]&#xA;9,[anelka],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[lamac]&#xA;|10,[ajurazi],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[lurok]"/>
+  <widgets xsi:type="model:Panel" x="184" y="840" width="781" height="288"/>
+  <widgets xsi:type="model:Label" x="190" y="840" width="362" text="*Da xu li*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:LinkBar" x="645" y="1102" text="&lt;&lt;prev,\[1],2,3,...,10,11,next>>">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" x="184" y="864" width="781" text="#,Gui boi,Thoi diem,Cau hoi,Mo ta,Duoc xu li boi,Ket qua&#xA;1,[thinh_pro],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[mrcold],Bo qua,[xem lai]&#xA;|2,[thinh_pro],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[lu-ko-vic],Da sua,[xem lai]&#xA;3,[lucia],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[azong-ho],Da sua,[xem lai]&#xA;|4,[lucia],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[ludazena],Da xoa,[xem lai]&#xA;5,[lucia],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[kiricuka],Bo qua,[xem lai]&#xA;|6,[anelka],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[hello-world],Da xoa,[xem lai]&#xA;7,[anelka],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[onyka],Da sua,[xem lai]&#xA;|8,[anelka],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[xuak],Bo qua,[xem lai]&#xA;9,[anelka],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[lamac],Da sua,[xem lai]&#xA;|10,[ajurazi],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[lurok],Bo qua,[xem lai]"/>
+  <widgets xsi:type="model:Label" x="188" y="154" text="Cac bao cao">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="188" y="207" width="769"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="235"/>
+    <guides position="813"/>
+  </vRuler>
+  <font/>
+</model:Screen>

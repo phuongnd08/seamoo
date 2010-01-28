@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Panel" x="176" y="80" width="289" height="209"/>
+  <widgets xsi:type="model:Label" x="186" y="90" text="*Báo lỗi*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="186" y="112" text="Mô tả lỗi">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextArea" x="186" y="134" width="263" height="99" text="..."/>
+  <widgets xsi:type="model:Button" x="186" y="260" text="Cancel"/>
+  <widgets xsi:type="model:Button" x="384" y="260" width="65" text="Gửi đi"/>
+  <widgets xsi:type="model:Label" x="188" y="235" text="Điền ít nhất 10 kí tự">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

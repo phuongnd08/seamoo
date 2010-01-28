@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="training-master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="192" y="264" width="493" height="22"/>
+  <widgets xsi:type="model:Label" x="198" y="264" width="290" text="*Cau hoi* [Grammar]">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="192" y="290" width="492" height="44"/>
+  <widgets xsi:type="model:Text" x="198" y="300" width="475" text="What is the proper preposition here:&#xA;I look \[...\] her">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="192" y="341" width="493" height="22"/>
+  <widgets xsi:type="model:Label" x="198" y="341" width="290" text="*Dien cau tra loi dung*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="192" y="400" text="Câu tiếp theo >>"/>
+  <widgets xsi:type="model:Label" x="646" y="368" text="{sad}">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" x="192" y="368" width="430" text="at"/>
+  <widgets xsi:type="model:Label" x="626" y="368" text="{check}">
+    <font/>
+  </widgets>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="460"/>
+  </vRuler>
+  <font/>
+</model:Screen>

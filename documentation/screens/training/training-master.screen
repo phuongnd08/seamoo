@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../master-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="192" y="168" text="Luyen tap">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="192" y="221" width="556"/>
+  <widgets xsi:type="model:Panel" x="761" y="221" width="199" height="548"/>
+  <widgets xsi:type="model:Text" x="192" y="232" width="553" height="33" text="Ban dang co *120* cau hoi trong bo suu tap ca nhan. *50* cau da duoc len lich de on tap trong hom nay. *20* cau chua bao gio duoc xem">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="771" y="248" text="Xếp lại lịch"/>
+  <widgets xsi:type="model:Label" x="771" y="226" text="Lịch luyện tập quá dày?">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="771" y="286" width="179" height="49" text="Chỉ muốn luyện tập với các câu hỏi thuộc một số giới hạn chủ đề?">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="771" y="338" text="Giới hạn từ khóa"/>
+  <widgets xsi:type="model:Text" x="771" y="450" width="179" height="324" text="*Tại sao cần luyện tập?*&#xA;Trong quá trình tham gia các giải đấu của SeaMoo, &#xA;bạn sẽ bắt gặp nhiều câu hỏi. Để có thể nhớ chính xác và lâu dài, việc luyện tập là cần thiết. Chức năng luyện tập của SeaMoo được thiết kế để tự động sắp xếp một lịch ôn tập tối ưu dành cho bạn để bạn có thể nhớ được nhiều nhất mà lại tốn thời gian ít nhất.&#xA;&#xA;*Làm sao để bổ sung câu hỏi*&#xA;Để bổ sung câu hỏi vào bộ sưu tập của mình, bạn có thể sử dụng chức năng nhập về trong bảng review có sau mỗi trận đấu.">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="696" y="290" text="{edit}&#xA;{delete}">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="771" y="376" width="179" height="33" text="Quản lí bộ sưu tập cá nhân của bạn?">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="771" y="277" width="179"/>
+  <widgets xsi:type="model:HLine" x="771" y="367" width="179"/>
+  <widgets xsi:type="model:Button" x="771" y="409" text="Xem bộ sưu tập cá nhân"/>
+  <widgets xsi:type="model:HLine" x="771" y="440" width="179"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

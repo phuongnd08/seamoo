@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:XMI="http://www.omg.org/XMI" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" XMI:version="2.0">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../master-administrator-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:TabbedPane" x="192" y="168" width="774" height="696" text="Moderators,Site Settings,Subjects" selection="2" background="#e5e5e5"/>
+  <widgets xsi:type="model:Panel" x="202" y="205" width="263" height="179"/>
+  <widgets xsi:type="model:Image" x="210" y="214" width="88" height="57" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Button" x="209" y="279" width="89" text="Upload photo"/>
+  <widgets xsi:type="model:TextField" x="312" y="217" width="142" text="Name"/>
+  <widgets xsi:type="model:TextArea" x="312" y="245" width="142" height="59" text="Show your knowledge of vocabulary, grammar and listening ability" verticalScrollbar="true"/>
+  <widgets xsi:type="model:Button" x="328" y="348" width="89" text="Save"/>
+  <widgets xsi:type="model:HLine" x="209" y="341" width="256"/>
+  <widgets xsi:type="model:Checkbox" x="312" y="311" text="Enabled"/>
+  <widgets xsi:type="model:Panel" x="488" y="205" width="263" height="83"/>
+  <widgets xsi:type="model:Image" x="498" y="214" width="86" height="57" src="../images/math.jpg"/>
+  <widgets xsi:type="model:Text" x="590" y="215" width="151" height="65" text="[*Toán học*]{edit}{delete}{print-preview}&#xA;Thể hiện sự hiểu biết cùng với khả năng suy luận toán học của bạn">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="202" y="400">
+    <widgets xsi:type="model:Panel" width="263" height="179"/>
+    <widgets xsi:type="model:Image" x="8" y="9" width="86" height="57" src="../images/math.jpg" grayscale="true"/>
+    <widgets xsi:type="model:Button" x="7" y="74" width="89" text="Upload photo"/>
+    <widgets xsi:type="model:TextField" x="110" y="12" width="142" text="Name"/>
+    <widgets xsi:type="model:TextArea" x="110" y="40" width="142" height="59" text="Description"/>
+    <widgets xsi:type="model:Button" x="70" y="144" width="89" text="Create"/>
+    <widgets xsi:type="model:HLine" x="7" y="136" width="256"/>
+    <widgets xsi:type="model:Checkbox" x="110" y="106" text="Enabled"/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="224" y="348" width="89" text="Cancel"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="372"/>
+  </vRuler>
+  <font/>
+</model:Screen>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Window" x="239" y="100" width="346" height="93" text="Bỏ câu hỏi"/>
+  <widgets xsi:type="model:Text" x="249" y="127" text="Bỏ câu hỏi này ra khỏi bộ sưu tập cá nhân của bạn?">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="344" y="152" text="Có"/>
+  <widgets xsi:type="model:Button" x="392" y="152" text="Không"/>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

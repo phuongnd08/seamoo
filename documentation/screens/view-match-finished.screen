@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
   <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="master.screen#/"/>
+    <screen href="master-not-logged-in.screen#/"/>
   </widgets>
   <widgets xsi:type="model:Panel" x="186" y="160" width="263" height="113"/>
   <widgets xsi:type="model:Image" x="196" y="169" width="77" height="48" src="images/england_flag_02.gif"/>
@@ -39,7 +39,7 @@
     </widgets>
     <widgets xsi:type="model:Icon" x="10" y="12" icon="user (large)"/>
   </widgets>
-  <widgets xsi:type="model:Table" x="464" y="576" width="493" text="#,,&#xA;1,[-] What is the proper preposition?&#xA;,&#x9;[thinh_pro] (8:06:09) Here I come, {circled-check}&#xA;,&#x9;[ken] (8:06:09) Wow, {circled-mul}&#xA;,&#x9;[ajeruzu] (8:06:10) Year, {circled-mul}&#xA;,&#x9;[c0ld] (8:06: 11), {sad}&#xA;,&#x9;*correct*: Here I come, {circled-check}&#xA;|2,[-] Listen to the sound {play} {pause}?&#xA;|,&#x9;[thinh_pro] (8:06:09) Here I come, (80%)&#xA;|,&#x9;[ken] (8:06:09) Wow, (0%)&#xA;|,&#x9;[ajeruzu] (8:06:10) Year, (0%)&#xA;|,&#x9;[c0ld] (8:06: 11), ({sad})&#xA;|,&#x9;*correct*: Here I came, (100%)"/>
+  <widgets xsi:type="model:Table" x="464" y="576" width="493" text="#,,&#xA;1,[-] What is the proper preposition?,[Xem]&#xA;,&#x9;[thinh_pro] (8:06:09) Here I come, {circled-check}&#xA;,&#x9;[ken] (8:06:09) Wow, {circled-mul}&#xA;,&#x9;[ajeruzu] (8:06:10) Year, {circled-mul}&#xA;,&#x9;[c0ld] (8:06: 11), {sad}&#xA;,&#x9;*correct*: Here I come, {circled-check}&#xA;|2,[-] Listen to the sound {play} {pause}?,[Xem]&#xA;|,&#x9;[thinh_pro] (8:06:09) Here I come, (80%),{flag}&#xA;|,&#x9;[ken] (8:06:09) Wow, (0%),{flag}&#xA;|,&#x9;[ajeruzu] (8:06:10) Year, (0%),{flag}&#xA;|,&#x9;[c0ld] (8:06: 11), ({sad})&#xA;|,&#x9;*correct*: Here I came, (100%)"/>
   <widgets xsi:type="model:WidgetGroup" x="464" y="160">
     <widgets xsi:type="model:Panel" width="493" height="22"/>
     <widgets xsi:type="model:Label" x="6" width="74" text="*Dien bien*">

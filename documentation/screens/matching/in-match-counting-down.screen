@@ -3,48 +3,52 @@
   <widgets xsi:type="model:Master" x="176" y="40">
     <screen href="../master-logged-in.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="160" width="263" height="113"/>
-  <widgets xsi:type="model:Image" x="196" y="169" width="77" height="48" src="images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="288" y="170" width="145" height="93" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League">
+  <widgets xsi:type="model:Panel" x="186" y="246" width="263" height="113"/>
+  <widgets xsi:type="model:Image" x="196" y="255" width="93" height="56" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="288" y="256" width="145" height="93" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="288" width="263" height="32"/>
-  <widgets xsi:type="model:Text" x="197" y="297" width="243" text="Ban se thi dau voi">
+  <widgets xsi:type="model:Panel" x="186" y="374" width="263" height="32"/>
+  <widgets xsi:type="model:Text" x="197" y="383" width="243" text="Ban se thi dau voi">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Table" x="466" y="281" width="494" text="Thoi diem,Su kien&#xA;8:00:00,[c0ld] dang cho&#xA;8:00:01,[thinh_pro] tham gia tran dau&#xA;8:00:02,[ken] &amp; [ajeruzu] tham gia tran dau"/>
-  <widgets xsi:type="model:WidgetGroup" x="466" y="253">
+  <widgets xsi:type="model:Table" x="466" y="367" width="494" text="Thoi diem,Su kien&#xA;8:00:00,[c0ld] dang cho&#xA;8:00:01,[thinh_pro] tham gia tran dau&#xA;8:00:02,[ken] &amp; [ajeruzu] tham gia tran dau"/>
+  <widgets xsi:type="model:WidgetGroup" x="466" y="339">
     <widgets xsi:type="model:Panel" width="493" height="22"/>
     <widgets xsi:type="model:Label" x="6" width="74" text="*Dien bien*">
       <font/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="186" y="328">
+  <widgets xsi:type="model:WidgetGroup" x="186" y="414">
     <widgets xsi:type="model:Panel" width="263" height="49"/>
     <widgets xsi:type="model:Text" x="54" y="10" width="198" height="34" text="[thinh_pro]&#xA;Song la khong cho doi">
       <font/>
     </widgets>
     <widgets xsi:type="model:Icon" x="10" y="12" icon="user (large)"/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="383" width="263" height="49"/>
-  <widgets xsi:type="model:Text" x="240" y="393" width="198" height="34" text="[ken]&#xA;Mot doi phu du">
+  <widgets xsi:type="model:Panel" x="186" y="469" width="263" height="49"/>
+  <widgets xsi:type="model:Text" x="240" y="479" width="198" height="34" text="[ken]&#xA;Mot doi phu du">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Icon" x="196" y="395" icon="user (large)"/>
-  <widgets xsi:type="model:WidgetGroup" x="186" y="440">
+  <widgets xsi:type="model:Icon" x="196" y="481" icon="user (large)"/>
+  <widgets xsi:type="model:WidgetGroup" x="186" y="526">
     <widgets xsi:type="model:Panel" width="263" height="49"/>
     <widgets xsi:type="model:Text" x="54" y="10" width="198" height="34" text="[ajeruzu]&#xA;Song la khong cho doi">
       <font/>
     </widgets>
     <widgets xsi:type="model:Icon" x="10" y="12" icon="user (large)"/>
   </widgets>
-  <widgets xsi:type="model:Label" x="466" y="195" text="00:15">
+  <widgets xsi:type="model:Label" x="466" y="281" text="00:15">
     <font size="32"/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="466" y="163" width="493" height="22"/>
-  <widgets xsi:type="model:Label" x="472" y="163" width="290" text="*Dem nguoc truoc khi tran dau bat dau*">
+  <widgets xsi:type="model:Panel" x="466" y="249" width="493" height="22"/>
+  <widgets xsi:type="model:Label" x="472" y="249" width="290" text="*Dem nguoc truoc khi tran dau bat dau*">
     <font/>
   </widgets>
+  <widgets xsi:type="model:Label" x="192" y="168" text="Tranh tai">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

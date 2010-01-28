@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Window" x="368" y="32" width="289" height="177" text="Sửa câu hỏi"/>
+  <widgets xsi:type="model:Button" x="474" y="176" width="63" text="Đóng"/>
+  <widgets xsi:type="model:Text" x="378" y="61" width="263" height="109" text="Bạn cần chuyển đến trang biên tập câu hỏi. Chú ý rắng các thành viên SeaMoo sẽ cập nhập được những sủa chữa của bạn (Xem [nguyên tắc cộng đồng của SeaMoo])&#xA;&#xA;[*Chuyển dến trang biên tập câu hỏi {redo}*]&#xA;_(Mở trang mới và đóng hộp thoại này lại)_">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

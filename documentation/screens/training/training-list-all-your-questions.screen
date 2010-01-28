@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../master-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="192" y="168" text="Bo suu tap cua ban">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="192" y="221" width="556"/>
+  <widgets xsi:type="model:Panel" x="761" y="221" width="199" height="122"/>
+  <widgets xsi:type="model:Text" x="192" y="232" width="553" height="17" text="Ban dang co *120* cau hoi trong bo suu tap ca nhan.">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="771" y="234" width="179" height="110" text="*Làm sao để bổ sung câu hỏi*&#xA;Để bổ sung câu hỏi vào bộ sưu tập của mình, bạn có thể sử dụng chức năng nhập về trong bảng review có sau mỗi trận đấu.">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="192" y="249" text="Tim kiem">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:SearchField" x="252" y="250" width="76"/>
+  <widgets xsi:type="model:Table" x="192" y="280" width="555" height="232" text="#,Them{desc},Noi dung,l.t. cuoi,l.t. tiep, Tu khoa&#xA;1,{calendar},What is the suitable preposition,--,--,[Grammar],{delete}{edit}{print-preview}&#xA;|2,{calendar},What is the proper noun,{calendar},{calendar},[Pronunciation],{delete}{edit}{print-preview}&#xA;3,{calendar},What is the suitable preposition,--,--,[Grammar],{delete}{edit}{print-preview}&#xA;|4,{calendar},What is the proper noun,{calendar},{calendar},[Pronunciation],{delete}{edit}{print-preview}&#xA;5,{calendar},What is the suitable preposition,--,--,[Grammar],{delete}{edit}{print-preview}&#xA;|6,{calendar},What is the proper noun,{calendar},{calendar},[Pronunciation],{delete}{edit}{print-preview}&#xA;7,{calendar},What is the suitable preposition,--,--,[Grammar],{delete}{edit}{print-preview}&#xA;|8,{calendar},What is the proper noun,{calendar},{calendar},[Pronunciation],{delete}{edit}{print-preview}&#xA;9,{calendar},What is the suitable preposition,--,--,[Grammar],{delete}{edit}{print-preview}&#xA;|10,{calendar},What is the proper noun,{calendar},{calendar},[Pronunciation],{delete}{edit}{print-preview}&#xA;"/>
+  <widgets xsi:type="model:LinkBar" x="469" y="515" text="&lt;&lt;prev,\[1],2,3,...,10,next>>">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="333" y="248" text="{delete}">
+    <font/>
+  </widgets>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

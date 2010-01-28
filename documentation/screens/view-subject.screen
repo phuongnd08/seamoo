@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
   <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="master.screen#/"/>
+    <screen href="master-not-logged-in.screen#/"/>
   </widgets>
   <widgets xsi:type="model:Panel" x="186" y="228" width="263" height="97"/>
   <widgets xsi:type="model:Image" x="196" y="237" width="77" height="48" src="images/england_flag_02.gif"/>
@@ -43,12 +43,6 @@
     <font/>
   </widgets>
   <widgets xsi:type="model:TextField" x="496" y="605" text="Pro"/>
-  <widgets xsi:type="model:Panel" x="472" y="674" width="489" height="106" background="#e5e5e5"/>
-  <widgets xsi:type="model:Image" x="482" y="684" width="63" height="45" src="images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="552" y="684" width="399" height="81" text="[Free League]&#xA;xxxx">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:TextField" x="495" y="695" text="Free"/>
   <widgets xsi:type="model:Label" x="191" y="160" text="English">
     <font size="32"/>
   </widgets>

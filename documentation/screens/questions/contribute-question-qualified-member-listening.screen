@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="contribute-question-qualified-master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Combo" x="296" y="341" width="208" text="Chon cau tra loi dung"/>
+  <widgets xsi:type="model:Panel" x="192" y="376" width="563" height="79"/>
+  <widgets xsi:type="model:Label" x="203" y="378" width="142" text="*Cau hoi*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="192" y="457" width="563" height="160"/>
+  <widgets xsi:type="model:Label" x="199" y="461" width="64" text="*Lua chon*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="204" y="483">
+    <widgets xsi:type="model:TextField" width="332" text="Yeah"/>
+    <widgets xsi:type="model:Label" x="338" width="150" text="(correct answer)">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" y="35" width="332" text="Ouch"/>
+    <widgets xsi:type="model:Button" x="338" y="34" width="150" text="Set as correct answer"/>
+    <widgets xsi:type="model:TextField" y="67" width="332" text="Oh"/>
+    <widgets xsi:type="model:Button" x="338" y="66" width="150" text="Set as correct answer"/>
+    <widgets xsi:type="model:TextField" y="99" width="332" text="_(New choice)_"/>
+    <widgets xsi:type="model:Button" x="338" y="98" width="64" text="Add"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="192" y="620">
+    <widgets xsi:type="model:Panel" width="561" height="78"/>
+    <widgets xsi:type="model:Label" x="12" y="3" width="66" text="*Tu khoa* ">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" x="10" y="47" width="541" text="grammar"/>
+    <widgets xsi:type="model:Label" x="12" y="25" width="471" text="Noi tu-khoa-dai bang dau gach (-), dung dau cach de phan toi da 5 tu khoa (grammar pronunciation)">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Button" x="192" y="706" width="68" text="Cancel"/>
+  <widgets xsi:type="model:Button" x="270" y="706" width="68" text="Lưu"/>
+  <widgets xsi:type="model:TextArea" x="202" y="399" width="541" height="46" text="What is the word that so close to *Wow*?"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="372"/>
+  </vRuler>
+  <font/>
+</model:Screen>

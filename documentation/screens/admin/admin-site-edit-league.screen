@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:XMI="http://www.omg.org/XMI" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" XMI:version="2.0">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../master-administrator-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:TabbedPane" x="192" y="168" width="774" height="696" text="Moderators,Site Settings,Subjects" selection="2" background="#e5e5e5"/>
+  <widgets xsi:type="model:Panel" x="202" y="205" width="753" height="83"/>
+  <widgets xsi:type="model:Image" x="212" y="214" width="84" height="58" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="304" y="215" width="640" height="65" text="[All subjects] > *English*&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="202" y="304" width="263" height="200"/>
+  <widgets xsi:type="model:Image" x="210" y="313" width="86" height="57" src="../images/math.jpg" grayscale="true"/>
+  <widgets xsi:type="model:Button" x="209" y="378" width="89" text="Upload photo"/>
+  <widgets xsi:type="model:TextField" x="312" y="316" width="142" text="Amateur League"/>
+  <widgets xsi:type="model:TextArea" x="312" y="344" width="142" height="59" text="For some one who is new to the subject"/>
+  <widgets xsi:type="model:Button" x="240" y="471" width="89" text="Cancel"/>
+  <widgets xsi:type="model:HLine" x="209" y="462" width="256"/>
+  <widgets xsi:type="model:Checkbox" x="312" y="432" text="Enabled"/>
+  <widgets xsi:type="model:Combo" x="312" y="410" text="Level 0 (Amateur)"/>
+  <widgets xsi:type="model:Panel" x="488" y="304" width="263" height="95"/>
+  <widgets xsi:type="model:Image" x="498" y="313" width="84" height="58" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="590" y="314" width="151" height="75" text="*League Two*{edit}{delete}{print-preview}&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="202" y="518">
+    <widgets xsi:type="model:Panel" width="263" height="103"/>
+    <widgets xsi:type="model:Image" x="10" y="9" width="84" height="58" src="../images/england_flag_02.gif"/>
+    <widgets xsi:type="model:Text" x="102" y="10" width="151" height="65" text="*League One*{edit}{delete}{print-preview}&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="488" y="518">
+    <widgets xsi:type="model:Panel" width="263" height="200"/>
+    <widgets xsi:type="model:Image" x="8" y="9" width="86" height="57" src="../images/math.jpg" grayscale="true"/>
+    <widgets xsi:type="model:Button" x="7" y="74" width="89" text="Upload photo"/>
+    <widgets xsi:type="model:TextField" x="110" y="12" width="142" text="Name"/>
+    <widgets xsi:type="model:TextArea" x="110" y="40" width="142" height="59" text="Description"/>
+    <widgets xsi:type="model:Button" x="70" y="166" width="89" text="Save"/>
+    <widgets xsi:type="model:HLine" x="7" y="158" width="256"/>
+    <widgets xsi:type="model:Checkbox" x="110" y="128" text="Enabled"/>
+    <widgets xsi:type="model:Combo" x="110" y="106" text="Level 0 (Amateur)"/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="336" y="471" width="89" text="Save"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="372"/>
+  </vRuler>
+  <font/>
+</model:Screen>

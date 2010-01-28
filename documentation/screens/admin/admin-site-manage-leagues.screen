@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:XMI="http://www.omg.org/XMI" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" XMI:version="2.0">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../master-administrator-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:TabbedPane" x="192" y="168" width="774" height="696" text="Moderators,Site Settings,Subjects" selection="2" background="#e5e5e5"/>
+  <widgets xsi:type="model:Panel" x="202" y="205" width="753" height="83"/>
+  <widgets xsi:type="model:Image" x="212" y="214" width="84" height="58" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="304" y="215" width="640" height="65" text="[All subjects] > *English*&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="488" y="409" width="263" height="200"/>
+  <widgets xsi:type="model:Image" x="496" y="418" width="86" height="57" src="../images/math.jpg" grayscale="true"/>
+  <widgets xsi:type="model:Button" x="495" y="483" width="89" text="Upload photo"/>
+  <widgets xsi:type="model:TextField" x="598" y="421" width="142" text="Name"/>
+  <widgets xsi:type="model:TextArea" x="598" y="449" width="142" height="59" text="Description"/>
+  <widgets xsi:type="model:Button" x="558" y="575" width="89" text="Save"/>
+  <widgets xsi:type="model:HLine" x="495" y="567" width="256"/>
+  <widgets xsi:type="model:Panel" x="202" y="304" width="263" height="96"/>
+  <widgets xsi:type="model:Image" x="212" y="313" width="84" height="58" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="304" y="314" width="151" height="85" text="*Amateur League*{edit}{delete}{print-preview}&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="488" y="304" width="263" height="95"/>
+  <widgets xsi:type="model:Image" x="498" y="313" width="84" height="58" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="590" y="314" width="151" height="75" text="*League Two*{edit}{delete}{print-preview}&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="202" y="409" width="263" height="103"/>
+  <widgets xsi:type="model:Image" x="212" y="418" width="84" height="58" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="304" y="419" width="151" height="65" text="*League One*{edit}{delete}{print-preview}&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Checkbox" x="598" y="537" text="Enabled"/>
+  <widgets xsi:type="model:Combo" x="598" y="515" text="Level 0 (Amateur)"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="372"/>
+  </vRuler>
+  <font/>
+</model:Screen>
