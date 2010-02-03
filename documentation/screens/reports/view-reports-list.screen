@@ -30,11 +30,12 @@
   <widgets xsi:type="model:LinkBar" x="645" y="1102" text="&lt;&lt;prev,\[1],2,3,...,10,11,next>>">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Table" x="184" y="864" width="781" text="#,Gui boi,Thoi diem,Cau hoi,Mo ta,Duoc xu li boi,Ket qua&#xA;1,[thinh_pro],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[mrcold],Bo qua,[xem lai]&#xA;|2,[thinh_pro],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[lu-ko-vic],Da sua,[xem lai]&#xA;3,[lucia],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[azong-ho],Da sua,[xem lai]&#xA;|4,[lucia],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[ludazena],Da xoa,[xem lai]&#xA;5,[lucia],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[kiricuka],Bo qua,[xem lai]&#xA;|6,[anelka],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[hello-world],Da xoa,[xem lai]&#xA;7,[anelka],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[onyka],Da sua,[xem lai]&#xA;|8,[anelka],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[xuak],Bo qua,[xem lai]&#xA;9,[anelka],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[lamac],Da sua,[xem lai]&#xA;|10,[ajurazi],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[lurok],Bo qua,[xem lai]"/>
+  <widgets xsi:type="model:Table" x="184" y="864" width="781" text="#,Gui boi,Thoi diem,Cau hoi,Mo ta,Duoc xu li boi&#xA;1,[thinh_pro],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[mrcold],[xem lai]&#xA;|2,[thinh_pro],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[lu-ko-vic],[xem lai]&#xA;3,[lucia],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[azong-ho],[xem lai]&#xA;|4,[lucia],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[ludazena],[xem lai]&#xA;5,[lucia],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[kiricuka],[xem lai]&#xA;|6,[anelka],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[hello-world],[xem lai]&#xA;7,[anelka],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[onyka],[xem lai]&#xA;|8,[anelka],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[xuak],[xem lai]&#xA;9,[anelka],2009/12/28 10:20,What is the proper preposition?,Wrong preposition,[lamac],[xem lai]&#xA;|10,[ajurazi],2009/12/28 10:20,Coca cola olala imiraesta,Misspelling,[lurok],[xem lai]"/>
   <widgets xsi:type="model:Label" x="188" y="154" text="Cac bao cao">
     <font size="32"/>
   </widgets>
   <widgets xsi:type="model:HLine" x="188" y="207" width="769"/>
+  <widgets xsi:type="model:Checkbox" x="759" y="213" text="Hiện cả những báo cáo bị xóa"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="view-report-master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="188" y="154" text="Báo cáo">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:Master" x="188" y="344">
+    <screen href="../../questions/partial/partial-view-listening.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="188" y="207" width="769"/>
+  <widgets xsi:type="model:Button" x="262" y="520" text="Sửa"/>
+  <widgets xsi:type="model:Button" x="316" y="520" text="Quay lại"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="235"/>
+    <guides position="813"/>
+  </vRuler>
+  <font/>
+</model:Screen>

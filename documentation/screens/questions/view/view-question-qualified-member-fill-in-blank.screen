@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="view-question-qualified-member-master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="255" y="357" width="711" height="56"/>
+  <widgets xsi:type="model:Text" x="261" y="361" width="695" height="51" text="Fill in the blank&#xA;Choose a proper form of BE&#xA;She \[...] a woman">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="255" y="418" width="711" height="22"/>
+  <widgets xsi:type="model:Label" x="262" y="418" width="212" text="*Cau tra loi*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="255" y="483">
+    <widgets xsi:type="model:Table" y="28" width="710" text="Thoi diem,&#xA;2009/12/20 08:20,[mrcold] tao ra cau hoi,[Xem]&#xA;2009/12/21 09:14,[thinh_pro] sua cau hoi,[Xem]"/>
+    <widgets xsi:type="model:Panel" width="711" height="22"/>
+    <widgets xsi:type="model:Label" x="7" width="212" text="*Lich su*">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="255" y="447">
+    <widgets xsi:type="model:Panel" width="710" height="22"/>
+    <widgets xsi:type="model:Text" x="7" y="5" width="424" text="is">
+      <font/>
+    </widgets>
+  </widgets>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="168"/>
+  </vRuler>
+  <font/>
+</model:Screen>

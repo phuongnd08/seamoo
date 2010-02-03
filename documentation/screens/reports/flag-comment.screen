@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
   <widgets xsi:type="model:Panel" x="176" y="80" width="289" height="113"/>
-  <widgets xsi:type="model:Label" x="186" y="90" width="199" text="*Cảnh báo câu trả lời*">
+  <widgets xsi:type="model:Label" x="186" y="90" width="199" text="*Cắm cờ trao đổi*">
     <font/>
   </widgets>
-  <widgets xsi:type="model:TextArea" x="188" y="112" width="263" height="43" text="Bạn muốn cảnh báo câu trả lời này như là vi phạm, spam hoặc quấy rối?"/>
+  <widgets xsi:type="model:TextArea" x="188" y="112" width="263" height="43" text="Bạn muốn đánh dấu lời trao đổi này như là vi phạm, spam hoặc quấy rối?"/>
   <widgets xsi:type="model:Button" x="188" y="160" text="Cancel"/>
   <widgets xsi:type="model:Button" x="272" y="160" width="65" text="Đồng ý"/>
   <hRuler/>

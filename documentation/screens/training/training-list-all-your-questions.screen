@@ -11,7 +11,7 @@
   <widgets xsi:type="model:Text" x="192" y="232" width="553" height="17" text="Ban dang co *120* cau hoi trong bo suu tap ca nhan.">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Text" x="771" y="234" width="179" height="110" text="*Làm sao để bổ sung câu hỏi*&#xA;Để bổ sung câu hỏi vào bộ sưu tập của mình, bạn có thể sử dụng chức năng nhập về trong bảng review có sau mỗi trận đấu.">
+  <widgets xsi:type="model:Text" x="771" y="234" width="179" height="110" text="*Làm sao để bổ sung câu hỏi*&#xA;Để bổ sung câu hỏi vào bộ sưu tập của mình, bạn có thể sử dụng chức năng *nhập khẩu* trong bảng review có sau mỗi trận đấu.">
     <font/>
   </widgets>
   <widgets xsi:type="model:Label" x="192" y="249" text="Tim kiem">

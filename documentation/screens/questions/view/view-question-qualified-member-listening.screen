@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="view-question-qualified-member-master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="257" y="351" width="711" height="30"/>
+  <widgets xsi:type="model:Text" x="263" y="355" width="475" text="Listening to the sound {play} {pause}">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="257" y="388" width="711" height="22"/>
+  <widgets xsi:type="model:Label" x="264" y="388" width="212" text="*Noi dung trong doan am*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" x="257" y="420" width="710" text="Hello, I'm Michael."/>
+  <widgets xsi:type="model:Table" x="256" y="479" width="710" text="Thoi diem,&#xA;2009/12/20 08:20,[mrcold] tao ra cau hoi,[Xem]&#xA;2009/12/21 09:14,[thinh_pro] sua cau hoi,[Xem]"/>
+  <widgets xsi:type="model:Panel" x="256" y="451" width="711" height="22"/>
+  <widgets xsi:type="model:Label" x="263" y="451" width="212" text="*Lich su*">
+    <font/>
+  </widgets>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

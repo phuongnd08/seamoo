@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="42">
+    <screen href="../../master-administrator-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="185" y="218" width="781" height="129"/>
+  <widgets xsi:type="model:Label" x="188" y="154" text="Báo cáo">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="188" y="207" width="769"/>
+  <widgets xsi:type="model:Text" x="195" y="228" width="398" text="*Bởi*: [ku_thinh_pro]&#xA;*Vào lúc*: 2009/12/31 22:00&#xA;*Nội dung*:&#xA;Sai ngữ pháp, cần phải chỉnh lại&#xA;*Tình trạng*:&#xA;Đã bị xóa: Báo cáo không chính xác">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Link" x="817" y="228" text="Khôi phục báo cáo này">
+    <font/>
+  </widgets>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="235"/>
+    <guides position="813"/>
+  </vRuler>
+  <font/>
+</model:Screen>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
   <widgets xsi:type="model:Placeholder" x="99" y="128" width="798" height="945"/>
-  <widgets xsi:type="model:SearchField" x="800" y="17" width="87" text="Search"/>
   <widgets xsi:type="model:Panel" x="99" y="51" width="193" height="68" background="#090ff9"/>
   <widgets xsi:type="model:Text" x="130" y="61" text="SEAMOO" foreground="#ffffff">
     <font size="20" bold="true"/>
@@ -10,8 +9,7 @@
     <font bold="true"/>
   </widgets>
   <widgets xsi:type="model:Button" x="294" y="94" width="59" text="Thi dau"/>
-  <widgets xsi:type="model:Button" x="356" y="94" text="Xep hang"/>
-  <widgets xsi:type="model:Button" x="437" y="94" text="Thanh vien"/>
+  <widgets xsi:type="model:Button" x="359" y="94" text="Thanh vien"/>
   <widgets xsi:type="model:Button" x="528" y="94" text="Báo cáo"/>
   <widgets xsi:type="model:Button" x="797" y="94" text="Đăng câu hỏi"/>
   <widgets xsi:type="model:Button" x="600" y="94" width="121" text="Câu hỏi nóng (350)"/>
@@ -20,6 +18,7 @@
   </widgets>
   <widgets xsi:type="model:HLine" x="113" y="1001" width="769"/>
   <widgets xsi:type="model:Image" x="767" y="1016" src="images/appengine-silver-120x30.gif"/>
+  <widgets xsi:type="model:Button" x="454" y="94" text="Trao đổi"/>
   <hRuler/>
   <vRuler/>
   <font/>

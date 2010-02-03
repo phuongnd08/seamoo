@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="edit-question-master.screen#/"/>
-  </widgets>
-  <widgets xsi:type="model:Panel" x="191" y="240" width="563" height="73"/>
-  <widgets xsi:type="model:Image" x="201" y="249" width="88" height="54" src="../images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="293" y="250" width="450" height="22" text="[English] > [League II] > *Question*">
-    <font/>
-  </widgets>
   <widgets xsi:type="model:Panel" x="191" y="456" width="561" height="80"/>
   <widgets xsi:type="model:Label" x="203" y="461" width="133" text="*Tu khoa* ">
     <font/>
@@ -21,11 +13,6 @@
     <font/>
   </widgets>
   <widgets xsi:type="model:TextField" x="192" y="424" width="559" text="Hello, I'm Michael."/>
-  <widgets xsi:type="model:Table" x="191" y="668" width="559" text="Thoi diem,&#xA;2009/12/20 08:20,[mrcold] tao ra cau hoi,[Xem]&#xA;2009/12/21 09:14,[thinh_pro] sua cau hoi,[Xem]"/>
-  <widgets xsi:type="model:Panel" x="191" y="640" width="560" height="22"/>
-  <widgets xsi:type="model:Label" x="198" y="640" width="61" text="*Lich su*">
-    <font/>
-  </widgets>
   <widgets xsi:type="model:Panel" x="191" y="320" width="561" height="22"/>
   <widgets xsi:type="model:Label" x="203" y="320" width="199" text="*Cau hoi*  (Listen to audio)">
     <font/>

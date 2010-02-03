@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="../master-logged-in.screen#/"/>
-  </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="234" width="783" height="73"/>
-  <widgets xsi:type="model:Image" x="196" y="243" width="84" height="54" src="../images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="288" y="244" width="670" height="22" text="[English] > [League II] > *Question*">
-    <font/>
-  </widgets>
   <widgets xsi:type="model:Panel" x="257" y="310" width="711" height="37"/>
   <widgets xsi:type="model:Label" x="268" y="314" width="290" text="*Cau hoi* [Grammar]">
     <font/>
@@ -19,16 +11,6 @@
   <widgets xsi:type="model:Panel" x="257" y="391" width="711" height="22"/>
   <widgets xsi:type="model:Label" x="264" y="391" width="212" text="*Lua chon*">
     <font/>
-  </widgets>
-  <widgets xsi:type="model:LinkBar" x="807" y="314" text="\[sua],\[báo lỗi],\[xóa]">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="257" y="522">
-    <widgets xsi:type="model:Table" y="28" width="710" text="Thoi diem,&#xA;2009/12/20 08:20,[mrcold] tao ra cau hoi,[Xem]&#xA;2009/12/21 09:14,[thinh_pro] sua cau hoi,[Xem]"/>
-    <widgets xsi:type="model:Panel" width="711" height="22"/>
-    <widgets xsi:type="model:Label" x="7" width="212" text="*Lich su*">
-      <font/>
-    </widgets>
   </widgets>
   <widgets xsi:type="model:Panel" x="257" y="423" width="710" height="84"/>
   <widgets xsi:type="model:Text" x="264" y="433" width="424" text="{check}Yeah&#xA;{bullet}Oh&#xA;{bullet}Ahh&#xA;{bullet}Ouch">
@@ -42,10 +24,6 @@
     <widgets xsi:type="model:Icon" x="18" icon="empty-arrow-up (large)"/>
     <widgets xsi:type="model:Icon" x="18" y="95" icon="empty-arrow-down (large)"/>
   </widgets>
-  <widgets xsi:type="model:Label" x="192" y="168" text="Xem cau hoi">
-    <font size="32"/>
-  </widgets>
-  <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

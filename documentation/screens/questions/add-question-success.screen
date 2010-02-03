@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Panel" x="224" y="160" width="353" height="81"/>
+  <widgets xsi:type="model:Text" x="234" y="170" text="Câu hỏi đã được thêm vào bộ sưu tập cá nhân của bạn">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="360" y="208" text="Đóng"/>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

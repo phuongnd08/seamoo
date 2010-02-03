@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="view-question-qualified-member-master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="257" y="354" width="711" height="30"/>
+  <widgets xsi:type="model:Text" x="263" y="358" width="475" text="What is the best word that synonym to *wow*?">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="257" y="391" width="711" height="22"/>
+  <widgets xsi:type="model:Label" x="264" y="391" width="212" text="*Lua chon*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="257" y="522">
+    <widgets xsi:type="model:Table" y="28" width="710" text="Thoi diem,&#xA;2009/12/20 08:20,[mrcold] tao ra cau hoi,[Xem]&#xA;2009/12/21 09:14,[thinh_pro] sua cau hoi,[Xem]"/>
+    <widgets xsi:type="model:Panel" width="711" height="22"/>
+    <widgets xsi:type="model:Label" x="7" width="212" text="*Lich su*">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="257" y="423" width="710" height="84"/>
+  <widgets xsi:type="model:Text" x="264" y="433" width="424" text="{check}Yeah&#xA;{bullet}Oh&#xA;{bullet}Ahh&#xA;{bullet}Ouch">
+    <font/>
+  </widgets>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

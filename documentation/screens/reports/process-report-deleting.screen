@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Window" x="352" y="160" height="120" text="Xoá báo cáo"/>
+  <widgets xsi:type="model:Combo" x="362" y="213" text="Báo cáo không chính xác"/>
+  <widgets xsi:type="model:Note" x="184" y="213" text="Báo cáo không chinh xac&#xA;Báo cáo có tính quấy rối" textAlignment="Left">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="362" y="192" text="Bạn vừa xoá 1 báo cáo. Hãy chọn lí do xóa">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="528" y="246" text="Tiếp tục"/>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

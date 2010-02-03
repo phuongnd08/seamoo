@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="../master-logged-in.screen#/"/>
-  </widgets>
-  <widgets xsi:type="model:Panel" x="184" y="237" width="783" height="73"/>
-  <widgets xsi:type="model:Image" x="194" y="246" width="84" height="54" src="../images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="286" y="247" width="670" height="22" text="[English] > [League II] > *Question*">
-    <font/>
-  </widgets>
   <widgets xsi:type="model:Panel" x="255" y="313" width="711" height="37"/>
   <widgets xsi:type="model:Label" x="266" y="317" width="290" text="*Cau hoi* [Grammar]">
     <font/>
@@ -16,19 +8,9 @@
   <widgets xsi:type="model:Text" x="261" y="361" width="695" height="51" text="Fill in the blank&#xA;Choose a proper form of BE&#xA;She \[...] a woman">
     <font/>
   </widgets>
-  <widgets xsi:type="model:LinkBar" x="805" y="317" text="\[sua],\[báo lỗi],\[xóa]">
-    <font/>
-  </widgets>
   <widgets xsi:type="model:Panel" x="255" y="418" width="711" height="22"/>
   <widgets xsi:type="model:Label" x="262" y="418" width="212" text="*Cau tra loi*">
     <font/>
-  </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="255" y="483">
-    <widgets xsi:type="model:Table" y="28" width="710" text="Thoi diem,&#xA;2009/12/20 08:20,[mrcold] tao ra cau hoi,[Xem]&#xA;2009/12/21 09:14,[thinh_pro] sua cau hoi,[Xem]"/>
-    <widgets xsi:type="model:Panel" width="711" height="22"/>
-    <widgets xsi:type="model:Label" x="7" width="212" text="*Lich su*">
-      <font/>
-    </widgets>
   </widgets>
   <widgets xsi:type="model:WidgetGroup" x="255" y="447">
     <widgets xsi:type="model:Panel" width="710" height="22"/>
@@ -44,10 +26,6 @@
     <widgets xsi:type="model:Icon" x="18" icon="empty-arrow-up (large)"/>
     <widgets xsi:type="model:Icon" x="18" y="95" icon="empty-arrow-down (large)"/>
   </widgets>
-  <widgets xsi:type="model:Label" x="192" y="168" text="Xem cau hoi">
-    <font size="32"/>
-  </widgets>
-  <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

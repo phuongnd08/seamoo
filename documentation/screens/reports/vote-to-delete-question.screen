@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Panel" x="176" y="80" width="289" height="273"/>
+  <widgets xsi:type="model:Panel" x="176" y="80" width="289" height="145"/>
   <widgets xsi:type="model:Label" x="186" y="90" text="*Xóa câu hỏi*">
     <font/>
   </widgets>
   <widgets xsi:type="model:Label" x="186" y="112" text="Lí do">
     <font/>
   </widgets>
-  <widgets xsi:type="model:TextArea" x="186" y="208" width="263" height="83" text="..."/>
-  <widgets xsi:type="model:Button" x="186" y="318" text="Cancel"/>
-  <widgets xsi:type="model:Button" x="384" y="318" width="65" text="Gửi đi"/>
-  <widgets xsi:type="model:Label" x="188" y="293" text="Điền ít nhất 10 kí tự">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:RadioButton" x="186" y="156" text="Vi phạm nguyên tắc của SeaMoo" selected="true"/>
-  <widgets xsi:type="model:RadioButton" x="186" y="134" text="Spam"/>
-  <widgets xsi:type="model:Label" x="186" y="186" text="Giải thích sự vi phạm">
-    <font/>
-  </widgets>
+  <widgets xsi:type="model:Button" x="186" y="192" text="Cancel"/>
+  <widgets xsi:type="model:Button" x="384" y="192" width="65" text="Xác nhận"/>
+  <widgets xsi:type="model:RadioButton" x="186" y="134" text="Spam/Nội dung không phù hợp"/>
+  <widgets xsi:type="model:RadioButton" x="186" y="161" text="Trùng lắp với câu hỏi khác"/>
   <hRuler/>
   <vRuler/>
   <font/>

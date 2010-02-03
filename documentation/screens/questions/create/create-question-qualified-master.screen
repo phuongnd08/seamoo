@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
   <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="../master-logged-in.screen#/"/>
+    <screen href="../../master-logged-in.screen#/"/>
   </widgets>
   <widgets xsi:type="model:Panel" x="191" y="248" width="563" height="81"/>
-  <widgets xsi:type="model:Image" x="343" y="288" width="50" height="33" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Image" x="343" y="288" width="49" height="32" src="../../images/england_flag_02.gif"/>
   <widgets xsi:type="model:Panel" x="191" y="336" width="563" height="34"/>
   <widgets xsi:type="model:Label" x="198" y="341" width="91" text="*Loai cau hoi*">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Label" x="192" y="168" text="Dong gop cau hoi">
+  <widgets xsi:type="model:Label" x="192" y="168" text="Tạo câu hỏi">
     <font size="32"/>
   </widgets>
   <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
@@ -21,15 +21,14 @@
   <widgets xsi:type="model:Label" x="406" y="258" text=">">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Image" x="440" y="288" width="50" height="33" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Image" x="440" y="288" width="48" height="31" src="../../images/england_flag_02.gif"/>
   <widgets xsi:type="model:Label" x="452" y="293" text="Two">
     <font/>
   </widgets>
   <widgets xsi:type="model:Panel" x="760" y="248" width="209" height="435"/>
-  <widgets xsi:type="model:Text" x="766" y="254" width="195" height="419" text="*Cach dong gop cau hoi*&#xA;SeaMoo hien ho tro 3 loai cau hoi: Nhan dang doan hoi thoai (dung cho ngoai ngu), Chon cau tra loi dung va Dien tu vao o trong.&#xA;Cac cau hoi nen duoc trinh bay ro rang va ngan gon.">
+  <widgets xsi:type="model:Text" x="766" y="254" width="195" height="419" text="*Tạo câu hỏi*&#xA;SeaMoo hien ho tro 3 loai cau hoi: Nhan dang doan hoi thoai (dung cho ngoai ngu), Chon cau tra loi dung va Dien tu vao o trong.&#xA;Cac cau hoi nen duoc trinh bay ro rang va ngan gon.&#xA;&#xA;Câu hỏi sau khi tạo sẽ được thêm vào danh sách câu hỏi nóng.&#xA;&#xA;Câu hỏi sẽ bắt đầu được sử dụng sau 24h.">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Placeholder" x="296" y="341" width="208" height="23" text="Load cau hoi"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

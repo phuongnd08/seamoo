@@ -3,10 +3,10 @@
   <widgets xsi:type="model:Master" x="99" y="17">
     <screen href="master-skeleton.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:LinkBar" x="656" y="15" text=",About,FAQ">
+  <widgets xsi:type="model:LinkBar" x="612" y="16" text=",About,FAQ,Luyện tập">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Label" x="579" y="14" text="{email} [c0ld], 15k">
+  <widgets xsi:type="model:Label" x="535" y="15" text="{email} [c0ld], 15k">
     <font/>
   </widgets>
   <hRuler/>

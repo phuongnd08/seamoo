@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Window" x="236" y="156" width="437" height="101" text="Ngừng theo dõi"/>
+  <widgets xsi:type="model:Text" x="247" y="186" text="Bạn muốn ngừng theo dõi thảo luận với câu hỏi này?&#xA;_(Bạn có thể theo dõi trở lại bằng cách nhấn nút {favorites} khi xem câu hỏi)_">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="400" y="224" text="Có"/>
+  <widgets xsi:type="model:Button" x="440" y="224" text="Không"/>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

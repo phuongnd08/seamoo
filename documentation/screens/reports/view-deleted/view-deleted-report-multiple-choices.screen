@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="42">
+    <screen href="view-deleted-report-master.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Master" x="185" y="354">
+    <screen href="../../questions/partial/partial-view-multiple-choices.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="256" y="561" text="Quay lại"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="235"/>
+    <guides position="813"/>
+  </vRuler>
+  <font/>
+</model:Screen>

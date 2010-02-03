@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Table" x="168" y="304" width="559" text="Phien ban,Thoi diem,&#xA;Rev 01,2009/12/20 08:20,[mrcold] tao ra cau hoi,[Xem]&#xA;Rev 02,2009/12/20 09:20,[mrcold] tao ra cau hoi,[Xem]&#xA;|Rev 03,2009/12/21 09:14,[thinh_pro] sua cau hoi,[Xem]"/>
+  <widgets xsi:type="model:Panel" x="168" y="276" width="560" height="22"/>
+  <widgets xsi:type="model:Label" x="175" y="276" width="61" text="*Lich su*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="168" y="400" width="558" height="24"/>
+  <widgets xsi:type="model:Label" x="175" y="400" width="61" text="*Trao đổi*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="168" y="432">
+    <widgets xsi:type="model:Panel" width="560" height="56"/>
+    <widgets xsi:type="model:Text" x="7" y="8" text="{arrow-up}&#xA;{flag}">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" x="32" y="7" width="517" height="41" text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean - [thinh_pro] at 5:09:30" dummyText="true">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="167" y="496">
+    <widgets xsi:type="model:Panel" width="560" height="56"/>
+    <widgets xsi:type="model:Text" x="7" y="8" text="{arrow-up}&#xA;{flag}">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" x="32" y="7" width="517" height="41" text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean - [thinh_pro] at 5:09:30" dummyText="true">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="167" y="560" width="560" height="56"/>
+  <widgets xsi:type="model:Text" x="199" y="567" width="517" height="41" text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean - [c0ld] at 5:09:30 {edit} {delete}" dummyText="true">
+    <font/>
+  </widgets>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

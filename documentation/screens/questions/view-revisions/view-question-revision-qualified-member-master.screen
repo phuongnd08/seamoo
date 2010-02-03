@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40">
+    <screen href="../../master-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="184" y="237" width="783" height="73"/>
+  <widgets xsi:type="model:Image" x="194" y="246" width="87" height="54" src="../../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="286" y="247" width="670" height="22" text="[English] > [League II] > *Question*">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="192" y="168" text="Xem cau hoi">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
+  <widgets xsi:type="model:Panel" x="184" y="315" width="782" height="37"/>
+  <widgets xsi:type="model:Label" x="196" y="319" width="290" text="_*Rev 01*_: [mrc0ld] tạo mới">
+    <font/>
+  </widgets>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler>
+    <guides position="168"/>
+  </vRuler>
+  <font/>
+</model:Screen>
