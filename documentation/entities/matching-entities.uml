@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="__MbTABPTEd-o6Mbf-aRYTg" name="matching-entities">
+  <elementImport xmi:id="__OAAUBPTEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="__OAAURPTEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="__OAAUhPTEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="__OAAUxPTEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_FTuocBPUEd-o6Mbf-aRYTg" name="Match">
+    <ownedAttribute xmi:id="_FTuocRPUEd-o6Mbf-aRYTg" name="formingTime" aggregation="composite"/>
+    <ownedAttribute xmi:id="_FTuochPUEd-o6Mbf-aRYTg" name="startTime" aggregation="composite"/>
+    <ownedAttribute xmi:id="_FTuocxPUEd-o6Mbf-aRYTg" name="endTime" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_FTv2kBPUEd-o6Mbf-aRYTg" name="MatchCompetitor">
+    <ownedAttribute xmi:id="_FTv2kRPUEd-o6Mbf-aRYTg" name="participateTime" aggregation="composite"/>
+    <ownedAttribute xmi:id="_FTv2khPUEd-o6Mbf-aRYTg" name="totalScore" aggregation="composite"/>
+    <ownedAttribute xmi:id="_FTv2kxPUEd-o6Mbf-aRYTg" name="rank" aggregation="composite"/>
+    <ownedAttribute xmi:id="_FTv2lBPUEd-o6Mbf-aRYTg" name="endTime" aggregation="composite"/>
+    <ownedAttribute xmi:id="_ZIJUgBPcEd-KL5eRM_ysLQ" name="currentQuestionIndex" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_FTxEsBPUEd-o6Mbf-aRYTg" name="MatchAnswer">
+    <ownedAttribute xmi:id="_FTxEsRPUEd-o6Mbf-aRYTg" name="answer" aggregation="composite"/>
+    <ownedAttribute xmi:id="_GjwMQBPcEd-KL5eRM_ysLQ" name="score" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_FTxrwBPUEd-o6Mbf-aRYTg" memberEnd="_FTxrwRPUEd-o6Mbf-aRYTg _FTxrxBPUEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_FTxrwRPUEd-o6Mbf-aRYTg" name="competitors" type="_FTuocBPUEd-o6Mbf-aRYTg" association="_FTxrwBPUEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FTxrwhPUEd-o6Mbf-aRYTg" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FTxrwxPUEd-o6Mbf-aRYTg"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_FTxrxBPUEd-o6Mbf-aRYTg" name="match" type="_FTv2kBPUEd-o6Mbf-aRYTg" association="_FTxrwBPUEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FTxrxRPUEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FTxrxhPUEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_FTy54BPUEd-o6Mbf-aRYTg" memberEnd="_FTy54RPUEd-o6Mbf-aRYTg _FTy55BPUEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_FTy54RPUEd-o6Mbf-aRYTg" name="answers" type="_FTv2kBPUEd-o6Mbf-aRYTg" association="_FTy54BPUEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FTy54hPUEd-o6Mbf-aRYTg" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FTy54xPUEd-o6Mbf-aRYTg"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_FTy55BPUEd-o6Mbf-aRYTg" name="competitor" type="_FTxEsBPUEd-o6Mbf-aRYTg" association="_FTy54BPUEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FTy55RPUEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FTy55hPUEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_VB1gEBPUEd-o6Mbf-aRYTg" memberEnd="_VB1gERPUEd-o6Mbf-aRYTg _VB2uMRPUEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_VB1gERPUEd-o6Mbf-aRYTg" name="member" type="_FTv2kBPUEd-o6Mbf-aRYTg" association="_VB1gEBPUEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VB2uMBPUEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VB2HIBPUEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_VB2uMRPUEd-o6Mbf-aRYTg" name="dst" association="_VB1gEBPUEd-o6Mbf-aRYTg">
+      <type xmi:type="uml:Class" href="core-entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VB38UBPUEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VB3VQBPUEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_aPAIgBPUEd-o6Mbf-aRYTg" memberEnd="_aPAvkBPUEd-o6Mbf-aRYTg _aPB9sRPUEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_aPAvkBPUEd-o6Mbf-aRYTg" name="questions" type="_FTuocBPUEd-o6Mbf-aRYTg" association="_aPAIgBPUEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bndwQBPUEd-o6Mbf-aRYTg" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bneXUBPUEd-o6Mbf-aRYTg"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_aPB9sRPUEd-o6Mbf-aRYTg" name="dst" association="_aPAIgBPUEd-o6Mbf-aRYTg">
+      <type xmi:type="uml:Class" href="question-entities.uml#_1fpJ0BPBEd-o6Mbf-aRYTg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_aPCkwRPUEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_aPCkwBPUEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_dbXhYBPVEd-KL5eRM_ysLQ" name="MatchEvent">
+    <ownedAttribute xmi:id="_i2Rq4BPVEd-KL5eRM_ysLQ" name="time" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_f2PoYBPVEd-KL5eRM_ysLQ" name="MatchJoinEvent">
+    <generalization xmi:id="_qUmBIBPWEd-KL5eRM_ysLQ" general="_dbXhYBPVEd-KL5eRM_ysLQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_gYBfwBPVEd-KL5eRM_ysLQ" name="MatchAnswerEvent">
+    <generalization xmi:id="_quzQ4BPWEd-KL5eRM_ysLQ" general="_dbXhYBPVEd-KL5eRM_ysLQ"/>
+    <ownedAttribute xmi:id="_sREU4BPWEd-KL5eRM_ysLQ" name="questionIndex" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_haUqQBPVEd-KL5eRM_ysLQ" name="MatchFinishEvent">
+    <generalization xmi:id="_p5lgIBPWEd-KL5eRM_ysLQ" general="_dbXhYBPVEd-KL5eRM_ysLQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_pinnEBPVEd-KL5eRM_ysLQ" memberEnd="_pipcQBPVEd-KL5eRM_ysLQ _pirRcRPVEd-KL5eRM_ysLQ">
+    <ownedEnd xmi:id="_pipcQBPVEd-KL5eRM_ysLQ" name="event" type="_FTuocBPUEd-o6Mbf-aRYTg" association="_pinnEBPVEd-KL5eRM_ysLQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qkabQBPVEd-KL5eRM_ysLQ" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qkc3gBPVEd-KL5eRM_ysLQ"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_pirRcRPVEd-KL5eRM_ysLQ" name="dst" type="_dbXhYBPVEd-KL5eRM_ysLQ" association="_pinnEBPVEd-KL5eRM_ysLQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pitGoBPVEd-KL5eRM_ysLQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pisfkBPVEd-KL5eRM_ysLQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_gTl2QBPWEd-KL5eRM_ysLQ" memberEnd="_gTmdUBPWEd-KL5eRM_ysLQ _gTo5kRPWEd-KL5eRM_ysLQ">
+    <ownedEnd xmi:id="_gTmdUBPWEd-KL5eRM_ysLQ" name="member" type="_f2PoYBPVEd-KL5eRM_ysLQ" association="_gTl2QBPWEd-KL5eRM_ysLQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gTo5kBPWEd-KL5eRM_ysLQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gToSgBPWEd-KL5eRM_ysLQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_gTo5kRPWEd-KL5eRM_ysLQ" name="dst" association="_gTl2QBPWEd-KL5eRM_ysLQ">
+      <type xmi:type="uml:Class" href="core-entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gTqHsRPWEd-KL5eRM_ysLQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gTqHsBPWEd-KL5eRM_ysLQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_ln4aYBPWEd-KL5eRM_ysLQ" memberEnd="_ln5BcBPWEd-KL5eRM_ysLQ _ln6PkBPWEd-KL5eRM_ysLQ">
+    <ownedEnd xmi:id="_ln5BcBPWEd-KL5eRM_ysLQ" name="member" type="_gYBfwBPVEd-KL5eRM_ysLQ" association="_ln4aYBPWEd-KL5eRM_ysLQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ln5ogRPWEd-KL5eRM_ysLQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ln5ogBPWEd-KL5eRM_ysLQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_ln6PkBPWEd-KL5eRM_ysLQ" name="dst" association="_ln4aYBPWEd-KL5eRM_ysLQ">
+      <type xmi:type="uml:Class" href="core-entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ln6PkhPWEd-KL5eRM_ysLQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ln6PkRPWEd-KL5eRM_ysLQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_EVD5YBPXEd-KL5eRM_ysLQ" name="MatchIgnoreQuestionEvent">
+    <ownedAttribute xmi:id="_REG-4BPXEd-KL5eRM_ysLQ" name="questionIndex" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_LwQfoBPXEd-KL5eRM_ysLQ" memberEnd="_LwRGsBPXEd-KL5eRM_ysLQ _LwS74BPXEd-KL5eRM_ysLQ">
+    <ownedEnd xmi:id="_LwRGsBPXEd-KL5eRM_ysLQ" name="member" type="_EVD5YBPXEd-KL5eRM_ysLQ" association="_LwQfoBPXEd-KL5eRM_ysLQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LwSU0BPXEd-KL5eRM_ysLQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LwRtwBPXEd-KL5eRM_ysLQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_LwS74BPXEd-KL5eRM_ysLQ" name="dst" association="_LwQfoBPXEd-KL5eRM_ysLQ">
+      <type xmi:type="uml:Class" href="core-entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LwUKABPXEd-KL5eRM_ysLQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LwTi8BPXEd-KL5eRM_ysLQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Package>

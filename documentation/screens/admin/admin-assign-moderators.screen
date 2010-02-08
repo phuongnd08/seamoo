@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:XMI="http://www.omg.org/XMI" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" XMI:version="2.0">
-  <widgets xsi:type="model:Master" x="176" y="40">
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1025">
     <screen href="../master-administrator-logged-in.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:TabbedPane" x="192" y="168" width="774" height="696" text="Moderators,Site Settings,Subjects" selection="0" background="#e6e6fa"/>
-  <widgets xsi:type="model:Panel" x="201" y="204" width="754" height="140"/>
-  <widgets xsi:type="model:Label" x="211" y="214" text="*Assigned moderator*">
+  <widgets xsi:type="model:TabbedPane" x="192" y="168" width="774" height="696" text="Moderators,Site Settings,Subjects" measuredWidth="774" measuredHeight="696" selection="0" background="#e6e6fa"/>
+  <widgets xsi:type="model:Panel" x="201" y="204" width="754" height="140" measuredWidth="754" measuredHeight="140"/>
+  <widgets xsi:type="model:Label" x="211" y="214" text="*Assigned moderator*" measuredWidth="159" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="211" y="240" width="172" height="88"/>
-  <widgets xsi:type="model:Icon" x="221" y="250" icon="user (large)"/>
-  <widgets xsi:type="model:Text" x="253" y="251" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]">
+  <widgets xsi:type="model:Panel" x="211" y="240" width="172" height="88" measuredWidth="172" measuredHeight="88"/>
+  <widgets xsi:type="model:Icon" x="221" y="250" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
+  <widgets xsi:type="model:Text" x="253" y="251" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]" measuredWidth="130" measuredHeight="51">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Button" x="252" y="299" width="79" text="{delete}Unassign"/>
-  <widgets xsi:type="model:Panel" x="400" y="240" width="172" height="88"/>
-  <widgets xsi:type="model:Icon" x="410" y="250" icon="user (large)"/>
-  <widgets xsi:type="model:Text" x="442" y="251" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]">
+  <widgets xsi:type="model:Button" x="252" y="299" width="79" text="{delete}Unassign" measuredWidth="79" measuredHeight="27"/>
+  <widgets xsi:type="model:Panel" x="400" y="240" width="172" height="88" measuredWidth="172" measuredHeight="88"/>
+  <widgets xsi:type="model:Icon" x="410" y="250" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
+  <widgets xsi:type="model:Text" x="442" y="251" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]" measuredWidth="130" measuredHeight="51">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Button" x="441" y="299" width="79" text="{delete}Unassign"/>
-  <widgets xsi:type="model:Panel" x="592" y="240" width="172" height="88"/>
-  <widgets xsi:type="model:Icon" x="602" y="250" icon="user (large)"/>
-  <widgets xsi:type="model:Text" x="634" y="251" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]">
+  <widgets xsi:type="model:Button" x="441" y="299" width="79" text="{delete}Unassign" measuredWidth="79" measuredHeight="27"/>
+  <widgets xsi:type="model:Panel" x="592" y="240" width="172" height="88" measuredWidth="172" measuredHeight="88"/>
+  <widgets xsi:type="model:Icon" x="602" y="250" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
+  <widgets xsi:type="model:Text" x="634" y="251" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]" measuredWidth="130" measuredHeight="51">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Button" x="633" y="299" width="79" text="{delete}Unassign"/>
-  <widgets xsi:type="model:Panel" x="201" y="360" width="754" height="140"/>
-  <widgets xsi:type="model:Label" x="211" y="370" text="*Search members*">
+  <widgets xsi:type="model:Button" x="633" y="299" width="79" text="{delete}Unassign" measuredWidth="79" measuredHeight="27"/>
+  <widgets xsi:type="model:Panel" x="201" y="360" width="754" height="140" measuredWidth="754" measuredHeight="140"/>
+  <widgets xsi:type="model:Label" x="211" y="370" text="*Search members*" measuredWidth="133" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="211" y="396" width="172" height="88"/>
-  <widgets xsi:type="model:Icon" x="221" y="406" icon="user (large)"/>
-  <widgets xsi:type="model:Text" x="253" y="407" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]">
+  <widgets xsi:type="model:Panel" x="211" y="396" width="172" height="88" measuredWidth="172" measuredHeight="88"/>
+  <widgets xsi:type="model:Icon" x="221" y="406" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
+  <widgets xsi:type="model:Text" x="253" y="407" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]" measuredWidth="130" measuredHeight="51">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Button" x="252" y="455" width="79" text="{add}Assign"/>
-  <widgets xsi:type="model:Panel" x="400" y="396" width="172" height="88"/>
-  <widgets xsi:type="model:Icon" x="410" y="406" icon="user (large)"/>
-  <widgets xsi:type="model:Text" x="442" y="407" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]">
+  <widgets xsi:type="model:Button" x="252" y="455" width="79" text="{add}Assign" measuredWidth="79" measuredHeight="27"/>
+  <widgets xsi:type="model:Panel" x="400" y="396" width="172" height="88" measuredWidth="172" measuredHeight="88"/>
+  <widgets xsi:type="model:Icon" x="410" y="406" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
+  <widgets xsi:type="model:Text" x="442" y="407" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]" measuredWidth="130" measuredHeight="51">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Button" x="441" y="455" width="79" text="{add}Assign"/>
-  <widgets xsi:type="model:Panel" x="592" y="396" width="172" height="88"/>
-  <widgets xsi:type="model:Icon" x="602" y="406" icon="user (large)"/>
-  <widgets xsi:type="model:Text" x="634" y="407" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]">
+  <widgets xsi:type="model:Button" x="441" y="455" width="79" text="{add}Assign" measuredWidth="79" measuredHeight="27"/>
+  <widgets xsi:type="model:Panel" x="592" y="396" width="172" height="88" measuredWidth="172" measuredHeight="88"/>
+  <widgets xsi:type="model:Icon" x="602" y="406" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
+  <widgets xsi:type="model:Text" x="634" y="407" text="[c0ld]&#xA;15k {bullet}Level 12{bullet}&#xA;[English]>[Pro League]" measuredWidth="130" measuredHeight="51">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Button" x="633" y="455" width="79" text="{add}Assign"/>
-  <widgets xsi:type="model:SearchField" x="330" y="372" width="86" text="c0ld"/>
+  <widgets xsi:type="model:Button" x="633" y="455" width="79" text="{add}Assign" measuredWidth="79" measuredHeight="27"/>
+  <widgets xsi:type="model:SearchField" x="343" y="372" width="86" text="c0ld" measuredWidth="86" measuredHeight="20"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

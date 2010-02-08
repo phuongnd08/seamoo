@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_R-m1EBPTEd-o6Mbf-aRYTg" name="training-entities">
+  <elementImport xmi:id="_R_4AYBPTEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_R_4AYRPTEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_R_4AYhPTEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_R_4ncBPTEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Wc_E4BPTEd-o6Mbf-aRYTg" name="TrainingQuestion">
+    <ownedAttribute xmi:id="_Zd_-0BPTEd-o6Mbf-aRYTg" name="lastRepetition" aggregation="composite"/>
+    <ownedAttribute xmi:id="_Z_Q40BPTEd-o6Mbf-aRYTg" name="nextRepetition" aggregation="composite"/>
+    <ownedAttribute xmi:id="_bNEIsBPTEd-o6Mbf-aRYTg" name="interval" aggregation="composite"/>
+    <ownedAttribute xmi:id="_dnjOIBPTEd-o6Mbf-aRYTg" name="easiness" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_pYXw0BPTEd-o6Mbf-aRYTg" memberEnd="_pYZmABPTEd-o6Mbf-aRYTg _pYaNERPTEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_pYZmABPTEd-o6Mbf-aRYTg" name="question" type="_Wc_E4BPTEd-o6Mbf-aRYTg" association="_pYXw0BPTEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pYaNEBPTEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pYZmARPTEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_pYaNERPTEd-o6Mbf-aRYTg" name="dst" association="_pYXw0BPTEd-o6Mbf-aRYTg">
+      <type xmi:type="uml:Class" href="question-entities.uml#_1fpJ0BPBEd-o6Mbf-aRYTg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pYaNExPTEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pYaNEhPTEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_qKrXgBPTEd-o6Mbf-aRYTg" memberEnd="_qKr-kBPTEd-o6Mbf-aRYTg _qKtMsRPTEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_qKr-kBPTEd-o6Mbf-aRYTg" name="member" type="_Wc_E4BPTEd-o6Mbf-aRYTg" association="_qKrXgBPTEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qKtMsBPTEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qKsloBPTEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_qKtMsRPTEd-o6Mbf-aRYTg" name="dst" association="_qKrXgBPTEd-o6Mbf-aRYTg">
+      <type xmi:type="uml:Class" href="core-entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qKua0BPTEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qKtzwBPTEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_zZOeYBRaEd-KL5eRM_ysLQ" name="TrainingTag">
+    <ownedAttribute xmi:id="_0yG84BRaEd-KL5eRM_ysLQ" name="value" aggregation="composite"/>
+    <ownedAttribute xmi:id="_L9JgIBRbEd-KL5eRM_ysLQ" name="count" aggregation="composite"/>
+    <ownedAttribute xmi:id="_iOb-oBRgEd-KL5eRM_ysLQ" name="using" aggregation="composite"/>
+  </packagedElement>
+</uml:Package>

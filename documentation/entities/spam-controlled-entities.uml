@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_ecFAMBPEEd-o6Mbf-aRYTg" name="spam-controlled-entities">
+  <elementImport xmi:id="_eeIOoBPEEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_eeIOoRPEEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_eeIOohPEEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_eeI1sBPEEd-o6Mbf-aRYTg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_gfm-MBPEEd-o6Mbf-aRYTg" name="Flaggable">
+    <ownedAttribute xmi:id="_S11AcBRhEd-KL5eRM_ysLQ" name="spamScore" aggregation="composite"/>
+    <ownedAttribute xmi:id="_VAKKABRhEd-KL5eRM_ysLQ" name="duplicateScore" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_iJqFMBPEEd-o6Mbf-aRYTg" name="Praisable">
+    <generalization xmi:id="_lTQTYBPEEd-o6Mbf-aRYTg" general="_gfm-MBPEEd-o6Mbf-aRYTg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jZJ-MBPEEd-o6Mbf-aRYTg" name="Votable">
+    <generalization xmi:id="_l5i3UBPEEd-o6Mbf-aRYTg" general="_iJqFMBPEEd-o6Mbf-aRYTg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_tKLzYBPEEd-o6Mbf-aRYTg" memberEnd="_tKMacBPEEd-o6Mbf-aRYTg _tKOPoBPEEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_tKMacBPEEd-o6Mbf-aRYTg" name="flaggers" type="_gfm-MBPEEd-o6Mbf-aRYTg" association="_tKLzYBPEEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xW_LABPEEd-o6Mbf-aRYTg" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xW_yEBPEEd-o6Mbf-aRYTg"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_tKOPoBPEEd-o6Mbf-aRYTg" name="dst" association="_tKLzYBPEEd-o6Mbf-aRYTg">
+      <type xmi:type="uml:Class" href="Entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tKO2sRPEEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tKO2sBPEEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_vT5R4BPEEd-o6Mbf-aRYTg" memberEnd="_vT548BPEEd-o6Mbf-aRYTg _vT7HERPEEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_vT548BPEEd-o6Mbf-aRYTg" name="upvoters" type="_iJqFMBPEEd-o6Mbf-aRYTg" association="_vT5R4BPEEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wT4IMBPEEd-o6Mbf-aRYTg" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wT4vQBPEEd-o6Mbf-aRYTg"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_vT7HERPEEd-o6Mbf-aRYTg" name="dst" association="_vT5R4BPEEd-o6Mbf-aRYTg">
+      <type xmi:type="uml:Class" href="Entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vT8VMBPEEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vT7uIBPEEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_0hOSYBPEEd-o6Mbf-aRYTg" memberEnd="_0hO5cBPEEd-o6Mbf-aRYTg _0hQHkRPEEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_0hO5cBPEEd-o6Mbf-aRYTg" name="downvoters" type="_jZJ-MBPEEd-o6Mbf-aRYTg" association="_0hOSYBPEEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2pC6gBPEEd-o6Mbf-aRYTg" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2pDhkBPEEd-o6Mbf-aRYTg"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_0hQHkRPEEd-o6Mbf-aRYTg" name="dst" association="_0hOSYBPEEd-o6Mbf-aRYTg">
+      <type xmi:type="uml:Class" href="Entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0hRVsBPEEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0hQuoBPEEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_0KxZ4BPHEd-o6Mbf-aRYTg" memberEnd="_0KyA8BPHEd-o6Mbf-aRYTg _0KzPEBPHEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_0KyA8BPHEd-o6Mbf-aRYTg" name="flaggers" type="_gfm-MBPEEd-o6Mbf-aRYTg" association="_0KxZ4BPHEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_318rIBPHEd-o6Mbf-aRYTg" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_319SMBPHEd-o6Mbf-aRYTg"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_0KzPEBPHEd-o6Mbf-aRYTg" name="dst" association="_0KxZ4BPHEd-o6Mbf-aRYTg">
+      <type xmi:type="uml:Class" href="core-entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0Kz2IRPHEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0Kz2IBPHEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_0pcS4BPHEd-o6Mbf-aRYTg" memberEnd="_0pc58BPHEd-o6Mbf-aRYTg _0peIERPHEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_0pc58BPHEd-o6Mbf-aRYTg" name="upvoters" type="_iJqFMBPEEd-o6Mbf-aRYTg" association="_0pcS4BPHEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5e4X0BPHEd-o6Mbf-aRYTg" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5e5l8BPHEd-o6Mbf-aRYTg"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_0peIERPHEd-o6Mbf-aRYTg" name="dst" association="_0pcS4BPHEd-o6Mbf-aRYTg">
+      <type xmi:type="uml:Class" href="core-entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0pfWMBPHEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0pevIBPHEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_1F8osBPHEd-o6Mbf-aRYTg" memberEnd="_1F9PwBPHEd-o6Mbf-aRYTg _1F-d4BPHEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_1F9PwBPHEd-o6Mbf-aRYTg" name="downvoters" type="_jZJ-MBPEEd-o6Mbf-aRYTg" association="_1F8osBPHEd-o6Mbf-aRYTg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6ngz0BPHEd-o6Mbf-aRYTg" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6nha4BPHEd-o6Mbf-aRYTg"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_1F-d4BPHEd-o6Mbf-aRYTg" name="dst" association="_1F8osBPHEd-o6Mbf-aRYTg">
+      <type xmi:type="uml:Class" href="core-entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1F_E8BPHEd-o6Mbf-aRYTg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1F-d4RPHEd-o6Mbf-aRYTg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Package>

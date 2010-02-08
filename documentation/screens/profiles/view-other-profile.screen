@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" x="176" y="40">
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1024">
     <screen href="../master-logged-in.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="228" width="263" height="221"/>
-  <widgets xsi:type="model:Image" x="196" y="237" width="68" height="64" src="../images/Mr_Cold.JPG"/>
-  <widgets xsi:type="model:Text" x="280" y="239" width="153" height="46" text="*Phuong Nguyen*&#xA;The hien mot dang cap pro">
+  <widgets xsi:type="model:Panel" x="186" y="228" width="263" height="221" measuredWidth="263" measuredHeight="221"/>
+  <widgets xsi:type="model:Image" x="196" y="237" width="68" height="64" measuredWidth="68" measuredHeight="64" src="../images/Mr_Cold.JPG"/>
+  <widgets xsi:type="model:Text" x="280" y="239" width="153" height="46" text="*Phuong Nguyen*&#xA;The hien mot dang cap pro" measuredWidth="153" measuredHeight="46">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Table" x="464" y="256" width="494" text="#,Thoi diem,Dau voi,Ket qua,&#xA;1,2009/12/02-08:00,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|2,2009/12/02-08:05,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;3,2009/12/02-08:10,[thinh_pro] &amp; [azura] &amp; [akanu],3rd,[Xem]&#xA;|4,2009/12/02-08:15,[thinh_pro] &amp; [azura] &amp; [akanu],4th,[Xem]&#xA;5,2009/12/02-08:20,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|6,2009/12/02-08:25,[thinh_pro] &amp; [azura] &amp; [akanu],2nd,[Xem]&#xA;7,2009/12/02-08:30,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|8,2009/12/02-08:35,[thinh_pro] &amp; [azura] &amp; [akanu],2nd,[Xem]&#xA;9,2009/12/02-08:40,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|10,2009/12/02-08:45,[thinh_pro] &amp; [azura] &amp; [akanu],3rd,[Xem]&#xA;"/>
-  <widgets xsi:type="model:Panel" x="464" y="228" width="493" height="22"/>
-  <widgets xsi:type="model:Label" x="470" y="228" width="331" text="*Cac tran dau da tham gia* (235)">
+  <widgets xsi:type="model:Table" x="464" y="256" width="494" text="#,Thoi diem,Dau voi,Ket qua,&#xA;1,2009/12/02-08:00,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|2,2009/12/02-08:05,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;3,2009/12/02-08:10,[thinh_pro] &amp; [azura] &amp; [akanu],3rd,[Xem]&#xA;|4,2009/12/02-08:15,[thinh_pro] &amp; [azura] &amp; [akanu],4th,[Xem]&#xA;5,2009/12/02-08:20,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|6,2009/12/02-08:25,[thinh_pro] &amp; [azura] &amp; [akanu],2nd,[Xem]&#xA;7,2009/12/02-08:30,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|8,2009/12/02-08:35,[thinh_pro] &amp; [azura] &amp; [akanu],2nd,[Xem]&#xA;9,2009/12/02-08:40,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|10,2009/12/02-08:45,[thinh_pro] &amp; [azura] &amp; [akanu],3rd,[Xem]&#xA;" measuredWidth="494" measuredHeight="257"/>
+  <widgets xsi:type="model:Panel" x="464" y="228" width="493" height="22" measuredWidth="493" measuredHeight="22"/>
+  <widgets xsi:type="model:Label" x="470" y="228" width="331" text="*Cac tran dau da tham gia* (235)" measuredWidth="331" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="186" y="529">
-    <widgets xsi:type="model:Panel" width="262" height="106"/>
-    <widgets xsi:type="model:Text" x="9" y="8" width="244" height="99" text="*Quyen tham gia*&#xA;[League II] &amp; [Amateur League]&#xA;&#xA;*Thanh tich hien tai*&#xA;[League Two] 40,&#xA;[Amateur League] 80">
+  <widgets xsi:type="model:WidgetGroup" x="186" y="529" height="128" measuredWidth="262" measuredHeight="128">
+    <widgets xsi:type="model:Panel" width="262" height="125" measuredWidth="262" measuredHeight="125"/>
+    <widgets xsi:type="model:Text" x="9" y="9" width="244" height="119" text="*Quyen tham gia*&#xA;[League II] &amp; [Amateur League]&#xA;&#xA;*Thanh tich hien tai*&#xA;[League Two] 40,&#xA;[Amateur League] 80" measuredWidth="244" measuredHeight="119">
       <font/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:Table" x="197" y="308" width="242" height="133" text="#,Thong tin&#xA;Tuoi, *23*&#xA;Thay lan cuoi,*24* phut truoc day&#xA;Website, [http://c0ld.blogspot.com]&#xA;Danh tieng,*120*&#xA;Cap,*3*"/>
-  <widgets xsi:type="model:LinkBar" x="700" y="497" text="&lt;Prev,1,2,...,19,20,Next>">
+  <widgets xsi:type="model:Table" x="197" y="308" width="242" height="133" text="#,Thong tin&#xA;Tuoi, *23*&#xA;Thay lan cuoi,*24* phut truoc day&#xA;Website, [http://c0ld.blogspot.com]&#xA;Danh tieng,*120*&#xA;Cap,*3*" measuredWidth="242" measuredHeight="133"/>
+  <widgets xsi:type="model:LinkBar" x="692" y="520" text="&lt;Prev,1,2,...,19,20,Next>" measuredWidth="265" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="464" y="531" width="493" height="22"/>
-  <widgets xsi:type="model:Label" x="470" y="531" width="331" text="*Cac giai dau da tham gia* (235)">
+  <widgets xsi:type="model:Panel" x="464" y="560" width="493" height="22" measuredWidth="493" measuredHeight="22"/>
+  <widgets xsi:type="model:Label" x="470" y="560" width="331" text="*Cac giai dau da tham gia* (235)" measuredWidth="331" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Table" x="464" y="564" width="494" text="#,Giai doan,Giai dau,Ket qua&#xA;1,2009/12,[League Two],*Dang thi dau* (40)&#xA;|2,2009/11,[Amateur League],Thang hang (330)&#xA;3,2009/10,[League Two],Tut hang (80)&#xA;|4,2009/09,[League One],Thang hang (400)&#xA;5,2009/08,[League One],Tru hang (130)&#xA;|6,2009/07,[Pro League],Tru hang (150)&#xA;"/>
-  <widgets xsi:type="model:LinkBar" x="700" y="722" text="&lt;Prev,1,2,...,19,20,Next>">
+  <widgets xsi:type="model:Table" x="464" y="593" width="494" text="#,Giai doan,Giai dau,Ket qua&#xA;1,2009/12,[League Two],*Dang thi dau* (40)&#xA;|2,2009/11,[Amateur League],Thang hang (330)&#xA;3,2009/10,[League Two],Tut hang (80)&#xA;|4,2009/09,[League One],Thang hang (400)&#xA;5,2009/08,[League One],Tru hang (130)&#xA;|6,2009/07,[Pro League],Tru hang (150)&#xA;" measuredWidth="494" measuredHeight="165"/>
+  <widgets xsi:type="model:LinkBar" x="692" y="768" text="&lt;Prev,1,2,...,19,20,Next>" measuredWidth="265" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Label" x="191" y="160" text="c0ld">
+  <widgets xsi:type="model:Label" x="191" y="160" text="c0ld" measuredWidth="94" measuredHeight="59">
     <font size="32"/>
   </widgets>
-  <widgets xsi:type="model:HLine" x="191" y="213" width="769"/>
-  <widgets xsi:type="model:Panel" x="186" y="459" width="261" height="60" background="#bfbfbf"/>
-  <widgets xsi:type="model:Text" x="197" y="469" width="242" height="39" text="Ambitious guy of destiny">
+  <widgets xsi:type="model:HLine" x="191" y="213" width="769" measuredWidth="769" measuredHeight="6"/>
+  <widgets xsi:type="model:Panel" x="186" y="459" width="261" height="60" measuredWidth="261" measuredHeight="60" background="#bfbfbf"/>
+  <widgets xsi:type="model:Text" x="197" y="469" width="242" height="39" text="Ambitious guy of destiny" measuredWidth="242" measuredHeight="39">
     <font/>
   </widgets>
   <hRuler>
