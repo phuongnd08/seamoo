@@ -12,11 +12,12 @@
   <elementImport xmi:id="_R_4ncBPTEd-o6Mbf-aRYTg">
     <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
   </elementImport>
-  <packagedElement xmi:type="uml:Class" xmi:id="_Wc_E4BPTEd-o6Mbf-aRYTg" name="TrainingQuestion">
+  <packagedElement xmi:type="uml:Class" xmi:id="_Wc_E4BPTEd-o6Mbf-aRYTg" name="TrainingEntry">
     <ownedAttribute xmi:id="_Zd_-0BPTEd-o6Mbf-aRYTg" name="lastRepetition" aggregation="composite"/>
     <ownedAttribute xmi:id="_Z_Q40BPTEd-o6Mbf-aRYTg" name="nextRepetition" aggregation="composite"/>
     <ownedAttribute xmi:id="_bNEIsBPTEd-o6Mbf-aRYTg" name="interval" aggregation="composite"/>
     <ownedAttribute xmi:id="_dnjOIBPTEd-o6Mbf-aRYTg" name="easiness" aggregation="composite"/>
+    <ownedAttribute xmi:id="_PlYMoBS_Ed-DJNqI1jqpJA" name="addedTime" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_pYXw0BPTEd-o6Mbf-aRYTg" memberEnd="_pYZmABPTEd-o6Mbf-aRYTg _pYaNERPTEd-o6Mbf-aRYTg">
     <ownedEnd xmi:id="_pYZmABPTEd-o6Mbf-aRYTg" name="question" type="_Wc_E4BPTEd-o6Mbf-aRYTg" association="_pYXw0BPTEd-o6Mbf-aRYTg">
@@ -30,7 +31,7 @@
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_qKrXgBPTEd-o6Mbf-aRYTg" memberEnd="_qKr-kBPTEd-o6Mbf-aRYTg _qKtMsRPTEd-o6Mbf-aRYTg">
-    <ownedEnd xmi:id="_qKr-kBPTEd-o6Mbf-aRYTg" name="member" type="_Wc_E4BPTEd-o6Mbf-aRYTg" association="_qKrXgBPTEd-o6Mbf-aRYTg">
+    <ownedEnd xmi:id="_qKr-kBPTEd-o6Mbf-aRYTg" name="member" type="_akhawBS_Ed-DJNqI1jqpJA" association="_qKrXgBPTEd-o6Mbf-aRYTg">
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qKtMsBPTEd-o6Mbf-aRYTg" value="1"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qKsloBPTEd-o6Mbf-aRYTg" value="1"/>
     </ownedEnd>
@@ -43,6 +44,27 @@
   <packagedElement xmi:type="uml:Class" xmi:id="_zZOeYBRaEd-KL5eRM_ysLQ" name="TrainingTag">
     <ownedAttribute xmi:id="_0yG84BRaEd-KL5eRM_ysLQ" name="value" aggregation="composite"/>
     <ownedAttribute xmi:id="_L9JgIBRbEd-KL5eRM_ysLQ" name="count" aggregation="composite"/>
-    <ownedAttribute xmi:id="_iOb-oBRgEd-KL5eRM_ysLQ" name="using" aggregation="composite"/>
+    <ownedAttribute xmi:id="_iOb-oBRgEd-KL5eRM_ysLQ" name="inUse" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_akhawBS_Ed-DJNqI1jqpJA" name="TrainingBook"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_e7ZUYBS_Ed-DJNqI1jqpJA" memberEnd="_e7Z7cBS_Ed-DJNqI1jqpJA _e7bwoBS_Ed-DJNqI1jqpJA">
+    <ownedEnd xmi:id="_e7Z7cBS_Ed-DJNqI1jqpJA" name="book" type="_Wc_E4BPTEd-o6Mbf-aRYTg" association="_e7ZUYBS_Ed-DJNqI1jqpJA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_e7bJkBS_Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_e7aigBS_Ed-DJNqI1jqpJA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_e7bwoBS_Ed-DJNqI1jqpJA" name="dst" type="_akhawBS_Ed-DJNqI1jqpJA" association="_e7ZUYBS_Ed-DJNqI1jqpJA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_e7cXsBS_Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_e7bwoRS_Ed-DJNqI1jqpJA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jyXqYBS_Ed-DJNqI1jqpJA" memberEnd="_jyYRcBS_Ed-DJNqI1jqpJA _jyZfkRS_Ed-DJNqI1jqpJA">
+    <ownedEnd xmi:id="_jyYRcBS_Ed-DJNqI1jqpJA" name="tags" type="_akhawBS_Ed-DJNqI1jqpJA" association="_jyXqYBS_Ed-DJNqI1jqpJA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jyZfkBS_Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jyY4gBS_Ed-DJNqI1jqpJA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_jyZfkRS_Ed-DJNqI1jqpJA" name="book" type="_zZOeYBRaEd-KL5eRM_ysLQ" association="_jyXqYBS_Ed-DJNqI1jqpJA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jyatsBS_Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jyaGoBS_Ed-DJNqI1jqpJA" value="1"/>
+    </ownedEnd>
   </packagedElement>
 </uml:Package>

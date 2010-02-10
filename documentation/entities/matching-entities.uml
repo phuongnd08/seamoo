@@ -129,4 +129,29 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LwTi8BPXEd-KL5eRM_ysLQ" value="1"/>
     </ownedEnd>
   </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_061WQBS2Ed-DJNqI1jqpJA" name="MatchCandidate">
+    <ownedAttribute xmi:id="_061WQRS2Ed-DJNqI1jqpJA" name="lastRequestTime" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_8iaLoBS2Ed-DJNqI1jqpJA" memberEnd="_8iedEBS2Ed-DJNqI1jqpJA _8ihgYBS2Ed-DJNqI1jqpJA">
+    <ownedEnd xmi:id="_8iedEBS2Ed-DJNqI1jqpJA" name="member" type="_061WQBS2Ed-DJNqI1jqpJA" association="_8iaLoBS2Ed-DJNqI1jqpJA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8ig5UBS2Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8igSQBS2Ed-DJNqI1jqpJA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_8ihgYBS2Ed-DJNqI1jqpJA" name="dst" association="_8iaLoBS2Ed-DJNqI1jqpJA">
+      <type xmi:type="uml:Class" href="core-entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8iiugBS2Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8iiHcBS2Ed-DJNqI1jqpJA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_85760BS2Ed-DJNqI1jqpJA" memberEnd="_859I8BS2Ed-DJNqI1jqpJA _85--IBS2Ed-DJNqI1jqpJA">
+    <ownedEnd xmi:id="_859I8BS2Ed-DJNqI1jqpJA" name="league" type="_061WQBS2Ed-DJNqI1jqpJA" association="_85760BS2Ed-DJNqI1jqpJA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_85-XEBS2Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_859wABS2Ed-DJNqI1jqpJA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_85--IBS2Ed-DJNqI1jqpJA" name="dst" association="_85760BS2Ed-DJNqI1jqpJA">
+      <type xmi:type="uml:Class" href="core-entities.uml#_L_EI0BL0Ed-endQqvA3VnQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_86AMQRS2Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_86AMQBS2Ed-DJNqI1jqpJA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
 </uml:Package>

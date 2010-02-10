@@ -18,6 +18,7 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_iJqFMBPEEd-o6Mbf-aRYTg" name="Praisable">
     <generalization xmi:id="_lTQTYBPEEd-o6Mbf-aRYTg" general="_gfm-MBPEEd-o6Mbf-aRYTg"/>
+    <ownedAttribute xmi:id="_6FYBIBS5Ed-DJNqI1jqpJA" name="votingScore" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_jZJ-MBPEEd-o6Mbf-aRYTg" name="Votable">
     <generalization xmi:id="_l5i3UBPEEd-o6Mbf-aRYTg" general="_iJqFMBPEEd-o6Mbf-aRYTg"/>

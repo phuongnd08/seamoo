@@ -21,8 +21,6 @@
     </generalization>
     <ownedAttribute xmi:id="_1fpJ0hPBEd-o6Mbf-aRYTg" name="addedTime" aggregation="composite"/>
     <ownedAttribute xmi:id="_1fpJ0xPBEd-o6Mbf-aRYTg" name="lastModifiedTime" aggregation="composite"/>
-    <ownedAttribute xmi:id="_1fpJ1BPBEd-o6Mbf-aRYTg" name="voteScore" aggregation="composite"/>
-    <ownedAttribute xmi:id="_1fpJ1RPBEd-o6Mbf-aRYTg" name="flaggedScore" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_1gmzIBPBEd-o6Mbf-aRYTg" name="QuestionType"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_1gnaMBPBEd-o6Mbf-aRYTg" name="QuestionRevision">
@@ -30,7 +28,7 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_1goBQBPBEd-o6Mbf-aRYTg" name="MultipleChoicesQuestionRevision">
     <generalization xmi:id="_1goBQRPBEd-o6Mbf-aRYTg" general="_1gnaMBPBEd-o6Mbf-aRYTg"/>
-    <ownedAttribute xmi:id="_1goBQhPBEd-o6Mbf-aRYTg" name="question" aggregation="composite"/>
+    <ownedAttribute xmi:id="_1goBQhPBEd-o6Mbf-aRYTg" name="content" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_1gooUBPBEd-o6Mbf-aRYTg" name="QuestionChoice">
     <ownedAttribute xmi:id="_1gooURPBEd-o6Mbf-aRYTg" name="content" aggregation="composite"/>
@@ -85,10 +83,11 @@
     </generalization>
     <ownedAttribute xmi:id="_TYuyEhPFEd-o6Mbf-aRYTg" name="content" aggregation="composite"/>
     <ownedAttribute xmi:id="_TYuyExPFEd-o6Mbf-aRYTg" name="postedTime" aggregation="composite"/>
+    <ownedAttribute xmi:id="_RORSgBS-Ed-DJNqI1jqpJA" name="lastEditTime" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_TYwAMBPFEd-o6Mbf-aRYTg" name="Report">
     <ownedAttribute xmi:id="_TYwAMRPFEd-o6Mbf-aRYTg" name="content" aggregation="composite"/>
-    <ownedAttribute xmi:id="_TYwAMhPFEd-o6Mbf-aRYTg" name="postedTime" aggregation="composite"/>
+    <ownedAttribute xmi:id="_TYwAMhPFEd-o6Mbf-aRYTg" name="submittedTime" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Enumeration" xmi:id="_TYxOUBPFEd-o6Mbf-aRYTg" name="ReportJudgement">
     <ownedLiteral xmi:id="_TYxOURPFEd-o6Mbf-aRYTg" name="NONE"/>
@@ -149,7 +148,6 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_a6g2kBPHEd-o6Mbf-aRYTg" value="1"/>
     </ownedEnd>
     <ownedEnd xmi:id="_a6hdoRPHEd-o6Mbf-aRYTg" name="dst" association="_a6fBYBPHEd-o6Mbf-aRYTg">
-      <type xmi:type="uml:Class" href="core-entities.uml#_IJUxABPeEd-KL5eRM_ysLQ"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_a6irwBPHEd-o6Mbf-aRYTg" value="1"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_a6iEsBPHEd-o6Mbf-aRYTg" value="1"/>
     </ownedEnd>
@@ -160,7 +158,6 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_brfAgBPHEd-o6Mbf-aRYTg" value="1"/>
     </ownedEnd>
     <ownedEnd xmi:id="_brfnkRPHEd-o6Mbf-aRYTg" name="dst" association="_brdyYBPHEd-o6Mbf-aRYTg">
-      <type xmi:type="uml:Class" href="core-entities.uml#_IJUxABPeEd-KL5eRM_ysLQ"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_brgOoRPHEd-o6Mbf-aRYTg" value="1"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_brgOoBPHEd-o6Mbf-aRYTg" value="1"/>
     </ownedEnd>
@@ -171,13 +168,13 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_crzOABPHEd-o6Mbf-aRYTg" value="1"/>
     </ownedEnd>
     <ownedEnd xmi:id="_crz1EBPHEd-o6Mbf-aRYTg" name="dst" association="_crx_4BPHEd-o6Mbf-aRYTg">
-      <type xmi:type="uml:Class" href="core-entities.uml#_IJUxABPeEd-KL5eRM_ysLQ"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cr0cIRPHEd-o6Mbf-aRYTg" value="1"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_cr0cIBPHEd-o6Mbf-aRYTg" value="1"/>
     </ownedEnd>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_WeXP0BPREd-o6Mbf-aRYTg" name="Track">
+  <packagedElement xmi:type="uml:Class" xmi:id="_WeXP0BPREd-o6Mbf-aRYTg" name="QuestionTrack">
     <ownedAttribute xmi:id="_yssRUBPSEd-o6Mbf-aRYTg" name="newCommentCount" aggregation="composite"/>
+    <ownedAttribute xmi:id="_279RwBS8Ed-DJNqI1jqpJA" name="newModificationCount" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_a9S5QBPREd-o6Mbf-aRYTg" memberEnd="_a9TgUBPREd-o6Mbf-aRYTg _a9UHYRPREd-o6Mbf-aRYTg">
     <ownedEnd xmi:id="_a9TgUBPREd-o6Mbf-aRYTg" name="tracks" type="_1fpJ0BPBEd-o6Mbf-aRYTg" association="_a9S5QBPREd-o6Mbf-aRYTg">
@@ -242,9 +239,30 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NcX0ABRXEd-KL5eRM_ysLQ" value="1"/>
     </ownedEnd>
     <ownedEnd xmi:id="_NcYbEBRXEd-KL5eRM_ysLQ" name="dst" association="_NcXM8BRXEd-KL5eRM_ysLQ">
-      <type xmi:type="uml:Class" href="core-entities.uml#_IJUxABPeEd-KL5eRM_ysLQ"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NcZCIBRXEd-KL5eRM_ysLQ" value="1"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NcYbERRXEd-KL5eRM_ysLQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_B498cBS-Ed-DJNqI1jqpJA" memberEnd="_B4-jgBS-Ed-DJNqI1jqpJA _B5A_wBS-Ed-DJNqI1jqpJA">
+    <ownedEnd xmi:id="_B4-jgBS-Ed-DJNqI1jqpJA" name="author" type="_TYuyEBPFEd-o6Mbf-aRYTg" association="_B498cBS-Ed-DJNqI1jqpJA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_B5AYsBS-Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_B4_xoBS-Ed-DJNqI1jqpJA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_B5A_wBS-Ed-DJNqI1jqpJA" name="dst" association="_B498cBS-Ed-DJNqI1jqpJA">
+      <type xmi:type="uml:Class" href="core-entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_B5Bm0BS-Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_B5A_wRS-Ed-DJNqI1jqpJA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_a0Q8YBS-Ed-DJNqI1jqpJA" memberEnd="_a0UmwBS-Ed-DJNqI1jqpJA _a0V04BS-Ed-DJNqI1jqpJA">
+    <ownedEnd xmi:id="_a0UmwBS-Ed-DJNqI1jqpJA" name="reporter" type="_TYwAMBPFEd-o6Mbf-aRYTg" association="_a0Q8YBS-Ed-DJNqI1jqpJA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_a0VN0RS-Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_a0VN0BS-Ed-DJNqI1jqpJA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_a0V04BS-Ed-DJNqI1jqpJA" name="dst" association="_a0Q8YBS-Ed-DJNqI1jqpJA">
+      <type xmi:type="uml:Class" href="core-entities.uml#_YEgfcBIqEd-m-NgWNEk20Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_a0Wb8RS-Ed-DJNqI1jqpJA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_a0Wb8BS-Ed-DJNqI1jqpJA" value="1"/>
     </ownedEnd>
   </packagedElement>
 </uml:Package>
