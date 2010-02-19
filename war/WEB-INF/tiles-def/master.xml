@@ -1,0 +1,37 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+	<!-- Definitions for Tiles documentation   -->
+<tiles-definitions>
+
+	<!-- ========================================================== -->
+	<!-- Master definition                                          -->
+	<!-- ========================================================== -->
+	<!-- Main page layout used as a root for other page definitions -->
+
+	<definition name="master"
+		template="/WEB-INF/layouts/master/so/skeleton-so.ftl">
+		<!--
+			<put-attribute name="menu" value="/WEB-INF/master/menu.jsp"/>
+		-->
+<!--		<put-attribute name="body" value=""/>-->
+<!--		<put-attribute name="side-content" value=""/>-->
+	</definition>
+
+	<definition name="master-no-small" extends="master">
+		<put-attribute name="content"
+			value="/WEB-INF/layouts/master/so/content-no-small.ftl"/>
+	</definition>
+
+	<definition name="master-small-left" extends="master">
+		<put-attribute name="content"
+			value="/WEB-INF/layouts/master/so/content-small-left.jsp" />
+	</definition>
+
+	<definition name="master-small-right" extends="master">
+		<put-attribute name="content"
+			value="/WEB-INF/layouts/master/so/content-small-right.jsp" />
+	</definition>
+
+</tiles-definitions>

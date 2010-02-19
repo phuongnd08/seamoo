@@ -1,0 +1,27 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+	<!-- Definitions for Tiles documentation   -->
+<tiles-definitions>
+	<definition name="admin.assign-moderators" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/admin/assign-moderators.jsp" />
+	</definition>
+
+	<definition name="admin.manage-leagues" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/admin/manage-leagues.jsp" />
+	</definition>
+
+	<definition name="admin.manage-subjects" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/admin/manage-subjects.jsp" />
+	</definition>
+
+	<definition name="admin.manage-site-settings" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/admin/manage-site-settings.jsp" />
+	</definition>
+
+</tiles-definitions>

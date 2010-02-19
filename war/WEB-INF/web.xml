@@ -5,9 +5,11 @@
 
 <web-app>
 	<!--ELFunctor for convenient using of bean method-->
-<!--	<listener>-->
-<!--		<listener-class>beanface.el.functor.InstallFunctorListener</listener-class>-->
-<!--	</listener>-->
+	<!--	<listener>-->
+	<!--
+		<listener-class>beanface.el.functor.InstallFunctorListener</listener-class>
+	-->
+	<!--	</listener>-->
 	<!-- Declare url rewrite for nicer url pattern -->
 	<filter>
 		<filter-name>UrlRewriteFilter</filter-name>
@@ -18,7 +20,7 @@
 		<filter-name>UrlRewriteFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- Declare Spring MVC DispatcherServlet -->
 	<servlet>
 		<servlet-name>spring-mvc</servlet-name>
@@ -60,9 +62,34 @@
 		<url-pattern>/app/*</url-pattern>
 	</servlet-mapping>
 
+
+	<servlet>
+		<servlet-name>freemarker</servlet-name>
+		<servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
+
+		<init-param>
+			<param-name>TemplatePath</param-name>
+			<param-value>/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>NoCache</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ContentType</param-name>
+			<param-value>text/html</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>freemarker</servlet-name>
+		<url-pattern>*.ftl</url-pattern>
+	</servlet-mapping>
+
 	<!-- Default page to serve -->
 	<welcome-file-list>
-		<welcome-file>viewGuestBook</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
 </web-app>

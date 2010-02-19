@@ -1,0 +1,104 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+	<!-- Definitions for Tiles documentation   -->
+<tiles-definitions>
+
+	<definition name="subjects.list" extends="master-no-small">
+		<put-attribute name="body" value="/WEB-INF/layouts/subjects/list.ftl" />
+		<!--<put-attribute name="body" value="Fuck You" />-->
+	</definition>
+	<definition name="subjects.detail" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/subjects/detail.jsp" />
+	</definition>
+
+	<definition name="leagues.list" extends="master-no-small">
+		<put-attribute name="body" value="/WEB-INF/layouts/leagues/list.jsp" />
+	</definition>
+	<definition name="leagues.detail" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/leagues/detail.jsp" />
+	</definition>
+
+	<definition name="matching.detail" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/matching/detail.jsp" />
+	</definition>
+	<definition name="matching.participate" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/matching/participate.jsp" />
+	</definition>
+
+	<definition name="users.list" extends="master-no-small">
+		<put-attribute name="body" value="/WEB-INF/layouts/users/list.jsp" />
+	</definition>
+	<definition name="users.login" extends="master-no-small">
+		<put-attribute name="body" value="/WEB-INF/layouts/users/login.jsp" />
+	</definition>
+	<definition name="users.first-time" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/users/first-time.jsp" />
+	</definition>
+
+	<definition name="profiles.view" extends="master-no-small">
+		<put-attribute name="body" value="/WEB-INF/layouts/profiles/view.jsp" />
+	</definition>
+	<definition name="profiles.edit" extends="master-no-small">
+		<put-attribute name="body" value="/WEB-INF/layouts/profiles/edit.jsp" />
+	</definition>
+
+	<definition name="discussion.personal" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/discussion/personal.jsp" />
+	</definition>
+	<definition name="discussion.all" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/discussion/all.jsp" />
+	</definition>
+
+	<definition name="questions.create" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/questions/create.jsp" />
+	</definition>
+	<definition name="questions.edit" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/questions/edit.jsp" />
+	</definition>
+	<definition name="questions.detail" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/questions/view.jsp" />
+	</definition>
+	<definition name="questions.view-revision" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/questions/view-revision.jsp" />
+	</definition>
+	<definition name="questions.list-hot" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/questions/list-hot.jsp" />
+	</definition>
+
+
+	<definition name="reports.list" extends="master-no-small">
+		<put-attribute name="body" value="/WEB-INF/layouts/reports/list.jsp" />
+	</definition>
+	<definition name="reports.detail" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/reports/detail.jsp" />
+	</definition>
+	<definition name="reports.process" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/reports/process.jsp" />
+	</definition>
+
+	<definition name="training.go" extends="master-no-small">
+		<put-attribute name="body" value="/WEB-INF/layouts/training/go.jsp" />
+	</definition>
+	<definition name="training.view-personal-collection"
+		extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/training/view-personal-collection.jsp" />
+	</definition>
+
+</tiles-definitions>
