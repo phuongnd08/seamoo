@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
   <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="master/master-logged-in.screen#/"/>
+    <screen href="../master/master-logged-in.screen#/"/>
   </widgets>
   <widgets xsi:type="model:Panel" x="186" y="160" width="263" height="113"/>
-  <widgets xsi:type="model:Image" x="196" y="169" width="77" height="48" src="images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Image" x="196" y="169" width="77" height="48" src="../images/england_flag_02.gif"/>
   <widgets xsi:type="model:Text" x="288" y="170" width="145" height="93" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League">
     <font/>
   </widgets>

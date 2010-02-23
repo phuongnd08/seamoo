@@ -114,15 +114,69 @@ td.logo-cell {
 	width: 30px;
 }
 
-.seamoo{
-	text-transform: uppercase;
-	font-weight: bold;
-	}
-	
-.seamoo.sea{
-	color: #008fe0;	
+.time-column,.date-column {
+	width: 90px;
 }
 
-.seamoo.moo{
+.seamoo {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.seamoo.sea {
+	color: #008fe0;
+}
+
+.seamoo.moo {
 	color: #ff9600;
+}
+
+.answer-correct {
+	display: inline-block;
+	background: url(images/answer-correct.png) no-repeat center center;
+	width: 16px;
+	height: 16px;
+}
+
+.answer-wrong {
+	display: inline-block;
+	background: url(images/answer-wrong.png) no-repeat center center;
+	width: 16px;
+	height: 16px;
+}
+
+.answer-ignore {
+	display: inline-block;
+	background: url(images/answer-ignore.png) no-repeat center center;
+	width: 16px;
+	height: 16px;
+}
+
+.answer-review-grade-column {
+	width: 50px;
+	text-align: center;
+}
+
+.match-review-answer-content {
+	font-weight: bold;
+}
+
+.match-review-answer-time {
+	background: #c0c0c0;
+	font-style: italic;
+}
+
+.match-review-question-row-1 {
+	
+}
+
+.match-review-question-row-2 {
+	background: #eee;
+}
+
+.answer-flag-btn {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background: url(images/answer-flag-btn.png) no-repeat center center;
 }

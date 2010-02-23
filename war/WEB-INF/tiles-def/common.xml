@@ -24,13 +24,15 @@
 			value="/WEB-INF/layouts/leagues/league-detail-side.ftl" />
 	</definition>
 
-	<definition name="matching.detail" extends="master-no-small">
+	<definition name="matches.detail" extends="master-small-left">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/matching/detail.jsp" />
+			value="/WEB-INF/layouts/matches/match-detail.ftl" />
+		<put-attribute name="side"
+			value="/WEB-INF/layouts/matches/match-detail-side.ftl" />
 	</definition>
-	<definition name="matching.participate" extends="master-no-small">
+	<definition name="matches.participate" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/matching/participate.jsp" />
+			value="/WEB-INF/layouts/matches/match-participate.ftl" />
 	</definition>
 
 	<definition name="users.list" extends="master-no-small">
@@ -54,7 +56,8 @@
 	<definition name="user.edit" extends="master-small-left">
 		<put-attribute name="body"
 			value="/WEB-INF/layouts/users/user-edit.ftl" />
-		<put-attribute name="side" value="/WEB-INF/layouts/users/user-edit-side.ftl"/>
+		<put-attribute name="side"
+			value="/WEB-INF/layouts/users/user-edit-side.ftl" />
 	</definition>
 	<definition name="user.discussion" extends="master-no-small">
 		<put-attribute name="body"
@@ -102,11 +105,12 @@
 	</definition>
 
 	<definition name="training.go" extends="master-small-right">
-		<put-attribute name="body" value="/WEB-INF/layouts/training/training-go.ftl" />
-		<put-attribute name="side" value="/WEB-INF/layouts/training/training-go-side.ftl"/>
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/training/training-go.ftl" />
+		<put-attribute name="side"
+			value="/WEB-INF/layouts/training/training-go-side.ftl" />
 	</definition>
-	<definition name="training.personal-collection"
-		extends="master-no-small">
+	<definition name="training.personal-collection" extends="master-no-small">
 		<put-attribute name="body"
 			value="/WEB-INF/layouts/training/training-personal-collection.ftl" />
 	</definition>
