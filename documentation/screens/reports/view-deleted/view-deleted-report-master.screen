@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
   <widgets xsi:type="model:Master" x="176" y="42">
-    <screen href="../../master-administrator-logged-in.screen#/"/>
+    <screen href="../../master/master-administrator-logged-in.screen#/"/>
   </widgets>
   <widgets xsi:type="model:Panel" x="185" y="218" width="781" height="129"/>
   <widgets xsi:type="model:Label" x="188" y="154" text="Báo cáo">

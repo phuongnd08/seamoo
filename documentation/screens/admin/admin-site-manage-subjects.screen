@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:XMI="http://www.omg.org/XMI" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" XMI:version="2.0">
   <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="../master-administrator-logged-in.screen#/"/>
+    <screen href="../master/master-administrator-logged-in.screen#/"/>
   </widgets>
   <widgets xsi:type="model:TabbedPane" x="192" y="168" width="774" height="696" text="Moderators,Site Settings,Subjects" selection="2" background="#e5e5e5"/>
   <widgets xsi:type="model:WidgetGroup" x="202" y="205">

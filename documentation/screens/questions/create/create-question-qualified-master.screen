@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
   <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="../../master-logged-in.screen#/"/>
+    <screen href="../../master/master-logged-in.screen#/"/>
   </widgets>
   <widgets xsi:type="model:Panel" x="191" y="248" width="563" height="81"/>
   <widgets xsi:type="model:Image" x="343" y="288" width="49" height="32" src="../../images/england_flag_02.gif"/>

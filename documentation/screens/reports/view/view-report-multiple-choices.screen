@@ -7,7 +7,7 @@
     <font size="32"/>
   </widgets>
   <widgets xsi:type="model:Master" x="188" y="344">
-    <screen href="../../master-administrator-logged-in.screen#/"/>
+    <screen href="../../master/master-administrator-logged-in.screen#/"/>
   </widgets>
   <widgets xsi:type="model:HLine" x="188" y="207" width="769"/>
   <widgets xsi:type="model:Button" x="266" y="557" text="Sửa"/>

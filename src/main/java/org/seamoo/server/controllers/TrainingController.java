@@ -5,16 +5,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping("/training")
 public class TrainingController {
-	@RequestMapping("/training/go")
+	@RequestMapping("/go")
 	public ModelAndView go(){
 		ModelAndView mav = new ModelAndView("training.go");
+		mav.addObject("title", "Luyện tập");
 		return mav;
 	}
 	
-	@RequestMapping("/training/view-personal-collection")
+	@RequestMapping("/personal-collection")
 	public ModelAndView viewPersonalCollection(){
-		ModelAndView mav = new ModelAndView("training.view-personal-collection");
+		ModelAndView mav = new ModelAndView("training.personal-collection");
+		mav.addObject("title", "Bộ sưu tập cá nhân");
 		return mav;
 	}
 }

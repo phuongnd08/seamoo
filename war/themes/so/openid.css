@@ -1,0 +1,109 @@
+.openid-identifier {
+	background: url("images/openid/openid-large.png") no-repeat
+		scroll left center transparent;
+	height: 22px;
+	line-height: 22px;
+	padding-left: 32px;
+}
+
+#openid_choice {
+	display: none;
+	margin-top: 10px;
+}
+
+#openid_username {
+	margin-right: 5px;
+}
+
+#openid_btns,#openid_btns br {
+	clear: both;
+}
+
+#openid_highlight {
+	background-color: #FFFCC9;
+	float: left;
+	padding: 3px;
+}
+
+.openid_large_btn {
+	border: 1px solid #DDDDDD;
+	float: left;
+	height: 60px;
+	margin: 3px;
+	width: 100px;
+}
+
+.openid_small_btn {
+	border: 1px solid #DDDDDD;
+	float: left;
+	height: 24px;
+	margin: 3px;
+	width: 24px;
+}
+
+a.openid_large_btn:focus {
+	outline: medium none;
+}
+
+a.openid_large_btn:focus {
+	
+}
+
+.openid_selected {
+	border: 4px solid #DDDDDD;
+}
+
+.openid_large_btn.google {
+	background: url(images/openid/google.png) no-repeat scroll center center
+		rgb(255, 255, 255);
+}
+
+.openid_large_btn.yahoo {
+	background: url(images/openid/yahoo.png) no-repeat scroll center center
+		rgb(255, 255, 255);
+}
+
+.openid_large_btn.myopenid {
+	background: url(images/openid/myopenid.png) no-repeat scroll center
+		center rgb(255, 255, 255);
+}
+
+.openid_large_btn.aol {
+	background: url(images/openid/aol.png) no-repeat scroll center center
+		rgb(255, 255, 255);
+}
+
+.openid_small_btn.livejournal {
+	background: url(images/openid/livejournal.png) no-repeat scroll center
+		center rgb(255, 255, 255);
+}
+
+.openid_small_btn.wordpress {
+	background: url(images/openid/wordpress.png) no-repeat scroll center
+		center rgb(255, 255, 255);
+}
+
+.openid_small_btn.blogger {
+	background: url(images/openid/blogger.png) no-repeat scroll center
+		center rgb(255, 255, 255);
+}
+
+.openid_small_btn.verisign {
+	background: url(images/openid/verisign.png) no-repeat scroll center
+		center rgb(255, 255, 255);
+}
+
+.openid_small_btn.claimid {
+	background: url(images/openid/claimid.png) no-repeat scroll center
+		center rgb(255, 255, 255);
+}
+
+.openid_small_btn.clickpass {
+	background: url(images/openid/clickpass.png) no-repeat scroll center
+		center rgb(255, 255, 255);
+}
+
+.openid_small_btn.google_profile {
+	background: url(images/openid/google_profile.png) no-repeat scroll
+		center center rgb(255, 255, 255);
+}

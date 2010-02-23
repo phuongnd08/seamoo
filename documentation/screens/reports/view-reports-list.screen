@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
   <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="../master-logged-in.screen#/"/>
+    <screen href="../master/master-logged-in.screen#/"/>
   </widgets>
   <widgets xsi:type="model:Button" x="184" y="216" text="Cap nhap lai danh sach"/>
   <widgets xsi:type="model:Label" x="352" y="217" text="{reload} Dang cap nhap lai danh sach">

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1024">
+    <screen href="../master/master-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:TabbedPane" x="186" y="192" width="779" height="665" text="Hồ sơ,Trao đổi" measuredWidth="779" measuredHeight="665" selection="0"/>
+  <widgets xsi:type="model:Table" x="468" y="257" width="494" text="#,Thoi diem,Dau voi,Ket qua,&#xA;1,2009/12/02-08:00,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|2,2009/12/02-08:05,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;3,2009/12/02-08:10,[thinh_pro] &amp; [azura] &amp; [akanu],3rd,[Xem]&#xA;|4,2009/12/02-08:15,[thinh_pro] &amp; [azura] &amp; [akanu],4th,[Xem]&#xA;5,2009/12/02-08:20,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|6,2009/12/02-08:25,[thinh_pro] &amp; [azura] &amp; [akanu],2nd,[Xem]&#xA;7,2009/12/02-08:30,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|8,2009/12/02-08:35,[thinh_pro] &amp; [azura] &amp; [akanu],2nd,[Xem]&#xA;9,2009/12/02-08:40,[thinh_pro] &amp; [azura] &amp; [akanu],1st,[Xem]&#xA;|10,2009/12/02-08:45,[thinh_pro] &amp; [azura] &amp; [akanu],3rd,[Xem]&#xA;" measuredWidth="494" measuredHeight="257"/>
+  <widgets xsi:type="model:Panel" x="468" y="229" width="493" height="22" measuredWidth="493" measuredHeight="22"/>
+  <widgets xsi:type="model:Label" x="474" y="229" width="331" text="*Cac tran dau da tham gia* (235)" measuredWidth="331" measuredHeight="25">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="190" y="522" measuredWidth="262" measuredHeight="321">
+    <widgets xsi:type="model:Panel" width="262" height="321" measuredWidth="262" measuredHeight="321"/>
+    <widgets xsi:type="model:Text" x="9" y="8" width="244" height="297" text="*Danh tieng*&#xA;Diem danh tieng {help} cua ban: *120*&#xA;Diem danh tieng toi da {help} cua ban: *200*&#xA;&#xA;*Quyen tham gia*&#xA;Ban da gianh quyen tham gia [League II] dong thoi duoc phep tham gia [Amateur League]&#xA;&#xA;*Thanh tich*&#xA;Ban dang co *40* diem o [League One]. Ban con *20* ngay de tich luy du *100* diem de co the tru hang hoac tich luy du *300* diem de co the thang hang len [League One]&#xA;Ban dang co *80* diem o [Amateur League]. Ban con *20* ngay de tich luy du *100* diem de co the duy tri suat du [League Two]" measuredWidth="244" measuredHeight="297">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:LinkBar" x="704" y="501" text="&lt;Prev,1,2,...,19,20,Next>" measuredWidth="265" measuredHeight="25">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="468" y="532" width="493" height="22" measuredWidth="493" measuredHeight="22"/>
+  <widgets xsi:type="model:Label" x="474" y="532" width="331" text="*Cac giai dau da tham gia* (235)" measuredWidth="331" measuredHeight="25">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Table" x="468" y="565" width="494" text="#,Giai doan,Giai dau,Ket qua&#xA;1,2009/12/01-2010/12/31,[League Two],*Dang thi dau* (40)&#xA;|2,2009/11/01-209/11/30,[Amateur League],Thang hang (330)&#xA;3,2009/10/01-2009/10/31,[League Two],Tut hang (80)&#xA;|4,2009/09/01-2009/09/30,[League One],Thang hang (400)&#xA;5,2009/08/01-2009/08/31,[League One],Tru hang (130)&#xA;|6,2009/07/01-2009/07/31,[Pro League],Tru hang (150)&#xA;" measuredWidth="494" measuredHeight="165"/>
+  <widgets xsi:type="model:LinkBar" x="704" y="723" text="&lt;Prev,1,2,...,19,20,Next>" measuredWidth="265" measuredHeight="25">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="196" y="130" measuredWidth="769" measuredHeight="59">
+    <widgets xsi:type="model:Label" text="c0ld" measuredWidth="94" measuredHeight="59">
+      <font size="32"/>
+    </widgets>
+    <widgets xsi:type="model:HLine" y="53" width="769" measuredWidth="769" measuredHeight="6"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="190" y="232" measuredWidth="263" measuredHeight="285">
+    <widgets xsi:type="model:WidgetGroup" measuredWidth="263" measuredHeight="285">
+      <widgets xsi:type="model:Panel" width="263" height="285" measuredWidth="263" measuredHeight="285"/>
+      <widgets xsi:type="model:Image" x="10" y="9" width="68" height="64" measuredWidth="68" measuredHeight="64" src="../images/Mr_Cold.JPG"/>
+      <widgets xsi:type="model:Text" x="94" y="11" width="153" height="46" text="*Phuong Nguyen*&#xA;The hien mot dang cap pro" measuredWidth="153" measuredHeight="46">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Table" x="11" y="80" width="242" height="133" text="#,Thong tin&#xA;Tuoi, *23*&#xA;Thay lan cuoi,*24* phut truoc day&#xA;Website, [http://c0ld.blogspot.com]&#xA;Danh tieng,*120*&#xA;Cap,*3*" measuredWidth="242" measuredHeight="133"/>
+      <widgets xsi:type="model:WidgetGroup" x="11" y="220" measuredWidth="242" measuredHeight="60">
+        <widgets xsi:type="model:Panel" width="242" height="60" measuredWidth="242" measuredHeight="60" background="#bfbfbf"/>
+        <widgets xsi:type="model:Text" x="5" y="10" width="237" height="39" text="Ambitious guy of destiny" measuredWidth="237" measuredHeight="39">
+          <font/>
+        </widgets>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:Link" x="229" y="7" text="Edit" measuredWidth="28" measuredHeight="25">
+      <font/>
+    </widgets>
+  </widgets>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

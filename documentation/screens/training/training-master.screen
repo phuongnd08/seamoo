@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="../master-logged-in.screen#/"/>
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1024">
+    <screen href="../master/master-logged-in.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Label" x="192" y="168" text="Luyen tap">
+  <widgets xsi:type="model:Label" x="192" y="168" text="Luyen tap" measuredWidth="217" measuredHeight="59">
     <font size="32"/>
   </widgets>
-  <widgets xsi:type="model:HLine" x="192" y="221" width="556"/>
-  <widgets xsi:type="model:Panel" x="761" y="221" width="199" height="548"/>
-  <widgets xsi:type="model:Text" x="192" y="232" width="553" height="33" text="Ban dang co *120* cau hoi trong bo suu tap ca nhan. *50* cau da duoc len lich de on tap trong hom nay. *20* cau chua bao gio duoc xem">
+  <widgets xsi:type="model:HLine" x="192" y="221" width="556" measuredWidth="556" measuredHeight="6"/>
+  <widgets xsi:type="model:Text" x="696" y="290" text="{edit}&#xA;{delete}" measuredWidth="16" measuredHeight="32">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Button" x="771" y="248" text="Xếp lại lịch"/>
-  <widgets xsi:type="model:Label" x="771" y="226" text="Lịch luyện tập quá dày?">
+  <widgets xsi:type="model:Panel" x="760" y="232" width="199" height="692" measuredWidth="199" measuredHeight="692"/>
+  <widgets xsi:type="model:Button" x="770" y="403" text="Xếp lại lịch" measuredWidth="92" measuredHeight="27"/>
+  <widgets xsi:type="model:Text" x="770" y="242" width="175" height="139" text="Tổng số câu hỏi&#xA;*120*&#xA;Được lên lịch trong hôm nay&#xA;*30*&#xA;Chưa bao giờ được xem&#xA;*20*" measuredWidth="175" measuredHeight="139">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Text" x="771" y="286" width="179" height="49" text="Chỉ muốn luyện tập với các câu hỏi thuộc một số giới hạn chủ đề?">
+  <widgets xsi:type="model:Label" x="770" y="381" text="Lịch luyện tập quá dày?" measuredWidth="159" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Button" x="771" y="338" text="Giới hạn từ khóa"/>
-  <widgets xsi:type="model:Text" x="771" y="450" width="179" height="324" text="*Tại sao cần luyện tập?*&#xA;Trong quá trình tham gia các giải đấu của SeaMoo, &#xA;bạn sẽ bắt gặp nhiều câu hỏi. Để có thể nhớ chính xác và lâu dài, việc luyện tập là cần thiết. Chức năng luyện tập của SeaMoo được thiết kế để tự động sắp xếp một lịch ôn tập tối ưu dành cho bạn để bạn có thể nhớ được nhiều nhất mà lại tốn thời gian ít nhất.&#xA;&#xA;*Làm sao để bổ sung câu hỏi*&#xA;Để bổ sung câu hỏi vào bộ sưu tập của mình, bạn có thể sử dụng chức năng nhập về trong bảng review có sau mỗi trận đấu.">
+  <widgets xsi:type="model:Text" x="770" y="441" width="179" height="49" text="Chỉ muốn luyện tập với các câu hỏi thuộc một số giới hạn chủ đề?" measuredWidth="179" measuredHeight="49">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Text" x="696" y="290" text="{edit}&#xA;{delete}">
+  <widgets xsi:type="model:Button" x="770" y="493" text="Giới hạn từ khóa" measuredWidth="127" measuredHeight="27"/>
+  <widgets xsi:type="model:Text" x="770" y="605" width="179" height="324" text="*Tại sao cần luyện tập?*&#xA;Trong quá trình tham gia các giải đấu của SeaMoo, &#xA;bạn sẽ bắt gặp nhiều câu hỏi. Để có thể nhớ chính xác và lâu dài, việc luyện tập là cần thiết. Chức năng luyện tập của SeaMoo được thiết kế để tự động sắp xếp một lịch ôn tập tối ưu dành cho bạn để bạn có thể nhớ được nhiều nhất mà lại tốn thời gian ít nhất.&#xA;&#xA;*Làm sao để bổ sung câu hỏi*&#xA;Để bổ sung câu hỏi vào bộ sưu tập của mình, bạn có thể sử dụng chức năng nhập về trong bảng review có sau mỗi trận đấu." measuredWidth="179" measuredHeight="324">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Text" x="771" y="376" width="179" height="33" text="Quản lí bộ sưu tập cá nhân của bạn?">
+  <widgets xsi:type="model:Text" x="770" y="531" width="179" height="33" text="Quản lí bộ sưu tập cá nhân của bạn?" measuredWidth="179" measuredHeight="33">
     <font/>
   </widgets>
-  <widgets xsi:type="model:HLine" x="771" y="277" width="179"/>
-  <widgets xsi:type="model:HLine" x="771" y="367" width="179"/>
-  <widgets xsi:type="model:Button" x="771" y="409" text="Xem bộ sưu tập cá nhân"/>
-  <widgets xsi:type="model:HLine" x="771" y="440" width="179"/>
+  <widgets xsi:type="model:HLine" x="770" y="432" width="179" measuredWidth="179" measuredHeight="6"/>
+  <widgets xsi:type="model:HLine" x="770" y="522" width="179" measuredWidth="179" measuredHeight="6"/>
+  <widgets xsi:type="model:Button" x="770" y="564" text="Xem bộ sưu tập cá nhân" measuredWidth="176" measuredHeight="27"/>
+  <widgets xsi:type="model:HLine" x="770" y="595" width="179" measuredWidth="179" measuredHeight="6"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

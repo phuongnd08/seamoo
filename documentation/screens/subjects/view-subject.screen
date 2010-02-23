@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1023">
+    <screen href="../master/master-not-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="228" width="263" height="97" measuredWidth="263" measuredHeight="97"/>
+  <widgets xsi:type="model:Image" x="196" y="237" width="77" height="48" measuredWidth="77" measuredHeight="48" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="288" y="238" width="145" height="87" text="Show your knowledge of vocabulary, grammar and listening ability" measuredWidth="145" measuredHeight="87">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="186" y="340" width="263" height="65" measuredWidth="263" measuredHeight="65"/>
+  <widgets xsi:type="model:Text" x="196" y="350" width="243" height="47" text="Linh vuc hien dang co _120_ thanh vien tham gia tranh tai. Nguoi dang dan dau la _mrc0ld_" measuredWidth="243" measuredHeight="47">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="472" y="232" width="489" measuredWidth="489" measuredHeight="100" background="#e5e5e5"/>
+  <widgets xsi:type="model:Image" x="482" y="242" measuredWidth="64" measuredHeight="48" src="../images/funny-baby.jpg"/>
+  <widgets xsi:type="model:Text" x="552" y="242" width="399" height="67" text="[Amateur League]&#xA;Giai dau danh cho nhung nguoi lan dau tham du&#xA;Ban dang co _40_ diem. Ban con *20* ngay de tich luy *300* diem de co the thang hang len *League II*" measuredWidth="399" measuredHeight="67">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="550" y="303" text="Tham gia" measuredWidth="81" measuredHeight="27"/>
+  <widgets xsi:type="model:WidgetGroup" x="472" y="340" measuredWidth="489" measuredHeight="145">
+    <widgets xsi:type="model:Panel" width="489" height="145" measuredWidth="489" measuredHeight="145" background="#e5e5e5"/>
+    <widgets xsi:type="model:Image" x="10" y="10" width="63" height="45" measuredWidth="63" measuredHeight="45" src="../images/england_flag_02.gif"/>
+    <widgets xsi:type="model:Text" x="80" y="10" width="399" height="95" text="[League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League&#xA;Ban dang co _40_ diem. Ban con *20* ngay de tich luy *100* diem de co the tru hang hoac tich luy du *300* diem de co the tham du League I" measuredWidth="399" measuredHeight="95">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Button" x="80" y="110" text="Tham gia" measuredWidth="81" measuredHeight="27"/>
+    <widgets xsi:type="model:TextField" x="24" y="21" text="2nd" measuredWidth="34" measuredHeight="25"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="472" y="494" measuredWidth="489" measuredHeight="78">
+    <widgets xsi:type="model:Panel" width="489" height="78" measuredWidth="489" measuredHeight="78" background="#e5e5e5"/>
+    <widgets xsi:type="model:Image" x="10" y="10" width="63" height="45" measuredWidth="63" measuredHeight="45" src="../images/england_flag_02.gif"/>
+    <widgets xsi:type="model:Text" x="80" y="10" width="399" height="67" text="[League I]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o League II&#xA;_Ban chua duoc quyen tham gia giai dau nay_" measuredWidth="399" measuredHeight="67">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:TextField" x="24" y="21" text="1st" measuredWidth="30" measuredHeight="25"/>
+  </widgets>
+  <widgets xsi:type="model:Panel" x="472" y="584" width="489" height="78" measuredWidth="489" measuredHeight="78" background="#e5e5e5"/>
+  <widgets xsi:type="model:Image" x="482" y="594" width="63" height="45" measuredWidth="63" measuredHeight="45" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="552" y="594" width="399" height="67" text="[Pro League]&#xA;Giai dau  chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Pro League&#xA;_Ban chua duoc quyen tham gia giai dau nay_" measuredWidth="399" measuredHeight="67">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:TextField" x="496" y="605" text="Pro" measuredWidth="31" measuredHeight="25"/>
+  <widgets xsi:type="model:Label" x="191" y="160" text="English" measuredWidth="159" measuredHeight="59">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="191" y="213" width="769" measuredWidth="769" measuredHeight="6"/>
+  <hRuler>
+    <guides position="447"/>
+  </hRuler>
+  <vRuler/>
+  <font/>
+</model:Screen>

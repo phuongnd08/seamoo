@@ -15,8 +15,8 @@
 		<!--
 			<put-attribute name="menu" value="/WEB-INF/master/menu.jsp"/>
 		-->
-<!--		<put-attribute name="body" value=""/>-->
-<!--		<put-attribute name="side-content" value=""/>-->
+		<put-attribute name="side" value=""/>
+		<put-attribute name="body" value=""/>
 	</definition>
 
 	<definition name="master-no-small" extends="master">
@@ -26,12 +26,12 @@
 
 	<definition name="master-small-left" extends="master">
 		<put-attribute name="content"
-			value="/WEB-INF/layouts/master/so/content-small-left.jsp" />
+			value="/WEB-INF/layouts/master/so/content-small-left.ftl" />
 	</definition>
 
 	<definition name="master-small-right" extends="master">
 		<put-attribute name="content"
-			value="/WEB-INF/layouts/master/so/content-small-right.jsp" />
+			value="/WEB-INF/layouts/master/so/content-small-right.ftl" />
 	</definition>
 
 </tiles-definitions>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Placeholder" x="99" y="128" width="798" height="945" measuredWidth="798" measuredHeight="945"/>
+  <widgets xsi:type="model:Panel" x="99" y="51" width="193" height="68" measuredWidth="193" measuredHeight="68" background="#090ff9"/>
+  <widgets xsi:type="model:Text" x="130" y="61" text="SEAMOO" measuredWidth="131" measuredHeight="32" foreground="#ffffff">
+    <font size="20" bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="135" y="92" text="Noi si tu tranh tai" measuredWidth="133" measuredHeight="17" foreground="#fdfa00">
+    <font bold="true"/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="294" y="94" width="59" text="Thi dau" measuredWidth="59" measuredHeight="27"/>
+  <widgets xsi:type="model:Button" x="359" y="94" text="Thanh vien" measuredWidth="92" measuredHeight="27"/>
+  <widgets xsi:type="model:Button" x="528" y="94" text="Báo cáo" measuredWidth="72" measuredHeight="27"/>
+  <widgets xsi:type="model:Button" x="797" y="94" text="Đăng câu hỏi" measuredWidth="105" measuredHeight="27"/>
+  <widgets xsi:type="model:Button" x="600" y="94" width="121" text="Câu hỏi nóng (350)" measuredWidth="121" measuredHeight="27"/>
+  <widgets xsi:type="model:LinkBar" x="117" y="1016" text="blog,fag,about,discussion" measuredWidth="217" measuredHeight="25">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:HLine" x="113" y="1001" width="769" measuredWidth="769" measuredHeight="6"/>
+  <widgets xsi:type="model:Image" x="767" y="1016" measuredWidth="120" measuredHeight="30" src="../images/appengine-silver-120x30.gif"/>
+  <widgets xsi:type="model:Button" x="454" y="94" text="Trao đổi" measuredWidth="71" measuredHeight="27"/>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

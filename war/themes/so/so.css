@@ -4,7 +4,7 @@
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	vertical-align: baseline;
+	/*vertical-align: baseline;*/
 	background: transparent;
 }
 
@@ -49,7 +49,7 @@ body {
 code {
 	font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
 		DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New;
-	background-color: #eee;
+	background-color: #c0c0c0;
 }
 
 textarea {
@@ -77,9 +77,9 @@ pre {
 	overflow: auto;
 	width: auto;
 	padding: 5px;
-	background-color: #eee;
-	width: 650px !     ie7;
-	padding-bottom: 20px !     ie7;
+	background-color: #c0c0c0;
+	width: 650px !         ie7;
+	padding-bottom: 20px !         ie7;
 	max-height: 600px;
 }
 
@@ -90,7 +90,7 @@ pre {
 blockquote {
 	margin-bottom: 10px;
 	padding: 10px 10px 1px 10px;
-	background-color: #eee;
+	background-color: #c0c0c0;
 }
 
 b,strong {
@@ -181,7 +181,7 @@ kbd {
 	padding: 2px 4px;
 	white-space: nowrap;
 	color: #000;
-	background: #eee;
+	background: #c0c0c0;
 	border-width: 1px 3px 3px 1px;
 	border-style: solid;
 	border-color: #ccc #aaa #888 #bbb;
@@ -214,7 +214,7 @@ p code {
 	float: right;
 	height: 30px;
 	width: 45px;
-	background-color: #eee;
+	background-color: #c0c0c0;
 	color: #999;
 	font: Bold 12px Verdana, Sans-Serif;
 	text-align: center;
@@ -237,7 +237,7 @@ p code {
 	cursor: pointer;
 	font-size: 250%;
 	font-weight: bold;
-	color: #777;
+	color: #003;
 	text-align: left;
 	vertical-align: middle;
 }
@@ -307,7 +307,7 @@ p code {
 
 .accept-rate {
 	margin-left: 37px;
-	padding-top: 6px !     ie7;
+	padding-top: 6px !         ie7;
 	margin-top: 3px;
 	margin-bottom: 6px;
 }
@@ -414,7 +414,7 @@ p code {
 }
 
 .post-menu>a:hover,.edit-tags-wrapper>span>a:hover {
-	background-color: #777;
+	background-color: #003;
 	color: #fff;
 	text-decoration: none;
 }
@@ -452,7 +452,7 @@ p code {
 
 .comments-link:hover {
 	padding: 0 3px 2px 3px;
-	background-color: #777;
+	background-color: #003;
 	color: #fff;
 	text-decoration: none;
 }
@@ -579,7 +579,7 @@ a.comment-user.owner {
 
 #footer {
 	color: #444;
-	background: #777;
+	background: #003;
 	border-top: 7px solid #000;
 	clear: both;
 	overflow: hidden;
@@ -645,8 +645,8 @@ a.comment-user.owner {
 }
 
 .user-info {
-	height: 35px;
 	width: 185px;
+	margin: 5px 5px 10px 5px;
 }
 
 .user-info .user-gravatar32 {
@@ -661,8 +661,7 @@ a.comment-user.owner {
 }
 
 .user-info .user-details {
-	float: left;
-	margin-left: 5px;
+	padding-left: 5px;
 	width: 145px;
 	overflow: hidden;
 	white-space: nowrap;
@@ -679,7 +678,7 @@ a.comment-user.owner {
 }
 
 .revision td {
-	background-color: #eee;
+	background-color: #c0c0c0;
 }
 
 .vote-revision td {
@@ -727,7 +726,7 @@ a.comment-user.owner {
 }
 
 #user-about-me {
-	background-color: #eee;
+	background-color: #c0c0c0;
 	line-height: 120%;
 	padding: 10px;
 	margin: 10px;
@@ -739,7 +738,7 @@ a.comment-user.owner {
 .answer-votes {
 	color: #555;
 	text-align: center;
-	background-color: #eee;
+	background-color: #c0c0c0;
 	float: left;
 	font-weight: bold;
 	padding: 4px;
@@ -820,7 +819,7 @@ a.comment-user.owner {
 	margin-top: 15px;
 	margin-bottom: -5px;
 	width: 717px;
-	background-color: #eee;
+	background-color: #c0c0c0;
 	line-height: 180%;
 	padding: 8px 8px 8px 0;
 	padding-bottom: 4px;
@@ -888,16 +887,12 @@ a.comment-user.owner {
 	zoom: 1;
 }
 
-#hsearch .textbox {
-	background: url(http://sstatic.net/so/Img/search.png) center left
-		no-repeat;
+.searchbox {
+	background: url(images/search.png) center left no-repeat;
 	background-color: #fff;
 	padding-left: 16px;
 	margin: 0;
-	max-width: 230px;
-	border: none;
-	border-top: 1px solid #ccc;
-	border-left: 1px solid #ccc;
+	border: 1px solid #ccc;
 }
 
 #header {
@@ -911,7 +906,7 @@ a.comment-user.owner {
 	float: right;
 	height: 30px;
 	line-height: 22px;
-	background-color: #eee;
+	background-color: #c0c0c0;
 	max-width: 750px;
 	-moz-border-radius-bottomleft: 3px;
 	-moz-border-radius-bottomright: 3px;
@@ -969,7 +964,7 @@ a.comment-user.owner {
 }
 
 .nav li {
-	background: #777;
+	background: #003;
 	display: block;
 	float: left;
 	margin-right: 7px;
@@ -1030,7 +1025,7 @@ a.comment-user.owner {
 }
 
 #feed-link a {
-	color: #777;
+	color: #003;
 }
 
 #feed-link-image {
@@ -1068,7 +1063,7 @@ a.comment-user.owner {
 #tabs a {
 	background: inherit;
 	border: 1px solid #fff;
-	color: #777;
+	color: #003;
 	display: block;
 	float: left;
 	font-size: 90%;
@@ -1081,7 +1076,7 @@ a.comment-user.owner {
 
 #tabs a:hover {
 	background: #fff;
-	border: 1px solid #777;
+	border: 1px solid #003;
 	border-bottom-color: #fff;
 	line-height: 20px;
 	margin-top: 9px;
@@ -1089,7 +1084,7 @@ a.comment-user.owner {
 
 #tabs a.youarehere {
 	background: #fff;
-	border: 1px solid #777;
+	border: 1px solid #003;
 	border-bottom-color: #fff;
 	color: black;
 	font-size: 120%;
@@ -1145,7 +1140,7 @@ a.comment-user.owner {
 }
 
 .stats {
-	background: #eee;
+	background: #c0c0c0;
 	margin: 0 0 0 7px;
 	padding: 4px 7px 6px 7px;
 	width: 58px;
@@ -1181,7 +1176,7 @@ a.comment-user.owner {
 }
 
 .narrow .votes {
-	background: #eee;
+	background: #c0c0c0;
 	float: left;
 	margin: 0 3px 0 0;
 	padding: 5px;
@@ -1430,7 +1425,7 @@ a.comment-user.owner {
 }
 
 #recent-tags .post-tag:hover {
-	background-color: #777;
+	background-color: #003;
 	color: #fff !important;
 	border: none;
 	margin: 0;
@@ -1574,7 +1569,7 @@ div.form-error {
 div.form-item-info {
 	padding: 4px 0 4px 4px;
 	width: 80%;
-	color: #777;
+	color: #003;
 }
 
 .edit-field-overlay {
@@ -1632,6 +1627,10 @@ div.form-item-info {
 
 .page-numbers.desc {
 	border: none;
+}
+
+.page-numbers:active {
+	font-weight: bold;
 }
 
 .page-numbers:hover {
@@ -1874,8 +1873,9 @@ div.form-item-info {
 .tagged-ignored {
 	opacity: .5;
 	background-color: #fff;
-	filter: progid :     DXImageTransform.Microsoft.Alpha (     Opacity =
-		    50 );
+	filter: progid :         DXImageTransform.Microsoft.Alpha (        
+		Opacity =  
+		      50 );
 }
 
 .tagged-ignored-hidden {
@@ -1909,7 +1909,7 @@ div.form-item-info {
 	line-height: 130%;
 	overflow: hidden;
 	margin-bottom: 8px;
-	border: 3px solid #eee;
+	border: 3px solid #c0c0c0;
 }
 
 #question-suggestions {
@@ -1954,13 +1954,9 @@ div.form-item-info {
 	padding-top: 20px;
 }
 
-.tar {
-	text-align: right;
-}
-
 .ac_results {
 	padding: 0;
-	border: 1px solid #777;
+	border: 1px solid #003;
 	background-color: #fff;
 	overflow: hidden;
 	z-index: 99999;

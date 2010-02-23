@@ -6,20 +6,22 @@
 <tiles-definitions>
 
 	<definition name="subjects.list" extends="master-no-small">
-		<put-attribute name="body" value="/WEB-INF/layouts/subjects/list.ftl" />
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/subjects/subject-list.ftl" />
 		<!--<put-attribute name="body" value="Fuck You" />-->
 	</definition>
-	<definition name="subjects.detail" extends="master-no-small">
+	<definition name="subjects.detail" extends="master-small-left">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/subjects/detail.jsp" />
+			value="/WEB-INF/layouts/subjects/subject-detail.ftl" />
+		<put-attribute name="side"
+			value="/WEB-INF/layouts/subjects/subject-detail-side.ftl" />
 	</definition>
 
-	<definition name="leagues.list" extends="master-no-small">
-		<put-attribute name="body" value="/WEB-INF/layouts/leagues/list.jsp" />
-	</definition>
-	<definition name="leagues.detail" extends="master-no-small">
+	<definition name="leagues.detail" extends="master-small-left">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/leagues/detail.jsp" />
+			value="/WEB-INF/layouts/leagues/league-detail.ftl" />
+		<put-attribute name="side"
+			value="/WEB-INF/layouts/leagues/league-detail-side.ftl" />
 	</definition>
 
 	<definition name="matching.detail" extends="master-no-small">
@@ -32,73 +34,81 @@
 	</definition>
 
 	<definition name="users.list" extends="master-no-small">
-		<put-attribute name="body" value="/WEB-INF/layouts/users/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/users/user-list.ftl" />
 	</definition>
-	<definition name="users.login" extends="master-no-small">
-		<put-attribute name="body" value="/WEB-INF/layouts/users/login.jsp" />
+	<definition name="users.login" extends="master-small-right">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/users/user-login.ftl" />
+		<put-attribute name="side"
+			value="/WEB-INF/layouts/users/user-login-side.ftl" />
 	</definition>
 	<definition name="users.first-time" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/users/first-time.jsp" />
+			value="/WEB-INF/layouts/users/user-first-time.ftl" />
 	</definition>
-
-	<definition name="profiles.view" extends="master-no-small">
-		<put-attribute name="body" value="/WEB-INF/layouts/profiles/view.jsp" />
-	</definition>
-	<definition name="profiles.edit" extends="master-no-small">
-		<put-attribute name="body" value="/WEB-INF/layouts/profiles/edit.jsp" />
-	</definition>
-
-	<definition name="discussion.personal" extends="master-no-small">
+	<definition name="user.view" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/discussion/personal.jsp" />
+			value="/WEB-INF/layouts/users/user-view.ftl" />
 	</definition>
+	<definition name="user.edit" extends="master-small-left">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/users/user-edit.ftl" />
+		<put-attribute name="side" value="/WEB-INF/layouts/users/user-edit-side.ftl"/>
+	</definition>
+	<definition name="user.discussion" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/users/user-discussion.ftl" />
+	</definition>
+
+
 	<definition name="discussion.all" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/discussion/all.jsp" />
+			value="/WEB-INF/layouts/discussion/discussion-all.ftl" />
 	</definition>
 
 	<definition name="questions.create" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/questions/create.jsp" />
+			value="/WEB-INF/layouts/questions/create.ftl" />
 	</definition>
 	<definition name="questions.edit" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/questions/edit.jsp" />
+			value="/WEB-INF/layouts/questions/edit.ftl" />
 	</definition>
 	<definition name="questions.detail" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/questions/view.jsp" />
+			value="/WEB-INF/layouts/questions/view.ftl" />
 	</definition>
 	<definition name="questions.view-revision" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/questions/view-revision.jsp" />
+			value="/WEB-INF/layouts/questions/view-revision.ftl" />
 	</definition>
 	<definition name="questions.list-hot" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/questions/list-hot.jsp" />
+			value="/WEB-INF/layouts/questions/list-hot.ftl" />
 	</definition>
 
 
 	<definition name="reports.list" extends="master-no-small">
-		<put-attribute name="body" value="/WEB-INF/layouts/reports/list.jsp" />
+		<put-attribute name="body" value="/WEB-INF/layouts/reports/list.ftl" />
 	</definition>
 	<definition name="reports.detail" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/reports/detail.jsp" />
+			value="/WEB-INF/layouts/reports/detail.ftl" />
 	</definition>
 	<definition name="reports.process" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/reports/process.jsp" />
+			value="/WEB-INF/layouts/reports/process.ftl" />
 	</definition>
 
-	<definition name="training.go" extends="master-no-small">
-		<put-attribute name="body" value="/WEB-INF/layouts/training/go.jsp" />
+	<definition name="training.go" extends="master-small-right">
+		<put-attribute name="body" value="/WEB-INF/layouts/training/training-go.ftl" />
+		<put-attribute name="side" value="/WEB-INF/layouts/training/training-go-side.ftl"/>
 	</definition>
-	<definition name="training.view-personal-collection"
+	<definition name="training.personal-collection"
 		extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/training/view-personal-collection.jsp" />
+			value="/WEB-INF/layouts/training/training-personal-collection.ftl" />
 	</definition>
 
 </tiles-definitions>
