@@ -1,63 +1,35 @@
 [#ftl/]
-[#macro eventItem moment]
-	<tr>
-		<td class="time-column">${moment}</td>
-		<td>[#nested/]</td>
-	</tr>
-[/#macro]
-
-[#macro joinEvent competitors]
-	[#list competitors as competitor]
-		<a href="#">${competitor}</a>
-		[#if competitor_has_next] &amp; [/#if]
-	[/#list]
-	tham gia trận đấu
-[/#macro]
-[#macro answerEvent competitor questions]
-	<a href="#">${competitor}</a> đã trả lời câu hỏi số 
-	[#list questions as question]
-		${question}[#if question_has_next], [/#if]
-	[/#list]
-[/#macro]
-
-[#macro ignoreEvent competitor questions]
-	<a href="#">${competitor}</a> đã bỏ qua câu hỏi số 
-	[#list questions as question]
-		${question}[#if question_has_next], [/#if]
-	[/#list]
-[/#macro]
-
-
+[#import "/match.ftl" as match/]
 <div class="description-box">
 	<h3>Diễn biến</h3>
 	<table class="fw">
-		[@eventItem moment="8:00:00"]
-			[@joinEvent competitors="mrcold,thinh_pro"?split(",")/]
-		[/@eventItem]		
-		[@eventItem moment="8:00:05"]
-			[@joinEvent competitors="xuka,ken"?split(",")/]
-		[/@eventItem]		
-		[@eventItem moment="8:00:10"]
+		[@match.eventItem moment="8:00:00"]
+			[@match.joinEvent competitors="mrcold,thinh_pro"?split(",")/]
+		[/@match.eventItem]		
+		[@match.eventItem moment="8:00:05"]
+			[@match.joinEvent competitors="xuka,ken"?split(",")/]
+		[/@match.eventItem]		
+		[@match.eventItem moment="8:00:10"]
 			Trận đấu đã bắt đầu
-		[/@eventItem]		
-		[@eventItem moment="8:00:20"]
-			[@answerEvent competitor="thinh_pro" questions=[1,2,3]/]
-		[/@eventItem]		
-		[@eventItem moment="8:00:22"]
-			[@answerEvent competitor="ken" questions=[1,2]/]
-		[/@eventItem]		
-		[@eventItem moment="8:00:25"]
-			[@ignoreEvent competitor="ken" questions=[3]/]
-		[/@eventItem]		
-		[@eventItem moment="8:00:26"]
-			[@answerEvent competitor="mrcold" questions=[1,2,3,4,5]/]
-		[/@eventItem]		
-		[@eventItem moment="8:00:28"]
-			[@ignoreEvent competitor="mrcold" questions=[6]/]
-		[/@eventItem]		
-		[@eventItem moment="8:00:30"]
+		[/@match.eventItem]		
+		[@match.eventItem moment="8:00:20"]
+			[@match.answerEvent competitor="thinh_pro" questions=[1,2,3]/]
+		[/@match.eventItem]		
+		[@match.eventItem moment="8:00:22"]
+			[@match.answerEvent competitor="ken" questions=[1,2]/]
+		[/@match.eventItem]		
+		[@match.eventItem moment="8:00:25"]
+			[@match.ignoreEvent competitor="ken" questions=[3]/]
+		[/@match.eventItem]		
+		[@match.eventItem moment="8:00:26"]
+			[@match.answerEvent competitor="mrcold" questions=[1,2,3,4,5]/]
+		[/@match.eventItem]		
+		[@match.eventItem moment="8:00:28"]
+			[@match.ignoreEvent competitor="mrcold" questions=[6]/]
+		[/@match.eventItem]		
+		[@match.eventItem moment="8:00:30"]
 			Trận đấu đã kết thúc
-		[/@eventItem]		
+		[/@match.eventItem]		
 	</table>
 </div>
 <br/>
@@ -72,14 +44,14 @@
 </div>
 
 [#macro question no content]
-	<tr class="match-review-question-row-${no%2+1}"><td>${no}</td><td colspan="3"><a href="#">${content}</a></td></tr>
+	<tr class="row-${no%2+1}"><td>${no}</td><td colspan="3"><a href="#">${content}</a></td></tr>
 [/#macro]
 [#macro icon type]
 <span class="answer-${type}"></span>
 [/#macro]
 
 [#macro answer no author moment content]
-	<tr class="match-review-question-row-${no%2+1}">
+	<tr class="row-${no%2+1}">
 		<td></td>
 		<td><a href="#">${author}</a> <span class="match-review-answer-time">${moment}</span>: <span class="match-review-answer-content">${content}</span> </td>
 		<td class="answer-review-grade-column">[#nested/]</td>
@@ -90,7 +62,7 @@
 [/#macro]
 
 [#macro correctAnswer no content]
-	<tr class="match-review-question-row-${no%2+1}">
+	<tr class="row-${no%2+1}">
 		<td></td>
 		<td><em>Câu trả lời đúng</em>: <span class="match-review-answer-content">${content}</span> </td>
 		<td class="answer-review-grade-column">[#nested/]</td>
@@ -118,6 +90,5 @@
 		[@answer no=2 author="thinh_pro" moment="08:00:20" content="I don't even know"]0%[/@answer]
 		[@answer no=2 author="thinh_pro" moment="08:00:20" content=""][@icon type="ignore"/][/@answer]
 		[@correctAnswer no=2 content="God damn it"]100%[/@correctAnswer]
-
 	</table>
 </div>

@@ -30,9 +30,10 @@
 		<put-attribute name="side"
 			value="/WEB-INF/layouts/matches/match-detail-side.ftl" />
 	</definition>
-	<definition name="matches.participate" extends="master-no-small">
+	<definition name="matches.participate" extends="master-small-left">
 		<put-attribute name="body"
 			value="/WEB-INF/layouts/matches/match-participate.ftl" />
+		<put-attribute name="side" value="/WEB-INF/layouts/matches/match-participate-side.ftl"/>
 	</definition>
 
 	<definition name="users.list" extends="master-no-small">
@@ -93,15 +94,15 @@
 
 
 	<definition name="reports.list" extends="master-no-small">
-		<put-attribute name="body" value="/WEB-INF/layouts/reports/list.ftl" />
+		<put-attribute name="body" value="/WEB-INF/layouts/reports/report-list.ftl" />
 	</definition>
 	<definition name="reports.detail" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/reports/detail.ftl" />
+			value="/WEB-INF/layouts/reports/report-detail.ftl" />
 	</definition>
 	<definition name="reports.process" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/reports/process.ftl" />
+			value="/WEB-INF/layouts/reports/report-process.ftl" />
 	</definition>
 
 	<definition name="training.go" extends="master-small-right">

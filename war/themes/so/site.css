@@ -36,6 +36,10 @@
 	margin: 5px;
 }
 
+.sc {
+	padding-left: 50px;
+}
+
 .ib {
 	display: inline-block;
 }
@@ -89,13 +93,6 @@ td.logo-cell {
 .question-personal-info {
 	padding-left: 30px;
 	font-style: italic;
-}
-
-.question-date {
-	width: 70px;
-	white-space: nowrap;
-	letter-spacing: -2px;
-	background-color: #ccc;
 }
 
 .question-edit-btn {
@@ -166,11 +163,11 @@ td.logo-cell {
 	font-style: italic;
 }
 
-.match-review-question-row-1 {
+.row-1 {
 	
 }
 
-.match-review-question-row-2 {
+.row-2 {
 	background: #eee;
 }
 
@@ -179,4 +176,24 @@ td.logo-cell {
 	height: 16px;
 	display: inline-block;
 	background: url(images/answer-flag-btn.png) no-repeat center center;
+}
+
+.loading-indicator {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: url(images/loading.gif) no-repeat center center;
+}
+
+.report-time {
+	background: silver;
+}
+
+.revision-column{
+	width: 80px;
+}
+
+.date-description {
+	white-space: nowrap;
+	background-color: #ccc;
 }

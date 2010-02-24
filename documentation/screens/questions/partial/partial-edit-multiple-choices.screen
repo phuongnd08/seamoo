@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Panel" x="190" y="310" width="563" height="35"/>
-  <widgets xsi:type="model:Label" x="201" y="312" width="142" text="*Cau hoi*">
+  <widgets xsi:type="model:Panel" x="190" y="310" width="563" height="35" measuredWidth="563" measuredHeight="35"/>
+  <widgets xsi:type="model:Label" x="201" y="312" width="142" text="*Cau hoi*" measuredWidth="142" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="190" y="354" width="563" height="28"/>
-  <widgets xsi:type="model:Text" x="196" y="358" width="327" height="13" text="What is the best word that synonym to *wow*?">
+  <widgets xsi:type="model:Panel" x="190" y="354" width="563" height="28" measuredWidth="563" measuredHeight="28"/>
+  <widgets xsi:type="model:Text" x="196" y="358" width="327" height="13" text="What is the best word that synonym to *wow*?" measuredWidth="327" measuredHeight="13">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="190" y="391" width="563" height="20"/>
-  <widgets xsi:type="model:Label" x="197" y="389" width="64" text="*Lua chon*">
+  <widgets xsi:type="model:Panel" x="190" y="391" width="563" height="20" measuredWidth="563" measuredHeight="20"/>
+  <widgets xsi:type="model:Label" x="197" y="389" width="64" text="*Lua chon*" measuredWidth="64" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:TextField" x="190" y="421" width="332" text="Yeah"/>
-  <widgets xsi:type="model:Label" x="528" y="421" width="150" text="(correct answer)">
+  <widgets xsi:type="model:TextField" x="190" y="421" width="332" text="Yeah" measuredWidth="332" measuredHeight="25"/>
+  <widgets xsi:type="model:Label" x="528" y="421" width="150" text="(correct answer)" measuredWidth="150" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:TextField" x="190" y="456" width="332" text="Ouch"/>
-  <widgets xsi:type="model:Button" x="528" y="455" width="150" text="Set as correct answer"/>
-  <widgets xsi:type="model:TextField" x="190" y="488" width="332" text="Oh"/>
-  <widgets xsi:type="model:Button" x="528" y="487" width="150" text="Set as correct answer"/>
-  <widgets xsi:type="model:TextField" x="190" y="520" width="332" text="_(New choice)_"/>
-  <widgets xsi:type="model:Button" x="528" y="519" width="64" text="Add"/>
-  <widgets xsi:type="model:Panel" x="190" y="554" width="561" height="78"/>
-  <widgets xsi:type="model:Label" x="202" y="557" width="8" text="*Tu khoa* ">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:TextField" x="200" y="601" width="541" text="grammar"/>
-  <widgets xsi:type="model:Label" x="202" y="579" width="471" text="Noi tu-khoa-dai bang dau gach (-), dung dau cach de phan toi da 5 tu khoa (grammar pronunciation)">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Button" x="190" y="640" width="68" text="Cancel"/>
-  <widgets xsi:type="model:Button" x="268" y="640" width="68" text="Lưu"/>
+  <widgets xsi:type="model:TextField" x="190" y="456" width="332" text="Ouch" measuredWidth="332" measuredHeight="25"/>
+  <widgets xsi:type="model:Button" x="528" y="455" width="150" text="Set as correct answer" measuredWidth="150" measuredHeight="27"/>
+  <widgets xsi:type="model:TextField" x="190" y="488" width="332" text="Oh" measuredWidth="332" measuredHeight="25"/>
+  <widgets xsi:type="model:Button" x="528" y="487" width="150" text="Set as correct answer" measuredWidth="150" measuredHeight="27"/>
+  <widgets xsi:type="model:TextField" x="190" y="520" width="332" text="_(New choice)_" measuredWidth="332" measuredHeight="25"/>
+  <widgets xsi:type="model:Button" x="528" y="519" width="64" text="Add" measuredWidth="64" measuredHeight="27"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

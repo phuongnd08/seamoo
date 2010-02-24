@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" x="176" y="40">
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1024">
     <screen href="edit-report-master.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Label" x="188" y="154" text="Báo cáo">
+  <widgets xsi:type="model:Label" x="188" y="154" text="Báo cáo" measuredWidth="175" measuredHeight="59">
     <font size="32"/>
   </widgets>
-  <widgets xsi:type="model:Master" x="188" y="369">
+  <widgets xsi:type="model:Master" x="188" y="369" measuredWidth="563" measuredHeight="236">
     <screen href="../../questions/partial/partial-edit-multiple-choices.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:HLine" x="188" y="207" width="769"/>
-  <widgets xsi:type="model:Master" x="188" y="729">
-    <screen href="../../questions/partial/partial-edit-history.screen#/"/>
+  <widgets xsi:type="model:HLine" x="188" y="207" width="769" measuredWidth="769" measuredHeight="6"/>
+  <widgets xsi:type="model:Master" x="188" y="608" measuredWidth="561" measuredHeight="552">
+    <screen href="../../questions/partial/partial-edit-footer.screen#/"/>
   </widgets>
   <hRuler>
     <guides position="447"/>

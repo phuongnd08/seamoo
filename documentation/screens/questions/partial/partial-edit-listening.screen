@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Panel" x="191" y="456" width="561" height="80"/>
-  <widgets xsi:type="model:Label" x="203" y="461" width="133" text="*Tu khoa* ">
+  <widgets xsi:type="model:Panel" x="192" y="350" width="560" height="34" measuredWidth="560" measuredHeight="34"/>
+  <widgets xsi:type="model:Text" x="200" y="360" width="88" height="19" text="Audio: {play} {pause}" measuredWidth="88" measuredHeight="19">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="192" y="350" width="560" height="34"/>
-  <widgets xsi:type="model:Text" x="200" y="360" width="88" height="19" text="Audio: {play} {pause}">
+  <widgets xsi:type="model:Panel" x="192" y="392" width="560" height="22" measuredWidth="560" measuredHeight="22"/>
+  <widgets xsi:type="model:Label" x="199" y="392" width="61" text="*Noi dung trong doan am*" measuredWidth="61" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="192" y="392" width="560" height="22"/>
-  <widgets xsi:type="model:Label" x="199" y="392" width="61" text="*Noi dung trong doan am*">
+  <widgets xsi:type="model:TextField" x="192" y="424" width="559" text="Hello, I'm Michael." measuredWidth="559" measuredHeight="25"/>
+  <widgets xsi:type="model:Panel" x="191" y="320" width="561" height="22" measuredWidth="561" measuredHeight="22"/>
+  <widgets xsi:type="model:Label" x="203" y="320" width="199" text="*Cau hoi*  (Listen to audio)" measuredWidth="199" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:TextField" x="192" y="424" width="559" text="Hello, I'm Michael."/>
-  <widgets xsi:type="model:Panel" x="191" y="320" width="561" height="22"/>
-  <widgets xsi:type="model:Label" x="203" y="320" width="199" text="*Cau hoi*  (Listen to audio)">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Button" x="292" y="355" width="124" text="Upload audio khac"/>
-  <widgets xsi:type="model:TextField" x="201" y="505" width="541" text="grammar"/>
-  <widgets xsi:type="model:Label" x="203" y="483" width="471" text="Noi tu-khoa-dai bang dau gach (-), dung dau cach de phan toi da 5 tu khoa (grammar pronunciation)">
-    <font/>
-  </widgets>
-  <widgets xsi:type="model:Button" x="191" y="544" width="66" text="Cancel"/>
-  <widgets xsi:type="model:Button" x="269" y="544" width="66" text="Lưu"/>
+  <widgets xsi:type="model:Button" x="292" y="355" width="124" text="Upload audio khac" measuredWidth="124" measuredHeight="27"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

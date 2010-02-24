@@ -18,7 +18,7 @@
 			</div>
 			<div><a href="#">${content}</a></div>
 			<div class="question-personal-info">
-			<span class="question-date" title="Lần luyện tập cuối">${lastRep}</span> - <span class="question-date" title="Lần luyện tập kế tiếp">${nextRep}</span><br/>
+			<span class="date-description" title="Lần luyện tập cuối">${lastRep}</span> - <span class="date-description" title="Lần luyện tập kế tiếp">${nextRep}</span><br/>
 			[#list keywords as keyword]
 				<strong>${keyword}</strong>
 				[#if keyword_has_next], &nbsp;[/#if]
