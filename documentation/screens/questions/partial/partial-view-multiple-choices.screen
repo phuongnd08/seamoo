@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Panel" x="257" y="310" width="711" height="37"/>
-  <widgets xsi:type="model:Label" x="268" y="314" width="290" text="*Cau hoi* [Grammar]">
+  <widgets xsi:type="model:Panel" x="257" y="310" width="711" height="37" measuredWidth="711" measuredHeight="37"/>
+  <widgets xsi:type="model:Label" x="268" y="314" width="290" text="*Cau hoi* [Grammar]" measuredWidth="290" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="257" y="354" width="711" height="30"/>
-  <widgets xsi:type="model:Text" x="263" y="358" width="475" text="What is the best word that synonym to *wow*?">
+  <widgets xsi:type="model:Panel" x="257" y="354" width="711" height="30" measuredWidth="711" measuredHeight="30"/>
+  <widgets xsi:type="model:Text" x="263" y="358" width="475" text="What is the best word that synonym to *wow*?" measuredWidth="475" measuredHeight="17">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="257" y="391" width="711" height="22"/>
-  <widgets xsi:type="model:Label" x="264" y="391" width="212" text="*Lua chon*">
+  <widgets xsi:type="model:Panel" x="257" y="391" width="711" height="22" measuredWidth="711" measuredHeight="22"/>
+  <widgets xsi:type="model:Label" x="264" y="391" width="212" text="*Lua chon*" measuredWidth="212" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="257" y="423" width="710" height="84"/>
-  <widgets xsi:type="model:Text" x="264" y="433" width="424" text="{check}Yeah&#xA;{bullet}Oh&#xA;{bullet}Ahh&#xA;{bullet}Ouch">
+  <widgets xsi:type="model:Panel" x="257" y="423" width="710" height="84" measuredWidth="710" measuredHeight="84"/>
+  <widgets xsi:type="model:Text" x="264" y="433" width="424" text="{check}Yeah&#xA;{bullet}Oh&#xA;{bullet}Ahh&#xA;{bullet}Ouch" measuredWidth="424" measuredHeight="68">
     <font/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="184" y="314">
-    <widgets xsi:type="model:Panel" y="30" width="69" height="66"/>
-    <widgets xsi:type="model:Label" x="7" y="37" text="10">
+  <widgets xsi:type="model:WidgetGroup" x="184" y="314" measuredWidth="69" measuredHeight="127">
+    <widgets xsi:type="model:Panel" y="30" width="69" height="66" measuredWidth="69" measuredHeight="66"/>
+    <widgets xsi:type="model:Label" x="7" y="37" text="10" measuredWidth="59" measuredHeight="59">
       <font size="32"/>
     </widgets>
-    <widgets xsi:type="model:Icon" x="18" icon="empty-arrow-up (large)"/>
-    <widgets xsi:type="model:Icon" x="18" y="95" icon="empty-arrow-down (large)"/>
+    <widgets xsi:type="model:Icon" x="18" measuredWidth="32" measuredHeight="32" icon="empty-arrow-up (large)"/>
+    <widgets xsi:type="model:Icon" x="18" y="95" measuredWidth="32" measuredHeight="32" icon="empty-arrow-down (large)"/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="208" y="437" text="{favorites}&#xA;{add}" measuredWidth="16" measuredHeight="32">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="913" y="315" text="{edit}{flag}{bell}" measuredWidth="48" measuredHeight="16">
+    <font/>
   </widgets>
   <hRuler>
     <guides position="447"/>

@@ -38,3 +38,27 @@
 	<p class="label-key">${key}</p>
 	<p class="label-value">${value}</p>
 [/#macro]
+
+
+[#--
+	combobox
+	Rendering a combobox
+--]
+[#macro combobox name options selectedKey]
+    <select name="${name}">
+        [#list options?keys as key]
+        [#assign isSelected = selectedKey==key]
+        <option value="${key?html}"[#if isSelected] selected="selected"[/#if]>${options[key]?html}</option>
+        [/#list]
+    </select>
+[/#macro]
+
+[#--
+	tagList
+	Display a list of tag in proper format
+--]
+[#macro tagList tags]
+	<div class="question-taglist">
+		[#list tags as tag]<a href="#" class="question-tag">${tag}</a>[#if tag_has_next]&nbsp;[/#if][/#list]
+	</div>
+[/#macro]

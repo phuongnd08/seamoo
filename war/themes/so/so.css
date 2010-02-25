@@ -78,8 +78,8 @@ pre {
 	width: auto;
 	padding: 5px;
 	background-color: #c0c0c0;
-	width: 650px !         ie7;
-	padding-bottom: 20px !         ie7;
+	width: 650px !           ie7;
+	padding-bottom: 20px !           ie7;
 	max-height: 600px;
 }
 
@@ -307,7 +307,7 @@ p code {
 
 .accept-rate {
 	margin-left: 37px;
-	padding-top: 6px !         ie7;
+	padding-top: 6px !           ie7;
 	margin-top: 3px;
 	margin-bottom: 6px;
 }
@@ -397,11 +397,6 @@ p code {
 	margin: 0 2px 0 2px;
 	color: #ccc;
 	font-size: 110%;
-}
-
-.post-taglist {
-	margin-bottom: 10px;
-	clear: both;
 }
 
 .post-menu {
@@ -574,7 +569,6 @@ a.comment-user.owner {
 	color: #333;
 	font-size: 120%;
 	margin: 1.2em 1.2em .5em 1.2em;
-	line-height: 120%;
 }
 
 #footer {
@@ -735,7 +729,7 @@ a.comment-user.owner {
 	overflow: auto;
 }
 
-.answer-votes {
+.question-votes {
 	color: #555;
 	text-align: center;
 	background-color: #c0c0c0;
@@ -749,16 +743,12 @@ a.comment-user.owner {
 	font-size: 110%;
 }
 
-.answer-hyperlink {
+.question-hyperlink {
 	color: #555 !important;
 	font-weight: bold;
 }
 
-.question-hyperlink {
-	font-weight: bold;
-}
-
-.answer-link {
+.question-link {
 	float: left;
 	width: 700px;
 	margin-top: 5px;
@@ -766,11 +756,11 @@ a.comment-user.owner {
 	color: #555;
 }
 
-.answer-link a {
+.question-link a {
 	font-weight: bold;
 }
 
-.answer-summary {
+.question-summary {
 	padding: 3px;
 	clear: both;
 }
@@ -1120,14 +1110,6 @@ a.comment-user.owner {
 	font-weight: bold;
 }
 
-.question-summary {
-	border-bottom: 1px dotted #999;
-	overflow: hidden;
-	padding: 11px 0;
-	width: 730px;
-	float: left;
-}
-
 #question {
 	clear: both;
 	width: 730px;
@@ -1184,14 +1166,26 @@ a.comment-user.owner {
 	height: 38px;
 }
 
-.vote-count-post {
+.vote-count {
 	display: block;
 	font-size: 240%;
 }
 
-.vote-up,.vote-down {
+.vote-up-btn,.vote-down-btn {
 	display: block;
 	margin: 0 auto;
+}
+
+.vote-up-btn {
+	width: 40px;
+	height: 16px;
+	background: url(images/vote-arrow-up.png) no-repeat center center;
+}
+
+.vote-down-btn {
+	width: 40px;
+	height: 16px;
+	background: url(images/vote-arrow-down.png) no-repeat center center;
 }
 
 .vote-count-separator {
@@ -1454,10 +1448,6 @@ a.comment-user.owner {
 
 .vote img {
 	cursor: pointer;
-}
-
-.vote-favorite {
-	margin-bottom: 5px;
 }
 
 .favoritecount {
@@ -1787,27 +1777,6 @@ div.form-item-info {
 	margin-left: 20px;
 }
 
-.post-tag {
-	color: #3E6D8E;
-	background-color: #E0EAF1;
-	border-bottom: 1px solid #3E6D8E;
-	border-right: 1px solid #7F9FB6;
-	margin: 2px 2px 2px 0;
-	padding: 3px 4px 3px 4px;
-	text-decoration: none;
-	font-size: 90%;
-	line-height: 2.2;
-	white-space: nowrap;
-}
-
-.post-tag:hover {
-	background-color: #3E6D8E;
-	color: #E0EAF1;
-	border-bottom: 1px solid #37607D;
-	border-right: 1px solid #37607D;
-	text-decoration: none;
-}
-
 .badge {
 	color: #fff;
 	background-color: #333;
@@ -1873,9 +1842,9 @@ div.form-item-info {
 .tagged-ignored {
 	opacity: .5;
 	background-color: #fff;
-	filter: progid :         DXImageTransform.Microsoft.Alpha (        
-		Opacity =  
-		      50 );
+	filter: progid :           DXImageTransform.Microsoft.Alpha (         
+		 Opacity =   
+		       50 );
 }
 
 .tagged-ignored-hidden {

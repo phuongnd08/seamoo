@@ -71,25 +71,27 @@
 			value="/WEB-INF/layouts/discussion/discussion-all.ftl" />
 	</definition>
 
-	<definition name="questions.create" extends="master-no-small">
+
+	<definition name="questions.create" extends="master-small-right">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/questions/create.ftl" />
+			value="/WEB-INF/layouts/questions/question-create.ftl" />
+		<put-attribute name="side" value="/WEB-INF/layouts/questions/question-create-side.ftl"/>
 	</definition>
 	<definition name="questions.edit" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/questions/edit.ftl" />
+			value="/WEB-INF/layouts/questions/question-edit.ftl" />
 	</definition>
 	<definition name="questions.detail" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/questions/view.ftl" />
+			value="/WEB-INF/layouts/questions/question-view.ftl" />
 	</definition>
-	<definition name="questions.view-revision" extends="master-no-small">
+	<definition name="questions.revision" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/questions/view-revision.ftl" />
+			value="/WEB-INF/layouts/questions/question-revision.ftl" />
 	</definition>
-	<definition name="questions.list-hot" extends="master-no-small">
+	<definition name="questions.hot" extends="master-no-small">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/questions/list-hot.ftl" />
+			value="/WEB-INF/layouts/questions/question-hot.ftl" />
 	</definition>
 
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" x="176" y="40">
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1024">
     <screen href="../master/master-logged-in.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Label" x="192" y="168" text="Các câu hỏi nóng">
+  <widgets xsi:type="model:Label" x="192" y="168" text="Các câu hỏi nóng" measuredWidth="374" measuredHeight="59">
     <font size="32"/>
   </widgets>
-  <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
-  <widgets xsi:type="model:Table" x="192" y="232" width="769" height="240" text="#,Thoi diem,Boi,Loai,Noi dung,Luot xem&#xA;1,2009/12/31 08:30,[mrcold],Tao moi,What is the suitable preposition,30,[xem]&#xA;2,2009/12/31 08:30,[mrcold],Sua,What is the suitable preposition,0,[xem]&#xA;3,2009/12/31 08:30,[chesi],Tao moi,What is the suitable preposition,36,[xem]&#xA;4,2009/12/31 08:30,[chesi],Sua,What is the suitable preposition,41,[xem]&#xA;5,2009/12/31 08:30,[huy-gs],Tao moi,What is the suitable preposition,32,[xem]&#xA;6,2009/12/31 08:30,[huy-ly],Sua,What is the suitable preposition,4,[xem]&#xA;7,2009/12/31 08:30,[tomahok],Tao moi,What is the suitable preposition,30,[xem]&#xA;8,2009/12/31 08:30,[atomic],Sua,What is the suitable preposition,7,[xem]&#xA;9,2009/12/31 08:30,[banana],Tao moi,What is the suitable preposition,9,[xem]&#xA;10,2009/12/31 08:30,[mrcold],Sua,What is the suitable preposition,35,[xem]&#xA;"/>
-  <widgets xsi:type="model:LinkBar" x="682" y="480" text="&lt;&lt;prev,\[1],2,3,...,50,next>>">
+  <widgets xsi:type="model:HLine" x="192" y="221" width="769" measuredWidth="769" measuredHeight="6"/>
+  <widgets xsi:type="model:Table" x="192" y="232" width="769" height="265" text="#,Thoi diem,Boi,Loai,Noi dung,Luot xem&#xA;1,2009/12/31 08:30,[mrcold],Tao moi,What is the suitable preposition,30,[xem]&#xA;2,2009/12/31 08:30,[mrcold],Sua,What is the suitable preposition,0,[xem]&#xA;3,2009/12/31 08:30,[chesi],Tao moi,What is the suitable preposition,36,[xem]&#xA;4,2009/12/31 08:30,[chesi],Sua,What is the suitable preposition,41,[xem]&#xA;5,2009/12/31 08:30,[huy-gs],Tao moi,What is the suitable preposition,32,[xem]&#xA;6,2009/12/31 08:30,[huy-ly],Sua,What is the suitable preposition,4,[xem]&#xA;7,2009/12/31 08:30,[tomahok],Tao moi,What is the suitable preposition,30,[xem]&#xA;8,2009/12/31 08:30,[atomic],Sua,What is the suitable preposition,7,[xem]&#xA;9,2009/12/31 08:30,[banana],Tao moi,What is the suitable preposition,9,[xem]&#xA;10,2009/12/31 08:30,[mrcold],Sua,What is the suitable preposition,35,[xem]&#xA;" measuredWidth="769" measuredHeight="265"/>
+  <widgets xsi:type="model:LinkBar" x="674" y="504" text="&lt;&lt;prev,\[1],2,3,...,50,next>>" measuredWidth="287" measuredHeight="25">
     <font/>
   </widgets>
   <hRuler>

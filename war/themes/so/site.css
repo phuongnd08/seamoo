@@ -189,11 +189,88 @@ td.logo-cell {
 	background: silver;
 }
 
-.revision-column{
+.revision-column {
 	width: 80px;
 }
 
 .date-description {
 	white-space: nowrap;
 	background-color: #ccc;
+}
+
+.question-total-view {
+	background: #008fe0;
+	color: white;
+	text-align: center;
+}
+
+.question-revision-view {
+	background: #ff9600;
+	color: white;
+	text-align: center;
+}
+
+.question-taglist {
+	margin-bottom: 10px;
+	clear: both;
+}
+
+.question-tag {
+	color: #3E6D8E;
+	background-color: #E0EAF1;
+	border-bottom: 1px solid #3E6D8E;
+	border-right: 1px solid #7F9FB6;
+	margin: 2px 2px 2px 0;
+	padding: 3px 4px 3px 4px;
+	text-decoration: none;
+	font-size: 90%;
+	line-height: 2.2;
+	white-space: nowrap;
+}
+
+.question-tag:hover {
+	background-color: #3E6D8E;
+	color: #E0EAF1;
+	border-bottom: 1px solid #37607D;
+	border-right: 1px solid #37607D;
+	text-decoration: none;
+}
+
+.question-favorite-off-btn,.question-favorite-on.btn {
+	display: block;
+	margin: 0 auto;
+	width: 32px;
+	height: 31px;
+}
+
+.question-favorite-off-btn {
+	background: url(images/question-favorite-off.png) no-repeat center
+		center;
+}
+
+.question-favorite-on-btn {
+	background: url(images/question-favorite-on.png) no-repeat center center
+		;
+}
+
+.question-add-btn-big,.question-remove-btn-big {
+	display: block;
+	width: 32px;
+	height: 32px;
+	margin: 0 auto;
+}
+
+.question-add-btn-big {
+	background: url(images/question-add-btn-big.png) no-repeat center center
+		;
+}
+
+.question-remove-btn-big {
+	background: url(images/question-remove-btn-big.png) no-repeat center
+		center;
+}
+
+.revision-active{
+	background: #f0f0f0;
+	border: solid 2px black;
 }

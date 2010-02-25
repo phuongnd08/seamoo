@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" x="176" y="40">
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1024">
     <screen href="view-question-revision-qualified-member-master.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Master" x="182" y="362">
+  <widgets xsi:type="model:Master" x="182" y="362" measuredWidth="784" measuredHeight="138">
     <screen href="../partial/partial-view-listening.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Master" x="184" y="511">
+  <widgets xsi:type="model:Master" x="184" y="511" measuredWidth="712" measuredHeight="349">
     <screen href="../partial/partial-view-history.screen#/"/>
   </widgets>
+  <widgets xsi:type="model:Icon" x="663" y="867" measuredWidth="32" measuredHeight="32" icon="add (large)"/>
+  <widgets xsi:type="model:Icon" x="596" y="914" measuredWidth="32" measuredHeight="32" icon="delete (large)"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

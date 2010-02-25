@@ -6,29 +6,30 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
-	@RequestMapping("/admin/assign-moderators")
-	public ModelAndView assignModerators(){
-		ModelAndView mav = new ModelAndView("admin.assign-moderators");
+	@RequestMapping("/moderators")
+	public ModelAndView manageModerators(){
+		ModelAndView mav = new ModelAndView("admin.moderators");
 		return mav;
 	}
 	
-	@RequestMapping("/admin/manage-leagues")
+	@RequestMapping("/leagues")
 	public ModelAndView manageLeagues(){
-		ModelAndView mav = new ModelAndView("admin.manage-leagues");
+		ModelAndView mav = new ModelAndView("admin.leagues");
 		return mav;
 	}
 	
-	@RequestMapping("/admin/manage-subjects")
+	@RequestMapping("/subjects")
 	public ModelAndView manageSubjects(){
-		ModelAndView mav = new ModelAndView("admin.manage-subjects");
+		ModelAndView mav = new ModelAndView("admin.subjects");
 		return mav;
 	}
 	
-	@RequestMapping("/admin/manage-site-settings")
+	@RequestMapping("/admin/site-settings")
 	public ModelAndView manageSiteSettings(){
-		ModelAndView mav = new ModelAndView("admin.manage-site-settings");
+		ModelAndView mav = new ModelAndView("admin.site-settings");
 		return mav;
 	}
 }

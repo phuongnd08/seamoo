@@ -4,24 +4,24 @@
 
 	<!-- Definitions for Tiles documentation   -->
 <tiles-definitions>
-	<definition name="admin.assign-moderators" extends="master">
+	<definition name="admin.moderators" extends="master">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/admin/assign-moderators.jsp" />
+			value="/WEB-INF/layouts/admin/admin-moderators.ftl" />
 	</definition>
 
-	<definition name="admin.manage-leagues" extends="master">
+	<definition name="admin.leagues" extends="master">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/admin/manage-leagues.jsp" />
+			value="/WEB-INF/layouts/admin/admin-leagues.ftl" />
 	</definition>
 
-	<definition name="admin.manage-subjects" extends="master">
+	<definition name="admin.subjects" extends="master">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/admin/manage-subjects.jsp" />
+			value="/WEB-INF/layouts/admin/admin-subjects.ftl" />
 	</definition>
 
-	<definition name="admin.manage-site-settings" extends="master">
+	<definition name="admin.site-settings" extends="master">
 		<put-attribute name="body"
-			value="/WEB-INF/layouts/admin/manage-site-settings.jsp" />
+			value="/WEB-INF/layouts/admin/admin-site-settings.ftl" />
 	</definition>
 
 </tiles-definitions>

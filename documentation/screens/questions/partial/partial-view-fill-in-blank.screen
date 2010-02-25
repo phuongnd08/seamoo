@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Panel" x="255" y="313" width="711" height="37"/>
-  <widgets xsi:type="model:Label" x="266" y="317" width="290" text="*Cau hoi* [Grammar]">
+  <widgets xsi:type="model:Panel" x="255" y="313" width="711" height="37" measuredWidth="711" measuredHeight="37"/>
+  <widgets xsi:type="model:Label" x="266" y="317" width="290" text="*Cau hoi* [Grammar]" measuredWidth="290" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="255" y="357" width="711" height="56"/>
-  <widgets xsi:type="model:Text" x="261" y="361" width="695" height="51" text="Fill in the blank&#xA;Choose a proper form of BE&#xA;She \[...] a woman">
+  <widgets xsi:type="model:Panel" x="255" y="357" width="711" height="56" measuredWidth="711" measuredHeight="56"/>
+  <widgets xsi:type="model:Text" x="261" y="361" width="695" height="51" text="Fill in the blank&#xA;Choose a proper form of BE&#xA;She \[...] a woman" measuredWidth="695" measuredHeight="51">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="255" y="418" width="711" height="22"/>
-  <widgets xsi:type="model:Label" x="262" y="418" width="212" text="*Cau tra loi*">
+  <widgets xsi:type="model:Panel" x="255" y="418" width="711" height="22" measuredWidth="711" measuredHeight="22"/>
+  <widgets xsi:type="model:Label" x="262" y="418" width="212" text="*Cau tra loi*" measuredWidth="212" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="255" y="447">
-    <widgets xsi:type="model:Panel" width="710" height="22"/>
-    <widgets xsi:type="model:Text" x="7" y="5" width="424" text="is">
+  <widgets xsi:type="model:WidgetGroup" x="255" y="447" measuredWidth="710" measuredHeight="22">
+    <widgets xsi:type="model:Panel" width="710" height="22" measuredWidth="710" measuredHeight="22"/>
+    <widgets xsi:type="model:Text" x="7" y="5" width="424" text="is" measuredWidth="424" measuredHeight="17">
       <font/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="182" y="317">
-    <widgets xsi:type="model:Panel" y="30" width="69" height="66"/>
-    <widgets xsi:type="model:Label" x="7" y="37" text="10">
+  <widgets xsi:type="model:WidgetGroup" x="182" y="317" measuredWidth="69" measuredHeight="127">
+    <widgets xsi:type="model:Panel" y="30" width="69" height="66" measuredWidth="69" measuredHeight="66"/>
+    <widgets xsi:type="model:Label" x="7" y="37" text="10" measuredWidth="59" measuredHeight="59">
       <font size="32"/>
     </widgets>
-    <widgets xsi:type="model:Icon" x="18" icon="empty-arrow-up (large)"/>
-    <widgets xsi:type="model:Icon" x="18" y="95" icon="empty-arrow-down (large)"/>
+    <widgets xsi:type="model:Icon" x="18" measuredWidth="32" measuredHeight="32" icon="empty-arrow-up (large)"/>
+    <widgets xsi:type="model:Icon" x="18" y="95" measuredWidth="32" measuredHeight="32" icon="empty-arrow-down (large)"/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="208" y="437" text="{favorites}&#xA;{add}" measuredWidth="16" measuredHeight="32">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="913" y="319" text="{edit}{flag}{bell}" measuredWidth="48" measuredHeight="16">
+    <font/>
   </widgets>
   <hRuler>
     <guides position="447"/>
