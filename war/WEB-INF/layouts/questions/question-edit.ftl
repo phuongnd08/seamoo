@@ -1,5 +1,9 @@
 [#ftl/]
 [#assign tiles=JspTaglibs["http://tiles.apache.org/tags-tiles"]]
+[#import "/common.ftl" as common/]
+<div class="description-box">
+	<strong>English</strong> [@common.combobox name="league" options={"0": "Giải nghiệp dư", "1": "Giải gà con", "2": "Giải gà chọi", "3": "Giải đại bàng"} selectedKey="0"/]
+</div>
 <div class="description-box">
 	<h3>Câu hỏi</h3>
 	<div>Điển vào chỗ trống</div>

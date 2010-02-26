@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Panel" x="187" y="116" width="382" height="85" measuredWidth="382" measuredHeight="85"/>
+  <widgets xsi:type="model:Text" x="192" y="122" width="367" height="55" text="Change the league will move question to that league. Do you want to do this?" measuredWidth="367" measuredHeight="55">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Button" x="195" y="170" text="No, don't do this" measuredWidth="127" measuredHeight="27"/>
+  <widgets xsi:type="model:Button" x="477" y="170" text="Yes, do it." measuredWidth="82" measuredHeight="27"/>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>

@@ -12,10 +12,10 @@
     <font/>
   </widgets>
   <widgets xsi:type="model:Panel" x="191" y="248" width="557" height="33" measuredWidth="557" measuredHeight="33"/>
-  <widgets xsi:type="model:Text" x="201" y="254" width="168" height="22" text="Câu hỏi thuộc *English*>" measuredWidth="168" measuredHeight="22">
+  <widgets xsi:type="model:Text" x="201" y="254" width="168" height="22" text="*English*>" measuredWidth="168" measuredHeight="22">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Combo" x="364" y="252" text="League 0" measuredWidth="83" measuredHeight="25"/>
+  <widgets xsi:type="model:Combo" x="272" y="252" text="League 0" measuredWidth="83" measuredHeight="25"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>
