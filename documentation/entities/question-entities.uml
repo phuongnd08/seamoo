@@ -25,6 +25,7 @@
   <packagedElement xmi:type="uml:Class" xmi:id="_1gmzIBPBEd-o6Mbf-aRYTg" name="QuestionType"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_1gnaMBPBEd-o6Mbf-aRYTg" name="QuestionRevision">
     <ownedAttribute xmi:id="_K4y4sBPCEd-o6Mbf-aRYTg" name="revisionNumber" aggregation="composite"/>
+    <ownedAttribute xmi:id="_MSOGwCKJEd-rlfJMCd6HmA" name="editSummary" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_1goBQBPBEd-o6Mbf-aRYTg" name="MultipleChoicesQuestionRevision">
     <generalization xmi:id="_1goBQRPBEd-o6Mbf-aRYTg" general="_1gnaMBPBEd-o6Mbf-aRYTg"/>

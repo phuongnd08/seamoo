@@ -72,6 +72,10 @@
         <element xmi:type="uml:Property" href="question-entities.uml#_K4y4sBPCEd-o6Mbf-aRYTg"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_K5omMBPCEd-o6Mbf-aRYTg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_MTwX0CKJEd-rlfJMCd6HmA" type="3001">
+        <element xmi:type="uml:Property" href="question-entities.uml#_MSOGwCKJEd-rlfJMCd6HmA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MTwX0SKJEd-rlfJMCd6HmA"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_1fmGhRPBEd-o6Mbf-aRYTg" showTitle="true"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_1fmGhhPBEd-o6Mbf-aRYTg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_1fmGhxPBEd-o6Mbf-aRYTg"/>

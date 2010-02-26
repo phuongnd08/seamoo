@@ -5,6 +5,7 @@ import org.seamoo.entities.Member;
 public abstract class QuestionRevision {
 	private Member creator;
 	private int revisionNumber;
+	private String editSummary;
 	public void setCreator(Member creator) {
 		this.creator = creator;
 	}
@@ -16,5 +17,12 @@ public abstract class QuestionRevision {
 	}
 	public int getRevisionNumber() {
 		return revisionNumber;
+	}
+	
+	public void setEditSummary(String editSummary) {
+		this.editSummary = editSummary;
+	}
+	public String getEditSummary() {
+		return editSummary;
 	}
 }
