@@ -197,7 +197,7 @@ td.logo-cell {
 	width: 16px;
 	height: 16px;
 	display: inline-block;
-	background: url(images/answer-flag-btn.png) no-repeat center center;
+	background: url(images/flag-btn.png) no-repeat center center;
 }
 
 .loading-indicator {

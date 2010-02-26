@@ -28,7 +28,7 @@
 	    </td>
 	    <td>
 			<div class="description-box">
-				<p><div class="fr"><a href="#" class="edit-btn"></a></div><h3>Câu hỏi</h3></p>
+				<p><div class="fr"><a href="#" class="edit-btn" title="Sửa câu hỏi này"></a><a href="#" class="flag-btn" title="Đánh dấu câu hỏi này là spam"></a></div><h3>Câu hỏi</h3></p>
 				[@common.tagList tags=["grammar", "english"]/]
 				<p>Cho biết nội dung trong đoạn hội thoại sau: <a href="#">play</a> <a href="#">pause</a></p>
 				<h3>Trả lời</h3>
