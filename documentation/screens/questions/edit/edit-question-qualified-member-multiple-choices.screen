@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" x="176" y="40">
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1024">
     <screen href="edit-question-master.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Master" x="192" y="327">
+  <widgets xsi:type="model:Master" x="192" y="288" measuredWidth="563" measuredHeight="236">
     <screen href="../partial/partial-edit-multiple-choices.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Master" x="192" y="700">
-    <screen href="../partial/partial-edit-history.screen#/"/>
+  <widgets xsi:type="model:Master" x="192" y="536" measuredWidth="561" measuredHeight="552">
+    <screen href="../partial/partial-edit-footer.screen#/"/>
   </widgets>
   <hRuler>
     <guides position="447"/>

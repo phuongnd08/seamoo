@@ -1,6 +1,13 @@
 ﻿.option-box {
 	float: left;
-	width: 250px;
+	width: 40%;
+	border: solid 2px silver;
+	margin: 5px;
+}
+
+.moderator-box {
+	float: left;
+	width: 30%;
 	border: solid 2px silver;
 	margin: 5px;
 }
@@ -28,7 +35,6 @@
 
 .fl {
 	float: left;
-	margin: 5px;
 }
 
 .fr {
@@ -82,8 +88,8 @@ td.logo-cell {
 	background: silver;
 }
 
-.discussion-ignore-btn {
-	display: block;
+.ignore-btn {
+	display: inline-block;
 	width: 16px;
 	height: 16px;
 	background: url(images/discussion-ignore-btn.png) no-repeat center
@@ -95,16 +101,32 @@ td.logo-cell {
 	font-style: italic;
 }
 
-.question-edit-btn {
+.edit-btn {
 	width: 16px;
 	height: 16px;
-	background: url(images/question-edit-btn.png) no-repeat center center;
+	display: inline-block;
+	background: url(images/edit-btn.png) no-repeat center center;
 }
 
-.question-remove-btn {
+.remove-btn {
 	width: 16px;
 	height: 16px;
-	background: url(images/question-remove-btn.png) no-repeat center center;
+	display: inline-block;
+	background: url(images/remove-btn.png) no-repeat center center;
+}
+
+.add-btn {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background: url(images/add-btn.png) no-repeat center center;
+}
+
+.preview-btn {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	background: url(images/preview-btn.png) no-repeat center center;
 }
 
 .number-column {
@@ -171,7 +193,7 @@ td.logo-cell {
 	background: #eee;
 }
 
-.answer-flag-btn {
+.flag-btn {
 	width: 16px;
 	height: 16px;
 	display: inline-block;
@@ -270,7 +292,14 @@ td.logo-cell {
 		center;
 }
 
-.revision-active{
+.revision-active {
 	background: #f0f0f0;
 	border: solid 2px black;
+}
+
+/*Work around for the IE monsters*/
+.revision-active td {
+	border-collapse: collapse;
+	border-bottom: solid 2px black;
+	border-top: solid 2px black;
 }

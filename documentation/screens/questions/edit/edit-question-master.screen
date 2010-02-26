@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" x="176" y="40">
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1024">
     <screen href="../../master/master-logged-in.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Label" x="192" y="168" text="Sua cau hoi">
+  <widgets xsi:type="model:Label" x="192" y="168" text="Sua cau hoi" measuredWidth="254" measuredHeight="59">
     <font size="32"/>
   </widgets>
-  <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
-  <widgets xsi:type="model:Panel" x="760" y="248" width="209" height="435"/>
-  <widgets xsi:type="model:Text" x="766" y="254" width="195" height="419" text="*Cach sua cau hoi*&#xA;Ban co the sua lai noi dung cau hoi nhung khong duoc phep lam thay doi noi dung chinh cua cau hoi. Viec sua cau hoi sẽ có tác dụng ngay lập tức. Câu hỏi sau khi sửa sẽ được đưa vào danh sách [Câu hỏi nóng] để các thành viên khác review">
+  <widgets xsi:type="model:HLine" x="192" y="221" width="769" measuredWidth="769" measuredHeight="6"/>
+  <widgets xsi:type="model:Panel" x="760" y="248" width="209" height="435" measuredWidth="209" measuredHeight="435"/>
+  <widgets xsi:type="model:Text" x="766" y="254" width="195" height="419" text="*Cach sua cau hoi*&#xA;Ban co the sua lai noi dung cau hoi nhung khong duoc phep lam thay doi noi dung chinh cua cau hoi. Viec sua cau hoi sẽ có tác dụng ngay lập tức. Câu hỏi sau khi sửa sẽ được đưa vào danh sách [Câu hỏi nóng] để các thành viên khác review" measuredWidth="195" measuredHeight="419">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="191" y="248" width="557" height="73"/>
-  <widgets xsi:type="model:Image" x="201" y="257" width="88" height="53" src="../../images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="293" y="258" width="444" height="22" text="[English] > [League II] > *Question*">
+  <widgets xsi:type="model:Panel" x="191" y="248" width="557" height="33" measuredWidth="557" measuredHeight="33"/>
+  <widgets xsi:type="model:Text" x="201" y="254" width="168" height="22" text="Câu hỏi thuộc *English*>" measuredWidth="168" measuredHeight="22">
     <font/>
   </widgets>
+  <widgets xsi:type="model:Combo" x="364" y="252" text="League 0" measuredWidth="83" measuredHeight="25"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>

@@ -1,5 +1,6 @@
 [#ftl/]
 [#import "/common.ftl" as common/]
+[#import "/spring.ftl" as spring/]
 <form method="post" action="/users/edit/244000" id="user-edit-form">
 	<div id="edit-block">
 		<input type="text" name="author" id="author"/> 
@@ -50,10 +51,10 @@
 			<td class="space">
 			<div class="form-error"></div>
 			<div class="form-submit"><input type="submit"
-				value="Save Profile" id="submit-button"> <input
+				value="Lưu lại" id="submit-button"> <input
 				type="button"
-				onclick="location.href='/users/244000/phuong-nguyen-de-mancity-fan'"
-				value="Cancel" name="cancel" id="cancel"></div>
+				onclick="location.href='[@spring.url "/users/244000/phuong-nguyen-de-mancity-fan"/]'"
+				value="Hủy" name="cancel" id="cancel"></div>
 			</td>
 		</tr>
 	</table>

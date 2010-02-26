@@ -2,11 +2,7 @@
 [#import "/spring.ftl" as spring/]
 [#import "/common.ftl" as common/]
 
-<div id="subheader">
-<div id="tabs">
-    <a title="Hồ sơ của Mrc0ld" href="/users/244000/mrc0ld?tab=profile">hồ sơ</a>
-	<a title="Your recent activity" href="/users/244000/mrc0ld?tab=discussion" class="youarehere">thảo luận</a>
-</div>
+[@common.subHeader headers={"hồ sơ": "/users/244000/mrc0ld?tab=profile", "thảo luận": "/users/244000/mrc0ld?tab=discussion"} selectedKey="hồ sơ"/]
 <div class="cbt"></div>
 
 [#macro discussionItem title time user]
@@ -14,7 +10,7 @@
 	<div>
 		<a href="#">${title}</a>
 		<div class="fr">
-			<a href="#" title="Ngừng theo dõi câu hỏi" class="discussion-ignore-btn"></a>
+			<a href="#" title="Ngừng theo dõi câu hỏi" class="ignore-btn"></a>
 		</div>
 	</div>
 	<div class="comments">

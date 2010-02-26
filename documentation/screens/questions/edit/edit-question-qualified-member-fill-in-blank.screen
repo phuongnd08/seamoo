@@ -3,10 +3,10 @@
   <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1024">
     <screen href="edit-question-master.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Master" x="190" y="328" measuredWidth="725" measuredHeight="459">
+  <widgets xsi:type="model:Master" x="190" y="288" measuredWidth="725" measuredHeight="459">
     <screen href="../partial/partial-edit-fill-in-blank.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Master" x="190" y="528" measuredWidth="561" measuredHeight="552">
+  <widgets xsi:type="model:Master" x="190" y="488" measuredWidth="561" measuredHeight="552">
     <screen href="../partial/partial-edit-footer.screen#/"/>
   </widgets>
   <hRuler>

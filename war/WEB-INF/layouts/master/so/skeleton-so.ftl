@@ -44,10 +44,10 @@
 <ul>
 	<li class="youarehere"><a href="[@spring.url "/subjects"/]">Lĩnh
 	vực</a></li>
-	<li><a href="[@spring.url "/tags"/]">Thành viên</a></li>
-	<li><a href="[@spring.url "/users"/]">Trao đổi</a></li>
-	<li><a href="[@spring.url "/badges"/]">Báo cáo</a></li>
-	<li><a href="[@spring.url "/unanswered"/]">Câu hỏi nóng</a></li>
+	<li><a href="[@spring.url "/users"/]">Thành viên</a></li>
+	<li><a href="[@spring.url "/discussion"/]">Trao đổi</a></li>
+	<li><a href="[@spring.url "/reports"/]">Báo cáo</a></li>
+	<li><a href="[@spring.url "/questions/hot"/]">Câu hỏi nóng</a></li>
 </ul>
 </div>
 <div class="nav" style="float: right;">

@@ -62,3 +62,17 @@
 		[#list tags as tag]<a href="#" class="question-tag">${tag}</a>[#if tag_has_next]&nbsp;[/#if][/#list]
 	</div>
 [/#macro]
+
+[#--
+	subHeader
+	Display a subheader in a form of tab list
+--]
+[#macro subHeader headers selectedKey]
+	<div id="subheader">
+		<div id="tabs">
+			[#list headers?keys as key]
+		    <a href="[@spring.url headers[key]/]"[#if key==selectedKey] class="youarehere"[/#if]>${key}</a>
+		    [/#list]
+		</div>
+	</div>
+[/#macro]

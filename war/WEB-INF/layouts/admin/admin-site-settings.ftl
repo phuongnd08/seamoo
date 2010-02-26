@@ -1,14 +1,7 @@
-<%--
-    Document   : viewSampleData
-    Created on : Nov 23, 2009, 10:51:02 PM
-    Author     : Administrator
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
-<div><strong>SuperMarket Management System</strong></div>
-<div>
-    Built by Nguyen Duc Phuong, Dinh Thi Hieu Thao and Tran Thi Thuy Tung as a JSP class project.
-</div>
+[#ftl/]
+[#import "/common.ftl" as common]
+[@common.subHeader headers={"Thiết lập cho site": "/admin/site-settings", "Quản lí subject": "/admin/subjects", "Quản lí điều hành viên": "/admin/moderators"} selectedKey="Thiết lập cho site"/]
+<div class="cbt"></div>
+<br/>
+<p>Site đang ở chế độ <strong>Bình thường</strong></p>
+<p><button>Chuyển sang chế độ <strong>Khai trương</strong></button></p>

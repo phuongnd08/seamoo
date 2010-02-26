@@ -1,14 +1,22 @@
 [#ftl/]
+[#import "/common.ftl" as common/]
 <div class="description-box">
-	<h3>Câu hỏi<div class="fr"><a href="#" class="question-edit-btn" title="Sửa câu hỏi này"></a><a href="#" class="question-remove-btn" title="Bỏ câu hỏi này"></a></div></h3>
-	<p class="question-personal-info"><strong>grammar</strong>, <strong>pronunciation</strong></p>
+	<div>
+		<div class="fr"><a href="#" class="edit-btn" title="Sửa câu hỏi này"></a><a href="#" class="remove-btn" title="Bỏ câu hỏi này"></a></div>
+		<h3>Câu hỏi</h3>
+	</div>
+	[@common.tagList tags=["grammar", "english"]/]
 	<p>What is the proper preposition here: <br/>I look ... her</p>
 </div>
 <div class="description-box">
 	<h3>Chọn câu trả lời đúng</h3>
-	<p style="line-height: 200%;">
-		<button>at</button><br/>
-		<button>in</button><br/>
+	<p>
+		<button>at</button>
+	</p>
+	<p>
+		<button>in</button>
+	</p>
+	<p>
 		<button>of</button>
 	</p>
 </div>

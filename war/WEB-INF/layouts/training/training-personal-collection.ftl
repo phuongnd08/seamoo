@@ -13,16 +13,13 @@
 		<td class="tar">${no}</td>
 		<td>
 			<div class="fr">			
-				<a href="#" title="Sửa câu hỏi" class="ib question-edit-btn"></a>
-				<a href="#" title="Bỏ câu hỏi ra khỏi bộ sưu tập" class="ib question-remove-btn"></a>
+				<a href="#" title="Sửa câu hỏi" class="ib edit-btn"></a>
+				<a href="#" title="Bỏ câu hỏi ra khỏi bộ sưu tập" class="ib remove-btn"></a>
 			</div>
 			<div><a href="#">${content}</a></div>
 			<div class="question-personal-info">
 			<span class="date-description" title="Lần luyện tập cuối">${lastRep}</span> - <span class="date-description" title="Lần luyện tập kế tiếp">${nextRep}</span><br/>
-			[#list keywords as keyword]
-				<strong>${keyword}</strong>
-				[#if keyword_has_next], &nbsp;[/#if]
-			[/#list]
+			[@common.tagList tags=keywords/]
 			</div>
 		</td>
 	</tr>

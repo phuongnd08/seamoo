@@ -56,7 +56,7 @@
 		<td><a href="#">${author}</a> <span class="match-review-answer-time">${moment}</span>: <span class="match-review-answer-content">${content}</span> </td>
 		<td class="answer-review-grade-column">[#nested/]</td>
 		<td>
-			<a href="#" class="answer-flag-btn" title="Báo cáo câu trả lời có tính chất spam"></a>
+			<a href="#" class="flag-btn" title="Báo cáo câu trả lời có tính chất spam"></a>
 		</td>
 	</tr>
 [/#macro]

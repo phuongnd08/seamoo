@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:XMI="http://www.omg.org/XMI" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" XMI:version="2.0">
-  <widgets xsi:type="model:Master" x="176" y="40">
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1025">
     <screen href="../master/master-administrator-logged-in.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:TabbedPane" x="192" y="168" width="774" height="696" text="Moderators,Site Settings,Subjects" selection="2" background="#e5e5e5"/>
-  <widgets xsi:type="model:Panel" x="202" y="205" width="753" height="83"/>
-  <widgets xsi:type="model:Image" x="212" y="214" width="84" height="58" src="../images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="304" y="215" width="640" height="65" text="[All subjects] > *English*&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+  <widgets xsi:type="model:TabbedPane" x="192" y="168" width="774" height="696" text="Moderators,Site Settings,Subjects" measuredWidth="774" measuredHeight="696" selection="2" background="#e5e5e5"/>
+  <widgets xsi:type="model:Panel" x="202" y="205" width="753" height="36" measuredWidth="753" measuredHeight="36"/>
+  <widgets xsi:type="model:Text" x="212" y="215" width="640" height="18" text="Leagues of *English*" measuredWidth="640" measuredHeight="18">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="488" y="409" width="263" height="200"/>
-  <widgets xsi:type="model:Image" x="496" y="418" width="86" height="57" src="../images/math.jpg" grayscale="true"/>
-  <widgets xsi:type="model:Button" x="495" y="483" width="89" text="Upload photo"/>
-  <widgets xsi:type="model:TextField" x="598" y="421" width="142" text="Name"/>
-  <widgets xsi:type="model:TextArea" x="598" y="449" width="142" height="59" text="Description"/>
-  <widgets xsi:type="model:Button" x="558" y="575" width="89" text="Save"/>
-  <widgets xsi:type="model:HLine" x="495" y="567" width="256"/>
-  <widgets xsi:type="model:Panel" x="202" y="304" width="263" height="96"/>
-  <widgets xsi:type="model:Image" x="212" y="313" width="84" height="58" src="../images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="304" y="314" width="151" height="85" text="*Amateur League*{edit}{delete}{print-preview}&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+  <widgets xsi:type="model:Panel" x="587" y="370" width="358" height="200" measuredWidth="358" measuredHeight="200"/>
+  <widgets xsi:type="model:Image" x="599" y="379" width="116" height="57" measuredWidth="116" measuredHeight="57" src="../images/math.jpg" grayscale="true"/>
+  <widgets xsi:type="model:Button" x="598" y="444" width="120" text="Upload photo" measuredWidth="120" measuredHeight="27"/>
+  <widgets xsi:type="model:TextField" x="737" y="382" width="192" text="Name" measuredWidth="192" measuredHeight="25"/>
+  <widgets xsi:type="model:TextArea" x="737" y="410" width="192" height="59" text="Description" measuredWidth="192" measuredHeight="59"/>
+  <widgets xsi:type="model:Button" x="682" y="536" width="120" text="Save" measuredWidth="120" measuredHeight="27"/>
+  <widgets xsi:type="model:HLine" x="598" y="528" width="347" measuredWidth="347" measuredHeight="6"/>
+  <widgets xsi:type="model:Panel" x="202" y="254" width="355" height="107" measuredWidth="355" measuredHeight="107"/>
+  <widgets xsi:type="model:Image" x="214" y="263" width="114" height="58" measuredWidth="114" measuredHeight="58" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="338" y="264" width="204" height="86" text="*Amateur League*{edit}{delete}{print-preview}&#xA;Show your knowledge of vocabulary, grammar and listening ability&#xA;_*Level 0, Enabled*_" measuredWidth="204" measuredHeight="86">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="488" y="304" width="263" height="95"/>
-  <widgets xsi:type="model:Image" x="498" y="313" width="84" height="58" src="../images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="590" y="314" width="151" height="75" text="*League Two*{edit}{delete}{print-preview}&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+  <widgets xsi:type="model:Panel" x="587" y="254" width="358" height="107" measuredWidth="358" measuredHeight="107"/>
+  <widgets xsi:type="model:Image" x="602" y="263" width="113" height="58" measuredWidth="113" measuredHeight="58" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="725" y="264" width="205" height="87" text="*League Two*{edit}{delete}{print-preview}&#xA;Show your knowledge of vocabulary, grammar and listening ability&#xA;_*Level 0, Enabled*_" measuredWidth="205" measuredHeight="87">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="202" y="409" width="263" height="103"/>
-  <widgets xsi:type="model:Image" x="212" y="418" width="84" height="58" src="../images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="304" y="419" width="151" height="65" text="*League One*{edit}{delete}{print-preview}&#xA;Show your knowledge of vocabulary, grammar and listening ability">
+  <widgets xsi:type="model:Panel" x="202" y="370" width="355" height="103" measuredWidth="355" measuredHeight="103"/>
+  <widgets xsi:type="model:Image" x="214" y="379" width="114" height="58" measuredWidth="114" measuredHeight="58" src="../images/england_flag_02.gif"/>
+  <widgets xsi:type="model:Text" x="338" y="380" width="204" height="83" text="*League One*{edit}{delete}{print-preview}&#xA;Show your knowledge of vocabulary, grammar and listening ability&#xA;_*Level 0, Disabled*_" measuredWidth="204" measuredHeight="83">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Checkbox" x="598" y="537" text="Enabled"/>
-  <widgets xsi:type="model:Combo" x="598" y="515" text="Level 0 (Amateur)"/>
+  <widgets xsi:type="model:Checkbox" x="737" y="498" text="Enabled" measuredWidth="73" measuredHeight="25"/>
+  <widgets xsi:type="model:Combo" x="737" y="476" width="191" text="Level 0 (Amateur)" measuredWidth="191" measuredHeight="25"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>
