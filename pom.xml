@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                       http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.seamoo</groupId>
+	<artifactId>seamoo-parent</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>Seamoo Umbrella Project</name>
+	<modules>
+		<module>seamoo-documentation</module>
+		<module>seamoo-model</module>
+		<module>seamoo-persistence</module>
+		<module>seamoo-training</module>
+		<module>seamoo-competition</module>
+		<module>seamoo-webapp</module>
+	</modules>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.5</source>
+						<target>1.5</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>persistence-api</artifactId>
+				<version>${javax.persistence-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>${javax.servlet-api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<properties>
+		<!--
+			This is just for "eclipse:eclipse" goal to always attempt downloading
+			sources
+		-->
+		<downloadSources>true</downloadSources>
+		<junit.version>4.6</junit.version>
+		<spring.version>3.0.0.RELEASE</spring.version>
+		<log4j.version>1.2.14</log4j.version>
+		<freemarker.version>2.3.16</freemarker.version>
+	</properties>
+</project>
+

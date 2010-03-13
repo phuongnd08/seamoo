@@ -3,7 +3,12 @@
 *#
 *~?
 *~??
-war/WEB-INF/lib/*.*
-war/WEB-INF/classes/
-war/WEB-INF/appengine-generated/*.*
-war/seamoo_2/
+*/WEB-INF/lib/*.*
+*/WEB-INF/classes/
+*/WEB-INF/appengine-generated/*.*
+/seamoo-*/target/
+/seamoo-*/.classpath
+/seamoo-*/.project
+/seamoo-*/.settings/
+.metadata
+

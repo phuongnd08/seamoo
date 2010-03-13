@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbench progressCount="63" version="2.0">
+<workbenchAdvisor/>
+<window height="766" maximized="true" width="1020" x="0" y="1">
+<fastViewData fastViewLocation="1024"/>
+<perspectiveBar>
+<itemSize x="160"/>
+</perspectiveBar>
+<coolbarLayout locked="0">
+<coolItem id="group.file" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="100" y="30"/>
+<coolItem id="additions" itemType="typeGroupMarker"/>
+<coolItem id="com.google.gdt.eclipse.suite.actionSet" itemType="typeToolBarContribution" x="92" y="30"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="116" y="30"/>
+<coolItem id="org.eclipse.jst.j2ee.J2eeMainActionSet" itemType="typeToolBarContribution" x="82" y="30"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="100" y="30"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="66" y="30"/>
+<coolItem id="org.eclipse.wst.server.ui.internal.webbrowser.actionSet" itemType="typeToolBarContribution" x="40" y="30"/>
+<coolItem id="org.eclipse.wst.ws.explorer.explorer" itemType="typeToolBarContribution" x="40" y="30"/>
+<coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="124" y="30"/>
+<coolItem id="group.nav" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="176" y="30"/>
+<coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.wst.html.core.htmlsource.source" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.maven.ide.eclipse.editor.MavenPomEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="group.help" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
+</coolbarLayout>
+<page focus="true" label="Workspace - Java EE">
+<editors>
+<editorArea activeWorkbook="DefaultEditorWorkbook">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+<part id="6"/>
+<part id="7"/>
+<part id="8"/>
+<part id="9"/>
+<part id="10"/>
+<part id="11"/>
+<part id="12"/>
+<part id="13"/>
+<part id="14"/>
+<part id="15"/>
+<part id="16"/>
+</presentation>
+</folder>
+</info>
+</editorArea>
+<editor activePart="true" focus="true" id="org.maven.ide.eclipse.editor.MavenPomEditor" name="pom.xml" partName="seamoo-competition/pom.xml" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-competition/pom.xml" title="seamoo-competition/pom.xml" tooltip="seamoo-competition/pom.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-competition/pom.xml"/>
+</editor>
+<editor id="org.maven.ide.eclipse.editor.MavenPomEditor" name="pom.xml" partName="/home/phuongnd08/eclipse-workspace/seamoo-parent/pom.xml" title="/home/phuongnd08/eclipse-workspace/seamoo-parent/pom.xml" tooltip="/home/phuongnd08/eclipse-workspace/seamoo-parent/pom.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/phuongnd08/eclipse-workspace/seamoo-parent/pom.xml"/>
+</editor>
+<editor id="org.maven.ide.eclipse.editor.MavenPomEditor" name="pom.xml" partName="seamoo-model/pom.xml" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-model/pom.xml" title="seamoo-model/pom.xml" tooltip="seamoo-model/pom.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-model/pom.xml"/>
+</editor>
+<editor id="org.maven.ide.eclipse.editor.MavenPomEditor" name="pom.xml" partName="seamoo-persistence/pom.xml" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-persistence/pom.xml" title="seamoo-persistence/pom.xml" tooltip="seamoo-persistence/pom.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-persistence/pom.xml"/>
+</editor>
+<editor id="org.maven.ide.eclipse.editor.MavenPomEditor" name="pom.xml" partName="seamoo-training/pom.xml" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-training/pom.xml" title="seamoo-training/pom.xml" tooltip="seamoo-training/pom.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-training/pom.xml"/>
+</editor>
+<editor id="org.maven.ide.eclipse.editor.MavenPomEditor" name="pom.xml" partName="seamoo-webapp/pom.xml" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-webapp/pom.xml" title="seamoo-webapp/pom.xml" tooltip="seamoo-webapp/pom.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-webapp/pom.xml"/>
+</editor>
+<editor id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="web.xml" partName="web.xml" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-webapp/src/main/webapp/WEB-INF/web.xml" title="web.xml" tooltip="seamoo-webapp/src/main/webapp/WEB-INF/web.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-webapp/src/main/webapp/WEB-INF/web.xml"/>
+</editor>
+<editor id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="appengine-web.xml" partName="appengine-web.xml" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-webapp/src/main/webapp/WEB-INF/appengine-web.xml" title="appengine-web.xml" tooltip="seamoo-webapp/src/main/webapp/WEB-INF/appengine-web.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-webapp/src/main/webapp/WEB-INF/appengine-web.xml"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LocalDatastoreTest.java" partName="LocalDatastoreTest.java" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-webapp/src/test/java/org/seamoo/webapp/server/LocalDatastoreTest.java" title="LocalDatastoreTest.java" tooltip="seamoo-webapp/src/test/java/org/seamoo/webapp/server/LocalDatastoreTest.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-webapp/src/test/java/org/seamoo/webapp/server/LocalDatastoreTest.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="314" selectionTopPixel="68"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.ClassFileEditor" name="ApiProxyLocalImpl.class" partName="ApiProxyLocalImpl.class" title="ApiProxyLocalImpl.class" tooltip="com.google.appengine.tools.development.ApiProxyLocalImpl" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" org.eclipse.jdt.ui.ClassFileIdentifier="=seamoo-webapp/\/home\/phuongnd08\/.m2\/repository\/com\/google\/appengine\/appengine-testing\/1.3.1\/appengine-testing-1.3.1.jar&lt;com.google.appengine.tools.development(ApiProxyLocalImpl.class"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.ClassFileEditor" name="ApiProxyLocalFactory.class" partName="ApiProxyLocalFactory.class" title="ApiProxyLocalFactory.class" tooltip="com.google.appengine.tools.development.ApiProxyLocalFactory" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" org.eclipse.jdt.ui.ClassFileIdentifier="=seamoo-webapp/\/home\/phuongnd08\/.m2\/repository\/com\/google\/appengine\/appengine-testing\/1.3.1\/appengine-testing-1.3.1.jar&lt;com.google.appengine.tools.development(ApiProxyLocalFactory.class"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MessageRepositoryTest.java" partName="MessageRepositoryTest.java" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-webapp/src/test/java/org/seamoo/webapp/server/MessageRepositoryTest.java" title="MessageRepositoryTest.java" tooltip="seamoo-webapp/src/test/java/org/seamoo/webapp/server/MessageRepositoryTest.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-webapp/src/test/java/org/seamoo/webapp/server/MessageRepositoryTest.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1525" selectionTopPixel="699"/>
+</editor>
+<editor id="org.eclipse.wst.html.core.htmlsource.source" name="index.html" partName="index.html" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-webapp/src/main/webapp/index.html" title="index.html" tooltip="seamoo-webapp/src/main/webapp/index.html" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-webapp/src/main/webapp/index.html"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="425" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="mvc-config.xml" partName="mvc-config.xml" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-webapp/src/main/webapp/WEB-INF/spring/mvc-config.xml" title="mvc-config.xml" tooltip="seamoo-webapp/src/main/webapp/WEB-INF/spring/mvc-config.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-webapp/src/main/webapp/WEB-INF/spring/mvc-config.xml"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExtTilesView.java" partName="ExtTilesView.java" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-webapp/src/main/java/org/seamoo/integration/ExtTilesView.java" title="ExtTilesView.java" tooltip="seamoo-webapp/src/main/java/org/seamoo/integration/ExtTilesView.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-webapp/src/main/java/org/seamoo/integration/ExtTilesView.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExtUrlBasedViewResolver.java" partName="ExtUrlBasedViewResolver.java" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-webapp/src/main/java/org/seamoo/integration/ExtUrlBasedViewResolver.java" title="ExtUrlBasedViewResolver.java" tooltip="seamoo-webapp/src/main/java/org/seamoo/integration/ExtUrlBasedViewResolver.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-webapp/src/main/java/org/seamoo/integration/ExtUrlBasedViewResolver.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.maven.ide.eclipse.editor.MavenPomEditor" name="pom.xml" partName="seamoo-documentation/pom.xml" path="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-documentation/pom.xml" title="seamoo-documentation/pom.xml" tooltip="seamoo-documentation/pom.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/seamoo-documentation/pom.xml"/>
+</editor>
+</editors>
+<views>
+<view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
+<viewState CommonNavigator.LINKING_ENABLED="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
+</view>
+<view id="org.eclipse.ui.views.AllMarkersView" partName="Markers">
+<viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.allSeverityField" categoryGroup="org.eclipse.ui.ide.type" markerContentGenerator="org.eclipse.ui.ide.allMarkersGenerator" partName="Markers">
+<expanded>
+<category IMemento.internal.id="Java Problems"/>
+</expanded>
+<columnWidths org.eclipse.ui.ide.allSeverityField="400" org.eclipse.ui.ide.locationField="83" org.eclipse.ui.ide.markerType="242" org.eclipse.ui.ide.pathField="163" org.eclipse.ui.ide.resourceField="123"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.allSeverityField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.locationField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.markerType"/>
+</viewState>
+</view>
+<view id="org.eclipse.wst.common.snippets.internal.ui.SnippetsView" partName="Snippets"/>
+<view id="org.eclipse.ui.views.ProgressView" partName="Progress">
+<viewState/>
+</view>
+<view id="org.eclipse.ui.views.PropertySheet" partName="Properties">
+<viewState/>
+</view>
+<view id="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator" partName="Data Source Explorer"/>
+<view id="org.eclipse.mylyn.tasks.ui.views.tasks" partName="Task List"/>
+<view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
+<viewState/>
+</view>
+<view id="org.eclipse.wst.server.ui.ServersView" partName="Servers"/>
+</views>
+<perspectives activePart="org.eclipse.ui.views.ProgressView" activePerspective="org.eclipse.jst.j2ee.J2EEPerspective">
+<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="org.eclipse.jst.j2ee.internal.perspective.J2EEPerspective" id="org.eclipse.jst.j2ee.J2EEPerspective" label="Java EE"/>
+<alwaysOnActionSet id="org.eclipse.jst.servlet.ui.internal.actions.ConvertToWebModuleTypeActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.rse.core.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.externaltools.ExternalToolsSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
+<alwaysOnActionSet id="org.eclipse.mylyn.context.ui.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.mylyn.doc.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.mylyn.tasks.ui.navigation"/>
+<alwaysOnActionSet id="com.google.gdt.eclipse.suite.actionSet.2.gae"/>
+<alwaysOnActionSet id="com.google.gdt.eclipse.suite.actionSet"/>
+<alwaysOnActionSet id="com.google.gdt.eclipse.suite.actionSet.1.gwt"/>
+<alwaysOnActionSet id="org.maven.ide.eclipse.ui.navigation"/>
+<alwaysOnActionSet id="org.maven.ide.eclipse.actionSet"/>
+<alwaysOnActionSet id="org.maven.ide.eclipse.help.actionSet"/>
+<alwaysOnActionSet id="to.etc.eclipse.colorplugin.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.jst.j2ee.J2eeMainActionSet"/>
+<alwaysOnActionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.debugActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.NavigateActionSet"/>
+<alwaysOnActionSet id="org.eclipse.wst.server.ui.internal.webbrowser.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
+<alwaysOnActionSet id="org.eclipse.wst.ws.explorer.explorer"/>
+<show_view_action id="org.eclipse.ui.navigator.ProjectExplorer"/>
+<show_view_action id="org.eclipse.wst.server.ui.ServersView"/>
+<show_view_action id="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator"/>
+<show_view_action id="org.eclipse.ui.views.BookmarkView"/>
+<show_view_action id="org.eclipse.ui.views.ContentOutline"/>
+<show_view_action id="org.eclipse.ui.views.PropertySheet"/>
+<show_view_action id="org.eclipse.ui.views.ResourceNavigator"/>
+<show_view_action id="org.eclipse.wst.common.snippets.internal.ui.SnippetsView"/>
+<show_view_action id="org.eclipse.ui.views.AllMarkersView"/>
+<show_view_action id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
+<show_view_action id="org.eclipse.search.ui.views.SearchView"/>
+<show_view_action id="org.eclipse.ui.console.ConsoleView"/>
+<new_wizard_action id="com.google.gdt.eclipse.suite.wizards.newProjectWizard"/>
+<new_wizard_action id="com.google.gwt.eclipse.core.newEntryPointWizard"/>
+<new_wizard_action id="com.google.gwt.eclipse.core.newHostPageWizard"/>
+<new_wizard_action id="com.google.gwt.eclipse.core.newModuleWizard"/>
+<new_wizard_action id="com.google.gwt.eclipse.core.newClientBundleWizard"/>
+<new_wizard_action id="com.google.gwt.eclipse.core.newUiBinderWizard"/>
+<new_wizard_action id="org.eclipse.jpt.ui.wizard.newJpaProject"/>
+<new_wizard_action id="org.eclipse.jst.j2ee.ui.project.facet.EarProjectWizard"/>
+<new_wizard_action id="org.eclipse.jst.servlet.ui.project.facet.WebProjectWizard"/>
+<new_wizard_action id="org.eclipse.jst.ejb.ui.project.facet.EjbProjectWizard"/>
+<new_wizard_action id="org.eclipse.jst.j2ee.jca.ui.internal.wizard.ConnectorProjectWizard"/>
+<new_wizard_action id="org.eclipse.jst.j2ee.ui.project.facet.appclient.AppClientProjectWizard"/>
+<new_wizard_action id="org.eclipse.wst.web.ui.internal.wizards.SimpleWebProjectWizard"/>
+<new_wizard_action id="org.eclipse.jst.servlet.ui.internal.wizard.AddServletWizard"/>
+<new_wizard_action id="org.eclipse.jst.ejb.ui.internal.wizard.AddSessionBeanWizard"/>
+<new_wizard_action id="org.eclipse.jst.ejb.ui.internal.wizard.AddMessageDrivenBeanWizard"/>
+<new_wizard_action id="org.eclipse.jpt.ui.wizard.newEntity"/>
+<new_wizard_action id="org.eclipse.jst.ws.creation.ui.wizard.serverwizard"/>
+<new_wizard_action id="org.eclipse.ui.wizards.new.folder"/>
+<new_wizard_action id="org.eclipse.ui.wizards.new.file"/>
+<perspective_action id="org.eclipse.jpt.ui.jpaPerspective"/>
+<perspective_action id="org.eclipse.debug.ui.DebugPerspective"/>
+<perspective_action id="org.eclipse.jdt.ui.JavaPerspective"/>
+<perspective_action id="org.eclipse.ui.resourcePerspective"/>
+<perspective_action id="org.eclipse.wst.web.ui.webDevPerspective"/>
+<hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<view id="org.eclipse.ui.navigator.ProjectExplorer"/>
+<view id="org.eclipse.ui.views.AllMarkersView"/>
+<view id="org.eclipse.ui.views.PropertySheet"/>
+<view id="org.eclipse.wst.server.ui.ServersView"/>
+<view id="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator"/>
+<view id="org.eclipse.wst.common.snippets.internal.ui.SnippetsView"/>
+<view id="org.eclipse.ui.views.ProgressView"/>
+<view id="org.eclipse.ui.views.ContentOutline"/>
+<view id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
+<fastViewBars/>
+<layout>
+<mainWindow>
+<info folder="true" part="topLeft">
+<folder activePageID="org.eclipse.ui.navigator.ProjectExplorer" appearance="2" expanded="2">
+<page content="org.eclipse.ui.navigator.ProjectExplorer" label="Project Explorer"/>
+<page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
+<page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
+<page content="org.eclipse.jdt.ui.PackagesView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.7495049" ratioLeft="757" ratioRight="253" relationship="2" relative="topLeft">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+<page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.31914893" ratioLeft="405" ratioRight="864" relationship="2" relative="topLeft"/>
+<info folder="true" part="bottomRight" ratio="0.6985871" ratioLeft="445" ratioRight="192" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.views.ProgressView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.AllMarkersView" label="Markers"/>
+<page content="org.eclipse.ui.views.PropertySheet" label="Properties"/>
+<page content="org.eclipse.wst.server.ui.ServersView" label="Servers"/>
+<page content="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator" label="Data Source Explorer"/>
+<page content="org.eclipse.wst.common.snippets.internal.ui.SnippetsView" label="Snippets"/>
+<page content="org.eclipse.ui.views.ProgressView" label="Progress"/>
+<page content="org.eclipse.ui.views.ProblemView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.TaskList" label="LabelNotFound"/>
+<page content="org.eclipse.ui.console.ConsoleView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
+<page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="topRight" ratio="0.69920844" ratioLeft="530" ratioRight="228" relationship="2" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<page content="org.eclipse.mylyn.tasks.ui.views.tasks" label="Task List"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+</presentation>
+</folder>
+</info>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+<workingSets/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" path="/seamoo-webapp/pom.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" path="/seamoo-webapp/src/main/webapp/WEB-INF/web.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/seamoo-webapp/src/test/java/org/seamoo/webapp/server/LocalDatastoreTest.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/seamoo-webapp/src/main/java/org/seamoo/server/ViewGuestBook.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/seamoo-webapp/src/test/java/org/seamoo/webapp/server/LocalServiceTest.java"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=seamoo-webapp/\/home\/phuongnd08\/.m2\/repository\/com\/google\/appengine\/appengine-testing\/1.3.1\/appengine-testing-1.3.1.jar&lt;com.google.appengine.tools.development(ApiProxyLocalImpl.class"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=seamoo-webapp/\/home\/phuongnd08\/.m2\/repository\/com\/google\/appengine\/appengine-testing\/1.3.1\/appengine-testing-1.3.1.jar&lt;com.google.appengine.tools.development(ApiProxyLocalImpl.class"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=seamoo-webapp/\/home\/phuongnd08\/.m2\/repository\/com\/google\/appengine\/appengine-testing\/1.3.1\/appengine-testing-1.3.1.jar&lt;com.google.appengine.tools.development(ApiProxyLocalFactory.class"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" path="/seamoo-webapp/pom.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/seamoo-webapp/src/test/java/org/seamoo/webapp/server/LocalDatastoreTest.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/seamoo-webapp/src/test/java/org/seamoo/webapp/server/MessageRepositoryTest.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="" path="/seamoo-webapp/pom.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" path="/seamoo-webapp/src/main/webapp/index.html"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" path="/seamoo-webapp/src/main/webapp/WEB-INF/web.xml"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=seamoo-webapp/\/home\/phuongnd08\/.m2\/repository\/net\/urlrewriter\/urlrewriter\/2.0RC1\/urlrewriter-2.0RC1.jar&lt;net.urlrewriter.utilities(Constants.class"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" path="/seamoo-webapp/src/main/webapp/WEB-INF/spring/mvc-config.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/seamoo-webapp/src/main/java/org/seamoo/integration/ExtTilesView.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/seamoo-webapp/src/main/java/org/seamoo/integration/ExtUrlBasedViewResolver.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" path="/seamoo-training/pom.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" path="/seamoo-persistence/pom.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" path="/seamoo-model/pom.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" path="/seamoo-documentation/pom.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" path="/seamoo-competition/pom.xml"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" uri="file:/home/phuongnd08/eclipse-workspace/seamoo-parent/pom.xml"/>
+</editors>
+<item historyLabel="LocalDatastoreTest.java" index="2">
+<position info="not_deleted" x="550" y="0"/>
+</item>
+<item historyLabel="ViewGuestBook.java" index="3">
+<position info="not_deleted" x="28" y="0"/>
+</item>
+<item historyLabel="LocalDatastoreTest.java" index="2">
+<position info="not_deleted" x="420" y="0"/>
+</item>
+<item historyLabel="web.xml" index="1"/>
+<item historyLabel="seamoo-webapp/pom.xml" index="0"/>
+<item historyLabel="LocalDatastoreTest.java" index="2">
+<position info="not_deleted" x="132" y="0"/>
+</item>
+<item historyLabel="seamoo-webapp/pom.xml" index="0"/>
+<item historyLabel="LocalDatastoreTest.java" index="2">
+<position info="not_deleted" x="538" y="0"/>
+</item>
+<item historyLabel="seamoo-webapp/pom.xml" index="0"/>
+<item historyLabel="LocalServiceTest.java" index="4">
+<position/>
+</item>
+<item historyLabel="ApiProxyLocalImpl.class" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="LocalServiceTest.java" index="4">
+<position info="not_deleted" x="150" y="0"/>
+</item>
+<item historyLabel="ApiProxyLocalImpl.class" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ApiProxyLocalFactory.class" index="7">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ApiProxyLocalImpl.class" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="seamoo-webapp/pom.xml" index="8"/>
+<item historyLabel="LocalDatastoreTest.java" index="9">
+<position info="not_deleted" x="314" y="0"/>
+</item>
+<item historyLabel="LocalServiceTest.java" index="4">
+<position info="not_deleted" x="150" y="0"/>
+</item>
+<item historyLabel="MessageRepositoryTest.java" index="10">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="LocalServiceTest.java" index="4">
+<position info="not_deleted" x="150" y="0"/>
+</item>
+<item historyLabel="MessageRepositoryTest.java" index="10">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="seamoo-webapp/pom.xml" index="8"/>
+<item historyLabel="MessageRepositoryTest.java" index="10">
+<position info="not_deleted" x="1525" y="0"/>
+</item>
+<item historyLabel="seamoo-webapp/pom.xml" index="8">
+<position/>
+</item>
+<item historyLabel="seamoo-webapp/pom.xml" index="11">
+<position info="not_deleted" x="8224" y="49"/>
+</item>
+<item historyLabel="seamoo-webapp/pom.xml" index="11">
+<position info="not_deleted" x="8224" y="50"/>
+</item>
+<item historyLabel="seamoo-webapp/pom.xml" index="11">
+<position info="not_deleted" x="9524" y="188"/>
+</item>
+<item historyLabel="index.html" index="12">
+<position info="not_deleted" x="425" y="0"/>
+</item>
+<item historyLabel="seamoo-webapp/pom.xml" index="8"/>
+<item historyLabel="web.xml" index="13"/>
+<item historyLabel="Constants.class" index="14">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="seamoo-webapp/pom.xml" index="8"/>
+<item historyLabel="web.xml" index="13"/>
+<item historyLabel="mvc-config.xml" index="15"/>
+<item historyLabel="ExtTilesView.java" index="16">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ExtUrlBasedViewResolver.java" index="17">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="seamoo-webapp/pom.xml" index="8"/>
+<item historyLabel="seamoo-training/pom.xml" index="18"/>
+<item historyLabel="seamoo-persistence/pom.xml" index="19"/>
+<item historyLabel="seamoo-model/pom.xml" index="20"/>
+<item historyLabel="seamoo-documentation/pom.xml" index="21"/>
+<item historyLabel="seamoo-competition/pom.xml" index="22"/>
+<item historyLabel="seamoo-model/pom.xml" index="20"/>
+<item historyLabel="seamoo-persistence/pom.xml" index="19"/>
+<item historyLabel="seamoo-webapp/pom.xml" index="8"/>
+<item historyLabel="/home/phuongnd08/eclipse-workspace/seamoo-parent/pom.xml" index="23"/>
+<item historyLabel="seamoo-documentation/pom.xml" index="21"/>
+<item historyLabel="/home/phuongnd08/eclipse-workspace/seamoo-parent/pom.xml" index="23"/>
+<item historyLabel="seamoo-documentation/pom.xml" index="21"/>
+<item active="true" historyLabel="seamoo-competition/pom.xml" index="22"/>
+</navigationHistory>
+<input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
+</page>
+<workbenchWindowAdvisor/>
+<actionBarAdvisor/>
+<trimLayout>
+<trimArea IMemento.internal.id="128">
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
+</trimArea>
+<trimArea IMemento.internal.id="1024">
+<trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
+<trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+<trimItem IMemento.internal.id="com.google.gdt.eclipse.suite.status.trim"/>
+</trimArea>
+</trimLayout>
+</window>
+<mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" name="pom.xml" tooltip="seamoo-documentation/pom.xml">
+<persistable path="/seamoo-documentation/pom.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExtUrlBasedViewResolver.java" tooltip="seamoo-webapp/src/main/java/org/seamoo/integration/ExtUrlBasedViewResolver.java">
+<persistable path="/seamoo-webapp/src/main/java/org/seamoo/integration/ExtUrlBasedViewResolver.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ExtTilesView.java" tooltip="seamoo-webapp/src/main/java/org/seamoo/integration/ExtTilesView.java">
+<persistable path="/seamoo-webapp/src/main/java/org/seamoo/integration/ExtTilesView.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="mvc-config.xml" tooltip="seamoo-webapp/src/main/webapp/WEB-INF/spring/mvc-config.xml">
+<persistable path="/seamoo-webapp/src/main/webapp/WEB-INF/spring/mvc-config.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.html.core.htmlsource.source" name="index.html" tooltip="seamoo-webapp/src/main/webapp/index.html">
+<persistable path="/seamoo-webapp/src/main/webapp/index.html"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MessageRepositoryTest.java" tooltip="seamoo-webapp/src/test/java/org/seamoo/webapp/server/MessageRepositoryTest.java">
+<persistable path="/seamoo-webapp/src/test/java/org/seamoo/webapp/server/MessageRepositoryTest.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="ApiProxyLocalFactory.class" tooltip="com.google.appengine.tools.development.ApiProxyLocalFactory">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=seamoo-webapp/\/home\/phuongnd08\/.m2\/repository\/com\/google\/appengine\/appengine-testing\/1.3.1\/appengine-testing-1.3.1.jar&lt;com.google.appengine.tools.development(ApiProxyLocalFactory.class"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="ApiProxyLocalImpl.class" tooltip="com.google.appengine.tools.development.ApiProxyLocalImpl">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=seamoo-webapp/\/home\/phuongnd08\/.m2\/repository\/com\/google\/appengine\/appengine-testing\/1.3.1\/appengine-testing-1.3.1.jar&lt;com.google.appengine.tools.development(ApiProxyLocalImpl.class"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LocalServiceTest.java" tooltip="seamoo-webapp/src/test/java/org/seamoo/webapp/server/LocalServiceTest.java">
+<persistable path="/seamoo-webapp/src/test/java/org/seamoo/webapp/server/LocalServiceTest.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LocalDatastoreTest.java" tooltip="seamoo-webapp/src/test/java/org/seamoo/webapp/server/LocalDatastoreTest.java">
+<persistable path="/seamoo-webapp/src/test/java/org/seamoo/webapp/server/LocalDatastoreTest.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="appengine-web.xml" tooltip="seamoo-webapp/src/main/webapp/WEB-INF/appengine-web.xml">
+<persistable path="/seamoo-webapp/src/main/webapp/WEB-INF/appengine-web.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="web.xml" tooltip="seamoo-webapp/src/main/webapp/WEB-INF/web.xml">
+<persistable path="/seamoo-webapp/src/main/webapp/WEB-INF/web.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" name="pom.xml" tooltip="seamoo-webapp/pom.xml">
+<persistable path="/seamoo-webapp/pom.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" name="pom.xml" tooltip="seamoo-training/pom.xml">
+<persistable path="/seamoo-training/pom.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.maven.ide.eclipse.editor.MavenPomEditor" name="pom.xml" tooltip="seamoo-persistence/pom.xml">
+<persistable path="/seamoo-persistence/pom.xml"/>
+</file>
+</mruList>
+</workbench>
