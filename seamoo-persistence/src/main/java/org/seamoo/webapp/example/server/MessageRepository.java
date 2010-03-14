@@ -10,7 +10,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
 import org.seamoo.webapp.example.model.Message;
-import org.seamoo.webapp.example.model.Messages;
+import org.seamoo.webapp.example.model.Messages;;
 
 public class MessageRepository implements Messages {
 

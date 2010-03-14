@@ -1,4 +1,4 @@
-package org.seamoo.webapp.server;
+package org.seamoo.persistence;
 
 import org.junit.After;
 import org.junit.Before;

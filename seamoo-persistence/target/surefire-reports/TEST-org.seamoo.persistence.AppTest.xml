@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.062" errors="0" skipped="0" tests="1" name="org.seamoo.persistence.AppTest">
+<testsuite failures="0" time="0.044" errors="0" skipped="0" tests="1" name="org.seamoo.persistence.AppTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/jdk1.6.0_18/jre/lib/amd64"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-persistence"/>
     <property name="java.endorsed.dirs" value="/usr/lib/jvm/jdk1.6.0_18/jre/lib/endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="/tmp/surefirebooter1523014469955850365.jar"/>
+    <property name="surefire.real.class.path" value="/tmp/surefirebooter6907648018303920690.jar"/>
     <property name="java.io.tmpdir" value="/tmp"/>
     <property name="line.separator" value="
 "/>
@@ -27,7 +27,7 @@
     <property name="os.name" value="Linux"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/lib/jvm/jdk1.6.0_18/jre/lib/amd64/server:/usr/lib/jvm/jdk1.6.0_18/jre/lib/amd64:/usr/lib/jvm/jdk1.6.0_18/jre/../lib/amd64:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
-    <property name="surefire.test.class.path" value="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-persistence/target/test-classes:/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-persistence/target/classes:/home/phuongnd08/.m2/repository/junit/junit/4.6/junit-4.6.jar:"/>
+    <property name="surefire.test.class.path" value="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-persistence/target/test-classes:/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-persistence/target/classes:/home/phuongnd08/.m2/repository/org/seamoo/seamoo-model/1.0-SNAPSHOT/seamoo-model-1.0-SNAPSHOT.jar:/home/phuongnd08/.m2/repository/com/google/appengine/orm/datanucleus-appengine/1.0.4.1/datanucleus-appengine-1.0.4.1.jar:/home/phuongnd08/.m2/repository/com/google/appengine/appengine-api-1.0-sdk/1.3.1/appengine-api-1.0-sdk-1.3.1.jar:/home/phuongnd08/.m2/repository/org/datanucleus/datanucleus-core/1.1.5/datanucleus-core-1.1.5.jar:/home/phuongnd08/.m2/repository/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1.1/geronimo-jta_1.1_spec-1.1.1.jar:/home/phuongnd08/.m2/repository/javax/jdo/jdo2-api/2.3-eb/jdo2-api-2.3-eb.jar:/home/phuongnd08/.m2/repository/com/google/appengine/datanucleus-jpa/1.1.5/datanucleus-jpa-1.1.5.jar:/home/phuongnd08/.m2/repository/com/google/appengine/geronimo-jpa_3.0_spec/1.1.1/geronimo-jpa_3.0_spec-1.1.1.jar:/home/phuongnd08/.m2/repository/javax/transaction/jta/1.1/jta-1.1.jar:/home/phuongnd08/.m2/repository/com/google/appengine/appengine-api-labs/1.3.1/appengine-api-labs-1.3.1.jar:/home/phuongnd08/.m2/repository/com/google/appengine/appengine-api-stubs/1.3.1/appengine-api-stubs-1.3.1.jar:/home/phuongnd08/.m2/repository/com/google/appengine/appengine-local-runtime/1.3.1/appengine-local-runtime-1.3.1.jar:/home/phuongnd08/.m2/repository/com/google/appengine/appengine-testing/1.3.1/appengine-testing-1.3.1.jar:/home/phuongnd08/.m2/repository/junit/junit/4.6/junit-4.6.jar:"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="50.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Server Compiler"/>
@@ -38,7 +38,7 @@
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="1.6"/>
     <property name="user.name" value="phuongnd08"/>
-    <property name="java.class.path" value="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-persistence/target/test-classes:/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-persistence/target/classes:/home/phuongnd08/.m2/repository/junit/junit/4.6/junit-4.6.jar:"/>
+    <property name="java.class.path" value="/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-persistence/target/test-classes:/home/phuongnd08/eclipse-workspace/seamoo-parent/seamoo-persistence/target/classes:/home/phuongnd08/.m2/repository/org/seamoo/seamoo-model/1.0-SNAPSHOT/seamoo-model-1.0-SNAPSHOT.jar:/home/phuongnd08/.m2/repository/com/google/appengine/orm/datanucleus-appengine/1.0.4.1/datanucleus-appengine-1.0.4.1.jar:/home/phuongnd08/.m2/repository/com/google/appengine/appengine-api-1.0-sdk/1.3.1/appengine-api-1.0-sdk-1.3.1.jar:/home/phuongnd08/.m2/repository/org/datanucleus/datanucleus-core/1.1.5/datanucleus-core-1.1.5.jar:/home/phuongnd08/.m2/repository/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.1.1/geronimo-jta_1.1_spec-1.1.1.jar:/home/phuongnd08/.m2/repository/javax/jdo/jdo2-api/2.3-eb/jdo2-api-2.3-eb.jar:/home/phuongnd08/.m2/repository/com/google/appengine/datanucleus-jpa/1.1.5/datanucleus-jpa-1.1.5.jar:/home/phuongnd08/.m2/repository/com/google/appengine/geronimo-jpa_3.0_spec/1.1.1/geronimo-jpa_3.0_spec-1.1.1.jar:/home/phuongnd08/.m2/repository/javax/transaction/jta/1.1/jta-1.1.jar:/home/phuongnd08/.m2/repository/com/google/appengine/appengine-api-labs/1.3.1/appengine-api-labs-1.3.1.jar:/home/phuongnd08/.m2/repository/com/google/appengine/appengine-api-stubs/1.3.1/appengine-api-stubs-1.3.1.jar:/home/phuongnd08/.m2/repository/com/google/appengine/appengine-local-runtime/1.3.1/appengine-local-runtime-1.3.1.jar:/home/phuongnd08/.m2/repository/com/google/appengine/appengine-testing/1.3.1/appengine-testing-1.3.1.jar:/home/phuongnd08/.m2/repository/junit/junit/4.6/junit-4.6.jar:"/>
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/usr/lib/jvm/jdk1.6.0_18/jre"/>
@@ -57,5 +57,5 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.009" classname="org.seamoo.persistence.AppTest" name="testApp"/>
+  <testcase time="0.007" classname="org.seamoo.persistence.AppTest" name="testApp"/>
 </testsuite>

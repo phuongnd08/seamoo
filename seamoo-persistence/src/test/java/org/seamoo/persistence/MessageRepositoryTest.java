@@ -1,4 +1,4 @@
-package org.seamoo.webapp.server;
+package org.seamoo.persistence;
 
 
 import static org.junit.Assert.assertEquals;
