@@ -40,6 +40,12 @@
 			<version>1.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>geronimo-jpa_3.0_spec</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -57,9 +63,10 @@
 						Make sure this path contains your persistent classes!
 					-->
 					<mappingIncludes>**/model/*.class</mappingIncludes>
+					<mappingIncludes>**/entities/**.class</mappingIncludes>
 					<verbose>true</verbose>
 					<enhancerName>ASM</enhancerName>
-					<api>JDO</api>
+					<api>JPA</api>
 				</configuration>
 				<executions>
 					<execution>

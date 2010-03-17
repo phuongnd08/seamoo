@@ -9,12 +9,13 @@ import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
+import org.seamoo.persistence.jdo.PMF;
 import org.seamoo.webapp.example.model.Message;
-import org.seamoo.webapp.example.model.Messages;;
+import org.seamoo.webapp.example.model.Messages;
 
 public class MessageRepository implements Messages {
 
-	PersistenceManagerFactory pmfInstance = JDOHelper.getPersistenceManagerFactory("transactions-optional");
+	PersistenceManagerFactory pmfInstance = PMF.get();
 
 	/**
      * @see net.kindleit.gae.example.model.Messages#getAll()

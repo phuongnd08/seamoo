@@ -10,6 +10,7 @@
 	<modules>
 		<module>seamoo-documentation</module>
 		<module>seamoo-model</module>
+		<module>seamoo-test-resources</module>
 		<module>seamoo-persistence</module>
 		<module>seamoo-training</module>
 		<module>seamoo-competition</module>
@@ -35,7 +36,6 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
-				<scope>test</scope>
 			</dependency>
 
 			<dependency>
@@ -43,13 +43,6 @@
 				<artifactId>log4j</artifactId>
 				<version>${log4j.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>servlet-api</artifactId>
-				<version>${javax.servlet-api.version}</version>
-				<scope>provided</scope>
-			</dependency>
-
 
 			<dependency>
 				<groupId>com.google.appengine</groupId>
@@ -84,17 +77,6 @@
 				<scope>provided</scope>
 			</dependency>
 
-			<!--
-			Make use of JSP tags. Remove, if you don't use JSPs
-		-->
-			<dependency>
-				<artifactId>standard</artifactId>
-				<groupId>taglibs</groupId>
-				<version>1.1.2</version>
-				<type>jar</type>
-				<scope>runtime</scope>
-			</dependency>
-
 			<!-- These dependencies are here just for enabling logging -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -108,14 +90,6 @@
 				<version>0.9.15</version>
 			</dependency>
 
-			<!-- Test scope -->
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.5</version>
-				<scope>test</scope>
-			</dependency>
-
 			<!--
 				GAE libraries for local testing as described here:
 				http://code.google.com/appengine/docs/java/howto/unittesting.html
@@ -124,28 +98,24 @@
 				<groupId>com.google.appengine</groupId>
 				<artifactId>appengine-api-labs</artifactId>
 				<version>${gae.version}</version>
-				<scope>test</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>com.google.appengine</groupId>
 				<artifactId>appengine-api-stubs</artifactId>
 				<version>${gae.version}</version>
-				<scope>test</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>com.google.appengine</groupId>
 				<artifactId>appengine-local-runtime</artifactId>
 				<version>${gae.version}</version>
-				<scope>test</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>com.google.appengine</groupId>
 				<artifactId>appengine-testing</artifactId>
 				<version>${gae.version}</version>
-				<scope>test</scope>
 			</dependency>
 
 			<dependency>
@@ -157,6 +127,12 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context-support</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
 

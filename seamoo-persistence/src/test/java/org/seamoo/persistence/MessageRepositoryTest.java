@@ -9,6 +9,7 @@ import java.util.Collection;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.seamoo.persistence.test.LocalDatastoreTest;
 import org.seamoo.webapp.example.model.Message;
 import org.seamoo.webapp.example.server.MessageRepository;
 

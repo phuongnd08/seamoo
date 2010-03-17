@@ -27,6 +27,11 @@
 			<artifactId>seamoo-persistence</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>seamoo-test-resources</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!--
 			jars from GAE's "lib/user" must be added as compile-time
 			dependencies, as described here in "Copying JARs" section:
@@ -87,15 +92,6 @@
 			<version>0.9.15</version>
 		</dependency>
 
-		<!-- Test scope -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.5</version>
-			<scope>test</scope>
-		</dependency>
-
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -132,6 +128,18 @@
 		<dependency>
 			<groupId>org.tuckey</groupId>
 			<artifactId>urlrewritefilter</artifactId>
+		</dependency>
+
+		<!-- Test scope -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -320,49 +328,4 @@
 			</properties>
 		</profile>
 	</profiles>
-
-	<repositories>
-		<!-- We go to mvnsearch.org after latest GAE SDK artifacts -->
-		<repository>
-			<id>mvnsearch.org</id>
-			<name>MVN Search</name>
-			<url>
-				http://www.mvnsearch.org/maven2
-	        </url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>warn</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>DataNucleus_Repos2</id>
-			<name>DataNucleus Repository</name>
-			<url>http://www.datanucleus.org/downloads/maven2</url>
-		</repository>
-		<repository>
-			<id>maven-gae-plugin-repo</id>
-			<name>maven-gae-plugin repository</name>
-			<url>
-				http://maven-gae-plugin.googlecode.com/svn/repository
-            </url>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>DataNucleus_2</id>
-			<url>http://www.datanucleus.org/downloads/maven2/</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>maven-gae-plugin-repo</id>
-			<name>maven-gae-plugin repository</name>
-			<url>
-				http://maven-gae-plugin.googlecode.com/svn/repository
-            </url>
-		</pluginRepository>
-	</pluginRepositories>
 </project>

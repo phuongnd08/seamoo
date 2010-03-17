@@ -14,7 +14,7 @@
 		Enable componenet scanning so that annotated controller can be picked
 		up and brought into use
 	-->
-	<context:component-scan base-package="org.seamoo.server.controllers" />
+	<context:component-scan base-package="org.seamoo.webapp.controllers" />
 
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />

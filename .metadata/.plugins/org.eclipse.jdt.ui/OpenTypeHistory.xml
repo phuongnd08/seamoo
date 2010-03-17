@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy/>
+<typeInfoHistroy>
+<typeInfo handle="=seamoo-persistence/src\/main\/java&lt;org.seamoo.persistence.jdo{JdoSubjectDAOImpl.java[JdoSubjectDAOImpl" modifiers="1" timestamp="1268817304000"/>
+<typeInfo handle="=seamoo-persistence/src\/main\/java&lt;org.seamoo.persistence{SubjectDAO.java[SubjectDAO" modifiers="513" timestamp="1268817191000"/>
+<typeInfo handle="=seamoo-persistence/src\/main\/java&lt;org.seamoo.persistence.jdo{JdoGenericDAOImpl.java[JdoGenericDAOImpl" modifiers="1025" timestamp="1268816543000"/>
+<typeInfo handle="=seamoo-model/src\/main\/java&lt;org.seamoo.entities{Subject.java[Subject" modifiers="1" timestamp="1268816803000"/>
+<typeInfo handle="=seamoo-persistence/src\/main\/java&lt;org.seamoo.persistence{GenericDAO.java[GenericDAO" modifiers="513" timestamp="1268749764000"/>
+<typeInfo handle="=seamoo-webapp/\/home\/phuongnd08\/app\/jvm\/jdk1.6.0_18\/jre\/lib\/rt.jar&lt;java.util(Map.class[Map" modifiers="1537" timestamp="1268713905000"/>
+</typeInfoHistroy>
