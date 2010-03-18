@@ -6,9 +6,9 @@
 */WEB-INF/lib/*.*
 */WEB-INF/classes/
 */WEB-INF/appengine-generated/*.*
-#/seamoo-*/target/
-#/seamoo-*/.classpath
-#/seamoo-*/.project
-#/seamoo-*/.settings/
-#.metadata
+/seamoo-*/target/
+/seamoo-*/.classpath
+/seamoo-*/.project
+/seamoo-*/.settings/
+.metadata
 
