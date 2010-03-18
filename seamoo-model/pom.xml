@@ -62,8 +62,7 @@
 					<!--
 						Make sure this path contains your persistent classes!
 					-->
-					<mappingIncludes>**/model/*.class</mappingIncludes>
-					<mappingIncludes>**/entities/**.class</mappingIncludes>
+					<mappingIncludes>**/model/*.class, **/entities/**.class</mappingIncludes>
 					<verbose>true</verbose>
 					<enhancerName>ASM</enhancerName>
 					<api>JPA</api>
