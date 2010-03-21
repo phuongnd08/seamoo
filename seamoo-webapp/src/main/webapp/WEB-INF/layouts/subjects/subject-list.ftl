@@ -27,6 +27,8 @@
 	Thể hiện sự hiểu biết cùng khả năng suy luận toán học của bạn
 [/@optionBox]
 <div class="cbt"></div>
+
+[#--
 <script type="text/javascript" language="javascript" src="[@spring.url "/seamoo_2/seamoo_2.nocache.js"/]"></script>
 <div>
     <table align="center">
@@ -38,4 +40,5 @@
         <td id="sendButtonContainer"></td>
       </tr>
     </table>
-</di>
+</div>
+--]
