@@ -2,7 +2,7 @@
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN" "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
 <urlrewrite default-match-type="regex">
 	<rule>
-		<from>^/((subjects|leagues|questions|users|profiles|admin|discussion|reports|training|matches)(/.*)?)$</from>
+		<from>^/((subjects|leagues|questions|users|profiles|admin|discussion|reports|training|matches|demo)(/.*)?)$</from>
 		<to>/app/$1</to>
 	</rule>
 <!--	<outbound-rule>-->

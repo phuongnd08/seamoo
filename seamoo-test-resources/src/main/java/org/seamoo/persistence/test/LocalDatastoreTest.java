@@ -14,10 +14,13 @@ import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
  */
 public abstract class LocalDatastoreTest {
 
-    private final LocalServiceTestHelper helper =
-        new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
+    private final LocalServiceTestHelper helper ;
 
-    
+    public LocalDatastoreTest(){
+    	LocalDatastoreServiceTestConfig testConfig = new LocalDatastoreServiceTestConfig();
+    	helper =
+            new LocalServiceTestHelper(testConfig);
+    }
 	/**
 	 * 
 	 */

@@ -1,15 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy>
-<typeInfo handle="=seamoo-webapp/src\/test\/java&lt;org.seamoo.webapp.controllers{SubjectControllerTest.java[SubjectControllerTest" modifiers="1" timestamp="1268835386000"/>
-<typeInfo handle="=seamoo-persistence/src\/main\/java&lt;org.seamoo.persistence.jdo{JdoSubjectDAOImpl.java[JdoSubjectDAOImpl" modifiers="1" timestamp="1268843408000"/>
-<typeInfo handle="=seamoo-webapp/src\/main\/java&lt;org.seamoo.webapp.controllers{SubjectController.java[SubjectController" modifiers="1" timestamp="1268835608000"/>
-<typeInfo handle="=seamoo-model/src\/main\/java&lt;org.seamoo.entities{Subject.java[Subject" modifiers="1" timestamp="1268882974000"/>
-<typeInfo handle="=seamoo-persistence/src\/main\/java&lt;org.seamoo.persistence.jdo{JdoGenericDAOImpl.java[JdoGenericDAOImpl" modifiers="1025" timestamp="1268843191000"/>
-<typeInfo handle="=seamoo-persistence/src\/test\/java&lt;org.seamoo.persistence{MessageRepositoryTest.java[MessageRepositoryTest" modifiers="1" timestamp="1268812537000"/>
-<typeInfo handle="=seamoo-persistence/src\/main\/java&lt;org.seamoo.webapp.example.server{MessageRepository.java[MessageRepository" modifiers="1" timestamp="1268812659000"/>
-<typeInfo handle="=seamoo-model/src\/main\/java&lt;org.seamoo.webapp.example.model{Message.java[Message" modifiers="1" timestamp="1268406560000"/>
-<typeInfo handle="=seamoo-webapp/src\/test\/java&lt;org.seamoo.webapp.controllers{AutowiredTest.java[AutowiredTest" modifiers="1" timestamp="1268884976000"/>
-<typeInfo handle="=seamoo-webapp/\/home\/phuongnd08\/.m2\/repository\/org\/apache\/tiles\/tiles-core\/2.1.2\/tiles-core-2.1.2.jar&lt;org.apache.tiles.evaluator.el(ELAttributeEvaluator.class[ELAttributeEvaluator" modifiers="33" timestamp="1268716333000"/>
-<typeInfo handle="=seamoo-webapp/\/home\/phuongnd08\/.m2\/repository\/org\/apache\/tiles\/tiles-core\/2.1.2\/tiles-core-2.1.2.jar&lt;org.apache.tiles.evaluator.el(TomcatExpressionFactoryFactory.class[TomcatExpressionFactoryFactory" modifiers="33" timestamp="1268716333000"/>
-<typeInfo handle="=seamoo-webapp/\/home\/phuongnd08\/.m2\/repository\/org\/apache\/tomcat\/jasper-el\/6.0.26\/jasper-el-6.0.26.jar&lt;org.apache.el(ExpressionFactoryImpl.class[ExpressionFactoryImpl" modifiers="33" timestamp="1268716316000"/>
-</typeInfoHistroy>
+<typeInfoHistroy/>

@@ -1,6 +1,5 @@
-<!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<!DOCTYPE tiles-definitions SYSTEM
+       "WEB-INF/tiles-def/tiles-config_2_0.dtd">
 
 	<!-- Definitions for Tiles documentation   -->
 <tiles-definitions>

@@ -130,17 +130,48 @@
 			<artifactId>urlrewritefilter</artifactId>
 		</dependency>
 
-		<!-- Test scope -->
+		<dependency>
+			<groupId>org.seamoo.utils</groupId>
+			<artifactId>converter</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<classifier>jdk15</classifier>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>mockit</groupId>
+			<artifactId>jmockit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sourceforge.htmlunit</groupId>
+			<artifactId>htmlunit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>rhino</groupId>
+			<artifactId>js</artifactId>
+			<version>1.7R2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -226,6 +257,81 @@
 				</executions>
 			</plugin>
 
+			<plugin>
+				<groupId>org.seamoo.plugins</groupId>
+				<artifactId>maven-gaeForTest-plugin</artifactId>
+				<version>1.0-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<id>runAsync</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>runAsync</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+						<configuration>
+							<!-- Wait for 2 seconds (FUNNY) -->
+							<seconds>2</seconds>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<phase>pre-integration-test</phase>
+						<configuration>
+							<tasks>
+								<!-- invoke a request to a page that will install sample -->
+								<exec dir="${basedir}/target" executable="wget"
+									failonerror="true">
+									<arg
+										line="http://localhost:${gae.testPort}/demo/install-sample -Oinstall-sample.txt" />
+								</exec>
+								<exec dir="${basedir}/target" executable="cat" failonerror="true">
+									<arg line="install-sample.txt" />
+								</exec>
+								<!-- remove the output from disk -->
+								<delete file="${basedir}/target/install-sample.txt" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.5</version>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>verify</id>
+						<goals>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
 			<!--
 				The actual maven-gae-plugin. Type "mvn gae:run" to run project, "mvn
 				gae:deploy" to upload to GAE.
@@ -257,15 +363,6 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-			
-			<!-- Jetty web server -->
-				<plugin>
-					<groupId>org.mortbay.jetty</groupId>
-					<artifactId>maven-jetty-plugin</artifactId>
-					<configuration>
-						<reload>automatic</reload>
-					</configuration>
-				</plugin>
 		</plugins>
 	</build>
 
@@ -283,6 +380,7 @@
 
 		<!-- port defaults to 8888 -->
 		<gae.port>8888</gae.port>
+		<gae.testPort>8888</gae.testPort>
 
 		<!--
 			Produce detailed JS during GWT compilation for development

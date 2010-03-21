@@ -32,7 +32,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/spring/app-config.xml
-				classpath:persistence-api.xml
+				classpath:dao-context.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

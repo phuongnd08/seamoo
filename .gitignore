@@ -10,4 +10,5 @@
 /seamoo-*/.classpath
 /seamoo-*/.project
 /seamoo-*/.settings/
+/seamoo-*/test-output/
 .metadata/
