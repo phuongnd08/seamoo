@@ -5,6 +5,8 @@ import org.seamoo.webapp.Site;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -44,5 +46,11 @@ public class AdminController {
 			operatingMode = Site.OPERATING_MODE_DEFAULT;
 		mav.addObject("operatingMode", operatingMode);
 		return mav;
+	}
+	
+	@RequestMapping(value="/update-site-settings", method=RequestMethod.POST)
+	public String updateSiteSettings(@RequestParam("operatingMode") String operatingMode){
+		siteSettingDAO.assignSetting("operatingMode", operatingMode);
+		return "redirect:site-settings";
 	}
 }

@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Subject {
@@ -19,9 +17,22 @@ public class Subject {
 	private String avatarUrl;
 	private String description;
 	private boolean enabled;
-	//@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	private Date addedTime;
 	private List<League> leagues;
+
+	public Subject() {
+
+	}
+
+	public Subject(Long autoId, String name, String avatarUrl,
+			String description, boolean enabled) {
+		this.autoId = autoId;
+		this.name = name;
+		this.avatarUrl = avatarUrl;
+		this.description = description;
+		this.enabled = enabled;
+	}
 
 	public void setName(String name) {
 		this.name = name;

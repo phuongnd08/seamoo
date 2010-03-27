@@ -10,11 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/subjects")
 public class SubjectController {
-	
+
 	@Autowired
 	SubjectDAO subjectDAO;
-	
-	@RequestMapping(value={"/", ""}) //all: subjects, subjects/, subjects/list will be routed to this method 
+
+	@RequestMapping(value = { "/", "" })
+	// subjects, subjects/ will be routed to this method
 	public ModelAndView list() {
 		ModelAndView mav = new ModelAndView("subjects.list");
 		mav.addObject("title", "Subject lists");
@@ -22,8 +23,9 @@ public class SubjectController {
 		return mav;
 	}
 
-	@RequestMapping("/view/{subjectId}")
-	public ModelAndView view(@PathVariable("subjectId") long subjectId) {
+	@RequestMapping("/{subjectId}-{subjectAlias}")
+	public ModelAndView view(@PathVariable("subjectId") long subjectId,
+			@PathVariable("subjectAlias") String subjectAlias) {
 		ModelAndView mav = new ModelAndView("subjects.detail");
 		mav.addObject("title", "English");
 		mav.addObject("subject", subjectDAO.findById(subjectId));

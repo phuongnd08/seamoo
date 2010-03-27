@@ -66,14 +66,10 @@ public class SubjectControllerTest extends JMockitTestNG {
 				result = english;
 			}
 		};
-		ModelAndView mav = subjectController.view(1);
+		ModelAndView mav = subjectController.view(1, "english");
 		Map<String, Object> model = mav.getModel();
 		Subject subject = (Subject) model.get("subject");
 		assertEquals("English", subject.getName());
-	}
-
-	@Test(expectedExceptions = SecurityException.class)
-	public void viewOfDisabledSubjectShouldNotReturnSubject() {
 	}
 
 }

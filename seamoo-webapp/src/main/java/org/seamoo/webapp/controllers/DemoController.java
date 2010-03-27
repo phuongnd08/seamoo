@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.seamoo.entities.Subject;
 import org.seamoo.persistence.SiteSettingDAO;
+import org.seamoo.persistence.SubjectDAO;
 import org.seamoo.utils.converter.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ public class DemoController {
 	@Autowired
 	SiteSettingDAO siteSettingDAO;
 
+	@Autowired
+	SubjectDAO subjectDAO;
+
 	@RequestMapping("/install-sample")
 	public void installSample(HttpServletResponse response) throws IOException {
 		response.setContentType("text/html");
@@ -24,10 +29,41 @@ public class DemoController {
 				.getSetting("sampleInstalled"));
 		if (!sampleInstalled) {
 			response.getWriter().println("Install Sample");
+			performInstall();
 			siteSettingDAO.assignSetting("sampleInstalled", Converter
 					.toString(true));
 		} else {
 			response.getWriter().println("Error: Sample Installed");
 		}
+	}
+
+	private void performInstall() {
+		Subject english = new Subject();
+		{
+			english.setName("English");
+			english
+					.setDescription("Thể hiện kĩ năng Anh ngữ của bạn về từ vựng, ngữ pháp và phát âm");
+			english.setAvatarUrl("/images/subjects/english.png");
+			english.setEnabled(true);
+		}
+
+		Subject maths = new Subject();
+		{
+			maths.setName("Toán học");
+			maths
+					.setDescription("Thể hiện sự hiểu biết cùng khả năng suy luận toán học của bạn");
+			maths.setAvatarUrl("/images/subjects/math.png");
+			maths.setEnabled(true);
+		}
+
+		Subject history = new Subject();
+		{
+			history.setName("Lịch sử");
+			history.setDescription("Thể hiện sự am tường lịch sử của bạn");
+			history.setAvatarUrl("/images/subjects/history.png");
+			history.setEnabled(false);
+		}
+
+		subjectDAO.persist(new Subject[] { english, maths, history });
 	}
 }

@@ -1,0 +1,11 @@
+<!-- Indices written at Sat, 20 Mar 2010 15:27:40 ICT -->
+
+<datastore-indexes>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Subject" ancestor="false" source="auto">
+        <property name="enabled" direction="asc"/>
+        <property name="addedTime" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>
