@@ -1,26 +1,35 @@
-n>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-<!--					<buildOutputDirectory>war/WEB-INF/classes</buildOutputDirectory>-->
-<!--					<classpathContainers>-->
-<!--						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>-->
-<!--						<classpathContainer>com.google.gwt.eclipse.core.GWT_CONTAINER</classpathContainer>-->
-<!--						<classpathContainer>com.google.appengine.eclipse.core.GAE_CONTAINER</classpathContainer>-->
-<!--					</classpathContainers>-->
-<!--					<additionalBuildcommands>-->
-						<!-- For sync files between maven webapp folder & GAE war folder -->
-<!--						<buildcommand>de.loskutov.FileSync.FSBuilder</buildcommand>-->
-<!--						<buildcommand>com.google.gwt.eclipse.core.gwtProjectValidator</buildcommand>-->
-<!--						<buildcommand>com.google.appengine.eclipse.core.enhancerbuilder</buildcommand>-->
-<!--						<buildcommand>com.google.appengine.eclipse.core.projectValidator</buildcommand>-->
-<!--						<buildcommand>com.google.gdt.eclipse.core.webAppProjectValidator</buildcommand>-->
-<!--					</additionalBuildcommands>-->
-<!--					<additionalProjectnatures>-->
-<!--						<projectnature>com.google.gwt.eclipse.core.gwtNature</projectnature>-->
-<!--						<projectnature>com.google.gdt.eclipse.core.webAppNature</projectnature>-->
-<!--						<projectnature>com.google.appengine.eclipse.core.gaeNature</projectnature>-->
-<!--					</additionalProjectnatures>-->
-				</configuration>
-			</plugin>
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-eclipse-plugin</artifactId>
+	<configuration>
+		<buildOutputDirectory>war/WEB-INF/classes</buildOutputDirectory>
+		<classpathContainers>
+			<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER
+			</classpathContainer>
+			<classpathContainer>com.google.gwt.eclipse.core.GWT_CONTAINER
+			</classpathContainer>
+			<classpathContainer>com.google.appengine.eclipse.core.GAE_CONTAINER
+			</classpathContainer>
+		</classpathContainers>
+		<additionalBuildcommands>
+<!--			For sync files between maven webapp folder & GAE war folder-->
+			<buildcommand>de.loskutov.FileSync.FSBuilder</buildcommand>
+			<buildcommand>com.google.gwt.eclipse.core.gwtProjectValidator
+			</buildcommand>
+			<buildcommand>com.google.appengine.eclipse.core.enhancerbuilder
+			</buildcommand>
+			<buildcommand>com.google.appengine.eclipse.core.projectValidator
+			</buildcommand>
+			<buildcommand>com.google.gdt.eclipse.core.webAppProjectValidator
+			</buildcommand>
+		</additionalBuildcommands>
+		<additionalProjectnatures>
+			<projectnature>com.google.gwt.eclipse.core.gwtNature</projectnature>
+			<projectnature>com.google.gdt.eclipse.core.webAppNature
+			</projectnature>
+			<projectnature>com.google.appengine.eclipse.core.gaeNature
+			</projectnature>
+		</additionalProjectnatures>
+	</configuration>
+</plugin>
 
