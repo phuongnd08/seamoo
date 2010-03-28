@@ -35,9 +35,9 @@
 			</tr>
 			<tr style='display: [#if mode="view"]none[/#if]' id="buttonContainer">
 				<td colspan="2" class="tac">
-					<span><input type="button" id="create-btn" value="Create"/></span>
-					<span><input type="button" id="save-btn" value="Save"/></span>
-					<span><input type="button" id="cancel-btn" value="Cancel"/></span>
+					<span><input type="button" id="create" value="Create"/></span>
+					<span><input type="button" id="save" value="Save"/></span>
+					<span><input type="button" id="cancel" value="Cancel"/></span>
 				</td>
 			</tr>
 		</table>

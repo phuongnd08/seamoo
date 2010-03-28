@@ -64,6 +64,11 @@
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<configuration>
 						<source>1.5</source>
@@ -239,6 +244,13 @@
 			</dependency>
 
 			<dependency>
+				<groupId>xalan</groupId>
+				<artifactId>xalan</artifactId>
+				<version>${xalan.version}</version>
+			</dependency>
+
+
+			<dependency>
 				<groupId>org.apache.tiles</groupId>
 				<artifactId>tiles-jsp</artifactId>
 				<version>${tiles.version}</version>
@@ -337,6 +349,7 @@
 		<htmlunit.version>2.2</htmlunit.version>
 		<jwebunit.version>2.2</jwebunit.version>
 		<spring.version>3.0.1.RELEASE</spring.version>
+		<xalan.version>2.7.0</xalan.version>
 		<log4j.version>1.2.14</log4j.version>
 		<tiles.version>2.1.2</tiles.version>
 		<freemarker.version>2.3.16</freemarker.version>

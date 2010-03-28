@@ -57,16 +57,16 @@ public class SubjectBox {
 		return (InputElement) GQuery.$("input#enabled", baseElement).get(0);
 	}
 
-	private ButtonElement getCreateButton() {
-		return (ButtonElement) GQuery.$("button#create", baseElement).get(0);
+	private InputElement getCreateButton() {
+		return (InputElement) GQuery.$("input#create", baseElement).get(0);
 	}
 
-	private ButtonElement getSaveButton() {
-		return (ButtonElement) GQuery.$("button#save", baseElement).get(0);
+	private InputElement getSaveButton() {
+		return (InputElement) GQuery.$("input#save", baseElement).get(0);
 	}
 
-	private ButtonElement getCancelButton() {
-		return (ButtonElement) GQuery.$("button#cancel", baseElement).get(0);
+	private InputElement getCancelButton() {
+		return (InputElement) GQuery.$("input#cancel", baseElement).get(0);
 	}
 
 	private TableRowElement getButtonContainer() {

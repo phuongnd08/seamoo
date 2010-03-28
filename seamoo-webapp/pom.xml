@@ -47,6 +47,7 @@
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- 
@@ -106,6 +107,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
 		</dependency>
 
 		<dependency>
@@ -172,11 +178,11 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>rhino</groupId>
-			<artifactId>js</artifactId>
-			<version>1.7R2</version>
-		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>rhino</groupId>-->
+		<!--			<artifactId>js</artifactId>-->
+		<!--			<version>1.7R2</version>-->
+		<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.jbehave</groupId>
@@ -224,8 +230,8 @@
 					<execution>
 						<goals>
 							<goal>compile</goal>
-<!--							<goal>generateAsync</goal>-->
-<!--							<goal>test</goal>-->
+							<!--							<goal>generateAsync</goal>-->
+							<!--							<goal>test</goal>-->
 						</goals>
 					</execution>
 				</executions>
@@ -389,6 +395,7 @@
 		<!-- port defaults to 8888 -->
 		<gae.port>8888</gae.port>
 		<gae.testPort>8888</gae.testPort>
+		<gae.debugPort>8000</gae.debugPort>
 
 		<!--
 			Produce detailed JS during GWT compilation for development
@@ -441,6 +448,42 @@
 				-->
 				<gwt.style>OBFUSCATED</gwt.style>
 			</properties>
+		</profile>
+		<profile>
+			<id>ant-target</id>
+			<build>
+				<defaultGoal>antrun:run</defaultGoal>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+
+						<configuration>
+							<tasks>
+								<property name="gae.port" value="${gae.port}" />
+								<property name="gae.debugPort" value="${gae.debugPort}" />
+								<property name="webapp.dir"
+									value="${project.build.directory}/${project.build.finalName}" />
+
+								<ant antfile="${basedir}/build.xml" inheritRefs="true"
+									inheritAll="true">
+									<target name="${target}" />
+								</ant>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>ant-contrib</groupId>
+					<artifactId>ant-contrib</artifactId>
+					<version>1.0b2</version>
+				</dependency>
+			</dependencies>
 		</profile>
 	</profiles>
 </project>
