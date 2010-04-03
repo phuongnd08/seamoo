@@ -43,7 +43,7 @@ public class DemoController {
 			english.setName("English");
 			english
 					.setDescription("Thể hiện kĩ năng Anh ngữ của bạn về từ vựng, ngữ pháp và phát âm");
-			english.setAvatarUrl("/images/subjects/english.png");
+			english.setLogoUrl("/images/subjects/english.png");
 			english.setEnabled(true);
 		}
 
@@ -52,7 +52,7 @@ public class DemoController {
 			maths.setName("Toán học");
 			maths
 					.setDescription("Thể hiện sự hiểu biết cùng khả năng suy luận toán học của bạn");
-			maths.setAvatarUrl("/images/subjects/math.png");
+			maths.setLogoUrl("/images/subjects/math.png");
 			maths.setEnabled(true);
 		}
 
@@ -60,7 +60,7 @@ public class DemoController {
 		{
 			history.setName("Lịch sử");
 			history.setDescription("Thể hiện sự am tường lịch sử của bạn");
-			history.setAvatarUrl("/images/subjects/history.png");
+			history.setLogoUrl("/images/subjects/history.png");
 			history.setEnabled(false);
 		}
 

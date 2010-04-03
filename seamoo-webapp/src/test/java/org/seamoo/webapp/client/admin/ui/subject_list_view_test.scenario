@@ -1,0 +1,7 @@
+Given A SubjectListDisplay
+When createSubjectDisplay called
+Then A new SubjectView is instantiated
+When addSubjectDisplay called
+Then number of children is 1
+When removeSubjectDisplay called
+Then number of children is 0

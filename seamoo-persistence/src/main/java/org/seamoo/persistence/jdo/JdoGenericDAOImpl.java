@@ -44,16 +44,17 @@ public abstract class JdoGenericDAOImpl<TEntity, TKey> implements
 		return (List<TEntity>) query.execute();
 	}
 
-	public void persist(TEntity entity) {
+	public TEntity persist(TEntity entity) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		try {
 			pm.makePersistent(entity);
 		} finally {
 			pm.close();
 		}
+		return entity;
 	}
 
-	public void persist(TEntity[] entities) {
+	public TEntity[] persist(TEntity[] entities) {
 		// TODO Auto-generated method stub
 		PersistenceManager pm = pmf.getPersistenceManager();
 		try {
@@ -61,6 +62,16 @@ public abstract class JdoGenericDAOImpl<TEntity, TKey> implements
 		} finally {
 			pm.close();
 		}
+		return entities;
 
+	}
+
+	public void delete(TEntity entity) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		try {
+			pm.deletePersistent(entity);
+		} finally {
+			pm.close();
+		}
 	}
 }

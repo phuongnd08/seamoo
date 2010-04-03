@@ -14,7 +14,7 @@ public class Subject {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long autoId;
 	private String name;
-	private String avatarUrl;
+	private String logoUrl;
 	private String description;
 	private boolean enabled;
 	// @Temporal(TemporalType.TIMESTAMP)
@@ -29,7 +29,7 @@ public class Subject {
 			String description, boolean enabled) {
 		this.autoId = autoId;
 		this.name = name;
-		this.avatarUrl = avatarUrl;
+		this.logoUrl = avatarUrl;
 		this.description = description;
 		this.enabled = enabled;
 	}
@@ -42,12 +42,12 @@ public class Subject {
 		return name;
 	}
 
-	public void setAvatarUrl(String avatarUrl) {
-		this.avatarUrl = avatarUrl;
+	public void setLogoUrl(String logoUrl) {
+		this.logoUrl = logoUrl;
 	}
 
-	public String getAvatarUrl() {
-		return avatarUrl;
+	public String getLogoUrl() {
+		return logoUrl;
 	}
 
 	public void setDescription(String description) {
@@ -88,5 +88,11 @@ public class Subject {
 
 	public Date getAddedTime() {
 		return addedTime;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return String.format("@Subject{%s}", name);
 	}
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_j3_poDxxEd-5OtKaS8KrOw" name="subject-manager">
+  <elementImport xmi:id="_kAtgwDxxEd-5OtKaS8KrOw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_kBUkwDxxEd-5OtKaS8KrOw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_kBVL0DxxEd-5OtKaS8KrOw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_kBVL0TxxEd-5OtKaS8KrOw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_p4oWYDxxEd-5OtKaS8KrOw" name="SubjectView" clientDependency="_IPqUUDx0Ed-5OtKaS8KrOw">
+    <ownedAttribute xmi:id="_0I1lcDxyEd-5OtKaS8KrOw" name="subjectCommand" aggregation="composite"/>
+    <interfaceRealization xmi:id="_IPqUUDx0Ed-5OtKaS8KrOw" supplier="__75HUDxzEd-5OtKaS8KrOw" client="_p4oWYDxxEd-5OtKaS8KrOw" contract="__75HUDxzEd-5OtKaS8KrOw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_s_gAsDxxEd-5OtKaS8KrOw" name="SubjectListPresenter">
+    <ownedOperation xmi:id="_LY3L0DxyEd-5OtKaS8KrOw" name="loadSubjects">
+      <ownedParameter xmi:id="_M33gcDxyEd-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_NBOQwDxyEd-5OtKaS8KrOw" name="removeSubject">
+      <ownedParameter xmi:id="_OImIgDxyEd-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_OOWyQDxyEd-5OtKaS8KrOw" name="createSubject">
+      <ownedParameter xmi:id="_PqjqgDxyEd-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_QQg3QDxyEd-5OtKaS8KrOw" name="updateSubject">
+      <ownedParameter xmi:id="_X3ugQDxyEd-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_eT-K8DxyEd-5OtKaS8KrOw" name="SubjectListView" clientDependency="_4x7lkDx0Ed-5OtKaS8KrOw">
+    <interfaceRealization xmi:id="_4x7lkDx0Ed-5OtKaS8KrOw" supplier="_e_jzsDx0Ed-5OtKaS8KrOw" client="_eT-K8DxyEd-5OtKaS8KrOw" contract="_e_jzsDx0Ed-5OtKaS8KrOw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_35HZIDxyEd-5OtKaS8KrOw" name="SubjectManipulationCommand">
+    <ownedLiteral xmi:id="_-DyLoDxyEd-5OtKaS8KrOw" name="EDIT"/>
+    <ownedLiteral xmi:id="_-rSQgDxyEd-5OtKaS8KrOw" name="UPDATE"/>
+    <ownedLiteral xmi:id="__Vm_4DxyEd-5OtKaS8KrOw" name="CREATE"/>
+    <ownedLiteral xmi:id="_APDJUDxzEd-5OtKaS8KrOw" name="DELETE"/>
+    <ownedLiteral xmi:id="_A5Qj8DxzEd-5OtKaS8KrOw" name="CANCEL_EDIT"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="__75HUDxzEd-5OtKaS8KrOw" name="SubjectPresenter.SubjectDisplay">
+    <ownedOperation xmi:id="_D6aLUDx0Ed-5OtKaS8KrOw" name="setSubject">
+      <ownedParameter xmi:id="_EeHVUDx0Ed-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_En9N0Dx0Ed-5OtKaS8KrOw" name="getSubject">
+      <ownedParameter xmi:id="_FB6l8Dx0Ed-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_FHBvcDx0Ed-5OtKaS8KrOw" name="setMode">
+      <ownedParameter xmi:id="_FdSTUDx0Ed-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_LTJTcDx0Ed-5OtKaS8KrOw" name="addEventListener">
+      <ownedParameter xmi:id="_OPyqwDx0Ed-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_UTzboDx0Ed-5OtKaS8KrOw" name="SubjectPresenter.SubjectDisplayEventListener">
+    <ownedOperation xmi:id="_XwMqADx0Ed-5OtKaS8KrOw" name="edit">
+      <ownedParameter xmi:id="_anXrcDx0Ed-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_ZKT3kDx0Ed-5OtKaS8KrOw" name="create">
+      <ownedParameter xmi:id="_aQhRsDx0Ed-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_bH2iUDx0Ed-5OtKaS8KrOw" name="delete">
+      <ownedParameter xmi:id="_bd9VMDx0Ed-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_bjCCcDx0Ed-5OtKaS8KrOw" name="cancelEdit">
+      <ownedParameter xmi:id="_cQiosDx0Ed-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_ctecUDx0Ed-5OtKaS8KrOw" name="update">
+      <ownedParameter xmi:id="_dBtm8Dx0Ed-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_e_jzsDx0Ed-5OtKaS8KrOw" name="SubjectPresenter.SubjectListDisplay">
+    <ownedOperation xmi:id="_mzfDADx0Ed-5OtKaS8KrOw" name="addSubjectDisplay">
+      <ownedParameter xmi:id="_p_kkgDx0Ed-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_qFCTUDx0Ed-5OtKaS8KrOw" name="removeSubjectDisplay">
+      <ownedParameter xmi:id="_rBDPoDx0Ed-5OtKaS8KrOw" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+</uml:Package>

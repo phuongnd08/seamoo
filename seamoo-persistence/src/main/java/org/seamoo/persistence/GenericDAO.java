@@ -5,7 +5,7 @@ import java.util.List;
 public interface GenericDAO<TEntity, TKey> {
 	public List<TEntity> getAll();
 	public TEntity findById(TKey key);
-	public void persist(TEntity entity);
-	public void persist(TEntity[] entities);
-	//public void persist(List<Entity> entities);
+	public TEntity persist(TEntity entity);
+	public TEntity[] persist(TEntity[] entities);
+	public void delete(TEntity entity);
 }

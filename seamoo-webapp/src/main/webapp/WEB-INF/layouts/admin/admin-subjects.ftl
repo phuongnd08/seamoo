@@ -19,10 +19,10 @@
 								<a href="#" id="preview" class="preview-btn"></a>		
 							</div>
 						</div>
-						<p id="description_label" >
+						<p id="description" >
 						[#nested/] 
 						</p>
-						<div id="enabled_label">[#if enabled]Enabled[#else]Disabled[/#if]</div>
+						<div><label id="enabled">[#if enabled]Enabled[#else]Disabled[/#if]</label></div>
 					</div>
 					<div style='display: [#if mode="view"]none[/#if]'>
 						<div><label for="name">Name</label></div>
@@ -48,7 +48,6 @@
 <div id="loading-message">
 	Loading...
 </div>
-[@subject name="English" link="#" img="/images/subjects/english.png" mode="view" enabled=true]Thể hiện vốn từ và khả năng nghe hiểu Anh ngữ của bạn[/@subject]
-[@subject name="Toán học" link="#" img="/images/subjects/math.png" mode="view" enabled=true]Thể hiện hiểu biết và khả năng tư duy toán học của bạn[/@subject]
-[@subject name="French" link="#" img="/images/subjects/english.png" mode="view"]Thể hiện vốn từ và khả năng nghe hiểu Pháp ngữ của bạn[/@subject]
-[@subject name="Russia" link="#" img="/images/subjects/english.png" mode="edit"]Thể hiện vốn từ và khả năng nghe hiểu Nga ngữ của bạn[/@subject]
+
+<div id="subject-list">
+</div>

@@ -1,0 +1,10 @@
+Given Site is in bootstrap mode
+And I'm in site settings page
+Then current mode indicator is "Khai trương"
+And current switch button is "Chuyển sang chế độ Bình thường"
+When I click on switch button
+Then current mode indicator is "Bình thường"
+And current switch button is "Chuyển sang chế độ Khai trương"
+When I click on switch button
+Then current mode indicator is "Khai trương"
+And current switch button is "Chuyển sang chế độ Bình thường"

@@ -1,0 +1,11 @@
+*Client*
+*For uiBinder*
+	classname + LogicalName: labelEnabled, paraDescription, textareaComment
+	for short tag, like a, or p:
+		a->anchor
+		p->para 
+
+*For MVP Model*
+	Presenter: Subject+Presenter
+		Subject+Display
+	View: Subject+View

@@ -1,3 +1,0 @@
-Given I'm in manage subject page
-When I select the first subject-panel
-Then name label is "English" 

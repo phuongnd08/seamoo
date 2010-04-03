@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- 
+ -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:gwt="urn:import:com.google.gwt.user.client.ui">
+	<gwt:HTMLPanel ui:field="mainPanel">
+	</gwt:HTMLPanel>
+</ui:UiBinder>

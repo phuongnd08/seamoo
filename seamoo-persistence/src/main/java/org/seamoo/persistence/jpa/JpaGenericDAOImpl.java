@@ -35,15 +35,22 @@ public abstract class JpaGenericDAOImpl<TEntity, TKey> implements
 		return null;
 	}
 
-	public void persist(TEntity entity) {
+	public TEntity persist(TEntity entity) {
 		EntityManager em = emf.createEntityManager();
 		em.persist(entity);
+		return entity;
 	}
 
-	public void persist(TEntity[] entities) {
+	public TEntity[] persist(TEntity[] entities) {
 		// TODO Auto-generated method stub
 		EntityManager em = emf.createEntityManager();
 		for (TEntity e : entities)
 			em.persist(e);
+		return entities;
+	}
+
+	public void delete(TEntity entity) {
+		EntityManager em = emf.createEntityManager();
+		em.remove(entity);
 	}
 }

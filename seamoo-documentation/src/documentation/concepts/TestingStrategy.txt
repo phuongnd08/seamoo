@@ -1,0 +1,24 @@
+In order to test the whole app:
+All client side code, server side code, persistent code will have their own unit tests. Dynamic mock will be used to speed up tests.
+During such unit tests, no external modules will be used (Speed reason).
+
+The whole website will have integration tests to tests for simplest use cases:
+	* A website is loaded successfully.
+	* Components is wired successfully without conflict
+These principle lead to:
+	For a feature involve GWT, like manipulating a subject:
+		A test for GWT presenter
+		2 test for GWT Async (if applicable) 
+			Unit tests for logic (mostly mixin???) 
+			Proxy test using SyncProxy
+				To make sure client can access GWT RPC as intended
+		
+			To be sure Dao & other business logics is successfully implemented
+		A test for page initialization (HTML Unit).
+			To be sure that no exception is thrown on the page during normal use.
+			To be sure that the GWT is properly wired: For example, we may want to assert that something happen when user click one button on the page.
+		A test for each GWT display associated with presenter: Hand testing (click button and observe correctness of behavior)
+
+	For a feature doesnot involve GWT
+		An request-test to make sure no exception is thrown (during integration-test phase)
+		A test for controller (using IoC and dynamic Mock)  

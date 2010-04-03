@@ -8,6 +8,7 @@
 /*/war/WEB-INF/lib/
 /*/war/WEB-INF/classes/
 /*/war/WEB-INF/appengine-generated/
+/*/bin/
 seamoo-*/target/
 .classpath
 .project

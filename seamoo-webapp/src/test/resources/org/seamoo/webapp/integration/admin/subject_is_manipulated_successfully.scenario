@@ -1,0 +1,6 @@
+Given I'm in manage subject page
+When Loading Message is removed
+And I select the first subject-panel
+Then Button container is invisible
+When I click on edit button
+Then Button container is visible

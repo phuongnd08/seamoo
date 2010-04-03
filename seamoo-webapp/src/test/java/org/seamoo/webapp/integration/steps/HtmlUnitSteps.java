@@ -4,6 +4,8 @@ import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeoutException;
+import java.util.logging.Logger;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -60,5 +62,23 @@ public class HtmlUnitSteps {
 						.getParentNode());
 		} else
 			return false;
+	}
+
+	protected final static int WAIT_PERIOD = 100;
+
+	protected static void waitForPageLoad(HtmlPage page,
+			HtmlUnitChecker checker, int maxMilliseconds) throws InterruptedException, TimeoutException {
+		int waitTime = 0;
+		while (waitTime < maxMilliseconds) {
+			if (checker.isSatisfied()) {
+				return;
+			}
+			synchronized (page) {
+				Logger.getLogger(HtmlUnitSteps.class.getName()).info("Wait");
+				page.wait(WAIT_PERIOD);
+			}
+			waitTime += WAIT_PERIOD;
+		}
+		throw new TimeoutException("Cannot wait for page load");
 	}
 }

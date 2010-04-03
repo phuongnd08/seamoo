@@ -4,7 +4,6 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="org.seamoo.themes.pink.Pink" />
 	<inherits name="org.seamoo.Models"/>
-	<inherits name="com.google.gwt.query.Query"/>
 	<source path="admin" />
-	<entry-point class="org.seamoo.webapp.client.admin.SubjectsManager" />
+	<entry-point class="org.seamoo.webapp.client.admin.SubjectListPresenter" />
 </module>

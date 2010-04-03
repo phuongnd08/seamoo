@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- 
+ -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:gwt="urn:import:com.google.gwt.user.client.ui">
+	<gwt:HTMLPanel>
+		<div class="option-box">
+			<form>
+				<gwt:Hidden ui:field="hiddenAutoId"></gwt:Hidden>
+				<table class="fw">
+					<tr>
+						<td class="logo-cell tac">
+							<gwt:Image ui:field="imgLogo" width="96" height="64"></gwt:Image>
+							<gwt:Button ui:field="buttonSelectLogo">Đổi ảnh</gwt:Button>
+						</td>
+						<td>
+							<gwt:HTMLPanel ui:field="divView">
+								<div>
+									<gwt:Anchor ui:field="anchorName">${name}</gwt:Anchor>
+									<div class="fr">
+										<gwt:Anchor href="#" ui:field="buttonEdit"
+											styleName="edit-btn"></gwt:Anchor>
+										<gwt:Anchor href="#" ui:field="buttonRemove"
+											styleName="remove-btn"></gwt:Anchor>
+										<gwt:Anchor href="#" ui:field="buttonPreview"
+											styleName="preview-btn"></gwt:Anchor>
+									</div>
+								</div>
+								<gwt:Label ui:field="labelDescription"></gwt:Label>
+								<div>
+									<gwt:Label ui:field="labelEnabled"><!-- Enabled/Disabled -->
+									</gwt:Label>
+								</div>
+							</gwt:HTMLPanel>
+							<gwt:HTMLPanel ui:field="divEdit">
+								<form action="#">
+									<div>
+										<label for="name">Name</label>
+									</div>
+									<div>
+										<gwt:TextBox ui:field="textboxName" name="name"
+											visibleLength="25"></gwt:TextBox>
+										<div>
+											<label for="description">Description</label>
+										</div>
+										<p>
+											<gwt:TextArea ui:field="textareaDescription"></gwt:TextArea>
+										</p>
+										<div>
+											<gwt:CheckBox ui:field="checkboxEnabled">Enabled</gwt:CheckBox>
+										</div>
+									</div>
+								</form>
+							</gwt:HTMLPanel>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="tac">
+							<gwt:HTMLPanel ui:field="buttonContainer">
+								<gwt:Button ui:field="buttonCreate">Create</gwt:Button>
+								<gwt:Button ui:field="buttonSave">Save</gwt:Button>
+								<gwt:Button ui:field="buttonCancel">Cancel</gwt:Button>
+							</gwt:HTMLPanel>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</gwt:HTMLPanel>
+</ui:UiBinder>
