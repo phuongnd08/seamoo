@@ -32,6 +32,7 @@ public class SubjectListPresenterSteps {
 	SubjectListDisplay subjectListDisplay;
 	SubjectDisplayEventListener[] subjectDisplayEventListeners;
 	SubjectDisplay[] subjectDisplays;
+	String[] subjectDisplayLogoUrls;
 	SubjectDisplayMode[] subjectDisplayModes;
 	Subject[] givenSubjects;
 	Subject[] assignedSubjects;
@@ -69,13 +70,13 @@ public class SubjectListPresenterSteps {
 				callback.onSuccess(subject);
 				return null;
 			}
-		}).when(subjectServiceAsync).persist(any(),
-				(AsyncCallback<Object>) any());
+		}).when(subjectServiceAsync).persist(any(), (AsyncCallback<Object>) any());
 	}
 
 	@Given("We have $number SubjectDisplay")
 	public void initSubjectDisplays(int number) {
 		subjectDisplays = new SubjectDisplay[number];
+		subjectDisplayLogoUrls = new String[number];
 		subjectDisplayEventListeners = new SubjectDisplayEventListener[number];
 		subjectDisplayModes = new SubjectDisplayMode[number];
 		assignedSubjects = new Subject[number];
@@ -90,23 +91,19 @@ public class SubjectListPresenterSteps {
 		subjectListPresenter = new SubjectListPresenter();
 	}
 
-	private void mockAddListenerAndSetter(SubjectDisplay subjectDisplay,
-			final int i) {
+	private void mockAddListenerAndSetter(SubjectDisplay subjectDisplay, final int i) {
 		// store event listener
 		doAnswer(new Answer() {
 			public Object answer(InvocationOnMock invocation) {
-				subjectDisplayEventListeners[i] = (SubjectDisplayEventListener) invocation
-						.getArguments()[0];
+				subjectDisplayEventListeners[i] = (SubjectDisplayEventListener) invocation.getArguments()[0];
 				return null;
 			}
-		}).when(subjectDisplay).addEventListener(
-				(SubjectDisplayEventListener) any());
+		}).when(subjectDisplay).addEventListener((SubjectDisplayEventListener) any());
 
 		// response to setMode
 		doAnswer(new Answer() {
 			public Object answer(InvocationOnMock invocation) {
-				subjectDisplayModes[i] = (SubjectDisplayMode) invocation
-						.getArguments()[0];
+				subjectDisplayModes[i] = (SubjectDisplayMode) invocation.getArguments()[0];
 				return null;
 			}
 		}).when(subjectDisplay).setMode((SubjectDisplayMode) any());
@@ -118,14 +115,23 @@ public class SubjectListPresenterSteps {
 				return null;
 			}
 		}).when(subjectDisplay).setSubject((Subject) any());
+
+		// response to setLogoUrl
+
+		doAnswer(new Answer() {
+			public Object answer(InvocationOnMock invocation) {
+				subjectDisplayLogoUrls[i] = (String) invocation.getArguments()[0];
+				return null;
+			}
+		}).when(subjectDisplay).setLogoUrl(anyString());
+
 	}
 
 	@Given("We have a SubjectListDisplay")
 	public void initSubjectListDisplay() {
 		subjectListDisplay = mock(SubjectListDisplay.class);
 		{
-			OngoingStubbing<SubjectListPresenter.SubjectDisplay> mock = when(subjectListDisplay
-					.createSubjectDisplay());
+			OngoingStubbing<SubjectListPresenter.SubjectDisplay> mock = when(subjectListDisplay.createSubjectDisplay());
 			for (int i = 0; i < subjectDisplays.length; i++)
 				mock = mock.thenReturn(subjectDisplays[i]);
 		}
@@ -134,8 +140,7 @@ public class SubjectListPresenterSteps {
 
 	@When("SubjectListPresenter initialize")
 	public void loadSubjectListPresenter() {
-		subjectListPresenter
-				.initialize(subjectListDisplay, subjectServiceAsync);
+		subjectListPresenter.initialize(subjectListDisplay, subjectServiceAsync);
 	}
 
 	@Then("SubjectServiceAsync $verb Subject")
@@ -150,8 +155,7 @@ public class SubjectListPresenterSteps {
 		if (verb.equals("create")) {
 			verify(subjectListDisplay, times(number)).createSubjectDisplay();
 		} else if (verb.equals("add")) {
-			verify(subjectListDisplay, times(number)).addSubjectDisplay(
-					(SubjectDisplay) any());
+			verify(subjectListDisplay, times(number)).addSubjectDisplay((SubjectDisplay) any());
 		}
 	}
 
@@ -182,15 +186,16 @@ public class SubjectListPresenterSteps {
 			l.cancelEdit(d);
 		else if (event.equals("delete"))
 			l.delete(d, s);
-		else
+		else if (event.equals("select-logo")) {
+			l.selectLogo(d, null);
+		} else
 			throw new RuntimeException("Event not supported");
 	}
 
 	@Given("Confirm dialog will return $returnValue")
 	public void setupConfirmDialog(String returnValue) {
 		PowerMockito.mockStatic(Window.class);
-		when(Window.confirm((String) any())).thenReturn(
-				Converter.toBoolean(returnValue));
+		when(Window.confirm((String) any())).thenReturn(Converter.toBoolean(returnValue));
 	}
 
 	@Then("Confirm dialog will be shown")
@@ -209,5 +214,26 @@ public class SubjectListPresenterSteps {
 		// 1-based index to
 		// 0-based index
 		verify(subjectDisplays[pos], times(t)).setSubject((Subject) any());
+	}
+
+	@Given("Input dialog will return \"$returnValue\"")
+	public void setupInputDialog(String returnValue) {
+		PowerMockito.mockStatic(Window.class);
+		when(Window.prompt(anyString(), anyString())).thenReturn(returnValue.equals("null") ? null : returnValue);
+	}
+
+	@Then("Input dialog will be shown")
+	public void assertInputDialogShown() {
+		// This is how to verify a call to static method the PowerMock way (how
+		// lame it is)
+		// http://code.google.com/p/powermock/wiki/MockitoUsage13
+		PowerMockito.verifyStatic();
+		Window.prompt(anyString(), anyString());
+	}
+
+	@Then("logoUrl of $position SubjectDisplay is \"$url\"")
+	public void assertLogoUrl(String position, String url) {
+		int pos = Converter.toInt(position.charAt(0)) - 1;
+		assertEquals(subjectDisplayLogoUrls[pos], url);
 	}
 }

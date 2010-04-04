@@ -8,6 +8,7 @@ The whole website will have integration tests to tests for simplest use cases:
 These principle lead to:
 	For a feature involve GWT, like manipulating a subject:
 		A test for GWT presenter
+		A test for each GWT display associated with presenter
 		2 test for GWT Async (if applicable) 
 			Unit tests for logic (mostly mixin???) 
 			Proxy test using SyncProxy
@@ -17,7 +18,6 @@ These principle lead to:
 		A test for page initialization (HTML Unit).
 			To be sure that no exception is thrown on the page during normal use.
 			To be sure that the GWT is properly wired: For example, we may want to assert that something happen when user click one button on the page.
-		A test for each GWT display associated with presenter: Hand testing (click button and observe correctness of behavior)
 
 	For a feature doesnot involve GWT
 		An request-test to make sure no exception is thrown (during integration-test phase)

@@ -37,7 +37,7 @@ public class SubjectViewSteps {
 			@Override
 			public Widget createAndBindUi(SubjectView subjectView) {
 				// TODO Auto-generated method stub
-				return GwtUiMocker.mockUiField(subjectView);
+				return GwtUiMocker.mockUiField(subjectView, Widget.class);
 			}
 		});
 		listener = mock(SubjectDisplayEventListener.class);
@@ -150,5 +150,10 @@ public class SubjectViewSteps {
 		else
 			throw new RuntimeException("Unsupported field Subject." + field);
 		assertEquals(v.toString(), value);
+	}
+	
+	@When("setLogoUrl is invoked with \"$url\"")
+	public void setLogoUrl(String url){
+		subjectView.setLogoUrl(url);
 	}
 }

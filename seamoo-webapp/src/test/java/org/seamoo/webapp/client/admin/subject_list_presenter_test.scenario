@@ -34,5 +34,13 @@ And SubjectListDisplay remove 1 SubjectDisplay
 Given Confirm dialog will return false
 When 2nd SubjectDisplay delete event is triggered
 Then Confirm dialog will be shown
+!-- For changing logo of subject
+Given Input dialog will return "images/replaced.png"
+When 1st SubjectDisplay select-logo event is triggered
+Then Input dialog will be shown
+Then logoUrl of 1st SubjectDisplay is "images/replaced.png"
+Given Input dialog will return "null"
+When 1st SubjectDisplay select-logo event is triggered
+Then logoUrl of 1st SubjectDisplay is "images/replaced.png"
 !-- SubjectServiceAsync does not delete any more Subject
 Then SubjectServiceAsync delete 1 Subject

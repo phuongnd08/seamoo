@@ -23,7 +23,7 @@ public class GwtUiMocker {
 	 * Mock field of object annotated with UiField and return a Widget that can
 	 * be used for object (probably another Widget) to wrap around
 	 */
-	public static Widget mockUiField(Object control) {
+	public static <T> T mockUiField(Object control, Class<T> clazz) {
 		for (Field field : control.getClass().getDeclaredFields()) {
 			if (field.getAnnotation(UiField.class) != null) {
 				try {
@@ -36,7 +36,7 @@ public class GwtUiMocker {
 				}
 			}
 		}
-		return mock(Widget.class);
+		return mock(clazz);
 	}
 
 	public static <T> T getMockedWidget(Class<T> clazz) {

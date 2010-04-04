@@ -32,6 +32,8 @@ public class SubjectListPresenter implements EntryPoint {
 			void create(SubjectDisplay display, Subject subject);
 
 			void delete(SubjectDisplay display, Subject subject);
+
+			void selectLogo(SubjectDisplay display, String logoUrl);
 		}
 
 		Subject getSubject();
@@ -39,6 +41,10 @@ public class SubjectListPresenter implements EntryPoint {
 		void setSubject(Subject subject);
 
 		void setMode(SubjectDisplayMode mode);
+
+		void setLogoUrl(String url);
+
+		String getLogoUrl();
 
 		void addEventListener(SubjectDisplayEventListener listener);
 
@@ -61,8 +67,7 @@ public class SubjectListPresenter implements EntryPoint {
 		DOM.getElementById("loading-message").removeFromParent();
 		RootPanel rootPanel = RootPanel.get("subject-list");
 		SubjectListDisplay view = new SubjectListView();
-		SubjectServiceAsync subjectServiceAsync = SubjectServiceAsync.Util
-				.getInstance();
+		SubjectServiceAsync subjectServiceAsync = SubjectServiceAsync.Util.getInstance();
 		rootPanel.add((Widget) view);
 		initialize(view, subjectServiceAsync);
 	}
@@ -71,8 +76,7 @@ public class SubjectListPresenter implements EntryPoint {
 	private SubjectServiceAsync subjectServiceAsync;
 	private SubjectListDisplay subjectListDisplay;
 
-	public void initialize(final SubjectListDisplay subjectListDisplay,
-			final SubjectServiceAsync subjectServiceAsync) {
+	public void initialize(final SubjectListDisplay subjectListDisplay, final SubjectServiceAsync subjectServiceAsync) {
 
 		this.subjectListDisplay = subjectListDisplay;
 		this.subjectServiceAsync = subjectServiceAsync;
@@ -99,61 +103,50 @@ public class SubjectListPresenter implements EntryPoint {
 					}
 
 					@Override
-					public void delete(final SubjectDisplay display,
-							Subject subject) {
+					public void delete(final SubjectDisplay display, Subject subject) {
 						// TODO Auto-generated method stub
-						if (Window.confirm(String.format("Delete subject %s",
-								subject.getName()))) {
-							subjectServiceAsync.delete(subject,
-									new AsyncCallback<Void>() {
+						if (Window.confirm(String.format("Delete subject %s", subject.getName()))) {
+							subjectServiceAsync.delete(subject, new AsyncCallback<Void>() {
 
-										@Override
-										public void onSuccess(Void arg0) {
-											// TODO Auto-generated method stub
-											subjectListDisplay
-													.removeSubjectDisplay(display);
-										}
+								@Override
+								public void onSuccess(Void arg0) {
+									// TODO Auto-generated method stub
+									subjectListDisplay.removeSubjectDisplay(display);
+								}
 
-										@Override
-										public void onFailure(
-												Throwable throwable) {
-											// TODO Auto-generated method stub
-											Window.alert(throwable.toString());
-										}
-									});
+								@Override
+								public void onFailure(Throwable throwable) {
+									// TODO Auto-generated method stub
+									Window.alert(throwable.toString());
+								}
+							});
 						}
 					}
 
 					@Override
-					public void create(final SubjectDisplay display,
-							Subject subject) {
+					public void create(final SubjectDisplay display, Subject subject) {
 						// TODO Auto-generated method stub
 						// subjectServiceAsync.persist
-						subjectServiceAsync.persist(subject,
-								new AsyncCallback<Object>() {
+						subjectServiceAsync.persist(subject, new AsyncCallback<Object>() {
 
-									@Override
-									public void onSuccess(Object arg0) {
-										// TODO Auto-generated method stub
-										display.setSubject((Subject) arg0);
-										display
-												.setMode(SubjectDisplayMode.VIEW);
-										// create new SubjectDisplay
-										SubjectDisplay newDisplay = subjectListDisplay
-												.createSubjectDisplay();
-										newDisplay.setSubject(new Subject());
-										newDisplay
-												.addEventListener(presenter.listener);
-										newDisplay
-												.setMode(SubjectDisplayMode.CREATE);
-									}
+							@Override
+							public void onSuccess(Object arg0) {
+								// TODO Auto-generated method stub
+								display.setSubject((Subject) arg0);
+								display.setMode(SubjectDisplayMode.VIEW);
+								// create new SubjectDisplay
+								SubjectDisplay newDisplay = subjectListDisplay.createSubjectDisplay();
+								newDisplay.setSubject(new Subject());
+								newDisplay.addEventListener(presenter.listener);
+								newDisplay.setMode(SubjectDisplayMode.CREATE);
+							}
 
-									@Override
-									public void onFailure(Throwable throwable) {
-										// TODO Auto-generated method stub
-										Window.alert(throwable.toString());
-									}
-								});
+							@Override
+							public void onFailure(Throwable throwable) {
+								// TODO Auto-generated method stub
+								Window.alert(throwable.toString());
+							}
+						});
 
 					}
 
@@ -163,19 +156,26 @@ public class SubjectListPresenter implements EntryPoint {
 						display.setMode(SubjectDisplayMode.VIEW);
 
 					}
+
+					@Override
+					public void selectLogo(SubjectDisplay display, String logoUrl) {
+						// TODO Auto-generated method stub
+						String newLogoUrl = Window.prompt("Input the new logo image url", logoUrl);
+						if (newLogoUrl != null) {
+							display.setLogoUrl(newLogoUrl);
+						}
+					}
 				};
 
 				// TODO Auto-generated method stub
 				for (int i = 0; i < subjects.size(); i++) {
-					SubjectDisplay subjectDisplay = subjectListDisplay
-							.createSubjectDisplay();
+					SubjectDisplay subjectDisplay = subjectListDisplay.createSubjectDisplay();
 					subjectDisplay.setSubject((Subject) subjects.get(i));
 					subjectDisplay.addEventListener(listener);
 					subjectDisplay.setMode(SubjectDisplayMode.VIEW);
 					subjectListDisplay.addSubjectDisplay(subjectDisplay);
 				}
-				SubjectDisplay newSubjectDisplay = subjectListDisplay
-						.createSubjectDisplay();
+				SubjectDisplay newSubjectDisplay = subjectListDisplay.createSubjectDisplay();
 				newSubjectDisplay.setSubject(new Subject());
 				newSubjectDisplay.addEventListener(listener);
 				newSubjectDisplay.setMode(SubjectDisplayMode.CREATE);

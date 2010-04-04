@@ -1,7 +1,7 @@
-Given A SubjectListDisplay
-When createSubjectDisplay called
+Given A SubjectListView
+When createSubjectDisplay is called
 Then A new SubjectView is instantiated
-When addSubjectDisplay called
-Then number of children is 1
-When removeSubjectDisplay called
-Then number of children is 0
+When addSubjectDisplay is called
+Then mainPanel.add is called
+When removeSubjectDisplay is called
+Then mainPanel.remove is called

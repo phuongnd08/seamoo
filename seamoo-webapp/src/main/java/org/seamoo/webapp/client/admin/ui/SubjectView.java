@@ -174,4 +174,16 @@ public class SubjectView extends Composite implements SubjectDisplay {
 		// TODO Auto-generated method stub
 		listeners.add(listener);
 	}
+
+	@Override
+	public String getLogoUrl() {
+		// TODO Auto-generated method stub
+		return imgLogo.getUrl();
+	}
+
+	@Override
+	public void setLogoUrl(String url) {
+		// TODO Auto-generated method stub
+		imgLogo.setUrl(url);
+	}
 }
