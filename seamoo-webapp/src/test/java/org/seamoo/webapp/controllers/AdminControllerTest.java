@@ -1,41 +1,33 @@
 package org.seamoo.webapp.controllers;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Map;
 
-import mockit.Mocked;
-import mockit.NonStrictExpectations;
-import mockit.integration.testng.JMockitTestNG;
-
-import org.seamoo.persistence.SiteSettingDAO;
+import org.seamoo.persistence.daos.SiteSettingDao;
 import org.seamoo.webapp.Site;
 import org.springframework.web.servlet.ModelAndView;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class AdminControllerTest extends JMockitTestNG {
-	@Mocked
-	SiteSettingDAO siteSettingDAO;
+public class AdminControllerTest {
+	SiteSettingDao siteSettingDAO;
 
 	AdminController adminController;
 
 	@BeforeMethod
 	public void setUp() {
 		// TODO Auto-generated method stub
+		siteSettingDAO = mock(SiteSettingDao.class);
 		adminController = new AdminController();
-		adminController.siteSettingDAO = siteSettingDAO;
+		adminController.siteSettingDao = siteSettingDAO;
 
 	}
 
 	@Test
 	public void manageSiteSettingShouldReturnCurrentOperatingMode() {
-		new NonStrictExpectations() {
-			{
-				siteSettingDAO.getSetting("operatingMode");
-				result = "normal";
-			}
-		};
+		when(siteSettingDAO.getSetting("operatingMode")).thenReturn("normal");
 		siteSettingDAO.assignSetting("operatingMode", "normal");
 		ModelAndView mav = adminController.manageSiteSettings();
 		Map<String, Object> model = mav.getModel();
@@ -44,12 +36,7 @@ public class AdminControllerTest extends JMockitTestNG {
 
 	@Test
 	public void manageSiteSettingShouldReturnBootstrapModeByDefault() {
-		new NonStrictExpectations() {
-			{
-				siteSettingDAO.getSetting("operatingMode");
-				result = null;
-			}
-		};
+		when(siteSettingDAO.getSetting("operatingMode")).thenReturn(null);
 		ModelAndView mav = adminController.manageSiteSettings();
 		Map<String, Object> model = mav.getModel();
 		assertEquals(Site.OPERATING_MODE_BOOTSTRAP, model.get("operatingMode"));

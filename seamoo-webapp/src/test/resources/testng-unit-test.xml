@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="client-test" verbose="1">
+	<test name="GWT-Tests">
+		<classes>
+			<class name="org.seamoo.webapp.client.admin.SubjectListPresenterTest" />
+			<class name="org.seamoo.webapp.client.admin.ui.SubjectViewTest" />
+			<class name="org.seamoo.webapp.client.admin.ui.SubjectListViewTest" />
+		</classes>
+		<packages>
+			<package name="org.seamoo.webapp.controllers"></package>
+		</packages>
+	</test>
+</suite>

@@ -3,7 +3,11 @@
 <module rename-to="adminSubjects">
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="org.seamoo.themes.pink.Pink" />
-	<inherits name="org.seamoo.Models"/>
+	<inherits name="org.seamoo.Models" />
+	<inherits name="org.seamoo.persistence.Daos" />
 	<source path="admin" />
 	<entry-point class="org.seamoo.webapp.client.admin.SubjectListPresenter" />
+	<!-- Temporary only compile for firefox browser -->
+	<set-property name="user.agent" value="gecko1_8" />
+
 </module>

@@ -4,8 +4,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.seamoo.persistence.SiteSettingDAO;
-import org.seamoo.persistence.SubjectDAO;
+import org.seamoo.persistence.daos.SiteSettingDao;
+import org.seamoo.persistence.daos.SubjectDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -15,9 +15,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class AutowiredTest {
 	
 	@Autowired
-	SubjectDAO subjectDAO;
+	SubjectDao subjectDAO;
 	@Autowired
-	SiteSettingDAO siteSettingDAO;
+	SiteSettingDao siteSettingDAO;
 
 	@Test
 	public void subjectDAOShouldBeAutowired() {

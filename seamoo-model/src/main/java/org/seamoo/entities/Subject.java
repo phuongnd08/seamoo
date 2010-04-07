@@ -1,32 +1,41 @@
 package org.seamoo.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
-@Entity
-public class Subject {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+@PersistenceCapable(detachable = "false")
+public class Subject implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3398469031026720030L;
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long autoId;
+	@Persistent
 	private String name;
+	@Persistent
 	private String logoUrl;
+	@Persistent
 	private String description;
+	@Persistent
 	private boolean enabled;
-	// @Temporal(TemporalType.TIMESTAMP)
+	@Persistent
 	private Date addedTime;
+	@Persistent
 	private List<League> leagues;
 
 	public Subject() {
 
 	}
 
-	public Subject(Long autoId, String name, String avatarUrl,
-			String description, boolean enabled) {
+	public Subject(Long autoId, String name, String avatarUrl, String description, boolean enabled) {
 		this.autoId = autoId;
 		this.name = name;
 		this.logoUrl = avatarUrl;
@@ -93,6 +102,6 @@ public class Subject {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return String.format("@Subject{%s}", name);
+		return "@Subject{" + name + "}";
 	}
 }

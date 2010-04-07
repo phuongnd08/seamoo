@@ -11,26 +11,14 @@
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<!--
-		Enable componenet scanning so that annotated controller can be picked
+		Enable component scanning so that annotated controller can be picked
 		up and brought into use
 	-->
 	<context:component-scan base-package="org.seamoo.webapp.controllers" />
 
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
-
-	<!-- Configures Handler Interceptors -->
-	<!--	<mvc:interceptors>-->
-	<!--
-		Changes the locale when a 'locale' request parameter is sent; e.g.
-		/?locale=de
-	-->
-	<!--
-		<bean
-		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
-		/>
-	-->
-	<!--	</mvc:interceptors>-->
+	<!-- Enables plain Controllers -->
 
 	<!-- Saves a locale change using a cookie -->
 	<!--
@@ -82,11 +70,11 @@
 				<prop key="number_format">0.######</prop>
 			</props>
 		</property>
-<!--		<property name="freemarkerVariables">-->
-<!--			<map>-->
-<!--				<entry key="html_escape" value-ref="fmHtmlEscape" />-->
-<!--			</map>-->
-<!--		</property>-->
+		<!--		<property name="freemarkerVariables">-->
+		<!--			<map>-->
+		<!--				<entry key="html_escape" value-ref="fmHtmlEscape" />-->
+		<!--			</map>-->
+		<!--		</property>-->
 	</bean>
 
 

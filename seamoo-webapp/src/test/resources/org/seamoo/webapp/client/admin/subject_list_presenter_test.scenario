@@ -1,0 +1,49 @@
+Given We have 1 Subject
+Given We have a SubjectServiceAsync
+Given We have 3 SubjectDisplay
+Given We have a SubjectListDisplay
+Given We have a SubjectListPresenter
+!-- For initial stage of the page
+When SubjectListPresenter initialize
+Then SubjectServiceAsync load all Subject
+And SubjectListDisplay create 2 SubjectDisplay
+And SubjectListDisplay add 2 SubjectDisplay
+And 1st SubjectDisplay was assigned a Subject 1 time
+And 2nd SubjectDisplay was assigned a Subject 1 time
+And 1st SubjectDisplay will be switched to VIEW mode
+And 2nd SubjectDisplay will be switched to CREATE mode
+!-- For edit/update subject
+When 1st SubjectDisplay edit event is triggered
+Then 1st SubjectDisplay will be switched to EDIT mode
+When 1st SubjectDisplay edit-cancel event is triggered
+Then 1st SubjectDisplay will be switched to VIEW mode
+Given SubjectServiceAsync update will be successful
+When 1st SubjectDisplay edit event is triggered
+And 1st SubjectDisplay update event is triggered
+Then SubjectServiceAsync update Subject
+And 1st SubjectDisplay will be switched to VIEW mode
+!-- For create new subject
+When 2nd SubjectDisplay create event is triggered
+Then 2nd SubjectDisplay will be switched to VIEW mode
+And 2nd SubjectDisplay was assigned a Subject 2 times
+And SubjectListDisplay create 3 SubjectDisplay
+And 3rd SubjectDisplay will be switched to CREATE mode
+!-- For delete subject
+Given Confirm dialog will return true
+When 1st SubjectDisplay delete event is triggered
+Then Confirm dialog will be shown
+Then SubjectServiceAsync delete Subject 1 time
+And SubjectListDisplay remove 1 SubjectDisplay
+Given Confirm dialog will return false
+When 2nd SubjectDisplay delete event is triggered
+Then Confirm dialog will be shown
+!-- SubjectServiceAsync does not delete any more Subject
+Then SubjectServiceAsync delete Subject 1 time
+!-- For changing logo of subject
+Given Input dialog will return "images/replaced.png"
+When 1st SubjectDisplay select-logo event is triggered
+Then Input dialog will be shown
+Then logoUrl of 1st SubjectDisplay is "images/replaced.png"
+Given Input dialog will return "null"
+When 1st SubjectDisplay select-logo event is triggered
+Then logoUrl of 1st SubjectDisplay is "images/replaced.png"

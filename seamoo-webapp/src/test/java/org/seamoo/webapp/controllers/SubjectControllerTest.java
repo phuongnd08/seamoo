@@ -1,25 +1,21 @@
 package org.seamoo.webapp.controllers;
 
-import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import mockit.Mocked;
-import mockit.NonStrictExpectations;
-import mockit.integration.testng.JMockitTestNG;
-
 import org.seamoo.entities.Subject;
-import org.seamoo.persistence.SubjectDAO;
+import org.seamoo.persistence.daos.SubjectDao;
 import org.springframework.web.servlet.ModelAndView;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class SubjectControllerTest extends JMockitTestNG {
+public class SubjectControllerTest {
 
-	@Mocked
-	SubjectDAO subjectDAO;
+	SubjectDao subjectDAO;
 
 	Subject english, maths, literature;
 
@@ -40,18 +36,14 @@ public class SubjectControllerTest extends JMockitTestNG {
 		literature.setEnabled(false);
 
 		subjectController = new SubjectController();
-		subjectController.subjectDAO = subjectDAO;
+		subjectDAO = mock(SubjectDao.class);
+		subjectController.subjectDao = subjectDAO;
 
 	}
 
 	@Test
 	public void listSubjectReturnsEnabledSubject() {
-		new NonStrictExpectations() {
-			{
-				subjectDAO.getEnabledSubjects();
-				result = Arrays.asList(new Subject[] { english, maths });
-			}
-		};
+		when(subjectDAO.getEnabledSubjects()).thenReturn(Arrays.asList(new Subject[] { english, maths }));
 		ModelAndView mav = subjectController.list();
 		Map<String, Object> model = mav.getModel();
 		List<Subject> returnedSubjects = (List<Subject>) model.get("subjects");
@@ -60,12 +52,7 @@ public class SubjectControllerTest extends JMockitTestNG {
 
 	@Test
 	public void viewOfEnabledSubjectShouldReturnSubject() {
-		new NonStrictExpectations() {
-			{
-				subjectDAO.findById(1L);
-				result = english;
-			}
-		};
+		when(subjectDAO.findById(1L)).thenReturn(english);
 		ModelAndView mav = subjectController.view(1, "english");
 		Map<String, Object> model = mav.getModel();
 		Subject subject = (Subject) model.get("subject");

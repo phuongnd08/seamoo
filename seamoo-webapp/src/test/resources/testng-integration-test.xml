@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="client-test" verbose="1">
+	<test name="GWT-Tests">
+		<packages>
+			<package name="org.seamoo.webapp.integration"></package>
+			<package name="org.seamoo.webapp.integration.admin"></package>
+		</packages>
+		<classes>
+			<class name="org.seamoo.webapp.client.admin.SubjectServiceAsyncIntegrationTest" />
+		</classes>
+	</test>
+</suite>

@@ -1,9 +1,21 @@
 package org.seamoo.webapp.client.admin;
 
-import org.seamoo.persistence.SubjectDAO;
+import java.util.List;
+
+import org.seamoo.entities.Subject;
+import org.workingonit.gwtbridge.GwtRemoteService;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-public interface SubjectService extends RemoteService, SubjectDAO {
+@RemoteServiceRelativePath("../services/subject")
+@GwtRemoteService("subject")
+public interface SubjectService extends RemoteService {
+	Subject save(Subject subject);
+
+	List<Subject> getAll();
+
+	void delete(Subject subject);
 	
+	Subject load(Integer id);
 }

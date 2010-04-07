@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.seamoo.entities.Subject;
-import org.seamoo.persistence.SiteSettingDAO;
-import org.seamoo.persistence.SubjectDAO;
+import org.seamoo.persistence.daos.SiteSettingDao;
+import org.seamoo.persistence.daos.SubjectDao;
 import org.seamoo.utils.converter.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DemoController {
 
 	@Autowired
-	SiteSettingDAO siteSettingDAO;
+	SiteSettingDao siteSettingDao;
 
 	@Autowired
-	SubjectDAO subjectDAO;
+	SubjectDao subjectDAO;
 
 	@RequestMapping("/install-sample")
 	public void installSample(HttpServletResponse response) throws IOException {
 		response.setContentType("text/html");
-		boolean sampleInstalled = Converter.toBoolean(siteSettingDAO
+		boolean sampleInstalled = Converter.toBoolean(siteSettingDao
 				.getSetting("sampleInstalled"));
 		if (!sampleInstalled) {
 			response.getWriter().println("Install Sample");
 			performInstall();
-			siteSettingDAO.assignSetting("sampleInstalled", Converter
+			siteSettingDao.assignSetting("sampleInstalled", Converter
 					.toString(true));
 		} else {
 			response.getWriter().println("Error: Sample Installed");

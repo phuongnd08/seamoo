@@ -1,0 +1,14 @@
+Given A remote SubjectService
+And A new Subject of name "English"
+When All Subject are retrieved
+Then The number of Subjects is at least 1
+When The Subject is persisted
+Then Subject is assigned an Id
+When Subject name is changed to "French"
+And Edited Subject is persisted
+And Edited Subject Id is equal Subject Id
+When findById is performed
+Then Subject name is "French"
+When delete is performed
+And findById is performed
+Then A null Subject is returned 

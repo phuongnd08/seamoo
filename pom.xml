@@ -86,8 +86,8 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<configuration>
-						<source>1.5</source>
-						<target>1.5</target>
+						<source>1.6</source>
+						<target>1.6</target>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -255,6 +255,12 @@
 				<artifactId>spring-context-support</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>net.sf.gwt-widget</groupId>
+				<artifactId>gwt-widgets-server</artifactId>
+				<version>${gwtwidgets.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -317,7 +323,7 @@
 			<dependency>
 				<groupId>org.testng</groupId>
 				<artifactId>testng</artifactId>
-				<version>5.11</version>
+				<version>${testng.version}</version>
 				<classifier>jdk15</classifier>
 			</dependency>
 
@@ -368,6 +374,27 @@
 				<artifactId>reflections</artifactId>
 				<version>${reflections.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.gwt</groupId>
+				<artifactId>syncproxy</artifactId>
+				<version>${syncproxy.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.gdata</groupId>
+				<artifactId>gdata-client</artifactId>
+				<version>${gdata.client.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.gdata</groupId>
+				<artifactId>gdata-core</artifactId>
+				<version>${gdata.core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -387,8 +414,12 @@
 		<powermock.version>1.3.7</powermock.version>
 		<reflections.version>0.9.5-RC1</reflections.version>
 		<htmlunit.version>2.2</htmlunit.version>
+		<syncproxy.version>0.1.3-SNAPSHOT</syncproxy.version>
+		<gdata.client.version>1.0</gdata.client.version>
+		<gdata.core.version>1.0</gdata.core.version>
 		<jwebunit.version>2.2</jwebunit.version>
 		<spring.version>3.0.1.RELEASE</spring.version>
+		<gwtwidgets.version>0.1.4</gwtwidgets.version>
 		<xalan.version>2.7.0</xalan.version>
 		<log4j.version>1.2.14</log4j.version>
 		<tiles.version>2.1.2</tiles.version>
@@ -400,11 +431,7 @@
 		-->
 		<gae.version>1.3.1</gae.version>
 		<gae.debugPort>8000</gae.debugPort>
-
-		<!-- GWT version -->
 		<gwt.version>2.0.3</gwt.version>
-		<gwtquery.version>1.0-SNAPSHOT</gwtquery.version>
-
 		<urlrewrite.filter.version>3.1.0</urlrewrite.filter.version>
 	</properties>
 </project>

@@ -9,7 +9,7 @@ import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
-import org.seamoo.persistence.jdo.PMF;
+import org.seamoo.persistence.daos.jdo.PMF;
 import org.seamoo.webapp.example.model.Message;
 import org.seamoo.webapp.example.model.Messages;
 

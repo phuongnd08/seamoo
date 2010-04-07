@@ -55,11 +55,11 @@ public class SubjectListPresenterSteps {
 		doAnswer(new Answer() {
 			public Object answer(InvocationOnMock invocation) {
 				Object[] args = invocation.getArguments();
-				AsyncCallback<List> callback = (AsyncCallback<List>) args[0];
+				AsyncCallback<List<Subject>> callback = (AsyncCallback<List<Subject>>) args[0];
 				callback.onSuccess(Arrays.asList(givenSubjects));
 				return null;
 			}
-		}).when(subjectServiceAsync).getAll((AsyncCallback<List>) any());
+		}).when(subjectServiceAsync).getAll((AsyncCallback<List<Subject>>) any());
 
 		// when persist subject
 		doAnswer(new Answer() {
@@ -70,7 +70,7 @@ public class SubjectListPresenterSteps {
 				callback.onSuccess(subject);
 				return null;
 			}
-		}).when(subjectServiceAsync).persist(any(), (AsyncCallback<Object>) any());
+		}).when(subjectServiceAsync).save((Subject) any(), (AsyncCallback<Subject>) any());
 	}
 
 	@Given("We have $number SubjectDisplay")
@@ -146,8 +146,30 @@ public class SubjectListPresenterSteps {
 	@Then("SubjectServiceAsync $verb Subject")
 	public void assertSubjectServiceAsyncMethod(String verb) {
 		if (verb.equals("load all")) {
-			verify(subjectServiceAsync).getAll((AsyncCallback<List>) any());
-		}
+			verify(subjectServiceAsync).getAll((AsyncCallback<List<Subject>>) any());
+		} else if (verb.equals("update")) {
+			verify(subjectServiceAsync).save((Subject) any(), (AsyncCallback<Subject>) any());
+		} else
+			throw new RuntimeException(String.format("Verb %s is not supported", verb));
+	}
+
+	@Then("SubjectServiceAsync delete Subject $time time")
+	public void assertSubjectServiceAsyncDeleteMethod(int time) {
+		verify(subjectServiceAsync, times(time)).delete((Subject) any(), (AsyncCallback<Void>) any());
+	}
+
+	@Given("SubjectServiceAsync update will be successful")
+	public void setupSubjectServiceAsyncOnSuccessHandler() {
+		doAnswer(new Answer() {
+
+			@Override
+			public Object answer(InvocationOnMock invocation) throws Throwable {
+				AsyncCallback<Subject> callback = (AsyncCallback<Subject>) invocation.getArguments()[1];
+				callback.onSuccess((Subject) invocation.getArguments()[0]);
+				return null;
+			}
+
+		}).when(subjectServiceAsync).save((Subject) any(), (AsyncCallback<Subject>) any());
 	}
 
 	@Then("SubjectListDisplay $verb $number SubjectDisplay")
