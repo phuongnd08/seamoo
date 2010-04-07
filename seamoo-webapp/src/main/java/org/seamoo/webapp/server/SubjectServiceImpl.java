@@ -41,7 +41,7 @@ public class SubjectServiceImpl extends RemoteServiceServlet implements SubjectS
 	}
 
 	@Override
-	public Subject load(Integer id) {
+	public Subject load(String id) {
 		// TODO Auto-generated method stub
 		return subjectDao.findById(new Long(id));
 	}

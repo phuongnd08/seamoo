@@ -69,24 +69,24 @@ public class SubjectServiceAsyncSteps extends TestConfigAware {
 	public void assertSubjectIdConsistency() {
 		assertEquals(newSubject.getAutoId(), subject.getAutoId());
 	}
-	
+
 	@When("findById is performed")
-	public void findSubjectById(){
-		subject = subjectService.load(subject.getAutoId().intValue());
+	public void findSubjectById() {
+		subject = subjectService.load(subject.getAutoId().toString());
 	}
-	
+
 	@Then("Subject name is \"$name\"")
-	public void assertSubjectName(String name){
+	public void assertSubjectName(String name) {
 		assertEquals(subject.getName(), name);
 	}
-	
+
 	@When("delete is performed")
-	public void deleteSubject(){
+	public void deleteSubject() {
 		subjectService.delete(subject);
 	}
-	
+
 	@Then("A null Subject is returned")
-	public void assertNullSubject(){
+	public void assertNullSubject() {
 		assertEquals(subject, null);
 	}
 }

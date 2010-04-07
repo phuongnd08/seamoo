@@ -16,7 +16,7 @@ public interface SubjectServiceAsync {
 
 	void save(Subject subject, AsyncCallback<Subject> callback);
 
-	void load(Integer id, AsyncCallback<Subject> callback);
+	void load(String id, AsyncCallback<Subject> callback);
 
 	/**
 	 * Utility class to get the RPC Async interface from client-side code

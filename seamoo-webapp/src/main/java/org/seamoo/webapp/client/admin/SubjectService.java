@@ -17,5 +17,5 @@ public interface SubjectService extends RemoteService {
 
 	void delete(Subject subject);
 	
-	Subject load(Integer id);
+	Subject load(String id);
 }
