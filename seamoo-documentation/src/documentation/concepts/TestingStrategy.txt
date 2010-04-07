@@ -10,12 +10,13 @@ These principle lead to:
 		A test for GWT presenter
 		A test for each GWT display associated with presenter
 		2 test for GWT Async (if applicable) 
-			Unit tests for logic (mostly mixin???) 
-			Proxy test using SyncProxy
+			Unit tests for *Impl class (that extends RemoteServiceServlet) 
+			Proxy test using SyncProxy (during integration test phase)
 				To make sure client can access GWT RPC as intended
+				Only one invoke is enough.
 		
 			To be sure Dao & other business logics is successfully implemented
-		A test for page initialization (HTML Unit).
+		A test for page initialization (HTML Unit, during integration phase).
 			To be sure that no exception is thrown on the page during normal use.
 			To be sure that the GWT is properly wired: For example, we may want to assert that something happen when user click one button on the page.
 
