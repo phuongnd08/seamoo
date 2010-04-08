@@ -156,7 +156,7 @@ public class SubjectListPresenterSteps {
 
 	@When("SubjectListPresenter initialize")
 	public void loadSubjectListPresenter() {
-		subjectListPresenter.initialize(subjectListDisplay, subjectServiceAsync);
+		subjectListPresenter.initialize(subjectListDisplay, subjectServiceAsync, null);
 	}
 
 	@Then("SubjectServiceAsync $verb Subject")

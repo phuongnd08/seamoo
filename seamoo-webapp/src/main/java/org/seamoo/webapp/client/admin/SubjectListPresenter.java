@@ -65,19 +65,32 @@ public class SubjectListPresenter implements EntryPoint {
 	public void onModuleLoad() {
 		// TODO Auto-generated method stub
 		// remove Loading-Message from page
-		DOM.getElementById("loading-message").removeFromParent();
 		RootPanel rootPanel = RootPanel.get("subject-list");
 		SubjectListDisplay view = new SubjectListView();
 		SubjectServiceAsync subjectServiceAsync = GWT.create(SubjectService.class);
 		rootPanel.add((Widget) view);
-		initialize(view, subjectServiceAsync);
+		initialize(view, subjectServiceAsync, new AsyncCallback() {
+
+			@Override
+			public void onFailure(Throwable throwable) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onSuccess(Object arg0) {
+				// TODO Auto-generated method stub
+				DOM.getElementById("loading-message").removeFromParent();
+			}
+		});
 	}
 
 	private SubjectDisplayEventListener listener;
 	private SubjectServiceAsync subjectServiceAsync;
 	private SubjectListDisplay subjectListDisplay;
 
-	public void initialize(final SubjectListDisplay subjectListDisplay, final SubjectServiceAsync subjectServiceAsync) {
+	public void initialize(final SubjectListDisplay subjectListDisplay, final SubjectServiceAsync subjectServiceAsync,
+			final AsyncCallback subjectLoadedCallback) {
 
 		this.subjectListDisplay = subjectListDisplay;
 		this.subjectServiceAsync = subjectServiceAsync;
@@ -196,6 +209,8 @@ public class SubjectListPresenter implements EntryPoint {
 				newSubjectDisplay.addEventListener(listener);
 				newSubjectDisplay.setMode(SubjectDisplayMode.CREATE);
 				subjectListDisplay.addSubjectDisplay(newSubjectDisplay);
+				if (subjectLoadedCallback != null)
+					subjectLoadedCallback.onSuccess(null);
 			}
 
 			@Override

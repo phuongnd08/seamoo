@@ -8,18 +8,18 @@ import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
 import org.seamoo.entities.Subject;
-import org.seamoo.webapp.integration.shared.TestConfigAware;
+import org.seamoo.webapp.integration.shared.TestConfig;
 
 import com.gdevelop.gwt.syncrpc.SyncProxy;
 
-public class SubjectServiceAsyncSteps extends TestConfigAware {
+public class SubjectServiceAsyncSteps {
 
 	private SubjectService subjectService;
 
 	@Given("A remote SubjectService")
 	public void initRemoteSubjectService() {
-		subjectService = (SubjectService) SyncProxy.newProxyInstance(SubjectService.class, getServerBase() + "/adminSubjects/",
-				"../services/subject");
+		subjectService = (SubjectService) SyncProxy.newProxyInstance(SubjectService.class, TestConfig.getServerBase()
+				+ "/adminSubjects/", "../services/subject");
 	}
 
 	List<Subject> listOfSubjects;

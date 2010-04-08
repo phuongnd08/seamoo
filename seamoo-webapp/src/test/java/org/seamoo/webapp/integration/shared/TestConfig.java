@@ -6,15 +6,14 @@ import java.util.Properties;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 
-public class TestConfigAware {
+public final class TestConfig {
 
 	protected static Properties testProperties;
 
-	public TestConfigAware() {
-		super();
+	private TestConfig() {
 	}
 
-	protected String getServerBase() {
+	public static String getServerBase() {
 		return testProperties.getProperty("serverBase");
 	}
 

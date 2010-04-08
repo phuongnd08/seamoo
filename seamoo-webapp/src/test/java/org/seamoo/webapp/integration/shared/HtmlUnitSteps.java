@@ -2,21 +2,25 @@ package org.seamoo.webapp.integration.shared;
 
 import static org.testng.Assert.*;
 
-import java.io.IOException;
-import java.util.Properties;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
 
+import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-public class HtmlUnitSteps extends TestConfigAware {
-	private WebClient client = new WebClient();
+public class HtmlUnitSteps {
+	private WebClient client;
+
+	public HtmlUnitSteps() {
+		client = new WebClient();
+		// client.setAjaxController(new NicelyResynchronizingAjaxController());
+	}
 
 	protected HtmlPage loadPage(String relativeUrl) {
 		try {
-			return (HtmlPage) client.getPage(getServerBase() + relativeUrl);
+			return (HtmlPage) client.getPage(TestConfig.getServerBase() + relativeUrl);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -38,20 +42,18 @@ public class HtmlUnitSteps extends TestConfigAware {
 	protected boolean getElementVisibilityRecursive(HtmlElement element) {
 		boolean visible = getElementVisibility(element);
 		if (visible) {
-			if (element.getParentNode() == element.getPage()
-					.getDocumentElement())
+			if (element.getParentNode() == element.getPage().getDocumentElement())
 				return visible;
 			else
-				return getElementVisibilityRecursive((HtmlElement) element
-						.getParentNode());
+				return getElementVisibilityRecursive((HtmlElement) element.getParentNode());
 		} else
 			return false;
 	}
 
-	protected final static int WAIT_PERIOD = 100;
+	protected final static int WAIT_PERIOD = 500;
 
-	protected static void waitForPageLoad(HtmlPage page,
-			HtmlUnitChecker checker, int maxMilliseconds) throws InterruptedException, TimeoutException {
+	protected static void waitForPageLoad(HtmlPage page, HtmlUnitChecker checker, int maxMilliseconds)
+			throws InterruptedException, TimeoutException {
 		int waitTime = 0;
 		while (waitTime < maxMilliseconds) {
 			if (checker.isSatisfied()) {

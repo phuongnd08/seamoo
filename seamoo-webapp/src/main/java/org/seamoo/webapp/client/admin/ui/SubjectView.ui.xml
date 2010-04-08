@@ -55,7 +55,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" class="tac">
-						<gwt:HTMLPanel ui:field="buttonContainer">
+						<gwt:HTMLPanel ui:field="buttonContainer" styleName="buttonContainer">
 							<gwt:Button ui:field="buttonCreate">Create</gwt:Button>
 							<gwt:Button ui:field="buttonSave">Save</gwt:Button>
 							<gwt:Button ui:field="buttonCancel">Cancel</gwt:Button>
