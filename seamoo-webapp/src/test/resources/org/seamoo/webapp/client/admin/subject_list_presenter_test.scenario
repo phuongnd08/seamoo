@@ -28,6 +28,7 @@ Then 2nd SubjectDisplay will be switched to VIEW mode
 And 2nd SubjectDisplay was assigned a Subject 2 times
 And SubjectListDisplay create 3 SubjectDisplay
 And 3rd SubjectDisplay will be switched to CREATE mode
+And SubjectListDisplay add 3 SubjectDisplay
 !-- For delete subject
 Given Confirm dialog will return true
 When 1st SubjectDisplay delete event is triggered

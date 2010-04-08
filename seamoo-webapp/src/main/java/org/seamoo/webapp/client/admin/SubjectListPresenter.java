@@ -154,6 +154,7 @@ public class SubjectListPresenter implements EntryPoint {
 								newDisplay.setSubject(new Subject());
 								newDisplay.addEventListener(presenter.listener);
 								newDisplay.setMode(SubjectDisplayMode.CREATE);
+								subjectListDisplay.addSubjectDisplay(newDisplay);
 							}
 
 							@Override

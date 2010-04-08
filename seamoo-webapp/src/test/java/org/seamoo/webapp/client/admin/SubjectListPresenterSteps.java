@@ -71,6 +71,17 @@ public class SubjectListPresenterSteps {
 				return null;
 			}
 		}).when(subjectServiceAsync).save((Subject) any(), (AsyncCallback<Subject>) any());
+
+		// when delete subject
+		doAnswer(new Answer() {
+			public Object answer(InvocationOnMock invocation) {
+				Object[] args = invocation.getArguments();
+				AsyncCallback<Void> callback = (AsyncCallback<Void>) args[1];
+				callback.onSuccess(null);
+				return null;
+			}
+		}).when(subjectServiceAsync).delete((Subject) any(), (AsyncCallback<Void>) any());
+
 	}
 
 	@Given("We have $number SubjectDisplay")
@@ -127,15 +138,20 @@ public class SubjectListPresenterSteps {
 
 	}
 
+	int invokeTime = 0;
+
 	@Given("We have a SubjectListDisplay")
 	public void initSubjectListDisplay() {
 		subjectListDisplay = mock(SubjectListDisplay.class);
-		{
-			OngoingStubbing<SubjectListPresenter.SubjectDisplay> mock = when(subjectListDisplay.createSubjectDisplay());
-			for (int i = 0; i < subjectDisplays.length; i++)
-				mock = mock.thenReturn(subjectDisplays[i]);
-		}
+		when(subjectListDisplay.createSubjectDisplay()).thenAnswer(new Answer<SubjectDisplay>() {
 
+			@Override
+			public SubjectDisplay answer(InvocationOnMock invocation) throws Throwable {
+				// TODO Auto-generated method stub
+				invokeTime++;
+				return subjectDisplays[invokeTime - 1];
+			}
+		});
 	}
 
 	@When("SubjectListPresenter initialize")
@@ -178,7 +194,10 @@ public class SubjectListPresenterSteps {
 			verify(subjectListDisplay, times(number)).createSubjectDisplay();
 		} else if (verb.equals("add")) {
 			verify(subjectListDisplay, times(number)).addSubjectDisplay((SubjectDisplay) any());
-		}
+		} else if (verb.equals("remove")) {
+			verify(subjectListDisplay, times(number)).removeSubjectDisplay((SubjectDisplay) any());
+		} else
+			throw new RuntimeException(String.format("Verb %s (times: %s) is not supported", verb, number));
 	}
 
 	@Then("$position SubjectDisplay will be switched to $mode mode")
