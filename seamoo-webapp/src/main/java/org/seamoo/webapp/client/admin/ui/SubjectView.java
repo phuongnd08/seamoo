@@ -126,6 +126,16 @@ public class SubjectView extends Composite implements SubjectDisplay {
 					l.delete(me, me.getSubject());
 			}
 		});
+
+		buttonSelectLogo.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent clickevent) {
+				// TODO Auto-generated method stub
+				for (SubjectDisplayEventListener l : listeners)
+					l.selectLogo(me, me.getLogoUrl());
+			}
+		});
 	}
 
 	public Subject getEditedSubject() {

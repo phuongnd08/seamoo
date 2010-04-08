@@ -29,6 +29,8 @@ When buttonCreate is clicked
 Then create event is triggered
 When buttonSave is clicked
 Then update event is triggered
+When buttonSelectLogo is clicked
+Then select-logo event is triggered
 When value of checkboxEnabled is changed to "true"
 Then editedSubject.enabled is "true"
 When value of checkboxEnabled is changed to "false"

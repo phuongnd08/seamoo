@@ -106,6 +106,8 @@ public class SubjectViewSteps {
 			verify(listener).create(eq(subjectView), (Subject) any());
 		else if (event.equals("update"))
 			verify(listener).update(eq(subjectView), (Subject) any());
+		else if (event.equals("select-logo"))
+			verify(listener).selectLogo(eq(subjectView), (String) any());
 		else
 			throw new RuntimeException("Event " + event + " is not supported");
 	}
@@ -151,9 +153,9 @@ public class SubjectViewSteps {
 			throw new RuntimeException("Unsupported field Subject." + field);
 		assertEquals(v.toString(), value);
 	}
-	
+
 	@When("setLogoUrl is invoked with \"$url\"")
-	public void setLogoUrl(String url){
+	public void setLogoUrl(String url) {
 		subjectView.setLogoUrl(url);
 	}
 }
