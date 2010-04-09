@@ -67,11 +67,13 @@
 	subHeader
 	Display a subheader in a form of tab list
 --]
-[#macro subHeader headers selectedKey]
+[#macro subHeader headers selectedIndex]
 	<div id="subheader">
 		<div id="tabs">
+			[#assign index=0/]
 			[#list headers?keys as key]
-		    <a href="[@spring.url headers[key]/]"[#if key==selectedKey] class="youarehere"[/#if]>${key}</a>
+		    <a href="[@spring.url headers[key]/]"[#if index?string==selectedIndex] class="youarehere"[/#if]>${key}</a>
+			[#assign index=index+1/]
 		    [/#list]
 		</div>
 	</div>

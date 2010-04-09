@@ -10,7 +10,6 @@ public class SeleneseTestCfgAwareTestNgHelper extends SeleneseTestNgHelper {
 	@BeforeTest
 	@Override
 	@Parameters( { "selenium.url", "selenium.browser" })
-	// trick: To have setUp method override properly
 	public void setUp(@Optional String url, @Optional String browserString) throws Exception {
 		super.setUp(TestConfig.getServerBase(), "*firefox");
 	}

@@ -16,7 +16,6 @@
 <br />
 	<div class="container">
 		[#include "skeleton-header.ftl"/]
-	
 		<div id="content-wrapper">
 			<div id="content-header">
 			<h2><a href="#" class="question-hyperlink">${title}</a></h2>
@@ -25,6 +24,8 @@
 			[@tiles.insertAttribute	name="content"]
 				[@tiles.putAttribute name="body" value="${body}"/]
 				[@tiles.putAttribute name="side" value="${side}"/]
+				[@tiles.putAttribute name="subBody" value="${subBody}"/]
+				[@tiles.putAttribute name="selectedIndex" value="${selectedIndex}"/]
 			[/@tiles.insertAttribute]
 		</div>
 		

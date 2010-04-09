@@ -57,14 +57,6 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<id>reflections-repo</id>
-			<name>Reflections Maven2 Repository</name>
-			<url>http://reflections.googlecode.com/svn/repo</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -255,7 +247,7 @@
 				<artifactId>spring-context-support</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>net.sf.gwt-widget</groupId>
 				<artifactId>gwt-widgets-server</artifactId>
@@ -370,11 +362,6 @@
 				<version>${powermock.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.reflections</groupId>
-				<artifactId>reflections</artifactId>
-				<version>${reflections.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.gwt</groupId>
 				<artifactId>syncproxy</artifactId>
 				<version>${syncproxy.version}</version>
@@ -422,7 +409,7 @@
 		<gwtwidgets.version>0.1.4</gwtwidgets.version>
 		<xalan.version>2.7.0</xalan.version>
 		<log4j.version>1.2.14</log4j.version>
-		<tiles.version>2.1.2</tiles.version>
+		<tiles.version>2.1.4</tiles.version>
 		<freemarker.version>2.3.16</freemarker.version>
 		<!--
 			Specify AppEngine version for your project. It should match SDK

@@ -12,11 +12,11 @@
 
 	<definition name="master"
 		template="/WEB-INF/layouts/master/so/skeleton-so.ftl">
-		<!--
-			<put-attribute name="menu" value="/WEB-INF/master/menu.jsp"/>
-		-->
+		<!-- Pre-init all possible attribute of the page -->
 		<put-attribute name="side" value=""/>
 		<put-attribute name="body" value=""/>
+		<put-attribute name="subBody" value=""/>
+		<put-attribute name="selectedIndex" value="0"/>
 	</definition>
 
 	<definition name="master-no-small" extends="master">

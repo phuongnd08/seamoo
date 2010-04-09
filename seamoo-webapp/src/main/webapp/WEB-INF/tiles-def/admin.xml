@@ -4,24 +4,33 @@
 
 	<!-- Definitions for Tiles documentation   -->
 <tiles-definitions>
-	<definition name="admin.moderators" extends="master-no-small">
+	<definition name="admin.master" extends="master-no-small">
 		<put-attribute name="body"
+			value="/WEB-INF/layouts/admin/admin-master.ftl" />
+	</definition>
+
+	<definition name="admin.moderators" extends="admin.master">
+		<put-attribute name="subBody"
 			value="/WEB-INF/layouts/admin/admin-moderators.ftl" />
+		<put-attribute name="selectedIndex" value="2" />
 	</definition>
 
-	<definition name="admin.leagues" extends="master-no-small">
-		<put-attribute name="body"
+	<definition name="admin.leagues" extends="admin.master">
+		<put-attribute name="subBody"
 			value="/WEB-INF/layouts/admin/admin-leagues.ftl" />
+		<put-attribute name="selectedIndex" value="1" />
 	</definition>
 
-	<definition name="admin.subjects" extends="master-no-small">
-		<put-attribute name="body"
+	<definition name="admin.subjects" extends="admin.master">
+		<put-attribute name="subBody"
 			value="/WEB-INF/layouts/admin/admin-subjects.ftl" />
+		<put-attribute name="selectedIndex" value="1" />
 	</definition>
 
-	<definition name="admin.site-settings" extends="master-no-small">
-		<put-attribute name="body"
+	<definition name="admin.site-settings" extends="admin.master">
+		<put-attribute name="subBody"
 			value="/WEB-INF/layouts/admin/admin-site-settings.ftl" />
+		<put-attribute name="selectedIndex" value="0" />
 	</definition>
 
 </tiles-definitions>
