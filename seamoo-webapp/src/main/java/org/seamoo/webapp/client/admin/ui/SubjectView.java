@@ -171,6 +171,9 @@ public class SubjectView extends Composite implements SubjectDisplay {
 		hiddenAutoId.setValue(subject.getAutoId() != null ? subject.getAutoId().toString() : "");
 		textboxName.setText(subject.getName());
 		anchorName.setText(subject.getName());
+		if (subject.getAutoId() != null) {
+			anchorName.setHref("/admin/subjects/" + subject.getAutoId());
+		}
 		imgLogo.setUrl(subject.getLogoUrl());
 		textareaDescription.setText(subject.getDescription());
 		labelDescription.setText(subject.getDescription());

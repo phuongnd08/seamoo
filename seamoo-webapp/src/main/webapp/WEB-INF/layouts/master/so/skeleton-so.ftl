@@ -24,8 +24,6 @@
 			[@tiles.insertAttribute	name="content"]
 				[@tiles.putAttribute name="body" value="${body}"/]
 				[@tiles.putAttribute name="side" value="${side}"/]
-				[@tiles.putAttribute name="subBody" value="${subBody}"/]
-				[@tiles.putAttribute name="selectedIndex" value="${selectedIndex}"/]
 			[/@tiles.insertAttribute]
 		</div>
 		

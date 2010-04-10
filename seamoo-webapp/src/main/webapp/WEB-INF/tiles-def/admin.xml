@@ -11,26 +11,26 @@
 
 	<definition name="admin.moderators" extends="admin.master">
 		<put-attribute name="subBody"
-			value="/WEB-INF/layouts/admin/admin-moderators.ftl" />
-		<put-attribute name="selectedIndex" value="2" />
+			value="/WEB-INF/layouts/admin/admin-moderators.ftl" cascade="true" />
+		<put-attribute name="selectedIndex" value="2" cascade="true" />
 	</definition>
 
 	<definition name="admin.leagues" extends="admin.master">
 		<put-attribute name="subBody"
-			value="/WEB-INF/layouts/admin/admin-leagues.ftl" />
-		<put-attribute name="selectedIndex" value="1" />
+			value="/WEB-INF/layouts/admin/admin-leagues.ftl" cascade="true" />
+		<put-attribute name="selectedIndex" value="1" cascade="true" />
 	</definition>
 
 	<definition name="admin.subjects" extends="admin.master">
 		<put-attribute name="subBody"
-			value="/WEB-INF/layouts/admin/admin-subjects.ftl" />
-		<put-attribute name="selectedIndex" value="1" />
+			value="/WEB-INF/layouts/admin/admin-subjects.ftl" cascade="true" />
+		<put-attribute name="selectedIndex" value="1" cascade="true" />
 	</definition>
 
 	<definition name="admin.site-settings" extends="admin.master">
 		<put-attribute name="subBody"
-			value="/WEB-INF/layouts/admin/admin-site-settings.ftl" />
-		<put-attribute name="selectedIndex" value="0" />
+			value="/WEB-INF/layouts/admin/admin-site-settings.ftl" cascade="true" />
+		<put-attribute name="selectedIndex" value="0" cascade="true" />
 	</definition>
 
 </tiles-definitions>
