@@ -1,30 +1,31 @@
 package org.seamoo.persistence.test;
 
-import org.junit.After;
-import org.junit.Before;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 
 /**
  * Performs datastore setup, as described <a
- * href="http://code.google.com/appengine/docs/java/howto/unittesting.html">here</a>.
+ * href="http://code.google.com/appengine/docs/java/howto/unittesting.html"
+ * >here</a>.
  * 
  * @author androns
  */
 public abstract class LocalDatastoreTest {
 
-    private final LocalServiceTestHelper helper ;
+	private final LocalServiceTestHelper helper;
 
-    public LocalDatastoreTest(){
-    	LocalDatastoreServiceTestConfig testConfig = new LocalDatastoreServiceTestConfig();
-    	helper =
-            new LocalServiceTestHelper(testConfig);
-    }
+	public LocalDatastoreTest() {
+		LocalDatastoreServiceTestConfig testConfig = new LocalDatastoreServiceTestConfig();
+		helper = new LocalServiceTestHelper(testConfig);
+	}
+
 	/**
 	 * 
 	 */
-        @Before
+	@BeforeMethod
 	public void setUp() {
 		helper.setUp();
 	}
@@ -32,7 +33,7 @@ public abstract class LocalDatastoreTest {
 	/**
 	 * @see LocalServiceTest#tearDown()
 	 */
-        @After
+	@AfterMethod
 	public void tearDown() {
 		helper.tearDown();
 	}

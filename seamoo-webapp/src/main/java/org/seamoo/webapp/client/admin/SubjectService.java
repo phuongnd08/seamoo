@@ -16,6 +16,4 @@ public interface SubjectService extends RemoteService {
 	List<Subject> getAll();
 
 	void delete(Subject subject);
-	
-	Subject load(String id);
 }

@@ -1,29 +1,29 @@
 package org.seamoo.persistence.daos.jdo;
 
-import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.seamoo.persistence.daos.jdo.JdoGenericDaoImpl;
+import static org.testng.Assert.*;
+
 import org.seamoo.persistence.test.LocalDatastoreTest;
 import org.seamoo.persistence.test.jpa.model.ExampleModel;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-public class JdoGenericDAOImplTest extends LocalDatastoreTest {
+public class JdoGenericDaoImplTest extends LocalDatastoreTest {
 
 	private class TestModelDAOImpl extends JdoGenericDaoImpl<ExampleModel, Long> {
 
 	}
 
 	@Override
-	@Before
+	@BeforeMethod
 	public void setUp() {
 		// TODO Auto-generated method stub
 		super.setUp();
 	}
 
 	@Override
-	@After
+	@AfterMethod
 	public void tearDown() {
 		// TODO Auto-generated method stub
 		super.tearDown();

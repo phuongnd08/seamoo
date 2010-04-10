@@ -1,0 +1,49 @@
+Given A LeagueView
+And An enabled League
+Then url of imgLogo is "images/leagues/eng-amateur.png"
+And text of anchorName is "English Amateur"
+And text of labelDescription is "English for everyone"
+And text of labelLevel is "Level 1"
+And text of labelEnabled is "Enabled"
+And text of textboxName is "English Amateur"
+And text of textareaDescription is "English for everyone"
+And text of textboxLevel is "1"
+And value of checkboxEnabled is "true"
+Given A disabled League
+Then text of labelEnabled is "Disabled"
+And value of checkboxEnabled is "false"
+When Mode is switched to VIEW
+Then imgLogo,divView are visible
+And buttonSelectLogo,buttonContainer are invisible
+When Mode is switched to EDIT
+Then imgLogo,buttonSelectLogo,divEdit,buttonContainer,buttonSave,buttonCancel are visible
+And divView,buttonCreate are invisible
+When Mode is switched to CREATE
+Then imgLogo,buttonSelectLogo,divEdit,buttonContainer,buttonCreate are visible
+And buttonSave,buttonCancel are invisible
+When buttonEdit is clicked
+Then edit event is triggered
+When buttonCancel is clicked
+Then edit-cancel event is triggered
+When buttonRemove is clicked
+Then delete event is triggered
+When buttonCreate is clicked
+Then create event is triggered
+When buttonSave is clicked
+Then update event is triggered
+When buttonSelectLogo is clicked
+Then select-logo event is triggered
+When value of checkboxEnabled is changed to "true"
+Then editedLeague.enabled is "true"
+When value of checkboxEnabled is changed to "false"
+Then editedLeague.enabled is "false"
+When text of textboxName is changed to "French"
+Then editedLeague.name is "French"
+When text of textboxLevel is changed to "2"
+Then editedLeague.level is "2"
+When text of textareaDescription is changed to "French for everyone"
+Then editedLeague.description is "French for everyone"
+When url of imgLogo is changed to "http://google.com/cartoon.png"
+Then editedLeague.logoUrl is "http://google.com/cartoon.png"
+When setLogoUrl is invoked with "/images/Leagues/replaced.png"
+Then url of imgLogo is "/images/Leagues/replaced.png"

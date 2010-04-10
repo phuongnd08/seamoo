@@ -1,4 +1,24 @@
-<!-- Indices written at Wed, 7 Apr 2010 23:28:14 ICT -->
+<!-- Indices written at Sat, 10 Apr 2010 11:59:19 ICT -->
 
-<datastore-indexes/>
+<datastore-indexes>
 
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="League" ancestor="false" source="auto">
+        <property name="subjectAutoId" direction="asc"/>
+        <property name="level" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="League" ancestor="false" source="auto">
+        <property name="enabled" direction="asc"/>
+        <property name="subjectAutoId" direction="asc"/>
+        <property name="level" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Subject" ancestor="false" source="auto">
+        <property name="enabled" direction="asc"/>
+        <property name="addedTime" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>

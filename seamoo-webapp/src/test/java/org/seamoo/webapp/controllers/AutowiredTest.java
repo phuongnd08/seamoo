@@ -1,32 +1,38 @@
 package org.seamoo.webapp.controllers;
 
-import static org.junit.Assert.assertNotNull;
+import static org.testng.Assert.*;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.seamoo.persistence.daos.LeagueDao;
 import org.seamoo.persistence.daos.SiteSettingDao;
 import org.seamoo.persistence.daos.SubjectDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.Test;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:dao-context.xml")
-public class AutowiredTest {
-	
+public class AutowiredTest extends AbstractTestNGSpringContextTests {
+
 	@Autowired
-	SubjectDao subjectDAO;
+	SubjectDao subjectDao;
 	@Autowired
-	SiteSettingDao siteSettingDAO;
+	SiteSettingDao siteSettingDao;
+	@Autowired
+	LeagueDao leagueDao;
 
 	@Test
 	public void subjectDAOShouldBeAutowired() {
-		assertNotNull(subjectDAO);
+		assertNotNull(subjectDao);
 	}
 
 	@Test
 	public void siteSettingDAOShouldBeAutowired() {
-		assertNotNull(siteSettingDAO);
+		assertNotNull(siteSettingDao);
+	}
+
+	@Test
+	public void leagueDAOShouldBeAutowired() {
+		assertNotNull(leagueDao);
 	}
 
 }

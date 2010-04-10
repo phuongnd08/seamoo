@@ -65,8 +65,9 @@
 
 
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<classifier>jdk15</classifier>
 			<scope>test</scope>
 		</dependency>
 

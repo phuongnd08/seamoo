@@ -26,6 +26,7 @@
 								</div>
 							</div>
 							<gwt:Label ui:field="labelDescription"></gwt:Label>
+							<gwt:Label ui:field="labelLevel"></gwt:Label>
 							<div>
 								<gwt:Label ui:field="labelEnabled"><!-- Enabled/Disabled -->
 								</gwt:Label>
@@ -43,7 +44,12 @@
 										<label for="description">Description</label>
 									</div>
 									<p>
-										<gwt:TextArea ui:field="textareaDescription" name="description"></gwt:TextArea>
+										<gwt:TextArea ui:field="textareaDescription"
+											name="description"></gwt:TextArea>
+									</p>
+									<p>
+										<label for="level">Level</label>
+										<gwt:TextBox ui:field="textboxLevel" name="level"></gwt:TextBox>
 									</p>
 									<div>
 										<gwt:CheckBox ui:field="checkboxEnabled">Enabled</gwt:CheckBox>

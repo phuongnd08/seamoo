@@ -15,4 +15,5 @@
 	<mvc:annotation-driven />
 	<bean class="org.workingonit.gwtbridge.GwtServicesRegistrar" />
 	<bean class="org.seamoo.webapp.server.SubjectServiceImpl" />
+	<bean class="org.seamoo.webapp.server.LeagueServiceImpl" />
 </beans>

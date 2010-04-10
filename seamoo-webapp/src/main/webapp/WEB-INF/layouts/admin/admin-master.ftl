@@ -6,5 +6,5 @@
 [#--][@tiles.useAttribute name="selectedIndex"/]--]
 [#--Selected Index: [@tiles.insertAttribute name="selectedIndex"/]--]
 [@tiles.importAttribute name="selectedIndex"/]
-[@common.subHeader headers={"Thiết lập cho site": "/admin/site-settings", "Quản lí subject": "/admin/subjects", "Quản lí điều hành viên": "/admin/moderators"} selectedIndex=selectedIndex/]
+[@common.subHeader headers={"Thiết lập cho site": "/admin/site-settings", "Quản lí subject/league": "/admin/subjects", "Quản lí điều hành viên": "/admin/moderators"} selectedIndex=selectedIndex/]
 [@tiles.insertAttribute name="subBody" /]

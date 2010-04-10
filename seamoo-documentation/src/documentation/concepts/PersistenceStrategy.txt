@@ -1,0 +1,4 @@
+In order to stack up the persistence merchanism:
+	Parent-child relationship should be avoid.
+	Instead, only parent will be placed inside child and we will use more query incase we want to fetch child by parent identity
+	In case of persist a child entity (due to the synapticism of un-detachable entity), well, we should (or should not???) include parent information???

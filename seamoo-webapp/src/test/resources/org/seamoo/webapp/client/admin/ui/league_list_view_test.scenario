@@ -1,0 +1,7 @@
+Given A LeagueListView
+When createLeagueDisplay is called
+Then A new LeagueView is instantiated
+When addLeagueDisplay is called
+Then mainPanel.add is called
+When removeLeagueDisplay is called
+Then mainPanel.remove is called

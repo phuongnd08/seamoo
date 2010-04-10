@@ -2,24 +2,52 @@ package org.seamoo.entities;
 
 import java.io.Serializable;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
+@PersistenceCapable(detachable = "false")
 public class League implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -9096904769164051434L;
-	private Subject subject;
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Long autoId;
+	@Persistent
+	private Long subjectAutoId;
+	@Persistent
 	private String name;
-	private String avatarUrl;
+	@Persistent
+	private String logoUrl;
+	@Persistent
 	private String description;
+	@Persistent
 	private int level;
+	@Persistent
 	private boolean enabled;
 
-	public void setSubject(Subject subject) {
-		this.subject = subject;
+	public League() {
+
 	}
 
-	public Subject getSubject() {
-		return subject;
+	public League(Long autoId, String name, String logoUrl, String description, int level, boolean enabled) {
+		this.autoId = autoId;
+		this.name = name;
+		this.logoUrl = logoUrl;
+		this.description = description;
+		this.level = level;
+		this.enabled = enabled;
+	}
+
+	public void setSubjectAutoId(Long subjectAutoId) {
+		this.subjectAutoId = subjectAutoId;
+	}
+
+	public Long getSubjectAutoId() {
+		return subjectAutoId;
 	}
 
 	public void setName(String name) {
@@ -30,12 +58,12 @@ public class League implements Serializable {
 		return name;
 	}
 
-	public void setAvatarUrl(String avatarUrl) {
-		this.avatarUrl = avatarUrl;
+	public void setLogoUrl(String logoUrl) {
+		this.logoUrl = logoUrl;
 	}
 
-	public String getAvatarUrl() {
-		return avatarUrl;
+	public String getLogoUrl() {
+		return logoUrl;
 	}
 
 	public void setDescription(String description) {
@@ -60,5 +88,13 @@ public class League implements Serializable {
 
 	public boolean isEnabled() {
 		return enabled;
+	}
+
+	public void setAutoId(Long autoId) {
+		this.autoId = autoId;
+	}
+
+	public Long getAutoId() {
+		return autoId;
 	}
 }

@@ -17,7 +17,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SubjectListPresenter implements EntryPoint {
+public class SubjectListPresenter {
 	public interface SubjectDisplay {
 		public enum SubjectDisplayMode {
 			VIEW, CREATE, EDIT
@@ -61,7 +61,6 @@ public class SubjectListPresenter implements EntryPoint {
 
 	private ArrayList<SubjectView> subjectBoxes;
 
-	@Override
 	public void onModuleLoad() {
 		// TODO Auto-generated method stub
 		// remove Loading-Message from page

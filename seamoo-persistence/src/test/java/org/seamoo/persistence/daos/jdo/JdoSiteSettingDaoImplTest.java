@@ -20,7 +20,7 @@ import org.seamoo.persistence.test.LocalDatastoreTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class JdoSiteSettingDAOImplTest extends LocalDatastoreTest {
+public class JdoSiteSettingDaoImplTest extends LocalDatastoreTest {
 	SiteSettingDao siteSettingDAO;
 
 	@Override

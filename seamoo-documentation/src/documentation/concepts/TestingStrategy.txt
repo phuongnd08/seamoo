@@ -5,6 +5,7 @@ During such unit tests, no external modules will be used (Speed reason).
 The whole website will have integration tests to tests for simplest use cases:
 	* A website is loaded successfully.
 	* Components is wired successfully without conflict
+	* Tests can be organized easily with testng suite
 These principle lead to:
 	For a feature involve GWT, like manipulating a subject:
 		A test for GWT presenter
@@ -14,12 +15,17 @@ These principle lead to:
 			Proxy test using SyncProxy (during integration test phase)
 				To make sure client can access GWT RPC as intended
 				Only one invoke is enough.
+				Placed inside integration package
+				Can be removed if the selenese/htmlunit test can ensure that the invocation of RPC is successful. 
 		
 			To be sure Dao & other business logics is successfully implemented
-		A test for page initialization (HTML Unit, during integration phase).
+		A test for page initialization (HTML Unit/Selenium, during integration phase).
 			To be sure that no exception is thrown on the page during normal use.
 			To be sure that the GWT is properly wired: For example, we may want to assert that something happen when user click one button on the page.
 
 	For a feature doesnot involve GWT
 		An request-test to make sure no exception is thrown (during integration-test phase)
-		A test for controller (using IoC and dynamic Mock)  
+		A test for controller (using IoC and dynamic Mock)
+	
+	Unit tests will be organized in certain package
+	Integration test will be organized in integration package

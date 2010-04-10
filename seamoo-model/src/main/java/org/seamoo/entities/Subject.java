@@ -28,8 +28,7 @@ public class Subject implements Serializable {
 	private boolean enabled;
 	@Persistent
 	private Date addedTime;
-	@Persistent
-	private List<League> leagues;
+	//private List<League> leagues;
 
 	public Subject() {
 
@@ -73,14 +72,6 @@ public class Subject implements Serializable {
 
 	public boolean isEnabled() {
 		return enabled;
-	}
-
-	public void setLeagues(List<League> leagues) {
-		this.leagues = leagues;
-	}
-
-	public List<League> getLeagues() {
-		return leagues;
 	}
 
 	public void setAutoId(Long autoId) {

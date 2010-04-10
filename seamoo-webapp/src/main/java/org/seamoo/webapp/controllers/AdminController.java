@@ -1,14 +1,14 @@
 package org.seamoo.webapp.controllers;
 
 import org.seamoo.persistence.daos.SiteSettingDao;
+import org.seamoo.persistence.daos.SubjectDao;
 import org.seamoo.webapp.Site;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -17,6 +17,8 @@ public class AdminController {
 
 	@Autowired
 	SiteSettingDao siteSettingDao;
+	@Autowired
+	SubjectDao subjectDao;
 
 	@RequestMapping("/moderators")
 	public ModelAndView manageModerators() {
@@ -25,10 +27,11 @@ public class AdminController {
 		return mav;
 	}
 
-	@RequestMapping("/leagues")
-	public ModelAndView manageLeagues() {
+	@RequestMapping("/subjects/{subjectAutoId}")
+	public ModelAndView manageLeagues(@PathVariable long subjectAutoId) {
 		ModelAndView mav = new ModelAndView("admin.leagues");
 		mav.addObject("title", "Manage leagues");
+		mav.addObject("currentSubject", subjectDao.findById(subjectAutoId));
 		return mav;
 	}
 
@@ -49,9 +52,9 @@ public class AdminController {
 		mav.addObject("operatingMode", operatingMode);
 		return mav;
 	}
-	
-	@RequestMapping(value="/update-site-settings", method=RequestMethod.POST)
-	public String updateSiteSettings(@RequestParam("operatingMode") String operatingMode){
+
+	@RequestMapping(value = "/update-site-settings", method = RequestMethod.POST)
+	public String updateSiteSettings(@RequestParam("operatingMode") String operatingMode) {
 		siteSettingDao.assignSetting("operatingMode", operatingMode);
 		return "redirect:site-settings";
 	}

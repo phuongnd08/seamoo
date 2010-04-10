@@ -78,3 +78,18 @@
 		</div>
 	</div>
 [/#macro]
+
+[#macro adminGwt module params={}]
+	<script type="text/javascript">
+	var Vars = {
+		module: "${module}"
+		[#assign index=0/]
+		[#list params?keys as key],
+			"${key}": "${params[key]}"
+			[#assign index=index+1]
+			[#if index<params?size],[/#if]
+		[/#list]
+	}
+	</script>
+	<script type="text/javascript" src="[@spring.url "/adminGwt/adminGwt.nocache.js"/]"></script>
+[/#macro]

@@ -1,0 +1,52 @@
+Given Id of current Subject is 15
+And We have 1 League
+And We have a LeagueServiceAsync
+And We have 3 LeagueDisplay
+And We have a LeagueListDisplay
+And We have a LeagueListPresenter
+!-- For initial stage of the page
+When LeagueListPresenter initialize
+Then LeagueServiceAsync load all League of Subject 15
+And LeagueListDisplay create 2 LeagueDisplay
+And LeagueListDisplay add 2 LeagueDisplay
+And 1st LeagueDisplay was assigned a League 1 time
+And 2nd LeagueDisplay was assigned a League 1 time
+And 1st LeagueDisplay will be switched to VIEW mode
+And 2nd LeagueDisplay will be switched to CREATE mode
+!-- For edit/update subject
+When 1st LeagueDisplay edit event is triggered
+Then 1st LeagueDisplay will be switched to EDIT mode
+When 1st LeagueDisplay edit-cancel event is triggered
+Then 1st LeagueDisplay will be switched to VIEW mode
+Given LeagueServiceAsync update will be successful
+When 1st LeagueDisplay edit event is triggered
+And 1st LeagueDisplay update event is triggered
+Then LeagueServiceAsync update League
+And 1st LeagueDisplay will be switched to VIEW mode
+!-- For create new subject
+When 2nd LeagueDisplay create event is triggered
+Then LeagueServiceAsync save League with subjectId equals 15 in 2 times
+And 2nd LeagueDisplay will be switched to VIEW mode
+And 2nd LeagueDisplay was assigned a League 2 times
+And LeagueListDisplay create 3 LeagueDisplay
+And 3rd LeagueDisplay will be switched to CREATE mode
+And LeagueListDisplay add 3 LeagueDisplay
+!-- For delete subject
+Given Confirm dialog will return true
+When 1st LeagueDisplay delete event is triggered
+Then Confirm dialog will be shown
+Then LeagueServiceAsync delete League 1 time
+And LeagueListDisplay remove 1 LeagueDisplay
+Given Confirm dialog will return false
+When 2nd LeagueDisplay delete event is triggered
+Then Confirm dialog will be shown
+!-- LeagueServiceAsync does not delete any more Subject
+Then LeagueServiceAsync delete League 1 time
+!-- For changing logo of subject
+Given Input dialog will return "images/replaced.png"
+When 1st LeagueDisplay select-logo event is triggered
+Then Input dialog will be shown
+Then logoUrl of 1st LeagueDisplay is "images/replaced.png"
+Given Input dialog will return "null"
+When 1st LeagueDisplay select-logo event is triggered
+Then logoUrl of 1st LeagueDisplay is "images/replaced.png"
