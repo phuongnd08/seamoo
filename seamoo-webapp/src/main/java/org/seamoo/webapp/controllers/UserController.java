@@ -1,5 +1,11 @@
 package org.seamoo.webapp.controllers;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.seamoo.utils.converter.Converter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,22 +29,33 @@ public class UserController {
 		return mav;
 	}
 
+	@RequestMapping("/redirectLogin")
+	public String redirectLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// response.setContentType("text/html");
+		// request.getAttributeNames()
+		// request.getAttribute(arg0)
+		// request.getRequestURI()
+		// request.getRequestURL()
+		// response.getWriter().println();
+		return String.format("redirect:/users/login?returnUrl=%s", request.getAttribute("javax.servlet.forward.request_uri"));
+	}
+
 	@RequestMapping("/login")
-	public ModelAndView login() {
+	public ModelAndView login(@RequestParam("returnUrl") String returnUrl) {
 		ModelAndView mav = new ModelAndView("users.login");
 		mav.addObject("title", "Đăng nhập với Open ID của bạn");
+		mav.addObject("returnUrl", returnUrl);
 		return mav;
 	}
 
-//	@RequestMapping("/{userId}/{userName}")
-//	public ModelAndView viewProfile(@PathVariable("userId") long userId,
-//			@PathVariable("userName") String userName){
-//		return viewProfileTab(userId, userName, "profile");
-//	}
+	// @RequestMapping("/{userId}/{userName}")
+	// public ModelAndView viewProfile(@PathVariable("userId") long userId,
+	// @PathVariable("userName") String userName){
+	// return viewProfileTab(userId, userName, "profile");
+	// }
 	@RequestMapping("/{userId}/{userName}")
-	public ModelAndView viewProfileTab(@PathVariable("userId") long userId,
-			@PathVariable("userName") String userName,
-			@RequestParam(value="tab", required=false) String tab) {
+	public ModelAndView viewProfileTab(@PathVariable("userId") long userId, @PathVariable("userName") String userName,
+			@RequestParam(value = "tab", required = false) String tab) {
 		ModelAndView mav = null;
 		if (tab != null && tab.equals("discussion")) {
 			mav = new ModelAndView("user.discussion");

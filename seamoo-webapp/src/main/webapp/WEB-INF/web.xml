@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	version="2.5">
-
+	version="2.5" metadata-complete="true">
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener
-		</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -18,8 +15,7 @@
 
 	<servlet>
 		<servlet-name>messages</servlet-name>
-		<servlet-class>org.seamoo.webapp.example.web.MessagesServiceImpl
-		</servlet-class>
+		<servlet-class>org.seamoo.webapp.example.web.MessagesServiceImpl</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -28,8 +24,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>gwtbridge</servlet-name>
-		<servlet-class>org.workingonit.gwtbridge.GwtBridgeServlet
-		</servlet-class>
+		<servlet-class>org.workingonit.gwtbridge.GwtBridgeServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
@@ -39,10 +34,25 @@
 	</servlet-mapping>
 
 	<filter>
-		<filter-name>UrlRewriteFilter</filter-name>
-		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter
-		</filter-class>
+		<filter-name>openid-filter</filter-name>
+		<filter-class>com.dyuproject.openid.OpenIdServletFilter</filter-class>
+		<load-on-startup>1</load-on-startup>
+		<init-param>
+			<param-name>forwardUri</param-name>
+			<param-value>/app/users/redirectLogin</param-value> <!-- login page when user is not authenticated-->
+		</init-param>
 	</filter>
+
+	<filter-mapping>
+		<filter-name>openid-filter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+	</filter>
+
 
 	<filter-mapping>
 		<filter-name>UrlRewriteFilter</filter-name>
@@ -52,8 +62,7 @@
 	<!-- Declare Spring MVC DispatcherServlet -->
 	<servlet>
 		<servlet-name>spring-mvc</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet
-		</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
@@ -73,8 +82,7 @@
 
 	<servlet>
 		<servlet-name>freemarker</servlet-name>
-		<servlet-class>freemarker.ext.servlet.FreemarkerServlet
-		</servlet-class>
+		<servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
 
 		<init-param>
 			<param-name>TemplatePath</param-name>

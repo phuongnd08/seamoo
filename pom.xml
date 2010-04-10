@@ -57,6 +57,14 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+			<id>dyuproject-repo</id>
+			<name>dyuproject-repo</name>
+			<url>http://dyuproject.googlecode.com/svn/repos/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>

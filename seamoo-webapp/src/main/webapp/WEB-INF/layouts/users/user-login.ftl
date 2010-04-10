@@ -1,26 +1,29 @@
 [#ftl/]
-<form method="post" action="/users/authenticate" id="openid_form">       
-            [#-- Simple OpenID Selector --]
-    <div id="openid_choice" style="display: block;">
-        <p>Chọn nhà cung cấp <a href="http://openid.net/what/">OpenID</a> của bạn:</p>
-        <div id="openid_btns">
-        	<a class="openid_large_btn google" title="Google"></a>
-        	<a class="openid_large_btn yahoo" title="Yahoo"></a>
-        	<a class="openid_large_btn myopenid" title="MyOpenID"></a>
-        	<a class="openid_large_btn aol" title="AOL"></a>
-        	<br/>
-        	<a class="openid_small_btn livejournal" title="LiveJournal"></a>
-        	<a class="openid_small_btn wordpress" title="Wordpress"></a>
-        	<a class="openid_small_btn blogger" title="Blogger"></a>
-        	<a class="openid_small_btn verisign"title="Verisign"></a>
-        	<a class="openid_small_btn claimid" title="ClaimID"></a>
-        	<a class="openid_small_btn clickpass" title="ClickPass"></a>
-        	[#--<a class="openid_small_btn google_profile" title="Google Profile"></a>--]
-    	</div>
-    </div>
-	
-    <div id="cbt"></div>
-    <p>&nbsp;</p>
-    <p>Nếu bạn không sử dụng dịch vụ của một trong các nhà cung cấp trên, <a href="#">click vào đây để đăng kí với myOpenID</a></p>
-        
+[#import "/spring.ftl" as spring/]
+<script type="text/javascript" src="[@spring.url "/js/jquery-1.2.6.min.js"/]"></script>
+<script type="text/javascript" src="[@spring.url "/js/openid-jquery.js"/]"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		openid.img_path = "[@spring.url "/themes/so/images/openid/"/]";
+	    openid.init('openid_identifier');
+	});
+
+</script>
+<form method="post" id="openid_form" action="${returnUrl}">
+    [#-- Simple OpenID Selector --]
+	<div id="openid_choice" style="display: block;">
+	    <p>Chọn nhà cung cấp <a href="http://openid.net/what/">OpenID</a> của bạn:</p>
+	    <div id="openid_btns">
+	    	[#--jquery-openid plugin will init buttons here--]
+		</div>
+		
+	</div>
+
+	<div id="openid_input_area">
+		<input id="openid_identifier" name="openid_identifier" type="text" value="http://" />
+		<input id="openid_submit" type="submit" value="Sign-In"/>
+	</div>
 </form>
+<div id="cbt"></div>
+<p>&nbsp;</p>
+<p>Nếu bạn không sử dụng dịch vụ của một trong các nhà cung cấp trên, <a href="https://www.google.com/accounts/NewAccount">click vào đây để đăng kí một tài khoản với Google</a></p>
