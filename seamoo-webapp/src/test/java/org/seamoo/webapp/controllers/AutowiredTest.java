@@ -3,6 +3,7 @@ package org.seamoo.webapp.controllers;
 import static org.testng.Assert.*;
 
 import org.seamoo.persistence.daos.LeagueDao;
+import org.seamoo.persistence.daos.MemberDao;
 import org.seamoo.persistence.daos.SiteSettingDao;
 import org.seamoo.persistence.daos.SubjectDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class AutowiredTest extends AbstractTestNGSpringContextTests {
 	SiteSettingDao siteSettingDao;
 	@Autowired
 	LeagueDao leagueDao;
+	@Autowired
+	MemberDao memberDao;
 
 	@Test
 	public void subjectDAOShouldBeAutowired() {
@@ -35,4 +38,8 @@ public class AutowiredTest extends AbstractTestNGSpringContextTests {
 		assertNotNull(leagueDao);
 	}
 
+	@Test
+	public void memberDAOShouldBeAutowired() {
+		assertNotNull(memberDao);
+	}
 }

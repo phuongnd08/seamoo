@@ -11,5 +11,6 @@
 	<bean id="siteSettingDao" class="org.seamoo.persistence.daos.jdo.JdoSiteSettingDaoImpl" />
 	<bean id="subjectDao" class="org.seamoo.persistence.daos.jdo.JdoSubjectDaoImpl" />
 	<bean id="leagueDao" class="org.seamoo.persistence.daos.jdo.JdoLeagueDaoImpl" />
+	<bean id="memberDao" class="org.seamoo.persistence.daos.jdo.JdoMemberDaoImpl" />
 
 </beans>

@@ -390,6 +390,24 @@
 				<version>2.5</version>
 			</dependency>
 
+		<dependency>
+			<groupId>com.dyuproject</groupId>
+			<artifactId>dyuproject-util</artifactId>
+			<version>${dyuproject.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dyuproject</groupId>
+			<artifactId>dyuproject-openid</artifactId>
+			<version>${dyuproject.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty-util</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -399,6 +417,8 @@
 			sources
 		-->
 		<downloadSources>true</downloadSources>
+		<jetty.version>6.1.22</jetty.version>
+		<dyuproject.version>1.1-SNAPSHOT</dyuproject.version>
 		<gwt.testutils.version>0.2</gwt.testutils.version>
 		<utils.version>0.1</utils.version>
 		<junit.version>4.6</junit.version>

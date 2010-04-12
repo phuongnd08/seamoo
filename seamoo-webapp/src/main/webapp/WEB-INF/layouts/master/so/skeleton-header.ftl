@@ -7,17 +7,17 @@
 	</div>
 	<div id="topbar">
 		<div id="hlinks">
-			[#if remoteUser?exists]
-					<a href="[@spring.url "/users/recent/244000"/]"><img
+			[#if openid_user?exists]
+					<a href="#">
+					<img
 						src="${themeRoot}/images/replies-off.png"
 						title="you have no new replies" alt="" height="10" width="15"></a>
-					<a href="[@spring.url "/users/244000/phuong-nguyen"/]">Phuong
-					Nguyen</a>&nbsp;<span class="reputation-score" title="reputation score">47</span>
+					<a href="[@spring.url "/users/244000/phuong-nguyen"/]">Phuong Nguyen</a>&nbsp;<span class="reputation-score" title="reputation score">47</span>
 					<span title="4 bronze badges"></span>
 					<span class="lsep">|</span>
-					<a href="[@spring.url "/users/logout?returnurl=#"/]">logout</a>
+					<a href="[@spring.url "/users/logout?returnUrl=#"/]">logout</a>
 			[#else]
-					<a href="[@spring.url "/users/login?returnurl=#"/]">login</a>
+					<a href="[@spring.url "/users/login?returnUrl=#"/]">login</a>
 			[/#if] 
 			
 			<span class="lsep">|</span> <a href="[@spring.url "/about"/]">about</a>
