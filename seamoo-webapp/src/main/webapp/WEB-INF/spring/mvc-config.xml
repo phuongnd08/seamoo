@@ -14,6 +14,7 @@
 		Enable component scanning so that annotated controller can be picked
 		up and brought into use
 	-->
+	<context:annotation-config />
 	<context:component-scan base-package="org.seamoo.webapp.controllers" />
 
 	<!-- Configures the @Controller programming model -->

@@ -1,0 +1,51 @@
+!-- Test login page
+Given A MemberDao
+And A UserController
+And An RelyingParty
+And An authenticated OpenIdUser
+And An HttpServletRequest
+And returnUrl is null
+When User is logging in
+Then User is being routed to "redirect:/"
+Given returnUrl is "/leagues/2"
+When User is logging in
+Then User is being routed to "redirect:/leagues/2"
+Given A null OpenIdUser
+When User is logging in
+Then User is being routed to "users.login"
+And Key "returnUrl" with value "/leagues/2" is passed to view
+Given An unauthenticated OpenIdUser
+When User is logging in
+Then User is being routed to "users.login"
+And Key "returnUrl" with value "/leagues/2" is passed to view
+!-- Test first-seen page
+Given An authenticated OpenIdUser
+And Method is "get"
+And returnUrl is null
+And Member is on the System
+When User is being seen first time
+Then User is being routed to "redirect:/"
+Given returnUrl is "/leagues/2"
+When User is being seen first time
+Then User is being routed to "redirect:/leagues/2"
+Given Member is not on the System
+When User is being seen first time
+Then User is being routed to "users.first-time"
+Given Method is "post"
+And returnUrl is null
+And Command is "cancel"
+When User is being seen first time
+Then RelyingParty is invalidated
+And User is being routed to "redirect:/"
+Given returnUrl is "/leagues/2"
+And Command is "cancel"
+When User is being seen first time
+Then User is being routed to "redirect:/leagues/2"
+Given Command is "create"
+Given returnUrl is null
+When User is being seen first time
+Then Member is created
+And User is being routed to "redirect:/"
+Given returnUrl is "/leagues/2"
+When User is being seen first time
+Then User is being routed to "redirect:/leagues/2"

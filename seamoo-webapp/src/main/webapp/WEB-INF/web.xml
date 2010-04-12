@@ -3,21 +3,18 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5" metadata-complete="true">
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener
-		</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/spring/app-config.xml
 			classpath:dao-context.xml
+			/WEB-INF/spring/context-config.xml
 		</param-value>
 	</context-param>
-
 	<servlet>
 		<servlet-name>messages</servlet-name>
-		<servlet-class>org.seamoo.webapp.example.web.MessagesServiceImpl
-		</servlet-class>
+		<servlet-class>org.seamoo.webapp.example.web.MessagesServiceImpl</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -26,8 +23,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>gwtbridge</servlet-name>
-		<servlet-class>org.workingonit.gwtbridge.GwtBridgeServlet
-		</servlet-class>
+		<servlet-class>org.workingonit.gwtbridge.GwtBridgeServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
@@ -42,30 +38,42 @@
 		<load-on-startup>1</load-on-startup>
 		<init-param>
 			<param-name>forwardUri</param-name>
-			<param-value>/app/users/redirectLogin</param-value> <!-- login page when user is not authenticated-->
+			<param-value>/users/login</param-value> <!-- login page when user is not authenticated-->
+		</init-param>
+		<init-param>
+			<param-name>forwardUriHandler</param-name>
+			<param-value>org.seamoo.webapp.filters.RedirectUriHandler</param-value>
+		</init-param>
+	</filter>
+
+	<!-- Put memberFilter first to avoid /user/login being a returnUrl of /users/first-seen -->
+	<filter>
+		<filter-name>memberFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>firstSeenUri</param-name>
+			<param-value>/users/first-seen</param-value>
 		</init-param>
 	</filter>
 
 	<filter-mapping>
-		<filter-name>openid-filter</filter-name>
-		<url-pattern>/admin/*</url-pattern>
+		<filter-name>memberFilter</filter-name>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<filter>
-		<filter-name>userprofile-injection-filter</filter-name>
-		<filter-class>org.seamoo.webapp.filters.UserProfileInjectionFilter
-		</filter-class>
-	</filter>
-
 	<filter-mapping>
-		<filter-name>userprofile-injection-filter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<filter-name>openid-filter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/users/login</url-pattern>
 	</filter-mapping>
 
 	<filter>
 		<filter-name>UrlRewriteFilter</filter-name>
-		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter
-		</filter-class>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
 	</filter>
 
 
@@ -77,13 +85,11 @@
 	<!-- Declare Spring MVC DispatcherServlet -->
 	<servlet>
 		<servlet-name>spring-mvc</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet
-		</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				/WEB-INF/spring/app-config.xml
-				classpath:dao-context.xml
+				/WEB-INF/spring/servlet-config.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -98,8 +104,7 @@
 
 	<servlet>
 		<servlet-name>freemarker</servlet-name>
-		<servlet-class>freemarker.ext.servlet.FreemarkerServlet
-		</servlet-class>
+		<servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
 
 		<init-param>
 			<param-name>TemplatePath</param-name>

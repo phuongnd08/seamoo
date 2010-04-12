@@ -9,7 +9,7 @@
 	});
 
 </script>
-<form method="post" id="openid_form" action="${returnUrl}">
+<form method="post" id="openid_form" action="?returnUrl=${returnUrl!""}">
     [#-- Simple OpenID Selector --]
 	<div id="openid_choice" style="display: block;">
 	    <p>Chọn nhà cung cấp <a href="http://openid.net/what/">OpenID</a> của bạn:</p>

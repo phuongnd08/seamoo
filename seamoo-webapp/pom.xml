@@ -17,27 +17,6 @@
 
 	<dependencies>
 
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>seamoo-model</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>seamoo-persistence</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>seamoo-theme</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>seamoo-test-resources</artifactId>
-			<version>${project.version}</version>
-			<scope>test</scope>
-		</dependency>
 		<!--
 			jars from GAE's "lib/user" must be added as compile-time
 			dependencies, as described here in "Copying JARs" section:
@@ -103,10 +82,10 @@
 		<!--			<artifactId>gwt-widgets-server</artifactId>-->
 		<!--		</dependency>-->
 
-		<dependency>
-			<groupId>xalan</groupId>
-			<artifactId>xalan</artifactId>
-		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>xalan</groupId>-->
+		<!--			<artifactId>xalan</artifactId>-->
+		<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -247,6 +226,27 @@
 			<artifactId>jetty-util</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>seamoo-model</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>seamoo-persistence</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>seamoo-theme</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>seamoo-test-resources</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -256,7 +256,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.5</version>
 				<configuration>
+					<forkMode>once</forkMode>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/testng-unit-test.xml</suiteXmlFile>
 					</suiteXmlFiles>
@@ -365,31 +367,40 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.1</version>
 				<executions>
-					<execution>
-						<id>copy-rpc-policy</id>
-						<phase>test-compile</phase>
-						<configuration>
-							<tasks>
-								<!-- Remote old GWT policies files (for Async RPC testing) -->
-								<delete>
-									<fileset dir="${basedir}/src/test/resources" includes="*.gwt.rpc" />
-								</delete>
-
-								<!--
-									Copy fresh generated GWT policies files to test resources
-								-->
-								<copy todir="${basedir}/src/test/resources" flatten="true">
-									<fileset
-										dir="${project.build.directory}/${project.build.finalName}"
-										includes="**/*.gwt.rpc">
-									</fileset>
-								</copy>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
+					<!--					<execution>-->
+					<!--						<id>copy-rpc-policy</id>-->
+					<!--						<phase>test-compile</phase>-->
+					<!--						<configuration>-->
+					<!--							<tasks>-->
+					<!--								 Remote old GWT policies files (for Async RPC testing) -->
+					<!--								<delete>-->
+					<!--
+						<fileset dir="${basedir}/src/test/resources" includes="*.gwt.rpc"
+						/>
+					-->
+					<!--								</delete>-->
+<!---->
+					<!--								-->
+					<!--
+						Copy fresh generated GWT policies files to test resources
+					-->
+					<!--								-->
+					<!--
+						<copy todir="${basedir}/src/test/resources" flatten="true">
+					-->
+					<!--									<fileset-->
+					<!--
+						dir="${project.build.directory}/${project.build.finalName}"
+					-->
+					<!--										includes="**/*.gwt.rpc">-->
+					<!--									</fileset>-->
+					<!--								</copy>-->
+					<!--							</tasks>-->
+					<!--						</configuration>-->
+					<!--						<goals>-->
+					<!--							<goal>run</goal>-->
+					<!--						</goals>-->
+					<!--					</execution>-->
 					<execution>
 						<id>generate-database</id>
 						<phase>pre-integration-test</phase>

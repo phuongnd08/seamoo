@@ -1,0 +1,20 @@
+login-filter: for page with authentication require
+	authenticated: continue 
+	not authenticated: redirect to /users/login
+/users/login->submit to /users/verify?returnUrl=${returnUrl!""} (have filter works over the /users/verify page)
+
+/users/verify: 
+	${returnUrl==null/returnUrl==""}?
+		true: redirect to /
+		false: redirect to ${returnUrl}
+	
+member-profile-filter:
+	if (url.startWith /users/first-time) continue filter chain
+	else  
+		get open id
+			open id available? get-member
+				available->inject member into request & continue filter chain
+				not-available->redirect-to /users/first-time
+					->either create a profile: POST /users/first-time?cmd=create, redirect
+					->either invalidate session: POST /users/first-time?cmd=cancel, redirect 
+			not available->continue filter chain
