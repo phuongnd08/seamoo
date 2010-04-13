@@ -34,7 +34,7 @@
 
 	<filter>
 		<filter-name>openid-filter</filter-name>
-		<filter-class>com.dyuproject.openid.OpenIdServletFilter</filter-class>
+		<filter-class>org.seamoo.webapp.filters.OpenIdAuthenticationFilter</filter-class>
 		<load-on-startup>1</load-on-startup>
 		<init-param>
 			<param-name>forwardUri</param-name>
@@ -46,7 +46,10 @@
 		</init-param>
 	</filter>
 
-	<!-- Put memberFilter first to avoid /user/login being a returnUrl of /users/first-seen -->
+	<!--
+		Put memberFilter first to avoid /user/login being a returnUrl of
+		/users/first-seen
+	-->
 	<filter>
 		<filter-name>memberFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -69,6 +72,7 @@
 		<filter-name>openid-filter</filter-name>
 		<url-pattern>/admin/*</url-pattern>
 		<url-pattern>/users/login</url-pattern>
+		<url-pattern>/users/first-seen</url-pattern>
 	</filter-mapping>
 
 	<filter>

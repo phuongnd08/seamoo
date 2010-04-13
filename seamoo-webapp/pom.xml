@@ -461,6 +461,9 @@
 			<plugin>
 				<groupId>net.kindleit</groupId>
 				<artifactId>maven-gae-plugin</artifactId>
+				<configuration>
+					<disableUpdateCheck>true</disableUpdateCheck>
+				</configuration>
 			</plugin>
 
 			<!--

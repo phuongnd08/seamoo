@@ -20,6 +20,7 @@ import com.dyuproject.openid.RelyingParty;
 
 public class MemberInjectionFilter implements Filter {
 
+	public static final String MEMBER_FIELD = "member";
 	@Autowired
 	MemberDao memberDao;
 	String firstSeenUri;
@@ -37,7 +38,7 @@ public class MemberInjectionFilter implements Filter {
 		try {
 			OpenIdUser openIdUser = RelyingParty.getInstance().discover((HttpServletRequest) request);
 			System.out.println("Discover OpenIdUser " + openIdUser);
-			if (openIdUser != null) {
+			if (openIdUser != null && openIdUser.isAuthenticated()) {
 				Member member = memberDao.findById(openIdUser.getClaimedId());
 				if (member == null) {
 					System.out.println("User never seen on system, route to first-seen");
@@ -48,7 +49,7 @@ public class MemberInjectionFilter implements Filter {
 					}
 				} else
 					System.out.println("User seen on system: " + member.toString());
-				request.setAttribute("member", member);// inject member
+				request.setAttribute(MEMBER_FIELD, member);// inject member
 				// information into
 				// context
 			}

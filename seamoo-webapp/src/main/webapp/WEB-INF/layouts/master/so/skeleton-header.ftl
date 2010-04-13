@@ -7,12 +7,12 @@
 	</div>
 	<div id="topbar">
 		<div id="hlinks">
-			[#if openid_user?exists]
+			[#if member?exists]
 					<a href="#">
 					<img
 						src="${themeRoot}/images/replies-off.png"
 						title="you have no new replies" alt="" height="10" width="15"></a>
-					<a href="[@spring.url "/users/244000/phuong-nguyen"/]">Phuong Nguyen</a>&nbsp;<span class="reputation-score" title="reputation score">47</span>
+					<a href="#">${member.email!"(unknown)"}</a>&nbsp;<span class="reputation-score" title="reputation score">0</span>
 					<span title="4 bronze badges"></span>
 					<span class="lsep">|</span>
 					<a href="[@spring.url "/users/logout?returnUrl=#"/]">logout</a>
