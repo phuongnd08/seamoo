@@ -1,0 +1,40 @@
+Given A list of subjects
+And A list of leagues
+And A QuestionCreatorDisplay
+And A UserQuestionServiceAsync
+And A QuestionCreatorPresenter
+When QuestionCreatorPresenter initialize
+Then UserQuestionServiceAsync load subjects list
+And QuestionCreatorDisplay is assigned a subjects list
+And UserQuestionServiceAsync load leagues list of 1st subject
+And QuestionCreatorDisplay is assigned a leagues list
+!-- Make sure display response properly to change in active subject
+Given QuestionCreatorDisplay forgot its interaction
+When 2nd subject is selected
+Then UserQuestionServiceAsync load leagues list of 2nd subject
+And QuestionCreatorDisplay is assigned a leagues list
+!-- Make sure presenter use cache properly
+Given QuestionCreatorDisplay forgot its interaction
+And UserQuestionServiceAsync forgot its interaction
+When 1st subject is selected
+Then UserQuestionServiceAsync doesn't reload leagues list of 1st subject
+And QuestionCreatorDisplay is assigned a leagues list
+!-- Make sure presenter response properly to question type switching
+Given QuestionCreatorDisplay forgot its interaction
+When multiple-choices is selected as question type
+Then QuestionCreatorDisplay question type is switched to multiple-choices
+When fill-in-blank is selected as question type
+Then QuestionCreatorDisplay question type is switched to fill-in-blank
+When listening is selected as question type
+Then QuestionCreatorDisplay question type is switched to listening
+!-- Persist data
+Given QuestionCreatorDisplay return 1st subject for getCurrentSubject
+And QuestionCreatorDisplay return 4th league for getCurrentLeague
+Given UserQuestionServiceAsync raise "Tag must not be empty" on creating question
+When Question is saved
+Then UserQuestionServiceAsync save question with leagueId=4
+Then QuestionCreatorDisplay error message is assigned to "Tag must not be empty"
+Given UserQuestionServiceAsync is successful on creating question with id=1 & alias=do-some-thing
+When Question is saved
+Then QuestionCreatorDisplay error message is assigned to "Question created"
+Then Page is redirected to "/questions/1/do-some-thing"

@@ -38,7 +38,7 @@
 	</div>
 	<br/>
 	<h3>Câu trả lời</h3>
-	<div><input type="text" size="80"/></div>
+	<div><input type="text" size="60"/></div>
 	<div class="sc">
 		<h3>Các câu hỏi tương tự</h3>
 		<div style="height: 150px; overflow-y: scroll">
@@ -60,7 +60,7 @@
 	<div>
 		<h3>Từ khóa</h3>
 		<div><em>Nối từ-khóa-dài bằng dấu gạch, dùng dấu cách để nối tối đa 5 từ khóa (Ví dụ: <strong>tiếng-anh phát-âm</strong>)</em></div>
-		<p><input type="text" size="80" value="english preposition"/></p>
+		<p><input type="text" size="60" value="english preposition"/></p>
 	</div>
 	<br/>
 	<div>
