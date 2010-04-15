@@ -13,12 +13,12 @@
     <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
   </elementImport>
   <packagedElement xmi:type="uml:Class" xmi:id="_FTuocBPUEd-o6Mbf-aRYTg" name="Match">
-    <ownedAttribute xmi:id="_FTuocRPUEd-o6Mbf-aRYTg" name="formingTime" aggregation="composite"/>
-    <ownedAttribute xmi:id="_FTuochPUEd-o6Mbf-aRYTg" name="startTime" aggregation="composite"/>
-    <ownedAttribute xmi:id="_FTuocxPUEd-o6Mbf-aRYTg" name="endTime" aggregation="composite"/>
+    <ownedAttribute xmi:id="_FTuocRPUEd-o6Mbf-aRYTg" name="formedTime" aggregation="composite"/>
+    <ownedAttribute xmi:id="_FTuochPUEd-o6Mbf-aRYTg" name="startedTime" aggregation="composite"/>
+    <ownedAttribute xmi:id="_FTuocxPUEd-o6Mbf-aRYTg" name="endedTime" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_FTv2kBPUEd-o6Mbf-aRYTg" name="MatchCompetitor">
-    <ownedAttribute xmi:id="_FTv2kRPUEd-o6Mbf-aRYTg" name="participateTime" aggregation="composite"/>
+    <ownedAttribute xmi:id="_FTv2kRPUEd-o6Mbf-aRYTg" name="participatedTime" aggregation="composite"/>
     <ownedAttribute xmi:id="_FTv2khPUEd-o6Mbf-aRYTg" name="totalScore" aggregation="composite"/>
     <ownedAttribute xmi:id="_FTv2kxPUEd-o6Mbf-aRYTg" name="rank" aggregation="composite"/>
     <ownedAttribute xmi:id="_FTv2lBPUEd-o6Mbf-aRYTg" name="endTime" aggregation="composite"/>
@@ -153,5 +153,29 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_86AMQRS2Ed-DJNqI1jqpJA" value="1"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_86AMQBS2Ed-DJNqI1jqpJA" value="1"/>
     </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_2NDL4EfWEd-zcZidVsYO6g" name="MatchAnswerType">
+    <ownedLiteral xmi:id="_4sUDoEfWEd-zcZidVsYO6g" name="SUBMITTED"/>
+    <ownedLiteral xmi:id="_5AXoEEfWEd-zcZidVsYO6g" name="IGNORED"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_AD-0wEfXEd-zcZidVsYO6g" memberEnd="_AEE7YEfXEd-zcZidVsYO6g _AEJz4EfXEd-zcZidVsYO6g">
+    <ownedEnd xmi:id="_AEE7YEfXEd-zcZidVsYO6g" name="type" type="_FTxEsBPUEd-o6Mbf-aRYTg" association="_AD-0wEfXEd-zcZidVsYO6g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_AEIlwEfXEd-zcZidVsYO6g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_AEHXoEfXEd-zcZidVsYO6g" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_AEJz4EfXEd-zcZidVsYO6g" name="dst" type="_2NDL4EfWEd-zcZidVsYO6g" association="_AD-0wEfXEd-zcZidVsYO6g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_AELCAUfXEd-zcZidVsYO6g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_AELCAEfXEd-zcZidVsYO6g" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ijjxQEgtEd-H2b45jNtFjw" name="MatchState">
+    <ownedAttribute xmi:id="_k2Z9oEgtEd-H2b45jNtFjw" name="phase" aggregation="composite"/>
+    <ownedAttribute xmi:id="_nDFQkEgtEd-H2b45jNtFjw" name="bufferedFrom" aggregation="composite"/>
+    <ownedAttribute xmi:id="_uxH6UEgtEd-H2b45jNtFjw" name="remainingPeriod" aggregation="composite"/>
+    <ownedAttribute xmi:id="_xinKgEgtEd-H2b45jNtFjw" name="recheckPeriod" aggregation="composite"/>
+    <ownedAttribute xmi:id="_0DUzwEgtEd-H2b45jNtFjw" name="periodLength" aggregation="composite"/>
+    <ownedAttribute xmi:id="_BdQCQEguEd-H2b45jNtFjw" name="bufferedFrom" aggregation="composite"/>
+    <ownedAttribute xmi:id="_B_X34EguEd-H2b45jNtFjw" name="bufferedQuestions" aggregation="composite"/>
+    <ownedAttribute xmi:id="_FAp3kEguEd-H2b45jNtFjw" name="matchAutoId" aggregation="composite"/>
   </packagedElement>
 </uml:Package>
