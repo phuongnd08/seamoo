@@ -131,6 +131,7 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_061WQBS2Ed-DJNqI1jqpJA" name="MatchCandidate">
     <ownedAttribute xmi:id="_061WQRS2Ed-DJNqI1jqpJA" name="lastRequestTime" aggregation="composite"/>
+    <ownedAttribute xmi:id="_Ol0QAEinEd-VLb0IPJat-g" name="currentMatch" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_8iaLoBS2Ed-DJNqI1jqpJA" memberEnd="_8iedEBS2Ed-DJNqI1jqpJA _8ihgYBS2Ed-DJNqI1jqpJA">
     <ownedEnd xmi:id="_8iedEBS2Ed-DJNqI1jqpJA" name="member" type="_061WQBS2Ed-DJNqI1jqpJA" association="_8iaLoBS2Ed-DJNqI1jqpJA">

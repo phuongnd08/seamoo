@@ -1,0 +1,23 @@
+Given A Match Organizer
+And There is no active match
+When Organizer initialize
+Then All Active Matches Are Loaded
+Given Current Time is 10:00:00
+When 1st user request for Match State
+Given Current Time is 10:00:01
+When 2nd user request for Match State
+Adn 3rd user request for Match State
+And 4th user request for Match State
+Then 1st Match Phase is FORMED
+Given Current Time is 10:00:11
+When 1st user request for Match State
+Then 1st Match Phase is PLAYING
+Given Current Time is 10:00:21
+When 1st user submit 10 answers
+And 2nd user submit 10 answers
+And 3rd user submit 10 answers
+And 4th user submit 10 answers
+When 1st user request for Match State
+Then 1st Match Phase is FINISHED
+And 1st Match is persisted
+And 1st Match is returned

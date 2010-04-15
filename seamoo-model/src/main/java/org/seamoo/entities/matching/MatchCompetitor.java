@@ -24,7 +24,8 @@ public class MatchCompetitor implements Serializable {
 	private Date participatedTime;
 	private double totalScore;
 	private int rank;
-	private Date endTime;
+	private Date finishedTime;
+	private Date lastSeenTime;
 	private int passedQuestionCount;
 
 	public void setParticipatedTime(Date participatedTime) {
@@ -60,11 +61,11 @@ public class MatchCompetitor implements Serializable {
 	}
 
 	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
+		this.finishedTime = endTime;
 	}
 
 	public Date getEndTime() {
-		return endTime;
+		return finishedTime;
 	}
 
 	public void setPassedQuestionCount(int passedQuestionCount) {
