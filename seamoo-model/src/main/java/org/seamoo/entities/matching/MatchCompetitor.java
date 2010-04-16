@@ -1,9 +1,12 @@
 package org.seamoo.entities.matching;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
 import org.seamoo.entities.Member;
 
@@ -20,13 +23,24 @@ public class MatchCompetitor implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1680471706907193985L;
+	@Persistent
 	private Member member;
+	@Persistent
 	private Date participatedTime;
+	@Persistent
 	private double totalScore;
+	@Persistent
 	private int rank;
-	private Date finishedTime;
-	private Date lastSeenTime;
+	@Persistent
+	private long finishedMoment;
+	@Persistent
 	private int passedQuestionCount;
+	@Persistent
+	private List<MatchAnswer> answers;
+
+	public MatchCompetitor() {
+		answers = new ArrayList<MatchAnswer>();
+	}
 
 	public void setParticipatedTime(Date participatedTime) {
 		this.participatedTime = participatedTime;
@@ -60,19 +74,36 @@ public class MatchCompetitor implements Serializable {
 		return rank;
 	}
 
-	public void setEndTime(Date endTime) {
-		this.finishedTime = endTime;
-	}
-
-	public Date getEndTime() {
-		return finishedTime;
-	}
-
 	public void setPassedQuestionCount(int passedQuestionCount) {
 		this.passedQuestionCount = passedQuestionCount;
 	}
 
 	public int getPassedQuestionCount() {
 		return passedQuestionCount;
+	}
+
+	public void addAnswer(int position, MatchAnswer answer) {
+		if (position == answers.size())
+			answers.add(answer);
+		else if (position < answers.size())
+			answers.set(position, answer);
+		else /* position>answers.size() */{
+			for (int i = answers.size(); i < position; i++)
+				answers.add(null);
+			answers.add(answer);
+		}
+		passedQuestionCount++;
+	}
+
+	public List<MatchAnswer> getAnswers() {
+		return answers;
+	}
+
+	public void setFinishedMoment(long finishedMoment) {
+		this.finishedMoment = finishedMoment;
+	}
+
+	public long getFinishedMoment() {
+		return finishedMoment;
 	}
 }

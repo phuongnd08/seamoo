@@ -14,10 +14,8 @@ And 2nd user last signal is 10:00:10
 And Current Time is 10:00:11
 When 1st user request for Match
 Then 1st Match Phase is PLAYING
-Given Current Time is 10:00:15
-When 1st user submit 20 answers
-And 2nd user ignore 20 questions
-When 1st user request for Match
-Then 1st Match is returned
-And 1st Match Phase is FINISHED
-And 1st Match is persisted
+Given Current Time is 10:00:20
+When 1st user submit 10 answers
+And 1st user request for Match
+Then 2nd Match is returned
+And 2nd Match Phase is NOT_FORMED

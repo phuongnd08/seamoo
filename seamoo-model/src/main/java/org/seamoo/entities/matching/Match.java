@@ -1,5 +1,6 @@
 package org.seamoo.entities.matching;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,36 +17,20 @@ public class Match {
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long autoId;
 	@Persistent
-	private Date formedTime;
+	private long formedMoment;
 	@Persistent
-	private Date startedTime;
+	private long startedMoment;
 	@Persistent
-	private Date endedTime;
+	private long endedMoment;
 	@Persistent
 	private List<Question> questions;
+	@Persistent
+	private List<MatchCompetitor> competitors;
+	@Persistent
+	private MatchPhase phase;
 
-	public void setFormedTime(Date formedTime) {
-		this.formedTime = formedTime;
-	}
-
-	public Date getFormedTime() {
-		return formedTime;
-	}
-
-	public void setStartedTime(Date startedTime) {
-		this.startedTime = startedTime;
-	}
-
-	public Date getStartedTime() {
-		return startedTime;
-	}
-
-	public void setEndedTime(Date endedTime) {
-		this.endedTime = endedTime;
-	}
-
-	public Date getEndedTime() {
-		return endedTime;
+	public Match() {
+		competitors = new ArrayList<MatchCompetitor>();
 	}
 
 	public void setAutoId(Long autoId) {
@@ -62,5 +47,45 @@ public class Match {
 
 	public List<Question> getQuestions() {
 		return questions;
+	}
+
+	public void setPhase(MatchPhase phase) {
+		this.phase = phase;
+	}
+
+	public MatchPhase getPhase() {
+		return phase;
+	}
+
+	public void setFormedMoment(long formedMoment) {
+		this.formedMoment = formedMoment;
+	}
+
+	public long getFormedMoment() {
+		return formedMoment;
+	}
+
+	public void setStartedMoment(long startedMoment) {
+		this.startedMoment = startedMoment;
+	}
+
+	public long getStartedMoment() {
+		return startedMoment;
+	}
+
+	public void setEndedMoment(long endedMoment) {
+		this.endedMoment = endedMoment;
+	}
+
+	public long getEndedMoment() {
+		return endedMoment;
+	}
+
+	public void setCompetitors(List<MatchCompetitor> competitors) {
+		this.competitors = competitors;
+	}
+
+	public List<MatchCompetitor> getCompetitors() {
+		return competitors;
 	}
 }

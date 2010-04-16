@@ -53,7 +53,7 @@ public class JdoSiteSettingDaoImplTest extends LocalDatastoreTest {
 	@Test
 	public void assignNonExistentSettingShouldCreateNewEntity() {
 		siteSettingDAO.assignSetting("model", "bootstrap");
-		assertNotNull(siteSettingDAO.findById("model"));
+		assertNotNull(siteSettingDAO.findByKey("model"));
 	}
 
 	@Test
@@ -61,7 +61,7 @@ public class JdoSiteSettingDaoImplTest extends LocalDatastoreTest {
 		SiteSetting setting = new SiteSetting("model", "bootstrap");
 		siteSettingDAO.persist(setting);
 		siteSettingDAO.assignSetting("model", "normal");
-		assertEquals("normal", siteSettingDAO.findById("model").getValue());
+		assertEquals("normal", siteSettingDAO.findByKey("model").getValue());
 	}
 
 	@Test

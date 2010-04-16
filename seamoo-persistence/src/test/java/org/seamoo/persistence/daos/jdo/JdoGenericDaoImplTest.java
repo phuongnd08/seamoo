@@ -40,7 +40,7 @@ public class JdoGenericDaoImplTest extends LocalDatastoreTest {
 	@Test
 	public void retrieveOfNonExistentObjectReturnNull() {
 		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
-		assertEquals(null, daoImpl.findById(new Long(10000)));
+		assertEquals(null, daoImpl.findByKey(new Long(10000)));
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class JdoGenericDaoImplTest extends LocalDatastoreTest {
 		testModel.setField("Ronaldo");
 		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
 		daoImpl.persist(testModel);
-		ExampleModel reloadedTestModel = daoImpl.findById(new Long(1));
+		ExampleModel reloadedTestModel = daoImpl.findByKey(new Long(1));
 		assertEquals("Ronaldo", reloadedTestModel.getField());
 	}
 
@@ -78,6 +78,6 @@ public class JdoGenericDaoImplTest extends LocalDatastoreTest {
 		ExampleModel transientModel = new ExampleModel();
 		transientModel.setAutoId(model.getAutoId());
 		daoImpl.delete(transientModel);
-		assertEquals(null, daoImpl.findById(model.getAutoId()));
+		assertEquals(null, daoImpl.findByKey(model.getAutoId()));
 	}
 }

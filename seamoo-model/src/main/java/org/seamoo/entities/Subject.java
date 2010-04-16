@@ -2,7 +2,6 @@ package org.seamoo.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
@@ -28,7 +27,8 @@ public class Subject implements Serializable {
 	private boolean enabled;
 	@Persistent
 	private Date addedTime;
-	//private List<League> leagues;
+
+	// private List<League> leagues;
 
 	public Subject() {
 

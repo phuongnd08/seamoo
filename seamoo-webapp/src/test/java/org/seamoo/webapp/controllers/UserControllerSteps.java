@@ -107,9 +107,9 @@ public class UserControllerSteps {
 	@Given("Member is $status the System")
 	public void setUpMemberStatus(String status) {
 		if (status.equals("on")) {
-			when(memberDao.findById(anyString())).thenReturn(new Member());
+			when(memberDao.findByKey(anyString())).thenReturn(new Member());
 		} else if (status.equals("not on")) {
-			when(memberDao.findById(anyString())).thenReturn(null);
+			when(memberDao.findByKey(anyString())).thenReturn(null);
 		} else
 			throw new RuntimeException(String.format("Status \"%s\" is not supported", status));
 	}

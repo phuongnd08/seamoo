@@ -1,4 +1,4 @@
-package org.seamoo.webapp;
+package org.seamoo.test;
 
 import org.jbehave.scenario.JUnitScenario;
 import org.jbehave.scenario.MostUsefulConfiguration;
@@ -9,11 +9,7 @@ import org.jbehave.scenario.parser.PowerMockUnderscoredCamelCaseResolver;
 import org.jbehave.scenario.parser.ScenarioDefiner;
 import org.jbehave.scenario.steps.StepsFactory;
 import org.testng.IObjectFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.ObjectFactory;
-
-import com.google.gwt.junit.GWTMockUtilities;
 
 public abstract class PowerMockedBddScenario extends JUnitScenario {
 

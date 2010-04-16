@@ -1,4 +1,3 @@
-!-- There is no match yet
 Given There is no active match
 And A list of 10 users
 And A Match Dao
@@ -10,18 +9,19 @@ When 1st user request for Match
 Then 1st Match is created
 And 1st Match Phase is NOT_FORMED
 And 1st Match is returned
-Given Current Time is 10:00:08
 When 2nd user request for Match
+Then 1st Match Phase is FORMED
+And 1st Match is returned
+!-- 3rd user can join this match
+Given Current Time is 10:00:05
+When 2nd user request for Match
+And 3rd user request for Match
+And 4th user request for Match
 Then 1st Match is returned
-And 1st Match Phase is NOT_FORMED
-And 1st Match has 1 player
-Given Current Time is 10:00:13
-When 3rd user request for Match
+Given Current Time is 10:00:06
+When 5th user request for Match
 Then 1st Match is returned
-And 1st Match Phase is FORMED
-And 1st Match has 2 players
-Given Current Time is 10:00:14
-When 3rd user request for Match
-Then 1st Match is returned
-And 1st Match has 1 player
-And 1st Match Phase is NOT_FORMED
+When 1st user request for Match
+Then 2nd Match is created
+And 2nd Match Phase is NOT_FORMED
+And 2nd Match is returned

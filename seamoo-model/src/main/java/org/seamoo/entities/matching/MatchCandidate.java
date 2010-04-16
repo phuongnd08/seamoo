@@ -8,7 +8,8 @@ import org.seamoo.entities.Member;
 public class MatchCandidate {
 	private Member member;
 	private League league;
-	private Date lastRequestTime;
+	private long lastSeenMoment;
+	private Match currentMatch;
 
 	public void setMember(Member member) {
 		this.member = member;
@@ -26,11 +27,19 @@ public class MatchCandidate {
 		return league;
 	}
 
-	public void setLastRequestTime(Date lastRequestTime) {
-		this.lastRequestTime = lastRequestTime;
+	public void setCurrentMatch(Match currentMatch) {
+		this.currentMatch = currentMatch;
 	}
 
-	public Date getLastRequestTime() {
-		return lastRequestTime;
+	public Match getCurrentMatch() {
+		return currentMatch;
+	}
+
+	public void setLastSeenMoment(long lastSeenMoment) {
+		this.lastSeenMoment = lastSeenMoment;
+	}
+
+	public long getLastSeenMoment() {
+		return lastSeenMoment;
 	}
 }

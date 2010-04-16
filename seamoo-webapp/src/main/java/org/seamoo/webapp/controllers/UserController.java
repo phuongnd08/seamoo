@@ -82,7 +82,7 @@ public class UserController {
 			@RequestParam(value = "returnUrl", required = false) String returnUrl,
 			@RequestParam(value = "cmd", required = false) String cmd) throws Exception {
 		OpenIdUser user = RelyingParty.getInstance().discover(request);
-		Member member = memberDao.findById(user.getClaimedId());
+		Member member = memberDao.findByKey(user.getClaimedId());
 		if (member != null) {
 			return new ModelAndView(getRedirectView(request, returnUrl));
 		}

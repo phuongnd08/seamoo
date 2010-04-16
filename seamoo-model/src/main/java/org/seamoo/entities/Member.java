@@ -2,15 +2,20 @@ package org.seamoo.entities;
 
 import java.util.Date;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.annotations.Unique;
 
 @PersistenceCapable
 public class Member {
-	@PrimaryKey
+	@Unique
 	@Persistent
 	private String openId;
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Long autoId;
 	@Persistent
 	private String displayName;
 	@Persistent
@@ -136,5 +141,13 @@ public class Member {
 
 	public Date getLastLocked() {
 		return lastLocked;
+	}
+
+	public void setAutoId(Long autoId) {
+		this.autoId = autoId;
+	}
+
+	public Long getAutoId() {
+		return autoId;
 	}
 }

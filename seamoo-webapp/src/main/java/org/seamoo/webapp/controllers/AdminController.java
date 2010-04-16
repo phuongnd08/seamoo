@@ -31,7 +31,7 @@ public class AdminController {
 	public ModelAndView manageLeagues(@PathVariable long subjectAutoId) {
 		ModelAndView mav = new ModelAndView("admin.leagues");
 		mav.addObject("title", "Manage leagues");
-		mav.addObject("currentSubject", subjectDao.findById(subjectAutoId));
+		mav.addObject("currentSubject", subjectDao.findByKey(subjectAutoId));
 		return mav;
 	}
 

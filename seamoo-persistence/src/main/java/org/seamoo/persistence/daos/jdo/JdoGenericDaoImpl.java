@@ -30,7 +30,7 @@ public abstract class JdoGenericDaoImpl<TEntity, TKey> implements GenericDao<TEn
 		this(PMF.get());
 	}
 
-	public TEntity findById(TKey key) {
+	public TEntity findByKey(TKey key) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		try {
 			return pm.getObjectById(entityClass, key);

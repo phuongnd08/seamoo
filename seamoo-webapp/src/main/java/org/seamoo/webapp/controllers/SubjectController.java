@@ -28,7 +28,7 @@ public class SubjectController {
 			@PathVariable("subjectAlias") String subjectAlias) {
 		ModelAndView mav = new ModelAndView("subjects.detail");
 		mav.addObject("title", "English");
-		mav.addObject("subject", subjectDao.findById(subjectId));
+		mav.addObject("subject", subjectDao.findByKey(subjectId));
 		return mav;
 	}
 }

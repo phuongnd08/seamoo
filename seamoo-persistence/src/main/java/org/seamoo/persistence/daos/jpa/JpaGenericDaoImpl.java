@@ -25,7 +25,7 @@ public abstract class JpaGenericDaoImpl<TEntity, TKey> implements
 		this(EMF.get());
 	}
 
-	public TEntity findById(TKey key) {
+	public TEntity findByKey(TKey key) {
 		EntityManager em = emf.createEntityManager();
 		return em.find(entityClass, key);
 	}

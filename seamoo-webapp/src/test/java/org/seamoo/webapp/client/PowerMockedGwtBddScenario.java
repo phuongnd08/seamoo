@@ -1,6 +1,6 @@
 package org.seamoo.webapp.client;
 
-import org.seamoo.webapp.PowerMockedBddScenario;
+import org.seamoo.test.PowerMockedBddScenario;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 

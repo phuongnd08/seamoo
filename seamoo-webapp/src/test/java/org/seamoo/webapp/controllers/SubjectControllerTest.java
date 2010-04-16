@@ -52,7 +52,7 @@ public class SubjectControllerTest {
 
 	@Test
 	public void viewOfEnabledSubjectShouldReturnSubject() {
-		when(subjectDAO.findById(1L)).thenReturn(english);
+		when(subjectDAO.findByKey(1L)).thenReturn(english);
 		ModelAndView mav = subjectController.view(1, "english");
 		Map<String, Object> model = mav.getModel();
 		Subject subject = (Subject) model.get("subject");

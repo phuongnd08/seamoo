@@ -50,7 +50,7 @@ public class AdminControllerTest {
 	@Test
 	public void manageSubjectsShouldPassCurrentSubjectToView() {
 		Subject currentSubject = new Subject();
-		when(subjectDao.findById(1L)).thenReturn(currentSubject);
+		when(subjectDao.findByKey(1L)).thenReturn(currentSubject);
 		ModelAndView mav = adminController.manageLeagues(1L);
 		assertEquals(currentSubject, mav.getModel().get("currentSubject"));
 	}

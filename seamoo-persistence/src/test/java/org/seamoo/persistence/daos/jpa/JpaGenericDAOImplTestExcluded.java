@@ -43,7 +43,7 @@ public class JpaGenericDAOImplTestExcluded extends LocalDatastoreTest {
 		testModel.setField("Ronaldo");
 		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
 		daoImpl.persist(testModel);
-		ExampleModel reloadedTestModel = daoImpl.findById(new Long(1));
+		ExampleModel reloadedTestModel = daoImpl.findByKey(new Long(1));
 		assertEquals("Ronaldo", reloadedTestModel.getField());
 	}
 

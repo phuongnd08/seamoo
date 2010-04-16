@@ -1,18 +1,34 @@
-Given A Match Organizer
-And There is no active match
-When Organizer initialize
+Given There is no active match
+And A list of 10 users
+And A Match Dao
+And A Question Dao
+And Match Are Observered with buffer of 10 objects
+When Organizer is created
 Given Current Time is 10:00:00
-When 1st user request for Match State
-And 2nd user request for Match State
+When 1st user request for Match
+And 2nd user request for Match
 Then 1st Match is created
-And 1st Match State is FORMED
-Given Current Time is 10:00:10
-When 3rd user request for Match State
-Then 2nd Match is created
-And 2nd Match State is NOT_FORMED
-And 2nd Match is returned
-And 1st Match has 2 players
-Given Current Time is 10:00:11
-When 1st user request for Match State
-Then 1st Match State is PLAYING
+And 1st Match Phase is FORMED
 And 1st Match is returned
+!-- Ensure that 1st & 2nd user is not kicked out
+Given Current Time is 10:00:05
+When 1st user request for Match
+And 2nd user request for Match
+Then 1st Match is returned
+!-- Keep 1st & 2nd user in touch 
+Given Current Time is 10:00:9
+When 1st user request for Match
+And 2nd user request for Match
+Then 1st Match is returned
+And 1st Match has 2 players
+And 1st Match Phase is FORMED
+!-- Now let 3rd user try
+Given Current Time is 10:00:11 
+When 3rd user request for Match
+Then 2nd Match is created
+And 2nd Match Phase is NOT_FORMED
+And 2nd Match is returned
+When 1st user request for Match
+Then 1st Match is returned
+And 1st Match Phase is PLAYING
+And 1st Match has 2 players
