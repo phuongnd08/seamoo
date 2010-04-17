@@ -1,5 +1,7 @@
 package org.seamoo.entities.question;
 
+import java.lang.reflect.UndeclaredThrowableException;
+
 public class ListeningQuestionRevision extends QuestionRevision {
 
 	private String audioUrl;
@@ -19,5 +21,11 @@ public class ListeningQuestionRevision extends QuestionRevision {
 
 	public String getContent() {
 		return content;
+	}
+
+	@Override
+	public double getScore(String answer) {
+		// TODO Auto-generated method stub
+		throw new UndeclaredThrowableException(null, "Not supported yet");
 	}
 }

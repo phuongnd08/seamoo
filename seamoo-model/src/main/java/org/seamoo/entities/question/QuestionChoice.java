@@ -4,6 +4,11 @@ public class QuestionChoice {
 	private String content;
 	private boolean correct;
 
+	public QuestionChoice(String content, boolean correct) {
+		this.content = content;
+		this.correct = correct;
+	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}

@@ -1,6 +1,9 @@
 package org.seamoo.competition;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +13,8 @@ import org.seamoo.entities.matching.MatchAnswer;
 import org.seamoo.entities.matching.MatchAnswerType;
 import org.seamoo.entities.matching.MatchCandidate;
 import org.seamoo.entities.matching.MatchCompetitor;
+import org.seamoo.entities.matching.MatchEvent;
+import org.seamoo.entities.matching.MatchEventType;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.persistence.daos.MemberDao;
 import org.seamoo.persistence.matching.daos.MatchDao;
@@ -61,11 +66,12 @@ public class MatchOrganizer {
 	 * 
 	 * @param match
 	 */
-	private void recheckMatchCompetitors(Match match) {
+	private void recheckCompetitors(Match match) {
 		for (int i = match.getCompetitors().size() - 1; i >= 0; i--) {
 			MatchCompetitor competitor = match.getCompetitors().get(i);
 			MatchCandidate candidate = getMatchCandidate(competitor.getMember().getAutoId());
 			if (competitor.getFinishedMoment() == 0 && isDisconnected(candidate)) {
+				match.addEvent(new MatchEvent(MatchEventType.LEFT, competitor.getMember()));
 				match.getCompetitors().remove(i);
 			}
 		}
@@ -88,7 +94,7 @@ public class MatchOrganizer {
 			}
 			Match match = null;
 			for (Match m : waitingMatches) {
-				recheckMatchCompetitors(m);
+				recheckCompetitors(m);
 				if (canJoin(m)) {
 					match = m;
 					break;
@@ -99,7 +105,8 @@ public class MatchOrganizer {
 			}
 			MatchCompetitor competitor = new MatchCompetitor();
 			competitor.setMember(candidate.getMember());
-			match.getCompetitors().add(competitor);
+			match.addCompetitor(competitor);
+			match.addEvent(new MatchEvent(MatchEventType.JOIN, competitor.getMember()));
 			return match;
 		}
 	}
@@ -138,7 +145,7 @@ public class MatchOrganizer {
 			candidate.setCurrentMatch(match);
 			return match;
 		} else {
-			recheckMatchCompetitors(candidate.getCurrentMatch());
+			recheckCompetitors(candidate.getCurrentMatch());
 			return candidate.getCurrentMatch();
 		}
 	}
@@ -153,14 +160,20 @@ public class MatchOrganizer {
 			if (match.getCompetitors().size() < MIN_CANDIDATE_PER_MATCH) {
 				match.setPhase(MatchPhase.NOT_FORMED);
 			} else if (match.getStartedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
-				match.setPhase(MatchPhase.PLAYING);
-				synchronized (waitingMatches) {
-					waitingMatches.remove(match);
-				}
+				startMatch(match);
 			}
 		} else if (match.getPhase() == MatchPhase.PLAYING
 				&& match.getEndedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
 			finishMatch(match);
+		}
+	}
+
+	private void startMatch(Match match) {
+		// TODO Auto-generated method stub
+		match.setPhase(MatchPhase.PLAYING);
+		match.addEvent(new MatchEvent(MatchEventType.STARTED));
+		synchronized (waitingMatches) {
+			waitingMatches.remove(match);
 		}
 	}
 
@@ -171,7 +184,34 @@ public class MatchOrganizer {
 	 */
 	private void finishMatch(Match match) {
 		match.setPhase(MatchPhase.FINISHED);
+		match.addEvent(new MatchEvent(MatchEventType.FINISHED));
+		rank(match);
 		matchDao.persist(match);
+	}
+
+	private void rank(Match match) {
+		// TODO Auto-generated method stub
+		List<MatchCompetitor> competitors = new ArrayList<MatchCompetitor>(match.getCompetitors());
+		Collections.sort(competitors, new Comparator<MatchCompetitor>() {
+
+			@Override
+			public int compare(MatchCompetitor c1, MatchCompetitor c2) {
+				// TODO Auto-generated method stub
+				int result = -Double.compare(c1.getTotalScore(), c2.getTotalScore());
+				if (result == 0) {
+					if (c1.getFinishedMoment() > c2.getFinishedMoment())
+						return 1;
+					else if (c1.getFinishedMoment() == c2.getFinishedMoment())
+						return 0;
+					else
+						return -1;
+				}
+				return result;
+			}
+		});
+		for (int i = 0; i < competitors.size(); i++) {
+			competitors.get(i).setRank(i + 1);
+		}
 	}
 
 	/**
@@ -220,7 +260,18 @@ public class MatchOrganizer {
 		}
 		if (competitor == null)
 			throw new RuntimeException("Competitor disappeared mysteriously");
+		switch (answer.getType()) {
+		case IGNORED:
+			match.addEvent(new MatchEvent(MatchEventType.IGNORE_QUESTION, candidate.getMember(), questionOrder));
+			break;
+		case SUBMITTED:
+			match.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, candidate.getMember(), questionOrder));
+			answer.setScore(match.getQuestions().get(questionOrder - 1).getScore(answer.getContent()));
+			break;
+		}
+
 		competitor.addAnswer(questionOrder, answer);
+
 		if (competitor.getPassedQuestionCount() == match.getQuestions().size()) {
 			competitor.setFinishedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
 			checkMatchFinished(match);
@@ -231,8 +282,10 @@ public class MatchOrganizer {
 	/**
 	 * Competitor submit an answer
 	 * 
+	 * 
 	 * @param userAutoId
 	 * @param questionOrder
+	 *            Must be in 1-based index
 	 * @param answer
 	 */
 	public void submitAnswer(Long userAutoId, int questionOrder, String answer) {
@@ -244,6 +297,7 @@ public class MatchOrganizer {
 	 * 
 	 * @param userAutoId
 	 * @param questionOrder
+	 *            Must be in 1-based index
 	 */
 	public void ignoreQuestion(Long userAutoId, int questionOrder) {
 		addMatchAnswer(userAutoId, questionOrder, new MatchAnswer(MatchAnswerType.IGNORED, null));

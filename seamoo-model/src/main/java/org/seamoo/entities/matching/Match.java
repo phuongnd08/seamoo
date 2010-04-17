@@ -1,7 +1,6 @@
 package org.seamoo.entities.matching;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -27,10 +26,13 @@ public class Match {
 	@Persistent
 	private List<MatchCompetitor> competitors;
 	@Persistent
+	private List<MatchEvent> events;
+	@Persistent
 	private MatchPhase phase;
 
 	public Match() {
 		competitors = new ArrayList<MatchCompetitor>();
+		events = new ArrayList<MatchEvent>();
 	}
 
 	public void setAutoId(Long autoId) {
@@ -81,11 +83,23 @@ public class Match {
 		return endedMoment;
 	}
 
-	public void setCompetitors(List<MatchCompetitor> competitors) {
-		this.competitors = competitors;
+	public void addCompetitor(MatchCompetitor competitor) {
+		this.competitors.add(competitor);
+	}
+
+	public void removeCompetitor(MatchCompetitor competitor) {
+		this.competitors.remove(competitor);
 	}
 
 	public List<MatchCompetitor> getCompetitors() {
 		return competitors;
+	}
+
+	public void addEvent(MatchEvent event) {
+		this.events.add(event);
+	}
+
+	public List<MatchEvent> getEvents() {
+		return events;
 	}
 }

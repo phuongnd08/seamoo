@@ -1,4 +1,4 @@
-package org.seamoo.webapp.controllers;
+package org.seamoo.webapp.autowired;
 
 import static org.testng.Assert.*;
 

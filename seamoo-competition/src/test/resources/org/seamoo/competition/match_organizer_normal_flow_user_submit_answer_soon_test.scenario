@@ -1,6 +1,7 @@
 Given There is no active match
 And A list of 10 users
 And A Match Dao
+And 20 questions that have correct choices on #1 
 And A Question Dao
 And Match Are Observered with buffer of 10 objects
 When Organizer is created
@@ -15,8 +16,8 @@ And Current Time is 10:00:11
 When 1st user request for Match
 Then 1st Match Phase is PLAYING
 Given Current Time is 10:00:15
-When 1st user submit 20 answers
-And 2nd user ignore 20 questions
+When 1st user submit #1 for question 1-20
+And 2nd user ignore question 1-20
 When 1st user request for Match
 Then 1st Match is returned
 And 1st Match Phase is FINISHED

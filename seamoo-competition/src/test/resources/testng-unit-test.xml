@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="client-test" verbose="1">
-	<test name="GWT-Tests">
+<suite name="competition-test" verbose="1">
+	<test name="MatchOrganizer">
 		<packages>
 			<package name="org.seamoo.competition"></package>
 		</packages>

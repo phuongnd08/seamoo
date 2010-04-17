@@ -2,6 +2,7 @@
 Given There is no active match
 And A list of 10 users
 And A Match Dao
+And 20 questions that have correct choices on #1 
 And A Question Dao
 And Match Are Observered with buffer of 10 objects
 When Organizer is created
@@ -11,19 +12,22 @@ Then 1st Match is created
 And Question Dao is requested for 20 random questions
 And 1st Match is assigned with 20 questions
 And 1st Match Phase is NOT_FORMED
+And 1st Match has 1 event
 And 1st Match is returned
 Given Current Time is 10:00:01
 When 1st user request for Match
 Then 1st Match Phase is NOT_FORMED
 When 2nd user request for Match
-Then 1st Match Phase is FORMED
+Then 1st Match is returned
+And 1st Match Phase is FORMED
 And 1st Match has 2 players
-And 1st Match is returned
+And 1st Match has 2 event
 !-- 3rd user can join this match
 Given Current Time is 10:00:05
 When 3rd user request for Match
 Then 1st Match is returned
 And 1st Match has 3 players
+And 1st Match has 3 events
 !-- Count down is over, then match is started
 Given Current Time is 10:00:11
 And 1st user last signal is 10:00:06
@@ -32,6 +36,7 @@ And 3rd user last signal is 10:00:06
 When 1st user request for Match
 Then 1st Match is returned
 And 1st Match Phase is PLAYING
+And 1st Match has 4 events
 !-- The match is timed out
 Given Current Time is 10:02:12
 And 1st user last signal is 10:02:07
@@ -44,4 +49,5 @@ When 2nd user request for Match
 Then 1st Match is returned
 When 3rd user request for Match
 Then 1st Match is returned
+And 1st Match has 5 events
 !--   

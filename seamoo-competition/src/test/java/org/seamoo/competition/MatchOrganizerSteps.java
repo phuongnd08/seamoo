@@ -19,8 +19,11 @@ import org.powermock.api.mockito.PowerMockito;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchCandidate;
+import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.entities.matching.MatchPhase;
+import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
+import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.persistence.daos.MemberDao;
 import org.seamoo.persistence.matching.daos.MatchDao;
 import org.seamoo.persistence.question.daos.QuestionDao;
@@ -59,12 +62,29 @@ public class MatchOrganizerSteps {
 		});
 	}
 
+	List<Question> questions;
+
+	@Given("$number questions that have correct choices on #$correct")
+	public void setUpQuestions(int number, int correct) {
+		questions = new ArrayList<Question>();
+		for (int i = 0; i < number; i++) {
+			MultipleChoicesQuestionRevision revision = new MultipleChoicesQuestionRevision();
+			for (int j = 0; j < 4; j++) {
+				revision.addChoice(new QuestionChoice("xx", j == correct - 1));
+			}
+			Question q = new Question();
+			q.addRevision(revision);
+			q.setCurrentRevision(revision);
+			questions.add(q);
+		}
+	}
+
 	QuestionDao questionDao;
 
 	@Given("A Question Dao")
 	public void setUpQuestionDao() {
 		questionDao = mock(QuestionDao.class);
-		when(questionDao.getRandomQuestions(20)).thenReturn(Arrays.asList(new Question[20]));
+		when(questionDao.getRandomQuestions(20)).thenReturn(questions);
 	}
 
 	MatchDao matchDao;
@@ -167,20 +187,20 @@ public class MatchOrganizerSteps {
 		candidate.setLastSeenMoment(getDateFromHMS(hour, minute, second).getTime());
 	}
 
-	@When("$position user submit $number answers")
-	public void userSubmitAnswer(String position, int number) {
+	@When("$position user submit #$choice for question $qFrom-$qTo")
+	public void submitChoices(String position, int choice, int qFrom, int qTo) {
 		int pos = positionToNumber(position) - 1;
 		Member member = members.get(pos);
-		for (int i = 0; i < number; i++) {
-			organizer.submitAnswer(member.getAutoId(), i, "xx");
+		for (int i = qFrom; i <= qTo; i++) {
+			organizer.submitAnswer(member.getAutoId(), i, String.valueOf(choice));
 		}
 	}
 
-	@When("$position user ignore $number questions")
-	public void userIgnoreQuestion(String position, int number) {
+	@When("$position user ignore question $qFrom-$qTo")
+	public void userIgnoreQuestion(String position, int qFrom, int qTo) {
 		int pos = positionToNumber(position) - 1;
 		Member member = members.get(pos);
-		for (int i = 0; i < number; i++) {
+		for (int i = qFrom; i <= qTo; i++) {
 			organizer.ignoreQuestion(member.getAutoId(), i);
 		}
 	}
@@ -202,4 +222,32 @@ public class MatchOrganizerSteps {
 		verify(matchDao).persist(bufferedMatches.get(pos));
 	}
 
+	@Then("$position Match has $number events")
+	@Alias("$position Match has $number event")
+	public void assertMatchPersisted(String position, int number) {
+		int pos = positionToNumber(position) - 1;
+		assertEquals(bufferedMatches.get(pos).getEvents().size(), number);
+	}
+
+	private MatchCompetitor findCompetitorByMember(Member member) {
+		for (int i = 0; i < match.getCompetitors().size(); i++)
+			if (match.getCompetitors().get(i).getMember() == member) {
+				return match.getCompetitors().get(i);
+			}
+		return null;
+	}
+
+	@Then("$position user score is $score")
+	public void assertScore(String position, double score) {
+		int pos = positionToNumber(position) - 1;
+		MatchCompetitor competitor = findCompetitorByMember(members.get(pos));
+		assertEquals(competitor.getTotalScore(), score);
+	}
+
+	@Then("$position user ranked $rank")
+	public void assertRank(String position, int rank) {
+		int pos = positionToNumber(position) - 1;
+		MatchCompetitor competitor = findCompetitorByMember(members.get(pos));
+		assertEquals(competitor.getRank(), rank);
+	}
 }

@@ -1,5 +1,6 @@
 package org.seamoo.entities.question;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,10 +14,10 @@ import org.seamoo.entities.Votable;
 public class Question extends Votable {
 	@Persistent
 	private Date addedTime;// used for faster access, can be deducted from first
-							// revision
+	// revision
 	@Persistent
 	private Date lastModifiedTime;// used for faster access, can be deducted
-									// from last revision
+	// from last revision
 	@Persistent
 	private QuestionRevision currentRevision;
 	@Persistent
@@ -27,9 +28,14 @@ public class Question extends Votable {
 	private QuestionType type;
 	@Persistent
 	private List<Tag> tags;
-	
+
 	@Persistent
 	private String alias;
+
+	public Question() {
+		this.revisions = new ArrayList<QuestionRevision>();
+		this.tags = new ArrayList<Tag>();
+	}
 
 	public void setAddedTime(Date addedTime) {
 		this.addedTime = addedTime;
@@ -55,8 +61,8 @@ public class Question extends Votable {
 		return currentRevision;
 	}
 
-	public void setRevisions(List<QuestionRevision> revisions) {
-		this.revisions = revisions;
+	public void addRevision(QuestionRevision revision) {
+		this.revisions.add(revision);
 	}
 
 	public List<QuestionRevision> getRevisions() {
@@ -79,8 +85,12 @@ public class Question extends Votable {
 		return type;
 	}
 
-	public void setTags(List<Tag> tags) {
-		this.tags = tags;
+	public void clearTags() {
+		this.tags.clear();
+	}
+
+	public void addTag(Tag tag) {
+		this.tags.add(tag);
 	}
 
 	public List<Tag> getTags() {
@@ -93,6 +103,17 @@ public class Question extends Votable {
 
 	public String getAlias() {
 		return alias;
+	}
+
+	/**
+	 * Return 1-scale score of an answer
+	 * If question is of multiple choices, then answer should be 1-based
+	 * 
+	 * @param answer
+	 * @return
+	 */
+	public double getScore(String answer) {
+		return currentRevision.getScore(answer);
 	}
 
 }

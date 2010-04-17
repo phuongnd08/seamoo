@@ -83,14 +83,19 @@ public class MatchCompetitor implements Serializable {
 	}
 
 	public void addAnswer(int position, MatchAnswer answer) {
-		if (position == answers.size())
+		if (position == answers.size()) {
 			answers.add(answer);
-		else if (position < answers.size())
+			totalScore += answer.getScore();
+		} else if (position < answers.size()) {
+			if (answers.get(position) != null)
+				throw new RuntimeException("Answer for the same question submitted twice. Ignored");
 			answers.set(position, answer);
-		else /* position>answers.size() */{
+			totalScore += answer.getScore();
+		} else /* position>answers.size() */{
 			for (int i = answers.size(); i < position; i++)
 				answers.add(null);
 			answers.add(answer);
+			totalScore += answer.getScore();
 		}
 		passedQuestionCount++;
 	}
