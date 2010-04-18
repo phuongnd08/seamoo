@@ -11,8 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.seamoo.daos.MemberDao;
 import org.seamoo.entities.Member;
-import org.seamoo.persistence.daos.MemberDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dyuproject.openid.OpenIdUser;

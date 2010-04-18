@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.seamoo.daos.MemberDao;
+import org.seamoo.daos.matching.MatchDao;
+import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchAnswer;
 import org.seamoo.entities.matching.MatchAnswerType;
@@ -16,9 +19,6 @@ import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchEventType;
 import org.seamoo.entities.matching.MatchPhase;
-import org.seamoo.persistence.daos.MemberDao;
-import org.seamoo.persistence.matching.daos.MatchDao;
-import org.seamoo.persistence.question.daos.QuestionDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MatchOrganizer {

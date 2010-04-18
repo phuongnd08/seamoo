@@ -8,6 +8,8 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import javax.jdo.annotations.Unique;
 
+import com.google.appengine.api.datastore.Key;
+
 @PersistenceCapable
 public class Member {
 	@Unique
@@ -15,6 +17,8 @@ public class Member {
 	private String openId;
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key autoKey;
+	@Persistent(valueStrategy = IdGeneratorStrategy.SEQUENCE)
 	private Long autoId;
 	@Persistent
 	private String displayName;

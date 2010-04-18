@@ -3,9 +3,9 @@ package org.seamoo.webapp.server;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.seamoo.daos.LeagueDao;
+import org.seamoo.daos.SubjectDao;
 import org.seamoo.entities.League;
-import org.seamoo.persistence.daos.LeagueDao;
-import org.seamoo.persistence.daos.SubjectDao;
 import org.seamoo.webapp.client.admin.LeagueService;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -63,6 +63,11 @@
 			<artifactId>powermock-api-mockito</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.vercer.engine.persist</groupId>
+			<artifactId>twig-persist</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

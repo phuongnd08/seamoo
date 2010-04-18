@@ -89,6 +89,12 @@
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.vercer.engine.persist</groupId>
+			<artifactId>twig-persist</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
@@ -106,4 +112,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>

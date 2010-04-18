@@ -5,7 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.SortedSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -15,9 +16,9 @@ import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Blob;
 
-@PersistenceCapable
+@PersistenceCapable(detachable = "false")
 public class NumericBag {
-	private SortedSet<Long> keySet;
+	private List<Long> keyList;
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long autoId;
@@ -74,7 +75,7 @@ public class NumericBag {
 		try {
 			keyBAOS = new ByteArrayOutputStream(0);
 			keyDOS = new DataOutputStream(keyBAOS);
-			for (Long l : keySet)
+			for (Long l : keyList)
 				keyDOS.writeLong(l);
 			keyBlob = new Blob(keyBAOS.toByteArray());
 		} catch (IOException ex) {
@@ -83,7 +84,7 @@ public class NumericBag {
 	}
 
 	public void addKey(Long key) {
-		keySet.add(key);
+		getKeyList().add(key);
 		prepareBlobOutputStream();
 		try {
 			keyDOS.writeLong(key);
@@ -95,17 +96,23 @@ public class NumericBag {
 	}
 
 	public void removeKey(Long key) {
-		keySet.remove(key);
+		getKeyList().remove(key);
 		rewriteKeyBlob();
 	}
 
-	public SortedSet<Long> getKeySet() throws IOException {
-		if (keySet == null) {
-			keySet = new TreeSet<Long>();
-			ByteArrayInputStream byteInputStream = new ByteArrayInputStream(keyBlob.getBytes());
-			DataInputStream inputStream = new DataInputStream(byteInputStream);
-			keySet.add(inputStream.readLong());
+	public List<Long> getKeyList() {
+		if (keyList == null) {
+			keyList = new ArrayList<Long>();
+			try {
+				ByteArrayInputStream byteInputStream = new ByteArrayInputStream(keyBlob.getBytes());
+				DataInputStream inputStream = new DataInputStream(byteInputStream);
+				while (inputStream.available() > 0) {
+					keyList.add(inputStream.readLong());
+				}
+			} catch (IOException ex) {
+				throw new RuntimeException(ex);
+			}
 		}
-		return keySet;
+		return keyList;
 	}
 }

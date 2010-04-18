@@ -1,7 +1,7 @@
 package org.seamoo.webapp.controllers;
 
-import org.seamoo.persistence.daos.SiteSettingDao;
-import org.seamoo.persistence.daos.SubjectDao;
+import org.seamoo.daos.SiteSettingDao;
+import org.seamoo.daos.SubjectDao;
 import org.seamoo.webapp.Site;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

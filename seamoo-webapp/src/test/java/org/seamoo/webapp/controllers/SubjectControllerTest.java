@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.seamoo.daos.SubjectDao;
 import org.seamoo.entities.Subject;
-import org.seamoo.persistence.daos.SubjectDao;
 import org.springframework.web.servlet.ModelAndView;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

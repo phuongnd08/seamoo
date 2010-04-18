@@ -1,6 +1,6 @@
 package org.seamoo.webapp.controllers;
 
-import org.seamoo.persistence.daos.SubjectDao;
+import org.seamoo.daos.SubjectDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -65,6 +65,10 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+			<id>twig</id>
+			<url>http://mvn.twig-persist.googlecode.com/hg</url>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -424,6 +428,12 @@
 				<version>${jetty.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>com.vercer.engine.persist</groupId>
+				<artifactId>twig-persist</artifactId>
+				<version>${twig-persist.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -455,6 +465,7 @@
 		<log4j.version>1.2.14</log4j.version>
 		<tiles.version>2.1.4</tiles.version>
 		<freemarker.version>2.3.16</freemarker.version>
+		<twig-persist.version>1.0</twig-persist.version>
 		<!--
 			Specify AppEngine version for your project. It should match SDK
 			version pointed to by ${gae.home} property (Typically, one used by

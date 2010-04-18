@@ -3,11 +3,11 @@ package org.seamoo.webapp.controllers;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
+import org.seamoo.daos.LeagueDao;
+import org.seamoo.daos.SiteSettingDao;
+import org.seamoo.daos.SubjectDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.Subject;
-import org.seamoo.persistence.daos.LeagueDao;
-import org.seamoo.persistence.daos.SiteSettingDao;
-import org.seamoo.persistence.daos.SubjectDao;
 import org.seamoo.utils.converter.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

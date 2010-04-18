@@ -3,10 +3,10 @@ package org.seamoo.webapp.server;
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
+import org.seamoo.daos.LeagueDao;
+import org.seamoo.daos.SubjectDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.Subject;
-import org.seamoo.persistence.daos.LeagueDao;
-import org.seamoo.persistence.daos.SubjectDao;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

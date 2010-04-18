@@ -14,8 +14,8 @@ import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
 import org.powermock.api.mockito.PowerMockito;
+import org.seamoo.daos.MemberDao;
 import org.seamoo.entities.Member;
-import org.seamoo.persistence.daos.MemberDao;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dyuproject.openid.OpenIdUser;

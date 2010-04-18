@@ -3,8 +3,8 @@ package org.seamoo.webapp.server;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.seamoo.daos.SubjectDao;
 import org.seamoo.entities.Subject;
-import org.seamoo.persistence.daos.SubjectDao;
 import org.seamoo.webapp.client.admin.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 

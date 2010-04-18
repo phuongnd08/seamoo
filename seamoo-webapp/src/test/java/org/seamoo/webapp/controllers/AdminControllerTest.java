@@ -5,9 +5,9 @@ import static org.mockito.Mockito.*;
 
 import java.util.Map;
 
+import org.seamoo.daos.SiteSettingDao;
+import org.seamoo.daos.SubjectDao;
 import org.seamoo.entities.Subject;
-import org.seamoo.persistence.daos.SiteSettingDao;
-import org.seamoo.persistence.daos.SubjectDao;
 import org.seamoo.webapp.Site;
 import org.springframework.web.servlet.ModelAndView;
 import org.testng.annotations.BeforeMethod;

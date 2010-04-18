@@ -4,14 +4,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 import org.seamoo.entities.Member;
-import org.seamoo.entities.Votable;
+
+import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
-public class Question extends Votable {
+public class Question {
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Key autoKey;
+	@Persistent(valueStrategy = IdGeneratorStrategy.SEQUENCE)
+	private Long autoId;
 	@Persistent
 	private Date addedTime;// used for faster access, can be deducted from first
 	// revision
@@ -20,7 +28,7 @@ public class Question extends Votable {
 	// from last revision
 	@Persistent
 	private QuestionRevision currentRevision;
-	@Persistent
+	@Persistent(mappedBy="question")
 	private List<QuestionRevision> revisions;
 	@Persistent
 	private Member originator;
@@ -61,8 +69,9 @@ public class Question extends Votable {
 		return currentRevision;
 	}
 
-	public void addRevision(QuestionRevision revision) {
+	public void addAndSetAsCurrentRevision(QuestionRevision revision) {
 		this.revisions.add(revision);
+		this.setCurrentRevision(revision);
 	}
 
 	public List<QuestionRevision> getRevisions() {
@@ -106,14 +115,30 @@ public class Question extends Votable {
 	}
 
 	/**
-	 * Return 1-scale score of an answer
-	 * If question is of multiple choices, then answer should be 1-based
+	 * Return 1-scale score of an answer If question is of multiple choices,
+	 * then answer should be 1-based
 	 * 
 	 * @param answer
 	 * @return
 	 */
 	public double getScore(String answer) {
 		return currentRevision.getScore(answer);
+	}
+
+	public void setAutoId(Long autoId) {
+		this.autoId = autoId;
+	}
+
+	public Long getAutoId() {
+		return autoId;
+	}
+
+	public void setAutoKey(Key autoKey) {
+		this.autoKey = autoKey;
+	}
+
+	public Key getAutoKey() {
+		return autoKey;
 	}
 
 }

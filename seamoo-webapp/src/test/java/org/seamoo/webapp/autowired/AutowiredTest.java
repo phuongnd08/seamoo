@@ -2,10 +2,10 @@ package org.seamoo.webapp.autowired;
 
 import static org.testng.Assert.*;
 
-import org.seamoo.persistence.daos.LeagueDao;
-import org.seamoo.persistence.daos.MemberDao;
-import org.seamoo.persistence.daos.SiteSettingDao;
-import org.seamoo.persistence.daos.SubjectDao;
+import org.seamoo.daos.LeagueDao;
+import org.seamoo.daos.MemberDao;
+import org.seamoo.daos.SiteSettingDao;
+import org.seamoo.daos.SubjectDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;

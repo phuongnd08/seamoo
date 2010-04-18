@@ -16,6 +16,9 @@ import org.jbehave.scenario.annotations.When;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
+import org.seamoo.daos.MemberDao;
+import org.seamoo.daos.matching.MatchDao;
+import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchCandidate;
@@ -24,9 +27,6 @@ import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
-import org.seamoo.persistence.daos.MemberDao;
-import org.seamoo.persistence.matching.daos.MatchDao;
-import org.seamoo.persistence.question.daos.QuestionDao;
 import org.seamoo.utils.converter.Converter;
 
 public class MatchOrganizerSteps {
@@ -73,7 +73,7 @@ public class MatchOrganizerSteps {
 				revision.addChoice(new QuestionChoice("xx", j == correct - 1));
 			}
 			Question q = new Question();
-			q.addRevision(revision);
+			q.addAndSetAsCurrentRevision(revision);
 			q.setCurrentRevision(revision);
 			questions.add(q);
 		}

@@ -17,9 +17,9 @@
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.jdo</groupId>
 			<artifactId>jdo2-api</artifactId>
@@ -52,6 +52,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>1.3.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vercer.engine.persist</groupId>
+			<artifactId>twig-persist</artifactId>
 		</dependency>
 
 	</dependencies>
@@ -93,7 +98,11 @@
 					<!--
 						Make sure this path contains your persistent classes!
 					-->
-					<mappingIncludes>**/model/*.class, **/entities/**.class</mappingIncludes>
+					<mappingIncludes>
+						**/model/*.class,
+						**/entities/**.class,
+						**/entities/question/**.class,
+						**/lookup/**.class</mappingIncludes>
 					<verbose>true</verbose>
 					<enhancerName>ASM</enhancerName>
 					<api>JPA</api>
