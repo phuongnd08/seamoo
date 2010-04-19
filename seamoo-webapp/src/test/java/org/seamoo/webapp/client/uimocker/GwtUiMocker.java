@@ -88,7 +88,7 @@ public class GwtUiMocker {
 
 	}
 
-	public static void mockVisibleAccessor(final MockedWidgetHelper helper, Widget widget) {
+	private static void mockVisibleAccessor(final MockedWidgetHelper helper, Widget widget) {
 		doAnswer(new Answer() {
 
 			@Override
@@ -110,7 +110,7 @@ public class GwtUiMocker {
 
 	}
 
-	public static void mockUrlAccessor(final MockedWidgetHelper helper, Image image) {
+	private static void mockUrlAccessor(final MockedWidgetHelper helper, Image image) {
 		doAnswer(new Answer() {
 
 			@Override
@@ -131,7 +131,7 @@ public class GwtUiMocker {
 		}).when(image).setUrl(anyString());
 	}
 
-	public static void mockTextAccessor(final MockedWidgetHelper helper, HasText widget) {
+	private static void mockTextAccessor(final MockedWidgetHelper helper, HasText widget) {
 		doAnswer(new Answer() {
 
 			@Override
@@ -152,7 +152,7 @@ public class GwtUiMocker {
 		}).when(widget).setText(anyString());
 	}
 
-	public static void mockClickHandler(final MockedWidgetHelper helper, HasClickHandlers widget) {
+	private static void mockClickHandler(final MockedWidgetHelper helper, HasClickHandlers widget) {
 		doAnswer(new Answer() {
 
 			@Override

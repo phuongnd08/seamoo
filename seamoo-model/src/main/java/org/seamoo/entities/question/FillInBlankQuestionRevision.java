@@ -1,7 +1,5 @@
 package org.seamoo.entities.question;
 
-import java.lang.reflect.UndeclaredThrowableException;
-
 public class FillInBlankQuestionRevision extends QuestionRevision {
 	private String content;
 	private String answer;
@@ -25,6 +23,6 @@ public class FillInBlankQuestionRevision extends QuestionRevision {
 	@Override
 	public double getScore(String answer) {
 		// TODO Auto-generated method stub
-		throw new UndeclaredThrowableException(null, "Not supported yet");
+		throw new UnsupportedOperationException("Unsupported");
 	}
 }

@@ -64,11 +64,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.vercer.engine.persist</groupId>
-			<artifactId>twig-persist</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>com.googlecode.objectify</groupId>
 			<artifactId>objectify</artifactId>
 		</dependency>

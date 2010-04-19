@@ -8,11 +8,11 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<bean id="modelRegistrar" class="org.semoo.persistence.daos.ofyImpl.OfyModelRegistrar" />
+	<bean id="modelRegistrar" class="org.seamoo.daos.ofyImpl.OfyModelRegistrar" />
 	<bean id="siteSettingDao"
-		class="org.seamoo.persistence.daos.ofyImpl.OfySiteSettingDaoImpl" />
-	<bean id="subjectDao" class="org.seamoo.persistence.daos.ofyImpl.OfySubjectDaoImpl" />
-	<bean id="leagueDao" class="org.seamoo.persistence.daos.ofyImpl.OfyLeagueDaoImpl" />
-	<bean id="memberDao" class="org.seamoo.persistence.daos.ofyImpl.OfyMemberDaoImpl" />
+		class="org.seamoo.daos.ofyImpl.OfySiteSettingDaoImpl" />
+	<bean id="subjectDao" class="org.seamoo.daos.ofyImpl.OfySubjectDaoImpl" />
+	<bean id="leagueDao" class="org.seamoo.daos.ofyImpl.OfyLeagueDaoImpl" />
+	<bean id="memberDao" class="org.seamoo.daos.ofyImpl.OfyMemberDaoImpl" />
 
 </beans>

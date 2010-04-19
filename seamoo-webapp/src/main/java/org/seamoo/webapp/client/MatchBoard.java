@@ -8,6 +8,7 @@ import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
 import org.seamoo.webapp.client.MatchBoard.Display.EventListener;
+import org.seamoo.webapp.client.ui.MatchView;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -29,7 +30,14 @@ public class MatchBoard {
 
 		public void setQuestion(Question question);
 
+		public void setTotalQuestion(int total);
+
+		public void setQuestionIndex(int index);
+
+		public void setRemainingTime(int seconds);
+
 		public void addEventListener(EventListener listener);
+		
 	}
 
 	public static class Presenter implements EntryPoint {
@@ -129,7 +137,7 @@ public class MatchBoard {
 					// consistent
 				}
 				for (int i = 0; i < qs.size(); i++) {
-					assert bufferedQuestions.size() == from + i:"Given bufferedFrom is miss-matched with expected index";
+					assert bufferedQuestions.size() == from + i : "Given bufferedFrom is miss-matched with expected index";
 					bufferedQuestions.add(qs.get(i));
 				}
 			}

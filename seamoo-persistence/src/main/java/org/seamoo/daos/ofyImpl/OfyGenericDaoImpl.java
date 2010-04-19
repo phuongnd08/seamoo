@@ -6,12 +6,9 @@ import java.util.List;
 import org.seamoo.daos.GenericDao;
 
 import com.google.appengine.api.datastore.EntityNotFoundException;
-import com.google.appengine.api.datastore.Key;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
-import com.vercer.engine.persist.ObjectDatastore;
 
 public abstract class OfyGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TKey> {
 

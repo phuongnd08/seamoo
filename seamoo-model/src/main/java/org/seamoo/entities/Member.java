@@ -7,14 +7,14 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import javax.jdo.annotations.Unique;
-
-import com.google.appengine.api.datastore.Key;
+import javax.persistence.Id;
 
 @PersistenceCapable
 public class Member {
 	@Unique
 	@Persistent
 	private String openId;
+	@Id
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.SEQUENCE)
 	private Long autoId;
