@@ -55,8 +55,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.vercer.engine.persist</groupId>
-			<artifactId>twig-persist</artifactId>
+			<groupId>com.googlecode.objectify</groupId>
+			<artifactId>objectify</artifactId>
 		</dependency>
 
 	</dependencies>

@@ -1,29 +1,35 @@
-package org.seamoo.daos.jpaImpl;
+package org.seamoo.daos.ofyImpl;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.seamoo.daos.jpaImpl.JpaGenericDaoImpl;
+import org.seamoo.daos.ofyImpl.OfyGenericDaoImpl;
 import org.seamoo.persistence.test.LocalDatastoreTest;
 import org.seamoo.persistence.test.jpa.model.ExampleModel;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-public class JpaGenericDAOImplTestExcluded extends LocalDatastoreTest {
+import com.googlecode.objectify.ObjectifyService;
 
-	private class TestModelDAOImpl extends JpaGenericDaoImpl<ExampleModel, Long> {
+public class OfyGenericDaoImplTest extends LocalDatastoreTest {
 
+	private class TestModelDAOImpl extends OfyGenericDaoImpl<ExampleModel, Long> {
+	}
+
+	public OfyGenericDaoImplTest() {
+		// TODO Auto-generated constructor stub
+		ObjectifyService.register(ExampleModel.class);
 	}
 
 	@Override
-	@Before
+	@BeforeMethod
 	public void setUp() {
 		// TODO Auto-generated method stub
 		super.setUp();
 	}
 
 	@Override
-	@After
+	@AfterMethod
 	public void tearDown() {
 		// TODO Auto-generated method stub
 		super.tearDown();
@@ -38,6 +44,12 @@ public class JpaGenericDAOImplTestExcluded extends LocalDatastoreTest {
 	}
 
 	@Test
+	public void retrieveOfNonExistentObjectReturnNull() {
+		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
+		assertEquals(null, daoImpl.findByKey(new Long(10000)));
+	}
+
+	@Test
 	public void loadMethodShouldReproduceEntity() {
 		ExampleModel testModel = new ExampleModel();
 		testModel.setField("Ronaldo");
@@ -49,8 +61,7 @@ public class JpaGenericDAOImplTestExcluded extends LocalDatastoreTest {
 
 	@Test
 	public void persistMultipleEntitiesProduceMultipleIdentity() {
-		ExampleModel[] testModels = new ExampleModel[] { new ExampleModel(),
-				new ExampleModel() };
+		ExampleModel[] testModels = new ExampleModel[] { new ExampleModel(), new ExampleModel() };
 		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
 		daoImpl.persist(testModels);
 		assertEquals(1, testModels[0].getAutoId());
@@ -59,10 +70,20 @@ public class JpaGenericDAOImplTestExcluded extends LocalDatastoreTest {
 
 	@Test
 	public void loadAllShouldReturnAllEntities() {
-		ExampleModel[] testModels = new ExampleModel[] { new ExampleModel(),
-				new ExampleModel() };
+		ExampleModel[] testModels = new ExampleModel[] { new ExampleModel(), new ExampleModel() };
 		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
 		daoImpl.persist(testModels);
 		assertEquals(2, daoImpl.getAll().size());
+	}
+
+	@Test
+	public void deleteTransientEntityShouldBeOK() {
+		ExampleModel model = new ExampleModel();
+		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
+		daoImpl.persist(model);
+		ExampleModel transientModel = new ExampleModel();
+		transientModel.setAutoId(model.getAutoId());
+		daoImpl.delete(transientModel);
+		assertEquals(null, daoImpl.findByKey(model.getAutoId()));
 	}
 }
