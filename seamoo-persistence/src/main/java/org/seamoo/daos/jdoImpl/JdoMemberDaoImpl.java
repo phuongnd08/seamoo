@@ -3,9 +3,10 @@ package org.seamoo.daos.jdoImpl;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.entities.Member;
 
-public class JdoMemberDaoImpl extends JdoGenericDaoImpl<Member, String> implements MemberDao {
+public class JdoMemberDaoImpl extends JdoGenericDaoImpl<Member, Long> implements MemberDao {
 
-	public Member findByAutoId(Long autoId) {
+	@Override
+	public Member findByOpenId(String openId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

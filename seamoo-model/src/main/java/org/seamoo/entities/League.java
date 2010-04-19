@@ -6,6 +6,7 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.Id;
 
 @PersistenceCapable(detachable = "false")
 public class League implements Serializable {
@@ -15,6 +16,7 @@ public class League implements Serializable {
 	private static final long serialVersionUID = -9096904769164051434L;
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Id
 	private Long autoId;
 	@Persistent
 	private Long subjectAutoId;

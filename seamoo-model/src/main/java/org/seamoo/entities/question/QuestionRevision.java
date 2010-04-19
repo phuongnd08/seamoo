@@ -1,8 +1,12 @@
 package org.seamoo.entities.question;
 
+import javax.persistence.Id;
+
 import org.seamoo.entities.Member;
 
 public abstract class QuestionRevision {
+	@Id
+	private Long autoId;
 	private Member creator;
 	private int revisionNumber;
 	private String editSummary;
@@ -29,6 +33,14 @@ public abstract class QuestionRevision {
 
 	public String getEditSummary() {
 		return editSummary;
+	}
+
+	public void setAutoId(Long autoId) {
+		this.autoId = autoId;
+	}
+
+	public Long getAutoId() {
+		return autoId;
 	}
 
 	/**

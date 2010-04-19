@@ -8,6 +8,7 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.Id;
 
 import org.seamoo.entities.Member;
 
@@ -15,9 +16,8 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class Question {
+	@Id
 	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key autoKey;
 	@Persistent(valueStrategy = IdGeneratorStrategy.SEQUENCE)
 	private Long autoId;
 	@Persistent
@@ -28,7 +28,7 @@ public class Question {
 	// from last revision
 	@Persistent
 	private QuestionRevision currentRevision;
-	@Persistent(mappedBy="question")
+	@Persistent(mappedBy = "question")
 	private List<QuestionRevision> revisions;
 	@Persistent
 	private Member originator;
@@ -131,14 +131,6 @@ public class Question {
 
 	public Long getAutoId() {
 		return autoId;
-	}
-
-	public void setAutoKey(Key autoKey) {
-		this.autoKey = autoKey;
-	}
-
-	public Key getAutoKey() {
-		return autoKey;
 	}
 
 }

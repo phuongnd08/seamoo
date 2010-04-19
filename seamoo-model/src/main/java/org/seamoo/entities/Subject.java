@@ -7,6 +7,7 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.Id;
 
 @PersistenceCapable(detachable = "false")
 public class Subject implements Serializable {
@@ -16,6 +17,7 @@ public class Subject implements Serializable {
 	private static final long serialVersionUID = 3398469031026720030L;
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Id
 	private Long autoId;
 	@Persistent
 	private String name;

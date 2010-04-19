@@ -16,8 +16,6 @@ public class Member {
 	@Persistent
 	private String openId;
 	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key autoKey;
 	@Persistent(valueStrategy = IdGeneratorStrategy.SEQUENCE)
 	private Long autoId;
 	@Persistent

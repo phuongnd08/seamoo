@@ -51,7 +51,7 @@ public class MatchOrganizerSteps {
 			members.add(member);
 		}
 		memberDao = mock(MemberDao.class);
-		when(memberDao.findByAutoId(anyLong())).thenAnswer(new Answer<Member>() {
+		when(memberDao.findByKey(anyLong())).thenAnswer(new Answer<Member>() {
 
 			@Override
 			public Member answer(InvocationOnMock invocation) throws Throwable {

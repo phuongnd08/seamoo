@@ -3,8 +3,11 @@ package org.seamoo.entities.question;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.annotations.Embedded;
+
 public class MultipleChoicesQuestionRevision extends QuestionRevision {
 	private String content;
+	@Embedded
 	private List<QuestionChoice> choices;
 
 	public MultipleChoicesQuestionRevision() {

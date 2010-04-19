@@ -7,18 +7,19 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import com.google.appengine.api.datastore.Blob;
 
 @PersistenceCapable(detachable = "false")
 public class NumericBag {
-	private List<Long> keyList;
+	@Id
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long autoId;
@@ -32,7 +33,12 @@ public class NumericBag {
 	@Persistent
 	private Blob keyBlob;
 
+	@Transient
+	private List<Long> keyList;
+
+	@Transient
 	private ByteArrayOutputStream keyBAOS;
+	@Transient
 	private DataOutputStream keyDOS;
 
 	public NumericBag() {

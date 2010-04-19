@@ -19,12 +19,16 @@ public abstract class OfyGenericDaoImpl<TEntity, TKey> implements GenericDao<TEn
 		// ObjectifyService.register()
 	}
 
-	Objectify ofy;
+	private Objectify ofy;
 	private Class<TEntity> entityClass;
 
 	public OfyGenericDaoImpl() {
 		entityClass = (Class<TEntity>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 		ofy = ObjectifyService.begin();
+	}
+
+	protected Objectify getOfy() {
+		return ofy;
 	}
 
 	public void delete(TEntity entity) {
@@ -57,7 +61,8 @@ public abstract class OfyGenericDaoImpl<TEntity, TKey> implements GenericDao<TEn
 	}
 
 	public TEntity[] persist(TEntity[] entities) {
-		ofy.put(Lists.newArrayList(entities));
+		if (entities.length != 0)
+			ofy.put(Lists.newArrayList(entities));
 		return entities;
 	}
 }

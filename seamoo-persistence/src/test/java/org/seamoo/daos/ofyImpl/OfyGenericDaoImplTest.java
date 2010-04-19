@@ -86,4 +86,11 @@ public class OfyGenericDaoImplTest extends LocalDatastoreTest {
 		daoImpl.delete(transientModel);
 		assertEquals(null, daoImpl.findByKey(model.getAutoId()));
 	}
+
+	@Test
+	public void persistEmptyListShouldBeOK() {
+		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
+		daoImpl.persist(new ExampleModel[0]);
+
+	}
 }

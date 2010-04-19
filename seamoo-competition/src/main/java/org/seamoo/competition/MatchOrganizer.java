@@ -133,7 +133,7 @@ public class MatchOrganizer {
 			candidate = candidates.get(userAutoId);
 		} else {
 			candidate = new MatchCandidate();
-			candidate.setMember(memberDao.findByAutoId(userAutoId));
+			candidate.setMember(memberDao.findByKey(userAutoId));
 			candidates.put(userAutoId, candidate);
 		}
 		return candidate;

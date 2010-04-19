@@ -39,7 +39,7 @@ public class MemberInjectionFilter implements Filter {
 			OpenIdUser openIdUser = RelyingParty.getInstance().discover((HttpServletRequest) request);
 			System.out.println("Discover OpenIdUser " + openIdUser);
 			if (openIdUser != null && openIdUser.isAuthenticated()) {
-				Member member = memberDao.findByKey(openIdUser.getClaimedId());
+				Member member = memberDao.findByOpenId(openIdUser.getClaimedId());
 				if (member == null) {
 					System.out.println("User never seen on system, route to first-seen");
 					String requestUri = ((HttpServletRequest) request).getRequestURI();
