@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- 
+ -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:gwt="urn:import:com.google.gwt.user.client.ui">
+	<gwt:HTMLPanel>
+		<gwt:HTMLPanel ui:field="panelIndicator">
+			<gwt:FlowPanel ui:field="panelMatchStatus">
+				<gwt:Image ui:field="imgMatchStatus" />
+				<gwt:Image ui:field="labelMatchStatus" />
+			</gwt:FlowPanel>
+			<gwt:FlowPanel ui:field="panelMatchPlayers">
+				<gwt:FlexTable ui:field="tableMatchPlayers">
+				</gwt:FlexTable>
+			</gwt:FlowPanel>
+		</gwt:HTMLPanel>
+
+		<gwt:HTMLPanel styleName="description-box" ui:field="panelCountDown">
+			<gwt:Label ui:field="labelCountDownType"></gwt:Label>
+			<gwt:Label ui:field="labelCountDown"></gwt:Label>
+		</gwt:HTMLPanel>
+		<gwt:HTMLPanel styleName="description-box" ui:field="panelQuestion">
+			<h3>
+				Câu hỏi
+				<gwt:Label ui:field="labelQuestionIndex"></gwt:Label>
+			</h3>
+			<div>
+				<gwt:Label ui:field="labelQuestion"></gwt:Label>
+			</div>
+			<gwt:FlowPanel ui:field="panelChoices"></gwt:FlowPanel>
+			<gwt:Button ui:field="buttonIgnore">Bỏ qua&gt;&gt;</gwt:Button>
+		</gwt:HTMLPanel>
+		<gwt:HTMLPanel styleName="description-box" ui:field="panelEvents">
+			<h3>Diễn biến</h3>
+			<gwt:FlexTable ui:field="tableEvents" styleName="fw">
+			</gwt:FlexTable>
+		</gwt:HTMLPanel>
+	</gwt:HTMLPanel>
+</ui:UiBinder>

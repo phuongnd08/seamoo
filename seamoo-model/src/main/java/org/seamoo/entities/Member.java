@@ -1,44 +1,42 @@
 package org.seamoo.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-import javax.jdo.annotations.Unique;
 import javax.persistence.Id;
 
-@PersistenceCapable
-public class Member {
-	@Unique
-	@Persistent
+import com.vercer.engine.persist.annotation.Key;
+
+public class Member implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9128570735254847132L;
 	private String openId;
 	@Id
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.SEQUENCE)
+	@Key
 	private Long autoId;
-	@Persistent
+
 	private String displayName;
-	@Persistent
+
 	private String email;
-	@Persistent
+
 	private Date dateOfBirth;
-	@Persistent
+
 	private Date joiningDate;
-	@Persistent
+
 	private String aboutMe;
-	@Persistent
+
 	private String website;
-	@Persistent
+
 	private String quote;
-	@Persistent
+
 	private Date lastSeen;
-	@Persistent
+
 	private long lockingDuration;
-	@Persistent
+
 	private boolean locked;
-	@Persistent
+
 	private Date lastLocked;
 
 	public Member() {

@@ -3,33 +3,30 @@ package org.seamoo.entities.matching;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
 import javax.persistence.Id;
 
+import org.seamoo.entities.Member;
 import org.seamoo.entities.question.Question;
 
-@PersistenceCapable
+import com.vercer.engine.persist.annotation.Key;
+
 public class Match {
 	@Id
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Key
 	private Long autoId;
-	@Persistent
+
 	private long formedMoment;
-	@Persistent
+
 	private long startedMoment;
-	@Persistent
+
 	private long endedMoment;
-	@Persistent
+
 	private List<Question> questions;
-	@Persistent
+
 	private List<MatchCompetitor> competitors;
-	@Persistent
+
 	private List<MatchEvent> events;
-	@Persistent
+
 	private MatchPhase phase;
 
 	public Match() {
@@ -95,6 +92,13 @@ public class Match {
 
 	public List<MatchCompetitor> getCompetitors() {
 		return competitors;
+	}
+
+	public MatchCompetitor getCompetitorForMember(Member member) {
+		for (MatchCompetitor competitor : competitors)
+			if (competitor.getMember() == member)
+				return competitor;
+		return null;
 	}
 
 	public void addEvent(MatchEvent event) {

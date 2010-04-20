@@ -1,6 +1,8 @@
 package org.seamoo.webapp.controllers;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.Map;
 
@@ -74,7 +76,14 @@ public class UserController {
 	}
 
 	private static String getRedirectView(HttpServletRequest request, String url) {
-		return String.format("redirect:%s", url != null && !url.equals("") ? url : request.getContextPath() + "/");
+		String workingUrl;
+		try {
+			workingUrl = url != null && !url.equals("") ? URLDecoder.decode(url, "utf-8") : request.getContextPath() + "/";
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			workingUrl = request.getContextPath() + "/";
+		}
+		return String.format("redirect:%s", workingUrl);
 	}
 
 	@RequestMapping(value = "/first-seen", method = { RequestMethod.GET, RequestMethod.POST })
@@ -99,6 +108,7 @@ public class UserController {
 					Map<String, String> infoMap = (Map<String, String>) user.getAttribute(OPEN_ID_INFO_FIELD);
 					if (infoMap != null) {
 						member.setEmail(infoMap.get(OPEN_ID_INFO_EMAIL_FIELD));
+						member.setDisplayName(infoMap.get(OPEN_ID_INFO_EMAIL_FIELD));
 					}
 					memberDao.persist(member);
 				}

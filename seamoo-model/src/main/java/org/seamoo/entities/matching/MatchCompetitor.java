@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-
 import org.seamoo.entities.Member;
 
 /**
@@ -17,25 +14,24 @@ import org.seamoo.entities.Member;
  * @author phuongnd08
  * 
  */
-@PersistenceCapable
 public class MatchCompetitor implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1680471706907193985L;
-	@Persistent
+
 	private Member member;
-	@Persistent
+
 	private Date participatedTime;
-	@Persistent
+
 	private double totalScore;
-	@Persistent
+
 	private int rank;
-	@Persistent
+
 	private long finishedMoment;
-	@Persistent
+
 	private int passedQuestionCount;
-	@Persistent
+
 	private List<MatchAnswer> answers;
 
 	public MatchCompetitor() {

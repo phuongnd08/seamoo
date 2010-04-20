@@ -2,20 +2,15 @@ package org.seamoo.entities.matching;
 
 import java.io.Serializable;
 
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-
-@PersistenceCapable
 public class MatchAnswer implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 116932736180099741L;
-	@Persistent
 	private MatchAnswerType type;
-	@Persistent
+
 	private String content;
-	@Persistent
+
 	private double score;
 
 	public MatchAnswer() {

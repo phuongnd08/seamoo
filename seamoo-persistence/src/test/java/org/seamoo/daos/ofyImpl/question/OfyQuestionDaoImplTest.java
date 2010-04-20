@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.TreeSet;
 
 import org.seamoo.daos.ofyImpl.OfyModelRegistrar;
+import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
+import org.seamoo.entities.question.QuestionChoice;
+import org.seamoo.entities.question.QuestionRevision;
 import org.seamoo.persistence.test.LocalDatastoreTest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -79,5 +82,21 @@ public class OfyQuestionDaoImplTest extends LocalDatastoreTest {
 		for (Question q : qs)
 			idSet.add(q.getAutoId());
 		assertEquals(idSet.size(), 4);
+	}
+
+	@Test
+	public void persistMultipleChoicesQuestionShouldBeOK() {
+		Question q = new Question();
+		MultipleChoicesQuestionRevision r = new MultipleChoicesQuestionRevision();
+		r.setContent("hello");
+		r.addChoice(new QuestionChoice("xxx", true));
+		q.addAndSetAsCurrentRevision(r);
+		daoImpl.persist(q);
+		Question qReloaded = daoImpl.findByKey(q.getAutoId());
+		MultipleChoicesQuestionRevision rReloaded = (MultipleChoicesQuestionRevision) qReloaded.getCurrentRevision();
+		assertEquals("hello", rReloaded.getContent());
+		assertEquals(1, rReloaded.getChoices().size());
+		assertEquals("xxx", rReloaded.getChoices().get(0).getContent());
+		assertEquals(true, rReloaded.getChoices().get(0).isCorrect());
 	}
 }

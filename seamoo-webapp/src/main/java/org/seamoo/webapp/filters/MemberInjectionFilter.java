@@ -44,7 +44,8 @@ public class MemberInjectionFilter implements Filter {
 					System.out.println("User never seen on system, route to first-seen");
 					String requestUri = ((HttpServletRequest) request).getRequestURI();
 					if (!requestUri.startsWith(firstSeenUri)) {
-						((HttpServletResponse) response).sendRedirect(String.format("%s?returnUrl=%s", firstSeenUri, requestUri));
+						((HttpServletResponse) response).sendRedirect(String.format("%s?returnUrl=%s", firstSeenUri,
+								RedirectUriHandler.getEncodedRedirectUrl((HttpServletRequest) request)));
 						return;
 					}
 				} else

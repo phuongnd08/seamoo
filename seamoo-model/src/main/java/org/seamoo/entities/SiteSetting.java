@@ -1,13 +1,12 @@
 package org.seamoo.entities;
 
-import javax.jdo.annotations.Unique;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+import com.vercer.engine.persist.annotation.Key;
+
 public class SiteSetting {
 	@Id
-	@Unique
+	@Key
 	private String key;
 	public String value;
 

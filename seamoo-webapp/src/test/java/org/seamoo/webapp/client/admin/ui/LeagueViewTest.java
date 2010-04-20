@@ -1,7 +1,7 @@
 package org.seamoo.webapp.client.admin.ui;
 
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.seamoo.webapp.client.PowerMockedGwtBddScenario;
+import org.seamoo.webapp.client.user.PowerMockedGwtBddScenario;
 import org.testng.annotations.Test;
 
 import com.google.gwt.core.client.GWT;

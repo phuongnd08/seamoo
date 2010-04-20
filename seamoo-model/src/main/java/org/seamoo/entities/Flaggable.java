@@ -3,18 +3,13 @@ package org.seamoo.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.Id;
 
-@PersistenceCapable
+import com.vercer.engine.persist.annotation.Key;
+
 public class Flaggable implements Serializable {
-	/**
-	 * 
-	 */
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Key
+	@Id
 	private Long autoId;
 	private static final long serialVersionUID = 6618772456611898530L;
 	private List<Member> flaggers;

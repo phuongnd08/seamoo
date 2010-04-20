@@ -15,6 +15,7 @@
 		<module>seamoo-training</module>
 		<module>seamoo-competition</module>
 		<module>seamoo-theme</module>
+		<module>seamoo-gwt-bridge</module>
 		<module>seamoo-webapp</module>
 	</modules>
 
@@ -68,11 +69,17 @@
 		<repository>
 			<id>twig</id>
 			<url>http://mvn.twig-persist.googlecode.com/hg</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 
 		<repository>
 			<id>objectify-appengine</id>
 			<url>http://objectify-appengine.googlecode.com/svn/maven</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 
@@ -203,7 +210,6 @@
 				<groupId>org.apache.geronimo.specs</groupId>
 				<artifactId>geronimo-servlet_2.5_spec</artifactId>
 				<version>1.2</version>
-				<scope>provided</scope>
 			</dependency>
 
 			<!-- These dependencies are here just for enabling logging -->
@@ -262,6 +268,12 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context-support</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
 
@@ -476,14 +488,14 @@
 		<log4j.version>1.2.14</log4j.version>
 		<tiles.version>2.1.4</tiles.version>
 		<freemarker.version>2.3.16</freemarker.version>
-		<twig-persist.version>1.0.1</twig-persist.version>
+		<twig-persist.version>1.0.2</twig-persist.version>
 		<objectify.version>2.1</objectify.version>
 		<!--
 			Specify AppEngine version for your project. It should match SDK
 			version pointed to by ${gae.home} property (Typically, one used by
 			your Eclipse plug-in)
 		-->
-		<gae.version>1.3.1</gae.version>
+		<gae.version>1.3.2</gae.version>
 		<gae.debugPort>8000</gae.debugPort>
 		<gwt.version>2.0.3</gwt.version>
 		<urlrewrite.filter.version>3.1.0</urlrewrite.filter.version>

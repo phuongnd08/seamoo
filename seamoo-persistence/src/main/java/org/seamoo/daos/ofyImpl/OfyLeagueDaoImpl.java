@@ -2,8 +2,6 @@ package org.seamoo.daos.ofyImpl;
 
 import java.util.List;
 
-import javax.jdo.PersistenceManager;
-
 import org.seamoo.daos.LeagueDao;
 import org.seamoo.entities.League;
 

@@ -50,7 +50,6 @@
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-servlet_2.5_spec</artifactId>
-			<version>1.2</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -76,16 +75,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
-
-		<!--		<dependency>-->
-		<!--			<groupId>net.sf.gwt-widget</groupId>-->
-		<!--			<artifactId>gwt-widgets-server</artifactId>-->
-		<!--		</dependency>-->
-
-		<!--		<dependency>-->
-		<!--			<groupId>xalan</groupId>-->
-		<!--			<artifactId>xalan</artifactId>-->
-		<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -130,6 +119,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
 		</dependency>
 
 		<dependency>
@@ -193,9 +187,9 @@
 		<!--		</dependency>-->
 
 		<dependency>
-			<groupId>org.workingonit</groupId>
-			<artifactId>gwtbridge</artifactId>
-			<version>0.1</version>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>seamoo-gwt-bridge</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
@@ -243,6 +237,11 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>seamoo-competition</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>seamoo-test-resources</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
@@ -260,7 +259,8 @@
 				<configuration>
 					<forkMode>once</forkMode>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/resources/testng-unit-test.xml</suiteXmlFile>
+						<suiteXmlFile>src/test/resources/testng-unit-test.xml
+						</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
@@ -367,40 +367,7 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.1</version>
 				<executions>
-					<!--					<execution>-->
-					<!--						<id>copy-rpc-policy</id>-->
-					<!--						<phase>test-compile</phase>-->
-					<!--						<configuration>-->
-					<!--							<tasks>-->
-					<!--								 Remote old GWT policies files (for Async RPC testing) -->
-					<!--								<delete>-->
-					<!--
-						<fileset dir="${basedir}/src/test/resources" includes="*.gwt.rpc"
-						/>
-					-->
-					<!--								</delete>-->
-<!---->
-					<!--								-->
-					<!--
-						Copy fresh generated GWT policies files to test resources
-					-->
-					<!--								-->
-					<!--
-						<copy todir="${basedir}/src/test/resources" flatten="true">
-					-->
-					<!--									<fileset-->
-					<!--
-						dir="${project.build.directory}/${project.build.finalName}"
-					-->
-					<!--										includes="**/*.gwt.rpc">-->
-					<!--									</fileset>-->
-					<!--								</copy>-->
-					<!--							</tasks>-->
-					<!--						</configuration>-->
-					<!--						<goals>-->
-					<!--							<goal>run</goal>-->
-					<!--						</goals>-->
-					<!--					</execution>-->
+
 					<execution>
 						<id>generate-database</id>
 						<phase>pre-integration-test</phase>
@@ -433,7 +400,8 @@
 				<version>2.5</version>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/resources/testng-integration-test.xml</suiteXmlFile>
+						<suiteXmlFile>src/test/resources/testng-integration-test.xml
+						</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 
@@ -488,25 +456,7 @@
 				</configuration>
 			</plugin>
 
-			<!--			<plugin>-->
-			<!--				<groupId>org.codehaus.mojo</groupId>-->
-			<!--				<artifactId>build-helper-maven-plugin</artifactId>-->
-			<!--				<executions>-->
-			<!--					<execution>-->
-			<!--						<id>add-source</id>-->
-			<!--						<phase>generate-sources</phase>-->
-			<!--						<goals>-->
-			<!--							<goal>add-source</goal>-->
-			<!--						</goals>-->
-			<!--						<configuration>-->
-			<!--							<sources>-->
-			<!--								<source>${basedir}/target/generated-sources/gwt</source>-->
-			<!--								 source code for auto generated gwt Async classes -->
-			<!--							</sources>-->
-			<!--						</configuration>-->
-			<!--					</execution>-->
-			<!--				</executions>-->
-			<!--			</plugin>-->
+
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -612,7 +562,7 @@
 								<property name="webapp.dir"
 									value="${project.build.directory}/${project.build.finalName}" />
 
-								<ant antfile="${basedir}/build.xml" inheritRefs="true"
+								<ant antfile="${basedir}/gwt.xml" inheritRefs="true"
 									inheritAll="true">
 									<target name="${target}" />
 								</ant>

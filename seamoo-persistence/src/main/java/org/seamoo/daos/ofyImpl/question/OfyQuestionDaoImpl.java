@@ -13,7 +13,6 @@ import org.seamoo.entities.question.Question;
 import org.seamoo.lookup.NumericBag;
 
 import com.google.common.collect.Lists;
-import com.googlecode.objectify.Query;
 
 public class OfyQuestionDaoImpl extends OfyGenericDaoImpl<Question, Long> implements QuestionDao {
 

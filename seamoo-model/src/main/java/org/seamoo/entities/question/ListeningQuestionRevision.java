@@ -1,8 +1,11 @@
 package org.seamoo.entities.question;
 
-
 public class ListeningQuestionRevision extends QuestionRevision {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1627240630356183641L;
 	private String audioUrl;
 	private String content;
 

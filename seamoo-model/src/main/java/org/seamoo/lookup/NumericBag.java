@@ -8,36 +8,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import com.google.appengine.api.datastore.Blob;
+import com.vercer.engine.persist.annotation.Key;
+import com.vercer.engine.persist.annotation.Store;
 
-@PersistenceCapable(detachable = "false")
 public class NumericBag {
 	@Id
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Key
 	private Long autoId;
 	/**
 	 * A string used to classify different type of bag, oftenly the class name
 	 * of entity
 	 */
-	@Persistent
+
 	private String classifier;
 
-	@Persistent
 	private Blob keyBlob;
 
 	@Transient
+	@Store(false)
 	private List<Long> keyList;
 
+	@Store(false)
 	@Transient
 	private ByteArrayOutputStream keyBAOS;
+	@Store(false)
 	@Transient
 	private DataOutputStream keyDOS;
 

@@ -1,10 +1,16 @@
 package org.seamoo.entities.question;
 
+import java.io.Serializable;
+
 import javax.persistence.Id;
 
 import org.seamoo.entities.Member;
 
-public abstract class QuestionRevision {
+public abstract class QuestionRevision implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2192950758622290277L;
 	@Id
 	private Long autoId;
 	private Member creator;

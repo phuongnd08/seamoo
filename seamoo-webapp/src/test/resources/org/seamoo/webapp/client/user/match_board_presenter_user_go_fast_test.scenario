@@ -1,0 +1,22 @@
+!-- User go so fast flow
+Given Refresh period is 1000 milliseconds
+And 10 questions to use in match
+And A Match Player Display
+And A Match Player Presenter
+And A Match Service Async
+!-- The match is started
+And Current match is started with remaining periods of 30000 milliseconds and number of questions of 10
+And 5 questions from 0 is associated to match 
+When Presenter initialize
+Then Service get the current match information with receivedQuestion=0 & receivedEvent=0
+And Display is switched to PLAYING mode
+!-- Fast-forward first 3 questions
+Given Service forgets its interaction
+And 5 questions from 5 is associated to match 
+And Service post-pone answer to query for match state 
+And Timer forgets its interaction
+When User ignore 5 questions
+Then Service get the current match information with receivedQuestion=5 & receivedEvent=0
+And Display is viewing 5th question
+When Answer to query for match state is returned
+Then Display is viewing 6th question

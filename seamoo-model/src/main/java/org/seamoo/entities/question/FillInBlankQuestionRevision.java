@@ -1,6 +1,10 @@
 package org.seamoo.entities.question;
 
 public class FillInBlankQuestionRevision extends QuestionRevision {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3236415741083406071L;
 	private String content;
 	private String answer;
 

@@ -79,7 +79,7 @@
 	</div>
 [/#macro]
 
-[#macro adminGwt module params={}]
+[#macro gwt prefix module params={}]
 	<script type="text/javascript">
 	var Vars = {
 		module: "${module}"
@@ -91,5 +91,13 @@
 		[/#list]
 	}
 	</script>
-	<script type="text/javascript" src="[@spring.url "/adminGwt/adminGwt.nocache.js"/]"></script>
+	<script type="text/javascript" src="[@spring.url "/${prefix}Gwt/${prefix}Gwt.nocache.js"/]"></script>
+[/#macro]
+
+[#macro adminGwt module params={}]
+	[@gwt prefix="admin" module=module params=params/]
+[/#macro]
+
+[#macro userGwt module params={}]
+	[@gwt prefix="user" module=module params=params/]
 [/#macro]

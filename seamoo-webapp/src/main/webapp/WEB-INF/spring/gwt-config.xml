@@ -13,7 +13,9 @@
 
 	<!-- Auto map url based on interfaces GwtRemoteService annotation -->
 	<mvc:annotation-driven />
+	<bean class="org.seamoo.competition.MatchOrganizer" />
 	<bean class="org.workingonit.gwtbridge.GwtServicesRegistrar" />
 	<bean class="org.seamoo.webapp.server.SubjectServiceImpl" />
 	<bean class="org.seamoo.webapp.server.LeagueServiceImpl" />
+	<bean class="org.seamoo.webapp.server.MatchServiceImpl" />
 </beans>

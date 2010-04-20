@@ -12,15 +12,7 @@
 			/WEB-INF/spring/context-config.xml
 		</param-value>
 	</context-param>
-	<servlet>
-		<servlet-name>messages</servlet-name>
-		<servlet-class>org.seamoo.webapp.example.web.MessagesServiceImpl</servlet-class>
-	</servlet>
 
-	<servlet-mapping>
-		<servlet-name>messages</servlet-name>
-		<url-pattern>/messages/messages</url-pattern>
-	</servlet-mapping>
 	<servlet>
 		<servlet-name>gwtbridge</servlet-name>
 		<servlet-class>org.workingonit.gwtbridge.GwtBridgeServlet</servlet-class>
@@ -73,6 +65,7 @@
 		<url-pattern>/admin/*</url-pattern>
 		<url-pattern>/users/login</url-pattern>
 		<url-pattern>/users/first-seen</url-pattern>
+		<url-pattern>/matches/participate</url-pattern>
 	</filter-mapping>
 
 	<filter>

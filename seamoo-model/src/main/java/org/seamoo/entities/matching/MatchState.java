@@ -17,17 +17,13 @@ public class MatchState implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8236758819315756620L;
-	public static final int DEFAULT_PERIOD_LENGTH = 100;// 100 milliseconds
-	public static final int DEFAULT_REFRESH_PERIOD = 10;
+	public static final int DEFAULT_REFRESH_PERIOD = 1000;// milliseconds
 	private long matchAutoId;
 	/**
 	 * The total number of questions used in match
 	 */
 	private int questionsCount;
-	/**
-	 * The length of each period, should be 100 milliseconds
-	 */
-	private int periodLength = DEFAULT_PERIOD_LENGTH;
+
 	/**
 	 * The number of periods after that the player should recheck for match
 	 * state
@@ -43,8 +39,10 @@ public class MatchState implements Serializable {
 	/**
 	 * The zero-based index from which questions is buffered for current player
 	 */
-	private int bufferedFrom;
+	private int bufferedQuestionsFrom;
 	private List<Question> bufferedQuestions;
+	private int bufferedEventsFrom;
+	private List<MatchEvent> bufferedEvents;
 	private List<MatchCompetitor> competitors;
 	private MatchPhase phase;
 	private int completedQuestionsCount;
@@ -57,12 +55,12 @@ public class MatchState implements Serializable {
 		return matchAutoId;
 	}
 
-	public void setBufferedFrom(int bufferedFrom) {
-		this.bufferedFrom = bufferedFrom;
+	public void setBufferedQuestionsFrom(int bufferedFrom) {
+		this.bufferedQuestionsFrom = bufferedFrom;
 	}
 
 	public int getBufferedFrom() {
-		return bufferedFrom;
+		return bufferedQuestionsFrom;
 	}
 
 	public void setBufferedQuestions(List<Question> bufferedQuestions) {
@@ -87,14 +85,6 @@ public class MatchState implements Serializable {
 
 	public int getQuestionsCount() {
 		return questionsCount;
-	}
-
-	public void setPeriodLength(int periodLength) {
-		this.periodLength = periodLength;
-	}
-
-	public int getPeriodLength() {
-		return periodLength;
 	}
 
 	public void setRefreshPeriod(int refreshPeriod) {
@@ -127,5 +117,21 @@ public class MatchState implements Serializable {
 
 	public int getCompletedQuestionsCount() {
 		return completedQuestionsCount;
+	}
+
+	public void setBufferedEventsFrom(int bufferedEventsFrom) {
+		this.bufferedEventsFrom = bufferedEventsFrom;
+	}
+
+	public int getBufferedEventsFrom() {
+		return bufferedEventsFrom;
+	}
+
+	public void setBufferedEvents(List<MatchEvent> bufferedEvents) {
+		this.bufferedEvents = bufferedEvents;
+	}
+
+	public List<MatchEvent> getBufferedEvents() {
+		return bufferedEvents;
 	}
 }

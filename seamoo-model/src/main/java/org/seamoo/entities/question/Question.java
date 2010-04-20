@@ -1,43 +1,33 @@
 package org.seamoo.entities.question;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-import javax.persistence.Id;
-
 import org.seamoo.entities.Member;
+import org.seamoo.entities.Votable;
 
-import com.google.appengine.api.datastore.Key;
+public class Question extends Votable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7123889816881222646L;
 
-@PersistenceCapable
-public class Question {
-	@Id
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.SEQUENCE)
-	private Long autoId;
-	@Persistent
 	private Date addedTime;// used for faster access, can be deducted from first
 	// revision
-	@Persistent
+
 	private Date lastModifiedTime;// used for faster access, can be deducted
 	// from last revision
-	@Persistent
+
 	private QuestionRevision currentRevision;
-	@Persistent(mappedBy = "question")
 	private List<QuestionRevision> revisions;
-	@Persistent
+
 	private Member originator;
-	@Persistent
+
 	private QuestionType type;
-	@Persistent
+
 	private List<Tag> tags;
 
-	@Persistent
 	private String alias;
 
 	public Question() {
@@ -124,13 +114,4 @@ public class Question {
 	public double getScore(String answer) {
 		return currentRevision.getScore(answer);
 	}
-
-	public void setAutoId(Long autoId) {
-		this.autoId = autoId;
-	}
-
-	public Long getAutoId() {
-		return autoId;
-	}
-
 }

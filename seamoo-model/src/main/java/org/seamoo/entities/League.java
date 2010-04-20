@@ -2,33 +2,29 @@ package org.seamoo.entities;
 
 import java.io.Serializable;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
 import javax.persistence.Id;
 
-@PersistenceCapable(detachable = "false")
+import com.vercer.engine.persist.annotation.Key;
+
 public class League implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -9096904769164051434L;
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	@Id
+	@Key
 	private Long autoId;
-	@Persistent
+
 	private Long subjectAutoId;
-	@Persistent
+
 	private String name;
-	@Persistent
+
 	private String logoUrl;
-	@Persistent
+
 	private String description;
-	@Persistent
+
 	private int level;
-	@Persistent
+
 	private boolean enabled;
 
 	public League() {

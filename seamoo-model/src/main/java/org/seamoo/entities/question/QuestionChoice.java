@@ -1,8 +1,17 @@
 package org.seamoo.entities.question;
 
-public class QuestionChoice {
+import java.io.Serializable;
+
+public class QuestionChoice implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -563242659588171862L;
 	private String content;
 	private boolean correct;
+
+	public QuestionChoice() {
+	}
 
 	public QuestionChoice(String content, boolean correct) {
 		this.content = content;

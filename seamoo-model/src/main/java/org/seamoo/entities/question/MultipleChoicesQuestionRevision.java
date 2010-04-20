@@ -3,11 +3,12 @@ package org.seamoo.entities.question;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jdo.annotations.Embedded;
-
 public class MultipleChoicesQuestionRevision extends QuestionRevision {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3124942569355863301L;
 	private String content;
-	@Embedded
 	private List<QuestionChoice> choices;
 
 	public MultipleChoicesQuestionRevision() {
