@@ -39,35 +39,43 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	public MatchState getMatchState(int bufferedQuestionsCount, int bufferredEventsCount) {
 		Member member = getInjectedMember();
 		Match match = matchOrganizer.getMatchForUser(member.getAutoId());
-		MatchState matchState = new MatchState();
-		matchState.setCompetitors(match.getCompetitors());
-		matchState.setQuestionsCount(match.getQuestions().size());
-		MatchCompetitor competitor = match.getCompetitorForMember(member);
-		matchState.setCompletedQuestionsCount(competitor.getPassedQuestionCount());
-		// assign buffered questions when user is in the middle of the match and
-		// in need of questions
-		if (match.getPhase() == MatchPhase.PLAYING && bufferedQuestionsCount < matchState.getQuestionsCount()
-				&& bufferedQuestionsCount - competitor.getPassedQuestionCount() <= BUFFERED_QUESTION_REFILL_THRESHOLD) {
-			matchState.setBufferedQuestionsFrom(bufferedQuestionsCount);
-			List<Question> bufferedQuestions = match.getQuestions().subList(bufferedQuestionsCount,
-					bufferedQuestionsCount + BUFFERED_QUESTION_BLOCK);
-			matchState.getBufferedQuestions().addAll(bufferedQuestions);
+		synchronized (match) {
+			//make sure not change on match during the process of generating RPC object
+			MatchState matchState = new MatchState();
+			matchState.setCompetitors(match.getCompetitors());
+			matchState.setQuestionsCount(match.getQuestions().size());
+			MatchCompetitor competitor = match.getCompetitorForMember(member);
+			matchState.setCompletedQuestionsCount(competitor.getPassedQuestionCount());
+			// assign buffered questions when user is in the middle of the match
+			// and
+			// in need of questions
+			if (match.getPhase() == MatchPhase.PLAYING && bufferedQuestionsCount < matchState.getQuestionsCount()
+					&& bufferedQuestionsCount - competitor.getPassedQuestionCount() <= BUFFERED_QUESTION_REFILL_THRESHOLD) {
+				matchState.setBufferedQuestionsFrom(bufferedQuestionsCount);
+				List<Question> bufferedQuestions = match.getQuestions().subList(bufferedQuestionsCount,
+						bufferedQuestionsCount + BUFFERED_QUESTION_BLOCK);
+				matchState.getBufferedQuestions().addAll(bufferedQuestions);
+			}
+			// set the correct remaining time
+			if (match.getPhase() == MatchPhase.FORMED) {
+				matchState.setRemainingPeriod(match.getStartedMoment() - TimeStampProvider.getCurrentTimeMilliseconds());
+			} else if (match.getPhase() == MatchPhase.PLAYING) {
+				matchState.setRemainingPeriod(match.getEndedMoment() - TimeStampProvider.getCurrentTimeMilliseconds());
+			}
+			// set the correct phase for current member
+			if (match.getPhase() == MatchPhase.PLAYING && competitor.getFinishedMoment() != 0) {
+				matchState.setPhase(MatchPhase.YOU_FINISHED);
+			} else
+				matchState.setPhase(match.getPhase());
+			// assign buffered events
+			if (bufferedQuestionsCount <= match.getEvents().size()) {
+				matchState.setBufferedEvents(new ArrayList<MatchEvent>(match.getEvents().subList(bufferredEventsCount,
+						match.getEvents().size())));
+			} else
+				System.err.println("Error: bufferedEvents from " + member.getDisplayName() + " > match.events.size");
+			matchState.setMatchAutoId(match.getAutoId() != null ? match.getAutoId().longValue() : 0);
+			return matchState;
 		}
-		// set the correct remaining time
-		if (match.getPhase() == MatchPhase.FORMED) {
-			matchState.setRemainingPeriod(match.getStartedMoment() - TimeStampProvider.getCurrentTimeMilliseconds());
-		} else if (match.getPhase() == MatchPhase.PLAYING) {
-			matchState.setRemainingPeriod(match.getEndedMoment() - TimeStampProvider.getCurrentTimeMilliseconds());
-		}
-		// set the correct phase for current member
-		if (match.getPhase() == MatchPhase.PLAYING && competitor.getFinishedMoment() != 0) {
-			matchState.setPhase(MatchPhase.YOU_FINISHED);
-		} else
-			matchState.setPhase(match.getPhase());
-		// assign buffered events
-		matchState.setBufferedEvents(new ArrayList<MatchEvent>(match.getEvents().subList(bufferredEventsCount,
-				match.getEvents().size())));
-		return matchState;
 	}
 
 	@Override

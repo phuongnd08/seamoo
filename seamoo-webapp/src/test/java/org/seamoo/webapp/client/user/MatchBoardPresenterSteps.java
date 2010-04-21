@@ -1,8 +1,8 @@
 package org.seamoo.webapp.client.user;
 
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
-
+import static org.mockito.Matchers.*;
+import static org.testng.Assert.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,6 +50,8 @@ public class MatchBoardPresenterSteps {
 		restubDisplay();
 	}
 
+	Question currentDisplayedQuestion;
+
 	@Given("Display forgets its interaction")
 	public void restubDisplay() {
 		reset(display);
@@ -65,6 +67,16 @@ public class MatchBoardPresenterSteps {
 				return null;
 			}
 		}).when(display).addEventListener((EventListener) any());
+
+		doAnswer(new Answer() {
+
+			@Override
+			public Object answer(InvocationOnMock invocation) throws Throwable {
+				// TODO Auto-generated method stub
+				currentDisplayedQuestion = (Question) invocation.getArguments()[0];
+				return null;
+			}
+		}).when(display).setQuestion((Question) any());
 	}
 
 	@Given("$number questions to use in match")
@@ -254,8 +266,12 @@ public class MatchBoardPresenterSteps {
 
 	@Then("Display is viewing $position question")
 	public void assertDisplayViewQuestion(String position) {
-		int pos = positionToNumber(position) - 1;
-		verify(display).setQuestion(questions[pos]);
+		if (position.equals("no")) {
+			assertNull(currentDisplayedQuestion);
+		} else {
+			int pos = positionToNumber(position) - 1;
+			assertEquals(currentDisplayedQuestion, questions[pos]);
+		}
 	}
 
 	@When("User submit answer for current question")

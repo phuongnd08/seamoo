@@ -8,6 +8,7 @@ And Match has 20 questions
 And Match has 20 events 
 When Member@1 request for Match State
 Then State Phase is NOT_FORMED
+And State matchAutoId is 0
 Given Match Phase is FORMED
 And Match Formed Time is 0
 And Current Time is 0
@@ -33,5 +34,7 @@ Given Member@1 finished the match
 When Member@1 request for Match State
 Then State Phase is YOU_FINISHED
 Given Match Phase is FINISHED
+And Match autoId is 5
 When Member@1 request for Match State
+And State matchAutoId is 5
 Then State Phase is FINISHED

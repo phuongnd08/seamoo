@@ -167,4 +167,13 @@ public class MatchServiceImplSteps {
 		assertEquals(matchState.getBufferedEvents().size(), number);
 	}
 
+	@Given("Match autoId is $id")
+	public void setMatchAutoId(long id) {
+		currentMatch.setAutoId(id);
+	}
+
+	@When("State matchAutoId is $id")
+	public void assertMatchStateAutoId(long id) {
+		assertEquals(matchState.getMatchAutoId(), id);
+	}
 }

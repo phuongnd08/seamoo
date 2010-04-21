@@ -17,6 +17,6 @@ And Service post-pone answer to query for match state
 And Timer forgets its interaction
 When User ignore 5 questions
 Then Service get the current match information with receivedQuestion=5 & receivedEvent=0
-And Display is viewing 5th question
+And Display is viewing no question
 When Answer to query for match state is returned
 Then Display is viewing 6th question

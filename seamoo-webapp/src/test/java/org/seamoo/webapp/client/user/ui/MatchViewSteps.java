@@ -20,6 +20,8 @@ import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.MatchCompetitor;
+import org.seamoo.entities.matching.MatchEvent;
+import org.seamoo.entities.matching.MatchEventType;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
@@ -161,12 +163,15 @@ public class MatchViewSteps {
 
 	@Then("$event event is triggered")
 	public void assertEventTriggered(String event) {
-		if (event.equalsIgnoreCase("submit"))
-			verify(listener).submitAnswer((Display) any(), anyString());
-		else if (event.equalsIgnoreCase("ignore"))
+		if (event.equalsIgnoreCase("ignore"))
 			verify(listener).ignoreQuestion((Display) any());
 		else
 			throw new RuntimeException("Event " + event + " is not supported");
+	}
+
+	@Then("submit event is triggered with answer=$answer")
+	public void assertSubmitEventTriggered(String answer) {
+		verify(listener).submitAnswer((Display) any(), eq(answer));
 	}
 
 	public static String capitalize(String s) {
@@ -258,5 +263,43 @@ public class MatchViewSteps {
 	public void clickChoiceButton(String position) {
 		int pos = positionToNumber(position) - 1;
 		((MockedClickable) panelChoicesButtons.get(pos)).click();
+	}
+
+	private Member memberFromDisplayName(String displayName) {
+		Member m = new Member();
+		m.setDisplayName(displayName);
+		return m;
+	}
+
+	List<MatchEvent> events = new ArrayList<MatchEvent>();
+
+	@Given("Event#$index $displayName join Match")
+	public void createJoinEvent(int index, String displayName) {
+		events.add(new MatchEvent(MatchEventType.JOIN, memberFromDisplayName(displayName)));
+	}
+
+	@Given("Event#$index $displayName submit answer for question #$questionIndex")
+	public void createAnswerEvent(int index, String displayName, int questionIndex) {
+		events.add(new MatchEvent(MatchEventType.ANSWER_QUESTION, memberFromDisplayName(displayName), questionIndex));
+	}
+
+	@Given("Event#$index $displayName ignore question #$questionIndex")
+	public void createIgnoreQuestionEvent(int index, String displayName, int questionIndex) {
+		events.add(new MatchEvent(MatchEventType.IGNORE_QUESTION, memberFromDisplayName(displayName), questionIndex));
+	}
+
+	@Given("Event#$index $displayName left Match")
+	public void createLeftEvent(int index, String displayName) {
+		events.add(new MatchEvent(MatchEventType.LEFT, memberFromDisplayName(displayName)));
+	}
+
+	@When("Events are added to View")
+	public void addEventsToView() {
+		matchView.addEvents(events);
+	}
+
+	@Then("tableMatchEvents shows \"$text\"")
+	public void assertMatchEventShown(String text) {
+		verify(matchView.tableMatchEvents).setText(anyInt(), anyInt(), eq(text));
 	}
 }

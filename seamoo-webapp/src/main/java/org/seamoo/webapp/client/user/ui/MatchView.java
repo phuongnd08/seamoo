@@ -64,7 +64,7 @@ public class MatchView extends Composite implements Display {
 	@UiField
 	HTMLPanel panelEvents;
 	@UiField
-	FlexTable tableEvents;
+	FlexTable tableMatchEvents;
 
 	List<MatchBoard.Display.EventListener> listeners;
 
@@ -131,7 +131,15 @@ public class MatchView extends Composite implements Display {
 			panelChoices.clear();
 			int i = 0;
 			for (QuestionChoice choice : revision.getChoices()) {
-				panelChoices.add(createChoiceButton(choice.getContent(), i));
+				panelChoices.add(createChoiceButton(choice.getContent(), i + 1));// answer
+				// for
+				// multiple
+				// choice
+				// should
+				// be
+				// in
+				// 1-based
+				// form
 				i++;
 			}
 		}
@@ -192,9 +200,33 @@ public class MatchView extends Composite implements Display {
 		labelCountDown.setText(s);
 	}
 
+	int eventIndex = -1;
+
+	String eventToText(MatchEvent event) {
+		switch (event.getType()) {
+		case ANSWER_QUESTION:
+			return event.getMember().getDisplayName() + " answer question #" + event.getQuestionOrder();
+		case FINISHED:
+			return "Match finished";
+		case IGNORE_QUESTION:
+			return event.getMember().getDisplayName() + " ignore question #" + event.getQuestionOrder();
+		case JOIN:
+			return event.getMember().getDisplayName() + " join match";
+		case LEFT:
+			return event.getMember().getDisplayName() + " left match";
+		case STARTED:
+			return "Match started";
+		default:
+			throw new IllegalArgumentException("MatchEvent type is not supported");
+		}
+	}
+
 	@Override
 	public void addEvents(List<MatchEvent> events) {
 		// TODO Auto-generated method stub
-
+		for (MatchEvent event : events) {
+			eventIndex++;
+			tableMatchEvents.setText(eventIndex, 0, eventToText(event));
+		}
 	}
 }

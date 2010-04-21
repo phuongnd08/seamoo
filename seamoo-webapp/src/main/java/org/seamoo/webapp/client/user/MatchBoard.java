@@ -56,14 +56,17 @@ public class MatchBoard {
 			@Override
 			public void submitAnswer(Display display, String answer) {
 				// Server use 1-based order, but currentQuestionOrder is 0-based
-				trySubmitAnswer(currentQuestionOrder+1, answer, 0/* no failed yet */);
+				trySubmitAnswer(currentQuestionOrder + 1, answer, 0/*
+																	 * no failed
+																	 * yet
+																	 */);
 				nextQuestion();
 			}
 
 			@Override
 			public void ignoreQuestion(Display display) {
 				// Server use 1-based order, but currentQuestionOrder is 0-based
-				tryIgnoreQuestion(currentQuestionOrder+1, 0);
+				tryIgnoreQuestion(currentQuestionOrder + 1, 0);
 				nextQuestion();
 			}
 		};
@@ -125,6 +128,10 @@ public class MatchBoard {
 			display.setQuestion(bufferedQuestions.get(order));
 			display.setTotalQuestion(currentMatchState.getQuestionsCount());
 			display.setQuestionIndex(order + 1);
+		}
+
+		private void showNoQuestion() {
+			display.setQuestion(null);
 		}
 
 		private void setCurrentMatchState(MatchState state) {
@@ -225,8 +232,10 @@ public class MatchBoard {
 				if (bufferedQuestions.size() < currentMatchState.getQuestionsCount()) {
 					// questions is being requested
 					waitingForNextQuestion = true;
+					showNoQuestion();
 				} else {
 					// no more questions, user has finished his match
+					showNoQuestion();
 					refreshTimer.cancel();
 					refreshTimer.run();
 				}

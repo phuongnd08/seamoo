@@ -32,7 +32,7 @@
 		</gwt:HTMLPanel>
 		<gwt:HTMLPanel styleName="description-box" ui:field="panelEvents">
 			<h3>Diễn biến</h3>
-			<gwt:FlexTable ui:field="tableEvents" styleName="fw">
+			<gwt:FlexTable ui:field="tableMatchEvents" styleName="fw">
 			</gwt:FlexTable>
 		</gwt:HTMLPanel>
 	</gwt:HTMLPanel>

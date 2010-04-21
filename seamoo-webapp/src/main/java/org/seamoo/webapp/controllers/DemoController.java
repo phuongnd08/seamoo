@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -169,12 +170,22 @@ public class DemoController {
 		}
 	}
 
+	Random rndGenerator = new Random();
+
 	private Question createQuestion(String question, String[] choices) {
 		// TODO Auto-generated method stub
 		Question q = new Question();
 		MultipleChoicesQuestionRevision r = new MultipleChoicesQuestionRevision();
 		r.setContent(question);
-		for (String choice : choices) {
+		List<String> lists = new ArrayList<String>();
+		for (String s : choices)
+			lists.add(s);
+		while (lists.size() > 0) {
+			// pick a random choice
+			int index = rndGenerator.nextInt(lists.size());
+			String choice = lists.get(index);
+			lists.remove(index);
+			// add it to the question
 			QuestionChoice c = new QuestionChoice();
 			c.setCorrect(choice.startsWith("*"));
 			c.setContent(choice.substring(c.isCorrect() ? 1 : 0));

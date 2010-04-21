@@ -5,7 +5,6 @@ import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +20,7 @@ import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
+import org.seamoo.entities.matching.MatchAnswer;
 import org.seamoo.entities.matching.MatchCandidate;
 import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.entities.matching.MatchPhase;
@@ -249,5 +249,15 @@ public class MatchOrganizerSteps {
 		int pos = positionToNumber(position) - 1;
 		MatchCompetitor competitor = findCompetitorByMember(members.get(pos));
 		assertEquals(competitor.getRank(), rank);
+	}
+
+	@Then("$position user has $count answers")
+	@Alias("$position user has $count answer")
+	public void assertUserQuestionsCount(String position, int count) {
+		int pos = positionToNumber(position) - 1;
+		MatchCompetitor competitor = findCompetitorByMember(members.get(pos));
+		assertEquals(competitor.getAnswers().size(), count);
+		for (MatchAnswer a : competitor.getAnswers())
+			assertNotNull(a);
 	}
 }

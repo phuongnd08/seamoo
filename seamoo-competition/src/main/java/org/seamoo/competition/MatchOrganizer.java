@@ -1,7 +1,6 @@
 package org.seamoo.competition;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -151,20 +150,26 @@ public class MatchOrganizer {
 	}
 
 	private void recheckMatchPhase(Match match) {
-		if (match.getPhase() == MatchPhase.NOT_FORMED && match.getCompetitors().size() >= MIN_CANDIDATE_PER_MATCH) {
-			match.setPhase(MatchPhase.FORMED);
-			match.setFormedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
-			match.setStartedMoment(TimeStampProvider.getCurrentTimeMilliseconds() + MATCH_COUNTDOWN_TIME);
-			match.setEndedMoment(match.getStartedMoment() + MATCH_TIME);
-		} else if (match.getPhase() == MatchPhase.FORMED) {
-			if (match.getCompetitors().size() < MIN_CANDIDATE_PER_MATCH) {
-				match.setPhase(MatchPhase.NOT_FORMED);
-			} else if (match.getStartedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
-				startMatch(match);
+		synchronized (match) {
+			// make sure no-thread-sensitive operation is
+			// performed when match is being manipulated
+
+			if (match.getPhase() == MatchPhase.NOT_FORMED && match.getCompetitors().size() >= MIN_CANDIDATE_PER_MATCH) {
+				match.setPhase(MatchPhase.FORMED);
+				match.setFormedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
+				match.setStartedMoment(TimeStampProvider.getCurrentTimeMilliseconds() + MATCH_COUNTDOWN_TIME);
+				match.setEndedMoment(match.getStartedMoment() + MATCH_TIME);
+			} else if (match.getPhase() == MatchPhase.FORMED) {
+				if (match.getCompetitors().size() < MIN_CANDIDATE_PER_MATCH) {
+					match.setPhase(MatchPhase.NOT_FORMED);
+				} else if (match.getStartedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
+					startMatch(match);
+				}
+			} else if (match.getPhase() == MatchPhase.PLAYING
+					&& match.getEndedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
+				finishMatch(match);
 			}
-		} else if (match.getPhase() == MatchPhase.PLAYING
-				&& match.getEndedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
-			finishMatch(match);
+
 		}
 	}
 
@@ -250,31 +255,44 @@ public class MatchOrganizer {
 	private void addMatchAnswer(Long userAutoId, int questionOrder, MatchAnswer answer) {
 		MatchCandidate candidate = getMatchCandidate(userAutoId);
 		Match match = getMatchForCandidate(candidate);
-		List<MatchCompetitor> competitors = match.getCompetitors();
-		MatchCompetitor competitor = null;
-		for (int i = 0; i < competitors.size(); i++) {
-			if (competitors.get(i).getMember().getAutoId() == candidate.getMember().getAutoId()) {
-				competitor = competitors.get(i);
+		synchronized (match) {
+			// make sure no-thread-sensitive operation is
+			// performed when match is being manipulated
+			List<MatchCompetitor> competitors = match.getCompetitors();
+			MatchCompetitor competitor = null;
+			for (int i = 0; i < competitors.size(); i++) {
+				if (competitors.get(i).getMember().getAutoId() == candidate.getMember().getAutoId()) {
+					competitor = competitors.get(i);
+					break;
+				}
+			}
+			if (competitor == null)
+				throw new RuntimeException("Competitor disappeared mysteriously");
+			switch (answer.getType()) {
+			case IGNORED:
+				match.addEvent(new MatchEvent(MatchEventType.IGNORE_QUESTION, candidate.getMember(), questionOrder));
+				break;
+			case SUBMITTED:
+				match.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, candidate.getMember(), questionOrder));
+				answer.setScore(match.getQuestions().get(questionOrder - 1).getScore(answer.getContent()));
 				break;
 			}
-		}
-		if (competitor == null)
-			throw new RuntimeException("Competitor disappeared mysteriously");
-		switch (answer.getType()) {
-		case IGNORED:
-			match.addEvent(new MatchEvent(MatchEventType.IGNORE_QUESTION, candidate.getMember(), questionOrder));
-			break;
-		case SUBMITTED:
-			match.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, candidate.getMember(), questionOrder));
-			answer.setScore(match.getQuestions().get(questionOrder - 1).getScore(answer.getContent()));
-			break;
-		}
 
-		competitor.addAnswer(questionOrder, answer);
+			List<MatchAnswer> answers = competitor.getAnswers();
+			int insertPos = questionOrder - 1;
+			if (answers.size() < insertPos) {
+				for (int i = answers.size(); i < insertPos; i++)
+					competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, null));
+			}
+			if (insertPos < answers.size()) {
+				System.err.println("Late received answer at " + questionOrder + " discarded");
+			} else
+				competitor.addAnswer(answer);
 
-		if (competitor.getPassedQuestionCount() == match.getQuestions().size()) {
-			competitor.setFinishedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
-			checkMatchFinished(match);
+			if (competitor.getPassedQuestionCount() == match.getQuestions().size()) {
+				competitor.setFinishedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
+				checkMatchFinished(match);
+			}
 		}
 		updateLastSeen(candidate);
 	}

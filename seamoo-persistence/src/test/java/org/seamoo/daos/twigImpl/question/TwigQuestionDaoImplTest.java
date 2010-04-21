@@ -19,10 +19,6 @@ import org.testng.annotations.Test;
 public class TwigQuestionDaoImplTest extends LocalDatastoreTest {
 	QuestionDao daoImpl;
 
-	public TwigQuestionDaoImplTest() {
-		new OfyModelRegistrar();
-	}
-
 	@BeforeMethod
 	@Override
 	public void setUp() {
