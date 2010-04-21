@@ -36,13 +36,13 @@ And Display total question is assigned to 10
 Given Service forgets its interaction
 And Display forgets its interaction
 And User submit answer for current question
-Then Service submit answer to server
+Then Service submit answer of order 1 to server
 And Display is viewing 2nd question
 !-- User ignore the question
 Given Service forgets its interaction
 And Display forgets its interaction
 And User ignore current question
-Then Service send ignore signal to server
+Then Service send ignore signal of order 2 to server
 And Display is viewing 3rd question
 !-- The match finished
 Given Service forgets its interaction

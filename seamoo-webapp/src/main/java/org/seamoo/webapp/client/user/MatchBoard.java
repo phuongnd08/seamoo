@@ -55,15 +55,15 @@ public class MatchBoard {
 
 			@Override
 			public void submitAnswer(Display display, String answer) {
-				// TODO Auto-generated method stub
-				trySubmitAnswer(currentQuestionOrder, answer, 0/* no failed yet */);
+				// Server use 1-based order, but currentQuestionOrder is 0-based
+				trySubmitAnswer(currentQuestionOrder+1, answer, 0/* no failed yet */);
 				nextQuestion();
 			}
 
 			@Override
 			public void ignoreQuestion(Display display) {
-				// TODO Auto-generated method stub
-				tryIgnoreQuestion(currentQuestionOrder, 0);
+				// Server use 1-based order, but currentQuestionOrder is 0-based
+				tryIgnoreQuestion(currentQuestionOrder+1, 0);
 				nextQuestion();
 			}
 		};
@@ -172,7 +172,7 @@ public class MatchBoard {
 		private int MAX_TRY_TIMES = 3;
 
 		private void trySubmitAnswer(final int questionOrder, final String answer, final int triedTimes) {
-			service.submitAnswer(currentQuestionOrder, answer, new AsyncCallback() {
+			service.submitAnswer(questionOrder, answer, new AsyncCallback() {
 
 				@Override
 				public void onFailure(Throwable throwable) {
@@ -192,7 +192,7 @@ public class MatchBoard {
 		}
 
 		private void tryIgnoreQuestion(final int questionOrder, final int triedTimes) {
-			service.ignoreQuestion(currentQuestionOrder, new AsyncCallback() {
+			service.ignoreQuestion(questionOrder, new AsyncCallback() {
 
 				@Override
 				public void onFailure(Throwable throwable) {

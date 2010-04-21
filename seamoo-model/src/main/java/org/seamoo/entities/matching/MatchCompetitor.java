@@ -84,7 +84,7 @@ public class MatchCompetitor implements Serializable {
 			totalScore += answer.getScore();
 		} else if (position < answers.size()) {
 			if (answers.get(position) != null)
-				throw new RuntimeException("Answer for the same question submitted twice. Ignored");
+				throw new RuntimeException("Answer for the same question (" + position + ") submitted twice. Ignored");
 			answers.set(position, answer);
 			totalScore += answer.getScore();
 		} else /* position>answers.size() */{

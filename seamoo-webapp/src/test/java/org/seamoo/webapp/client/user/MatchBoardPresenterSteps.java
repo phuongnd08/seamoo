@@ -263,9 +263,9 @@ public class MatchBoardPresenterSteps {
 		listener.submitAnswer(display, "xxx");
 	}
 
-	@Then("Service submit answer to server")
-	public void assertServiceSubmitAnswer() {
-		verify(serviceAsync).submitAnswer(anyInt(), anyString(), (AsyncCallback) any());
+	@Then("Service submit answer of order $order to server")
+	public void assertServiceSubmitAnswer(int order) {
+		verify(serviceAsync).submitAnswer(eq(order), anyString(), (AsyncCallback) any());
 	}
 
 	// !-- When user ignore the question
@@ -281,9 +281,9 @@ public class MatchBoardPresenterSteps {
 			listener.ignoreQuestion(display);
 	}
 
-	@Then("Service send ignore signal to server")
-	public void assertServiceSendIgnoreSignal() {
-		verify(serviceAsync).ignoreQuestion(anyInt(), (AsyncCallback) any());
+	@Then("Service send ignore signal of order $order to server")
+	public void assertServiceSendIgnoreSignal(int order) {
+		verify(serviceAsync).ignoreQuestion(eq(order), (AsyncCallback) any());
 	}
 
 	@Given("Current match is finished")

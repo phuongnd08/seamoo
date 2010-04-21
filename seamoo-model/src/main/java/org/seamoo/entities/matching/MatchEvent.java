@@ -5,6 +5,10 @@ import java.io.Serializable;
 import org.seamoo.entities.Member;
 
 public class MatchEvent implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7625209665588405346L;
 	private MatchEventType type;
 	private Member member;
 	private int questionOrder;
