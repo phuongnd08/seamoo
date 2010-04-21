@@ -11,6 +11,8 @@ public class MatchAnswer implements Serializable {
 
 	private String content;
 
+	private boolean correct;
+
 	private double score;
 
 	public MatchAnswer() {
@@ -43,5 +45,13 @@ public class MatchAnswer implements Serializable {
 
 	public String getContent() {
 		return content;
+	}
+
+	public void setCorrect(boolean correct) {
+		this.correct = correct;
+	}
+
+	public boolean isCorrect() {
+		return correct;
 	}
 }

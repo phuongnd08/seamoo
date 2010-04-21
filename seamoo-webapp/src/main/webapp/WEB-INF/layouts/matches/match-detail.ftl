@@ -1,46 +1,61 @@
 [#ftl/]
-[#import "/match.ftl" as match/]
+[#import "/match.ftl" as matchX/]
+[#import "/spring.ftl" as spring/]
 <div class="description-box">
 	<h3>Diễn biến</h3>
 	<table class="fw">
-		[@match.eventItem moment="8:00:00"]
-			[@match.joinEvent competitors="mrcold,thinh_pro"?split(",")/]
-		[/@match.eventItem]		
-		[@match.eventItem moment="8:00:05"]
-			[@match.joinEvent competitors="xuka,ken"?split(",")/]
-		[/@match.eventItem]		
-		[@match.eventItem moment="8:00:10"]
+		[@matchX.eventItem moment="8:00:00"]
+			[@matchX.joinEvent competitors="mrcold,thinh_pro"?split(",")/]
+		[/@matchX.eventItem]		
+		[@matchX.eventItem moment="8:00:05"]
+			[@matchX.joinEvent competitors="xuka,ken"?split(",")/]
+		[/@matchX.eventItem]		
+		[@matchX.eventItem moment="8:00:10"]
 			Trận đấu đã bắt đầu
-		[/@match.eventItem]		
-		[@match.eventItem moment="8:00:20"]
-			[@match.answerEvent competitor="thinh_pro" questions=[1,2,3]/]
-		[/@match.eventItem]		
-		[@match.eventItem moment="8:00:22"]
-			[@match.answerEvent competitor="ken" questions=[1,2]/]
-		[/@match.eventItem]		
-		[@match.eventItem moment="8:00:25"]
-			[@match.ignoreEvent competitor="ken" questions=[3]/]
-		[/@match.eventItem]		
-		[@match.eventItem moment="8:00:26"]
-			[@match.answerEvent competitor="mrcold" questions=[1,2,3,4,5]/]
-		[/@match.eventItem]		
-		[@match.eventItem moment="8:00:28"]
-			[@match.ignoreEvent competitor="mrcold" questions=[6]/]
-		[/@match.eventItem]		
-		[@match.eventItem moment="8:00:30"]
+		[/@matchX.eventItem]		
+		[@matchX.eventItem moment="8:00:20"]
+			[@matchX.answerEvent competitor="thinh_pro" questions=[1,2,3]/]
+		[/@matchX.eventItem]		
+		[@matchX.eventItem moment="8:00:22"]
+			[@matchX.answerEvent competitor="ken" questions=[1,2]/]
+		[/@matchX.eventItem]		
+		[@matchX.eventItem moment="8:00:25"]
+			[@matchX.ignoreEvent competitor="ken" questions=[3]/]
+		[/@matchX.eventItem]		
+		[@matchX.eventItem moment="8:00:26"]
+			[@matchX.answerEvent competitor="mrcold" questions=[1,2,3,4,5]/]
+		[/@matchX.eventItem]		
+		[@matchX.eventItem moment="8:00:28"]
+			[@matchX.ignoreEvent competitor="mrcold" questions=[6]/]
+		[/@matchX.eventItem]		
+		[@matchX.eventItem moment="8:00:30"]
 			Trận đấu đã kết thúc
-		[/@match.eventItem]		
+		[/@matchX.eventItem]		
 	</table>
 </div>
 <br/>
 <div class="description-box">
 	<h3>Kết quả</h3>
-	<ol>
-		<li>mrcold</li>
-		<li>thinh_pro</li>
-		<li>xuka</li>
-		<li>ken</li>
-	</ol>
+	<table>
+	<tr>
+		<th>#</th>
+		<th>Thành viên</th>
+		<th>Đúng (x 1.0)</th>
+		<th>Sai (x -0.5)</th>
+		<th>Bỏ qua (0)</th>
+		<th>Tổng điểm</th>
+	</tr>
+	[#list match.competitors?sort_by("rank") as competitor]
+	<tr>
+		<td>${competitor.rank}</td>
+		<td>${competitor.member.displayName}</td>
+		<td>${competitor.correctCount}</td>
+		<td>${competitor.wrongCount}</td>
+		<td>${competitor.ignoreCount}</td>
+		<td>${competitor.totalScore}</td>
+	</tr>
+	[/#list]
+	</table>
 </div>
 
 [#macro question no content]
@@ -91,4 +106,8 @@
 		[@answer no=2 author="thinh_pro" moment="08:00:20" content=""][@icon type="ignore"/][/@answer]
 		[@correctAnswer no=2 content="God damn it"]100%[/@correctAnswer]
 	</table>
+</div>
+
+<div class="description-box">
+	<a href="[@spring.url "/matches/rejoin?leagueId=1"/]">Chơi trận khác</a>
 </div>

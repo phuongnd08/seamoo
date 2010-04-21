@@ -306,6 +306,7 @@ public class MatchBoardPresenterSteps {
 	public void setUpFinishedMatch() {
 		matchState = new MatchState();
 		matchState.setMatchAutoId(1L);
+		matchState.setMatchAlias("user1-user2");
 		matchState.setPhase(MatchPhase.FINISHED);
 	}
 

@@ -274,7 +274,9 @@ public class MatchOrganizer {
 				break;
 			case SUBMITTED:
 				match.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, candidate.getMember(), questionOrder));
-				answer.setScore(match.getQuestions().get(questionOrder - 1).getScore(answer.getContent()));
+				double score = match.getQuestions().get(questionOrder - 1).getScore(answer.getContent());
+				answer.setScore(score);
+				answer.setCorrect(score > 0);
 				break;
 			}
 

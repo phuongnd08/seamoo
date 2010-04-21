@@ -139,7 +139,7 @@ public class MatchBoard {
 			currentMatchState = state;
 			display.setPhase(state.getPhase());
 			if (state.getPhase() == MatchPhase.FINISHED) {
-				Window.Location.replace("/matches/" + state.getMatchAutoId());
+				Window.Location.replace("/matches/" + state.getMatchAutoId()+"/"+state.getMatchAlias());
 				return;
 			}
 			if (state.getBufferedQuestions() != null) {

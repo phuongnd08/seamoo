@@ -54,6 +54,7 @@ public class MatchServiceImplSteps {
 			Long memberId = Long.parseLong(list.get(i));
 			Member m = new Member();
 			m.setAutoId(memberId);
+			m.setDisplayName("user" + memberId);
 			members.put(memberId, m);
 		}
 	}
@@ -175,5 +176,10 @@ public class MatchServiceImplSteps {
 	@When("State matchAutoId is $id")
 	public void assertMatchStateAutoId(long id) {
 		assertEquals(matchState.getMatchAutoId(), id);
+	}
+
+	@Then("State alias is \"$alias\"")
+	public void assertMatchStateAlias(String alias) {
+		assertEquals(matchState.getMatchAlias(), alias);
 	}
 }

@@ -65,7 +65,7 @@
 		<url-pattern>/admin/*</url-pattern>
 		<url-pattern>/users/login</url-pattern>
 		<url-pattern>/users/first-seen</url-pattern>
-		<url-pattern>/matches/participate</url-pattern>
+		<url-pattern>/matches/*</url-pattern>
 	</filter-mapping>
 
 	<filter>

@@ -31,6 +31,9 @@ public class MemberInjectionFilter implements Filter {
 
 	}
 
+	public static Member getInjectedMember(HttpServletRequest request){
+		return (Member) request.getAttribute(MEMBER_FIELD);
+	}
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException {

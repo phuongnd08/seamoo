@@ -51,4 +51,4 @@ And Current match is finished
 When Timer is fired on schedule
 Then Service get the current match information with receivedQuestion=5 & receivedEvent=12
 And Display is switched to FINISHED mode
-And Page is redirected to "/matches/1"
+And Page is redirected to "/matches/1/user1-user2"

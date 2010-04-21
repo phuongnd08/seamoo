@@ -95,4 +95,40 @@ public class MatchCompetitor implements Serializable {
 	public long getFinishedMoment() {
 		return finishedMoment;
 	}
+
+	public String getAlias() {
+		if (member == null)
+			return null;
+		return member.getDisplayName();
+	}
+
+	public int getCorrectCount() {
+		int count = 0;
+		for (MatchAnswer a : answers) {
+			if (a != null)
+				if (a.getType() == MatchAnswerType.SUBMITTED && a.isCorrect())
+					count++;
+		}
+		return count;
+	}
+
+	public int getWrongCount() {
+		int count = 0;
+		for (MatchAnswer a : answers) {
+			if (a != null)
+				if (a.getType() == MatchAnswerType.SUBMITTED && !a.isCorrect())
+					count++;
+		}
+		return count;
+	}
+
+	public int getIgnoreCount() {
+		int count = 0;
+		for (MatchAnswer a : answers) {
+			if (a != null)
+				if (a.getType() == MatchAnswerType.IGNORED)
+					count++;
+		}
+		return count;
+	}
 }

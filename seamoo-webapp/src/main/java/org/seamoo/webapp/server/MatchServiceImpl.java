@@ -74,6 +74,7 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 			} else
 				System.err.println("Error: bufferedEvents from " + member.getDisplayName() + " > match.events.size");
 			matchState.setMatchAutoId(match.getAutoId() != null ? match.getAutoId().longValue() : 0);
+			matchState.setMatchAlias(match.getAlias());
 			return matchState;
 		}
 	}

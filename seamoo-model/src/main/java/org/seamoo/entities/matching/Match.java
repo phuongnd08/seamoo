@@ -108,4 +108,14 @@ public class Match {
 	public List<MatchEvent> getEvents() {
 		return events;
 	}
+
+	public String getAlias() {
+		String alias = "";
+		for (int i = 0; i < competitors.size(); i++) {
+			alias += competitors.get(i).getAlias();
+			if (i < competitors.size() - 1)
+				alias += "-";
+		}
+		return alias;
+	}
 }
