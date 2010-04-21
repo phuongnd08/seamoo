@@ -182,9 +182,9 @@ public class MatchView extends Composite implements Display {
 	}
 
 	@Override
-	public void setRemainingTime(int seconds) {
+	public void setRemainingTime(long seconds) {
 		// TODO Auto-generated method stub
-		int minutes = seconds / 60;
+		long minutes = seconds / 60;
 		seconds = seconds % 60;
 		String s = minutes < 10 ? "0" + minutes : "" + minutes;
 		s += ":";

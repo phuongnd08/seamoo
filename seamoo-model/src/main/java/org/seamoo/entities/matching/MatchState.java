@@ -1,6 +1,7 @@
 package org.seamoo.entities.matching;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.seamoo.entities.question.Question;
@@ -28,14 +29,14 @@ public class MatchState implements Serializable {
 	 * The number of periods after that the player should recheck for match
 	 * state
 	 */
-	private int refreshPeriod = DEFAULT_REFRESH_PERIOD;
+	private long refreshPeriod = DEFAULT_REFRESH_PERIOD;
 	/**
 	 * The number of periods after that the current phase will end If the
 	 * current phase is FORMED then this is the number of period before the
 	 * match begin If the current phase is PLAYING then this is the number of
 	 * period before the match end
 	 */
-	private int remainingPeriod;
+	private long remainingPeriod;
 	/**
 	 * The zero-based index from which questions is buffered for current player
 	 */
@@ -46,6 +47,10 @@ public class MatchState implements Serializable {
 	private List<MatchCompetitor> competitors;
 	private MatchPhase phase;
 	private int completedQuestionsCount;
+
+	public MatchState() {
+		bufferedQuestions = new ArrayList<Question>();
+	}
 
 	public void setMatchAutoId(long matchAutoId) {
 		this.matchAutoId = matchAutoId;
@@ -87,19 +92,19 @@ public class MatchState implements Serializable {
 		return questionsCount;
 	}
 
-	public void setRefreshPeriod(int refreshPeriod) {
+	public void setRefreshPeriod(long refreshPeriod) {
 		this.refreshPeriod = refreshPeriod;
 	}
 
-	public int getRefreshPeriod() {
+	public long getRefreshPeriod() {
 		return refreshPeriod;
 	}
 
-	public void setRemainingPeriod(int remainingPeriod) {
+	public void setRemainingPeriod(long remainingPeriod) {
 		this.remainingPeriod = remainingPeriod;
 	}
 
-	public int getRemainingPeriod() {
+	public long getRemainingPeriod() {
 		return remainingPeriod;
 	}
 

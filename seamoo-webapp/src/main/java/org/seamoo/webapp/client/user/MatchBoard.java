@@ -39,7 +39,7 @@ public class MatchBoard {
 
 		public void setQuestionIndex(int index);
 
-		public void setRemainingTime(int seconds);
+		public void setRemainingTime(long seconds);
 
 		public void addEventListener(EventListener listener);
 
@@ -165,7 +165,7 @@ public class MatchBoard {
 
 			display.setCompetitors(state.getCompetitors());
 			display.setRemainingTime(state.getRemainingPeriod() / 1000);
-			refreshTimer.schedule(state.getRefreshPeriod());
+			refreshTimer.schedule((int) state.getRefreshPeriod());
 
 		}
 

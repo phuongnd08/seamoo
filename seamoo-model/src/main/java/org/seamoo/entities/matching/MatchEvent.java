@@ -1,8 +1,10 @@
 package org.seamoo.entities.matching;
 
+import java.io.Serializable;
+
 import org.seamoo.entities.Member;
 
-public class MatchEvent {
+public class MatchEvent implements Serializable{
 	private MatchEventType type;
 	private Member member;
 	private int questionOrder;
