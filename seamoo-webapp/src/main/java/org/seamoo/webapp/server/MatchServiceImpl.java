@@ -40,7 +40,8 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 		Member member = getInjectedMember();
 		Match match = matchOrganizer.getMatchForUser(member.getAutoId());
 		synchronized (match) {
-			//make sure not change on match during the process of generating RPC object
+			// make sure not change on match during the process of generating
+			// RPC object
 			MatchState matchState = new MatchState();
 			matchState.setCompetitors(match.getCompetitors());
 			matchState.setQuestionsCount(match.getQuestions().size());
@@ -68,11 +69,11 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 			} else
 				matchState.setPhase(match.getPhase());
 			// assign buffered events
-			if (bufferedQuestionsCount <= match.getEvents().size()) {
-				matchState.setBufferedEvents(new ArrayList<MatchEvent>(match.getEvents().subList(bufferredEventsCount,
-						match.getEvents().size())));
-			} else
-				System.err.println("Error: bufferedEvents from " + member.getDisplayName() + " > match.events.size");
+			if (bufferredEventsCount > match.getEvents().size()) {
+				assert bufferredEventsCount <= match.getEvents().size();
+			}
+			matchState.setBufferedEvents(new ArrayList<MatchEvent>(match.getEvents().subList(bufferredEventsCount,
+					match.getEvents().size())));
 			matchState.setMatchAutoId(match.getAutoId() != null ? match.getAutoId().longValue() : 0);
 			matchState.setMatchAlias(match.getAlias());
 			return matchState;

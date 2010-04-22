@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.seamoo.entities.Member;
 
+import com.vercer.engine.persist.annotation.Store;
+
 /**
  * Information about a member joining in the match, include member score, rank
  * in the match, the time member join the match
@@ -21,8 +23,9 @@ public class MatchCompetitor implements Serializable {
 	private static final long serialVersionUID = 1680471706907193985L;
 
 	private Member member;
-
-	private Date participatedTime;
+	
+	@Store(true)
+	transient private Date participatedTime;
 
 	private double totalScore;
 
@@ -32,7 +35,8 @@ public class MatchCompetitor implements Serializable {
 
 	private int passedQuestionCount;
 
-	private List<MatchAnswer> answers;
+	@Store(true)
+	transient private List<MatchAnswer> answers;
 
 	public MatchCompetitor() {
 		answers = new ArrayList<MatchAnswer>();

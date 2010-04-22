@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Id;
 
 import com.vercer.engine.persist.annotation.Key;
+import com.vercer.engine.persist.annotation.Store;
 
 public class Member implements Serializable {
 	/**
@@ -19,19 +20,24 @@ public class Member implements Serializable {
 
 	private String displayName;
 
-	private String email;
+	@Store(true)
+	transient private String email;
 
 	private Date dateOfBirth;
 
-	private Date joiningDate;
+	@Store(true)
+	transient private Date joiningDate;
 
 	private String aboutMe;
 
-	private String website;
+	@Store(true)
+	transient private String website;
 
-	private String quote;
+	@Store(true)
+	transient private String quote;
 
-	private Date lastSeen;
+	@Store(true)
+	transient private Date lastSeen;
 
 	private long lockingDuration;
 

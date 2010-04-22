@@ -1,12 +1,14 @@
 package org.seamoo.webapp.client.user;
 
-import static org.mockito.Mockito.*;
 import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jbehave.scenario.annotations.Alias;
 import org.jbehave.scenario.annotations.Aliases;
 import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
@@ -376,4 +378,9 @@ public class MatchBoardPresenterSteps {
 		verify(display).setTotalQuestion(total);
 	}
 
+	@Then("Service get current match information $count times")
+	@Alias("Service get current match information $count time")
+	public void assertServiceGetMatchStateTimes(int count) {
+		verify(serviceAsync, times(count)).getMatchState(anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
+	}
 }

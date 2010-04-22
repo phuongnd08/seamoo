@@ -103,18 +103,25 @@ public class MatchBoard {
 			refreshMatchState();
 		}
 
+		private boolean refreshingMatchState = false;
+
 		public void refreshMatchState() {
+			if (refreshingMatchState)
+				return;
+			refreshingMatchState = true;
 			service.getMatchState(bufferedQuestions.size(), bufferedEvents.size(), new AsyncCallback<MatchState>() {
 
 				@Override
 				public void onSuccess(MatchState state) {
 					// TODO Auto-generated method stub
+					refreshingMatchState = false;
 					setCurrentMatchState(state);
 				}
 
 				@Override
 				public void onFailure(Throwable throwable) {
 					// TODO Auto-generated method stub
+					refreshingMatchState = false;
 					refreshMatchState();// do not accept failure, retry!
 				}
 			});
@@ -139,7 +146,7 @@ public class MatchBoard {
 			currentMatchState = state;
 			display.setPhase(state.getPhase());
 			if (state.getPhase() == MatchPhase.FINISHED) {
-				Window.Location.replace("/matches/" + state.getMatchAutoId()+"/"+state.getMatchAlias());
+				Window.Location.replace("/matches/" + state.getMatchAutoId() + "/" + state.getMatchAlias());
 				return;
 			}
 			if (state.getBufferedQuestions() != null) {

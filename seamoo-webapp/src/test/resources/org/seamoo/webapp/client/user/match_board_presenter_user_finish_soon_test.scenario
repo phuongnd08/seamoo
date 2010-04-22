@@ -44,4 +44,4 @@ Given Current match is finished
 And Service forgets its interaction
 When Timer is fired on schedule
 Then Service get the current match information with receivedQuestion=10 & receivedEvent=0
-And Page is redirected to "/matches/1"
+And Page is redirected to "/matches/1/user1-user2"

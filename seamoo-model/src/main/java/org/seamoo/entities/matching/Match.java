@@ -96,7 +96,7 @@ public class Match {
 
 	public MatchCompetitor getCompetitorForMember(Member member) {
 		for (MatchCompetitor competitor : competitors)
-			if (competitor.getMember() == member)
+			if (competitor.getMember().getAutoId() == member.getAutoId())
 				return competitor;
 		return null;
 	}

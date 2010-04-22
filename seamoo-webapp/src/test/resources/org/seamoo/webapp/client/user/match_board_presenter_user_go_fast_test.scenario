@@ -15,7 +15,9 @@ Given Service forgets its interaction
 And 5 questions from 5 is associated to match 
 And Service post-pone answer to query for match state 
 And Timer forgets its interaction
-When User ignore 5 questions
+When Timer is fired on schedule
+And User ignore 5 questions
+Then Service get current match information 1 time
 Then Service get the current match information with receivedQuestion=5 & receivedEvent=0
 And Display is viewing no question
 When Answer to query for match state is returned
