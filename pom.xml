@@ -457,6 +457,12 @@
 				<version>${objectify.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${apache.commons.verions}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -490,6 +496,7 @@
 		<freemarker.version>2.3.16</freemarker.version>
 		<twig-persist.version>1.0.2</twig-persist.version>
 		<objectify.version>2.1</objectify.version>
+		<apache.commons.verions>1.4</apache.commons.verions>
 		<!--
 			Specify AppEngine version for your project. It should match SDK
 			version pointed to by ${gae.home} property (Typically, one used by

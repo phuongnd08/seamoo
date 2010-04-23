@@ -41,6 +41,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

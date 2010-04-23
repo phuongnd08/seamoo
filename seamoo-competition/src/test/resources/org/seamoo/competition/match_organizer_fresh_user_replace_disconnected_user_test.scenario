@@ -20,6 +20,7 @@ And 3rd user request for Match
 And 4th user request for Match
 Then 1st Match is returned
 Given Current Time is 10:00:06
+When 4th user request for Match
 When 5th user request for Match
 Then 1st Match is returned
 When 1st user request for Match

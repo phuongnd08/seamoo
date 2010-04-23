@@ -7,7 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-@PrepareForTest(value = { MatchOrganizer.class, TimeStampProvider.class })
+@PrepareForTest(value = { EntityFactory.class, TimeStampProvider.class })
 public class MatchOrganizerRareUserTest extends PowerMockedBddScenario {
 	public MatchOrganizerRareUserTest() {
 		super(new MatchOrganizerSteps());

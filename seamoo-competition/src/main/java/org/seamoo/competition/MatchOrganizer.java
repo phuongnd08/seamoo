@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.list.TreeList;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
@@ -42,14 +43,21 @@ public class MatchOrganizer {
 	 */
 	Map<Long, MatchCandidate> candidates;
 	/**
-	 * List of matches that is either NOT_FORMED or FORMED, mean that there's
-	 * chances that a user can join the match
+	 * List of matches that is either NOT_FORMED or FORMED but with number of
+	 * competitors < MAX_CANDIDATE_PER_MATCH, mean that there's chances that a
+	 * user can join the match
 	 */
-	private List<Match> waitingMatches;
+	private List notFullWaitingMatches;
+	/**
+	 * List of matches that is FORMED and number of competitors
+	 * >=MAX_CANDIDATE_PER_MATCH
+	 */
+	private List fullWaitingMatches;
 
 	public MatchOrganizer() {
 		candidates = new HashMap<Long, MatchCandidate>();
-		waitingMatches = new ArrayList<Match>();
+		notFullWaitingMatches = new TreeList();
+		fullWaitingMatches = new TreeList();
 	}
 
 	private boolean shouldStarted(Match match) {
@@ -65,13 +73,26 @@ public class MatchOrganizer {
 	 * 
 	 * @param match
 	 */
+	private boolean isMatchFull(Match match) {
+		return match.getCompetitors().size() == MAX_CANDIDATE_PER_MATCH;
+	}
+
 	private void recheckCompetitors(Match match) {
+		boolean isMatchFullBeforeCheck = isMatchFull(match);
 		for (int i = match.getCompetitors().size() - 1; i >= 0; i--) {
 			MatchCompetitor competitor = match.getCompetitors().get(i);
 			MatchCandidate candidate = getMatchCandidate(competitor.getMember().getAutoId());
 			if (competitor.getFinishedMoment() == 0 && isDisconnected(candidate)) {
 				match.addEvent(new MatchEvent(MatchEventType.LEFT, competitor.getMember()));
 				match.getCompetitors().remove(i);
+			}
+		}
+		if (isMatchFullBeforeCheck && !isMatchFull(match)) {
+			synchronized (fullWaitingMatches) {
+				synchronized (notFullWaitingMatches) {
+					fullWaitingMatches.remove(match);
+					notFullWaitingMatches.add(match);
+				}
 			}
 		}
 	}
@@ -84,28 +105,32 @@ public class MatchOrganizer {
 	 * @return
 	 */
 	private Match findAndAssignAvailableMatch(MatchCandidate candidate) {
-		synchronized (waitingMatches) {
-			// get rid of should stared match
-			for (int i = waitingMatches.size() - 1; i >= 0; i--) {
-				if (shouldStarted(waitingMatches.get(i))) {
-					waitingMatches.remove(i);
-				}
-			}
+		synchronized (notFullWaitingMatches) {
 			Match match = null;
-			for (Match m : waitingMatches) {
-				recheckCompetitors(m);
-				if (canJoin(m)) {
-					match = m;
+			while (notFullWaitingMatches.size() > 0) {
+				match = (Match) notFullWaitingMatches.get(0);
+				if (shouldStarted(match)) {
+					notFullWaitingMatches.remove(match);
+					match = null;
+				} else
 					break;
-				}
 			}
 			if (match == null) {
 				match = createNewMatch();
+				notFullWaitingMatches.add(match);
 			}
 			MatchCompetitor competitor = new MatchCompetitor();
 			competitor.setMember(candidate.getMember());
 			match.addCompetitor(competitor);
 			match.addEvent(new MatchEvent(MatchEventType.JOIN, competitor.getMember()));
+
+			if (isMatchFull(match)) {
+				synchronized (fullWaitingMatches) {
+					notFullWaitingMatches.remove(match);
+					fullWaitingMatches.add(match);
+				}
+			}
+
 			return match;
 		}
 	}
@@ -114,7 +139,6 @@ public class MatchOrganizer {
 		Match match = EntityFactory.newMatch();
 		match.setPhase(MatchPhase.NOT_FORMED);
 		match.setQuestions(questionDao.getRandomQuestions(QUESTION_PER_MATCH));
-		waitingMatches.add(match);
 		return match;
 	}
 
@@ -139,14 +163,15 @@ public class MatchOrganizer {
 	}
 
 	private Match getMatchForCandidate(MatchCandidate candidate) {
+		Match match = null;
 		if (candidate.getCurrentMatch() == null || isDisconnected(candidate)) {
-			Match match = findAndAssignAvailableMatch(candidate);
+			match = findAndAssignAvailableMatch(candidate);
 			candidate.setCurrentMatch(match);
-			return match;
 		} else {
-			recheckCompetitors(candidate.getCurrentMatch());
-			return candidate.getCurrentMatch();
+			match = candidate.getCurrentMatch();
 		}
+		recheckCompetitors(match);
+		return match;
 	}
 
 	private void recheckMatchPhase(Match match) {
@@ -177,8 +202,17 @@ public class MatchOrganizer {
 		// TODO Auto-generated method stub
 		match.setPhase(MatchPhase.PLAYING);
 		match.addEvent(new MatchEvent(MatchEventType.STARTED));
-		synchronized (waitingMatches) {
-			waitingMatches.remove(match);
+		boolean matchDequeued = false;
+		synchronized (notFullWaitingMatches) {
+			if (notFullWaitingMatches.contains(match)) {
+				notFullWaitingMatches.remove(match);
+				matchDequeued = true;
+			}
+		}
+		if (!matchDequeued) {
+			synchronized (fullWaitingMatches) {
+				fullWaitingMatches.remove(match);
+			}
 		}
 	}
 
@@ -227,8 +261,10 @@ public class MatchOrganizer {
 	 */
 	public Match getMatchForUser(Long userAutoId) {
 		MatchCandidate candidate = getMatchCandidate(userAutoId);
-		Match match = getMatchForCandidate(candidate);
+		if (isDisconnected(candidate))
+			candidate.setCurrentMatch(null);
 		updateLastSeen(candidate);
+		Match match = getMatchForCandidate(candidate);
 		// check for various phase of match
 		recheckMatchPhase(match);
 		return match;
@@ -254,6 +290,10 @@ public class MatchOrganizer {
 
 	private void addMatchAnswer(Long userAutoId, int questionOrder, MatchAnswer answer) {
 		MatchCandidate candidate = getMatchCandidate(userAutoId);
+		if (candidate.getCurrentMatch() == null || isDisconnected(candidate)) {
+			System.err.println("Cannot find a suitable match for user. Answer discarded");
+			return;
+		}
 		Match match = getMatchForCandidate(candidate);
 		synchronized (match) {
 			// make sure no-thread-sensitive operation is
