@@ -169,23 +169,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--		<dependency>-->
-		<!--			<groupId>org.gwt</groupId>-->
-		<!--			<artifactId>syncproxy</artifactId>-->
-		<!--			<scope>test</scope>-->
-		<!--		</dependency>-->
-
-		<!--		<dependency>-->
-		<!--			<groupId>com.google.gdata</groupId>-->
-		<!--			<artifactId>gdata-core</artifactId>-->
-		<!--			<scope>test</scope>-->
-		<!--		</dependency>-->
-
-		<!--		<dependency>-->
-		<!--			<groupId>javax.servlet</groupId>-->
-		<!--			<artifactId>servlet-api</artifactId>-->
-		<!--		</dependency>-->
-
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>seamoo-gwt-bridge</artifactId>
@@ -480,14 +463,9 @@
 	<!-- Specify hard-coded project properties here -->
 	<properties>
 		<!--
-			This is just for "eclipse:eclipse" goal to always attempt downloading
-			sources
-		-->
-
-		<!--
 			Upload to http://0.latest.<applicationName>.appspot.com by default
 		-->
-		<gae.application.version>0</gae.application.version>
+		<gae.application.version>1</gae.application.version>
 
 		<!-- port defaults to 8888 -->
 		<gae.port>8888</gae.port>

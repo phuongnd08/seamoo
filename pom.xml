@@ -458,11 +458,10 @@
 			</dependency>
 
 			<dependency>
-				<groupId>commons-io</groupId>
-				<artifactId>commons-io</artifactId>
-				<version>${apache.commons.verions}</version>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>${commons.collections.version}</version>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 
@@ -496,13 +495,13 @@
 		<freemarker.version>2.3.16</freemarker.version>
 		<twig-persist.version>1.0.2</twig-persist.version>
 		<objectify.version>2.1</objectify.version>
-		<apache.commons.verions>1.4</apache.commons.verions>
+		<commons.collections.version>3.2.1</commons.collections.version>
 		<!--
 			Specify AppEngine version for your project. It should match SDK
 			version pointed to by ${gae.home} property (Typically, one used by
 			your Eclipse plug-in)
 		-->
-		<gae.version>1.3.2</gae.version>
+		<gae.version>1.3.3</gae.version>
 		<gae.debugPort>8000</gae.debugPort>
 		<gwt.version>2.0.3</gwt.version>
 		<urlrewrite.filter.version>3.1.0</urlrewrite.filter.version>

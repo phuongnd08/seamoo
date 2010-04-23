@@ -41,10 +41,9 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 		</dependency>
-
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
