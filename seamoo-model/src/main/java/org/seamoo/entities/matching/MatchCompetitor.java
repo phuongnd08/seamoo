@@ -23,7 +23,7 @@ public class MatchCompetitor implements Serializable {
 	private static final long serialVersionUID = 1680471706907193985L;
 
 	private Member member;
-	
+
 	@Store(true)
 	transient private Date participatedTime;
 
@@ -109,9 +109,8 @@ public class MatchCompetitor implements Serializable {
 	public int getCorrectCount() {
 		int count = 0;
 		for (MatchAnswer a : answers) {
-			if (a != null)
-				if (a.getType() == MatchAnswerType.SUBMITTED && a.isCorrect())
-					count++;
+			if (a.getType() == MatchAnswerType.SUBMITTED && a.isCorrect())
+				count++;
 		}
 		return count;
 	}
@@ -119,9 +118,8 @@ public class MatchCompetitor implements Serializable {
 	public int getWrongCount() {
 		int count = 0;
 		for (MatchAnswer a : answers) {
-			if (a != null)
-				if (a.getType() == MatchAnswerType.SUBMITTED && !a.isCorrect())
-					count++;
+			if (a.getType() == MatchAnswerType.SUBMITTED && !a.isCorrect())
+				count++;
 		}
 		return count;
 	}
@@ -129,9 +127,8 @@ public class MatchCompetitor implements Serializable {
 	public int getIgnoreCount() {
 		int count = 0;
 		for (MatchAnswer a : answers) {
-			if (a != null)
-				if (a.getType() == MatchAnswerType.IGNORED)
-					count++;
+			if (a.getType() == MatchAnswerType.IGNORED)
+				count++;
 		}
 		return count;
 	}
