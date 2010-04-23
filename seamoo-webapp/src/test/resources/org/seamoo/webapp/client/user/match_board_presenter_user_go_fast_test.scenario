@@ -6,7 +6,7 @@ And A Match Player Presenter
 And A Match Service Async
 !-- The match is started
 And Current match is started with remaining periods of 30000 milliseconds and number of questions of 10
-And 5 questions from 0 is associated to match 
+And 5 questions from 0 is associated to match
 When Presenter initialize
 Then Service get the current match information with receivedQuestion=0 & receivedEvent=0
 And Display is switched to PLAYING mode
