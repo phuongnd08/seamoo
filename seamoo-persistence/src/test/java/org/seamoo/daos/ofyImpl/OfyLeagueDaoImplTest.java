@@ -8,12 +8,12 @@ import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.SubjectDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.Subject;
-import org.seamoo.persistence.test.LocalDatastoreTest;
+import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class OfyLeagueDaoImplTest extends LocalDatastoreTest {
+public class OfyLeagueDaoImplTest extends LocalAppEngineTest {
 	LeagueDao leagueDao;
 	SubjectDao subjectDao;
 	Subject english;

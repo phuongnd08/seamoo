@@ -4,12 +4,12 @@ import static org.testng.Assert.*;
 
 import org.seamoo.daos.SiteSettingDao;
 import org.seamoo.entities.SiteSetting;
-import org.seamoo.persistence.test.LocalDatastoreTest;
+import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TwigSiteSettingDaoImplTest extends LocalDatastoreTest {
+public class TwigSiteSettingDaoImplTest extends LocalAppEngineTest {
 	SiteSettingDao siteSettingDAO;
 
 	public TwigSiteSettingDaoImplTest() {

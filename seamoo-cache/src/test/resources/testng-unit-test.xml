@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="cache-test" verbose="1">
+	<test name="MemcacheTest">
+		<packages>
+			<package name="org.seamoo.cache"></package>
+			<package name="org.seamoo.cache.memcacheImpl"></package>
+		</packages>
+	</test>
+</suite>

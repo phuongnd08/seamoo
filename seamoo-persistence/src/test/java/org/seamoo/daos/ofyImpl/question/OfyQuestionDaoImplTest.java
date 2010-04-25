@@ -11,14 +11,14 @@ import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.entities.question.QuestionRevision;
-import org.seamoo.persistence.test.LocalDatastoreTest;
+import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.google.apphosting.api.ApiProxy.ArgumentException;
 
-public class OfyQuestionDaoImplTest extends LocalDatastoreTest {
+public class OfyQuestionDaoImplTest extends LocalAppEngineTest {
 	OfyQuestionDaoImpl daoImpl;
 
 	public OfyQuestionDaoImplTest() {

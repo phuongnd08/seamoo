@@ -9,7 +9,7 @@ import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchEventType;
 import org.seamoo.entities.question.Question;
-import org.seamoo.persistence.test.LocalDatastoreTest;
+import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 import com.google.inject.internal.Lists;
 
-public class TwigMatchDaoImplTest extends LocalDatastoreTest {
+public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 	MatchDao daoImpl;
 
 	public TwigMatchDaoImplTest() {

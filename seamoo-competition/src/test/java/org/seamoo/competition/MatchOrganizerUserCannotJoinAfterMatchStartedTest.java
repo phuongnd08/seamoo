@@ -23,8 +23,8 @@ public class MatchOrganizerUserCannotJoinAfterMatchStartedTest extends PowerMock
 	@BeforeMethod
 	public void startStaticMock() {
 		PowerMockito.mockStatic(TimeStampProvider.class);
-	}
 
+	}
 	@AfterMethod
 	public void endStaticMock() {
 	}

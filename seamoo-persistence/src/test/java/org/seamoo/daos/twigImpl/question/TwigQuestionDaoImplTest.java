@@ -11,12 +11,12 @@ import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
-import org.seamoo.persistence.test.LocalDatastoreTest;
+import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TwigQuestionDaoImplTest extends LocalDatastoreTest {
+public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 	QuestionDao daoImpl;
 
 	@BeforeMethod

@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Date;
 import org.seamoo.daos.SubjectDao;
 import org.seamoo.entities.Subject;
-import org.seamoo.persistence.test.LocalDatastoreTest;
+import org.seamoo.persistence.test.LocalAppEngineTest;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TwigSubjectDaoImplTest extends LocalDatastoreTest {
+public class TwigSubjectDaoImplTest extends LocalAppEngineTest {
 	SubjectDao subjectDAO;
 	Subject english, maths, literature;
 

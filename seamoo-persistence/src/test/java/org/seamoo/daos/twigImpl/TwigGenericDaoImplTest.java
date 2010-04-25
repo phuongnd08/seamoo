@@ -2,7 +2,7 @@ package org.seamoo.daos.twigImpl;
 
 import static org.testng.Assert.*;
 
-import org.seamoo.persistence.test.LocalDatastoreTest;
+import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.seamoo.persistence.test.jpa.model.ExampleModel;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import com.googlecode.objectify.ObjectifyService;
 
-public class TwigGenericDaoImplTest extends LocalDatastoreTest {
+public class TwigGenericDaoImplTest extends LocalAppEngineTest {
 
 	private class TestModelDAOImpl extends TwigGenericDaoImpl<ExampleModel, Long> {
 	}

@@ -4,12 +4,12 @@ import static org.testng.Assert.*;
 
 import org.seamoo.daos.MemberDao;
 import org.seamoo.entities.Member;
-import org.seamoo.persistence.test.LocalDatastoreTest;
+import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class OfyMemberDaoImplTest extends LocalDatastoreTest {
+public class OfyMemberDaoImplTest extends LocalAppEngineTest {
 	MemberDao memberDao;
 
 	public OfyMemberDaoImplTest() {
