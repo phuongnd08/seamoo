@@ -103,4 +103,20 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 				- TwigMemberDaoImpl.CACHE_PERIOD);
 		assertEquals(memberDao.findByOpenId("xxx").getDisplayName(), "Mr X");
 	}
+
+	@Test
+	public void nullMemberAlwaysRefreshed() {
+		assertNull(memberDao.findByOpenId("xxx"));
+		TwigMemberDaoImpl dao2 = new TwigMemberDaoImpl();
+		// init separate object data store for new dao
+		dao2.ods = new AnnotationObjectDatastore();
+
+		Member m = new Member();
+		m.setOpenId("xxx");
+		dao2.persist(m);
+
+		assertNotNull(memberDao.findByOpenId("xxx"));
+
+	}
+
 }

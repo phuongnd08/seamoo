@@ -28,7 +28,7 @@ public class MemcacheWrapper<T> implements CacheWrapper<T> {
 	}
 
 	public void lock(long timeout) throws TimeoutException {
-		long v = cacheService.increment(this.keyLock, 1L, 1L);
+		long v = cacheService.increment(this.keyLock, 1L, 0L);
 		long sleepTime = 0;
 		while (v != 1 && sleepTime < timeout) {
 			cacheService.increment(this.keyLock, -1L);
@@ -38,10 +38,12 @@ public class MemcacheWrapper<T> implements CacheWrapper<T> {
 				throw new RuntimeException(e);
 			}
 			sleepTime += 100L;
-			v = cacheService.increment(this.keyLock, 1L, 1L);
+			v = cacheService.increment(this.keyLock, 1L);
 		}
-		if (v != 1)
+		if (v != 1) {
+			cacheService.increment(this.keyLock, -1L);
 			throw new TimeoutException();
+		}
 		this.locked = true;
 	}
 
@@ -53,9 +55,13 @@ public class MemcacheWrapper<T> implements CacheWrapper<T> {
 	public void unlock() {
 		// TODO Auto-generated method stub
 		if (this.locked) {
-			cacheService.increment(this.keyLock, -1L, 0L);
+			long v = cacheService.increment(this.keyLock, -1L, 0L);
+			if (v != 0L) {
+				throw new IllegalStateException("Unlock not properly restore lock key");
+			}
 			this.locked = false;
-		}
+		} else
+			throw new IllegalStateException("Lock has not been acquired");
 	}
 
 }

@@ -50,16 +50,18 @@ public class TwigMemberDaoImpl extends TwigGenericDaoImpl<Member, Long> implemen
 	private void refreshByKey(Long key) {
 		// TODO Auto-generated method stub
 		Member member = super.findByKey(key);
-		if (member != null)
+		if (member != null) {
 			getOds().refresh(member);
-		refreshMember(key, member != null ? member.getOpenId() : "", member);
+			refreshMember(key, member.getOpenId(), member);
+		}
 	}
 
 	private void refreshByOpenId(String openId) {
 		Member member = internalFindByOpenId(openId);
-		if (member != null)
+		if (member != null) {
 			getOds().refresh(member);
-		refreshMember(member != null ? member.getAutoId() : 0L, openId, member);
+			refreshMember(member.getAutoId(), openId, member);
+		}
 	}
 
 	private void refreshMember(Long autoId, String openId, Member member) {
