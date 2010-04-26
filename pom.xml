@@ -44,6 +44,15 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
+		<repository>
+			<id>biblio</id>
+			<url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
 		<repository>
 			<id>codehaus.org</id>
 			<name>CodeHaus Repository</name>
@@ -82,6 +91,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
 	</repositories>
 
 	<pluginRepositories>
@@ -463,6 +473,7 @@
 				<artifactId>commons-collections</artifactId>
 				<version>${commons.collections.version}</version>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -506,6 +517,7 @@
 		<gae.debugPort>8000</gae.debugPort>
 		<gwt.version>2.0.3</gwt.version>
 		<urlrewrite.filter.version>3.1.0</urlrewrite.filter.version>
+		<jug.version>2.0.0</jug.version>
 	</properties>
 </project>
 

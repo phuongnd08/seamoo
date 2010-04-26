@@ -8,22 +8,22 @@ When Organizer is created
 Given Current Time is 10:00:00
 When 1st user request for Match
 Then 1st Match is created
-And 1st Match Phase is NOT_FORMED
-And 1st Match is returned
+And Returned Match is 1st match
+And Returned Match Phase is NOT_FORMED
 When 2nd user request for Match
-Then 1st Match Phase is FORMED
-And 1st Match is returned
+Then Returned Match is 1st match
+And Returned Match Phase is FORMED
 !-- 3rd user can join this match
 Given Current Time is 10:00:05
 When 2nd user request for Match
 And 3rd user request for Match
 And 4th user request for Match
-Then 1st Match is returned
+Then Returned Match is 1st match
 Given Current Time is 10:00:06
 When 4th user request for Match
 When 5th user request for Match
-Then 1st Match is returned
+Then Returned Match is 1st match
 When 1st user request for Match
 Then 2nd Match is created
-And 2nd Match Phase is NOT_FORMED
-And 2nd Match is returned
+And Returned Match is 2nd match
+And Returned Match Phase is NOT_FORMED

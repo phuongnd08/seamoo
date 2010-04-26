@@ -2,13 +2,13 @@ package org.seamoo.competition;
 
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.seamoo.test.PowerMockedBddScenario;
+import org.seamoo.test.PowerMockedGaeBddScenario;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-@PrepareForTest(value = { MatchOrganizer.class, TimeStampProvider.class })
-public class MatchOrganizerUserCannotJoinAfterMatchIsFullTest extends PowerMockedBddScenario {
+@PrepareForTest(value = { EntityFactory.class, TimeStampProvider.class })
+public class MatchOrganizerUserCannotJoinAfterMatchIsFullTest extends PowerMockedGaeBddScenario {
 	public MatchOrganizerUserCannotJoinAfterMatchIsFullTest() {
 		super(new MatchOrganizerSteps());
 	}

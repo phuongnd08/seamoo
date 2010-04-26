@@ -1,0 +1,53 @@
+!-- There is no match yet
+Given There is no active match
+And A list of 10 users
+And A Match Dao
+And 20 questions that have correct choices on #1 
+And A Question Dao
+And Match Are Observered with buffer of 10 objects
+When Organizer is created
+Given Current Time is 10:00:00
+When 1st user request for Match
+And 2nd user request for Match
+Then Returned Match is 1st match
+Given Cache of notFullList is corrupted
+And 3rd user request for Match
+Then Returned Match is 2nd match
+And Returned Match has 1 players
+And Returned Match has 1 events
+!-- Count down is over, then match is started
+Given Current Time is 10:00:10
+And 1st user last signal is 10:00:06
+And 2nd user last signal is 10:00:06
+And 3rd user last signal is 10:00:06
+When 1st user request for Match
+Then Returned Match is 1st match
+And Returned Match Phase is PLAYING
+And Returned Match has 3 events
+!-- The match is timed out
+Given Current Time is 10:02:10
+And 1st user last signal is 10:02:07
+And 2nd user last signal is 10:02:07
+And 3rd user last signal is 10:02:07
+When 1st user request for Match
+Then Returned Match is 1st match
+And Returned Match Phase is FINISHED
+And 1st user finished moment assigned
+And 2nd user finished moment assigned
+Given Cache of 2nd match is corrupted
+And Current Time is 10:10:00
+When 3rd user request for Match
+And 4th user request for Match
+Then 3rd Match is created
+And Returned Match is 3rd match
+Given 3rd user last signal is 10:10:07
+And 4th user last signal is 10:10:07
+And Current Time is 10:10:10
+When 3rd user request for Match
+Then Returned Match is 3rd match
+And Returned Match Phase is PLAYING
+Given Cache of 3rd match candidate corrupted
+When 3rd user request for Match
+Then 4th Match is created
+And Returned Match is 4th match
+And Returned Match has 1 player

@@ -120,7 +120,7 @@
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>xalan</groupId>
 			<artifactId>xalan</artifactId>
@@ -240,7 +240,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
-					<forkMode>once</forkMode>
+					<forkMode>always</forkMode>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/testng-unit-test.xml
 						</suiteXmlFile>

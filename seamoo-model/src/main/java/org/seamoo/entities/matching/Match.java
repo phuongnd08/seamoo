@@ -1,5 +1,6 @@
 package org.seamoo.entities.matching;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +10,14 @@ import org.seamoo.entities.Member;
 import org.seamoo.entities.question.Question;
 
 import com.vercer.engine.persist.annotation.Key;
+import com.vercer.engine.persist.annotation.Store;
 
-public class Match {
+public class Match implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1901172087193249663L;
+
 	@Id
 	@Key
 	private Long autoId;
@@ -28,6 +35,12 @@ public class Match {
 	private List<MatchEvent> events;
 
 	private MatchPhase phase;
+
+	@Store(false)
+	private String temporalUUID;
+
+	@Store(false)
+	private String description;
 
 	public Match() {
 		competitors = new ArrayList<MatchCompetitor>();
@@ -94,9 +107,9 @@ public class Match {
 		return competitors;
 	}
 
-	public MatchCompetitor getCompetitorForMember(Member member) {
+	public MatchCompetitor getCompetitorForMember(Long memberAutoId) {
 		for (MatchCompetitor competitor : competitors)
-			if (competitor.getMember().getAutoId() == member.getAutoId())
+			if (competitor.getMember().getAutoId().equals(memberAutoId))
 				return competitor;
 		return null;
 	}
@@ -117,5 +130,21 @@ public class Match {
 				alias += "-";
 		}
 		return alias;
+	}
+
+	public void setTemporalUUID(String temporalUUID) {
+		this.temporalUUID = temporalUUID;
+	}
+
+	public String getTemporalUUID() {
+		return temporalUUID;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 }

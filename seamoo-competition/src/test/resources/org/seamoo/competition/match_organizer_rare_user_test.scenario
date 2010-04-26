@@ -9,20 +9,20 @@ When Organizer is created
 Given Current Time is 10:00:00
 When 1st user request for Match
 Then 1st Match is created
-And 1st Match Phase is NOT_FORMED
-And 1st Match is returned
+And Returned Match is 1st match
+And Returned Match Phase is NOT_FORMED
 Given Current Time is 10:00:08
 When 2nd user request for Match
-Then 1st Match is returned
-And 1st Match Phase is NOT_FORMED
-And 1st Match has 1 player
+Then Returned Match is 1st match
+And Returned Match Phase is NOT_FORMED
+And Returned Match has 1 player
 Given Current Time is 10:00:13
 When 3rd user request for Match
-Then 1st Match is returned
-And 1st Match Phase is FORMED
-And 1st Match has 2 players
+Then Returned Match is 1st match 
+And Returned Match Phase is FORMED
+And Returned Match has 2 players
 Given Current Time is 10:00:14
 When 3rd user request for Match
-Then 1st Match is returned
-And 1st Match has 1 player
-And 1st Match Phase is NOT_FORMED
+Then Returned Match is 1st match
+And Returned Match has 1 player
+And Returned Match Phase is NOT_FORMED

@@ -9,14 +9,16 @@ Given Current Time is 10:00:00
 When 1st user request for Match
 Given Current Time is 10:00:01
 When 2nd user request for Match
-Then 1st Match Phase is FORMED
+Then Returned Match is 1st match
+And Returned Match Phase is FORMED
 Given 1st user last signal is 10:00:10
 And 2nd user last signal is 10:00:10
 And Current Time is 10:00:11
 When 1st user request for Match
-Then 1st Match Phase is PLAYING
+Then Returned Match is 1st match
+Then Returned Match Phase is PLAYING
 Given Current Time is 10:00:20
 When 1st user submit #1 for question 1-10
 And 1st user request for Match
-Then 2nd Match is returned
-And 2nd Match Phase is NOT_FORMED
+Then Returned Match is 2nd match
+And Returned Match Phase is NOT_FORMED

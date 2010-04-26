@@ -4,12 +4,22 @@ import java.io.Serializable;
 
 import org.seamoo.entities.Member;
 
-public class MatchEvent implements Serializable{
+import com.vercer.engine.persist.annotation.Store;
+
+public class MatchEvent implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7625209665588405346L;
 	private MatchEventType type;
+	private Long memberAutoId;
+
+	@Store(false)
+	/**
+	 * Member is a transient field. It is present to provide some support
+	 * to Client MatchView. A loader should examine the memberAutoId
+	 * And Assign this value before sending object to client
+	 */
 	private Member member;
 	private int questionOrder;
 
@@ -20,13 +30,13 @@ public class MatchEvent implements Serializable{
 		this.setType(type);
 	}
 
-	public MatchEvent(MatchEventType type, Member member) {
+	public MatchEvent(MatchEventType type, Long memberAutoId) {
 		this(type);
-		this.setMember(member);
+		this.setMemberAutoId(memberAutoId);
 	}
 
-	public MatchEvent(MatchEventType type, Member member, int questionOrder) {
-		this(type, member);
+	public MatchEvent(MatchEventType type, Long memberAutoId, int questionOrder) {
+		this(type, memberAutoId);
 		this.setQuestionOrder(questionOrder);
 	}
 
@@ -38,12 +48,12 @@ public class MatchEvent implements Serializable{
 		return type;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setMemberAutoId(Long autoId) {
+		this.memberAutoId = autoId;
 	}
 
-	public Member getMember() {
-		return member;
+	public Long getMemberAutoId() {
+		return memberAutoId;
 	}
 
 	public void setQuestionOrder(int questionOrder) {
@@ -52,5 +62,13 @@ public class MatchEvent implements Serializable{
 
 	public int getQuestionOrder() {
 		return questionOrder;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public Member getMember() {
+		return member;
 	}
 }

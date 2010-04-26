@@ -12,9 +12,13 @@ import org.jbehave.scenario.annotations.Alias;
 import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
+import org.mockito.ArgumentMatcher;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
+import org.seamoo.cache.CacheWrapper;
+import org.seamoo.cache.CacheWrapperFactory;
+import org.seamoo.cache.memcacheImpl.MemcacheWrapperFactoryImpl;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
@@ -30,7 +34,6 @@ import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.utils.converter.Converter;
 
 public class MatchOrganizerSteps {
-	MatchOrganizer organizer;
 	List<Match> activeMatches;
 
 	@Given("There is no active match")
@@ -103,6 +106,7 @@ public class MatchOrganizerSteps {
 		for (int i = 0; i < buffered; i++) {
 			Match m = new Match();
 			m.setAutoId(new Long(i + 1));
+			m.setDescription("Match #" + (i + 1));
 			bufferedMatches.add(m);
 		}
 		PowerMockito.mockStatic(EntityFactory.class);
@@ -117,12 +121,23 @@ public class MatchOrganizerSteps {
 
 	}
 
+	CacheWrapperFactory cacheWrapperFactory;
+	MatchOrganizer organizer;
+
 	@When("Organizer is created")
 	public void initMatchOrganizer() {
+		cacheWrapperFactory = new MemcacheWrapperFactoryImpl();
+		organizer = new MatchOrganizer();
+		reinstantiateMatchOrganizer();
+	}
+
+	@When("Match Organizer is recreated")
+	public void reinstantiateMatchOrganizer() {
 		organizer = new MatchOrganizer();
 		organizer.memberDao = memberDao;
 		organizer.questionDao = questionDao;
 		organizer.matchDao = matchDao;
+		organizer.cacheWrapperFactory = cacheWrapperFactory;
 	}
 
 	@Then("All Active Matches Are Loaded")
@@ -159,32 +174,33 @@ public class MatchOrganizerSteps {
 		EntityFactory.newMatch();
 	}
 
-	@Then("$position Match Phase is $phase")
-	public void assertMatchPhase(String position, String phase) {
-		int pos = positionToNumber(position) - 1;
+	@Then("Returned Match Phase is $phase")
+	public void assertMatchPhase(String phase) {
 		MatchPhase p = MatchPhase.valueOf(phase);
-		assertEquals(bufferedMatches.get(pos).getPhase(), p);
+		assertEquals(match.getPhase(), p);
 	}
 
-	@Then("$position Match is returned")
+	@Then("Returned Match is $position match")
 	public void assertMatchReturning(String position) {
-		int pos = positionToNumber(position) - 1;
-		assertEquals(match, bufferedMatches.get(pos));
+		int pos = positionToNumber(position);
+		assertEquals(match.getDescription(), "Match #" + pos);
 
 	}
 
-	@Then("$position Match has $number players")
-	@Alias("$position Match has $number player")
-	public void assertNumberOfPlayersInMatch(String position, int number) {
-		int pos = positionToNumber(position) - 1;
-		assertEquals(bufferedMatches.get(pos).getCompetitors().size(), number);
+	@Then("Returned Match has $number players")
+	@Alias("Returned Match has $number player")
+	public void assertNumberOfPlayersInMatch(int number) {
+		assertEquals(match.getCompetitors().size(), number);
 	}
 
 	@Given("$position user last signal is $hour:$minute:$second")
 	public void mockUserLastSignal(String position, int hour, int minute, int second) {
 		int pos = positionToNumber(position) - 1;
-		MatchCandidate candidate = organizer.candidates.get(members.get(pos).getAutoId());
+		CacheWrapper<MatchCandidate> candidateWrapper = cacheWrapperFactory.createCacheWrapper(MatchCandidate.class, members.get(
+				pos).getAutoId().toString());
+		MatchCandidate candidate = candidateWrapper.getObject();
 		candidate.setLastSeenMoment(getDateFromHMS(hour, minute, second).getTime());
+		candidateWrapper.putObject(candidate);
 	}
 
 	@When("$position user submit #$choice for question $qFrom-$qTo")
@@ -210,44 +226,44 @@ public class MatchOrganizerSteps {
 		verify(questionDao, times(1)).getRandomQuestions(eq(number));
 	}
 
-	@Then("$position Match is assigned with $number questions")
-	public void assertQuestionsAssignedToMatch(String position, int number) {
-		int pos = positionToNumber(position) - 1;
+	@Then("Returned Match is assigned with $number questions")
+	public void assertQuestionsAssignedToMatch(int number) {
 		assertEquals(match.getQuestions().size(), number);
 	}
 
 	@Then("$position Match is persisted")
 	public void assertMatchPersisted(String position) {
-		int pos = positionToNumber(position) - 1;
-		verify(matchDao).persist(bufferedMatches.get(pos));
-	}
+		final int pos = positionToNumber(position);
+		verify(matchDao).persist(argThat(new ArgumentMatcher<Match>() {
 
-	@Then("$position Match has $number events")
-	@Alias("$position Match has $number event")
-	public void assertMatchPersisted(String position, int number) {
-		int pos = positionToNumber(position) - 1;
-		assertEquals(bufferedMatches.get(pos).getEvents().size(), number);
-	}
-
-	private MatchCompetitor findCompetitorByMember(Member member) {
-		for (int i = 0; i < match.getCompetitors().size(); i++)
-			if (match.getCompetitors().get(i).getMember() == member) {
-				return match.getCompetitors().get(i);
+			@Override
+			public boolean matches(Object argument) {
+				// TODO Auto-generated method stub
+				Match m = (Match) argument;
+				return m.getDescription().equals("Match #" + pos);
 			}
-		return null;
+		}));
+	}
+
+	@Then("Returned Match has $number events")
+	@Alias("Returned Match has $number event")
+	public void assertMatchPersisted(int number) {
+		assertEquals(match.getEvents().size(), number);
 	}
 
 	@Then("$position user score is $score")
 	public void assertScore(String position, double score) {
 		int pos = positionToNumber(position) - 1;
-		MatchCompetitor competitor = findCompetitorByMember(members.get(pos));
+		Long memberAutoId = members.get(pos).getAutoId();
+		Match m = organizer.getMatchForUser(memberAutoId);
+		MatchCompetitor competitor = m.getCompetitorForMember(members.get(pos).getAutoId());
 		assertEquals(competitor.getTotalScore(), score);
 	}
 
 	@Then("$position user ranked $rank")
 	public void assertRank(String position, int rank) {
 		int pos = positionToNumber(position) - 1;
-		MatchCompetitor competitor = findCompetitorByMember(members.get(pos));
+		MatchCompetitor competitor = match.getCompetitorForMember(members.get(pos).getAutoId());
 		assertEquals(competitor.getRank(), rank);
 	}
 
@@ -255,9 +271,42 @@ public class MatchOrganizerSteps {
 	@Alias("$position user has $count answer")
 	public void assertUserQuestionsCount(String position, int count) {
 		int pos = positionToNumber(position) - 1;
-		MatchCompetitor competitor = findCompetitorByMember(members.get(pos));
+		Long memberAutoId = members.get(pos).getAutoId();
+		Match m = organizer.getMatchForUser(memberAutoId);
+		MatchCompetitor competitor = m.getCompetitorForMember(members.get(pos).getAutoId());
 		assertEquals(competitor.getAnswers().size(), count);
 		for (MatchAnswer a : competitor.getAnswers())
 			assertNotNull(a);
+	}
+
+	@Then("$position user finished moment assigned")
+	public void assertFinishedMomentAssigned(String position) {
+		int pos = positionToNumber(position) - 1;
+		MatchCompetitor competitor = match.getCompetitorForMember(members.get(pos).getAutoId());
+		assertNotSame(competitor.getFinishedMoment(), 0L);
+	}
+
+	@Given("Cache of notFullList is corrupted")
+	public void corruptNotFullListCache() {
+		CacheWrapper<List> notFullListCache = cacheWrapperFactory.createCacheWrapper(List.class,
+				MatchOrganizer.NOT_FULL_WAITING_MATCHES_KEY);
+		notFullListCache.putObject(null);
+	}
+
+	@Given("Cache of $position match is corrupted")
+	public void corruptMatchCache(String position) {
+		int pos = positionToNumber(position) - 1;
+		match = bufferedMatches.get(pos);
+		CacheWrapper<Match> matchWrapper = cacheWrapperFactory.createCacheWrapper(Match.class, match.getTemporalUUID());
+		matchWrapper.putObject(null);
+	}
+
+	@Given("Cache of $position match candidate corrupted")
+	public void corruptMatchCandidateCache(String position) {
+		int pos = positionToNumber(position) - 1;
+		Member member = members.get(pos);
+		CacheWrapper<MatchCandidate> candidateWrapper = cacheWrapperFactory.createCacheWrapper(MatchCandidate.class,
+				member.getAutoId().toString());
+		candidateWrapper.putObject(null);
 	}
 }

@@ -3,13 +3,11 @@ package org.seamoo.daos.twigImpl;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.seamoo.daos.GenericDao;
 
 import com.google.common.collect.Lists;
 import com.vercer.engine.persist.ObjectDatastore;
 
-@PrepareForTest(TOD.class)
 public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TKey> {
 
 	ObjectDatastore ods;

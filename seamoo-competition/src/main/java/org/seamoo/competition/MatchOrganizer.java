@@ -6,8 +6,12 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeoutException;
 
 import org.apache.commons.collections.list.TreeList;
+import org.seamoo.cache.CacheWrapper;
+import org.seamoo.cache.CacheWrapperFactory;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
@@ -31,6 +35,7 @@ public class MatchOrganizer {
 	public final long MIN_CANDIDATE_PER_MATCH = 2;
 	public final int QUESTION_PER_MATCH = 20;
 	public final long MATCH_TIME = 120000;
+	public final long MAX_LOCK_WAIT_TIME = 5000L;
 
 	@Autowired
 	MemberDao memberDao;
@@ -38,26 +43,46 @@ public class MatchOrganizer {
 	MatchDao matchDao;
 	@Autowired
 	QuestionDao questionDao;
+	@Autowired
+	CacheWrapperFactory cacheWrapperFactory;
 	/**
 	 * Candidates for match
 	 */
-	Map<Long, MatchCandidate> candidates;
 	/**
 	 * List of matches that is either NOT_FORMED or FORMED but with number of
 	 * competitors < MAX_CANDIDATE_PER_MATCH, mean that there's chances that a
 	 * user can join the match
 	 */
-	private List notFullWaitingMatches;
+	private CacheWrapper<List> notFullWaitingMatches;
 	/**
 	 * List of matches that is FORMED and number of competitors
 	 * >=MAX_CANDIDATE_PER_MATCH
 	 */
-	private List fullWaitingMatches;
+	private CacheWrapper<List> fullWaitingMatches;
+
+	private CacheWrapper<Match> getMatchWrapperByUUID(String uuid) {
+		return cacheWrapperFactory.createCacheWrapper(Match.class, uuid);
+	}
+
+	private CacheWrapper<MatchCandidate> getCandidateWrapperByAutoId(Long autoId) {
+		return cacheWrapperFactory.createCacheWrapper(MatchCandidate.class, autoId.toString());
+	}
+
+	boolean initialized;
 
 	public MatchOrganizer() {
-		candidates = new HashMap<Long, MatchCandidate>();
-		notFullWaitingMatches = new TreeList();
-		fullWaitingMatches = new TreeList();
+		initialized = false;
+	}
+
+	public static final String NOT_FULL_WAITING_MATCHES_KEY = "not-full-waiting-matches";
+	public static final String FULL_WAITING_MATCHES_KEY = "full-waiting-matches";
+
+	private synchronized void initialize() {
+		if (initialized)
+			return;
+		notFullWaitingMatches = cacheWrapperFactory.createCacheWrapper(List.class, NOT_FULL_WAITING_MATCHES_KEY);
+		fullWaitingMatches = cacheWrapperFactory.createCacheWrapper(List.class, FULL_WAITING_MATCHES_KEY);
+		initialized = true;
 	}
 
 	private boolean shouldStarted(Match match) {
@@ -77,23 +102,48 @@ public class MatchOrganizer {
 		return match.getCompetitors().size() == MAX_CANDIDATE_PER_MATCH;
 	}
 
-	private void recheckCompetitors(Match match) {
+	private static interface DoWhileListsLockedRunner {
+		/**
+		 * Perform a neccessary action while two waiting lists are locked.
+		 * 
+		 * @param fullList
+		 * @param notFullList
+		 * @return true if either list is modified. false if neither is modified
+		 */
+		boolean perform(List fullList, List notFullList);
+	}
+
+	private synchronized void doWhileListsLocked(DoWhileListsLockedRunner runner) throws TimeoutException {
+		fullWaitingMatches.lock(MAX_LOCK_WAIT_TIME);
+		notFullWaitingMatches.lock(MAX_LOCK_WAIT_TIME);
+		List fullList = fullWaitingMatches.getObject();
+		if (fullList == null)
+			fullList = new ArrayList();
+		List notFullList = notFullWaitingMatches.getObject();
+		if (notFullList == null)
+			notFullList = new ArrayList();
+		if (runner.perform(fullList, notFullList)) {
+			fullWaitingMatches.putObject(fullList);
+			notFullWaitingMatches.putObject(notFullList);
+		}
+		notFullWaitingMatches.unlock();
+		fullWaitingMatches.unlock();
+	}
+
+	private void recheckCompetitors(final Match match, List fullList, List notFullList) {
 		boolean isMatchFullBeforeCheck = isMatchFull(match);
 		for (int i = match.getCompetitors().size() - 1; i >= 0; i--) {
 			MatchCompetitor competitor = match.getCompetitors().get(i);
 			MatchCandidate candidate = getMatchCandidate(competitor.getMember().getAutoId());
 			if (competitor.getFinishedMoment() == 0 && isDisconnected(candidate)) {
-				match.addEvent(new MatchEvent(MatchEventType.LEFT, competitor.getMember()));
+				match.addEvent(new MatchEvent(MatchEventType.LEFT, competitor.getMember().getAutoId()));
 				match.getCompetitors().remove(i);
 			}
 		}
 		if (isMatchFullBeforeCheck && !isMatchFull(match)) {
-			synchronized (fullWaitingMatches) {
-				synchronized (notFullWaitingMatches) {
-					fullWaitingMatches.remove(match);
-					notFullWaitingMatches.add(match);
-				}
-			}
+			// TODO Auto-generated method stub
+			fullList.remove(match.getTemporalUUID());
+			notFullList.add(match.getTemporalUUID());
 		}
 	}
 
@@ -102,43 +152,52 @@ public class MatchOrganizer {
 	 * a new match if necessary and assign member to the new created match
 	 * 
 	 * @param candidate
+	 * @param notFullList
+	 * @param fullList
 	 * @return
+	 * @throws TimeoutException
 	 */
-	private Match findAndAssignAvailableMatch(MatchCandidate candidate) {
-		synchronized (notFullWaitingMatches) {
-			Match match = null;
-			while (notFullWaitingMatches.size() > 0) {
-				match = (Match) notFullWaitingMatches.get(0);
-				if (shouldStarted(match)) {
-					notFullWaitingMatches.remove(match);
-					match = null;
-				} else
-					break;
-			}
+	private Match findAndAssignAvailableMatch(final MatchCandidate candidate, List fullList, List notFullList) {
+		CacheWrapper<Match> matchWrapper = null;
+		Match match = null;
+		while (notFullList.size() > 0) {
+			matchWrapper = getMatchWrapperByUUID((String) notFullList.get(0));
+			match = matchWrapper.getObject();
+
 			if (match == null) {
-				match = createNewMatch();
-				notFullWaitingMatches.add(match);
+				// Cache of the match is corrupted
+				notFullList.remove(0);
+			} else if (shouldStarted(match)) {
+				notFullList.remove(0);
+				match = null;
+			} else {
+				recheckCompetitors(match, fullList, notFullList);
+				break;
 			}
-			MatchCompetitor competitor = new MatchCompetitor();
-			competitor.setMember(candidate.getMember());
-			match.addCompetitor(competitor);
-			match.addEvent(new MatchEvent(MatchEventType.JOIN, competitor.getMember()));
-
-			if (isMatchFull(match)) {
-				synchronized (fullWaitingMatches) {
-					notFullWaitingMatches.remove(match);
-					fullWaitingMatches.add(match);
-				}
-			}
-
-			return match;
 		}
+		if (match == null) {
+			match = createNewMatch();
+			notFullList.add(match.getTemporalUUID());
+			matchWrapper = getMatchWrapperByUUID(match.getTemporalUUID());
+		}
+		MatchCompetitor competitor = new MatchCompetitor();
+		competitor.setMember(memberDao.findByKey(candidate.getMemberAutoId()));
+		match.addCompetitor(competitor);
+		match.addEvent(new MatchEvent(MatchEventType.JOIN, competitor.getMember().getAutoId()));
+
+		if (isMatchFull(match)) {
+			fullList.add(match.getTemporalUUID());
+			notFullList.remove(match.getTemporalUUID());
+		}
+
+		return match;
 	}
 
 	private Match createNewMatch() {
 		Match match = EntityFactory.newMatch();
 		match.setPhase(MatchPhase.NOT_FORMED);
 		match.setQuestions(questionDao.getRandomQuestions(QUESTION_PER_MATCH));
+		match.setTemporalUUID(UUID.randomUUID().toString());
 		return match;
 	}
 
@@ -146,74 +205,75 @@ public class MatchOrganizer {
 		candidate.setLastSeenMoment(TimeStampProvider.getCurrentTimeMilliseconds());
 	}
 
+	private void recacheCandidate(MatchCandidate candidate) {
+		CacheWrapper<MatchCandidate> candidateWrapper = getCandidateWrapperByAutoId(candidate.getMemberAutoId());
+		candidateWrapper.putObject(candidate);
+	}
+
 	private boolean isDisconnected(MatchCandidate candidate) {
 		return candidate.getLastSeenMoment() + CANDIDATE_ACTIVE_PERIOD < TimeStampProvider.getCurrentTimeMilliseconds();
 	}
 
 	private MatchCandidate getMatchCandidate(Long userAutoId) {
-		MatchCandidate candidate;
-		if (candidates.containsKey(userAutoId)) {
-			candidate = candidates.get(userAutoId);
-		} else {
+		CacheWrapper<MatchCandidate> candidateWrapper = getCandidateWrapperByAutoId(userAutoId);
+		MatchCandidate candidate = candidateWrapper.getObject();
+		if (candidate == null) {
 			candidate = new MatchCandidate();
-			candidate.setMember(memberDao.findByKey(userAutoId));
-			candidates.put(userAutoId, candidate);
+			candidate.setMemberAutoId(userAutoId);
 		}
 		return candidate;
 	}
 
-	private Match getMatchForCandidate(MatchCandidate candidate) {
+	private Match getMatchForCandidate(MatchCandidate candidate, List fullList, List notFullList) {
 		Match match = null;
-		if (candidate.getCurrentMatch() == null || isDisconnected(candidate)) {
-			match = findAndAssignAvailableMatch(candidate);
-			candidate.setCurrentMatch(match);
-		} else {
-			match = candidate.getCurrentMatch();
+
+		if (candidate.getCurrentMatchUUID() != null && !isDisconnected(candidate)) {
+			match = getMatchWrapperByUUID(candidate.getCurrentMatchUUID()).getObject();
 		}
-		recheckCompetitors(match);
+
+		// Deal with both situation: When user is not allocated a match or when
+		// cache of match is corrupted
+		if (match != null) {
+			recheckCompetitors(match, fullList, notFullList);
+		} else {
+			match = findAndAssignAvailableMatch(candidate, fullList, notFullList);
+			candidate.setCurrentMatchUUID(match.getTemporalUUID());
+		}
 		return match;
 	}
 
-	private void recheckMatchPhase(Match match) {
-		synchronized (match) {
-			// make sure no-thread-sensitive operation is
-			// performed when match is being manipulated
-
-			if (match.getPhase() == MatchPhase.NOT_FORMED && match.getCompetitors().size() >= MIN_CANDIDATE_PER_MATCH) {
-				match.setPhase(MatchPhase.FORMED);
-				match.setFormedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
-				match.setStartedMoment(TimeStampProvider.getCurrentTimeMilliseconds() + MATCH_COUNTDOWN_TIME);
-				match.setEndedMoment(match.getStartedMoment() + MATCH_TIME);
-			} else if (match.getPhase() == MatchPhase.FORMED) {
-				if (match.getCompetitors().size() < MIN_CANDIDATE_PER_MATCH) {
-					match.setPhase(MatchPhase.NOT_FORMED);
-				} else if (match.getStartedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
-					startMatch(match);
-				}
-			} else if (match.getPhase() == MatchPhase.PLAYING
-					&& match.getEndedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
-				finishMatch(match);
+	private void recheckMatchPhase(Match match, List fullList, List notFullList) {
+		if (match.getPhase() == MatchPhase.NOT_FORMED && match.getCompetitors().size() >= MIN_CANDIDATE_PER_MATCH) {
+			match.setPhase(MatchPhase.FORMED);
+			match.setFormedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
+			match.setStartedMoment(TimeStampProvider.getCurrentTimeMilliseconds() + MATCH_COUNTDOWN_TIME);
+			match.setEndedMoment(match.getStartedMoment() + MATCH_TIME);
+		} else if (match.getPhase() == MatchPhase.FORMED) {
+			if (match.getCompetitors().size() < MIN_CANDIDATE_PER_MATCH) {
+				match.setPhase(MatchPhase.NOT_FORMED);
+			} else if (match.getStartedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
+				startMatch(match, fullList, notFullList);
 			}
-
+		} else if (match.getPhase() == MatchPhase.PLAYING
+				&& match.getEndedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
+			finishMatch(match);
 		}
 	}
 
-	private void startMatch(Match match) {
+	private void startMatch(Match match, List fullList, List notFullList) {
 		// TODO Auto-generated method stub
 		match.setPhase(MatchPhase.PLAYING);
 		match.addEvent(new MatchEvent(MatchEventType.STARTED));
-		boolean matchDequeued = false;
-		synchronized (notFullWaitingMatches) {
-			if (notFullWaitingMatches.contains(match)) {
-				notFullWaitingMatches.remove(match);
-				matchDequeued = true;
-			}
+		if (!notFullList.remove(match.getTemporalUUID()))
+			fullList.remove(match.getTemporalUUID());
+	}
+
+	private void checkMatchFinished(Match match) {
+		for (MatchCompetitor competitor : match.getCompetitors()) {
+			if (competitor.getFinishedMoment() == 0)
+				return;
 		}
-		if (!matchDequeued) {
-			synchronized (fullWaitingMatches) {
-				fullWaitingMatches.remove(match);
-			}
-		}
+		finishMatch(match);// all answers submitted/ignored
 	}
 
 	/**
@@ -224,8 +284,22 @@ public class MatchOrganizer {
 	private void finishMatch(Match match) {
 		match.setPhase(MatchPhase.FINISHED);
 		match.addEvent(new MatchEvent(MatchEventType.FINISHED));
+		for (MatchCompetitor competitor : match.getCompetitors()) {
+			if (competitor.getFinishedMoment() == 0)
+				competitor.setFinishedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
+		}
 		rank(match);
+		prepareMatchForPersistence(match);
 		matchDao.persist(match);
+	}
+
+	/**
+	 * Try to associate necessary entity of match so that persistence can
+	 * maintain a consistent link between entities in datastore
+	 * 
+	 * @param match
+	 */
+	private void prepareMatchForPersistence(Match match) {
 	}
 
 	private void rank(Match match) {
@@ -258,16 +332,40 @@ public class MatchOrganizer {
 	 * 
 	 * @param userAutoId
 	 * @return
+	 * @throws TimeoutException
 	 */
 	public Match getMatchForUser(Long userAutoId) {
-		MatchCandidate candidate = getMatchCandidate(userAutoId);
+		initialize();
+		final MatchCandidate candidate = getMatchCandidate(userAutoId);
 		if (isDisconnected(candidate))
-			candidate.setCurrentMatch(null);
+			candidate.setCurrentMatchUUID(null);
 		updateLastSeen(candidate);
-		Match match = getMatchForCandidate(candidate);
-		// check for various phase of match
-		recheckMatchPhase(match);
-		return match;
+		final Match[] matches = new Match[1];
+		try {
+			doWhileListsLocked(new DoWhileListsLockedRunner() {
+
+				@Override
+				public boolean perform(List fullList, List notFullList) {
+					matches[0] = getMatchForCandidate(candidate, fullList, notFullList);
+					// check for which phase should match be now
+					recheckMatchPhase(matches[0], fullList, notFullList);
+					/*
+					 * The match has gone through several changes. Put it back
+					 * to cache
+					 */
+					CacheWrapper<Match> matchWrapper = getMatchWrapperByUUID(matches[0].getTemporalUUID());
+					matchWrapper.putObject(matches[0]);
+
+					return true;
+				}
+			});
+		} catch (TimeoutException e) {
+			// Cannot acquire enough lock to find match for user. Give up
+			return null;
+		}
+
+		recacheCandidate(candidate);
+		return matches[0];
 	}
 
 	/**
@@ -277,66 +375,59 @@ public class MatchOrganizer {
 	 * @param userAutoId
 	 */
 	public void escapeCurrentMatch(Long userAutoId) {
-		getMatchCandidate(userAutoId).setCurrentMatch(null);
-	}
-
-	private void checkMatchFinished(Match match) {
-		for (MatchCompetitor competitor : match.getCompetitors()) {
-			if (competitor.getFinishedMoment() == 0)
-				return;
-		}
-		finishMatch(match);// all answers submitted/ignored
+		initialize();
+		getMatchCandidate(userAutoId).setCurrentMatchUUID(null);
 	}
 
 	private void addMatchAnswer(Long userAutoId, int questionOrder, MatchAnswer answer) {
 		MatchCandidate candidate = getMatchCandidate(userAutoId);
-		if (candidate.getCurrentMatch() == null || isDisconnected(candidate)) {
+		if (candidate.getCurrentMatchUUID() == null || isDisconnected(candidate)) {
 			System.err.println("Cannot find a suitable match for user. Answer discarded");
 			return;
 		}
-		Match match = getMatchForCandidate(candidate);
-		synchronized (match) {
-			// make sure no-thread-sensitive operation is
-			// performed when match is being manipulated
-			List<MatchCompetitor> competitors = match.getCompetitors();
-			MatchCompetitor competitor = null;
-			for (int i = 0; i < competitors.size(); i++) {
-				if (competitors.get(i).getMember().getAutoId() == candidate.getMember().getAutoId()) {
-					competitor = competitors.get(i);
-					break;
-				}
-			}
-			if (competitor == null)
-				throw new RuntimeException("Competitor disappeared mysteriously");
-			switch (answer.getType()) {
-			case IGNORED:
-				match.addEvent(new MatchEvent(MatchEventType.IGNORE_QUESTION, candidate.getMember(), questionOrder));
-				break;
-			case SUBMITTED:
-				match.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, candidate.getMember(), questionOrder));
-				double score = match.getQuestions().get(questionOrder - 1).getScore(answer.getContent());
-				answer.setScore(score);
-				answer.setCorrect(score > 0);
-				break;
-			}
-
-			List<MatchAnswer> answers = competitor.getAnswers();
-			int insertPos = questionOrder - 1;
-			if (answers.size() < insertPos) {
-				for (int i = answers.size(); i < insertPos; i++)
-					competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, null));
-			}
-			if (insertPos < answers.size()) {
-				System.err.println("Late received answer at " + questionOrder + " discarded");
-			} else
-				competitor.addAnswer(answer);
-
-			if (competitor.getPassedQuestionCount() == match.getQuestions().size()) {
-				competitor.setFinishedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
-				checkMatchFinished(match);
-			}
+		CacheWrapper<Match> matchWrapper = getMatchWrapperByUUID(candidate.getCurrentMatchUUID());
+		Match match = matchWrapper.getObject();
+		if (match == null) {
+			System.err.println("Cannot find match associated with user. Probably cache is corrupted. Answer discarded");
+			return;
 		}
+
+		List<MatchCompetitor> competitors = match.getCompetitors();
+		MatchCompetitor competitor = match.getCompetitorForMember(candidate.getMemberAutoId());
+		if (competitor == null)
+			throw new RuntimeException("Competitor disappeared mysteriously");
+		switch (answer.getType()) {
+		case IGNORED:
+			match.addEvent(new MatchEvent(MatchEventType.IGNORE_QUESTION, candidate.getMemberAutoId(), questionOrder));
+			break;
+		case SUBMITTED:
+			match.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, candidate.getMemberAutoId(), questionOrder));
+			double score = match.getQuestions().get(questionOrder - 1).getScore(answer.getContent());
+			answer.setScore(score);
+			answer.setCorrect(score > 0);
+			break;
+		}
+
+		List<MatchAnswer> answers = competitor.getAnswers();
+		int insertPos = questionOrder - 1;
+		if (answers.size() < insertPos) {
+			for (int i = answers.size(); i < insertPos; i++)
+				competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, null));
+		}
+		if (insertPos < answers.size()) {
+			System.err.println("Late received answer at " + questionOrder + " discarded");
+		} else
+			competitor.addAnswer(answer);
+
+		if (competitor.getPassedQuestionCount() == match.getQuestions().size()) {
+			competitor.setFinishedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
+			checkMatchFinished(match);
+		}
+
+		matchWrapper.putObject(match);
+
 		updateLastSeen(candidate);
+		recacheCandidate(candidate);
 	}
 
 	/**
@@ -349,6 +440,7 @@ public class MatchOrganizer {
 	 * @param answer
 	 */
 	public void submitAnswer(Long userAutoId, int questionOrder, String answer) {
+		initialize();
 		addMatchAnswer(userAutoId, questionOrder, new MatchAnswer(MatchAnswerType.SUBMITTED, answer));
 	}
 
@@ -360,6 +452,7 @@ public class MatchOrganizer {
 	 *            Must be in 1-based index
 	 */
 	public void ignoreQuestion(Long userAutoId, int questionOrder) {
+		initialize();
 		addMatchAnswer(userAutoId, questionOrder, new MatchAnswer(MatchAnswerType.IGNORED, null));
 	}
 

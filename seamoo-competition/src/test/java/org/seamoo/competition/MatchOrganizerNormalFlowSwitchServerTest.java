@@ -2,14 +2,15 @@ package org.seamoo.competition;
 
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.seamoo.test.PowerMockedBddScenario;
 import org.seamoo.test.PowerMockedGaeBddScenario;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @PrepareForTest(value = { EntityFactory.class, TimeStampProvider.class })
-public class MatchOrganizerNormalFlowTest extends PowerMockedGaeBddScenario {
-	public MatchOrganizerNormalFlowTest() {
+public class MatchOrganizerNormalFlowSwitchServerTest extends PowerMockedGaeBddScenario {
+	public MatchOrganizerNormalFlowSwitchServerTest() {
 		super(new MatchOrganizerSteps());
 	}
 

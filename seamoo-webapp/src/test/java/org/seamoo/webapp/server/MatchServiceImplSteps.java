@@ -15,6 +15,7 @@ import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
 import org.powermock.api.mockito.PowerMockito;
+import org.seamoo.cache.CacheWrapper;
 import org.seamoo.competition.MatchOrganizer;
 import org.seamoo.competition.TimeStampProvider;
 import org.seamoo.entities.Member;
@@ -149,7 +150,7 @@ public class MatchServiceImplSteps {
 
 	@Given("Member@$id finished the match")
 	public void setUpMemberFinishedMatch(Long id) {
-		currentMatch.getCompetitorForMember(members.get(id)).setFinishedMoment(1L);
+		currentMatch.getCompetitorForMember(members.get(id).getAutoId()).setFinishedMoment(1L);
 	}
 
 	@Given("Current Time is $stamp")

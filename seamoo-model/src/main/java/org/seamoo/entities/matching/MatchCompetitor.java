@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.seamoo.entities.Member;
 
+import com.google.gwt.user.client.rpc.GwtTransient;
 import com.vercer.engine.persist.annotation.Store;
 
 /**
@@ -25,7 +26,8 @@ public class MatchCompetitor implements Serializable {
 	private Member member;
 
 	@Store(true)
-	transient private Date participatedTime;
+	@GwtTransient
+	private Date participatedTime;
 
 	private double totalScore;
 
@@ -36,7 +38,8 @@ public class MatchCompetitor implements Serializable {
 	private int passedQuestionCount;
 
 	@Store(true)
-	transient private List<MatchAnswer> answers;
+	@GwtTransient
+	private List<MatchAnswer> answers;
 
 	public MatchCompetitor() {
 		answers = new ArrayList<MatchAnswer>();

@@ -8,8 +8,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @PrepareForTest(value = { EntityFactory.class, TimeStampProvider.class })
-public class MatchOrganizerNormalFlowTest extends PowerMockedGaeBddScenario {
-	public MatchOrganizerNormalFlowTest() {
+public class MatchOrganizerCacheCorruptedTest extends PowerMockedGaeBddScenario {
+	public MatchOrganizerCacheCorruptedTest() {
 		super(new MatchOrganizerSteps());
 	}
 

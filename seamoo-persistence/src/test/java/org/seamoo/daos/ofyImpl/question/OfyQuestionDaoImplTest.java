@@ -83,20 +83,4 @@ public class OfyQuestionDaoImplTest extends LocalAppEngineTest {
 			idSet.add(q.getAutoId());
 		assertEquals(idSet.size(), 4);
 	}
-
-	@Test
-	public void persistMultipleChoicesQuestionShouldBeOK() {
-		Question q = new Question();
-		MultipleChoicesQuestionRevision r = new MultipleChoicesQuestionRevision();
-		r.setContent("hello");
-		r.addChoice(new QuestionChoice("xxx", true));
-		q.addAndSetAsCurrentRevision(r);
-		daoImpl.persist(q);
-		Question qReloaded = daoImpl.findByKey(q.getAutoId());
-		MultipleChoicesQuestionRevision rReloaded = (MultipleChoicesQuestionRevision) qReloaded.getCurrentRevision();
-		assertEquals("hello", rReloaded.getContent());
-		assertEquals(1, rReloaded.getChoices().size());
-		assertEquals("xxx", rReloaded.getChoices().get(0).getContent());
-		assertEquals(true, rReloaded.getChoices().get(0).isCorrect());
-	}
 }

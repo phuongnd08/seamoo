@@ -206,8 +206,6 @@ public class MatchView extends Composite implements Display {
 		switch (event.getType()) {
 		case ANSWER_QUESTION:
 			return event.getMember().getDisplayName() + " answer question #" + event.getQuestionOrder();
-		case FINISHED:
-			return "Match finished";
 		case IGNORE_QUESTION:
 			return event.getMember().getDisplayName() + " ignore question #" + event.getQuestionOrder();
 		case JOIN:
@@ -216,6 +214,8 @@ public class MatchView extends Composite implements Display {
 			return event.getMember().getDisplayName() + " left match";
 		case STARTED:
 			return "Match started";
+		case FINISHED:
+			return "Match finished";
 		default:
 			throw new IllegalArgumentException("MatchEvent type is not supported");
 		}

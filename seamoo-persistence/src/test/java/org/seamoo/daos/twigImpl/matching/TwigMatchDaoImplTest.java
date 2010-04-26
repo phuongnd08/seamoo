@@ -42,7 +42,7 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 	public void persistMatchWithQuestionAndEventAndCompetitorsAndAnswersShouldBeOK() {
 		Match m = new Match();
 		m.setQuestions(Lists.newArrayList(new Question[] { new Question() }));
-		m.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, new Member(), 1));
+		m.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, 0L, 1));
 		MatchCompetitor competitor = new MatchCompetitor();
 		competitor.setMember(new Member());
 		competitor.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, "1"));
@@ -55,7 +55,7 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 	public void matchCompetitorsAndAnswersShouldBePersisted() {
 		Match m = new Match();
 		m.setQuestions(Lists.newArrayList(new Question[] { new Question() }));
-		m.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, new Member(), 1));
+		m.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, 0L, 1));
 		MatchCompetitor competitor = new MatchCompetitor();
 		competitor.setMember(new Member());
 		competitor.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, "1"));

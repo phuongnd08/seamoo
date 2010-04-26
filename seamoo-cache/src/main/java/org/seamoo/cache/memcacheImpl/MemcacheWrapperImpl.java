@@ -8,14 +8,14 @@ import org.seamoo.cache.CacheWrapper;
 
 import com.google.appengine.api.memcache.MemcacheService;
 
-public class MemcacheWrapper<T> implements CacheWrapper<T> {
+public class MemcacheWrapperImpl<T> implements CacheWrapper<T> {
 
 	private String key;
 	private String keyLock;
 	MemcacheService cacheService;
 	private boolean locked;
 
-	public MemcacheWrapper(String key, MemcacheService cacheService) {
+	public MemcacheWrapperImpl(String key, MemcacheService cacheService) {
 		this.key = key;
 		this.keyLock = key + "@lock";
 		this.cacheService = cacheService;
@@ -55,7 +55,7 @@ public class MemcacheWrapper<T> implements CacheWrapper<T> {
 	public void unlock() {
 		// TODO Auto-generated method stub
 		if (this.locked) {
-			long v = cacheService.increment(this.keyLock, -1L, 0L);
+			long v = cacheService.increment(this.keyLock, -1L, 1L);
 			if (v != 0L) {
 				throw new IllegalStateException("Unlock not properly restore lock key");
 			}

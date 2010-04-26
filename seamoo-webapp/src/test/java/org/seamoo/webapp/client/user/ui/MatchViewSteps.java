@@ -275,22 +275,30 @@ public class MatchViewSteps {
 
 	@Given("Event#$index $displayName join Match")
 	public void createJoinEvent(int index, String displayName) {
-		events.add(new MatchEvent(MatchEventType.JOIN, memberFromDisplayName(displayName)));
+		MatchEvent e = new MatchEvent(MatchEventType.JOIN);
+		e.setMember(memberFromDisplayName(displayName));
+		events.add(e);
 	}
 
 	@Given("Event#$index $displayName submit answer for question #$questionIndex")
 	public void createAnswerEvent(int index, String displayName, int questionIndex) {
-		events.add(new MatchEvent(MatchEventType.ANSWER_QUESTION, memberFromDisplayName(displayName), questionIndex));
+		MatchEvent e = new MatchEvent(MatchEventType.ANSWER_QUESTION, 0L, questionIndex);
+		e.setMember(memberFromDisplayName(displayName));
+		events.add(e);
 	}
 
 	@Given("Event#$index $displayName ignore question #$questionIndex")
 	public void createIgnoreQuestionEvent(int index, String displayName, int questionIndex) {
-		events.add(new MatchEvent(MatchEventType.IGNORE_QUESTION, memberFromDisplayName(displayName), questionIndex));
+		MatchEvent e = new MatchEvent(MatchEventType.IGNORE_QUESTION, 0L, questionIndex);
+		e.setMember(memberFromDisplayName(displayName));
+		events.add(e);
 	}
 
 	@Given("Event#$index $displayName left Match")
 	public void createLeftEvent(int index, String displayName) {
-		events.add(new MatchEvent(MatchEventType.LEFT, memberFromDisplayName(displayName)));
+		MatchEvent e = new MatchEvent(MatchEventType.LEFT, 0L);
+		e.setMember(memberFromDisplayName(displayName));
+		events.add(e);
 	}
 
 	@When("Events are added to View")

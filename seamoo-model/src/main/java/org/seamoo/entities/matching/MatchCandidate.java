@@ -1,38 +1,30 @@
 package org.seamoo.entities.matching;
 
-import java.util.Date;
+import java.io.Serializable;
 
-import org.seamoo.entities.League;
-import org.seamoo.entities.Member;
-
-public class MatchCandidate {
-	private Member member;
-	private League league;
+public class MatchCandidate implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6934095741107742969L;
+	private Long memberAutoId;
 	private long lastSeenMoment;
-	private Match currentMatch;
+	private String currentMatchUUID;
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setMemberAutoId(Long memberAutoId) {
+		this.memberAutoId = memberAutoId;
 	}
 
-	public Member getMember() {
-		return member;
+	public Long getMemberAutoId() {
+		return memberAutoId;
 	}
 
-	public void setLeague(League league) {
-		this.league = league;
+	public void setCurrentMatchUUID(String currentMatchUUID) {
+		this.currentMatchUUID = currentMatchUUID;
 	}
 
-	public League getLeague() {
-		return league;
-	}
-
-	public void setCurrentMatch(Match currentMatch) {
-		this.currentMatch = currentMatch;
-	}
-
-	public Match getCurrentMatch() {
-		return currentMatch;
+	public String getCurrentMatchUUID() {
+		return currentMatchUUID;
 	}
 
 	public void setLastSeenMoment(long lastSeenMoment) {
