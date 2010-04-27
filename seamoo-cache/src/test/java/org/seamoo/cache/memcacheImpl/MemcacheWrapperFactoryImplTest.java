@@ -123,4 +123,21 @@ public class MemcacheWrapperFactoryImplTest extends LocalAppEngineTest {
 		assertEquals("Hello", wrapper1.getObject().t1Field);
 		assertEquals("Bonjure", wrapper2.getObject().t2Field);
 	}
+
+	@Test
+	public void failedUnlockShouldNotContaminateCache() throws TimeoutException {
+		CacheWrapperFactory factory = new MemcacheWrapperFactoryImpl();
+		CacheWrapper<T1> wrapper1 = factory.createCacheWrapper(T1.class, "wow");
+		CacheWrapper<T1> wrapper2 = factory.createCacheWrapper(T1.class, "wow");
+		wrapper1.lock(1000L);
+		try {
+			wrapper2.lock(100L);
+		} catch (TimeoutException e) {
+
+		}
+
+		wrapper1.unlock();
+		wrapper2.lock(100L);
+
+	}
 }

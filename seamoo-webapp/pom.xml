@@ -97,6 +97,7 @@
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
+			<classifier>gae-pre2</classifier>
 		</dependency>
 
 		<dependency>
@@ -240,7 +241,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
-					<forkMode>always</forkMode>
+					<forkMode>once</forkMode>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/testng-unit-test.xml
 						</suiteXmlFile>
@@ -413,7 +414,7 @@
 				<groupId>net.kindleit</groupId>
 				<artifactId>maven-gae-plugin</artifactId>
 				<configuration>
-					<disableUpdateCheck>true</disableUpdateCheck>
+					<disableUpdateCheck>false</disableUpdateCheck>
 				</configuration>
 			</plugin>
 
@@ -439,8 +440,6 @@
 				</configuration>
 			</plugin>
 
-
-
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>selenium-maven-plugin</artifactId>
@@ -465,7 +464,7 @@
 		<!--
 			Upload to http://0.latest.<applicationName>.appspot.com by default
 		-->
-		<gae.application.version>1</gae.application.version>
+		<gae.application.version>2</gae.application.version>
 
 		<!-- port defaults to 8888 -->
 		<gae.port>8888</gae.port>

@@ -8,7 +8,7 @@
 <project name="SeaMoo WebApp GWT Launcher" basedir=".">
 	<!-- Configure path to GWT SDK -->
 	<property name="gwt.sdk" location="/home/phuongnd08/google-sdk/gwt/gwt-2.0.3" />
-	<property name="appengine.sdk" location="/home/phuongnd08/.m2/repository/com/google/appengine/appengine-java-sdk/1.3.2/appengine-java-sdk-1.3.2" />
+	<property name="appengine.sdk" location="/home/phuongnd08/.m2/repository/com/google/appengine/appengine-java-sdk/1.3.3.1/appengine-java-sdk-1.3.3.1" />
 	<!--<property name="webapp.dir" location="target/stock-watcher-1.0-SNAPSHOT" />-->
 	<property name="src.dir" location="src/main/java" />
 

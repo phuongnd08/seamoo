@@ -77,7 +77,7 @@ public class MatchOrganizer {
 	public static final String NOT_FULL_WAITING_MATCHES_KEY = "not-full-waiting-matches";
 	public static final String FULL_WAITING_MATCHES_KEY = "full-waiting-matches";
 
-	private synchronized void initialize() {
+	protected synchronized void initialize() {
 		if (initialized)
 			return;
 		notFullWaitingMatches = cacheWrapperFactory.createCacheWrapper(List.class, NOT_FULL_WAITING_MATCHES_KEY);
@@ -102,7 +102,7 @@ public class MatchOrganizer {
 		return match.getCompetitors().size() == MAX_CANDIDATE_PER_MATCH;
 	}
 
-	private static interface DoWhileListsLockedRunner {
+	protected static interface DoWhileListsLockedRunner {
 		/**
 		 * Perform a neccessary action while two waiting lists are locked.
 		 * 
@@ -113,21 +113,25 @@ public class MatchOrganizer {
 		boolean perform(List fullList, List notFullList);
 	}
 
-	private synchronized void doWhileListsLocked(DoWhileListsLockedRunner runner) throws TimeoutException {
+	protected synchronized void doWhileListsLocked(DoWhileListsLockedRunner runner) throws TimeoutException {
 		fullWaitingMatches.lock(MAX_LOCK_WAIT_TIME);
 		notFullWaitingMatches.lock(MAX_LOCK_WAIT_TIME);
-		List fullList = fullWaitingMatches.getObject();
-		if (fullList == null)
-			fullList = new ArrayList();
-		List notFullList = notFullWaitingMatches.getObject();
-		if (notFullList == null)
-			notFullList = new ArrayList();
-		if (runner.perform(fullList, notFullList)) {
-			fullWaitingMatches.putObject(fullList);
-			notFullWaitingMatches.putObject(notFullList);
+		try {
+			List fullList = fullWaitingMatches.getObject();
+			if (fullList == null)
+				fullList = new ArrayList();
+			List notFullList = notFullWaitingMatches.getObject();
+			if (notFullList == null)
+				notFullList = new ArrayList();
+			if (runner.perform(fullList, notFullList)) {
+				fullWaitingMatches.putObject(fullList);
+				notFullWaitingMatches.putObject(notFullList);
+			}
+		} finally {
+			//always guarantee that lock will be released
+			notFullWaitingMatches.unlock();
+			fullWaitingMatches.unlock();
 		}
-		notFullWaitingMatches.unlock();
-		fullWaitingMatches.unlock();
 	}
 
 	private void recheckCompetitors(final Match match, List fullList, List notFullList) {

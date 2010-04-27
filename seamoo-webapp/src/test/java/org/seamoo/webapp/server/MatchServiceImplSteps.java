@@ -18,6 +18,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.seamoo.cache.CacheWrapper;
 import org.seamoo.competition.MatchOrganizer;
 import org.seamoo.competition.TimeStampProvider;
+import org.seamoo.daos.MemberDao;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchCompetitor;
@@ -30,6 +31,7 @@ import org.workingonit.gwtbridge.ServletUtils;
 public class MatchServiceImplSteps {
 	MatchOrganizer mo;
 	Match currentMatch;
+	MemberDao memberDao;
 
 	@Given("A MatchOrganizer")
 	public void initMatchOrganizer() {
@@ -38,12 +40,18 @@ public class MatchServiceImplSteps {
 		when(mo.getMatchForUser(anyLong())).thenReturn(currentMatch);
 	}
 
+	@Given("A MemberDao")
+	public void initMemberDao() {
+		memberDao = mock(MemberDao.class);
+	}
+
 	MatchServiceImpl service;
 
 	@Given("A MatchServiceImpl")
 	public void initMatchServiceImp() {
 		service = new MatchServiceImpl();
 		service.matchOrganizer = mo;
+		service.memberDao = memberDao;
 	}
 
 	Map<Long, Member> members;

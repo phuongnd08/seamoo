@@ -76,7 +76,8 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 				match.getEvents().size())));
 		// bind member to event using memberAutoId
 		for (MatchEvent e : matchState.getBufferedEvents()) {
-			e.setMember(memberDao.findByKey(e.getMemberAutoId()));
+			if (e.getMemberAutoId() != null)
+				e.setMember(memberDao.findByKey(e.getMemberAutoId()));
 		}
 		matchState.setMatchAutoId(match.getAutoId() != null ? match.getAutoId().longValue() : 0);
 		matchState.setMatchAlias(match.getAlias());
