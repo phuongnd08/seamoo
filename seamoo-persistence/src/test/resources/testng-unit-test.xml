@@ -1,16 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="client-test" verbose="1">
 	<test name="GWT-Tests">
-		<packages>
-			<package name="org.seamoo.daos.ofyImpl"></package>
-			<package name="org.seamoo.daos.ofyImpl.question"></package>
-			<package name="org.seamoo.daos.ofyImpl.matching"></package>
-			<package name="org.seamoo.daos.ofyImpl.matching"></package>
-			
+		<packages>	
 			<package name="org.seamoo.daos.twigImpl"></package>
 			<package name="org.seamoo.daos.twigImpl.question"></package>
 			<package name="org.seamoo.daos.twigImpl.matching"></package>
 			<package name="org.seamoo.daos.twigImpl.lookup"></package>
+			<package name="org.seamoo.daos.twigImpl.installation"></package>
 		</packages>
 	</test>
 </suite>

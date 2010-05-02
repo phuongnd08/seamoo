@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-import org.seamoo.daos.ofyImpl.OfyModelRegistrar;
 import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;

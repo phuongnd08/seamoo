@@ -3,7 +3,6 @@ package org.seamoo.daos.twigImpl.lookup;
 import static org.testng.Assert.*;
 
 import org.seamoo.daos.lookup.NumericBagDao;
-import org.seamoo.daos.ofyImpl.OfyModelRegistrar;
 import org.seamoo.lookup.NumericBag;
 import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.testng.annotations.AfterMethod;
@@ -14,7 +13,6 @@ public class TwigNumericBagDaoImplTest extends LocalAppEngineTest {
 
 	public TwigNumericBagDaoImplTest() {
 		// TODO Auto-generated constructor stub
-		new OfyModelRegistrar();
 	}
 
 	NumericBagDao dao;
