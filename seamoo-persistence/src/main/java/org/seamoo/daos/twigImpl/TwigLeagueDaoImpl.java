@@ -22,4 +22,13 @@ public class TwigLeagueDaoImpl extends TwigGenericDaoImpl<League, Long> implemen
 				subjectAutoId).addFilter("enabled", FilterOperator.EQUAL, true);
 		return Lists.newArrayList(fc.returnResultsNow());
 	}
+
+	@Override
+	public League findBySubjectIdAndLevel(Long subjectAutoId, int level) {
+		RootFindCommand<League> fc = getOds().find().type(League.class).addFilter("subjectAutoId", FilterOperator.EQUAL,
+				subjectAutoId).addFilter("level", FilterOperator.EQUAL, level);
+		if (fc.countResultsNow() == 0)
+			return null;
+		return fc.returnResultsNow().next();
+	}
 }

@@ -18,6 +18,8 @@ public class Subject implements Serializable {
 
 	private String name;
 
+	private String alias;
+
 	private String logoUrl;
 
 	private String description;
@@ -42,6 +44,7 @@ public class Subject implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+		this.alias = name.toLowerCase().replace(' ', '-');
 	}
 
 	public String getName() {
@@ -86,6 +89,10 @@ public class Subject implements Serializable {
 
 	public Date getAddedTime() {
 		return addedTime;
+	}
+
+	public String getAlias() {
+		return alias;
 	}
 
 	@Override

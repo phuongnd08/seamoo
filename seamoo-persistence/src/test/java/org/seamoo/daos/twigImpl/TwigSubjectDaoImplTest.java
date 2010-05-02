@@ -58,4 +58,5 @@ public class TwigSubjectDaoImplTest extends LocalAppEngineTest {
 		assertEquals("Literature", subjects.get(1).getName());
 		assertEquals("English", subjects.get(2).getName());
 	}
+	
 }

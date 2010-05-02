@@ -35,6 +35,8 @@ import org.seamoo.utils.converter.Converter;
 
 public class MatchOrganizerSteps {
 	List<Match> activeMatches;
+	public static final long TEST_LEAGUE_ID = 1L;
+	public static final long TEST_LEAGUE2_ID = 2L;
 
 	@Given("There is no active match")
 	public void setUpNoActiveMatch() {
@@ -87,7 +89,7 @@ public class MatchOrganizerSteps {
 	@Given("A Question Dao")
 	public void setUpQuestionDao() {
 		questionDao = mock(QuestionDao.class);
-		when(questionDao.getRandomQuestions(20)).thenReturn(questions);
+		when(questionDao.getRandomQuestions(anyLong(), eq(20))).thenReturn(questions);
 	}
 
 	MatchDao matchDao;
@@ -127,13 +129,23 @@ public class MatchOrganizerSteps {
 	@When("Organizer is created")
 	public void initMatchOrganizer() {
 		cacheWrapperFactory = new MemcacheWrapperFactoryImpl();
-		organizer = new MatchOrganizer();
 		reinstantiateMatchOrganizer();
+	}
+
+	MatchOrganizer organizer2;
+
+	@When("Organizer of league 2 is created")
+	public void initLeague2MatchOrganizer() {
+		organizer2 = new MatchOrganizer(TEST_LEAGUE2_ID);
+		organizer2.memberDao = memberDao;
+		organizer2.questionDao = questionDao;
+		organizer2.matchDao = matchDao;
+		organizer2.cacheWrapperFactory = new MemcacheWrapperFactoryImpl();
 	}
 
 	@When("Match Organizer is recreated")
 	public void reinstantiateMatchOrganizer() {
-		organizer = new MatchOrganizer();
+		organizer = new MatchOrganizer(TEST_LEAGUE_ID);
 		organizer.memberDao = memberDao;
 		organizer.questionDao = questionDao;
 		organizer.matchDao = matchDao;
@@ -165,6 +177,12 @@ public class MatchOrganizerSteps {
 	public void userRequestForMatch(String position) {
 		int pos = positionToNumber(position) - 1;
 		match = organizer.getMatchForUser(members.get(pos).getAutoId());
+	}
+
+	@When("$position user request for Match on league 2")
+	public void userRequestForMatchOnLeague2(String position) {
+		int pos = positionToNumber(position) - 1;
+		match = organizer2.getMatchForUser(members.get(pos).getAutoId());
 	}
 
 	@Then("$position Match is created")
@@ -223,7 +241,12 @@ public class MatchOrganizerSteps {
 
 	@Then("Question Dao is requested for $number random questions")
 	public void assertRandomQuestionsRequested(int number) {
-		verify(questionDao, times(1)).getRandomQuestions(eq(number));
+		verify(questionDao, times(1)).getRandomQuestions(anyLong(), eq(number));
+	}
+
+	@Then("Question Dao is requested for $number random questions on league $leagueId")
+	public void assertRandomQuestionsRequested(int number, long leagueId) {
+		verify(questionDao, times(1)).getRandomQuestions(eq(leagueId), eq(number));
 	}
 
 	@Then("Returned Match is assigned with $number questions")
@@ -289,7 +312,7 @@ public class MatchOrganizerSteps {
 	@Given("Cache of notFullList is corrupted")
 	public void corruptNotFullListCache() {
 		CacheWrapper<List> notFullListCache = cacheWrapperFactory.createCacheWrapper(List.class,
-				MatchOrganizer.NOT_FULL_WAITING_MATCHES_KEY);
+				MatchOrganizer.NOT_FULL_WAITING_MATCHES_KEY + "@" + TEST_LEAGUE_ID);
 		notFullListCache.putObject(null);
 	}
 

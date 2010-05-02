@@ -362,13 +362,13 @@
 								<exec dir="${basedir}/target" executable="wget"
 									failonerror="true">
 									<arg
-										line="http://localhost:${gae.testPort}/demo/install-sample -Oinstall-sample.txt" />
+										line="http://localhost:${gae.testPort}/demo/install-leagues -O install-leagues.txt" />
 								</exec>
 								<exec dir="${basedir}/target" executable="cat" failonerror="true">
-									<arg line="install-sample.txt" />
+									<arg line="install-leagues.txt" />
 								</exec>
 								<!-- remove the output from disk -->
-								<delete file="${basedir}/target/install-sample.txt" />
+								<delete file="${basedir}/target/install-leagues.txt" />
 							</tasks>
 						</configuration>
 						<goals>

@@ -21,7 +21,7 @@ public class NumericBag {
 	private Long autoId;
 	/**
 	 * A string used to classify different type of bag, oftenly the class name
-	 * of entity
+	 * of entity with an extra number
 	 */
 
 	private String classifier;

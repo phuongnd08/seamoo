@@ -1,0 +1,25 @@
+!-- There is no match yet
+Given There is no active match
+And A list of 10 users
+And A Match Dao
+And 20 questions that have correct choices on #1 
+And A Question Dao
+And Match Are Observered with buffer of 10 objects
+When Organizer is created
+Given Current Time is 10:00:00
+When 1st user request for Match
+Then 1st Match is created
+And Question Dao is requested for 20 random questions on league 1
+And Returned Match is 1st match
+And Returned Match has 1 event
+And Returned Match is assigned with 20 questions
+And Returned Match Phase is NOT_FORMED
+When Organizer of league 2 is created
+When 2nd user request for Match on league 2
+Then 2nd Match is created
+And Question Dao is requested for 20 random questions on league 2
+And Returned Match is 2nd match
+When 3rd user request for Match
+Then Returned Match is 1st match
+When 4th user request for Match on league 2
+Then Returned Match is 2nd match

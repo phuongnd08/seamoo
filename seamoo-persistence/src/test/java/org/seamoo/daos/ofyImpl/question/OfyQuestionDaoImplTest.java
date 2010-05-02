@@ -61,13 +61,13 @@ public class OfyQuestionDaoImplTest extends LocalAppEngineTest {
 	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void getRandomExceedAvailableThrowExeption() {
 		generateQuestions(5, 0);
-		daoImpl.getRandomQuestions(6);
+		daoImpl.getRandomQuestions(1L, 6);
 	}
 
 	@Test
 	public void getRandomEqualAvailableProduceSameSet() {
 		generateQuestions(5, 0);
-		List<Question> qs = daoImpl.getRandomQuestions(5);
+		List<Question> qs = daoImpl.getRandomQuestions(1L, 5);
 		List<Long> qsId = new ArrayList<Long>();
 		for (Question q : qs)
 			qsId.add(q.getAutoId());
@@ -77,7 +77,7 @@ public class OfyQuestionDaoImplTest extends LocalAppEngineTest {
 	@Test
 	public void getRandomSmallThanAvailableProduceSubDistinctSet() {
 		generateQuestions(2, 3);
-		List<Question> qs = daoImpl.getRandomQuestions(4);
+		List<Question> qs = daoImpl.getRandomQuestions(1L, 4);
 		TreeSet<Long> idSet = new TreeSet<Long>();
 		for (Question q : qs)
 			idSet.add(q.getAutoId());

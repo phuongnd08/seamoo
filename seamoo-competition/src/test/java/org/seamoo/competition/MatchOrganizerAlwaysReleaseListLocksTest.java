@@ -20,7 +20,7 @@ public class MatchOrganizerAlwaysReleaseListLocksTest extends LocalAppEngineTest
 
 	@Test
 	public void exceptionDuringExecutionDoesNotContaminateListLocks() throws TimeoutException {
-		MatchOrganizer organizer = new MatchOrganizer();
+		MatchOrganizer organizer = new MatchOrganizer(1L);
 		organizer.cacheWrapperFactory = new MemcacheWrapperFactoryImpl();
 		organizer.initialize();
 		try {

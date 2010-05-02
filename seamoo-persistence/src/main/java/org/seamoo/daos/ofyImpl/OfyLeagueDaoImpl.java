@@ -19,4 +19,10 @@ public class OfyLeagueDaoImpl extends OfyGenericDaoImpl<League, Long> implements
 		Query<League> q = getOfy().query(League.class).filter("subjectAutoId =", subjectAutoId).filter("enabled =", true);
 		return Lists.newArrayList(q.fetch());
 	}
+
+	@Override
+	public League findBySubjectIdAndLevel(Long subjectAutoId, int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -36,16 +36,27 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 
 	Long[] originalQuestionId;
 
-	public void generateQuestions(int number, int bulkNumber) {
+	/**
+	 * A method that used to generate questions for the sake of test. The method
+	 * include both singular persistence and bulk persistence to ensure that the question dao
+	 * has maintained a consistent index for all questions
+	 * @param leagueId
+	 * @param number
+	 * @param bulkNumber
+	 */
+	public void generateQuestions(Long leagueId, int number, int bulkNumber) {
 		originalQuestionId = new Long[number + bulkNumber];
 		for (int i = 0; i < number; i++) {
 			Question q = new Question();
+			q.setLeagueAutoId(leagueId);
 			daoImpl.persist(q);
 			originalQuestionId[i] = q.getAutoId();
 		}
 		Question[] qs = new Question[bulkNumber];
-		for (int i = 0; i < bulkNumber; i++)
+		for (int i = 0; i < bulkNumber; i++) {
 			qs[i] = new Question();
+			qs[i].setLeagueAutoId(leagueId);
+		}
 		daoImpl.persist(qs);
 		for (int i = 0; i < bulkNumber; i++)
 			originalQuestionId[number + i] = qs[i].getAutoId();
@@ -54,14 +65,14 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 
 	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void getRandomExceedAvailableThrowExeption() {
-		generateQuestions(5, 0);
-		daoImpl.getRandomQuestions(6);
+		generateQuestions(1L, 5, 0);
+		daoImpl.getRandomQuestions(1L, 6);
 	}
 
 	@Test
 	public void getRandomEqualAvailableProduceSameSet() {
-		generateQuestions(5, 0);
-		List<Question> qs = daoImpl.getRandomQuestions(5);
+		generateQuestions(1L, 5, 0);
+		List<Question> qs = daoImpl.getRandomQuestions(1L, 5);
 		List<Long> qsId = new ArrayList<Long>();
 		for (Question q : qs)
 			qsId.add(q.getAutoId());
@@ -70,12 +81,21 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 
 	@Test
 	public void getRandomSmallThanAvailableProduceSubDistinctSet() {
-		generateQuestions(2, 3);
-		List<Question> qs = daoImpl.getRandomQuestions(4);
+		generateQuestions(1L, 2, 3);
+		List<Question> qs = daoImpl.getRandomQuestions(1L, 4);
 		TreeSet<Long> idSet = new TreeSet<Long>();
 		for (Question q : qs)
 			idSet.add(q.getAutoId());
 		assertEquals(idSet.size(), 4);
+	}
+
+	@Test
+	public void getRandomDoesNotReturnCrossLeagueQuestion() {
+		generateQuestions(1L, 2, 3);
+		generateQuestions(2L, 5, 0);
+		List<Question> qs = daoImpl.getRandomQuestions(1L, 5);
+		for (Question q : qs)
+			assertEquals(q.getLeagueAutoId(), new Long(1L));
 	}
 
 	@Test

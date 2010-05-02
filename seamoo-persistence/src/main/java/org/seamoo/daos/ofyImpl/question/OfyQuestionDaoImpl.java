@@ -23,12 +23,9 @@ public class OfyQuestionDaoImpl extends OfyGenericDaoImpl<Question, Long> implem
 
 	public OfyQuestionDaoImpl() {
 		numericBagDao = new OfyNumericBagDaoImpl();
-		List<NumericBag> bags = numericBagDao.findByClassifier(classifier);
-		if (bags.size() == 0) {
-			autoIdBag = new NumericBag();
-			autoIdBag.setClassifier(classifier);
-		} else {
-			autoIdBag = bags.get(0);
+		autoIdBag = numericBagDao.findByClassifier(classifier);
+		if (autoIdBag == null) {
+			autoIdBag = new NumericBag(classifier);
 		}
 	}
 
@@ -63,7 +60,7 @@ public class OfyQuestionDaoImpl extends OfyGenericDaoImpl<Question, Long> implem
 		return qs;
 	}
 
-	public List<Question> getRandomQuestions(int number) {
+	public List<Question> getRandomQuestions(Long leagueId, int number) {
 		int totalSize = autoIdBag.getKeyList().size();
 		if (number > totalSize) {
 			throw new IllegalArgumentException(String.format("%d exceeds the number of available questions", number));

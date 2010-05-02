@@ -7,6 +7,6 @@ import org.seamoo.entities.question.Question;
 
 public interface QuestionDao extends GenericDao<Question, Long> {
 
-	List<Question> getRandomQuestions(int number);
+	List<Question> getRandomQuestions(Long leagueId, int number);
 
 }

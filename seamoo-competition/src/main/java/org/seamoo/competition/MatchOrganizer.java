@@ -69,9 +69,11 @@ public class MatchOrganizer {
 	}
 
 	boolean initialized;
+	Long leagueId;
 
-	public MatchOrganizer() {
+	public MatchOrganizer(Long leagueId) {
 		initialized = false;
+		this.leagueId = leagueId;
 	}
 
 	public static final String NOT_FULL_WAITING_MATCHES_KEY = "not-full-waiting-matches";
@@ -80,8 +82,8 @@ public class MatchOrganizer {
 	protected synchronized void initialize() {
 		if (initialized)
 			return;
-		notFullWaitingMatches = cacheWrapperFactory.createCacheWrapper(List.class, NOT_FULL_WAITING_MATCHES_KEY);
-		fullWaitingMatches = cacheWrapperFactory.createCacheWrapper(List.class, FULL_WAITING_MATCHES_KEY);
+		notFullWaitingMatches = cacheWrapperFactory.createCacheWrapper(List.class, NOT_FULL_WAITING_MATCHES_KEY + "@" + leagueId);
+		fullWaitingMatches = cacheWrapperFactory.createCacheWrapper(List.class, FULL_WAITING_MATCHES_KEY + "@" + leagueId);
 		initialized = true;
 	}
 
@@ -128,7 +130,7 @@ public class MatchOrganizer {
 				notFullWaitingMatches.putObject(notFullList);
 			}
 		} finally {
-			//always guarantee that lock will be released
+			// always guarantee that lock will be released
 			notFullWaitingMatches.unlock();
 			fullWaitingMatches.unlock();
 		}
@@ -200,7 +202,7 @@ public class MatchOrganizer {
 	private Match createNewMatch() {
 		Match match = EntityFactory.newMatch();
 		match.setPhase(MatchPhase.NOT_FORMED);
-		match.setQuestions(questionDao.getRandomQuestions(QUESTION_PER_MATCH));
+		match.setQuestions(questionDao.getRandomQuestions(leagueId, QUESTION_PER_MATCH));
 		match.setTemporalUUID(UUID.randomUUID().toString());
 		return match;
 	}

@@ -16,6 +16,7 @@ public class OfyNumericBagDaoImplTest extends LocalAppEngineTest {
 		// TODO Auto-generated constructor stub
 		new OfyModelRegistrar();
 	}
+
 	NumericBagDao dao;
 
 	@BeforeMethod
@@ -89,6 +90,13 @@ public class OfyNumericBagDaoImplTest extends LocalAppEngineTest {
 		NumericBag bag = new NumericBag();
 		bag.setClassifier("Question");
 		dao.persist(bag);
-		assertEquals(dao.findByClassifier("Question").size(), 1);
+		NumericBag reloadedBag = dao.findByClassifier("Question");
+		assertEquals(reloadedBag.getClassifier(), "Question");
+	}
+
+	@Test
+	public void loadByClassifierShouldReturnNullForUnavailableBag() {
+		NumericBag bag = dao.findByClassifier("Question xxx");
+		assertNull(bag);
 	}
 }

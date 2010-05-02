@@ -1,9 +1,10 @@
 package org.seamoo.entities.question;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.seamoo.entities.League;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.Votable;
 
@@ -22,6 +23,7 @@ public class Question extends Votable {
 	private QuestionRevision currentRevision;
 	private List<QuestionRevision> revisions;
 
+	private Long leagueAutoId;
 	private Member originator;
 
 	private QuestionType type;
@@ -113,5 +115,13 @@ public class Question extends Votable {
 	 */
 	public double getScore(String answer) {
 		return currentRevision.getScore(answer);
+	}
+
+	public void setLeagueAutoId(Long leagueAutoId) {
+		this.leagueAutoId = leagueAutoId;
+	}
+
+	public Long getLeagueAutoId() {
+		return leagueAutoId;
 	}
 }

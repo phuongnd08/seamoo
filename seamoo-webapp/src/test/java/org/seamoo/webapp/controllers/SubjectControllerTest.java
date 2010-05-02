@@ -1,13 +1,16 @@
 package org.seamoo.webapp.controllers;
 
-import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.SubjectDao;
+import org.seamoo.entities.League;
 import org.seamoo.entities.Subject;
 import org.springframework.web.servlet.ModelAndView;
 import org.testng.annotations.BeforeMethod;
@@ -15,7 +18,8 @@ import org.testng.annotations.Test;
 
 public class SubjectControllerTest {
 
-	SubjectDao subjectDAO;
+	SubjectDao subjectDao;
+	LeagueDao leagueDao;
 
 	Subject english, maths, literature;
 
@@ -36,14 +40,16 @@ public class SubjectControllerTest {
 		literature.setEnabled(false);
 
 		subjectController = new SubjectController();
-		subjectDAO = mock(SubjectDao.class);
-		subjectController.subjectDao = subjectDAO;
+		subjectDao = mock(SubjectDao.class);
+		leagueDao = mock(LeagueDao.class);
+		subjectController.subjectDao = subjectDao;
+		subjectController.leagueDao = leagueDao;
 
 	}
 
 	@Test
 	public void listSubjectReturnsEnabledSubject() {
-		when(subjectDAO.getEnabledSubjects()).thenReturn(Arrays.asList(new Subject[] { english, maths }));
+		when(subjectDao.getEnabledSubjects()).thenReturn(Arrays.asList(new Subject[] { english, maths }));
 		ModelAndView mav = subjectController.list();
 		Map<String, Object> model = mav.getModel();
 		List<Subject> returnedSubjects = (List<Subject>) model.get("subjects");
@@ -51,12 +57,15 @@ public class SubjectControllerTest {
 	}
 
 	@Test
-	public void viewOfEnabledSubjectShouldReturnSubject() {
-		when(subjectDAO.findByKey(1L)).thenReturn(english);
+	public void viewOfEnabledSubjectShouldReturnSubjectAndSubLeague() {
+		when(subjectDao.findByKey(1L)).thenReturn(english);
+		List<League> l = new ArrayList<League>();
+		when(leagueDao.getEnabledBySubjectId(1L)).thenReturn(l);
 		ModelAndView mav = subjectController.view(1, "english");
 		Map<String, Object> model = mav.getModel();
 		Subject subject = (Subject) model.get("subject");
-		assertEquals("English", subject.getName());
+		assertEquals(subject, english);
+		assertEquals(model.get("leagues"), l);
 	}
 
 }

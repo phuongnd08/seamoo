@@ -7,6 +7,6 @@ import org.seamoo.lookup.NumericBag;
 
 public interface NumericBagDao extends GenericDao<NumericBag, Long> {
 
-	List<NumericBag> findByClassifier(String classifier);
+	NumericBag findByClassifier(String classifier);
 
 }

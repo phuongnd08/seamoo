@@ -114,7 +114,7 @@ từ 'trước' (trong 'trước nửa đêm) viết là|*before|after|in front 
 từ 'hoặc' (trong 'trên hoặc dưới') viết là|*or|and|in|neither
 từ 'thời gian' viết là|*time|tiem|thime|theme
 từ dùng để chỉ một thứ gì đó|*thing|he|she|think
-từ 'rất' (trong 'rất nóng') viết là|*very|many|really
+từ 'rất' (trong 'rất nóng') viết là|*very, so|many, lot|really, in fact
 từ 'với' (trong 'tôi đi với bạn') viết là|*with|company|in|to
 từ 'làm việc' viết là|*work|play|do|exercise
 từ 'lấy' (trong 'lấy một cốc nước') viết là|*take|marry|smurf|talk
@@ -128,35 +128,34 @@ từ 'người' viết là|*people|pupil|animal
 từ 'vài' (trong 'vài người') viết là|*some|many|much|a lot of
 từ 'thích' viết là|*like|want|need|know
 từ 'đến' (trong 'tôi đến nhà anh') viết là|*come|go|touch|move
-(n) an additional or larger quantity, number, degree or amount|*more
-(adj) greatest or the greatest part of|*most   (the most talent; most women)
-(adj) not old, recent or never used before|*new  (a new book)
-(n) a division or segment of a whole|*part
-(adv) without anything or anyone else|*only
-(n) an area, region|*place
-being the one present or under discussion but more immediate, (than 'that')|*this   (this place)
-being the one present or under discussion|*that   (that place)
-the one being present or under discussion but more immediate|*these   (these people)
-being the one present or under discussion but less immediate|*those   (those people)
-a word used to introduce a dependent clause|*that (he told me that)
-lower than, below|*under   (under the house)
-higher than|*above, over
-(adj) above (in: above you)|*over (over you)
-in reference to, concerning|*about   (about you)
-which thing, event, kind or character|*what   (what do you want?) (what's this?)
-to perform|*do   (what are you doing?)
-what or which individual or group|*who
-(adv) for what purpose, reason or cause|*why
-at or in what place|*where
-at what time|*when
-in what manner or way|*how
-what one or ones|*which
-(adj) being exactly alike, identical|*the same
-(adv) to a great extent, very|*so  (so hot)
-(adj) of this or that kind|*such   (such people)
-(n) a condition or mode of existence|*state
-up to or at the time indicated, (still alive)|*still
-(adv) once more|*again
+từ "thêm" (trong 'cho tôi thêm ít đường') viết là|*more|some|much|many
+từ "nhiều hơn" viết là|*more|mucher|so many
+từ "nhất" (trong 'người tài năng nhất')|*most|almost|extreme|first
+từ "mới" (trong 'cuốn sách mới')viết là|*new
+từ 'phần' (trong 'chia thành nhiều phần') viết là|*part|amount|quantity|role
+từ 'duy nhất' viết là|*only
+từ "nơi chốn" viết là|*place|palace|plase|pacel
+từ 'này' (trong "chỗ này") viết là|*this|that|these|those
+từ 'kia' (trong "chỗ kia") viết là|*that|this|these|those
+từ 'này' trong ("những người này") viết là|*these|those|this|that
+từ 'kia' trong ("những người kia") viết là|these|*those|this|that
+từ dùng để giới thiệu một mệnh đề phụ thuộc|*that|such|so|about 
+từ 'bên dưới' viết là|*under|over|above|low
+từ 'bên trên' viết là|*above, over|under, low|beside, aside
+từ 'về' (trong 'nói chuyện về anh') viết là|*about|to|at|on
+từ 'cái gì' (trong 'anh muốn cái gì) viết là|*what|where|how|when
+từ 'làm' viết là|*do|go|come|operate
+từ 'ai' (trong 'anh là ai') viết là|*who|how|when|where
+từ 'tại sao' viết là|*why|how|where|when
+từ 'ở đâu' viết là|*where|at|when|who
+từ 'vào lúc nào' viết là|*when|where|how|which
+từ 'bằng cách nào' viết là|*how|what|which
+từ 'cái nào' viết là|*which|where|when|how
+từ 'giống như nhau' viết là|*the same|a shame|a same|the shame
+từ 'loại đó' (trong 'nhưng người loại đó') viết là|*such|so|these|those
+từ 'tình trạng' viết là|*state|status|position
+từ 'vẫn' (trong 'vẫn còn sống') viết là|*still|untill|till|n'till
+từ 'thêm một lần nữa' viết là|*again|against|repeat
 contrary to or in a direction opposite to|*against
 a word used to answer the phone|*hello
 (adj) being the whole number, amount, every|*all

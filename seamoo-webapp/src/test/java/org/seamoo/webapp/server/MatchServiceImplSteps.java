@@ -16,6 +16,7 @@ import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
 import org.powermock.api.mockito.PowerMockito;
 import org.seamoo.cache.CacheWrapper;
+import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.competition.MatchOrganizer;
 import org.seamoo.competition.TimeStampProvider;
 import org.seamoo.daos.MemberDao;
@@ -29,6 +30,7 @@ import org.seamoo.entities.question.Question;
 import org.workingonit.gwtbridge.ServletUtils;
 
 public class MatchServiceImplSteps {
+	LeagueOrganizer lo;
 	MatchOrganizer mo;
 	Match currentMatch;
 	MemberDao memberDao;
@@ -36,8 +38,10 @@ public class MatchServiceImplSteps {
 	@Given("A MatchOrganizer")
 	public void initMatchOrganizer() {
 		mo = mock(MatchOrganizer.class);
+		lo = mock(LeagueOrganizer.class);
 		currentMatch = new Match();
 		when(mo.getMatchForUser(anyLong())).thenReturn(currentMatch);
+		when(lo.getMatchOrganizer(1L)).thenReturn(mo);
 	}
 
 	@Given("A MemberDao")
@@ -50,7 +54,7 @@ public class MatchServiceImplSteps {
 	@Given("A MatchServiceImpl")
 	public void initMatchServiceImp() {
 		service = new MatchServiceImpl();
-		service.matchOrganizer = mo;
+		service.leagueOrganizer = lo;
 		service.memberDao = memberDao;
 	}
 
@@ -106,7 +110,7 @@ public class MatchServiceImplSteps {
 	@When("Member@$id request for Match State")
 	public void requestMatchState(Long id) {
 		setUpCurrentMember(members.get(id));
-		matchState = service.getMatchState(bufferedQuestionsCount, bufferedEventsCount);
+		matchState = service.getMatchState(1L, bufferedQuestionsCount, bufferedEventsCount);
 	}
 
 	private void setUpCurrentMember(Member member) {

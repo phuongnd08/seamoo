@@ -31,10 +31,13 @@ public class TwigLeagueDaoImplTest extends LocalAppEngineTest {
 		leagues = new League[] { new League(), new League(), new League() };
 		leagues[0].setName("English Amateur");
 		leagues[0].setSubjectAutoId(english.getAutoId());
+		leagues[0].setLevel(0);
 		leagues[1].setName("English League 2");
 		leagues[1].setSubjectAutoId(english.getAutoId());
 		leagues[1].setEnabled(true);
+		leagues[1].setLevel(1);
 		leagues[2].setName("English League 1");
+		leagues[2].setLevel(2);
 		leagueDao.persist(leagues);
 	}
 
@@ -59,4 +62,18 @@ public class TwigLeagueDaoImplTest extends LocalAppEngineTest {
 		assertEquals(leaguesBySubject.size(), 1);
 		assertEquals(leagues[1].getName(), leaguesBySubject.get(0).getName());
 	}
+
+	@Test
+	public void getLeagueBySubjectAutoIdAndLevelWithoutResult() {
+		League league = leagueDao.findBySubjectIdAndLevel(1L, 3);
+		assertNull(league);
+	}
+
+	@Test
+	public void getLeagueBySubjectAutoIdAndLevelWithResult() {
+		League league = leagueDao.findBySubjectIdAndLevel(1L, 0);
+		assertNotNull(league);
+		assertEquals(league.getLevel(), 0);
+	}
+
 }

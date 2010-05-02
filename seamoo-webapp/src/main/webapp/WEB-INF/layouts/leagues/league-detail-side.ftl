@@ -3,16 +3,19 @@
 [#import "/common.ftl" as common/] 
 <div class="module">
 	<div class="description-box">
-		<img src="[@spring.url "/images/leagues/eng-league-2.png"/]" width="96" height="64" class="fl"/>
-				<p>Dành cho những đấu thủ đã vuợt qua được thử thách ở giải nghiệp dư.</p>
+		<img src="[@spring.url "${league.logoUrl}"/]" width="96" height="64" class="fl"/>
+				<p>${league.description}</p>
 				<p>Có <strong>300</strong> thanh vien hiện được phép tham gia giải đấu</p>
 				<p>Có <strong>35</strong> thành viên đang thi đấu</p>
 		</table>
 	</div>
 	<div class="description-box">
 		<p>
-		Ban dang co <strong>40</strong> diem. Ban con <strong>20</strong> ngay de tich luy <strong>100</strong> diem de co the tru hang hoac tich luy du <strong>300</strong> diem de co the tham du
-		<a href="/subjects/view/2">Giải gà chọi</a>
+		Ban dang co <strong>40</strong> diem.
+		[#if nextLeague?exists] 
+		Ban con <strong>20</strong> ngay de tich luy <strong>100</strong> diem de co the tru hang hoac tich luy du <strong>300</strong> diem de co the tham du
+		<a href="[@spring.url "/leagues/${nextLeague.autoId}/${nextLeague.alias}"/]">${nextLeague.name}</a>
+		[/#if]
 		</p>
 	</div>
 </div>

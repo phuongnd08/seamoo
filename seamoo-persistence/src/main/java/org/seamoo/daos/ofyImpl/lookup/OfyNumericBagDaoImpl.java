@@ -10,10 +10,10 @@ import com.google.common.collect.Lists;
 import com.googlecode.objectify.Query;
 
 public class OfyNumericBagDaoImpl extends OfyGenericDaoImpl<NumericBag, Long> implements NumericBagDao {
-	public List<NumericBag> findByClassifier(String classifier) {
+	public NumericBag findByClassifier(String classifier) {
 		// TODO Auto-generated method stub
 		Query<NumericBag> q = getOfy().query(NumericBag.class).filter("classifier =", classifier);
-		return Lists.newArrayList(q.fetch());
+		return q.get();
 	}
 
 }

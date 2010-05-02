@@ -24,20 +24,9 @@
 </table>
 </div>
 [/#macro]
-[@leagueControl link="/leagues/view/1" title="Giải nghiệp dư" img="/images/leagues/eng-amateur.png" joinable=true]
-Dành cho những người lần đầu tham dự. Bạn đang có <strong>40</strong> điểm. 
+[#list leagues as league]
+[@leagueControl link="/leagues/${league.autoId}/${league.alias}" title="${league.name}" img="${league.logoUrl}" joinable=true]
+${league.description}. Bạn đang có <strong>40</strong> điểm. 
 Bạn còn <strong>20</strong> ngày để tích lũy đủ <strong>300</strong> điểm để duy trì quyền tham gia <strong>Giải gà con</strong>
 [/@leagueControl]
-
-[@leagueControl link="/leagues/view/2" title="Giải gà con" img="/images/leagues/eng-league-2.png" joinable=true]
-Dành cho những đấu thủ đã vuợt qua được thử thách ở giải nghiệp dư. Bạn đang có <strong>40</strong> điểm. 
-Bạn còn <strong>20</strong> ngày để tích lũy <strong>300</strong> điểm để có thể thăng hạng lên <strong>Giải gà chọi</strong>
-[/@leagueControl]
-
-[@leagueControl link="/leagues/view/2" title="Giải gà chọi" img="/images/leagues/eng-league-1.png" joinable=false]
-Dành cho những đấu thủ có đẳng cấp.
-[/@leagueControl]
-
-[@leagueControl link="/leagues/view/3" title="Giải đại bàng" img="/images/leagues/eng-pro-league.png" joinable=false]
-Dành cho những đấu thủ đẳng cấp cao
-[/@leagueControl]
+[/#list]

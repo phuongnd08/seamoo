@@ -3,6 +3,7 @@ package org.seamoo.webapp.server;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.competition.MatchOrganizer;
 import org.seamoo.competition.TimeStampProvider;
 import org.seamoo.daos.MemberDao;
@@ -27,7 +28,7 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	 */
 	private static final long serialVersionUID = -4763302000027924061L;
 	@Autowired
-	MatchOrganizer matchOrganizer;
+	LeagueOrganizer leagueOrganizer;
 	@Autowired
 	MemberDao memberDao;
 
@@ -39,8 +40,9 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	}
 
 	@Override
-	public MatchState getMatchState(int bufferedQuestionsCount, int bufferredEventsCount) {
+	public MatchState getMatchState(Long leagueId, int bufferedQuestionsCount, int bufferredEventsCount) {
 		Member member = getInjectedMember();
+		MatchOrganizer matchOrganizer = leagueOrganizer.getMatchOrganizer(leagueId);
 		Match match = matchOrganizer.getMatchForUser(member.getAutoId());
 		// make sure not change on match during the process of generating
 		// RPC object
@@ -85,14 +87,16 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	}
 
 	@Override
-	public void ignoreQuestion(int questionOrder) {
+	public void ignoreQuestion(Long leagueId, int questionOrder) {
+		MatchOrganizer matchOrganizer = leagueOrganizer.getMatchOrganizer(leagueId);
 		Member member = getInjectedMember();
 		matchOrganizer.ignoreQuestion(member.getAutoId(), questionOrder);
 
 	}
 
 	@Override
-	public void submitAnswer(int questionOrder, String answer) {
+	public void submitAnswer(Long leagueId, int questionOrder, String answer) {
+		MatchOrganizer matchOrganizer = leagueOrganizer.getMatchOrganizer(leagueId);
 		Member member = getInjectedMember();
 		matchOrganizer.submitAnswer(member.getAutoId(), questionOrder, answer);
 	}
