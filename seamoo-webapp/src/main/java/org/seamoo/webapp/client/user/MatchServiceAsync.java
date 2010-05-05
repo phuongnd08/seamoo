@@ -5,9 +5,9 @@ import org.seamoo.entities.matching.MatchState;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface MatchServiceAsync {
-	public void getMatchState(int bufferedQuestionsCount, int bufferedEventsCount, AsyncCallback<MatchState> callback);
+	public void getMatchState(Long leagueId, int bufferedQuestionsCount, int bufferedEventsCount, AsyncCallback<MatchState> callback);
 
-	public void submitAnswer(int questionOrder, String answer, AsyncCallback callback);
+	public void submitAnswer(Long leagueId, int questionOrder, String answer, AsyncCallback callback);
 
-	public void ignoreQuestion(int questionOrder, AsyncCallback callback);
+	public void ignoreQuestion(Long leagueId, int questionOrder, AsyncCallback callback);
 }

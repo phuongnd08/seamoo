@@ -15,7 +15,7 @@ public class UserLoader implements EntryPoint {
 			questionCreatorPresenter.onModuleLoad();
 		} else if (module.equals("matching")) {
 			MatchBoard.Presenter matchboardPresenter = new MatchBoard.Presenter();
-			matchboardPresenter.onModuleLoad();
+			matchboardPresenter.onModuleLoad(dictionary);
 		}
 	}
 }

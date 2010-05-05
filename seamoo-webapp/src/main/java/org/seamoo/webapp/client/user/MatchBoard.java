@@ -13,6 +13,7 @@ import org.seamoo.webapp.client.user.ui.MatchView;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.Dictionary;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -45,12 +46,13 @@ public class MatchBoard {
 
 	}
 
-	public static class Presenter implements EntryPoint {
+	public static class Presenter {
 
 		MatchServiceAsync service;
 		Display display;
 		MatchState currentMatchState;
 		boolean waitingForNextQuestion = false;
+		Long leagueAutoId;
 		EventListener listener = new EventListener() {
 
 			@Override
@@ -71,13 +73,13 @@ public class MatchBoard {
 			}
 		};
 
-		@Override
-		public void onModuleLoad() {
+		public void onModuleLoad(Dictionary dictionary) {
 			// TODO Auto-generated method stub
 			service = GWT.create(MatchService.class);
 			display = new MatchView();
 			RootPanel.get("matching-panel").add((Widget) display);
-			initialize(service, display);
+			Long lid = Long.parseLong(dictionary.get("leagueAutoId"));
+			initialize(service, display, lid);
 		}
 
 		Timer refreshTimer = new Timer() {
@@ -93,10 +95,11 @@ public class MatchBoard {
 		List<Question> bufferedQuestions;
 		List<MatchEvent> bufferedEvents;
 
-		public void initialize(MatchServiceAsync service, final Display display) {
+		public void initialize(MatchServiceAsync service, final Display display, Long leagueAutoId) {
 			// TODO Auto-generated method stub
 			this.service = service;
 			this.display = display;
+			this.leagueAutoId = leagueAutoId;
 			display.addEventListener(listener);
 			bufferedQuestions = new ArrayList<Question>();
 			bufferedEvents = new ArrayList<MatchEvent>();
@@ -109,7 +112,7 @@ public class MatchBoard {
 			if (refreshingMatchState)
 				return;
 			refreshingMatchState = true;
-			service.getMatchState(bufferedQuestions.size(), bufferedEvents.size(), new AsyncCallback<MatchState>() {
+			service.getMatchState(leagueAutoId, bufferedQuestions.size(), bufferedEvents.size(), new AsyncCallback<MatchState>() {
 
 				@Override
 				public void onSuccess(MatchState state) {
@@ -186,7 +189,7 @@ public class MatchBoard {
 		private int MAX_TRY_TIMES = 3;
 
 		private void trySubmitAnswer(final int questionOrder, final String answer, final int triedTimes) {
-			service.submitAnswer(questionOrder, answer, new AsyncCallback() {
+			service.submitAnswer(leagueAutoId, questionOrder, answer, new AsyncCallback() {
 
 				@Override
 				public void onFailure(Throwable throwable) {
@@ -206,7 +209,7 @@ public class MatchBoard {
 		}
 
 		private void tryIgnoreQuestion(final int questionOrder, final int triedTimes) {
-			service.ignoreQuestion(questionOrder, new AsyncCallback() {
+			service.ignoreQuestion(leagueAutoId, questionOrder, new AsyncCallback() {
 
 				@Override
 				public void onFailure(Throwable throwable) {

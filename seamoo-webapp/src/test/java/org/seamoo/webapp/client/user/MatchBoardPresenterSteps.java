@@ -35,6 +35,7 @@ public class MatchBoardPresenterSteps {
 
 	Question[] questions;
 	MatchBoard.Display.EventListener listener;
+	public static final long TEST_LEAGUE_AUTOID=1L;
 	int refreshPeriod;
 	Timer oldTimer;
 	Timer mockedTimer;
@@ -107,11 +108,11 @@ public class MatchBoardPresenterSteps {
 			@Override
 			public Object answer(InvocationOnMock invocation) throws Throwable {
 				// TODO Auto-generated method stub
-				AsyncCallback<MatchState> callback = (AsyncCallback<MatchState>) invocation.getArguments()[2];
+				AsyncCallback<MatchState> callback = (AsyncCallback<MatchState>) invocation.getArguments()[3];
 				callback.onSuccess(matchState);
 				return null;
 			}
-		}).when(serviceAsync).getMatchState(anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
+		}).when(serviceAsync).getMatchState(anyLong(), anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
 	}
 
 	AsyncCallback<MatchState> postPonedCallback;
@@ -123,10 +124,10 @@ public class MatchBoardPresenterSteps {
 			@Override
 			public Object answer(InvocationOnMock invocation) throws Throwable {
 				// TODO Auto-generated method stub
-				postPonedCallback = (AsyncCallback<MatchState>) invocation.getArguments()[2];
+				postPonedCallback = (AsyncCallback<MatchState>) invocation.getArguments()[3];
 				return null;
 			}
-		}).when(serviceAsync).getMatchState(anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
+		}).when(serviceAsync).getMatchState(anyLong(), anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
 	}
 
 	@When("Answer to query for match state is returned")
@@ -180,12 +181,12 @@ public class MatchBoardPresenterSteps {
 
 	@When("Presenter initialize")
 	public void initializePresenter() {
-		presenter.initialize(serviceAsync, display);
+		presenter.initialize(serviceAsync, display, TEST_LEAGUE_AUTOID);
 	}
 
 	@Then("Service get the current match information with receivedQuestion=$receivedQuestion & receivedEvent=$receivedEvent")
 	public void assertServiceGetCurrentMatchInformation(int receivedQuestion, int receivedEvent) {
-		verify(serviceAsync).getMatchState(eq(receivedQuestion), eq(receivedEvent), (AsyncCallback<MatchState>) any());
+		verify(serviceAsync).getMatchState(eq(1L), eq(receivedQuestion), eq(receivedEvent), (AsyncCallback<MatchState>) any());
 	}
 
 	@Then("Display is switched to $mode mode")
@@ -283,7 +284,7 @@ public class MatchBoardPresenterSteps {
 
 	@Then("Service submit answer of order $order to server")
 	public void assertServiceSubmitAnswer(int order) {
-		verify(serviceAsync).submitAnswer(eq(order), anyString(), (AsyncCallback) any());
+		verify(serviceAsync).submitAnswer(eq(1L), eq(order), anyString(), (AsyncCallback) any());
 	}
 
 	// !-- When user ignore the question
@@ -301,7 +302,7 @@ public class MatchBoardPresenterSteps {
 
 	@Then("Service send ignore signal of order $order to server")
 	public void assertServiceSendIgnoreSignal(int order) {
-		verify(serviceAsync).ignoreQuestion(eq(order), (AsyncCallback) any());
+		verify(serviceAsync).ignoreQuestion(eq(1L), eq(order), (AsyncCallback) any());
 	}
 
 	@Given("Current match is finished")
@@ -330,7 +331,7 @@ public class MatchBoardPresenterSteps {
 
 	@Then("Service doesn't get the current match information")
 	public void assertServiceDoesNotGetMatchState() {
-		verify(serviceAsync, never()).getMatchState(anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
+		verify(serviceAsync, never()).getMatchState(anyLong(), anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
 	}
 
 	@Then("Timer is not rescheduled")
@@ -381,6 +382,6 @@ public class MatchBoardPresenterSteps {
 	@Then("Service get current match information $count times")
 	@Alias("Service get current match information $count time")
 	public void assertServiceGetMatchStateTimes(int count) {
-		verify(serviceAsync, times(count)).getMatchState(anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
+		verify(serviceAsync, times(count)).getMatchState(anyLong(), anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
 	}
 }

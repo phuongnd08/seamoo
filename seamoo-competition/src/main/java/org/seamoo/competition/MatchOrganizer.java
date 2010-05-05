@@ -26,16 +26,6 @@ import org.seamoo.entities.matching.MatchPhase;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MatchOrganizer {
-	public final long CANDIDATE_ACTIVE_PERIOD = 5000;/*
-													 * 5000 milliseconds or 5
-													 * seconds
-													 */
-	public final long MATCH_COUNTDOWN_TIME = 10000;
-	public final long MAX_CANDIDATE_PER_MATCH = 4;
-	public final long MIN_CANDIDATE_PER_MATCH = 2;
-	public final int QUESTION_PER_MATCH = 20;
-	public final long MATCH_TIME = 120000;
-	public final long MAX_LOCK_WAIT_TIME = 5000L;
 
 	@Autowired
 	MemberDao memberDao;
@@ -45,6 +35,8 @@ public class MatchOrganizer {
 	QuestionDao questionDao;
 	@Autowired
 	CacheWrapperFactory cacheWrapperFactory;
+
+	MatchOrganizerSettings settings;
 	/**
 	 * Candidates for match
 	 */
@@ -53,12 +45,12 @@ public class MatchOrganizer {
 	 * competitors < MAX_CANDIDATE_PER_MATCH, mean that there's chances that a
 	 * user can join the match
 	 */
-	private CacheWrapper<List> notFullWaitingMatches;
+	protected CacheWrapper<List> notFullWaitingMatches;
 	/**
 	 * List of matches that is FORMED and number of competitors
 	 * >=MAX_CANDIDATE_PER_MATCH
 	 */
-	private CacheWrapper<List> fullWaitingMatches;
+	protected CacheWrapper<List> fullWaitingMatches;
 
 	private CacheWrapper<Match> getMatchWrapperByUUID(String uuid) {
 		return cacheWrapperFactory.createCacheWrapper(Match.class, uuid);
@@ -72,8 +64,13 @@ public class MatchOrganizer {
 	Long leagueId;
 
 	public MatchOrganizer(Long leagueId) {
+		this(leagueId, new MatchOrganizerSettings());
+	}
+
+	public MatchOrganizer(Long leagueId, MatchOrganizerSettings settings) {
 		initialized = false;
 		this.leagueId = leagueId;
+		this.settings = settings;
 	}
 
 	public static final String NOT_FULL_WAITING_MATCHES_KEY = "not-full-waiting-matches";
@@ -92,7 +89,7 @@ public class MatchOrganizer {
 	}
 
 	private boolean canJoin(Match match) {
-		return match.getCompetitors().size() < MAX_CANDIDATE_PER_MATCH;
+		return match.getCompetitors().size() < settings.getMaxCandidatePerMatch();
 	}
 
 	/**
@@ -101,7 +98,7 @@ public class MatchOrganizer {
 	 * @param match
 	 */
 	private boolean isMatchFull(Match match) {
-		return match.getCompetitors().size() == MAX_CANDIDATE_PER_MATCH;
+		return match.getCompetitors().size() == settings.getMaxCandidatePerMatch();
 	}
 
 	protected static interface DoWhileListsLockedRunner {
@@ -116,8 +113,8 @@ public class MatchOrganizer {
 	}
 
 	protected synchronized void doWhileListsLocked(DoWhileListsLockedRunner runner) throws TimeoutException {
-		fullWaitingMatches.lock(MAX_LOCK_WAIT_TIME);
-		notFullWaitingMatches.lock(MAX_LOCK_WAIT_TIME);
+		fullWaitingMatches.lock(settings.getMaxLockWaitTime());
+		notFullWaitingMatches.lock(settings.getMaxLockWaitTime());
 		try {
 			List fullList = fullWaitingMatches.getObject();
 			if (fullList == null)
@@ -202,7 +199,7 @@ public class MatchOrganizer {
 	private Match createNewMatch() {
 		Match match = EntityFactory.newMatch();
 		match.setPhase(MatchPhase.NOT_FORMED);
-		match.setQuestions(questionDao.getRandomQuestions(leagueId, QUESTION_PER_MATCH));
+		match.setQuestions(questionDao.getRandomQuestions(leagueId, settings.getQuestionPerMatch()));
 		match.setTemporalUUID(UUID.randomUUID().toString());
 		return match;
 	}
@@ -217,7 +214,7 @@ public class MatchOrganizer {
 	}
 
 	private boolean isDisconnected(MatchCandidate candidate) {
-		return candidate.getLastSeenMoment() + CANDIDATE_ACTIVE_PERIOD < TimeStampProvider.getCurrentTimeMilliseconds();
+		return candidate.getLastSeenMoment() + settings.getCandidateActivePeriod() < TimeStampProvider.getCurrentTimeMilliseconds();
 	}
 
 	private MatchCandidate getMatchCandidate(Long userAutoId) {
@@ -249,13 +246,13 @@ public class MatchOrganizer {
 	}
 
 	private void recheckMatchPhase(Match match, List fullList, List notFullList) {
-		if (match.getPhase() == MatchPhase.NOT_FORMED && match.getCompetitors().size() >= MIN_CANDIDATE_PER_MATCH) {
+		if (match.getPhase() == MatchPhase.NOT_FORMED && match.getCompetitors().size() >= settings.getMinCandidatePerMatch()) {
 			match.setPhase(MatchPhase.FORMED);
 			match.setFormedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
-			match.setStartedMoment(TimeStampProvider.getCurrentTimeMilliseconds() + MATCH_COUNTDOWN_TIME);
-			match.setEndedMoment(match.getStartedMoment() + MATCH_TIME);
+			match.setStartedMoment(TimeStampProvider.getCurrentTimeMilliseconds() + settings.getMatchCountDownTime());
+			match.setEndedMoment(match.getStartedMoment() + settings.getMatchTime());
 		} else if (match.getPhase() == MatchPhase.FORMED) {
-			if (match.getCompetitors().size() < MIN_CANDIDATE_PER_MATCH) {
+			if (match.getCompetitors().size() < settings.getMinCandidatePerMatch()) {
 				match.setPhase(MatchPhase.NOT_FORMED);
 			} else if (match.getStartedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
 				startMatch(match, fullList, notFullList);

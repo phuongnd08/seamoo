@@ -2,7 +2,9 @@ package org.seamoo.webapp.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.competition.MatchOrganizer;
+import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.entities.Member;
 import org.seamoo.webapp.filters.MemberInjectionFilter;
@@ -19,12 +21,15 @@ public class MatchController {
 	@Autowired
 	MatchDao matchDao;
 	@Autowired
-	MatchOrganizer matchOrganizer;
+	LeagueDao leagueDao;
+	@Autowired
+	LeagueOrganizer leagueOrganizer;
 
 	@RequestMapping("/participate")
 	public ModelAndView participate(@RequestParam("leagueId") long leagueId) {
 		ModelAndView mav = new ModelAndView("matches.participate");
 		mav.addObject("title", "Tham gia giải đấu");
+		mav.addObject("league", leagueDao.findByKey(leagueId));
 		return mav;
 	}
 
@@ -39,7 +44,7 @@ public class MatchController {
 	@RequestMapping("/rejoin")
 	public String rejoin(HttpServletRequest request, @RequestParam("leagueId") long leagueId) {
 		Member member = MemberInjectionFilter.getInjectedMember(request);
-		matchOrganizer.escapeCurrentMatch(member.getAutoId());
+		leagueOrganizer.getMatchOrganizer(leagueId).escapeCurrentMatch(member.getAutoId());
 		return "redirect:/matches/participate?leagueId=" + leagueId;
 	}
 
