@@ -221,7 +221,7 @@ public class MatchOrganizerPerformanceTest {
 		System.out.println("notFullWaitingMatches.lockCount = " + notFullWaitingMatches.lockCount);
 		System.out.println("notFullWaitingMatches.lockTryTime = " + notFullWaitingMatches.lockTryTime);
 		System.out.println("end-start = " + (end - start));
-		System.out.println("expected match time = " + (settings.getMatchCountDownTime() + settings.getMatchTime()));
+		System.out.println("expected match time = " + (settings.getMatchCountDownTime()+ settings.getMatchTime()));
 		if (notFullWaitingMatches.lockCount > 200)
 			fail("Expect <=200 lockCount on notFullWaitingMatches but got " + notFullWaitingMatches.lockCount);
 		if (notFullWaitingMatches.lockTryTime > 300 * SLEEP_UNIT)
