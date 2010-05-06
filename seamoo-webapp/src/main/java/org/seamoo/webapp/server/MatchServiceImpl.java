@@ -2,6 +2,7 @@ package org.seamoo.webapp.server;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.competition.MatchOrganizer;
@@ -43,7 +44,13 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	public MatchState getMatchState(Long leagueId, int bufferedQuestionsCount, int bufferredEventsCount) {
 		Member member = getInjectedMember();
 		MatchOrganizer matchOrganizer = leagueOrganizer.getMatchOrganizer(leagueId);
-		Match match = matchOrganizer.getMatchForUser(member.getAutoId());
+		Match match;
+		try {
+			match = matchOrganizer.getMatchForUser(member.getAutoId());
+		} catch (TimeoutException e1) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e1);
+		}
 		// make sure not change on match during the process of generating
 		// RPC object
 		MatchState matchState = new MatchState();

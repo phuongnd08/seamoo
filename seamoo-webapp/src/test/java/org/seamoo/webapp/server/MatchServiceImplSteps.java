@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,7 +37,7 @@ public class MatchServiceImplSteps {
 	MemberDao memberDao;
 
 	@Given("A MatchOrganizer")
-	public void initMatchOrganizer() {
+	public void initMatchOrganizer() throws TimeoutException {
 		mo = mock(MatchOrganizer.class);
 		lo = mock(LeagueOrganizer.class);
 		currentMatch = new Match();

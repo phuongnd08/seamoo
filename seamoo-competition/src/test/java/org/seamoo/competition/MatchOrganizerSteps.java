@@ -7,6 +7,7 @@ import static org.testng.Assert.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import org.jbehave.scenario.annotations.Alias;
 import org.jbehave.scenario.annotations.Given;
@@ -174,13 +175,13 @@ public class MatchOrganizerSteps {
 	}
 
 	@When("$position user request for Match")
-	public void userRequestForMatch(String position) {
+	public void userRequestForMatch(String position) throws TimeoutException {
 		int pos = positionToNumber(position) - 1;
 		match = organizer.getMatchForUser(members.get(pos).getAutoId());
 	}
 
 	@When("$position user request for Match on league 2")
-	public void userRequestForMatchOnLeague2(String position) {
+	public void userRequestForMatchOnLeague2(String position) throws TimeoutException {
 		int pos = positionToNumber(position) - 1;
 		match = organizer2.getMatchForUser(members.get(pos).getAutoId());
 	}
@@ -275,7 +276,7 @@ public class MatchOrganizerSteps {
 	}
 
 	@Then("$position user score is $score")
-	public void assertScore(String position, double score) {
+	public void assertScore(String position, double score) throws TimeoutException {
 		int pos = positionToNumber(position) - 1;
 		Long memberAutoId = members.get(pos).getAutoId();
 		Match m = organizer.getMatchForUser(memberAutoId);
@@ -292,7 +293,7 @@ public class MatchOrganizerSteps {
 
 	@Then("$position user has $count answers")
 	@Alias("$position user has $count answer")
-	public void assertUserQuestionsCount(String position, int count) {
+	public void assertUserQuestionsCount(String position, int count) throws TimeoutException {
 		int pos = positionToNumber(position) - 1;
 		Long memberAutoId = members.get(pos).getAutoId();
 		Match m = organizer.getMatchForUser(memberAutoId);

@@ -227,24 +227,6 @@ public class MatchOrganizer {
 		return candidate;
 	}
 
-	private Match getMatchForCandidate(MatchCandidate candidate, List fullList, List notFullList) {
-		Match match = null;
-
-		if (candidate.getCurrentMatchUUID() != null && !isDisconnected(candidate)) {
-			match = getMatchWrapperByUUID(candidate.getCurrentMatchUUID()).getObject();
-		}
-
-		// Deal with both situation: When user is not allocated a match or when
-		// cache of match is corrupted
-		if (match != null) {
-			recheckCompetitors(match, fullList, notFullList);
-		} else {
-			match = findAndAssignAvailableMatch(candidate, fullList, notFullList);
-			candidate.setCurrentMatchUUID(match.getTemporalUUID());
-		}
-		return match;
-	}
-
 	private void recheckMatchPhase(Match match, List fullList, List notFullList) {
 		if (match.getPhase() == MatchPhase.NOT_FORMED && match.getCompetitors().size() >= settings.getMinCandidatePerMatch()) {
 			match.setPhase(MatchPhase.FORMED);
@@ -335,38 +317,51 @@ public class MatchOrganizer {
 	 * 
 	 * @param userAutoId
 	 * @return
-	 * @throws TimeoutException
+	 * @throws TimeoutException 
 	 */
-	public Match getMatchForUser(Long userAutoId) {
+	public Match getMatchForUser(Long userAutoId) throws TimeoutException {
 		initialize();
 		final MatchCandidate candidate = getMatchCandidate(userAutoId);
 		if (isDisconnected(candidate))
 			candidate.setCurrentMatchUUID(null);
 		updateLastSeen(candidate);
 		final Match[] matches = new Match[1];
-		try {
+
+		if (candidate.getCurrentMatchUUID() != null && !isDisconnected(candidate)) {
+			matches[0] = getMatchWrapperByUUID(candidate.getCurrentMatchUUID()).getObject();
+		}
+
+		if (matches[0] != null) {
+			if (matches[0].getPhase() == MatchPhase.NOT_FORMED || matches[0].getPhase() == MatchPhase.FORMED) {
+				doWhileListsLocked(new DoWhileListsLockedRunner() {
+
+					@Override
+					public boolean perform(List fullList, List notFullList) {
+						// TODO Auto-generated method stub
+						recheckCompetitors(matches[0], fullList, notFullList);
+						recheckMatchPhase(matches[0], fullList, notFullList);
+						return true;
+					}
+				});
+			} else recheckMatchPhase(matches[0], null, null);//there is no need to manipulate the list, save some round trip to memcache
+		} else {
+			// Deal with both situation: When user is not allocated a match or when
+			// cache of match is corrupted
 			doWhileListsLocked(new DoWhileListsLockedRunner() {
 
 				@Override
 				public boolean perform(List fullList, List notFullList) {
-					matches[0] = getMatchForCandidate(candidate, fullList, notFullList);
-					// check for which phase should match be now
+					// TODO Auto-generated method stub
+					matches[0] = findAndAssignAvailableMatch(candidate, fullList, notFullList);
+					candidate.setCurrentMatchUUID(matches[0].getTemporalUUID());
 					recheckMatchPhase(matches[0], fullList, notFullList);
-					/*
-					 * The match has gone through several changes. Put it back
-					 * to cache
-					 */
-					CacheWrapper<Match> matchWrapper = getMatchWrapperByUUID(matches[0].getTemporalUUID());
-					matchWrapper.putObject(matches[0]);
-
 					return true;
 				}
 			});
-		} catch (TimeoutException e) {
-			// Cannot acquire enough lock to find match for user. Give up
-			return null;
 		}
 
+		CacheWrapper<Match> matchWrapper = getMatchWrapperByUUID(matches[0].getTemporalUUID());
+		matchWrapper.putObject(matches[0]);
 		recacheCandidate(candidate);
 		return matches[0];
 	}

@@ -43,7 +43,7 @@ public class MatchOrganizerPerformanceTest {
 		public T getObject() {
 			// TODO Auto-generated method stub
 			try {
-				Thread.sleep(SLEEP_UNIT * 3 / 10);
+				Thread.sleep(SLEEP_UNIT);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -84,7 +84,7 @@ public class MatchOrganizerPerformanceTest {
 		}
 
 		@Override
-		public void unlock() {
+		public synchronized void unlock() {
 			// TODO Auto-generated method stub
 			if (this.locked == true)
 				this.locked = false;
@@ -124,7 +124,12 @@ public class MatchOrganizerPerformanceTest {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					m = organizer.getMatchForUser(memberId);
+					try {
+						m = organizer.getMatchForUser(memberId);
+					} catch (TimeoutException e) {
+						// TODO Auto-generated catch block
+						throw new RuntimeException(e);
+					}
 				} while (m.getPhase() != MatchPhase.PLAYING);
 
 				// Submit answer
@@ -149,7 +154,12 @@ public class MatchOrganizerPerformanceTest {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					m = organizer.getMatchForUser(memberId);
+					try {
+						m = organizer.getMatchForUser(memberId);
+					} catch (TimeoutException e) {
+						// TODO Auto-generated catch block
+						throw new RuntimeException(e);
+					}
 				} while (m.getPhase() != MatchPhase.FINISHED);
 
 			}
@@ -193,7 +203,7 @@ public class MatchOrganizerPerformanceTest {
 			threads[i] = getTypicalMemberActionThread(organizer, new Long(i + 1));
 			threads[i].start();
 			try {
-				Thread.sleep(5 * SLEEP_UNIT);
+				Thread.sleep(SLEEP_UNIT);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -221,9 +231,9 @@ public class MatchOrganizerPerformanceTest {
 		System.out.println("notFullWaitingMatches.lockCount = " + notFullWaitingMatches.lockCount);
 		System.out.println("notFullWaitingMatches.lockTryTime = " + notFullWaitingMatches.lockTryTime);
 		System.out.println("end-start = " + (end - start));
-		System.out.println("expected match time = " + (settings.getMatchCountDownTime()+ settings.getMatchTime()));
-		if (notFullWaitingMatches.lockCount > 200)
-			fail("Expect <=200 lockCount on notFullWaitingMatches but got " + notFullWaitingMatches.lockCount);
+		System.out.println("expected match time = " + (settings.getMatchCountDownTime() + settings.getMatchTime()));
+		if (notFullWaitingMatches.lockCount > 300)
+			fail("Expect <=300 lockCount on notFullWaitingMatches but got " + notFullWaitingMatches.lockCount);
 		if (notFullWaitingMatches.lockTryTime > 300 * SLEEP_UNIT)
 			fail("Expect <=300 SLEEP_UNIT lockTryTime on notFullWaitingMatches but got " + notFullWaitingMatches.lockTryTime
 					/ SLEEP_UNIT);
