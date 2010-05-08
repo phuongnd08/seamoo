@@ -65,4 +65,11 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 		Match reloadedM = daoImpl.findByKey(m.getAutoId());
 		Assert.assertEquals(reloadedM.getCompetitors().get(0).getAnswers().size(), 2);
 	}
+
+	@Test
+	public void cachedMatchShouldBePersisted() {
+		Match m = new Match();
+		m.setAutoId(1L);
+		daoImpl.persist(m);
+	}
 }

@@ -167,8 +167,10 @@ public class MatchOrganizerPerformanceTest {
 		return t;
 	}
 
+	long MAX_TEST_TIME = 10000;
+
 	@Test
-	public void matchOrganizerShouldNotLockTooMuch() {
+	public void matchOrganizerShouldNotLockTooMuch() throws InterruptedException {
 		MatchOrganizerSettings settings = new MatchOrganizerSettings();
 		settings.setMatchCountDownTime(100 * SLEEP_UNIT);
 		settings.setMatchTime(120 * 10 * SLEEP_UNIT);
@@ -210,6 +212,7 @@ public class MatchOrganizerPerformanceTest {
 			}
 		}
 
+		int sleepTime = 0;
 		long start = TimeStampProvider.getCurrentTimeMilliseconds();
 
 		while (true) {
@@ -221,6 +224,17 @@ public class MatchOrganizerPerformanceTest {
 				}
 			if (finishedAll)
 				break;
+			else {
+				Thread.sleep(SLEEP_UNIT * 10);
+				sleepTime += SLEEP_UNIT * 10;
+				if (sleepTime >= MAX_TEST_TIME) {
+					for (int i = 0; i < threads.length; i++) {
+						if (threads[i].isAlive())
+							threads[i].interrupt();
+					}
+					fail("Test Timeout");
+				}
+			}
 		}
 
 		long end = TimeStampProvider.getCurrentTimeMilliseconds();

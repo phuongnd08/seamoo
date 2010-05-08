@@ -44,6 +44,7 @@ public class NumericBag {
 	}
 
 	public NumericBag(String classifier) {
+		this();
 		this.setClassifier(classifier);
 	}
 

@@ -11,7 +11,6 @@ import org.seamoo.entities.question.Question;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
 import org.seamoo.webapp.client.user.ui.MatchView;
 
-import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Dictionary;
 import com.google.gwt.user.client.Timer;
@@ -91,6 +90,14 @@ public class MatchBoard {
 			}
 
 		};
+
+		public void rescheduleTimer() {
+			long interval = currentMatchState.getRefreshPeriod();
+			if (currentMatchState.getRemainingPeriod() != 0) {
+				interval = Math.min(interval, currentMatchState.getRemainingPeriod());
+			}
+			refreshTimer.schedule((int) interval);
+		}
 
 		List<Question> bufferedQuestions;
 		List<MatchEvent> bufferedEvents;
@@ -182,7 +189,7 @@ public class MatchBoard {
 
 			display.setCompetitors(state.getCompetitors());
 			display.setRemainingTime(state.getRemainingPeriod() / 1000);
-			refreshTimer.schedule((int) state.getRefreshPeriod());
+			rescheduleTimer();
 
 		}
 

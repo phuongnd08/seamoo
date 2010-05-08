@@ -18,7 +18,7 @@ public class MatchState implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8236758819315756620L;
-	public static final int DEFAULT_REFRESH_PERIOD = 1000;// milliseconds
+	public static final int DEFAULT_REFRESH_PERIOD = 3000;// milliseconds
 	private long matchAutoId;
 	private String matchAlias;
 	/**

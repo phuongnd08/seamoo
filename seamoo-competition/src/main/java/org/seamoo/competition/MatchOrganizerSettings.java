@@ -1,7 +1,7 @@
 package org.seamoo.competition;
 
 public class MatchOrganizerSettings {
-	public static final long CANDIDATE_ACTIVE_PERIOD = 5000;/*
+	public static final long CANDIDATE_ACTIVE_PERIOD = 60000;/*
 															 * 5000 milliseconds
 															 * or 5 seconds
 															 */

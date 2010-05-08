@@ -327,11 +327,14 @@ public class MatchOrganizer {
 		updateLastSeen(candidate);
 		final Match[] matches = new Match[1];
 
+		CacheWrapper<Match> matchWrapper = null;
 		if (candidate.getCurrentMatchUUID() != null && !isDisconnected(candidate)) {
-			matches[0] = getMatchWrapperByUUID(candidate.getCurrentMatchUUID()).getObject();
+			matchWrapper = getMatchWrapperByUUID(candidate.getCurrentMatchUUID());
+			matches[0] = matchWrapper.getObject();
 		}
 
 		if (matches[0] != null) {
+			matchWrapper.lock(settings.getMaxLockWaitTime());
 			if (matches[0].getPhase() == MatchPhase.NOT_FORMED || matches[0].getPhase() == MatchPhase.FORMED) {
 				doWhileListsLocked(new DoWhileListsLockedRunner() {
 
@@ -344,6 +347,8 @@ public class MatchOrganizer {
 					}
 				});
 			} else recheckMatchPhase(matches[0], null, null);//there is no need to manipulate the list, save some round trip to memcache
+			matchWrapper.putObject(matches[0]);
+			matchWrapper.unlock();
 		} else {
 			// Deal with both situation: When user is not allocated a match or when
 			// cache of match is corrupted
@@ -358,10 +363,10 @@ public class MatchOrganizer {
 					return true;
 				}
 			});
+			matchWrapper = getMatchWrapperByUUID(matches[0].getTemporalUUID());
+			matchWrapper.putObject(matches[0]);
 		}
 
-		CacheWrapper<Match> matchWrapper = getMatchWrapperByUUID(matches[0].getTemporalUUID());
-		matchWrapper.putObject(matches[0]);
 		recacheCandidate(candidate);
 		return matches[0];
 	}

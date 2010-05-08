@@ -165,7 +165,7 @@ public class DemoController {
 			Long[] newFinished = new Long[1];
 			boolean done = installPackage(bundleName, finished, newFinished, MAX_DURATION, leagueDao.findByKey(leagueId));
 			if (done) {
-				Bundle p = new Bundle(bundleName, newFinished[1], true);
+				Bundle p = new Bundle(bundleName, newFinished[0], true);
 				bundleDao.persist(p);
 			} else {
 				TaskOptions taskOptions = TaskOptions.Builder.url("/demo/install-questions").param("bundleName", bundleName).param(
