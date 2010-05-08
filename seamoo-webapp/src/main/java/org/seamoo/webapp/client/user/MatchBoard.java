@@ -91,12 +91,31 @@ public class MatchBoard {
 
 		};
 
-		public void rescheduleTimer() {
+		public void rescheduleRefreshTimer() {
 			long interval = currentMatchState.getRefreshPeriod();
 			if (currentMatchState.getRemainingPeriod() != 0) {
 				interval = Math.min(interval, currentMatchState.getRemainingPeriod());
 			}
 			refreshTimer.schedule((int) interval);
+		}
+
+		private long remainingPeriod = 0;
+		Timer countdownTimer = new Timer() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				setRemainingPeriod(remainingPeriod - 1000);
+			}
+
+		};
+
+		private void setRemainingPeriod(long remainingPeriod) {
+			countdownTimer.cancel();
+			this.remainingPeriod = remainingPeriod > 0 ? remainingPeriod : 0;
+			if (this.remainingPeriod > 0)
+				countdownTimer.schedule((int) Math.min(1000, this.remainingPeriod));
+			display.setRemainingTime(this.remainingPeriod / 1000);
 		}
 
 		List<Question> bufferedQuestions;
@@ -188,8 +207,8 @@ public class MatchBoard {
 			}
 
 			display.setCompetitors(state.getCompetitors());
-			display.setRemainingTime(state.getRemainingPeriod() / 1000);
-			rescheduleTimer();
+			this.setRemainingPeriod(state.getRemainingPeriod());
+			rescheduleRefreshTimer();
 
 		}
 
