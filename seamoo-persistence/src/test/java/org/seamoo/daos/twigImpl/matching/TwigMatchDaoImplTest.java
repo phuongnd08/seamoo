@@ -1,6 +1,5 @@
 package org.seamoo.daos.twigImpl.matching;
 
-import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchAnswer;
@@ -18,7 +17,7 @@ import org.testng.annotations.Test;
 import com.google.inject.internal.Lists;
 
 public class TwigMatchDaoImplTest extends LocalAppEngineTest {
-	MatchDao daoImpl;
+	TwigMatchDaoImpl daoImpl;
 
 	public TwigMatchDaoImplTest() {
 	}
@@ -67,9 +66,11 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 	}
 
 	@Test
-	public void cachedMatchShouldBePersisted() {
+	public void competitorWithEmptyAnswersShouldBePersisted() {
 		Match m = new Match();
-		m.setAutoId(1L);
+		MatchCompetitor mc = new MatchCompetitor();
+		m.addCompetitor(mc);
 		daoImpl.persist(m);
+		Assert.assertNotNull(m.getCompetitors().get(0).getAnswers());
 	}
 }

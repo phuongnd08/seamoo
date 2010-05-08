@@ -111,28 +111,31 @@ public class MatchCompetitor implements Serializable {
 
 	public int getCorrectCount() {
 		int count = 0;
-		for (MatchAnswer a : answers) {
-			if (a.getType() == MatchAnswerType.SUBMITTED && a.isCorrect())
-				count++;
-		}
+		if (answers != null)
+			for (MatchAnswer a : answers) {
+				if (a.getType() == MatchAnswerType.SUBMITTED && a.isCorrect())
+					count++;
+			}
 		return count;
 	}
 
 	public int getWrongCount() {
 		int count = 0;
-		for (MatchAnswer a : answers) {
-			if (a.getType() == MatchAnswerType.SUBMITTED && !a.isCorrect())
-				count++;
-		}
+		if (answers != null)
+			for (MatchAnswer a : answers) {
+				if (a.getType() == MatchAnswerType.SUBMITTED && !a.isCorrect())
+					count++;
+			}
 		return count;
 	}
 
 	public int getIgnoreCount() {
 		int count = 0;
-		for (MatchAnswer a : answers) {
-			if (a.getType() == MatchAnswerType.IGNORED)
-				count++;
-		}
+		if (answers != null)
+			for (MatchAnswer a : answers) {
+				if (a.getType() == MatchAnswerType.IGNORED)
+					count++;
+			}
 		return count;
 	}
 }

@@ -1,16 +1,13 @@
 package org.seamoo.competition;
 
 public class MatchOrganizerSettings {
-	public static final long CANDIDATE_ACTIVE_PERIOD = 60000;/*
-															 * 5000 milliseconds
-															 * or 5 seconds
-															 */
+	public static final long CANDIDATE_ACTIVE_PERIOD = 6000;// 6 seconds
 	public static final long MATCH_COUNTDOWN_TIME = 10000;
 	public static final long MAX_CANDIDATE_PER_MATCH = 4;
 	public static final long MIN_CANDIDATE_PER_MATCH = 2;
 	public static final int QUESTION_PER_MATCH = 20;
-	public static final long MATCH_TIME = 120000;
-	public static final long MAX_LOCK_WAIT_TIME = 5000L;
+	public static final long MATCH_TIME = 120000;// 2 minutes
+	public static final long MAX_LOCK_WAIT_TIME = 5000;
 
 	public MatchOrganizerSettings() {
 		this.candidateActivePeriod = CANDIDATE_ACTIVE_PERIOD;
