@@ -1,64 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" x="176" y="40">
-    <screen href="../master/master-logged-in.screen#/"/>
+  <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1024">
+    <screen href="in-match-answering-master.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="184" y="256" width="263" height="113"/>
-  <widgets xsi:type="model:Image" x="194" y="265" width="93" height="54" src="../images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="286" y="266" width="145" height="93" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League">
+  <widgets xsi:type="model:Panel" x="468" y="379" width="493" height="22" measuredWidth="493" measuredHeight="22"/>
+  <widgets xsi:type="model:Label" x="474" y="379" width="290" text="*Cau hoi* (1/20) [Grammar]" measuredWidth="290" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="184" y="384" width="263" height="32"/>
-  <widgets xsi:type="model:Text" x="195" y="393" width="243" text="Ban dang thi dau voi">
+  <widgets xsi:type="model:Panel" x="468" y="405" width="492" height="44" measuredWidth="492" measuredHeight="44"/>
+  <widgets xsi:type="model:Text" x="474" y="415" width="475" text="What is the proper preposition here:&#xA;I look ... her" measuredWidth="475" measuredHeight="34">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Table" x="464" y="533" width="494" text="Thoi diem,Su kien&#xA;8:00:00,[c0ld] dang cho&#xA;8:00:01,[thinh_pro] tham gia tran dau&#xA;8:00:02,[ken] &amp; [ajeruzu] tham gia tran dau"/>
-  <widgets xsi:type="model:WidgetGroup" x="464" y="505">
-    <widgets xsi:type="model:Panel" width="493" height="22"/>
-    <widgets xsi:type="model:Label" x="6" width="74" text="*Dien bien*">
-      <font/>
-    </widgets>
-  </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="184" y="424">
-    <widgets xsi:type="model:Panel" width="263" height="49"/>
-    <widgets xsi:type="model:Text" x="54" y="10" width="198" height="34" text="[thinh_pro]&#xA;Song la khong cho doi">
-      <font/>
-    </widgets>
-    <widgets xsi:type="model:Icon" x="10" y="12" icon="user (large)"/>
-  </widgets>
-  <widgets xsi:type="model:Panel" x="184" y="479" width="263" height="49"/>
-  <widgets xsi:type="model:Text" x="238" y="489" width="198" height="34" text="[ken]&#xA;Mot doi phu du">
+  <widgets xsi:type="model:Panel" x="468" y="456" width="493" height="22" measuredWidth="493" measuredHeight="22"/>
+  <widgets xsi:type="model:Label" x="474" y="456" width="290" text="*Chon cau tra loi dung*" measuredWidth="290" measuredHeight="25">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Icon" x="194" y="491" icon="user (large)"/>
-  <widgets xsi:type="model:WidgetGroup" x="184" y="536">
-    <widgets xsi:type="model:Panel" width="263" height="49"/>
-    <widgets xsi:type="model:Text" x="54" y="10" width="198" height="34" text="[ajeruzu]&#xA;Song la khong cho doi">
-      <font/>
-    </widgets>
-    <widgets xsi:type="model:Icon" x="10" y="12" icon="user (large)"/>
-  </widgets>
-  <widgets xsi:type="model:Panel" x="464" y="259" width="493" height="22"/>
-  <widgets xsi:type="model:Label" x="470" y="259" width="290" text="*Cau hoi* (1/20) [Grammar]">
+  <widgets xsi:type="model:Panel" x="468" y="488" width="492" measuredWidth="492" measuredHeight="100"/>
+  <widgets xsi:type="model:Button" x="474" y="495" text="to" measuredWidth="33" measuredHeight="27">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="464" y="285" width="492" height="44"/>
-  <widgets xsi:type="model:Text" x="470" y="295" width="475" text="What is the proper preposition here:&#xA;I look ... her">
+  <widgets xsi:type="model:Button" x="474" y="525" text="at" measuredWidth="33" measuredHeight="27">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="464" y="336" width="493" height="22"/>
-  <widgets xsi:type="model:Label" x="470" y="336" width="290" text="*Chon cau tra loi dung*">
+  <widgets xsi:type="model:Button" x="473" y="556" text="in" measuredWidth="32" measuredHeight="27">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="464" y="368" width="492"/>
-  <widgets xsi:type="model:Button" x="470" y="375" text="to"/>
-  <widgets xsi:type="model:Button" x="470" y="405" text="at"/>
-  <widgets xsi:type="model:Button" x="469" y="436" text="in"/>
-  <widgets xsi:type="model:Button" x="464" y="472" text="Bo qua >>"/>
-  <widgets xsi:type="model:Label" x="192" y="168" text="Tranh tai">
-    <font size="32"/>
+  <widgets xsi:type="model:Button" x="468" y="592" text="Bo qua >>" measuredWidth="91" measuredHeight="27">
+    <font/>
   </widgets>
-  <widgets xsi:type="model:HLine" x="192" y="221" width="769"/>
   <hRuler>
     <guides position="447"/>
   </hRuler>
