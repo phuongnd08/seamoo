@@ -48,7 +48,7 @@ public class MatchViewSteps {
 		listener = mock(MatchBoard.Display.EventListener.class);
 	}
 
-	List<Button> panelChoicesButtons;
+	List<Button> tableChoicesButtons;
 
 	@Given("A Match View")
 	public void initMatchView() {
@@ -82,16 +82,16 @@ public class MatchViewSteps {
 		});
 		matchView = new MatchView();
 		matchView.addEventListener(listener);
-		panelChoicesButtons = new ArrayList<Button>();
+		tableChoicesButtons = new ArrayList<Button>();
 		doAnswer(new Answer() {
 
 			@Override
 			public Object answer(InvocationOnMock invocation) throws Throwable {
 				// TODO Auto-generated method stub
-				panelChoicesButtons.add((Button) invocation.getArguments()[0]);
+				tableChoicesButtons.add((Button) invocation.getArguments()[2]);
 				return null;
 			}
-		}).when(matchView.panelChoices).add((Widget) any());
+		}).when(matchView.tableChoices).setWidget(anyInt(), anyInt(), (Widget) any());
 	}
 
 	MultipleChoicesQuestionRevision questionRev = null;
@@ -257,7 +257,7 @@ public class MatchViewSteps {
 	@Then("$number buttons of text $choices are added to panelChoices")
 	public void assertButtonAdded(List<String> choices) {
 		for (String choice : choices) {
-			verify(matchView.panelChoices).add(argThat(new ButtonMatcher(choice)));
+			verify(matchView.tableChoices).setWidget(anyInt(), anyInt(), argThat(new ButtonMatcher(choice)));
 		}
 	}
 
@@ -268,7 +268,7 @@ public class MatchViewSteps {
 	@When("User click $position button of panelChoices")
 	public void clickChoiceButton(String position) {
 		int pos = positionToNumber(position) - 1;
-		((MockedClickable) panelChoicesButtons.get(pos)).click();
+		((MockedClickable) tableChoicesButtons.get(pos)).click();
 	}
 
 	private Member memberFromDisplayName(String displayName) {

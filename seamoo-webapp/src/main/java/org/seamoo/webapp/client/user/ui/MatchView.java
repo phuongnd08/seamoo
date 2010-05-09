@@ -60,7 +60,7 @@ public class MatchView extends Composite implements Display {
 	@UiField
 	Label labelQuestion;
 	@UiField
-	FlowPanel panelChoices;
+	FlexTable tableChoices;
 	@UiField
 	Button buttonIgnore;
 	@UiField
@@ -162,18 +162,12 @@ public class MatchView extends Composite implements Display {
 		if (question != null) {
 			MultipleChoicesQuestionRevision revision = (MultipleChoicesQuestionRevision) question.getCurrentRevision();
 			labelQuestion.setText(revision.getContent());
-			panelChoices.clear();
+			tableChoices.clear();
 			int i = 0;
 			for (QuestionChoice choice : revision.getChoices()) {
-				panelChoices.add(createChoiceButton(choice.getContent(), i + 1));// answer
-				// for
-				// multiple
-				// choice
-				// should
-				// be
-				// in
-				// 1-based
-				// form
+				tableChoices.setWidget(i, 0, createChoiceButton(choice.getContent(), i + 1));
+				// answer for multiple choice
+				// should be in 1-based form
 				i++;
 			}
 		}
@@ -237,7 +231,7 @@ public class MatchView extends Composite implements Display {
 	int eventIndex = -1;
 
 	String memberToHTML(Member m) {
-		return "<a href='/users/" + m.getAutoId() + "/" + m.getAlias() + "'>" + m.getDisplayName() + "</a>";
+		return "<a href='/users/" + m.getAutoId() + "/" + m.getAlias() + "' target='_blank'>" + m.getDisplayName() + "</a>";
 
 	}
 

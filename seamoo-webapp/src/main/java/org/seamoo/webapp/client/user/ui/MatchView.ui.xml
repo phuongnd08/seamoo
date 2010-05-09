@@ -34,7 +34,7 @@
 			<div>
 				<gwt:Label ui:field="labelQuestion"></gwt:Label>
 			</div>
-			<gwt:FlowPanel ui:field="panelChoices"></gwt:FlowPanel>
+			<gwt:FlexTable ui:field="tableChoices" styleName="fw"></gwt:FlexTable>
 			<gwt:Button ui:field="buttonIgnore">Bỏ qua&gt;&gt;</gwt:Button>
 		</gwt:HTMLPanel>
 		<gwt:HTMLPanel styleName="description-box" ui:field="panelEvents">
