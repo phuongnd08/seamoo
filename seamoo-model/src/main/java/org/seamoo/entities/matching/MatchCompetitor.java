@@ -136,4 +136,12 @@ public class MatchCompetitor implements Serializable {
 			}
 		return count;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		if (member == null)
+			return "Competitor{null}";
+		return "Competitor{" + member.getDisplayName() + "}";
+	}
 }

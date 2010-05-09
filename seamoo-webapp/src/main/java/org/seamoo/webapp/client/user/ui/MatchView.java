@@ -3,6 +3,7 @@ package org.seamoo.webapp.client.user.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
@@ -235,16 +236,21 @@ public class MatchView extends Composite implements Display {
 
 	int eventIndex = -1;
 
-	String eventToText(MatchEvent event) {
+	String memberToHTML(Member m) {
+		return "<a href='/users/" + m.getAutoId() + "/" + m.getAlias() + "'>" + m.getDisplayName() + "</a>";
+
+	}
+
+	String eventToHTML(MatchEvent event) {
 		switch (event.getType()) {
 		case ANSWER_QUESTION:
-			return event.getMember().getDisplayName() + " answer question #" + event.getQuestionOrder();
+			return memberToHTML(event.getMember()) + " answer question #" + event.getQuestionOrder();
 		case IGNORE_QUESTION:
-			return event.getMember().getDisplayName() + " ignore question #" + event.getQuestionOrder();
+			return memberToHTML(event.getMember()) + " ignore question #" + event.getQuestionOrder();
 		case JOIN:
-			return event.getMember().getDisplayName() + " join match";
+			return memberToHTML(event.getMember()) + " join match";
 		case LEFT:
-			return event.getMember().getDisplayName() + " left match";
+			return memberToHTML(event.getMember()) + " left match";
 		case STARTED:
 			return "Match started";
 		case FINISHED:
@@ -259,7 +265,7 @@ public class MatchView extends Composite implements Display {
 		// TODO Auto-generated method stub
 		for (MatchEvent event : events) {
 			eventIndex++;
-			tableMatchEvents.setText(eventIndex, 0, eventToText(event));
+			tableMatchEvents.setHTML(eventIndex, 0, eventToHTML(event));
 		}
 	}
 

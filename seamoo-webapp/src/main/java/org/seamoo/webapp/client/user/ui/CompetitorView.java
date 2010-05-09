@@ -31,6 +31,7 @@ public class CompetitorView extends Composite {
 	Label labelQuote;
 	@UiField
 	ProgressBar barAnsweredQuestionsIndicator;
+	MatchCompetitor competitor;
 
 	List<MatchBoard.Display.EventListener> listeners;
 
@@ -51,6 +52,11 @@ public class CompetitorView extends Composite {
 		labelQuote.setText(m.getQuote());
 		barAnsweredQuestionsIndicator.setVisible(competitor.getPassedQuestionCount() > 0);
 		barAnsweredQuestionsIndicator.setProgress(competitor.getPassedQuestionCount());
+		this.competitor = competitor;
+	}
+
+	public MatchCompetitor getCompetitor() {
+		return this.competitor;
 	}
 
 	public void setTotalQuestionsCount(int count) {

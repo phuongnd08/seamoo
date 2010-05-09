@@ -71,6 +71,15 @@ public class MatchViewSteps {
 				return GwtUiMocker.getMockedWidget(Button.class);
 			}
 		});
+
+		when(UiObjectFactory.newCompetitorView()).thenAnswer(new Answer<CompetitorView>() {
+
+			@Override
+			public CompetitorView answer(InvocationOnMock invocation) throws Throwable {
+				// TODO Auto-generated method stub
+				return GwtUiMocker.getMockedWidget(CompetitorView.class);
+			}
+		});
 		matchView = new MatchView();
 		matchView.addEventListener(listener);
 		panelChoicesButtons = new ArrayList<Button>();
@@ -201,11 +210,6 @@ public class MatchViewSteps {
 		method.invoke(control, v);
 	}
 
-	@Then("tableMatchPlayers shows $player")
-	public void assertPlayerShown(String player) {
-		verify(matchView.tableMatchPlayers).setText(anyInt(), anyInt(), eq(player));
-	}
-
 	@When("View Remaining Seconds is assigned to $seconds")
 	public void setRemainingSeconds(int seconds) {
 		matchView.setRemainingTime(seconds);
@@ -270,6 +274,8 @@ public class MatchViewSteps {
 	private Member memberFromDisplayName(String displayName) {
 		Member m = new Member();
 		m.setDisplayName(displayName);
+		m.setAlias(displayName);
+		m.setAutoId(1L);
 		return m;
 	}
 
@@ -310,6 +316,6 @@ public class MatchViewSteps {
 
 	@Then("tableMatchEvents shows \"$text\"")
 	public void assertMatchEventShown(String text) {
-		verify(matchView.tableMatchEvents).setText(anyInt(), anyInt(), eq(text));
+		verify(matchView.tableMatchEvents).setHTML(anyInt(), anyInt(), eq(text));
 	}
 }

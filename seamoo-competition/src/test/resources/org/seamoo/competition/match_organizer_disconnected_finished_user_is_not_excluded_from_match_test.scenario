@@ -24,13 +24,13 @@ And Returned Match has 3 events
 Given Current Time is 10:00:15
 When 1st user submit #1 for question 1-20
 And 1st user request for Match
-Then Returned Match has 23 events
+Then Returned Match has 3 events
 Given 2nd user last signal is 10:00:25
 And Current Time is 10:00:30
 When 2nd user request for Match
 Then Returned Match is 1st match
 And Returned Match has 2 players
-And Returned Match has 23 events
+And Returned Match has 3 events
 When 1st user request for Match
 Then 2nd Match is created
 And Returned Match is 2nd match

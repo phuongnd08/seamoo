@@ -57,5 +57,5 @@ When 2nd user request for Match
 Then Returned Match is 1st match
 When 3rd user request for Match
 Then Returned Match is 1st match
-And Returned Match has 8 events
+And Returned Match has 5 events
 !--   

@@ -16,9 +16,6 @@ And panelMatchPlayers is visible
 And panelCountDown is visible
 And text of labelCountDownType is "Chờ trận đấu bắt đầu"
 And panelQuestion is invisible
-And tableMatchPlayers shows player1
-And tableMatchPlayers shows player2
-And tableMatchPlayers shows player3
 When View Remaining Seconds is assigned to 9
 Then text of labelCountDown is "00:09"
 When View Phase is switched to PLAYING
@@ -52,7 +49,7 @@ Given Event#1 phuongnd08 submit answer for question #1
 Given Event#2 phuongnd08 ignore question #2
 Given Event#3 phuongnd08 left Match
 When Events are added to View
-Then tableMatchEvents shows "phuongnd08 join match"
-And tableMatchEvents shows "phuongnd08 answer question #1"
-And tableMatchEvents shows "phuongnd08 ignore question #2"
-And tableMatchEvents shows "phuongnd08 left match"
+Then tableMatchEvents shows "<a href='/users/1/phuongnd08'>phuongnd08</a> join match"
+And tableMatchEvents shows "<a href='/users/1/phuongnd08'>phuongnd08</a> answer question #1"
+And tableMatchEvents shows "<a href='/users/1/phuongnd08'>phuongnd08</a> ignore question #2"
+And tableMatchEvents shows "<a href='/users/1/phuongnd08'>phuongnd08</a> left match"

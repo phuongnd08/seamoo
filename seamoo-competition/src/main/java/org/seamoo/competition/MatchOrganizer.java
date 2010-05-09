@@ -349,10 +349,10 @@ public class MatchOrganizer {
 				});
 			} else
 				recheckMatchPhase(matches[0], null, null);// there is no need to
-															// manipulate the
-															// list, save some
-															// round trip to
-															// memcache
+			// manipulate the
+			// list, save some
+			// round trip to
+			// memcache
 			matchWrapper.putObject(matches[0]);
 			matchWrapper.unlock();
 		} else {
@@ -408,10 +408,8 @@ public class MatchOrganizer {
 			throw new RuntimeException("Competitor disappeared mysteriously");
 		switch (answer.getType()) {
 		case IGNORED:
-			match.addEvent(new MatchEvent(MatchEventType.IGNORE_QUESTION, candidate.getMemberAutoId(), questionOrder));
 			break;
 		case SUBMITTED:
-			match.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, candidate.getMemberAutoId(), questionOrder));
 			double score = match.getQuestions().get(questionOrder - 1).getScore(answer.getContent());
 			answer.setScore(score);
 			answer.setCorrect(score > 0);
