@@ -31,28 +31,29 @@ public class MemberInjectionFilter implements Filter {
 
 	}
 
-	public static Member getInjectedMember(HttpServletRequest request){
+	public static Member getInjectedMember(HttpServletRequest request) {
 		return (Member) request.getAttribute(MEMBER_FIELD);
 	}
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException {
-		// TODO Auto-generated method stub
 		try {
 			OpenIdUser openIdUser = RelyingParty.getInstance().discover((HttpServletRequest) request);
-			System.out.println("Discover OpenIdUser " + openIdUser);
+			// System.out.println("Discover OpenIdUser " + openIdUser);
 			if (openIdUser != null && openIdUser.isAuthenticated()) {
 				Member member = memberDao.findByOpenId(openIdUser.getClaimedId());
 				if (member == null) {
-					System.out.println("User never seen on system, route to first-seen");
+					// System.out.println("User never seen on system, route to first-seen");
 					String requestUri = ((HttpServletRequest) request).getRequestURI();
 					if (!requestUri.startsWith(firstSeenUri)) {
 						((HttpServletResponse) response).sendRedirect(String.format("%s?returnUrl=%s", firstSeenUri,
 								RedirectUriHandler.getEncodedRedirectUrl((HttpServletRequest) request)));
 						return;
 					}
-				} else
-					System.out.println("User seen on system: " + member.toString());
+				} // else
+				// System.out.println("User seen on system: " +
+				// member.toString());
 				request.setAttribute(MEMBER_FIELD, member);// inject member
 				// information into
 				// context

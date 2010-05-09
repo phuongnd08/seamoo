@@ -2,17 +2,24 @@
 	<!-- 
  -->
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:gwt="urn:import:com.google.gwt.user.client.ui" xmlns:new="com.google.gwt.widgetideas.client">
+	xmlns:gwt="urn:import:com.google.gwt.user.client.ui" xmlns:new="urn:import:com.google.gwt.widgetideas.client">
 	<gwt:HTMLPanel>
 		<gwt:HTMLPanel ui:field="panelIndicator" visible="false">
 			<gwt:HTMLPanel ui:field="panelMatchWaiting">
 				<span class="loading-indicator"></span>
 				<gwt:InlineLabel ui:field="labelMatchWaiting">Đang chờ sắp xếp trận đấu</gwt:InlineLabel>
 			</gwt:HTMLPanel>
-			<gwt:FlowPanel ui:field="panelMatchPlayers">
+			<gwt:HTMLPanel ui:field="panelYouFinished">
+				<span>Bạn đã hoàn thành phần thi của mình. Bạn có thể chờ các đối
+					thủ khác hoặc</span>
+				<gwt:Button ui:field="buttonRematch">Đấu tiếp trận khác</gwt:Button>
+				<hr />
+			</gwt:HTMLPanel>
+			<gwt:HTMLPanel ui:field="panelMatchPlayers">
+				<h3>Các đấu thủ</h3>
 				<gwt:FlexTable ui:field="tableMatchPlayers">
 				</gwt:FlexTable>
-			</gwt:FlowPanel>
+			</gwt:HTMLPanel>
 		</gwt:HTMLPanel>
 
 		<gwt:HTMLPanel styleName="description-box" ui:field="panelCountDown">

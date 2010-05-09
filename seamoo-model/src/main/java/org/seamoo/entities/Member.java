@@ -32,13 +32,13 @@ public class Member implements Serializable {
 	@Store(true)
 	transient private Date joiningDate;
 
-	private String aboutMe;
+	@Store(true)
+	transient private String aboutMe;
 
 	@Store(true)
 	transient private String website;
 
-	@Store(true)
-	transient private String quote;
+	private String quote;
 
 	@Store(true)
 	transient private Date lastSeen;

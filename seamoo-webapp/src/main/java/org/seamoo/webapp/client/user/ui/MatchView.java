@@ -17,6 +17,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -38,9 +39,11 @@ public class MatchView extends Composite implements Display {
 	@UiField
 	HTMLPanel panelMatchWaiting;
 	@UiField
+	HTMLPanel panelYouFinished;
+	@UiField
 	InlineLabel labelMatchWaiting;
 	@UiField
-	FlowPanel panelMatchPlayers;
+	HTMLPanel panelMatchPlayers;
 	@UiField
 	FlexTable tableMatchPlayers;
 	@UiField
@@ -63,12 +66,16 @@ public class MatchView extends Composite implements Display {
 	HTMLPanel panelEvents;
 	@UiField
 	FlexTable tableMatchEvents;
+	@UiField
+	Button buttonRematch;
 
 	List<MatchBoard.Display.EventListener> listeners;
+	List<CompetitorView> competitorViews;
 
 	public MatchView() {
 		initWidget(binder.createAndBindUi(this));
 		listeners = new ArrayList<EventListener>();
+		competitorViews = new ArrayList<CompetitorView>();
 		final MatchView me = this;
 		buttonIgnore.addClickHandler(new ClickHandler() {
 
@@ -78,6 +85,16 @@ public class MatchView extends Composite implements Display {
 				for (EventListener l : listeners) {
 					l.ignoreQuestion(me);
 				}
+			}
+		});
+
+		buttonRematch.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent arg0) {
+				// TODO Auto-generated method stub
+				for (EventListener l : listeners)
+					l.rematch(me);
 			}
 		});
 
@@ -92,14 +109,28 @@ public class MatchView extends Composite implements Display {
 		listeners.add(listener);
 	}
 
+	private void refreshCompetitorQuestionCount() {
+		for (CompetitorView v : competitorViews) {
+			v.setTotalQuestionsCount(questionTotal);
+		}
+	}
+
 	@Override
 	public void setCompetitors(List<MatchCompetitor> competitors) {
-		// TODO Auto-generated method stub
-		tableMatchPlayers.clear();
-		int i = 0;
-		for (MatchCompetitor competitor : competitors) {
-			tableMatchPlayers.setText(i, 0, competitor.getMember().getDisplayName());
-			i++;
+		if (tableMatchPlayers.getRowCount() != competitors.size()) {
+			tableMatchPlayers.clear();
+			for (int i = 0; i < competitors.size(); i++) {
+				if (competitorViews.size() <= i) {
+					CompetitorView view = UiObjectFactory.newCompetitorView();
+					view.setTotalQuestionsCount(questionTotal);
+					competitorViews.add(view);
+				}
+				tableMatchPlayers.setWidget(i, 0, competitorViews.get(i));
+			}
+			refreshCompetitorQuestionCount();
+		}
+		for (int j = 0; j < competitors.size(); j++) {
+			competitorViews.get(j).setCompetitor(competitors.get(j));
 		}
 	}
 
@@ -119,6 +150,8 @@ public class MatchView extends Composite implements Display {
 			break;
 
 		}
+
+		panelYouFinished.setVisible(phase == MatchPhase.YOU_FINISHED);
 	}
 
 	@Override
@@ -169,6 +202,11 @@ public class MatchView extends Composite implements Display {
 	int questionIndex = 0, questionTotal = 0;
 	public Object p;
 
+	private void refreshQuestionIndicator() {
+		// TODO Auto-generated method stub
+		labelQuestionIndex.setText("" + questionIndex + "/" + questionTotal);
+	}
+
 	@Override
 	public void setQuestionIndex(int index) {
 		// TODO Auto-generated method stub
@@ -176,17 +214,12 @@ public class MatchView extends Composite implements Display {
 		refreshQuestionIndicator();
 	}
 
-	private void refreshQuestionIndicator() {
-		// TODO Auto-generated method stub
-		labelQuestionIndex.setText("" + questionIndex + "/" + questionTotal);
-	}
-
 	@Override
 	public void setTotalQuestion(int total) {
 		// TODO Auto-generated method stub
 		questionTotal = total;
+		refreshCompetitorQuestionCount();
 		refreshQuestionIndicator();
-
 	}
 
 	@Override

@@ -1195,3 +1195,32 @@ td.datePickerMonth {
   background: #c75cd1 url(images/splitPanelThumb.png) center center no-repeat;
   cursor: row-resize;
 }
+
+/**
+ * Applied to ProgressBar.
+ */
+.gwt-ProgressBar-shell {
+  border: 2px solid #faf9f7;
+  border-right: 2px solid #848280;
+  border-bottom: 2px solid #848280;
+  background-color: #AAAAAA;
+  height: 14pt;
+  width: 50%;
+}
+.gwt-ProgressBar-shell .gwt-ProgressBar-bar {
+  background-color: #67A7E3;
+}
+.gwt-ProgressBar-shell .gwt-ProgressBar-text {
+  padding: 0px;
+  margin: 0px;
+  color: white;
+}
+.gwt-ProgressBar-thin {
+  border: 2px solid #848280;
+  background-color: white;
+  height: 7px;
+  overflow: hidden;
+}
+.gwt-ProgressBar-thin .gwt-ProgressBar-bar {
+  background-color: #67A7E3;
+}

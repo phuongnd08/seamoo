@@ -25,7 +25,6 @@ public class MatchCompetitor implements Serializable {
 
 	private Member member;
 
-	@Store(true)
 	@GwtTransient
 	private Date participatedTime;
 
@@ -37,7 +36,6 @@ public class MatchCompetitor implements Serializable {
 
 	private int passedQuestionCount;
 
-	@Store(true)
 	@GwtTransient
 	private List<MatchAnswer> answers;
 

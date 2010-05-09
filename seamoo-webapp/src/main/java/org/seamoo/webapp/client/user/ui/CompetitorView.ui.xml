@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- 
+ -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:gwt="urn:import:com.google.gwt.user.client.ui" xmlns:new="urn:import:com.google.gwt.widgetideas.client">
+	<gwt:HTMLPanel styleName="fl user-info">
+		<table>
+			<tbody>
+				<tr>
+					<td class="user-gravatar32">
+						<gwt:Image ui:field="imageAvatar" width="32" height="32"></gwt:Image>
+					</td>
+					<td class="user-details">
+						<div>
+							<gwt:Anchor ui:field="anchorDisplayName" target="_blank"></gwt:Anchor>
+						</div>
+						<div>
+							<gwt:Label ui:field="labelQuote"></gwt:Label>
+						</div>
+						<div>
+							<new:ProgressBar ui:field="barAnsweredQuestionsIndicator" height="10px"/>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</gwt:HTMLPanel>
+</ui:UiBinder>

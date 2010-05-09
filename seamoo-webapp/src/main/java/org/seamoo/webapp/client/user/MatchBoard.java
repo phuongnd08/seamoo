@@ -8,6 +8,7 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
+import org.seamoo.webapp.client.shared.ui.UrlFactory;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
 import org.seamoo.webapp.client.user.ui.MatchView;
 
@@ -25,6 +26,8 @@ public class MatchBoard {
 			public void submitAnswer(Display display, String answer);
 
 			public void ignoreQuestion(Display display);
+
+			public void rematch(Display display);
 		}
 
 		public void setPhase(MatchPhase phase);
@@ -44,8 +47,9 @@ public class MatchBoard {
 		public void addEventListener(EventListener listener);
 
 		/**
-		 * Get the side widget that controlled by the presenter but actually put in the side
-		 * This is used to simplify testing (really?)
+		 * Get the side widget that controlled by the presenter but actually put
+		 * in the side This is used to simplify testing (really?)
+		 * 
 		 * @return
 		 */
 		public Widget getSideWidget();
@@ -76,6 +80,12 @@ public class MatchBoard {
 				// Server use 1-based order, but currentQuestionOrder is 0-based
 				tryIgnoreQuestion(currentQuestionOrder + 1, 0);
 				nextQuestion();
+			}
+
+			@Override
+			public void rematch(Display display) {
+				// TODO Auto-generated method stub
+				throw new RuntimeException("Not supported");
 			}
 		};
 
@@ -170,7 +180,6 @@ public class MatchBoard {
 		private void setCurrentQuestionOrder(int order) {
 			currentQuestionOrder = order;
 			display.setQuestion(bufferedQuestions.get(order));
-			display.setTotalQuestion(currentMatchState.getQuestionsCount());
 			display.setQuestionIndex(order + 1);
 		}
 
@@ -183,9 +192,10 @@ public class MatchBoard {
 			currentMatchState = state;
 			display.setPhase(state.getPhase());
 			if (state.getPhase() == MatchPhase.FINISHED) {
-				Window.Location.replace("/matches/" + state.getMatchAutoId() + "/" + state.getMatchAlias());
+				Window.Location.replace(UrlFactory.getMatchViewUrl(state));
 				return;
 			}
+			display.setTotalQuestion(currentMatchState.getQuestionsCount());
 			if (state.getBufferedQuestions() != null) {
 				List<Question> qs = state.getBufferedQuestions();
 				int from = state.getBufferedFrom();

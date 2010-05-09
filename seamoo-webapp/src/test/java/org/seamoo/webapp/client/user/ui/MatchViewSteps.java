@@ -165,6 +165,8 @@ public class MatchViewSteps {
 	public void assertEventTriggered(String event) {
 		if (event.equalsIgnoreCase("ignore"))
 			verify(listener).ignoreQuestion((Display) any());
+		else if (event.equalsIgnoreCase("rematch"))
+			verify(listener).rematch((Display) any());
 		else
 			throw new RuntimeException("Event " + event + " is not supported");
 	}
