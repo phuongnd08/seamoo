@@ -43,6 +43,13 @@ public class MatchBoard {
 
 		public void addEventListener(EventListener listener);
 
+		/**
+		 * Get the side widget that controlled by the presenter but actually put in the side
+		 * This is used to simplify testing (really?)
+		 * @return
+		 */
+		public Widget getSideWidget();
+
 	}
 
 	public static class Presenter {
@@ -77,6 +84,7 @@ public class MatchBoard {
 			service = GWT.create(MatchService.class);
 			display = new MatchView();
 			RootPanel.get("matching-panel").add((Widget) display);
+			RootPanel.get(dictionary.get("sideContainer")).add(display.getSideWidget());
 			Long lid = Long.parseLong(dictionary.get("leagueAutoId"));
 			initialize(service, display, lid);
 		}

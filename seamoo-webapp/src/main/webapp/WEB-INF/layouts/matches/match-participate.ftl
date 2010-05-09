@@ -1,7 +1,7 @@
 [#ftl/]
 [#import "/match.ftl" as match/]
 [#import "/common.ftl" as common/]
-[@common.userGwt module="matching" params={"leagueAutoId": league.autoId}/]
+[@common.userGwt module="matching" params={"leagueAutoId": league.autoId, "sideContainer": "sidePlaceHolder"}/]
 [#-- 
 <div class="description-box">
 	<h3>Diễn biến</h3>

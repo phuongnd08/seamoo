@@ -201,6 +201,7 @@ public class MatchOrganizer {
 		match.setPhase(MatchPhase.NOT_FORMED);
 		match.setQuestions(questionDao.getRandomQuestions(leagueId, settings.getQuestionPerMatch()));
 		match.setTemporalUUID(UUID.randomUUID().toString());
+		match.setLeagueAutoId(leagueId);
 		return match;
 	}
 
@@ -317,7 +318,7 @@ public class MatchOrganizer {
 	 * 
 	 * @param userAutoId
 	 * @return
-	 * @throws TimeoutException 
+	 * @throws TimeoutException
 	 */
 	public Match getMatchForUser(Long userAutoId) throws TimeoutException {
 		initialize();
@@ -346,11 +347,17 @@ public class MatchOrganizer {
 						return true;
 					}
 				});
-			} else recheckMatchPhase(matches[0], null, null);//there is no need to manipulate the list, save some round trip to memcache
+			} else
+				recheckMatchPhase(matches[0], null, null);// there is no need to
+															// manipulate the
+															// list, save some
+															// round trip to
+															// memcache
 			matchWrapper.putObject(matches[0]);
 			matchWrapper.unlock();
 		} else {
-			// Deal with both situation: When user is not allocated a match or when
+			// Deal with both situation: When user is not allocated a match or
+			// when
 			// cache of match is corrupted
 			doWhileListsLocked(new DoWhileListsLockedRunner() {
 

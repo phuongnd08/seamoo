@@ -17,7 +17,7 @@ And Timer forgets its interaction
 When User ignore 3 questions
 Then Service get the current match information with receivedQuestion=5 & receivedEvent=0
 And Timer is reset
-And Timer is rescheduled with interval of 1000
+And Timer is rescheduled with interval of 3000
 !-- Fast-forward 5 more question
 Given Service forgets its interaction
 And Timer forgets its interaction

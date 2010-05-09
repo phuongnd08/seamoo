@@ -81,15 +81,15 @@
 
 [#macro gwt prefix module params={}]
 	<script type="text/javascript">
-	var Vars = {
-		module: "${module}"
-		[#assign index=0/]
-		[#list params?keys as key],
-			"${key}": "${params[key]}"
-			[#assign index=index+1]
-			[#if index<params?size],[/#if]
-		[/#list]
-	}
+	[@compress single_line=true]
+		var Vars = {
+			module: "${module}"
+			[#assign index=0/]
+			[#list params?keys as key],
+				"${key}": "${params[key]}"
+			[/#list]
+		}
+	[/@compress]
 	</script>
 	<script type="text/javascript" src="[@spring.url "/${prefix}Gwt/${prefix}Gwt.nocache.js"/]"></script>
 [/#macro]

@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -36,11 +36,9 @@ public class MatchView extends Composite implements Display {
 	@UiField
 	HTMLPanel panelIndicator;
 	@UiField
-	FlowPanel panelMatchStatus;
+	HTMLPanel panelMatchWaiting;
 	@UiField
-	Image imgMatchStatus;
-	@UiField
-	Image labelMatchStatus;
+	InlineLabel labelMatchWaiting;
 	@UiField
 	FlowPanel panelMatchPlayers;
 	@UiField
@@ -85,6 +83,7 @@ public class MatchView extends Composite implements Display {
 
 		// Some panel is invisible by default
 		panelQuestion.setVisible(false);
+		panelIndicator.setVisible(false);
 	}
 
 	@Override
@@ -106,7 +105,8 @@ public class MatchView extends Composite implements Display {
 
 	@Override
 	public void setPhase(MatchPhase phase) {
-		panelMatchStatus.setVisible(phase == MatchPhase.NOT_FORMED);
+		panelIndicator.setVisible(true);
+		panelMatchWaiting.setVisible(phase == MatchPhase.NOT_FORMED);
 		panelMatchPlayers.setVisible(phase != MatchPhase.NOT_FORMED);
 		panelCountDown.setVisible(phase == MatchPhase.FORMED || phase == MatchPhase.PLAYING || phase == MatchPhase.YOU_FINISHED);
 		switch (phase) {
@@ -228,5 +228,11 @@ public class MatchView extends Composite implements Display {
 			eventIndex++;
 			tableMatchEvents.setText(eventIndex, 0, eventToText(event));
 		}
+	}
+
+	@Override
+	public Widget getSideWidget() {
+		// TODO Auto-generated method stub
+		return panelIndicator;
 	}
 }

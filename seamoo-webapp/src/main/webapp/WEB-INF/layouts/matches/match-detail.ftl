@@ -109,5 +109,5 @@
 </div>
 
 <div class="description-box">
-	<a href="[@spring.url "/matches/rejoin?leagueId=1"/]">Chơi trận khác</a>
+	<a href="[@spring.url "/matches/rejoin?leagueId=${match.leagueAutoId}"/]">Chơi trận khác</a>
 </div>

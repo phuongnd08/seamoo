@@ -4,13 +4,13 @@ And A Question
 And Question Text is "After 1 is ..."
 And Question Choices are 1,2,3,4
 When View Phase is switched to NOT_FORMED
-Then panelMatchStatus is visible
+Then panelMatchWaiting is visible
 And panelMatchPlayers is invisible
 And panelCountDown is invisible
 And panelQuestion is invisible
 When View Phase is switched to FORMED
 And View Players is assigned to player1,player2,player3
-Then panelMatchStatus is invisible
+Then panelMatchWaiting is invisible
 And panelMatchPlayers is visible
 And panelCountDown is visible
 And text of labelCountDownType is "Chờ trận đấu bắt đầu"

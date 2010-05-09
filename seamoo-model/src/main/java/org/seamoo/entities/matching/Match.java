@@ -35,6 +35,8 @@ public class Match implements Serializable {
 	private List<MatchEvent> events;
 
 	private MatchPhase phase;
+	
+	private Long leagueAutoId;
 
 	@Store(false)
 	private String temporalUUID;
@@ -146,5 +148,13 @@ public class Match implements Serializable {
 
 	public String getDescription() {
 		return description;
+	}
+
+	public void setLeagueAutoId(Long leagueAutoId) {
+		this.leagueAutoId = leagueAutoId;
+	}
+
+	public Long getLeagueAutoId() {
+		return leagueAutoId;
 	}
 }

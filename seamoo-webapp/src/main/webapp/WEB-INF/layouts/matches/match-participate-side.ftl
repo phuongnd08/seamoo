@@ -11,10 +11,7 @@
 			Dành cho những người lần đầu tham gia
 		</p>
 	</div>
-	<div class="description-box">
-		<p>
-		<span class="loading-indicator"></span> Đang chờ xếp trận đấu...
-		</p>
+	<div class="description-box" id="sidePlaceHolder">
 	</div>
 	<div>
 		<button class="fw">&lt;&lt;Thoát khỏi <strong>Giải nghiệp dư</strong></button>
