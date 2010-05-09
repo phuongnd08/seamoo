@@ -101,3 +101,7 @@
 [#macro userGwt module params={}]
 	[@gwt prefix="user" module=module params=params/]
 [/#macro]
+
+[#macro avatar emailHash size classes=""]
+	<img class="${classes}" width="${size?c}" height="${size?c}" src="http://www.gravatar.com/avatar/${emailHash!"na"}?s=${size?c}&d=wavatar&r=PG"/>
+[/#macro]

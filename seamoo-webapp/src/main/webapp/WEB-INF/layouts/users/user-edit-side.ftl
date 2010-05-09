@@ -3,8 +3,7 @@
 <div class="module">
 	<div class="description-box tac">
 		<div>
-			<img width="128" height="128" alt=""
-				src="http://www.gravatar.com/avatar/7566e2a406450d0581dcc3661247badc?s=128&amp;d=identicon&amp;r=PG">
+			[@common.avatar emailHash=user.emailHash size=128/]
 		</div>
 		<br/>
 		<p style="font-size: 200%; font-weight: bold;"><a

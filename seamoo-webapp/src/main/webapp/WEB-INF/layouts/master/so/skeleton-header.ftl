@@ -12,7 +12,7 @@
 					<img
 						src="${themeRoot}/images/replies-off.png"
 						title="you have no new replies" alt="" height="10" width="15"></a>
-					<a href="#">${member.email!"(unknown)"}</a>&nbsp;<span class="reputation-score" title="reputation score">0</span>
+					<a href="[@spring.url "/users/${member.autoId?c}/${member.alias}"/]">${member.displayName}</a>&nbsp;<span class="reputation-score" title="reputation score">0</span>
 					<span title="4 bronze badges"></span>
 					<span class="lsep">|</span>
 					<a href="[@spring.url "/users/logout?returnUrl=#"/]">logout</a>

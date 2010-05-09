@@ -3,6 +3,7 @@ package org.seamoo.webapp.controllers;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
 
@@ -11,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.seamoo.daos.MemberDao;
 import org.seamoo.entities.Member;
+import org.seamoo.utils.AliasBuilder;
+import org.seamoo.utils.EmailExtractor;
+import org.seamoo.utils.HashBuilder;
+import org.seamoo.utils.converter.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -104,12 +109,17 @@ public class UserController {
 					member = new Member();
 					member.setOpenId(user.getClaimedId());
 					member.setJoiningDate(new Date());
-					String email = null;
 					Map<String, String> infoMap = (Map<String, String>) user.getAttribute(OPEN_ID_INFO_FIELD);
 					if (infoMap != null) {
-						member.setEmail(infoMap.get(OPEN_ID_INFO_EMAIL_FIELD));
-						member.setDisplayName(infoMap.get(OPEN_ID_INFO_EMAIL_FIELD));
+						String email = infoMap.get(OPEN_ID_INFO_EMAIL_FIELD);
+						member.setEmail(email);
+						if (email != null) {
+							member.setEmailHash(HashBuilder.getMD5Hash(email));
+							member.setDisplayName(EmailExtractor.extractName(email));
+						}
 					}
+					if (member.getDisplayName() != null)
+						member.setAlias(AliasBuilder.toAlias(member.getDisplayName()));
 					memberDao.persist(member);
 				}
 
@@ -157,8 +167,8 @@ public class UserController {
 	// @PathVariable("userName") String userName){
 	// return viewProfileTab(userId, userName, "profile");
 	// }
-	@RequestMapping("/{userId}/{userName}")
-	public ModelAndView viewProfileTab(@PathVariable("userId") long userId, @PathVariable("userName") String userName,
+	@RequestMapping("/{userId}/{userAlias}")
+	public ModelAndView viewProfileTab(@PathVariable("userId") long userId, @PathVariable("userAlias") String userAlias,
 			@RequestParam(value = "tab", required = false) String tab) {
 		ModelAndView mav = null;
 		if (tab != null && tab.equals("discussion")) {
@@ -166,17 +176,45 @@ public class UserController {
 			mav.addObject("title", "Discussion");
 		} else {
 			mav = new ModelAndView("user.view");
-			mav.addObject("userName", userName);
-			mav.addObject("userId", new Long(userId));
-			mav.addObject("title", userName);
+			Member m = memberDao.findByKey(userId);
+			mav.addObject("user", m);
+			mav.addObject("title", "View Profile - " + m.getDisplayName());
 		}
 		return mav;
 	}
 
-	@RequestMapping("/edit/{userId}")
+	public static String BIRTH_DAY_FORMAT = "yyyy/MM/dd";
+
+	@RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)
 	public ModelAndView edit(@PathVariable("userId") long userId) {
 		ModelAndView mav = new ModelAndView("user.edit");
-		mav.addObject("title", String.format("Edit profile %d", userId));
+		Member m = memberDao.findByKey(userId);
+		mav.addObject("title", String.format("Edit profile %s", m.getDisplayName()));
+		mav.addObject("user", m);
+		mav.addObject("birthdayString", m.getDateOfBirth() != null ? Converter.toString(m.getDateOfBirth(), BIRTH_DAY_FORMAT)
+				: "");
 		return mav;
+	}
+
+	@RequestMapping(value = "/edit/{userId}", method = RequestMethod.POST)
+	public String save(@PathVariable("userId") long userId, @RequestParam("displayName") String displayName,
+			@RequestParam("email") String email, @RequestParam("birthday") String birthday,
+			@RequestParam("website") String website, @RequestParam("quote") String quote, @RequestParam("aboutMe") String aboutMe) {
+		Member m = memberDao.findByKey(userId);
+		m.setDisplayName(displayName);
+		m.setAlias(AliasBuilder.toAlias(displayName));
+		m.setEmail(email);
+		m.setEmailHash(HashBuilder.getMD5Hash(email));
+		m.setQuote(quote);
+		Date d = null;
+		try {
+			d = Converter.toDate(birthday, BIRTH_DAY_FORMAT);
+		} catch (ParseException e) {
+		}
+		m.setDateOfBirth(d);
+		m.setWebsite(website);
+		m.setAboutMe(aboutMe);
+		memberDao.persist(m);
+		return String.format("redirect:/users/%d/%s", m.getAutoId(), m.getAlias());
 	}
 }

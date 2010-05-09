@@ -233,7 +233,7 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-incubator</artifactId>
-			<version>2.0.1</version>
+			<version>${gwt.incubator.version}</version>
 		</dependency>
 
 	</dependencies>

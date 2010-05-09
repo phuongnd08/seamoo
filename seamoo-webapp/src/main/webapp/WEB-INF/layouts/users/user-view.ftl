@@ -4,21 +4,29 @@
 <table class="fw">
 <tr>
 	<td class="hw">
+		[#if (member.autoId==user.autoId)]
+		<div style="float: right; margin-top: 19px; margin-right: 4px;">
+             <a href="/users/edit/${user.autoId?c}">sửa</a> 
+        </div>
+        [/#if]
 		<table class="fw">
 			<tr>
 				<td class="user-gravatar128">
-					<img class="fl user-gravatar128" width="128" height="128" src="http://www.gravatar.com/avatar/74db71cdccf02240329dac5acda62428?s=128&d=identicon&r=PG"/>
+					[@common.avatar emailHash=user.emailHash size=128 classes="fl user-gravatar128"/]
 				</td>
 				<td>
 					<p>
-						<strong>Phương Nguyễn</strong><br/>
-						Thể hiện một đẳng cấp pro
+						<strong>${user.displayName}</strong><br/>
+						${user.quote!""}
 					</p>
 					<p>
 						<table class="fw">
 							<tr><td>Tuổi</td><td>25</td></tr>
-							<tr><td>Thấy lần cuối</td><td>10 phút trước</td></tr>
-							<tr><td>Website</td><td><a href="http://mrcold.blogger.com">mrcold.blogger.com</a></td></tr>
+							[#--<tr><td>Thấy lần cuối</td><td>10 phút trước</td></tr>--]
+							<tr>
+								<td>Website</td>
+								<td>[#if (user.website?exists && user.website!="")]<a href="${user.website}">${user.website}</a>[/#if]</td>
+							</tr>
 							<tr><td>Danh tiếng</td><td>12k</td></tr>
 							<tr><td>Cấp</td><td>10</td></tr>
 						</table>
@@ -29,7 +37,7 @@
 	</td>
 	<td>
 		<p id="user-about-me">
-		Ambitious guy of destiny
+		${((user.aboutMe!"")?xhtml)?replace("\n", "<br/>")}
 		</p>
 	</td>
 </tr>
@@ -69,6 +77,7 @@
 				[/#if]
 			[/#list]
 		</td>
+		<td>${result}</td>
 		<td><a href="#">Xem</a></td>
 	</tr>
 [/#macro]

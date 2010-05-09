@@ -10,6 +10,7 @@
 	<modules>
 		<module>seamoo-documentation</module>
 		<module>seamoo-model</module>
+		<module>seamoo-server-utils</module>
 		<module>seamoo-test-resources</module>
 		<module>seamoo-persistence</module>
 		<module>seamoo-cache</module>
@@ -520,6 +521,7 @@
 		<gae.version>1.3.3.1</gae.version>
 		<gae.debugPort>8000</gae.debugPort>
 		<gwt.version>2.0.3</gwt.version>
+		<gwt.incubator.version>2.0.1</gwt.incubator.version>
 		<urlrewrite.filter.version>3.1.0</urlrewrite.filter.version>
 		<jug.version>2.0.0</jug.version>
 	</properties>

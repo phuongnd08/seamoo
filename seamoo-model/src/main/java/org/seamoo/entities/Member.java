@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Id;
 
+import com.google.gwt.user.client.rpc.GwtTransient;
 import com.vercer.engine.persist.annotation.Key;
 import com.vercer.engine.persist.annotation.Store;
 
@@ -21,7 +22,10 @@ public class Member implements Serializable {
 	private String displayName;
 
 	@Store(true)
-	transient private String email;
+	@GwtTransient
+	private String email;
+	
+	private String emailHash;
 
 	private Date dateOfBirth;
 
@@ -45,6 +49,8 @@ public class Member implements Serializable {
 
 	private Date lastLocked;
 
+	private String alias;
+
 	public Member() {
 
 	}
@@ -66,6 +72,12 @@ public class Member implements Serializable {
 	}
 
 	public String getDisplayName() {
+		if (displayName == null || displayName.length() == 0)
+			return "(unknown)";
+		return displayName;
+	}
+
+	public String getRealDisplayName() {
 		return displayName;
 	}
 
@@ -155,5 +167,21 @@ public class Member implements Serializable {
 
 	public Long getAutoId() {
 		return autoId;
+	}
+
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
+	public void setEmailHash(String emailHash) {
+		this.emailHash = emailHash;
+	}
+
+	public String getEmailHash() {
+		return emailHash;
 	}
 }
