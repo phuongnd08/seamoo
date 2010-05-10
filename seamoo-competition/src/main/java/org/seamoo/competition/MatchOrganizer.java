@@ -396,46 +396,51 @@ public class MatchOrganizer {
 			return;
 		}
 		CacheWrapper<Match> matchWrapper = getMatchWrapperByUUID(candidate.getCurrentMatchUUID());
-		Match match = matchWrapper.getObject();
-		if (match == null) {
-			System.err.println("Cannot find match associated with user. Probably cache is corrupted. Answer discarded");
-			return;
+		matchWrapper.lock(settings.getMaxLockWaitTime());
+		try {
+			Match match = matchWrapper.getObject();
+			if (match == null) {
+				System.err.println("Cannot find match associated with user. Probably cache is corrupted. Answer discarded");
+				return;
+			}
+
+			List<MatchCompetitor> competitors = match.getCompetitors();
+			MatchCompetitor competitor = match.getCompetitorForMember(candidate.getMemberAutoId());
+			if (competitor == null)
+				throw new RuntimeException("Competitor disappeared mysteriously");
+			switch (answer.getType()) {
+			case IGNORED:
+				break;
+			case SUBMITTED:
+				double score = match.getQuestions().get(questionOrder - 1).getScore(answer.getContent());
+				answer.setScore(score);
+				answer.setCorrect(score > 0);
+				break;
+			}
+
+			List<MatchAnswer> answers = competitor.getAnswers();
+			int insertPos = questionOrder - 1;
+			if (answers.size() < insertPos) {
+				for (int i = answers.size(); i < insertPos; i++)
+					competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, null));
+			}
+			if (insertPos < answers.size()) {
+				System.err.println("Late received answer at " + questionOrder + " discarded");
+			} else
+				competitor.addAnswer(answer);
+
+			if (competitor.getPassedQuestionCount() == match.getQuestions().size()) {
+				competitor.setFinishedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
+				checkMatchFinished(match);
+			}
+
+			matchWrapper.putObject(match);
+
+			updateLastSeen(candidate);
+			recacheCandidate(candidate);
+		} finally {
+			matchWrapper.unlock();
 		}
-
-		List<MatchCompetitor> competitors = match.getCompetitors();
-		MatchCompetitor competitor = match.getCompetitorForMember(candidate.getMemberAutoId());
-		if (competitor == null)
-			throw new RuntimeException("Competitor disappeared mysteriously");
-		switch (answer.getType()) {
-		case IGNORED:
-			break;
-		case SUBMITTED:
-			double score = match.getQuestions().get(questionOrder - 1).getScore(answer.getContent());
-			answer.setScore(score);
-			answer.setCorrect(score > 0);
-			break;
-		}
-
-		List<MatchAnswer> answers = competitor.getAnswers();
-		int insertPos = questionOrder - 1;
-		if (answers.size() < insertPos) {
-			for (int i = answers.size(); i < insertPos; i++)
-				competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, null));
-		}
-		if (insertPos < answers.size()) {
-			System.err.println("Late received answer at " + questionOrder + " discarded");
-		} else
-			competitor.addAnswer(answer);
-
-		if (competitor.getPassedQuestionCount() == match.getQuestions().size()) {
-			competitor.setFinishedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
-			checkMatchFinished(match);
-		}
-
-		matchWrapper.putObject(match);
-
-		updateLastSeen(candidate);
-		recacheCandidate(candidate);
 	}
 
 	/**

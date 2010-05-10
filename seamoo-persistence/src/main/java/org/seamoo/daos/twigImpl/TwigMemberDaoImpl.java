@@ -24,29 +24,6 @@ public class TwigMemberDaoImpl extends TwigGenericDaoImpl<Member, Long> implemen
 		memberLastCacheByOpenIds = new HashMap<String, Long>();
 	}
 
-	private Member internalFindByOpenId(String openId) {
-		// TODO Auto-generated method stub
-		RootFindCommand<Member> fc = getOds().find().type(Member.class).addFilter("openId", FilterOperator.EQUAL, openId);
-		if (fc.countResultsNow() == 1)
-			return fc.returnResultsNow().next();
-		return null;
-	}
-
-	public Member findByOpenId(String openId) {
-		if (!memberByOpenIds.containsKey(openId) || isExpiredByOpenId(openId)) {
-			refreshByOpenId(openId);
-		}
-		return memberByOpenIds.get(openId);
-	}
-
-	@Override
-	public Member findByKey(Long key) {
-		// prefer in-memory cached over datastore
-		if (!memberByKeys.containsKey(key) || isExpiredByKey(key))
-			refreshByKey(key);
-		return memberByKeys.get(key);
-	}
-
 	private void refreshByKey(Long key) {
 		// TODO Auto-generated method stub
 		Member member = super.findByKey(key);
@@ -80,4 +57,28 @@ public class TwigMemberDaoImpl extends TwigGenericDaoImpl<Member, Long> implemen
 		// TODO Auto-generated method stub
 		return memberLastCacheByOpenIds.get(openId) + CACHE_PERIOD <= System.currentTimeMillis();
 	}
+
+	private Member internalFindByOpenId(String openId) {
+		// TODO Auto-generated method stub
+		RootFindCommand<Member> fc = getOds().find().type(Member.class).addFilter("openId", FilterOperator.EQUAL, openId);
+		if (fc.countResultsNow() >= 1)
+			return fc.returnResultsNow().next();
+		return null;
+	}
+
+	public Member findByOpenId(String openId) {
+		if (memberByOpenIds.get(openId) == null || isExpiredByOpenId(openId)) {
+			refreshByOpenId(openId);
+		}
+		return memberByOpenIds.get(openId);
+	}
+
+	@Override
+	public Member findByKey(Long key) {
+		// prefer in-memory cached over datastore
+		if (memberByKeys.get(key) == null || isExpiredByKey(key))
+			refreshByKey(key);
+		return memberByKeys.get(key);
+	}
+
 }

@@ -12,6 +12,7 @@ import org.seamoo.webapp.client.shared.ui.UrlFactory;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
 import org.seamoo.webapp.client.user.ui.MatchView;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Dictionary;
 import com.google.gwt.user.client.Timer;
@@ -114,6 +115,7 @@ public class MatchBoard {
 			if (currentMatchState.getRemainingPeriod() != 0) {
 				interval = Math.min(interval, currentMatchState.getRemainingPeriod());
 			}
+			Log.info("Schedule refresh timer in the next " + interval + " milliseconds");
 			refreshTimer.schedule((int) interval);
 		}
 
@@ -156,6 +158,7 @@ public class MatchBoard {
 			if (refreshingMatchState)
 				return;
 			refreshingMatchState = true;
+			Log.info("Refresh Match State");
 			service.getMatchState(leagueAutoId, bufferedQuestions.size(), bufferedEvents.size(), new AsyncCallback<MatchState>() {
 
 				@Override
@@ -240,14 +243,17 @@ public class MatchBoard {
 					// TODO Auto-generated method stub
 					if (triedTimes < MAX_TRY_TIMES) {
 						trySubmitAnswer(questionOrder, answer, triedTimes + 1);
-					} else
+						Log.info("Cannot submit answer of Q#" + questionOrder + " " + triedTimes + " time(s). Retry");
+					} else {
+						Log.info("Cannot submit answer of Q#" + questionOrder + " " + MAX_TRY_TIMES + ". Give up");
 						throw new RuntimeException("Tried " + MAX_TRY_TIMES + " times but cannot submit the answer");
+					}
 				}
 
 				@Override
 				public void onSuccess(Object arg0) {
 					// TODO Auto-generated method stub
-
+					Log.info("Answer of Q#" + questionOrder + " submitted successfully");
 				}
 			});
 		}
@@ -272,6 +278,12 @@ public class MatchBoard {
 			});
 		}
 
+		private void shortCircuitRefreshTimer() {
+			Log.info("Short circuit refresh timer");
+			refreshTimer.cancel();
+			refreshTimer.run();
+		}
+
 		private void nextQuestion() {
 			if (currentQuestionOrder < bufferedQuestions.size() - 1) {
 				waitingForNextQuestion = false;
@@ -279,8 +291,7 @@ public class MatchBoard {
 				if (currentQuestionOrder == bufferedQuestions.size() - 2
 						&& bufferedQuestions.size() < currentMatchState.getQuestionsCount()) {
 					// short circuit the refreshTimer
-					refreshTimer.cancel();
-					refreshTimer.run();
+					shortCircuitRefreshTimer();
 				}
 			} else {
 				if (bufferedQuestions.size() < currentMatchState.getQuestionsCount()) {
@@ -290,8 +301,7 @@ public class MatchBoard {
 				} else {
 					// no more questions, user has finished his match
 					showNoQuestion();
-					refreshTimer.cancel();
-					refreshTimer.run();
+					shortCircuitRefreshTimer();
 				}
 			}
 		}

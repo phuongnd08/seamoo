@@ -235,7 +235,11 @@
 			<artifactId>gwt-incubator</artifactId>
 			<version>${gwt.incubator.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>gwt.log</groupId>
+			<artifactId>gwt-log</artifactId>
+			<version>${gwt.log.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

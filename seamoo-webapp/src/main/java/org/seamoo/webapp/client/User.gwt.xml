@@ -6,6 +6,11 @@
 	<inherits name="org.seamoo.Models" />
 	<inherits name='com.google.gwt.widgetideas.WidgetIdeas' />
 	<inherits name='com.google.gwt.libideas.LibIdeas' />
+	<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
+	<set-property name="log_WindowLogger" value="ENABLED" />
+	<!-- Loggers Enabled by default -->
+	<set-property name="log_DivLogger" value="ENABLED" />
+
 	<source path="user" />
 	<source path="shared" />
 	<entry-point class="org.seamoo.webapp.client.user.UserLoader" />

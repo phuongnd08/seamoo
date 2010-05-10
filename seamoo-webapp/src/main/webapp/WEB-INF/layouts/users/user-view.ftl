@@ -37,7 +37,7 @@
 	</td>
 	<td>
 		<p id="user-about-me">
-		${((user.aboutMe!"")?xhtml)?replace("\n", "<br/>")}
+		${((user.aboutMe!"")?html)?replace("\n", "<br/>")}
 		</p>
 	</td>
 </tr>
