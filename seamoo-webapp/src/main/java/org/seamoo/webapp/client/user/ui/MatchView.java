@@ -231,8 +231,9 @@ public class MatchView extends Composite implements Display {
 	int eventIndex = -1;
 
 	String memberToHTML(Member m) {
-		return "<a href='/users/" + m.getAutoId() + "/" + m.getAlias() + "' target='_blank'>" + m.getDisplayName() + "</a>";
-
+		// return "<a href='/users/" + m.getAutoId() + "/" + m.getAlias() +
+		// "' target='_blank'>" + m.getDisplayName() + "</a>";
+		return "<strong>" + m.getDisplayName() + "</strong>";
 	}
 
 	String eventToHTML(MatchEvent event) {

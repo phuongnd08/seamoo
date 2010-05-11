@@ -35,7 +35,7 @@ public class MatchBoardPresenterSteps {
 
 	Question[] questions;
 	MatchBoard.Display.EventListener listener;
-	public static final long TEST_LEAGUE_AUTOID=1L;
+	public static final long TEST_LEAGUE_AUTOID = 1L;
 	int refreshPeriod;
 	Timer oldTimer;
 	Timer mockedTimer;
@@ -177,6 +177,13 @@ public class MatchBoardPresenterSteps {
 		matchState.setBufferedQuestions(new ArrayList<Question>());
 		matchState.setBufferedQuestionsFrom(0);
 		matchState.setPhase(MatchPhase.NOT_FORMED);
+	}
+
+	@Given("Current user has answered $number questions")
+	public void setUpCurrentUserCompletedQuestions(int number) {
+		matchState.setCompletedQuestionsCount(number);
+		matchState.setBufferedEventsFrom(0);
+		matchState.setBufferedQuestions(Arrays.asList(questions));
 	}
 
 	@When("Presenter initialize")

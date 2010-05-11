@@ -49,7 +49,7 @@ Given Event#1 phuongnd08 submit answer for question #1
 Given Event#2 phuongnd08 ignore question #2
 Given Event#3 phuongnd08 left Match
 When Events are added to View
-Then tableMatchEvents shows "<a href='/users/1/phuongnd08' target='_blank'>phuongnd08</a> join match"
-And tableMatchEvents shows "<a href='/users/1/phuongnd08' target='_blank'>phuongnd08</a> answer question #1"
-And tableMatchEvents shows "<a href='/users/1/phuongnd08' target='_blank'>phuongnd08</a> ignore question #2"
-And tableMatchEvents shows "<a href='/users/1/phuongnd08' target='_blank'>phuongnd08</a> left match"
+Then tableMatchEvents shows "<strong>phuongnd08</strong> join match"
+And tableMatchEvents shows "<strong>phuongnd08</strong> answer question #1"
+And tableMatchEvents shows "<strong>phuongnd08</strong> ignore question #2"
+And tableMatchEvents shows "<strong>phuongnd08</strong> left match"

@@ -61,12 +61,14 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 		// assign buffered questions when user is in the middle of the match
 		// and
 		// in need of questions
-		if (match.getPhase() == MatchPhase.PLAYING && bufferedQuestionsCount < matchState.getQuestionsCount()
-				&& bufferedQuestionsCount - competitor.getPassedQuestionCount() <= BUFFERED_QUESTION_REFILL_THRESHOLD) {
-			matchState.setBufferedQuestionsFrom(bufferedQuestionsCount);
-			List<Question> bufferedQuestions = match.getQuestions().subList(bufferedQuestionsCount,
-					bufferedQuestionsCount + BUFFERED_QUESTION_BLOCK);
-			matchState.getBufferedQuestions().addAll(bufferedQuestions);
+		if (match.getPhase() == MatchPhase.PLAYING) {
+			if (bufferedQuestionsCount < matchState.getQuestionsCount()
+					&& bufferedQuestionsCount - competitor.getPassedQuestionCount() <= BUFFERED_QUESTION_REFILL_THRESHOLD) {
+				matchState.setBufferedQuestionsFrom(bufferedQuestionsCount);
+				List<Question> bufferedQuestions = getOptimalQuestionBuffer(bufferedQuestionsCount,
+						competitor.getPassedQuestionCount(), match.getQuestions());
+				matchState.getBufferedQuestions().addAll(bufferedQuestions);
+			}
 		}
 		// set the correct remaining time
 		if (match.getPhase() == MatchPhase.FORMED) {
@@ -91,6 +93,20 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 		matchState.setMatchAutoId(match.getAutoId() != null ? match.getAutoId().longValue() : 0);
 		matchState.setMatchAlias(match.getAlias());
 		return matchState;
+	}
+
+	private List<Question> getOptimalQuestionBuffer(int bufferedQuestionsCount, int passedQuestionCount, List<Question> questions) {
+		int lowRange = bufferedQuestionsCount;
+		int highRange = bufferedQuestionsCount + BUFFERED_QUESTION_BLOCK;
+		while (highRange <= passedQuestionCount + BUFFERED_QUESTION_REFILL_THRESHOLD) {
+			if (highRange < questions.size())
+				highRange += BUFFERED_QUESTION_BLOCK;
+			else
+				break;
+		}
+
+		List<Question> bufferedQuestions = questions.subList(lowRange, highRange);
+		return bufferedQuestions;
 	}
 
 	@Override

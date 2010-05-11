@@ -156,6 +156,11 @@ public class MatchServiceImplSteps {
 		bufferedQuestionsCount = count;
 	}
 
+	@Given("Member@$id has answered $number questions")
+	public void setUpCurrentMemberAnsweredQuestions(long id, int number) {
+		currentMatch.getCompetitorForMember(members.get(id).getAutoId()).setPassedQuestionCount(number);
+	}
+
 	@Given("Current Member has $count buffered events")
 	public void setUpCurrentMemberBufferedEvents(int count) {
 		bufferedEventsCount = count;
@@ -180,6 +185,11 @@ public class MatchServiceImplSteps {
 	@Then("State Buffered Events has $number events")
 	public void assertNumberOfBufferedEventsOfMatchState(int number) {
 		assertEquals(matchState.getBufferedEvents().size(), number);
+	}
+
+	@Then("State Completed Questions Count is $number")
+	public void assertNumberOfCompletedQuestionsCount(int number) {
+		assertEquals(matchState.getCompletedQuestionsCount(), number);
 	}
 
 	@Given("Match autoId is $id")
