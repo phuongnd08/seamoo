@@ -403,7 +403,8 @@ public class MatchOrganizer {
 	 */
 	public void escapeCurrentMatch(Long userAutoId) {
 		initialize();
-		getMatchCandidate(userAutoId).setCurrentMatchUUID(null);
+		CacheWrapper<MatchCandidate> candidateWrapper = getCandidateWrapperByAutoId(userAutoId);
+		candidateWrapper.putObject(null);
 	}
 
 	private void addMatchAnswer(Long userAutoId, int questionOrder, MatchAnswer answer) throws TimeoutException {
