@@ -15,11 +15,13 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
+import org.seamoo.webapp.client.shared.ui.NotLoggedInException;
 import org.seamoo.webapp.client.user.MatchService;
 import org.seamoo.webapp.filters.MemberInjectionFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workingonit.gwtbridge.ServletUtils;
 
+import com.google.gwt.user.client.rpc.StatusCodeException;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class MatchServiceImpl extends RemoteServiceServlet implements MatchService {
@@ -41,8 +43,12 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	}
 
 	@Override
-	public MatchState getMatchState(Long leagueId, int bufferedQuestionsCount, int bufferredEventsCount) {
+	public MatchState getMatchState(Long leagueId, int bufferedQuestionsCount, int bufferredEventsCount)
+			throws NotLoggedInException {
 		Member member = getInjectedMember();
+		if (member == null) {
+			throw new NotLoggedInException();
+		}
 		MatchOrganizer matchOrganizer = leagueOrganizer.getMatchOrganizer(leagueId);
 		Match match;
 		try {

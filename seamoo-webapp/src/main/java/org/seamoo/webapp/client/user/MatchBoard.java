@@ -8,6 +8,7 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
+import org.seamoo.webapp.client.shared.ui.NotLoggedInException;
 import org.seamoo.webapp.client.shared.ui.UrlFactory;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
 import org.seamoo.webapp.client.user.ui.MatchView;
@@ -171,8 +172,14 @@ public class MatchBoard {
 				@Override
 				public void onFailure(Throwable throwable) {
 					// TODO Auto-generated method stub
+					Log.info(throwable.getClass().getName());
+					Log.info(String.valueOf(throwable instanceof NotLoggedInException));
 					refreshingMatchState = false;
-					refreshMatchState();// do not accept failure, retry!
+					if (throwable instanceof NotLoggedInException)
+						Window.Location.reload();// reload to force a login if
+					// necessary
+					else
+						refreshMatchState();// do not accept failure, retry!
 				}
 			});
 

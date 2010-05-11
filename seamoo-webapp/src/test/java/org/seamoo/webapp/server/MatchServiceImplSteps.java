@@ -28,6 +28,7 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
+import org.seamoo.webapp.client.shared.ui.NotLoggedInException;
 import org.workingonit.gwtbridge.ServletUtils;
 
 public class MatchServiceImplSteps {
@@ -109,7 +110,7 @@ public class MatchServiceImplSteps {
 	MatchState matchState;
 
 	@When("Member@$id request for Match State")
-	public void requestMatchState(Long id) {
+	public void requestMatchState(Long id) throws NotLoggedInException {
 		setUpCurrentMember(members.get(id));
 		matchState = service.getMatchState(1L, bufferedQuestionsCount, bufferedEventsCount);
 	}

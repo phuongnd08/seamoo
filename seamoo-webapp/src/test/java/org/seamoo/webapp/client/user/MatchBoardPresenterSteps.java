@@ -24,6 +24,7 @@ import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.utils.converter.Converter;
+import org.seamoo.webapp.client.shared.ui.NotLoggedInException;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
 
 import com.google.gwt.core.client.GWT;
@@ -39,6 +40,7 @@ public class MatchBoardPresenterSteps {
 	int refreshPeriod;
 	Timer oldTimer;
 	Timer mockedTimer;
+	boolean notLoggedIn = false;
 
 	@Given("Refresh period is $refreshPeriod milliseconds")
 	public void setUpRefreshSettings(int refreshPeriod) {
@@ -109,7 +111,10 @@ public class MatchBoardPresenterSteps {
 			public Object answer(InvocationOnMock invocation) throws Throwable {
 				// TODO Auto-generated method stub
 				AsyncCallback<MatchState> callback = (AsyncCallback<MatchState>) invocation.getArguments()[3];
-				callback.onSuccess(matchState);
+				if (!notLoggedIn)
+					callback.onSuccess(matchState);
+				else
+					callback.onFailure(new NotLoggedInException());
 				return null;
 			}
 		}).when(serviceAsync).getMatchState(anyLong(), anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
@@ -390,5 +395,16 @@ public class MatchBoardPresenterSteps {
 	@Alias("Service get current match information $count time")
 	public void assertServiceGetMatchStateTimes(int count) {
 		verify(serviceAsync, times(count)).getMatchState(anyLong(), anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
+	}
+
+	@Given("User is not logged in")
+	public void setUpUserNotLoggedIn() {
+		notLoggedIn = true;
+	}
+
+	@Then("Page is reloaded")
+	public void assertPageReloaded() {
+		PowerMockito.verifyStatic();
+		Window.Location.reload();
 	}
 }
