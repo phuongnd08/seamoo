@@ -35,7 +35,7 @@ public class MatchOrganizerStressTest {
 
 	private static long MAX_TEST_TIME = 10000;
 
-	private static int SIMULTANEOUS_USERS_COUNT = 30;
+	private static int SIMULTANEOUS_USERS_COUNT = 15;
 
 	public static class CountableCacheWrapper<T> implements CacheWrapper<T> {
 
@@ -203,7 +203,7 @@ public class MatchOrganizerStressTest {
 		MatchOrganizerSettings settings = new MatchOrganizerSettings();
 		settings.setMatchCountDownTime(100 * SLEEP_UNIT);
 		settings.setMatchTime(120 * 10 * SLEEP_UNIT);
-		settings.setMaxLockWaitTime(300 * SLEEP_UNIT);
+		settings.setMaxLockWaitTime(1000 * SLEEP_UNIT);
 		settings.setCandidateActivePeriod(Long.MAX_VALUE / 2);
 		// make sure
 		// active period
