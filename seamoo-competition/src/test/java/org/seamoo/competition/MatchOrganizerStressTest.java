@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -28,11 +29,13 @@ import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.entities.question.QuestionType;
 import org.testng.annotations.Test;
 
-public class MatchOrganizerLockCountTest {
+public class MatchOrganizerStressTest {
 
 	private static long SLEEP_UNIT = 1;
 
-	private static long MAX_TEST_TIME = 5000;
+	private static long MAX_TEST_TIME = 10000;
+
+	private static int SIMULTANEOUS_USERS_COUNT = 30;
 
 	public static class CountableCacheWrapper<T> implements CacheWrapper<T> {
 
@@ -41,12 +44,14 @@ public class MatchOrganizerLockCountTest {
 		private boolean locked;
 		private String key;
 		private Map<String, Object> map;
+		Map<String, Lock> lockMap;
 
-		public CountableCacheWrapper(String key, Map<String, Object> map) {
+		public CountableCacheWrapper(String key, Map<String, Object> map, Map<String, Lock> lockMap) {
 			lockCount = 0;
 			lockTryTime = 0;
 			this.key = key;
 			this.map = map;
+			this.lockMap = lockMap;
 		}
 
 		@Override
@@ -62,20 +67,15 @@ public class MatchOrganizerLockCountTest {
 		}
 
 		@Override
-		public synchronized void lock(long timeout) throws TimeoutException {
+		public void lock(long timeout) throws TimeoutException {
 			// TODO Auto-generated method stub
 			long sleep = 0;
-			while (this.locked) {
-				try {
-					Thread.sleep(SLEEP_UNIT);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				sleep += SLEEP_UNIT;
-				lockTryTime += SLEEP_UNIT;
-				if (sleep >= timeout)
+			try {
+				if (!lockMap.get(key).tryLock(timeout, TimeUnit.MILLISECONDS))
 					throw new TimeoutException();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			this.locked = true;
 			this.lockCount++;
@@ -85,7 +85,7 @@ public class MatchOrganizerLockCountTest {
 		public void putObject(T object) {
 			// TODO Auto-generated method stub
 			try {
-				Thread.sleep(SLEEP_UNIT * 3 / 10);
+				Thread.sleep(SLEEP_UNIT * 3);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -94,11 +94,12 @@ public class MatchOrganizerLockCountTest {
 		}
 
 		@Override
-		public synchronized void unlock() {
+		public void unlock() {
 			// TODO Auto-generated method stub
-			if (this.locked == true)
+			if (this.locked == true) {
 				this.locked = false;
-			else
+				this.lockMap.get(key).unlock();
+			} else
 				throw new IllegalStateException("Cannot unlock");
 		}
 
@@ -117,9 +118,10 @@ public class MatchOrganizerLockCountTest {
 		@Override
 		public synchronized <T> CacheWrapper<T> createCacheWrapper(Class<T> clazz, String key) {
 			// TODO Auto-generated method stub
-			if (!this.lockMap.containsKey(key))
-				this.lockMap.put(key, new ReentrantLock());
-			return new CountableCacheWrapper<T>(key, map);
+			String realKey = clazz.getName() + "@" + key;
+			if (!this.lockMap.containsKey(realKey))
+				this.lockMap.put(realKey, new ReentrantLock());
+			return new CountableCacheWrapper<T>(realKey, map, lockMap);
 		}
 	}
 
@@ -141,6 +143,7 @@ public class MatchOrganizerLockCountTest {
 						m = organizer.getMatchForUser(memberId);
 					} catch (TimeoutException e) {
 						// TODO Auto-generated catch block
+						e.printStackTrace();
 						throw new RuntimeException(e);
 					}
 				} while (m.getPhase() != MatchPhase.PLAYING);
@@ -200,7 +203,7 @@ public class MatchOrganizerLockCountTest {
 		MatchOrganizerSettings settings = new MatchOrganizerSettings();
 		settings.setMatchCountDownTime(100 * SLEEP_UNIT);
 		settings.setMatchTime(120 * 10 * SLEEP_UNIT);
-		settings.setMaxLockWaitTime(50 * SLEEP_UNIT);
+		settings.setMaxLockWaitTime(300 * SLEEP_UNIT);
 		settings.setCandidateActivePeriod(Long.MAX_VALUE / 2);
 		// make sure
 		// active period
@@ -237,7 +240,7 @@ public class MatchOrganizerLockCountTest {
 
 		when(organizer.questionDao.getRandomQuestions(anyLong(), eq(20))).thenReturn(questions);
 
-		Thread[] threads = new Thread[100];
+		Thread[] threads = new Thread[SIMULTANEOUS_USERS_COUNT];
 		for (int i = 0; i < threads.length; i++) {
 			threads[i] = getTypicalMemberActionThread(organizer, new Long(i + 1));
 			threads[i].start();
