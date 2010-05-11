@@ -7,9 +7,14 @@
 	<inherits name='com.google.gwt.widgetideas.WidgetIdeas' />
 	<inherits name='com.google.gwt.libideas.LibIdeas' />
 	<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
-	<set-property name="log_WindowLogger" value="ENABLED" />
+	<extend-property name="log_level" values="DEBUG,WARN,INFO" />
 	<!-- Loggers Enabled by default -->
+	<set-property name="log_ConsoleLogger" value="DISABLED" />
 	<set-property name="log_DivLogger" value="ENABLED" />
+	<set-property name="log_FirebugLogger" value="DISABLED" />
+	<set-property name="log_GWTLogger" value="DISABLED" />
+	<set-property name="log_SystemLogger" value="DISABLED" />
+	<set-property name="log_WindowLogger" value="DISABLED" />
 
 	<source path="user" />
 	<source path="shared" />

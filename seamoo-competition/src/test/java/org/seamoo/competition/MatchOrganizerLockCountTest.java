@@ -3,10 +3,14 @@ package org.seamoo.competition;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -18,11 +22,17 @@ import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchPhase;
+import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
+import org.seamoo.entities.question.Question;
+import org.seamoo.entities.question.QuestionChoice;
+import org.seamoo.entities.question.QuestionType;
 import org.testng.annotations.Test;
 
-public class MatchOrganizerPerformanceTest {
+public class MatchOrganizerLockCountTest {
 
 	private static long SLEEP_UNIT = 1;
+
+	private static long MAX_TEST_TIME = 5000;
 
 	public static class CountableCacheWrapper<T> implements CacheWrapper<T> {
 
@@ -97,17 +107,20 @@ public class MatchOrganizerPerformanceTest {
 	public static class CountableCacheWrapperFactory implements CacheWrapperFactory {
 
 		Map<String, Object> map;
+		Map<String, Lock> lockMap;
 
 		public CountableCacheWrapperFactory() {
 			this.map = new HashMap<String, Object>();
+			this.lockMap = new HashMap<String, Lock>();
 		}
 
 		@Override
-		public <T> CacheWrapper<T> createCacheWrapper(Class<T> clazz, String key) {
+		public synchronized <T> CacheWrapper<T> createCacheWrapper(Class<T> clazz, String key) {
 			// TODO Auto-generated method stub
+			if (!this.lockMap.containsKey(key))
+				this.lockMap.put(key, new ReentrantLock());
 			return new CountableCacheWrapper<T>(key, map);
 		}
-
 	}
 
 	private Thread getTypicalMemberActionThread(final MatchOrganizer organizer, final Long memberId) {
@@ -133,17 +146,22 @@ public class MatchOrganizerPerformanceTest {
 				} while (m.getPhase() != MatchPhase.PLAYING);
 
 				// Submit answer
+				System.out.println("Received " + m.getQuestions().size() + " questions");
 				for (int i = 0; i < m.getQuestions().size(); i++) {
 					try {
 						Thread.sleep(30 * SLEEP_UNIT);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					if (i % 2 == 0)
-						organizer.submitAnswer(memberId, i + 1, "1");
-					else
-						organizer.ignoreQuestion(memberId, i + 1);
+					try {
+						if (i % 2 == 0)
+							organizer.submitAnswer(memberId, i + 1, "1");
+						else
+							organizer.ignoreQuestion(memberId, i + 1);
+					} catch (TimeoutException e) {
+						System.err.println(e);
+						throw new RuntimeException(e);
+					}
 				}
 
 				// Wait for match to be finished
@@ -158,16 +176,24 @@ public class MatchOrganizerPerformanceTest {
 						m = organizer.getMatchForUser(memberId);
 					} catch (TimeoutException e) {
 						// TODO Auto-generated catch block
+						System.err.println(e);
 						throw new RuntimeException(e);
 					}
 				} while (m.getPhase() != MatchPhase.FINISHED);
+
+				incFinishedUser(memberId);
 
 			}
 		});
 		return t;
 	}
 
-	long MAX_TEST_TIME = 10000;
+	int finishedUser = 0;
+
+	private synchronized void incFinishedUser(long userId) {
+		finishedUser++;
+		System.out.println("User #" + userId + " finished");
+	}
 
 	@Test
 	public void matchOrganizerShouldNotLockTooMuch() throws InterruptedException {
@@ -175,13 +201,13 @@ public class MatchOrganizerPerformanceTest {
 		settings.setMatchCountDownTime(100 * SLEEP_UNIT);
 		settings.setMatchTime(120 * 10 * SLEEP_UNIT);
 		settings.setMaxLockWaitTime(50 * SLEEP_UNIT);
-		settings.setCandidateActivePeriod(Long.MAX_VALUE / 2);// make sure
+		settings.setCandidateActivePeriod(Long.MAX_VALUE / 2);
+		// make sure
 		// active period
 		// is long
 		// enough for
 		// debugging
 		// purpose
-		// never expired
 		MatchOrganizer organizer = new MatchOrganizer(1L, settings);
 		organizer.matchDao = mock(MatchDao.class);
 		organizer.cacheWrapperFactory = new CountableCacheWrapperFactory();
@@ -199,6 +225,17 @@ public class MatchOrganizerPerformanceTest {
 			}
 		});
 		organizer.questionDao = mock(QuestionDao.class);
+		List<Question> questions = new ArrayList<Question>();
+		for (int i = 0; i < 20; i++) {
+			Question q = new Question();
+			q.setType(QuestionType.MULTIPLE_CHOICES);
+			MultipleChoicesQuestionRevision rev = new MultipleChoicesQuestionRevision();
+			rev.addChoice(new QuestionChoice());
+			q.addAndSetAsCurrentRevision(rev);
+			questions.add(q);
+		}
+
+		when(organizer.questionDao.getRandomQuestions(anyLong(), eq(20))).thenReturn(questions);
 
 		Thread[] threads = new Thread[100];
 		for (int i = 0; i < threads.length; i++) {
@@ -216,13 +253,9 @@ public class MatchOrganizerPerformanceTest {
 		long start = TimeStampProvider.getCurrentTimeMilliseconds();
 
 		while (true) {
-			boolean finishedAll = true;
-			for (int i = 0; i < threads.length; i++)
-				if (threads[i].isAlive()) {
-					finishedAll = false;
-					break;
-				}
-			if (finishedAll)
+			if (finishedUser >= threads.length - 1)// accept the cases where 1
+				// user was left behind and
+				// cannot have a match
 				break;
 			else {
 				Thread.sleep(SLEEP_UNIT * 10);
@@ -246,10 +279,7 @@ public class MatchOrganizerPerformanceTest {
 		System.out.println("notFullWaitingMatches.lockTryTime = " + notFullWaitingMatches.lockTryTime);
 		System.out.println("end-start = " + (end - start));
 		System.out.println("expected match time = " + (settings.getMatchCountDownTime() + settings.getMatchTime()));
-		if (notFullWaitingMatches.lockCount > 300)
+		if (notFullWaitingMatches.lockCount > 200)
 			fail("Expect <=300 lockCount on notFullWaitingMatches but got " + notFullWaitingMatches.lockCount);
-		if (notFullWaitingMatches.lockTryTime > 300 * SLEEP_UNIT)
-			fail("Expect <=300 SLEEP_UNIT lockTryTime on notFullWaitingMatches but got " + notFullWaitingMatches.lockTryTime
-					/ SLEEP_UNIT);
 	}
 }

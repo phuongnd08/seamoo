@@ -139,6 +139,7 @@ public class MatchOrganizer {
 			MatchCompetitor competitor = match.getCompetitors().get(i);
 			MatchCandidate candidate = getMatchCandidate(competitor.getMember().getAutoId());
 			if (competitor.getFinishedMoment() == 0 && isDisconnected(candidate)) {
+				System.err.println("Discard disconnected user " + candidate.getMemberAutoId());
 				match.addEvent(new MatchEvent(MatchEventType.LEFT, competitor.getMember().getAutoId()));
 				match.getCompetitors().remove(i);
 			}
@@ -320,7 +321,7 @@ public class MatchOrganizer {
 	 * @return
 	 * @throws TimeoutException
 	 */
-	public Match getMatchForUser(Long userAutoId) throws TimeoutException {
+	public Match getMatchForUser(final Long userAutoId) throws TimeoutException {
 		initialize();
 		final MatchCandidate candidate = getMatchCandidate(userAutoId);
 		if (isDisconnected(candidate))
@@ -336,25 +337,33 @@ public class MatchOrganizer {
 
 		if (matches[0] != null) {
 			matchWrapper.lock(settings.getMaxLockWaitTime());
+			matches[0] = matchWrapper.getObject();
+			// re-get the match after lock to ensure consistency
+			System.out.println("Match lock acquired: check phase for match of player #" + userAutoId);
+			String s = "";
+			for (int i = 0; i < matches[0].getCompetitors().size(); i++) {
+				MatchCompetitor c = matches[0].getCompetitors().get(i);
+				s += "(#" + c.getMember().getAutoId() + ":" + c.getPassedQuestionCount() + ") ";
+			}
+			System.out.println(s);
 			if (matches[0].getPhase() == MatchPhase.NOT_FORMED || matches[0].getPhase() == MatchPhase.FORMED) {
 				doWhileListsLocked(new DoWhileListsLockedRunner() {
 
 					@Override
 					public boolean perform(List fullList, List notFullList) {
-						// TODO Auto-generated method stub
 						recheckCompetitors(matches[0], fullList, notFullList);
 						recheckMatchPhase(matches[0], fullList, notFullList);
 						return true;
 					}
 				});
-			} else
-				recheckMatchPhase(matches[0], null, null);// there is no need to
-			// manipulate the
-			// list, save some
-			// round trip to
-			// memcache
+			} else {
+				// there is no need to manipulate the list, save some round trip
+				// to memcache
+				recheckMatchPhase(matches[0], null, null);
+			}
 			matchWrapper.putObject(matches[0]);
 			matchWrapper.unlock();
+			System.out.println("Match lock released");
 		} else {
 			// Deal with both situation: When user is not allocated a match or
 			// when
@@ -363,15 +372,23 @@ public class MatchOrganizer {
 
 				@Override
 				public boolean perform(List fullList, List notFullList) {
-					// TODO Auto-generated method stub
 					matches[0] = findAndAssignAvailableMatch(candidate, fullList, notFullList);
 					candidate.setCurrentMatchUUID(matches[0].getTemporalUUID());
+					CacheWrapper<Match> localMatchWrapper = getMatchWrapperByUUID(matches[0].getTemporalUUID());
+					try {
+						localMatchWrapper.lock(settings.getMaxLockWaitTime());
+						System.out.println("Match lock acquired: Allocate match for User#" + userAutoId);
+					} catch (TimeoutException e) {
+						// TODO Auto-generated catch block
+						throw new RuntimeException(e);
+					}
 					recheckMatchPhase(matches[0], fullList, notFullList);
+					localMatchWrapper.putObject(matches[0]);
+					localMatchWrapper.unlock();
+					System.out.println("Match lock released");
 					return true;
 				}
 			});
-			matchWrapper = getMatchWrapperByUUID(matches[0].getTemporalUUID());
-			matchWrapper.putObject(matches[0]);
 		}
 
 		recacheCandidate(candidate);
@@ -389,7 +406,7 @@ public class MatchOrganizer {
 		getMatchCandidate(userAutoId).setCurrentMatchUUID(null);
 	}
 
-	private void addMatchAnswer(Long userAutoId, int questionOrder, MatchAnswer answer) {
+	private void addMatchAnswer(Long userAutoId, int questionOrder, MatchAnswer answer) throws TimeoutException {
 		MatchCandidate candidate = getMatchCandidate(userAutoId);
 		if (candidate.getCurrentMatchUUID() == null || isDisconnected(candidate)) {
 			System.err.println("Cannot find a suitable match for user. Answer discarded");
@@ -397,6 +414,7 @@ public class MatchOrganizer {
 		}
 		CacheWrapper<Match> matchWrapper = getMatchWrapperByUUID(candidate.getCurrentMatchUUID());
 		matchWrapper.lock(settings.getMaxLockWaitTime());
+		System.out.println("Match lock acquired: add answer of User#" + userAutoId + " on Question#" + questionOrder);
 		try {
 			Match match = matchWrapper.getObject();
 			if (match == null) {
@@ -440,6 +458,7 @@ public class MatchOrganizer {
 			recacheCandidate(candidate);
 		} finally {
 			matchWrapper.unlock();
+			System.out.println("Match lock released");
 		}
 	}
 
@@ -451,8 +470,9 @@ public class MatchOrganizer {
 	 * @param questionOrder
 	 *            Must be in 1-based index
 	 * @param answer
+	 * @throws TimeoutException
 	 */
-	public void submitAnswer(Long userAutoId, int questionOrder, String answer) {
+	public void submitAnswer(Long userAutoId, int questionOrder, String answer) throws TimeoutException {
 		initialize();
 		addMatchAnswer(userAutoId, questionOrder, new MatchAnswer(MatchAnswerType.SUBMITTED, answer));
 	}
@@ -463,8 +483,9 @@ public class MatchOrganizer {
 	 * @param userAutoId
 	 * @param questionOrder
 	 *            Must be in 1-based index
+	 * @throws TimeoutException
 	 */
-	public void ignoreQuestion(Long userAutoId, int questionOrder) {
+	public void ignoreQuestion(Long userAutoId, int questionOrder) throws TimeoutException {
 		initialize();
 		addMatchAnswer(userAutoId, questionOrder, new MatchAnswer(MatchAnswerType.IGNORED, null));
 	}

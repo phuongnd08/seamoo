@@ -223,7 +223,7 @@ public class MatchOrganizerSteps {
 	}
 
 	@When("$position user submit #$choice for question $qFrom-$qTo")
-	public void submitChoices(String position, int choice, int qFrom, int qTo) {
+	public void submitChoices(String position, int choice, int qFrom, int qTo) throws TimeoutException {
 		int pos = positionToNumber(position) - 1;
 		Member member = members.get(pos);
 		for (int i = qFrom; i <= qTo; i++) {
@@ -232,7 +232,7 @@ public class MatchOrganizerSteps {
 	}
 
 	@When("$position user ignore question $qFrom-$qTo")
-	public void userIgnoreQuestion(String position, int qFrom, int qTo) {
+	public void userIgnoreQuestion(String position, int qFrom, int qTo) throws TimeoutException {
 		int pos = positionToNumber(position) - 1;
 		Member member = members.get(pos);
 		for (int i = qFrom; i <= qTo; i++) {

@@ -97,7 +97,12 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	public void ignoreQuestion(Long leagueId, int questionOrder) {
 		MatchOrganizer matchOrganizer = leagueOrganizer.getMatchOrganizer(leagueId);
 		Member member = getInjectedMember();
-		matchOrganizer.ignoreQuestion(member.getAutoId(), questionOrder);
+		try {
+			matchOrganizer.ignoreQuestion(member.getAutoId(), questionOrder);
+		} catch (TimeoutException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e);
+		}
 
 	}
 
@@ -105,6 +110,11 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	public void submitAnswer(Long leagueId, int questionOrder, String answer) {
 		MatchOrganizer matchOrganizer = leagueOrganizer.getMatchOrganizer(leagueId);
 		Member member = getInjectedMember();
-		matchOrganizer.submitAnswer(member.getAutoId(), questionOrder, answer);
+		try {
+			matchOrganizer.submitAnswer(member.getAutoId(), questionOrder, answer);
+		} catch (TimeoutException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e);
+		}
 	}
 }
