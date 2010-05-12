@@ -6,9 +6,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.seamoo.webapp.Site;
 import org.springframework.web.servlet.support.RequestContext;
 import org.springframework.web.servlet.view.AbstractTemplateView;
 import org.springframework.web.servlet.view.tiles2.TilesView;
+
+import freemarker.ext.beans.BeansWrapper;
 
 public class ExtTilesView extends TilesView {
 
@@ -35,6 +38,8 @@ public class ExtTilesView extends TilesView {
 					.put(
 							AbstractTemplateView.SPRING_MACRO_REQUEST_CONTEXT_ATTRIBUTE,
 							new RequestContext(request, model));
+			model.put(Site.STATICS_ATTRIBUTE, BeansWrapper.getDefaultInstance().getStaticModels());
+			model.put(Site.ENUMS_ATTRIBUTE, BeansWrapper.getDefaultInstance().getEnumModels());
 		}
 
 		super.renderMergedOutputModel(model, request, response);

@@ -4,68 +4,20 @@
 <div class="description-box">
 	<h3>Diễn biến</h3>
 	<table class="fw">
-		[@matchX.eventItem moment="8:00:00"]
-			[@matchX.joinEvent competitors="mrcold,thinh_pro"?split(",")/]
-		[/@matchX.eventItem]		
-		[@matchX.eventItem moment="8:00:05"]
-			[@matchX.joinEvent competitors="xuka,ken"?split(",")/]
-		[/@matchX.eventItem]		
-		[@matchX.eventItem moment="8:00:10"]
-			Trận đấu đã bắt đầu
-		[/@matchX.eventItem]		
-		[@matchX.eventItem moment="8:00:20"]
-			[@matchX.answerEvent competitor="thinh_pro" questions=[1,2,3]/]
-		[/@matchX.eventItem]		
-		[@matchX.eventItem moment="8:00:22"]
-			[@matchX.answerEvent competitor="ken" questions=[1,2]/]
-		[/@matchX.eventItem]		
-		[@matchX.eventItem moment="8:00:25"]
-			[@matchX.ignoreEvent competitor="ken" questions=[3]/]
-		[/@matchX.eventItem]		
-		[@matchX.eventItem moment="8:00:26"]
-			[@matchX.answerEvent competitor="mrcold" questions=[1,2,3,4,5]/]
-		[/@matchX.eventItem]		
-		[@matchX.eventItem moment="8:00:28"]
-			[@matchX.ignoreEvent competitor="mrcold" questions=[6]/]
-		[/@matchX.eventItem]		
-		[@matchX.eventItem moment="8:00:30"]
-			Trận đấu đã kết thúc
-		[/@matchX.eventItem]		
-	</table>
-</div>
-<br/>
-<div class="description-box">
-	<h3>Kết quả</h3>
-	<table>
-	<tr>
-		<th>#</th>
-		<th>Thành viên</th>
-		<th>Đúng (x 1.0)</th>
-		<th>Sai (x -0.5)</th>
-		<th>Bỏ qua (0)</th>
-		<th>Tổng điểm</th>
-	</tr>
-	[#list match.competitors?sort_by("rank") as competitor]
-	<tr>
-		<td>${competitor.rank}</td>
-		<td>${competitor.member.displayName}</td>
-		<td>${competitor.correctCount}</td>
-		<td>${competitor.wrongCount}</td>
-		<td>${competitor.ignoreCount}</td>
-		<td>${competitor.totalScore}</td>
-	</tr>
-	[/#list]
+		[#list match.events as event]
+			[@matchX.eventItem event/]
+		[/#list]
 	</table>
 </div>
 
-[#macro question no content]
-	<tr class="row-${no%2+1}"><td>${no}</td><td colspan="3"><a href="#">${content}</a></td></tr>
+[#macro questionItem no content]
+	<tr class="row-${no%2+1}"><td>${no}</td><td colspan="3"><u>${content}</u></td></tr>
 [/#macro]
 [#macro icon type]
 <span class="answer-${type}"></span>
 [/#macro]
 
-[#macro answer no author moment content]
+[#macro answerItem no author moment content]
 	<tr class="row-${no%2+1}">
 		<td></td>
 		<td><a href="#">${author}</a> <span class="match-review-answer-time">${moment}</span>: <span class="match-review-answer-content">${content}</span> </td>
@@ -76,7 +28,7 @@
 	</tr>
 [/#macro]
 
-[#macro correctAnswer no content]
+[#macro correctAnswerItem no content]
 	<tr class="row-${no%2+1}">
 		<td></td>
 		<td><em>Câu trả lời đúng</em>: <span class="match-review-answer-content">${content}</span> </td>
@@ -92,19 +44,24 @@
 		<tr>
 			<th class="number-column"></th><th></th><th style="width: 50px;"></th><th class="answer-review-grade-column"></th>
 		</tr>
-		[@question no=1 content="What is the proper preposition"/]
-		[@answer no=1 author="mrcold" moment="08:00:20" content="at"][@icon type="correct"/][/@answer]
-		[@answer no=1 author="xuka" moment="08:00:23" content="on"][@icon type="wrong"/][/@answer]
-		[@answer no=1 author="thinh_pro" moment="08:00:20" content="up"][@icon type="wrong"/][/@answer]
-		[@answer no=1 author="thinh_pro" moment="08:00:20" content=""][@icon type="ignore"/][/@answer]
-		[@correctAnswer no=1 content="at"][@icon type="correct"/][/@correctAnswer]
-
-		[@question no=2 content="What is in the sound"/]
-		[@answer no=2 author="mrcold" moment="08:00:20" content="Ridiculous"]0%[/@answer]
-		[@answer no=2 author="xuka" moment="08:00:23" content="God damn it"]0%[/@answer]
-		[@answer no=2 author="thinh_pro" moment="08:00:20" content="I don't even know"]0%[/@answer]
-		[@answer no=2 author="thinh_pro" moment="08:00:20" content=""][@icon type="ignore"/][/@answer]
-		[@correctAnswer no=2 content="God damn it"]100%[/@correctAnswer]
+		[#assign count=0/]
+		[#list match.questions as question]
+			[#assign count=count+1/]
+			[@questionItem no=count content="${question.currentRevision.content}"/]
+			[#list match.competitors as competitor]
+				[#if (competitor.answers?size >= count)]
+					[#assign answer=competitor.answers[count-1]/]
+					[@answerItem no=count author=competitor.member.displayName moment="${answer.submittedTime?string('HH:mm:ss')} (UTC)" content=question.currentRevision.getTranslatedAnswer(answer.content)]
+						[#if answer.correct]
+							[@icon type="correct"/]
+						[#else]
+							[@icon type="wrong"/]
+						[/#if]
+					[/@answerItem]
+				[/#if]
+			[/#list]
+			[@correctAnswerItem no=count content="${question.currentRevision.correctAnswer}"][@icon type="correct"/][/@correctAnswerItem]
+		[/#list]
 	</table>
 </div>
 

@@ -306,3 +306,14 @@ td.logo-cell {
 	border-bottom: solid 2px black;
 	border-top: solid 2px black;
 }
+
+.competitor-rank {
+	float: right;
+	margin-top: 5px;
+	margin-right: 10px;
+	font-size: 200%;
+}
+
+.competitor-rank-first {
+	color: green;
+}

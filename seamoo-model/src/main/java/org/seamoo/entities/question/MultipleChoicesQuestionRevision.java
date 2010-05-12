@@ -45,4 +45,22 @@ public class MultipleChoicesQuestionRevision extends QuestionRevision {
 			return -0.5;
 	}
 
+	@Override
+	public String getCorrectAnswer() {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < choices.size(); i++)
+			if (choices.get(i).isCorrect())
+				return choices.get(i).getContent();
+		return "";
+	}
+
+	@Override
+	public String getTranslatedAnswer(String userAnswer) {
+		// TODO Auto-generated method stub
+		int i = Integer.parseInt(userAnswer) - 1;
+		if (i >= 0 && i < choices.size())
+			return choices.get(i).getContent();
+		return "";
+	}
+
 }

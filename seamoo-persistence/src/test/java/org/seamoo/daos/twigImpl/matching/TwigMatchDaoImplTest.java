@@ -1,5 +1,7 @@
 package org.seamoo.daos.twigImpl.matching;
 
+import java.util.Date;
+
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchAnswer;
@@ -41,9 +43,8 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 	public void persistMatchWithQuestionAndEventAndCompetitorsAndAnswersShouldBeOK() {
 		Match m = new Match();
 		m.setQuestions(Lists.newArrayList(new Question[] { new Question() }));
-		m.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, 0L, 1));
+		m.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, new Date(), new Member(), 1));
 		MatchCompetitor competitor = new MatchCompetitor();
-		competitor.setMember(new Member());
 		competitor.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, "1"));
 		competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, "1"));
 		m.addCompetitor(competitor);
@@ -54,9 +55,8 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 	public void matchCompetitorsAndAnswersShouldBePersisted() {
 		Match m = new Match();
 		m.setQuestions(Lists.newArrayList(new Question[] { new Question() }));
-		m.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, 0L, 1));
+		m.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, new Date(), new Member(), 1));
 		MatchCompetitor competitor = new MatchCompetitor();
-		competitor.setMember(new Member());
 		competitor.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, "1"));
 		competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, "1"));
 		m.addCompetitor(competitor);

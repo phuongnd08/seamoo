@@ -1,6 +1,7 @@
 package org.seamoo.entities.matching;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class MatchAnswer implements Serializable {
 	/**
@@ -14,6 +15,8 @@ public class MatchAnswer implements Serializable {
 	private boolean correct;
 
 	private double score;
+	
+	private Date submittedTime;
 
 	public MatchAnswer() {
 	}
@@ -53,5 +56,13 @@ public class MatchAnswer implements Serializable {
 
 	public boolean isCorrect() {
 		return correct;
+	}
+
+	public void setSubmittedTime(Date submittedTime) {
+		this.submittedTime = submittedTime;
+	}
+
+	public Date getSubmittedTime() {
+		return submittedTime;
 	}
 }

@@ -2,17 +2,27 @@
 [#import "/common.ftl" as common/]
 [#import "/spring.ftl" as spring/]
 
-[#macro competitorInfo competitor quote]
+[#macro minuteAndSecond milliseconds]
+${(milliseconds/1000/60)?string("0")}:${(milliseconds/1000 % 60)?string("00")}
+[/#macro]
+[#macro competitorInfo competitor]
 <div class="user-info">
-	<table>
+	<table class="fw">
 		<tr>
 			<td class="user-gravatar32">
-				<img src="http://www.gravatar.com/avatar/7566e2a406450d0581dcc3661247badc?s=32&d=identicon&r=PG" width="32" height="32"/>
+				[@common.avatar emailHash=competitor.member.emailHash size=32/]
 			</td>
 			<td class="user-details">
-				<div><a href="#">${competitor}</a></div>
+				<div class="competitor-rank[#if competitor.rank==1] competitor-rank-first[/#if]">${competitor.rank}</div>
+				<div><a href="[@spring.url "/users/${competitor.member.autoId}/${competitor.member.alias}"/]">${competitor.member.displayName}</a></div>
 				<div><span class="reputation-score">12k</span> ● <span class="user-level">10</span></div>
-				<div><em>${quote}</em></div>
+				<div><em>${(competitor.member.quote!"")?html}</em></div>
+				<div>Tổng điểm <strong>${competitor.totalScore}</strong></div>
+				<div>● Đúng <strong>${competitor.correctCount}</strong></div>
+				<div>● Sai <strong>${competitor.wrongCount}</strong></div>
+				<div>● Bỏ qua <strong>${competitor.ignoreCount}</strong></div>
+				<div>● Thời gian <strong>[@minuteAndSecond competitor.finishedMoment-match.startedMoment/]</strong></div>
+				<div>Tích luỹ <strong>+2</strong></div>
 			</td>
 		</tr>
 	</table>
@@ -29,9 +39,8 @@
 	</div>
 	<h3>Giữa</h3>
 	<div class="description-box">
-		[@competitorInfo competitor="mrcold" quote="Sống là không chờ đợi"/]
-		[@competitorInfo competitor="ken" quote="Đời là phù du"/]
-		[@competitorInfo competitor="xuka" quote="Hận đời vô đối"/]
-		[@competitorInfo competitor="thinh_pro" quote="Một đời lang bạt"/]
+		[#list match.competitors as competitor]
+		[@competitorInfo competitor/]
+		[/#list]
 	</div>
 </div>

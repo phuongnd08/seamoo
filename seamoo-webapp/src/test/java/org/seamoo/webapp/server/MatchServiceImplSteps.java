@@ -42,6 +42,7 @@ public class MatchServiceImplSteps {
 		mo = mock(MatchOrganizer.class);
 		lo = mock(LeagueOrganizer.class);
 		currentMatch = new Match();
+		currentMatch.setLeagueAutoId(1L);
 		when(mo.getMatchForUser(anyLong())).thenReturn(currentMatch);
 		when(lo.getMatchOrganizer(1L)).thenReturn(mo);
 	}
@@ -156,9 +157,9 @@ public class MatchServiceImplSteps {
 	public void setUpCurrentMemberBufferedQuestions(int count) {
 		bufferedQuestionsCount = count;
 	}
-	
+
 	@Given("Member@$id has answered $number questions")
-	public void setUpCurrentMemberAnsweredQuestions(long id, int number){
+	public void setUpCurrentMemberAnsweredQuestions(long id, int number) {
 		currentMatch.getCompetitorForMember(members.get(id).getAutoId()).setPassedQuestionCount(number);
 	}
 
@@ -189,11 +190,10 @@ public class MatchServiceImplSteps {
 	}
 
 	@Then("State Completed Questions Count is $number")
-	public void assertNumberOfCompletedQuestionsCount(int number)
-	{
+	public void assertNumberOfCompletedQuestionsCount(int number) {
 		assertEquals(matchState.getCompletedQuestionsCount(), number);
 	}
-	
+
 	@Given("Match autoId is $id")
 	public void setMatchAutoId(long id) {
 		currentMatch.setAutoId(id);

@@ -3,6 +3,7 @@ package org.seamoo.competition;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchEventType;
 import org.seamoo.entities.matching.MatchPhase;
+import org.seamoo.entities.question.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MatchOrganizer {
@@ -140,7 +142,7 @@ public class MatchOrganizer {
 			MatchCandidate candidate = getMatchCandidate(competitor.getMember().getAutoId());
 			if (competitor.getFinishedMoment() == 0 && isDisconnected(candidate)) {
 				System.err.println("Discard disconnected user " + candidate.getMemberAutoId());
-				match.addEvent(new MatchEvent(MatchEventType.LEFT, competitor.getMember().getAutoId()));
+				match.addEvent(new MatchEvent(MatchEventType.LEFT, new Date(), competitor.getMember()));
 				match.getCompetitors().remove(i);
 			}
 		}
@@ -187,7 +189,7 @@ public class MatchOrganizer {
 		MatchCompetitor competitor = new MatchCompetitor();
 		competitor.setMember(memberDao.findByKey(candidate.getMemberAutoId()));
 		match.addCompetitor(competitor);
-		match.addEvent(new MatchEvent(MatchEventType.JOIN, competitor.getMember().getAutoId()));
+		match.addEvent(new MatchEvent(MatchEventType.JOINED, new Date(), competitor.getMember()));
 
 		if (isMatchFull(match)) {
 			fullList.add(match.getTemporalUUID());
@@ -250,7 +252,7 @@ public class MatchOrganizer {
 	private void startMatch(Match match, List fullList, List notFullList) {
 		// TODO Auto-generated method stub
 		match.setPhase(MatchPhase.PLAYING);
-		match.addEvent(new MatchEvent(MatchEventType.STARTED));
+		match.addEvent(new MatchEvent(MatchEventType.STARTED, new Date()));
 		if (!notFullList.remove(match.getTemporalUUID()))
 			fullList.remove(match.getTemporalUUID());
 	}
@@ -270,7 +272,7 @@ public class MatchOrganizer {
 	 */
 	private void finishMatch(Match match) {
 		match.setPhase(MatchPhase.FINISHED);
-		match.addEvent(new MatchEvent(MatchEventType.FINISHED));
+		match.addEvent(new MatchEvent(MatchEventType.FINISHED, new Date()));
 		for (MatchCompetitor competitor : match.getCompetitors()) {
 			if (competitor.getFinishedMoment() == 0)
 				competitor.setFinishedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
@@ -287,6 +289,8 @@ public class MatchOrganizer {
 	 * @param match
 	 */
 	private void prepareMatchForPersistence(Match match) {
+		// Would not need to do anything since Twig-persist is smart enought to
+		// re-link all objects before persisting them
 	}
 
 	private void rank(Match match) {
@@ -409,6 +413,7 @@ public class MatchOrganizer {
 
 	private void addMatchAnswer(Long userAutoId, int questionOrder, MatchAnswer answer) throws TimeoutException {
 		MatchCandidate candidate = getMatchCandidate(userAutoId);
+		answer.setSubmittedTime(new Date());
 		if (candidate.getCurrentMatchUUID() == null || isDisconnected(candidate)) {
 			System.err.println("Cannot find a suitable match for user. Answer discarded");
 			return;

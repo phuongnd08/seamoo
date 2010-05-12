@@ -94,11 +94,6 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 		assert bufferredEventsCount <= match.getEvents().size();
 		matchState.setBufferedEvents(new ArrayList<MatchEvent>(match.getEvents().subList(bufferredEventsCount,
 				match.getEvents().size())));
-		// bind member to event using memberAutoId
-		for (MatchEvent e : matchState.getBufferedEvents()) {
-			if (e.getMemberAutoId() != null)
-				e.setMember(memberDao.findByKey(e.getMemberAutoId()));
-		}
 		matchState.setMatchAutoId(match.getAutoId() != null ? match.getAutoId().longValue() : 0);
 		matchState.setLeagueAutoId(match.getLeagueAutoId());
 		matchState.setMatchAlias(match.getAlias());

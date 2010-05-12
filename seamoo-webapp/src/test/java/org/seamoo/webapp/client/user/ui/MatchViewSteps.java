@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.jbehave.scenario.annotations.Alias;
@@ -285,29 +286,28 @@ public class MatchViewSteps {
 
 	@Given("Event#$index $displayName join Match")
 	public void createJoinEvent(int index, String displayName) {
-		MatchEvent e = new MatchEvent(MatchEventType.JOIN);
+		MatchEvent e = new MatchEvent(MatchEventType.JOINED);
 		e.setMember(memberFromDisplayName(displayName));
 		events.add(e);
 	}
 
 	@Given("Event#$index $displayName submit answer for question #$questionIndex")
 	public void createAnswerEvent(int index, String displayName, int questionIndex) {
-		MatchEvent e = new MatchEvent(MatchEventType.ANSWER_QUESTION, 0L, questionIndex);
-		e.setMember(memberFromDisplayName(displayName));
+		MatchEvent e = new MatchEvent(MatchEventType.ANSWER_QUESTION, new Date(), memberFromDisplayName(displayName),
+				questionIndex);
 		events.add(e);
 	}
 
 	@Given("Event#$index $displayName ignore question #$questionIndex")
 	public void createIgnoreQuestionEvent(int index, String displayName, int questionIndex) {
-		MatchEvent e = new MatchEvent(MatchEventType.IGNORE_QUESTION, 0L, questionIndex);
-		e.setMember(memberFromDisplayName(displayName));
+		MatchEvent e = new MatchEvent(MatchEventType.IGNORE_QUESTION, new Date(), memberFromDisplayName(displayName),
+				questionIndex);
 		events.add(e);
 	}
 
 	@Given("Event#$index $displayName left Match")
 	public void createLeftEvent(int index, String displayName) {
-		MatchEvent e = new MatchEvent(MatchEventType.LEFT, 0L);
-		e.setMember(memberFromDisplayName(displayName));
+		MatchEvent e = new MatchEvent(MatchEventType.LEFT, new Date(), memberFromDisplayName(displayName));
 		events.add(e);
 	}
 

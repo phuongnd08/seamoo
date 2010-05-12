@@ -48,6 +48,10 @@ public abstract class QuestionRevision implements Serializable {
 	public Long getAutoId() {
 		return autoId;
 	}
+	
+	public abstract String getCorrectAnswer();
+	
+	public abstract String getTranslatedAnswer(String userAnswer);
 
 	/**
 	 * Return 1-scale score given for an answer. If question is of multiple

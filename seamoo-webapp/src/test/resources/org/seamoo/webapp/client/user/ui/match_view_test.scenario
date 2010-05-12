@@ -51,7 +51,7 @@ Given Event#1 phuongnd08 submit answer for question #1
 Given Event#2 phuongnd08 ignore question #2
 Given Event#3 phuongnd08 left Match
 When Events are added to View
-Then tableMatchEvents shows "<strong>phuongnd08</strong> join match"
-And tableMatchEvents shows "<strong>phuongnd08</strong> answer question #1"
-And tableMatchEvents shows "<strong>phuongnd08</strong> ignore question #2"
+Then tableMatchEvents shows "<strong>phuongnd08</strong> joined match"
+And tableMatchEvents shows "<strong>phuongnd08</strong> answered question #1"
+And tableMatchEvents shows "<strong>phuongnd08</strong> ignored question #2"
 And tableMatchEvents shows "<strong>phuongnd08</strong> left match"

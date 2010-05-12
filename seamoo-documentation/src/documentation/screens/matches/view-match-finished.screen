@@ -3,56 +3,61 @@
   <widgets xsi:type="model:Master" x="176" y="40" measuredWidth="803" measuredHeight="1024">
     <screen href="../master/master-logged-in.screen#/"/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="160" width="263" height="113" measuredWidth="263" measuredHeight="113"/>
+  <widgets xsi:type="model:Panel" x="186" y="160" width="263" height="121" measuredWidth="263" measuredHeight="121"/>
   <widgets xsi:type="model:Image" x="196" y="169" width="77" height="48" measuredWidth="77" measuredHeight="48" src="../images/england_flag_02.gif"/>
-  <widgets xsi:type="model:Text" x="288" y="170" width="145" height="93" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League" measuredWidth="145" measuredHeight="93">
+  <widgets xsi:type="model:Text" x="288" y="170" width="145" height="101" text="[English] > [League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League" measuredWidth="145" measuredHeight="101">
     <font/>
   </widgets>
   <widgets xsi:type="model:Panel" x="186" y="288" width="263" height="32" measuredWidth="263" measuredHeight="32"/>
-  <widgets xsi:type="model:Text" x="197" y="297" width="243" text="Ban dang xem tran dau giua: " measuredWidth="243" measuredHeight="17">
+  <widgets xsi:type="model:Text" x="197" y="297" width="243" text="Tran dau giua: " measuredWidth="243" measuredHeight="17">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="186" y="328" width="263" height="49" measuredWidth="263" measuredHeight="49"/>
-  <widgets xsi:type="model:Text" x="240" y="338" width="198" height="34" text="[thinh_pro]&#xA;Song la khong cho doi" measuredWidth="198" measuredHeight="34">
+  <widgets xsi:type="model:Panel" x="186" y="328" width="263" height="94" measuredWidth="263" measuredHeight="94"/>
+  <widgets xsi:type="model:Text" x="240" y="338" width="169" height="74" text="[thinh_pro]&#xA;Song la khong cho doi&#xA;Score: 17.5&#xA;Tích luỹ: +2" measuredWidth="169" measuredHeight="74">
     <font/>
   </widgets>
   <widgets xsi:type="model:Icon" x="196" y="340" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
   <widgets xsi:type="model:Table" x="464" y="188" width="494" text="Thoi diem,Su kien&#xA;8:00:00,[thinh_pro] &amp; [ken] tham gia tran dau&#xA;8:01:00,[ajeruzu] &amp; [c0ld] tham gia tran dau&#xA;8:05:00,Tran dau bat dau&#xA;8:05:01,[thinh_pro] da tra loi cau hoi so 1\,2\,3&#xA;8:05:03,[ken] da tra loi cau hoi so 1\, 2&#xA;8:05:09,[ken] bo qua cau hoi so 3&#xA;8:06:09,[c0ld] da tra loi cau hoi so 1\,2\,3\,4\,5&#xA;8:09:08,[c0ld] da bo qua cau hoi so 6&#xA;8:10:00,Tran dau da ket thuc" measuredWidth="494" measuredHeight="234"/>
-  <widgets xsi:type="model:Panel" x="186" y="383" width="263" height="49" measuredWidth="263" measuredHeight="49"/>
-  <widgets xsi:type="model:Text" x="240" y="393" width="198" height="34" text="[ken]&#xA;Mot doi phu du" measuredWidth="198" measuredHeight="34">
+  <widgets xsi:type="model:Panel" x="186" y="430" width="263" height="91" measuredWidth="263" measuredHeight="91"/>
+  <widgets xsi:type="model:Text" x="240" y="440" width="198" height="71" text="[ken]&#xA;Mot doi phu du&#xA;Score: 18.5&#xA;Tích luỹ: +1" measuredWidth="198" measuredHeight="71">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Icon" x="196" y="395" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
-  <widgets xsi:type="model:WidgetGroup" x="186" y="440" measuredWidth="263" measuredHeight="49">
-    <widgets xsi:type="model:Panel" width="263" height="49" measuredWidth="263" measuredHeight="49"/>
-    <widgets xsi:type="model:Text" x="54" y="10" width="198" height="34" text="[ajeruzu]&#xA;Song la khong cho doi" measuredWidth="198" measuredHeight="34">
-      <font/>
-    </widgets>
-    <widgets xsi:type="model:Icon" x="10" y="12" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
+  <widgets xsi:type="model:Icon" x="196" y="442" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
+  <widgets xsi:type="model:Panel" x="186" y="537" width="263" height="88" measuredWidth="263" measuredHeight="88"/>
+  <widgets xsi:type="model:Text" x="240" y="544" width="198" height="71" text="[ajeruzu]&#xA;Song la khong cho doi&#xA;Score: 12.5&#xA;Tích luỹ: -" measuredWidth="198" measuredHeight="71">
+    <font/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="187" y="496" measuredWidth="263" measuredHeight="49">
-    <widgets xsi:type="model:Panel" width="263" height="49" measuredWidth="263" measuredHeight="49"/>
-    <widgets xsi:type="model:Text" x="54" y="10" width="198" height="34" text="[c0ld]&#xA;Song la khong cho doi" measuredWidth="198" measuredHeight="34">
-      <font/>
-    </widgets>
-    <widgets xsi:type="model:Icon" x="10" y="12" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
+  <widgets xsi:type="model:Icon" x="196" y="558" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
+  <widgets xsi:type="model:Panel" x="186" y="634" width="263" height="87" measuredWidth="263" measuredHeight="87"/>
+  <widgets xsi:type="model:Text" x="240" y="648" width="198" text="[c0ld]&#xA;Song la khong cho doi&#xA;Score: 14.5&#xA;Tích luỹ: -" measuredWidth="198" measuredHeight="68">
+    <font/>
   </widgets>
-  <widgets xsi:type="model:Table" x="464" y="576" width="493" text="#,,&#xA;1,[-] What is the proper preposition?,&#xA;,&#x9;[thinh_pro] (8:06:09) Here I come, {circled-check}&#xA;,&#x9;[ken] (8:06:09) Wow, {circled-mul}&#xA;,&#x9;[ajeruzu] (8:06:10) Year, {circled-mul}&#xA;,&#x9;[c0ld] (8:06: 11), {sad}&#xA;,&#x9;*correct*: Here I come, {circled-check}&#xA;|2,[-] Listen to the sound {play} {pause}?,&#xA;|,&#x9;[thinh_pro] (8:06:09) Here I come, (80%),{flag}&#xA;|,&#x9;[ken] (8:06:09) Wow, (0%),{flag}&#xA;|,&#x9;[ajeruzu] (8:06:10) Year, (0%),{flag}&#xA;|,&#x9;[c0ld] (8:06: 11), ({sad})&#xA;|,&#x9;*correct*: Here I came, (100%)" measuredWidth="493" measuredHeight="303"/>
+  <widgets xsi:type="model:Icon" x="196" y="659" measuredWidth="32" measuredHeight="32" icon="user (large)"/>
+  <widgets xsi:type="model:Table" x="464" y="456" width="493" text="#,,&#xA;1,[-] What is the proper preposition?,&#xA;,&#x9;[thinh_pro] (8:06:09) Here I come, {circled-check}&#xA;,&#x9;[ken] (8:06:09) Wow, {circled-mul}&#xA;,&#x9;[ajeruzu] (8:06:10) Year, {circled-mul}&#xA;,&#x9;[c0ld] (8:06: 11), {sad}&#xA;,&#x9;*correct*: Here I come, {circled-check}&#xA;|2,[-] Listen to the sound {play} {pause}?,&#xA;|,&#x9;[thinh_pro] (8:06:09) Here I come, (80%),{flag}&#xA;|,&#x9;[ken] (8:06:09) Wow, (0%),{flag}&#xA;|,&#x9;[ajeruzu] (8:06:10) Year, (0%),{flag}&#xA;|,&#x9;[c0ld] (8:06: 11), ({sad})&#xA;|,&#x9;*correct*: Here I came, (100%)" measuredWidth="493" measuredHeight="303"/>
   <widgets xsi:type="model:WidgetGroup" x="464" y="160" measuredWidth="493" measuredHeight="25">
     <widgets xsi:type="model:Panel" width="493" height="22" measuredWidth="493" measuredHeight="22"/>
     <widgets xsi:type="model:Label" x="6" width="74" text="*Dien bien*" measuredWidth="74" measuredHeight="25">
       <font/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:Panel" x="464" y="552" width="493" height="22" measuredWidth="493" measuredHeight="22"/>
-  <widgets xsi:type="model:Label" x="470" y="552" width="74" text="*Cau hoi*" measuredWidth="74" measuredHeight="25">
-    <font/>
+  <widgets xsi:type="model:WidgetGroup" x="464" y="432" measuredWidth="493" measuredHeight="25">
+    <widgets xsi:type="model:Panel" width="493" height="22" measuredWidth="493" measuredHeight="22"/>
+    <widgets xsi:type="model:Label" x="6" width="139" text="*Chi tiết điểm số*" measuredWidth="139" measuredHeight="25">
+      <font/>
+    </widgets>
   </widgets>
-  <widgets xsi:type="model:Panel" x="464" y="412" width="493" height="22" measuredWidth="493" measuredHeight="22"/>
-  <widgets xsi:type="model:Label" x="470" y="411" width="74" text="*Ket qua*" measuredWidth="74" measuredHeight="25">
-    <font/>
+  <widgets xsi:type="model:Label" x="408" y="438" text="1" measuredWidth="32" measuredHeight="59">
+    <font size="32"/>
   </widgets>
-  <widgets xsi:type="model:Table" x="464" y="440" width="494" height="104" text="#,&#xA;1, [c0ld]&#xA;|2, [thinh_pro]&#xA;3, [ken]&#xA;|4, [ajeruzu]&#xA;" measuredWidth="494" measuredHeight="104"/>
+  <widgets xsi:type="model:Label" x="408" y="325" text="2" measuredWidth="32" measuredHeight="59">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="409" y="629" text="3" measuredWidth="32" measuredHeight="59">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="408" y="540" text="4" measuredWidth="32" measuredHeight="59">
+    <font size="32"/>
+  </widgets>
   <hRuler>
     <guides position="447"/>
   </hRuler>

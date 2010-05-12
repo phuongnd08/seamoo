@@ -250,11 +250,11 @@ public class MatchView extends Composite implements Display {
 	String eventToHTML(MatchEvent event) {
 		switch (event.getType()) {
 		case ANSWER_QUESTION:
-			return memberToHTML(event.getMember()) + " answer question #" + event.getQuestionOrder();
+			return memberToHTML(event.getMember()) + " answered question #" + event.getQuestionOrder();
 		case IGNORE_QUESTION:
-			return memberToHTML(event.getMember()) + " ignore question #" + event.getQuestionOrder();
-		case JOIN:
-			return memberToHTML(event.getMember()) + " join match";
+			return memberToHTML(event.getMember()) + " ignored question #" + event.getQuestionOrder();
+		case JOINED:
+			return memberToHTML(event.getMember()) + " joined match";
 		case LEFT:
 			return memberToHTML(event.getMember()) + " left match";
 		case STARTED:

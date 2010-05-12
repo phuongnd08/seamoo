@@ -2,7 +2,7 @@ package org.seamoo.entities.matching;
 
 public enum MatchEventType {
 	STARTED,
-	JOIN,
+	JOINED,
 	LEFT,
 	ANSWER_QUESTION,
 	IGNORE_QUESTION,

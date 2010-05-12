@@ -30,4 +30,16 @@ public class ListeningQuestionRevision extends QuestionRevision {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unsupported");
 	}
+
+	@Override
+	public String getCorrectAnswer() {
+		// TODO Auto-generated method stub
+		return content;
+	}
+
+	@Override
+	public String getTranslatedAnswer(String userAnswer) {
+		// TODO Auto-generated method stub
+		return userAnswer;
+	}
 }

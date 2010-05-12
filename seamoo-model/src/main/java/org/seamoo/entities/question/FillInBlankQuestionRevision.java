@@ -29,4 +29,16 @@ public class FillInBlankQuestionRevision extends QuestionRevision {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unsupported");
 	}
+
+	@Override
+	public String getCorrectAnswer() {
+		// TODO Auto-generated method stub
+		return answer;
+	}
+
+	@Override
+	public String getTranslatedAnswer(String userAnswer) {
+		// TODO Auto-generated method stub
+		return userAnswer;
+	}
 }
