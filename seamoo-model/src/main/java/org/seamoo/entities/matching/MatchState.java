@@ -20,6 +20,7 @@ public class MatchState implements Serializable {
 	private static final long serialVersionUID = -8236758819315756620L;
 	public static final int DEFAULT_REFRESH_PERIOD = 3000;// milliseconds
 	private long matchAutoId;
+	private long leagueAutoId;
 	private String matchAlias;
 	/**
 	 * The total number of questions used in match
@@ -147,5 +148,13 @@ public class MatchState implements Serializable {
 
 	public String getMatchAlias() {
 		return matchAlias;
+	}
+
+	public void setLeagueAutoId(long leagueAutoId) {
+		this.leagueAutoId = leagueAutoId;
+	}
+
+	public long getLeagueAutoId() {
+		return leagueAutoId;
 	}
 }

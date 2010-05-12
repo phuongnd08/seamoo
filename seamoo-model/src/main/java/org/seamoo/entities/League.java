@@ -52,7 +52,6 @@ public class League implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-		this.alias = name.toLowerCase().replace(' ', '-');
 	}
 
 	public String getName() {
@@ -101,5 +100,9 @@ public class League implements Serializable {
 
 	public String getAlias() {
 		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
 	}
 }

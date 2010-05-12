@@ -8,6 +8,7 @@
 			<gwt:HTMLPanel ui:field="panelMatchWaiting">
 				<span class="loading-indicator"></span>
 				<gwt:InlineLabel ui:field="labelMatchWaiting">Đang chờ sắp xếp trận đấu</gwt:InlineLabel>
+				<hr />
 			</gwt:HTMLPanel>
 			<gwt:HTMLPanel ui:field="panelYouFinished">
 				<span>Bạn đã hoàn thành phần thi của mình. Bạn có thể chờ các đối
@@ -19,6 +20,10 @@
 				<h3>Các đấu thủ</h3>
 				<gwt:FlexTable ui:field="tableMatchPlayers">
 				</gwt:FlexTable>
+				<hr />
+			</gwt:HTMLPanel>
+			<gwt:HTMLPanel ui:field="panelLeaveMatch">
+				<gwt:Button ui:field="buttonLeaveMatch">Bỏ trận đấu</gwt:Button>
 			</gwt:HTMLPanel>
 		</gwt:HTMLPanel>
 

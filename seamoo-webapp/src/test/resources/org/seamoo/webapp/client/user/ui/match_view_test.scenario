@@ -35,6 +35,8 @@ When buttonIgnore is clicked
 Then ignore event is triggered
 When buttonRematch is clicked
 Then rematch event is triggered
+When buttonLeaveMatch is clicked
+Then leaveMatch event is triggered
 When View Question is assigned to Null
 Then panelQuestion is invisible
 When View Phase is switched to FINISHED

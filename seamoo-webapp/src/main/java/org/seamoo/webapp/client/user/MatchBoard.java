@@ -3,11 +3,13 @@ package org.seamoo.webapp.client.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.seamoo.entities.League;
 import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
+import org.seamoo.webapp.client.shared.ui.MessageBox;
 import org.seamoo.webapp.client.shared.ui.NotLoggedInException;
 import org.seamoo.webapp.client.shared.ui.UrlFactory;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
@@ -30,6 +32,8 @@ public class MatchBoard {
 			public void ignoreQuestion(Display display);
 
 			public void rematch(Display display);
+
+			public void leaveMatch(Display display);
 		}
 
 		public void setPhase(MatchPhase phase);
@@ -86,8 +90,44 @@ public class MatchBoard {
 
 			@Override
 			public void rematch(Display display) {
-				// TODO Auto-generated method stub
-				throw new RuntimeException("Not supported");
+				service.escapeCurrentMatch(leagueAutoId, new AsyncCallback() {
+
+					@Override
+					public void onFailure(Throwable arg0) {
+					}
+
+					@Override
+					public void onSuccess(Object arg0) {
+						Window.Location.reload();
+					}
+				});
+			}
+
+			@Override
+			public void leaveMatch(Display any) {
+				MessageBox.showPopupPanel("Bỏ trận đấu?", new String[] { "yes", "no" }, new String[] { "Có", "Không" },
+						new MessageBox.EventListener() {
+
+							@Override
+							public void select(String buttonName) {
+								if (buttonName.equals("yes")) {
+									service.escapeCurrentMatch(leagueAutoId, new AsyncCallback<League>() {
+
+										@Override
+										public void onSuccess(League league) {
+											Window.Location.replace(UrlFactory.getLeagueViewUrl(league));
+
+										}
+
+										@Override
+										public void onFailure(Throwable throwable) {
+											// TODO Auto-generated method stub
+
+										}
+									});
+								}
+							}
+						});
 			}
 		};
 
@@ -172,8 +212,6 @@ public class MatchBoard {
 				@Override
 				public void onFailure(Throwable throwable) {
 					// TODO Auto-generated method stub
-					Log.info(throwable.getClass().getName());
-					Log.info(String.valueOf(throwable instanceof NotLoggedInException));
 					refreshingMatchState = false;
 					if (throwable instanceof NotLoggedInException)
 						Window.Location.reload();// reload to force a login if

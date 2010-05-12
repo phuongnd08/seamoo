@@ -13,7 +13,4 @@
 	</div>
 	<div class="description-box" id="sidePlaceHolder">
 	</div>
-	<div>
-		<button class="fw">&lt;&lt;Thoát khỏi <strong>Giải nghiệp dư</strong></button>
-	</div>
 </div>

@@ -69,6 +69,10 @@ public class MatchView extends Composite implements Display {
 	FlexTable tableMatchEvents;
 	@UiField
 	Button buttonRematch;
+	@UiField
+	HTMLPanel panelLeaveMatch;
+	@UiField
+	Button buttonLeaveMatch;
 
 	List<MatchBoard.Display.EventListener> listeners;
 	List<CompetitorView> competitorViews;
@@ -82,7 +86,6 @@ public class MatchView extends Composite implements Display {
 
 			@Override
 			public void onClick(ClickEvent arg0) {
-				// TODO Auto-generated method stub
 				for (EventListener l : listeners) {
 					l.ignoreQuestion(me);
 				}
@@ -93,9 +96,17 @@ public class MatchView extends Composite implements Display {
 
 			@Override
 			public void onClick(ClickEvent arg0) {
-				// TODO Auto-generated method stub
 				for (EventListener l : listeners)
 					l.rematch(me);
+			}
+		});
+
+		buttonLeaveMatch.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent clickevent) {
+				for (EventListener l : listeners)
+					l.leaveMatch(me);
 			}
 		});
 

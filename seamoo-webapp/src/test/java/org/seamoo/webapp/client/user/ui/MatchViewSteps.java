@@ -176,6 +176,8 @@ public class MatchViewSteps {
 			verify(listener).ignoreQuestion((Display) any());
 		else if (event.equalsIgnoreCase("rematch"))
 			verify(listener).rematch((Display) any());
+		else if (event.equalsIgnoreCase("leaveMatch"))
+			verify(listener).leaveMatch((Display) any());
 		else
 			throw new RuntimeException("Event " + event + " is not supported");
 	}

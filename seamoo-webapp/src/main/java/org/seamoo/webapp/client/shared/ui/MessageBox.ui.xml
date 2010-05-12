@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- 
+ -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:gwt="urn:import:com.google.gwt.user.client.ui" xmlns:new="urn:import:com.google.gwt.widgetideas.client">
+	<gwt:HTMLPanel width="200">
+		<table class="fw">
+			<tr>
+				<td class="tac">
+					<gwt:Label ui:field="labelMessage"></gwt:Label>
+				</td>
+			</tr>
+			<tr>
+				<td class="tac">
+					<gwt:FlowPanel ui:field="panelButtons"></gwt:FlowPanel>
+				</td>
+			</tr>
+		</table>
+	</gwt:HTMLPanel>
+</ui:UiBinder>

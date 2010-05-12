@@ -17,6 +17,7 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
+import org.seamoo.entities.League;
 import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
@@ -24,6 +25,7 @@ import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.utils.converter.Converter;
+import org.seamoo.webapp.client.shared.ui.MessageBox;
 import org.seamoo.webapp.client.shared.ui.NotLoggedInException;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
 
@@ -31,6 +33,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.PopupPanel;
 
 public class MatchBoardPresenterSteps {
 
@@ -102,6 +106,29 @@ public class MatchBoardPresenterSteps {
 		restubService();
 	}
 
+	MessageBox.EventListener messageBoxListener;
+
+	@Given("MessageBox is mocked")
+	public void mockMessageBox() {
+		PowerMockito.mockStatic(MessageBox.class);
+		when(
+				MessageBox.showPopupPanel(anyString(), (String[]) any(), (String[]) any(),
+						(org.seamoo.webapp.client.shared.ui.MessageBox.EventListener) any())).thenAnswer(new Answer<PopupPanel>() {
+
+			@Override
+			public PopupPanel answer(InvocationOnMock invocation) throws Throwable {
+				// TODO Auto-generated method stub
+				messageBoxListener = (org.seamoo.webapp.client.shared.ui.MessageBox.EventListener) invocation.getArguments()[3];
+				return null;
+			}
+		});
+	}
+
+	@When("\"$name\" is selected from DialogBox")
+	public void fireSelectOKFromDialogBox(String name) {
+		messageBoxListener.select(name);
+	}
+
 	@Given("Service forgets its interaction")
 	public void restubService() {
 		reset(serviceAsync);
@@ -118,6 +145,21 @@ public class MatchBoardPresenterSteps {
 				return null;
 			}
 		}).when(serviceAsync).getMatchState(anyLong(), anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
+
+		doAnswer(new Answer() {
+
+			@Override
+			public Object answer(InvocationOnMock invocation) throws Throwable {
+				// TODO Auto-generated method stub
+				AsyncCallback<League> callback = (AsyncCallback<League>) invocation.getArguments()[1];
+				League league = new League();
+				league.setAutoId(1L);
+				league.setAlias("giai-ga-con");
+				callback.onSuccess(league);
+				return null;
+			}
+		}).when(serviceAsync).escapeCurrentMatch(anyLong(), (AsyncCallback<League>) any());
+
 	}
 
 	AsyncCallback<MatchState> postPonedCallback;
@@ -179,6 +221,7 @@ public class MatchBoardPresenterSteps {
 	@Given("Current match is empty")
 	public void setupCurrentEmptyMatch() {
 		matchState = new MatchState();
+		matchState.setLeagueAutoId(TEST_LEAGUE_AUTOID);
 		matchState.setBufferedQuestions(new ArrayList<Question>());
 		matchState.setBufferedQuestionsFrom(0);
 		matchState.setPhase(MatchPhase.NOT_FORMED);
@@ -299,10 +342,21 @@ public class MatchBoardPresenterSteps {
 		verify(serviceAsync).submitAnswer(eq(1L), eq(order), anyString(), (AsyncCallback) any());
 	}
 
-	// !-- When user ignore the question
 	@When("User ignore current question")
 	public void ignoreQuestion() {
 		listener.ignoreQuestion(display);
+	}
+
+	@When("Display invoke a leaveMatch")
+	public void leaveMatch() {
+		listener.leaveMatch(display);
+	}
+
+	@Then("a DialogBox is shown")
+	public void assertDialogBoxShown() {
+		PowerMockito.verifyStatic();
+		MessageBox.showPopupPanel(anyString(), (String[]) any(), (String[]) any(),
+				(org.seamoo.webapp.client.shared.ui.MessageBox.EventListener) any());
 	}
 
 	@When("User ignore $number more questions")
@@ -406,5 +460,10 @@ public class MatchBoardPresenterSteps {
 	public void assertPageReloaded() {
 		PowerMockito.verifyStatic();
 		Window.Location.reload();
+	}
+
+	@Then("Service submit an escape")
+	public void assertServiceSubmitEscape() {
+		verify(serviceAsync).escapeCurrentMatch(eq(matchState.getLeagueAutoId()), (AsyncCallback) any());
 	}
 }

@@ -26,6 +26,7 @@ import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.installation.Bundle;
+import org.seamoo.utils.AliasBuilder;
 import org.seamoo.utils.converter.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -109,6 +110,7 @@ public class DemoController {
 		League englishAmateur = new League();
 		{
 			englishAmateur.setName("Giải nghiệp dư");
+			englishAmateur.setAlias("giai-nghiep-du");
 			englishAmateur.setDescription("Dành cho những người lần đầu tham gia ");
 			englishAmateur.setLogoUrl("/images/leagues/eng-amateur.png");
 			englishAmateur.setLevel(0);
@@ -118,6 +120,7 @@ public class DemoController {
 		League englishChick = new League();
 		{
 			englishChick.setName("Giải gà con");
+			englishChick.setAlias("giai-ga-con");
 			englishChick.setDescription("Dành cho những đấu thủ đã thể hiện được mình ở Giải nghiệp dư ");
 			englishChick.setLogoUrl("/images/leagues/eng-league-2.png");
 			englishChick.setLevel(1);
@@ -128,6 +131,7 @@ public class DemoController {
 		League englishCock = new League();
 		{
 			englishCock.setName("Giải gà chọi");
+			englishCock.setAlias("giai-ga-choi");
 			englishCock.setDescription("Dành cho những đấu thủ đẳng cấp ");
 			englishCock.setLogoUrl("/images/leagues/eng-league-1.png");
 			englishCock.setLevel(2);
@@ -138,14 +142,16 @@ public class DemoController {
 		League englishEagle = new League();
 		{
 			englishEagle.setName("Giải đại bàng");
+			englishEagle.setAlias("giai-dai-bang");
 			englishEagle.setDescription("Dành cho những đấu thủ đẳng cấp cao");
 			englishEagle.setLogoUrl("/images/leagues/eng-pro-league.png");
 			englishEagle.setLevel(3);
 			englishEagle.setEnabled(true);
 		}
 		League[] leagues = new League[] { englishAmateur, englishChick, englishCock, englishEagle };
-		for (League l : leagues)
+		for (League l : leagues) {
 			l.setSubjectAutoId(subject.getAutoId());
+		}
 		leagueDao.persist(leagues);
 		return leagues;
 	}

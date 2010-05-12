@@ -7,7 +7,9 @@ import java.util.concurrent.TimeoutException;
 import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.competition.MatchOrganizer;
 import org.seamoo.competition.TimeStampProvider;
+import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.MemberDao;
+import org.seamoo.entities.League;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchCompetitor;
@@ -21,7 +23,6 @@ import org.seamoo.webapp.filters.MemberInjectionFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.workingonit.gwtbridge.ServletUtils;
 
-import com.google.gwt.user.client.rpc.StatusCodeException;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class MatchServiceImpl extends RemoteServiceServlet implements MatchService {
@@ -34,6 +35,8 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	LeagueOrganizer leagueOrganizer;
 	@Autowired
 	MemberDao memberDao;
+	@Autowired
+	LeagueDao leagueDao;
 
 	int BUFFERED_QUESTION_BLOCK = 5;
 	int BUFFERED_QUESTION_REFILL_THRESHOLD = 2;
@@ -97,6 +100,7 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 				e.setMember(memberDao.findByKey(e.getMemberAutoId()));
 		}
 		matchState.setMatchAutoId(match.getAutoId() != null ? match.getAutoId().longValue() : 0);
+		matchState.setLeagueAutoId(match.getLeagueAutoId());
 		matchState.setMatchAlias(match.getAlias());
 		return matchState;
 	}
@@ -138,5 +142,14 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public League escapeCurrentMatch(Long leagueId) {
+		// TODO Auto-generated method stub
+		MatchOrganizer matchOrganizer = leagueOrganizer.getMatchOrganizer(leagueId);
+		Member member = getInjectedMember();
+		matchOrganizer.escapeCurrentMatch(member.getAutoId());
+		return leagueDao.findByKey(leagueId);
 	}
 }
