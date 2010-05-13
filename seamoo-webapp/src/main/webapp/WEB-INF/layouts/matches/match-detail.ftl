@@ -55,7 +55,7 @@
 			[#assign count=count+1/]
 			[@questionItem no=count content="${question.currentRevision.content}"/]
 			[#list match.competitors as competitor]
-				[#if (competitor.answers?size >= count)]
+				[#if (competitor.answers?exists && competitor.answers?size >= count)]
 					[#assign answer=competitor.answers[count-1]/]
 					[#if (answer.type==enums["org.seamoo.entities.matching.MatchAnswerType"].SUBMITTED)]
 						[@answerItem no=count author=competitor.member.displayName moment="${answer.submittedTime?string('HH:mm:ss')} (UTC)" content=question.currentRevision.getTranslatedAnswer(answer.content)]
