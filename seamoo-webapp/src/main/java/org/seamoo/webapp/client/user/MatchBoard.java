@@ -9,9 +9,9 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
+import org.seamoo.webapp.client.shared.NotLoggedInException;
+import org.seamoo.webapp.client.shared.UrlFactory;
 import org.seamoo.webapp.client.shared.ui.MessageBox;
-import org.seamoo.webapp.client.shared.ui.NotLoggedInException;
-import org.seamoo.webapp.client.shared.ui.UrlFactory;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
 import org.seamoo.webapp.client.user.ui.MatchView;
 
@@ -116,7 +116,6 @@ public class MatchBoard {
 										@Override
 										public void onSuccess(League league) {
 											Window.Location.replace(UrlFactory.getLeagueViewUrl(league));
-
 										}
 
 										@Override
@@ -240,7 +239,7 @@ public class MatchBoard {
 			currentMatchState = state;
 			display.setPhase(state.getPhase());
 			if (state.getPhase() == MatchPhase.FINISHED) {
-				Window.Location.replace(UrlFactory.getMatchViewUrl(state));
+				Window.Location.replace(UrlFactory.getRejoinableMatchViewUrl(state));
 				return;
 			}
 			display.setTotalQuestion(currentMatchState.getQuestionsCount());

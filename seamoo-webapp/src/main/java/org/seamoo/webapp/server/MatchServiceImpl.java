@@ -17,7 +17,7 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
-import org.seamoo.webapp.client.shared.ui.NotLoggedInException;
+import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.seamoo.webapp.client.user.MatchService;
 import org.seamoo.webapp.filters.MemberInjectionFilter;
 import org.springframework.beans.factory.annotation.Autowired;

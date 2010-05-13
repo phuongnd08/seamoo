@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.MatchCompetitor;
-import org.seamoo.webapp.client.shared.ui.UrlFactory;
+import org.seamoo.webapp.client.shared.UrlFactory;
 import org.seamoo.webapp.client.user.MatchBoard;
 
 import com.google.gwt.core.client.GWT;

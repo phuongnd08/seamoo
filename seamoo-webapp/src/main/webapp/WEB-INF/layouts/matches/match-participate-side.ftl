@@ -4,11 +4,12 @@
 <div class="module">
 	<div class="description-box">
 		<p>
-			<img src="[@spring.url "/images/leagues/eng-amateur.png"/]" width="96" height="64" class="fl"/>
-			<strong>English</strong> &gt; <strong>Giải nghiệp dư</strong><br/>
+			<img class="fl" width="96" height="64" src="[@spring.url league.logoUrl/]"/>
+			<a href='${statics["org.seamoo.webapp.client.shared.UrlFactory"].getSubjectViewUrl(subject)}'>${subject.name}</a> 
+			&gt; <a href='${statics["org.seamoo.webapp.client.shared.UrlFactory"].getLeagueViewUrl(league)}'>${league.name}</a>
 		</p>
 		<p>
-			Dành cho những người lần đầu tham gia
+			${league.description}
 		</p>
 	</div>
 	<div class="description-box" id="sidePlaceHolder">

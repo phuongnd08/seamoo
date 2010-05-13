@@ -65,7 +65,7 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 		Assert.assertEquals(reloadedM.getCompetitors().get(0).getAnswers().size(), 2);
 	}
 
-	@Test
+	// @Test
 	public void competitorWithEmptyAnswersShouldBePersisted() {
 		Match m = new Match();
 		MatchCompetitor mc = new MatchCompetitor();

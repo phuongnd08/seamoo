@@ -33,8 +33,9 @@ ${(milliseconds/1000/60)?string("0")}:${(milliseconds/1000 % 60)?string("00")}
 	<h3>Trận đấu trong khuôn khổ</h3>
 	<div class="description-box">
 		<p>
-			<img class="fl" width="96" height="64" src="[@spring.url "/images/leagues/eng-amateur.png"/]"/>
-			<a href="#">English</a> &gt; <a href="#">Giải nghiệp dư</a>
+			<img class="fl" width="96" height="64" src="[@spring.url league.logoUrl/]"/>
+			<a href='${statics["org.seamoo.webapp.client.shared.UrlFactory"].getSubjectViewUrl(subject)}'>${subject.name}</a> 
+			&gt; <a href='${statics["org.seamoo.webapp.client.shared.UrlFactory"].getLeagueViewUrl(league)}'>${league.name}</a>
 		</p>
 	</div>
 	<h3>Giữa</h3>

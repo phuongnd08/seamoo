@@ -35,7 +35,7 @@ public class Match implements Serializable {
 	private List<MatchEvent> events;
 
 	private MatchPhase phase;
-	
+
 	private Long leagueAutoId;
 
 	@Store(false)
@@ -131,6 +131,8 @@ public class Match implements Serializable {
 			if (i < competitors.size() - 1)
 				alias += "-";
 		}
+		if (alias.length() > 50)
+			alias = alias.substring(0, 50);
 		return alias;
 	}
 

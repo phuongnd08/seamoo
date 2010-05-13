@@ -125,7 +125,7 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<configuration>
 						<forkMode>once</forkMode>
-						<testFailureIgnore>true</testFailureIgnore>
+						<testFailureIgnore>false</testFailureIgnore>
 					</configuration>
 				</plugin>
 				<plugin>

@@ -1,4 +1,4 @@
-package org.seamoo.webapp.client.shared.ui;
+package org.seamoo.webapp.client.shared;
 
 public class NotLoggedInException extends Exception {
 

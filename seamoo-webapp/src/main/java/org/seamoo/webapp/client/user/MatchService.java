@@ -2,7 +2,7 @@ package org.seamoo.webapp.client.user;
 
 import org.seamoo.entities.League;
 import org.seamoo.entities.matching.MatchState;
-import org.seamoo.webapp.client.shared.ui.NotLoggedInException;
+import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.workingonit.gwtbridge.GwtRemoteService;
 
 import com.google.gwt.user.client.rpc.RemoteService;

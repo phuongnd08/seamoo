@@ -1,6 +1,12 @@
 [#ftl/]
 [#import "/match.ftl" as matchX/]
 [#import "/spring.ftl" as spring/]
+[#if rejoin]
+<div class="description-box">
+	<a href="[@spring.url "/matches/rejoin?leagueId=${match.leagueAutoId}"/]">Chơi trận khác</a>
+</div>
+[/#if]
+
 <div class="description-box">
 	<h3>Diễn biến</h3>
 	<table class="fw">
@@ -14,7 +20,7 @@
 	<tr class="row-${no%2+1}"><td>${no}</td><td colspan="3"><u>${content}</u></td></tr>
 [/#macro]
 [#macro icon type]
-<span class="answer-${type}"></span>
+<span class="answer-${type}" title="${type}"></span>
 [/#macro]
 
 [#macro answerItem no author moment content]
@@ -23,7 +29,7 @@
 		<td><a href="#">${author}</a> <span class="match-review-answer-time">${moment}</span>: <span class="match-review-answer-content">${content}</span> </td>
 		<td class="answer-review-grade-column">[#nested/]</td>
 		<td>
-			<a href="#" class="flag-btn" title="Báo cáo câu trả lời có tính chất spam"></a>
+			[#--<a href="#" class="flag-btn" title="Báo cáo câu trả lời có tính chất spam"></a>--]
 		</td>
 	</tr>
 [/#macro]
@@ -51,20 +57,23 @@
 			[#list match.competitors as competitor]
 				[#if (competitor.answers?size >= count)]
 					[#assign answer=competitor.answers[count-1]/]
-					[@answerItem no=count author=competitor.member.displayName moment="${answer.submittedTime?string('HH:mm:ss')} (UTC)" content=question.currentRevision.getTranslatedAnswer(answer.content)]
-						[#if answer.correct]
-							[@icon type="correct"/]
-						[#else]
-							[@icon type="wrong"/]
-						[/#if]
-					[/@answerItem]
+					[#if (answer.type==enums["org.seamoo.entities.matching.MatchAnswerType"].SUBMITTED)]
+						[@answerItem no=count author=competitor.member.displayName moment="${answer.submittedTime?string('HH:mm:ss')} (UTC)" content=question.currentRevision.getTranslatedAnswer(answer.content)]
+							[#if answer.correct]
+								[@icon type="correct"/]
+							[#else]
+								[@icon type="wrong"/]
+							[/#if]
+						[/@answerItem]
+					[#else]
+						[@answerItem no=count author=competitor.member.displayName moment="${answer.submittedTime?string('HH:mm:ss')} (UTC)" content=""]
+							[@icon type="ignore"/]
+						[/@answerItem]
+					
+					[/#if]
 				[/#if]
 			[/#list]
 			[@correctAnswerItem no=count content="${question.currentRevision.correctAnswer}"][@icon type="correct"/][/@correctAnswerItem]
 		[/#list]
 	</table>
-</div>
-
-<div class="description-box">
-	<a href="[@spring.url "/matches/rejoin?leagueId=${match.leagueAutoId}"/]">Chơi trận khác</a>
 </div>

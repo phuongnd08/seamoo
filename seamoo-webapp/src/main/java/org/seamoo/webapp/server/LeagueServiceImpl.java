@@ -6,6 +6,7 @@ import java.util.List;
 import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.SubjectDao;
 import org.seamoo.entities.League;
+import org.seamoo.entities.Subject;
 import org.seamoo.webapp.client.admin.LeagueService;
 import org.springframework.beans.factory.annotation.Autowired;
 

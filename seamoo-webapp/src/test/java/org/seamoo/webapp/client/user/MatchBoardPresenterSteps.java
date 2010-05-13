@@ -25,8 +25,8 @@ import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.utils.converter.Converter;
+import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.seamoo.webapp.client.shared.ui.MessageBox;
-import org.seamoo.webapp.client.shared.ui.NotLoggedInException;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
 
 import com.google.gwt.core.client.GWT;
