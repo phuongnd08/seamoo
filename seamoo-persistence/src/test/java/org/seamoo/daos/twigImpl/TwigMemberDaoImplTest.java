@@ -19,9 +19,15 @@ import org.testng.annotations.Test;
 import com.vercer.engine.persist.ObjectDatastore;
 import com.vercer.engine.persist.annotation.AnnotationObjectDatastore;
 
+@PrepareForTest(TOD.class)
 public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 
 	TwigMemberDaoImpl memberDao;
+
+	@ObjectFactory
+	public IObjectFactory getObjectFactory() {
+		return new org.powermock.modules.testng.PowerMockObjectFactory();
+	}
 
 	public TwigMemberDaoImplTest() {
 	}
@@ -31,9 +37,14 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 	public void setUp() {
 		// TODO Auto-generated method stub
 		super.setUp();
+		mockTOD();//every time test run we need to reset the ObjectDatastore
 		memberDao = new TwigMemberDaoImpl();
-		// init separate object data store for new dao
-		memberDao.ods = new AnnotationObjectDatastore();
+	}
+
+	private void mockTOD() {
+		PowerMockito.mockStatic(TOD.class);
+		AnnotationObjectDatastore aods = new AnnotationObjectDatastore();
+		when(TOD.getObjectDataStore()).thenReturn(aods);
 	}
 
 	@Override
@@ -69,10 +80,9 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 		memberDao.persist(m);
 		assertEquals(memberDao.findByOpenId("xxx"), m);
 
+		mockTOD();
 		TwigMemberDaoImpl dao2 = new TwigMemberDaoImpl();
 		// init separate object data store for new dao
-		dao2.ods = new AnnotationObjectDatastore();
-
 		Member m2 = dao2.findByKey(m.getAutoId());
 		assertNotSame(m2, m);
 		m2.setDisplayName("Mr X");
@@ -90,9 +100,8 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 		memberDao.persist(m);
 		assertEquals(memberDao.findByOpenId("xxx"), m);
 
+		mockTOD();
 		TwigMemberDaoImpl dao2 = new TwigMemberDaoImpl();
-		// init separate object data store for new dao
-		dao2.ods = new AnnotationObjectDatastore();
 
 		Member m2 = dao2.findByOpenId("xxx");
 		assertNotSame(m2, m);
@@ -107,9 +116,9 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 	@Test
 	public void nullMemberAlwaysRefreshed() {
 		assertNull(memberDao.findByOpenId("xxx"));
+
+		mockTOD();
 		TwigMemberDaoImpl dao2 = new TwigMemberDaoImpl();
-		// init separate object data store for new dao
-		dao2.ods = new AnnotationObjectDatastore();
 
 		Member m = new Member();
 		m.setOpenId("xxx");

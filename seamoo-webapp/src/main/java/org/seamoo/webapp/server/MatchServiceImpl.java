@@ -6,7 +6,6 @@ import java.util.concurrent.TimeoutException;
 
 import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.competition.MatchOrganizer;
-import org.seamoo.competition.TimeStampProvider;
 import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.entities.League;
@@ -17,6 +16,7 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
+import org.seamoo.utils.TimeProvider;
 import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.seamoo.webapp.client.user.MatchService;
 import org.seamoo.webapp.filters.MemberInjectionFilter;
@@ -81,9 +81,9 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 		}
 		// set the correct remaining time
 		if (match.getPhase() == MatchPhase.FORMED) {
-			matchState.setRemainingPeriod(match.getStartedMoment() - TimeStampProvider.getCurrentTimeMilliseconds());
+			matchState.setRemainingPeriod(match.getStartedMoment() - TimeProvider.getCurrentTimeMilliseconds());
 		} else if (match.getPhase() == MatchPhase.PLAYING) {
-			matchState.setRemainingPeriod(match.getEndedMoment() - TimeStampProvider.getCurrentTimeMilliseconds());
+			matchState.setRemainingPeriod(match.getEndedMoment() - TimeProvider.getCurrentTimeMilliseconds());
 		}
 		// set the correct phase for current member
 		if (match.getPhase() == MatchPhase.PLAYING && competitor.getFinishedMoment() != 0) {

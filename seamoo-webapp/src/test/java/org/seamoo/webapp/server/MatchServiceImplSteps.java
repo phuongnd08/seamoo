@@ -19,7 +19,6 @@ import org.powermock.api.mockito.PowerMockito;
 import org.seamoo.cache.CacheWrapper;
 import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.competition.MatchOrganizer;
-import org.seamoo.competition.TimeStampProvider;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
@@ -28,6 +27,7 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
+import org.seamoo.utils.TimeProvider;
 import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.workingonit.gwtbridge.ServletUtils;
 
@@ -175,8 +175,8 @@ public class MatchServiceImplSteps {
 
 	@Given("Current Time is $stamp")
 	public void setUpCurrentTime(long stamp) {
-		PowerMockito.mockStatic(TimeStampProvider.class);
-		when(TimeStampProvider.getCurrentTimeMilliseconds()).thenReturn(stamp);
+		PowerMockito.mockStatic(TimeProvider.class);
+		when(TimeProvider.getCurrentTimeMilliseconds()).thenReturn(stamp);
 	}
 
 	@Then("State Buffered Questions has $number questions")

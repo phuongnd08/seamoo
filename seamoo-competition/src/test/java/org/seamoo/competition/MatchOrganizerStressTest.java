@@ -27,6 +27,7 @@ import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.entities.question.QuestionType;
+import org.seamoo.utils.TimeProvider;
 import org.testng.annotations.Test;
 
 public class MatchOrganizerStressTest {
@@ -253,7 +254,7 @@ public class MatchOrganizerStressTest {
 		}
 
 		int sleepTime = 0;
-		long start = TimeStampProvider.getCurrentTimeMilliseconds();
+		long start = TimeProvider.getCurrentTimeMilliseconds();
 
 		while (true) {
 			if (finishedUser >= threads.length - 1)// accept the cases where 1
@@ -273,7 +274,7 @@ public class MatchOrganizerStressTest {
 			}
 		}
 
-		long end = TimeStampProvider.getCurrentTimeMilliseconds();
+		long end = TimeProvider.getCurrentTimeMilliseconds();
 
 		CountableCacheWrapper<List> fullWaitingMatches = (CountableCacheWrapper<List>) organizer.fullWaitingMatches;
 		CountableCacheWrapper<List> notFullWaitingMatches = (CountableCacheWrapper<List>) organizer.notFullWaitingMatches;

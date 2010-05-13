@@ -28,6 +28,7 @@ import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.entities.question.QuestionType;
 import org.seamoo.test.ObjectSerializer;
+import org.seamoo.utils.TimeProvider;
 import org.testng.annotations.Test;
 
 public class MatchOrganizerConcurrencyTest {
@@ -298,7 +299,7 @@ public class MatchOrganizerConcurrencyTest {
 		Thread.sleep(50L);
 		thread2.start();
 		int sleepTime = 0;
-		long start = TimeStampProvider.getCurrentTimeMilliseconds();
+		long start = TimeProvider.getCurrentTimeMilliseconds();
 
 		while (true) {
 			if (m != null)
@@ -314,7 +315,7 @@ public class MatchOrganizerConcurrencyTest {
 			}
 		}
 
-		long end = TimeStampProvider.getCurrentTimeMilliseconds();
+		long end = TimeProvider.getCurrentTimeMilliseconds();
 		assertEquals(m.getCompetitors().get(0).getAnswers().size(), 1);
 	}
 

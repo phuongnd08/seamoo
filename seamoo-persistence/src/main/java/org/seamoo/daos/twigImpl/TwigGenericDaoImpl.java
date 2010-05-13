@@ -10,45 +10,43 @@ import com.vercer.engine.persist.ObjectDatastore;
 
 public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TKey> {
 
-	ObjectDatastore ods;
 	private Class<TEntity> entityClass;
 
 	public TwigGenericDaoImpl() {
 		entityClass = (Class<TEntity>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-		ods = TOD.getObjectDataStore();
 	}
 
 	protected ObjectDatastore getOds() {
-		return ods;
+		return TOD.getObjectDataStore();
 	}
 
 	public void delete(TEntity entity) {
 		// TODO Auto-generated method stub
-		ods.associate(entity);
-		ods.delete(entity);
+		getOds().associate(entity);
+		getOds().delete(entity);
 
 	}
 
 	public TEntity findByKey(TKey key) {
-		return ods.load(entityClass, key);
+		return getOds().load(entityClass, key);
 	}
 
 	public List<TEntity> getAll() {
 		// TODO Auto-generated method stub
-		return Lists.newArrayList(ods.find(entityClass));
+		return Lists.newArrayList(getOds().find(entityClass));
 	}
 
 	public TEntity persist(TEntity entity) {
-		ods.storeOrUpdate(entity);
-		ods.refresh(entity);
+		getOds().storeOrUpdate(entity);
+		getOds().refresh(entity);
 		return entity;
 	}
 
 	public TEntity[] persist(TEntity[] entities) {
 		if (entities.length != 0) {
-			ods.storeAll(Lists.newArrayList(entities));
+			getOds().storeAll(Lists.newArrayList(entities));
 			for (TEntity e : entities) {
-				ods.refresh(e);
+				getOds().refresh(e);
 			}
 		}
 		return entities;

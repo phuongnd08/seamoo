@@ -32,6 +32,7 @@ import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
+import org.seamoo.utils.TimeProvider;
 import org.seamoo.utils.converter.Converter;
 
 public class MatchOrganizerSteps {
@@ -165,7 +166,7 @@ public class MatchOrganizerSteps {
 	@Given("Current Time is $hour:$minute:$second")
 	public void mockCurrentTime(int hour, int minute, int second) {
 		Date d = getDateFromHMS(hour, minute, second);
-		when(TimeStampProvider.getCurrentTimeMilliseconds()).thenReturn(d.getTime());
+		when(TimeProvider.getCurrentTimeMilliseconds()).thenReturn(d.getTime());
 	}
 
 	Match match;

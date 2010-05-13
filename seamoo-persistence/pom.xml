@@ -64,19 +64,25 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.googlecode.objectify</groupId>
-			<artifactId>objectify</artifactId>
+			<groupId>com.vercer.engine.persist</groupId>
+			<artifactId>twig-persist</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>com.vercer.engine.persist</groupId>
-			<artifactId>twig-persist</artifactId>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>seamoo-server-utils</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.google.collections</groupId>
 			<artifactId>google-collections</artifactId>
 			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
 		</dependency>
 
 	</dependencies>
@@ -88,7 +94,6 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
-					<forkMode>once</forkMode>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/testng-unit-test.xml</suiteXmlFile>
 					</suiteXmlFiles>

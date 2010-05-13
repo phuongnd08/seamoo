@@ -3,11 +3,12 @@ package org.seamoo.competition;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.seamoo.test.PowerMockedGaeBddScenario;
+import org.seamoo.utils.TimeProvider;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-@PrepareForTest(value = { EntityFactory.class, TimeStampProvider.class })
+@PrepareForTest(value = { EntityFactory.class, TimeProvider.class })
 public class MatchOrganizerRareUserTest extends PowerMockedGaeBddScenario {
 	public MatchOrganizerRareUserTest() {
 		super(new MatchOrganizerSteps());
@@ -22,7 +23,7 @@ public class MatchOrganizerRareUserTest extends PowerMockedGaeBddScenario {
 
 	@BeforeMethod
 	public void startStaticMock() {
-		PowerMockito.mockStatic(TimeStampProvider.class);
+		PowerMockito.mockStatic(TimeProvider.class);
 	}
 
 	@AfterMethod

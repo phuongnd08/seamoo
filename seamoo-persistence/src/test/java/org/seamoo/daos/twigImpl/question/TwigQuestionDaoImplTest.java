@@ -1,21 +1,43 @@
 package org.seamoo.daos.twigImpl.question;
 
+import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.seamoo.daos.question.QuestionDao;
+import org.seamoo.daos.twigImpl.TOD;
+import org.seamoo.daos.twigImpl.TwigMemberDaoImpl;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.persistence.test.LocalAppEngineTest;
+import org.testng.IObjectFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.ObjectFactory;
 import org.testng.annotations.Test;
 
+import com.vercer.engine.persist.annotation.AnnotationObjectDatastore;
+
+@PrepareForTest(TOD.class)
 public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
+
+	@ObjectFactory
+	public IObjectFactory getObjectFactory() {
+		return new org.powermock.modules.testng.PowerMockObjectFactory();
+	}
+
+	private void mockTOD() {
+		PowerMockito.mockStatic(TOD.class);
+		AnnotationObjectDatastore aods = new AnnotationObjectDatastore();
+		when(TOD.getObjectDataStore()).thenReturn(aods);
+	}
+
 	QuestionDao daoImpl;
 
 	@BeforeMethod
@@ -23,6 +45,7 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 	public void setUp() {
 		// TODO Auto-generated method stub
 		super.setUp();
+		mockTOD();// every time test run we need to reset the ObjectDatastore
 		daoImpl = new TwigQuestionDaoImpl();
 	}
 
@@ -37,8 +60,9 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 
 	/**
 	 * A method that used to generate questions for the sake of test. The method
-	 * include both singular persistence and bulk persistence to ensure that the question dao
-	 * has maintained a consistent index for all questions
+	 * include both singular persistence and bulk persistence to ensure that the
+	 * question dao has maintained a consistent index for all questions
+	 * 
 	 * @param leagueId
 	 * @param number
 	 * @param bulkNumber
@@ -62,10 +86,15 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 
 	}
 
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test
 	public void getRandomExceedAvailableThrowExeption() {
 		generateQuestions(1L, 5, 0);
-		daoImpl.getRandomQuestions(1L, 6);
+		try {
+			daoImpl.getRandomQuestions(1L, 6);
+		} catch (IllegalArgumentException ex) {
+			return;
+		}
+		fail("Expected IllegalArgumentException is not thrown");
 	}
 
 	@Test

@@ -3,7 +3,7 @@
  -->
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
 	xmlns:gwt="urn:import:com.google.gwt.user.client.ui" xmlns:new="urn:import:com.google.gwt.widgetideas.client">
-	<gwt:HTMLPanel styleName="fl user-info">
+	<gwt:HTMLPanel styleName="user-info">
 		<table class="fw">
 			<tbody>
 				<tr>

@@ -25,6 +25,7 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchEventType;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.question.Question;
+import org.seamoo.utils.TimeProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MatchOrganizer {
@@ -87,7 +88,7 @@ public class MatchOrganizer {
 	}
 
 	private boolean shouldStarted(Match match) {
-		return match.getPhase() == MatchPhase.FORMED && match.getStartedMoment() < TimeStampProvider.getCurrentTimeMilliseconds();
+		return match.getPhase() == MatchPhase.FORMED && match.getStartedMoment() < TimeProvider.getCurrentTimeMilliseconds();
 	}
 
 	private boolean canJoin(Match match) {
@@ -209,7 +210,7 @@ public class MatchOrganizer {
 	}
 
 	private void updateLastSeen(MatchCandidate candidate) {
-		candidate.setLastSeenMoment(TimeStampProvider.getCurrentTimeMilliseconds());
+		candidate.setLastSeenMoment(TimeProvider.getCurrentTimeMilliseconds());
 	}
 
 	private void recacheCandidate(MatchCandidate candidate) {
@@ -218,7 +219,7 @@ public class MatchOrganizer {
 	}
 
 	private boolean isDisconnected(MatchCandidate candidate) {
-		return candidate.getLastSeenMoment() + settings.getCandidateActivePeriod() < TimeStampProvider.getCurrentTimeMilliseconds();
+		return candidate.getLastSeenMoment() + settings.getCandidateActivePeriod() < TimeProvider.getCurrentTimeMilliseconds();
 	}
 
 	private MatchCandidate getMatchCandidate(Long userAutoId) {
@@ -234,17 +235,17 @@ public class MatchOrganizer {
 	private void recheckMatchPhase(Match match, List fullList, List notFullList) {
 		if (match.getPhase() == MatchPhase.NOT_FORMED && match.getCompetitors().size() >= settings.getMinCandidatePerMatch()) {
 			match.setPhase(MatchPhase.FORMED);
-			match.setFormedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
-			match.setStartedMoment(TimeStampProvider.getCurrentTimeMilliseconds() + settings.getMatchCountDownTime());
+			match.setFormedMoment(TimeProvider.getCurrentTimeMilliseconds());
+			match.setStartedMoment(TimeProvider.getCurrentTimeMilliseconds() + settings.getMatchCountDownTime());
 			match.setEndedMoment(match.getStartedMoment() + settings.getMatchTime());
 		} else if (match.getPhase() == MatchPhase.FORMED) {
 			if (match.getCompetitors().size() < settings.getMinCandidatePerMatch()) {
 				match.setPhase(MatchPhase.NOT_FORMED);
-			} else if (match.getStartedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
+			} else if (match.getStartedMoment() <= TimeProvider.getCurrentTimeMilliseconds()) {
 				startMatch(match, fullList, notFullList);
 			}
 		} else if (match.getPhase() == MatchPhase.PLAYING
-				&& match.getEndedMoment() <= TimeStampProvider.getCurrentTimeMilliseconds()) {
+				&& match.getEndedMoment() <= TimeProvider.getCurrentTimeMilliseconds()) {
 			finishMatch(match);
 		}
 	}
@@ -275,7 +276,7 @@ public class MatchOrganizer {
 		match.addEvent(new MatchEvent(MatchEventType.FINISHED, new Date()));
 		for (MatchCompetitor competitor : match.getCompetitors()) {
 			if (competitor.getFinishedMoment() == 0)
-				competitor.setFinishedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
+				competitor.setFinishedMoment(TimeProvider.getCurrentTimeMilliseconds());
 		}
 		rank(match);
 		prepareMatchForPersistence(match);
@@ -454,7 +455,7 @@ public class MatchOrganizer {
 				competitor.addAnswer(answer);
 
 			if (competitor.getPassedQuestionCount() == match.getQuestions().size()) {
-				competitor.setFinishedMoment(TimeStampProvider.getCurrentTimeMilliseconds());
+				competitor.setFinishedMoment(TimeProvider.getCurrentTimeMilliseconds());
 				checkMatchFinished(match);
 			}
 
