@@ -73,6 +73,11 @@
 			<artifactId>twig-persist</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>seamoo-server-utils</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 	</dependencies>
 

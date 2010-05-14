@@ -3,31 +3,23 @@ package org.seamoo.daos.twigImpl;
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.seamoo.daos.MemberDao;
 import org.seamoo.entities.Member;
 import org.seamoo.persistence.test.LocalAppEngineTest;
+import org.seamoo.test.MockedTimeProvider;
+import org.seamoo.utils.TimeProvider;
 import org.testng.IObjectFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.ObjectFactory;
 import org.testng.annotations.Test;
 
-import com.vercer.engine.persist.ObjectDatastore;
 import com.vercer.engine.persist.annotation.AnnotationObjectDatastore;
 
-@PrepareForTest(TOD.class)
 public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 
 	TwigMemberDaoImpl memberDao;
-
-	@ObjectFactory
-	public IObjectFactory getObjectFactory() {
-		return new org.powermock.modules.testng.PowerMockObjectFactory();
-	}
 
 	public TwigMemberDaoImplTest() {
 	}
@@ -37,14 +29,9 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 	public void setUp() {
 		// TODO Auto-generated method stub
 		super.setUp();
-		mockTOD();//every time test run we need to reset the ObjectDatastore
 		memberDao = new TwigMemberDaoImpl();
-	}
-
-	private void mockTOD() {
-		PowerMockito.mockStatic(TOD.class);
-		AnnotationObjectDatastore aods = new AnnotationObjectDatastore();
-		when(TOD.getObjectDataStore()).thenReturn(aods);
+		memberDao.objectDatastoreProvider = new ObjectDatastoreProvider();// create separated odsp to use
+		memberDao.timeProvider = new TimeProvider();
 	}
 
 	@Override
@@ -74,55 +61,58 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 	}
 
 	@Test
-	public void obsoleteMemberByKeyShouldBeRefreshed() {
+	public void obsoleteMemberByKeyShouldBeRefreshedOnFind() {
 		Member m = new Member();
 		m.setOpenId("xxx");
+		m.setDisplayName("Mr X");
+		MockedTimeProvider mtp = new MockedTimeProvider();
+		memberDao.timeProvider = mtp;
+		mtp.setCurrentTimeStamp(0);
 		memberDao.persist(m);
-		assertEquals(memberDao.findByOpenId("xxx"), m);
 
-		mockTOD();
-		TwigMemberDaoImpl dao2 = new TwigMemberDaoImpl();
+		TwigMemberDaoImpl anotherMemberDao = new TwigMemberDaoImpl();
+		anotherMemberDao.objectDatastoreProvider = new ObjectDatastoreProvider();// create separated odsp to use
 		// init separate object data store for new dao
-		Member m2 = dao2.findByKey(m.getAutoId());
-		assertNotSame(m2, m);
-		m2.setDisplayName("Mr X");
-		dao2.persist(m2);
-		assertFalse("Mr X".equals(memberDao.findByKey(m.getAutoId()).getDisplayName()));
-		((TwigMemberDaoImpl) memberDao).memberLastCacheByKeys.put(m.getAutoId(), System.currentTimeMillis()
-				- TwigMemberDaoImpl.CACHE_PERIOD);
+		Member reloaded = anotherMemberDao.findByKey(m.getAutoId());
+		assertNotSame(reloaded, m);
+		reloaded.setDisplayName("Mr Y");
+		anotherMemberDao.persist(reloaded);
 		assertEquals(memberDao.findByKey(m.getAutoId()).getDisplayName(), "Mr X");
+		mtp.setCurrentTimeStamp(TwigMemberDaoImpl.CACHE_PERIOD + 1);
+		assertEquals(memberDao.findByKey(m.getAutoId()).getDisplayName(), "Mr Y");
 	}
 
 	@Test
-	public void obsoleteMemberByOpenIdShouldBeRefreshed() {
+	public void obsoleteMemberByOpenIdShouldBeRefreshedOnFind() {
 		Member m = new Member();
 		m.setOpenId("xxx");
+		m.setDisplayName("Mr X");
+		MockedTimeProvider mtp = new MockedTimeProvider();
+		memberDao.timeProvider = mtp;
+		mtp.setCurrentTimeStamp(0);
 		memberDao.persist(m);
-		assertEquals(memberDao.findByOpenId("xxx"), m);
 
-		mockTOD();
-		TwigMemberDaoImpl dao2 = new TwigMemberDaoImpl();
+		TwigMemberDaoImpl anotherMemberDao = new TwigMemberDaoImpl();
+		anotherMemberDao.objectDatastoreProvider = new ObjectDatastoreProvider();// create separated odsp to use
 
-		Member m2 = dao2.findByOpenId("xxx");
-		assertNotSame(m2, m);
-		m2.setDisplayName("Mr X");
-		dao2.persist(m2);
-		assertFalse("Mr X".equals(memberDao.findByOpenId("xxx").getDisplayName()));
-		((TwigMemberDaoImpl) memberDao).memberLastCacheByOpenIds.put(m.getOpenId(), System.currentTimeMillis()
-				- TwigMemberDaoImpl.CACHE_PERIOD);
+		Member reloaded = anotherMemberDao.findByOpenId("xxx");
+		reloaded.setDisplayName("Mr X");
+		anotherMemberDao.persist(reloaded);
 		assertEquals(memberDao.findByOpenId("xxx").getDisplayName(), "Mr X");
+		mtp.setCurrentTimeStamp(TwigMemberDaoImpl.CACHE_PERIOD + 1);
+		assertEquals(memberDao.findByOpenId("xxx").getDisplayName(), "Mr Y");
 	}
 
 	@Test
 	public void nullMemberAlwaysRefreshed() {
 		assertNull(memberDao.findByOpenId("xxx"));
 
-		mockTOD();
-		TwigMemberDaoImpl dao2 = new TwigMemberDaoImpl();
+		TwigMemberDaoImpl anotherMemberDao = new TwigMemberDaoImpl();
+		anotherMemberDao.objectDatastoreProvider = new ObjectDatastoreProvider();// create separated odsp to use
 
 		Member m = new Member();
 		m.setOpenId("xxx");
-		dao2.persist(m);
+		anotherMemberDao.persist(m);
 
 		assertNotNull(memberDao.findByOpenId("xxx"));
 

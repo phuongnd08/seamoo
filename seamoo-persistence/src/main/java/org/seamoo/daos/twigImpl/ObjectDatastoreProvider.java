@@ -3,17 +3,16 @@ package org.seamoo.daos.twigImpl;
 import com.vercer.engine.persist.ObjectDatastore;
 import com.vercer.engine.persist.annotation.AnnotationObjectDatastore;
 
-public class TOD {
-	static ThreadLocal<ObjectDatastore> local = new ThreadLocal<ObjectDatastore>() {
+public class ObjectDatastoreProvider {
+	public static final ObjectDatastoreProvider DEFAULT = new ObjectDatastoreProvider();
+	ThreadLocal<ObjectDatastore> local = new ThreadLocal<ObjectDatastore>() {
 		@Override
 		protected ObjectDatastore initialValue() {
 			return null;
 		}
 	};
 
-	static ObjectDatastore objectDatastore;
-
-	public static ObjectDatastore getObjectDataStore() {
+	public ObjectDatastore getObjectDataStore() {
 		ObjectDatastore ods = local.get();
 		if (ods == null) {
 			ods = new AnnotationObjectDatastore();

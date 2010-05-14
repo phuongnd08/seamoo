@@ -10,7 +10,7 @@ import java.util.TreeSet;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.seamoo.daos.question.QuestionDao;
-import org.seamoo.daos.twigImpl.TOD;
+import org.seamoo.daos.twigImpl.ObjectDatastoreProvider;
 import org.seamoo.daos.twigImpl.TwigMemberDaoImpl;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 
 import com.vercer.engine.persist.annotation.AnnotationObjectDatastore;
 
-@PrepareForTest(TOD.class)
+@PrepareForTest(ObjectDatastoreProvider.class)
 public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 
 	@ObjectFactory
@@ -32,21 +32,15 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 		return new org.powermock.modules.testng.PowerMockObjectFactory();
 	}
 
-	private void mockTOD() {
-		PowerMockito.mockStatic(TOD.class);
-		AnnotationObjectDatastore aods = new AnnotationObjectDatastore();
-		when(TOD.getObjectDataStore()).thenReturn(aods);
-	}
-
-	QuestionDao daoImpl;
+	TwigQuestionDaoImpl daoImpl;
 
 	@BeforeMethod
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
 		super.setUp();
-		mockTOD();// every time test run we need to reset the ObjectDatastore
 		daoImpl = new TwigQuestionDaoImpl();
+		daoImpl.objectDatastoreProvider = new ObjectDatastoreProvider();
 	}
 
 	@AfterMethod
@@ -59,9 +53,8 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 	Long[] originalQuestionId;
 
 	/**
-	 * A method that used to generate questions for the sake of test. The method
-	 * include both singular persistence and bulk persistence to ensure that the
-	 * question dao has maintained a consistent index for all questions
+	 * A method that used to generate questions for the sake of test. The method include both singular persistence and bulk
+	 * persistence to ensure that the question dao has maintained a consistent index for all questions
 	 * 
 	 * @param leagueId
 	 * @param number

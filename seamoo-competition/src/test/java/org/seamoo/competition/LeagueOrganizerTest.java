@@ -21,7 +21,7 @@ import org.seamoo.entities.Member;
 import org.seamoo.entities.MemberQualification;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchCompetitor;
-import org.seamoo.utils.TimeProvider;
+import org.seamoo.test.MockedTimeProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -103,25 +103,6 @@ public class LeagueOrganizerTest {
 			m.addCompetitor(getSampleCompetitor(i, i));
 		m.setLeagueAutoId(leagueAutoId);
 		return m;
-	}
-
-	static class MockedTimeProvider extends TimeProvider {
-		int mockedYear, mockedMonth;
-
-		public MockedTimeProvider(int mockedYear, int mockedMonth) {
-			this.mockedYear = mockedYear;
-			this.mockedMonth = mockedMonth;
-		}
-
-		@Override
-		public int getCurrentYear() {
-			return mockedYear;
-		}
-
-		@Override
-		public int getCurrentMonth() {
-			return mockedMonth;
-		}
 	}
 
 	@Test
