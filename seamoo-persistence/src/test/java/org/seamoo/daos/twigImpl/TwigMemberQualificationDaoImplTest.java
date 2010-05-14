@@ -29,10 +29,11 @@ public class TwigMemberQualificationDaoImplTest extends LocalAppEngineTest {
 		MemberQualification mq = new MemberQualification();
 		mq.setMemberAutoId(1L);
 		mq.setLevel(2);
+		mq.setSubjectAutoId(200L);
 		TwigMemberQualificationDaoImpl daoImpl = new TwigMemberQualificationDaoImpl();
 		daoImpl.persist(mq);
-		MemberQualification reloadedMq = daoImpl.findByMember(1L);
-		assertNotNull(reloadedMq);
+		assertNotNull(daoImpl.findByMemberAndSubject(1L, 200L));
+		assertNull(daoImpl.findByMemberAndSubject(1L, 201L));
 	}
 
 }

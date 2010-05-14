@@ -7,7 +7,7 @@ public class TimeProvider {
 		return System.currentTimeMillis();
 	}
 
-	public long getCurrentMilliseconds() {
+	public long getCurrentTimeStamp() {
 		return System.currentTimeMillis();
 	}
 

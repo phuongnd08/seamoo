@@ -24,7 +24,7 @@ public class Member implements Serializable {
 	@Store(true)
 	@GwtTransient
 	private String email;
-	
+
 	private String emailHash;
 
 	private Date dateOfBirth;
@@ -50,6 +50,17 @@ public class Member implements Serializable {
 	private Date lastLocked;
 
 	private String alias;
+
+	@GwtTransient
+	private boolean administrator;
+	@GwtTransient
+	private boolean moderator;
+	@GwtTransient
+	private double reputationCapacity;
+	private double reputation;
+	@GwtTransient
+	private double spammerScore;
+
 
 	public Member() {
 
@@ -183,5 +194,45 @@ public class Member implements Serializable {
 
 	public String getEmailHash() {
 		return emailHash;
+	}
+
+	public void setAdministrator(boolean administrator) {
+		this.administrator = administrator;
+	}
+
+	public boolean isAdministrator() {
+		return administrator;
+	}
+
+	public void setModerator(boolean moderator) {
+		this.moderator = moderator;
+	}
+
+	public boolean isModerator() {
+		return moderator;
+	}
+
+	public void setReputationCapacity(double reputationCapacity) {
+		this.reputationCapacity = reputationCapacity;
+	}
+
+	public double getReputationCapacity() {
+		return reputationCapacity;
+	}
+
+	public void setReputation(double reputation) {
+		this.reputation = reputation;
+	}
+
+	public double getReputation() {
+		return reputation;
+	}
+
+	public void setSpammerScore(double spammerScore) {
+		this.spammerScore = spammerScore;
+	}
+
+	public double getSpammerScore() {
+		return spammerScore;
 	}
 }

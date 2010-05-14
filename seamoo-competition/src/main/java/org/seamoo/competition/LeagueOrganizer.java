@@ -1,6 +1,7 @@
 package org.seamoo.competition;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.seamoo.cache.CacheWrapperFactory;
@@ -12,6 +13,7 @@ import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.LeagueMembership;
+import org.seamoo.entities.LeagueResult;
 import org.seamoo.entities.MemberQualification;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchCompetitor;
@@ -66,7 +68,7 @@ public class LeagueOrganizer {
 
 	public boolean canMemberJoinLeague(Long memberAutoId, Long leagueAutoId) {
 		League league = leagueDao.findByKey(leagueAutoId);
-		MemberQualification mq = memberQualificationDao.findByMember(memberAutoId);
+		MemberQualification mq = memberQualificationDao.findByMemberAndSubject(memberAutoId, league.getSubjectAutoId());
 		if (league.getLevel() == 0 && mq == null)
 			return true;
 		if (mq == null)
@@ -94,20 +96,70 @@ public class LeagueOrganizer {
 	}
 
 	/**
-	 * Method to be used in *cron* job to periodically relegate member between
-	 * different league. The method will take a LeagueMembership whose
-	 * id>fromLeagueMembershipAutoId and check if the user should be relegate
-	 * (by updating his level). After running for an amount of maxTime, the
-	 * method will return a membershipAutoId that can be used to queue another
-	 * *cron* job (this is due to the limitation on execution time of a
-	 * request). In the case all record are scanned, the method return -1,
-	 * indicate no more check is necessary (for current month)
+	 * Method to be used in *cron* job to periodically relegate member between different league. The method will take a
+	 * LeagueMembership whose id>fromLeagueMembershipAutoId and check if the user should be relegate (by updating his level).
+	 * After running for an amount of maxTime, the method will return a membershipAutoId that can be used to queue another *cron*
+	 * job (this is due to the limitation on execution time of a request). In the case all record are scanned, the method return
+	 * -1, indicate no more check is necessary (for current month)
 	 * 
 	 * @param fromLeagueIndex
 	 * @param maxTime
 	 * @return
 	 */
-	public int recheckLeagueMembership(int fromLeagueMembershipAutoId, long maxTime) {
-		return 0;
+	public long recheckLeagueMembership(int startFrom, long maxTime) {
+		long currentTime = timeProvider.getCurrentTimeStamp();
+		int yearToProcess = timeProvider.getCurrentYear();
+		int updatedYear = timeProvider.getCurrentYear();
+		int monthToProcess = timeProvider.getCurrentMonth() - 1;
+		int updatedMonth = timeProvider.getCurrentMonth();
+		if (monthToProcess == 0) {
+			monthToProcess = 12;
+			yearToProcess--;
+		}
+		List<LeagueMembership> memberships = null;
+		boolean done = false;
+		int rangeStart = startFrom;
+		while (timeProvider.getCurrentTimeStamp() - currentTime < maxTime && !done) {
+			memberships = leagueMembershipDao.findUndeterminedByMinimumAutoIdAndMoment(yearToProcess, monthToProcess, rangeStart,
+					settings.getCheckBatchSize());
+			for (LeagueMembership ms : memberships) {
+				League l = leagueDao.findByKey(ms.getLeagueAutoId());
+				MemberQualification mq = memberQualificationDao.findByMemberAndSubject(ms.getMemberAutoId(), l.getSubjectAutoId());
+				if (mq == null) {
+					mq = new MemberQualification();
+					mq.setMemberAutoId(ms.getMemberAutoId());
+					mq.setSubjectAutoId(l.getSubjectAutoId());
+				}
+				int levelToRelegate;
+				if (ms.getAccumulatedScore() >= settings.getScoreForUpRelegate()) {
+					levelToRelegate = l.getLevel() + 1;
+					ms.setResult(LeagueResult.UP_RELEGATED);
+				} else if (ms.getAccumulatedScore() >= settings.getScoreForStay()) {
+					levelToRelegate = l.getLevel();
+					ms.setResult(LeagueResult.STAYED);
+				} else {
+					levelToRelegate = l.getLevel() != 0 ? l.getLevel() - 1 : 0;
+					ms.setResult(LeagueResult.DOWN_RELEGATED);
+				}
+				if (mq.getUpdatedYear() != updatedYear || mq.getUpdatedMonth() != updatedMonth) {
+					mq.setUpdatedMonth(updatedMonth);
+					mq.setUpdatedYear(updatedYear);
+					mq.setLevel(levelToRelegate);
+				} else {
+					mq.setLevel(Math.max(mq.getLevel(), levelToRelegate));
+					// in case user participate in multiple leagues, take
+					// account the best
+				}
+				ms.setResultCalculated(true);
+				memberQualificationDao.persist(mq);
+				leagueMembershipDao.persist(ms);
+			}
+			done = memberships.size() < settings.getCheckBatchSize();
+			rangeStart = rangeStart + settings.getCheckBatchSize();
+		}
+
+		if (done)
+			return -1;
+		return rangeStart;
 	}
 }
