@@ -96,7 +96,7 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 		anotherMemberDao.objectDatastoreProvider = new ObjectDatastoreProvider();// create separated odsp to use
 
 		Member reloaded = anotherMemberDao.findByOpenId("xxx");
-		reloaded.setDisplayName("Mr X");
+		reloaded.setDisplayName("Mr Y");
 		anotherMemberDao.persist(reloaded);
 		assertEquals(memberDao.findByOpenId("xxx").getDisplayName(), "Mr X");
 		mtp.setCurrentTimeStamp(TwigMemberDaoImpl.CACHE_PERIOD + 1);

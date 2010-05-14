@@ -1,28 +1,24 @@
 package org.seamoo.daos.twigImpl.question;
 
-import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.daos.twigImpl.ObjectDatastoreProvider;
-import org.seamoo.daos.twigImpl.TwigMemberDaoImpl;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.persistence.test.LocalAppEngineTest;
+import org.springframework.util.ReflectionUtils;
 import org.testng.IObjectFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.ObjectFactory;
 import org.testng.annotations.Test;
-
-import com.vercer.engine.persist.annotation.AnnotationObjectDatastore;
 
 @PrepareForTest(ObjectDatastoreProvider.class)
 public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
@@ -40,7 +36,9 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 		// TODO Auto-generated method stub
 		super.setUp();
 		daoImpl = new TwigQuestionDaoImpl();
-		daoImpl.objectDatastoreProvider = new ObjectDatastoreProvider();
+		Field f = ReflectionUtils.findField(TwigQuestionDaoImpl.class, "objectDatastoreProvider");
+		f.setAccessible(true);
+		ReflectionUtils.setField(f, daoImpl, new ObjectDatastoreProvider());
 	}
 
 	@AfterMethod

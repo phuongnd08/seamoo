@@ -10,7 +10,7 @@ import com.vercer.engine.persist.FindCommand.RootFindCommand;
 public class TwigNumericBagDaoImpl extends TwigGenericDaoImpl<NumericBag, Long> implements NumericBagDao {
 	public NumericBag findByClassifier(String classifier) {
 		// TODO Auto-generated method stub
-		RootFindCommand<NumericBag> fc = getOds().find().type(NumericBag.class).addFilter("classifier", FilterOperator.EQUAL,
+		RootFindCommand<NumericBag> fc = newOds().find().type(NumericBag.class).addFilter("classifier", FilterOperator.EQUAL,
 				classifier);
 		if (fc.countResultsNow() == 0)
 			return null;

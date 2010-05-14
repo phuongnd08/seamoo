@@ -11,7 +11,7 @@ public class TwigMemberQualificationDaoImpl extends TwigGenericDaoImpl<MemberQua
 
 	@Override
 	public MemberQualification findByMemberAndSubject(Long memberAutoId, Long subjectAutoId) {
-		RootFindCommand<MemberQualification> fc = getOds().find().type(MemberQualification.class).addFilter("memberAutoId",
+		RootFindCommand<MemberQualification> fc = newOds().find().type(MemberQualification.class).addFilter("memberAutoId",
 				FilterOperator.EQUAL, memberAutoId).addFilter("subjectAutoId", FilterOperator.EQUAL, subjectAutoId);
 		if (fc.countResultsNow() == 0)
 			return null;

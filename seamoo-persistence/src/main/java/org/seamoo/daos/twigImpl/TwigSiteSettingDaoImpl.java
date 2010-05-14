@@ -14,7 +14,7 @@ public class TwigSiteSettingDaoImpl extends TwigGenericDaoImpl<SiteSetting, Stri
 				s = new SiteSetting(key, value);
 			else
 				s.setValue(value);
-			getOds().storeOrUpdate(s);
+			newOds().storeOrUpdate(s);
 		} finally {
 
 		}

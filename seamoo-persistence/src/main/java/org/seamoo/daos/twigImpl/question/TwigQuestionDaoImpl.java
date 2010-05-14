@@ -91,7 +91,7 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 		List<Question> result = new ArrayList<Question>();
 
 		for (Long autoId : pickedAutoIds)
-			result.add(getOds().load(Question.class, autoId));
+			result.add(newOds().load(Question.class, autoId));
 		return result;
 	}
 

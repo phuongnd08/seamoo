@@ -12,20 +12,20 @@ import com.vercer.engine.persist.FindCommand.RootFindCommand;
 public class TwigLeagueDaoImpl extends TwigGenericDaoImpl<League, Long> implements LeagueDao {
 
 	public List<League> getAllBySubjectId(Long subjectAutoId) {
-		RootFindCommand<League> fc = getOds().find().type(League.class).addFilter("subjectAutoId", FilterOperator.EQUAL,
+		RootFindCommand<League> fc = newOds().find().type(League.class).addFilter("subjectAutoId", FilterOperator.EQUAL,
 				subjectAutoId);
 		return Lists.newArrayList(fc.returnResultsNow());
 	}
 
 	public List<League> getEnabledBySubjectId(Long subjectAutoId) {
-		RootFindCommand<League> fc = getOds().find().type(League.class).addFilter("subjectAutoId", FilterOperator.EQUAL,
+		RootFindCommand<League> fc = newOds().find().type(League.class).addFilter("subjectAutoId", FilterOperator.EQUAL,
 				subjectAutoId).addFilter("enabled", FilterOperator.EQUAL, true);
 		return Lists.newArrayList(fc.returnResultsNow());
 	}
 
 	@Override
 	public League findBySubjectIdAndLevel(Long subjectAutoId, int level) {
-		RootFindCommand<League> fc = getOds().find().type(League.class).addFilter("subjectAutoId", FilterOperator.EQUAL,
+		RootFindCommand<League> fc = newOds().find().type(League.class).addFilter("subjectAutoId", FilterOperator.EQUAL,
 				subjectAutoId).addFilter("level", FilterOperator.EQUAL, level);
 		if (fc.countResultsNow() == 0)
 			return null;

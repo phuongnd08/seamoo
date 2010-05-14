@@ -3,6 +3,8 @@ package org.seamoo.utils;
 import java.util.Date;
 
 public class TimeProvider {
+	public static final TimeProvider DEFAULT = new TimeProvider();
+
 	public static long getCurrentTimeMilliseconds() {
 		return System.currentTimeMillis();
 	}
@@ -13,6 +15,7 @@ public class TimeProvider {
 
 	/**
 	 * Return current year (YYYY)
+	 * 
 	 * @return
 	 */
 	public int getCurrentYear() {
@@ -21,6 +24,7 @@ public class TimeProvider {
 
 	/**
 	 * Return current month (1-12)
+	 * 
 	 * @return
 	 */
 	public int getCurrentMonth() {
