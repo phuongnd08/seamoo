@@ -254,7 +254,7 @@ public class MatchOrganizerStressTest {
 		}
 
 		int sleepTime = 0;
-		long start = TimeProvider.getCurrentTimeMilliseconds();
+		long start = TimeProvider.DEFAULT.getCurrentTimeStamp();
 
 		while (true) {
 			if (finishedUser >= threads.length - 1)// accept the cases where 1
@@ -274,7 +274,7 @@ public class MatchOrganizerStressTest {
 			}
 		}
 
-		long end = TimeProvider.getCurrentTimeMilliseconds();
+		long end = TimeProvider.DEFAULT.getCurrentTimeStamp();
 
 		CountableCacheWrapper<List> fullWaitingMatches = (CountableCacheWrapper<List>) organizer.fullWaitingMatches;
 		CountableCacheWrapper<List> notFullWaitingMatches = (CountableCacheWrapper<List>) organizer.notFullWaitingMatches;

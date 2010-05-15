@@ -24,9 +24,7 @@ public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TE
 		public Object getKey(T object);
 	}
 
-	@Autowired
 	TimeProvider timeProvider = TimeProvider.DEFAULT;
-	@Autowired
 	ObjectDatastoreProvider objectDatastoreProvider = ObjectDatastoreProvider.DEFAULT;
 	private Class<TEntity> entityClass;
 	private boolean cacheEnabled;

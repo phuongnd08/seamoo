@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.commons.collections.list.TreeList;
 import org.seamoo.cache.CacheWrapper;
 import org.seamoo.cache.CacheWrapperFactory;
 import org.seamoo.daos.MemberDao;
@@ -24,7 +21,6 @@ import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchEventType;
 import org.seamoo.entities.matching.MatchPhase;
-import org.seamoo.entities.question.Question;
 import org.seamoo.utils.TimeProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -38,20 +34,20 @@ public class MatchOrganizer {
 	QuestionDao questionDao;
 	@Autowired
 	CacheWrapperFactory cacheWrapperFactory;
+	@Autowired
+	TimeProvider timeProvider = TimeProvider.DEFAULT;
 
 	MatchOrganizerSettings settings;
 	/**
 	 * Candidates for match
 	 */
 	/**
-	 * List of matches that is either NOT_FORMED or FORMED but with number of
-	 * competitors < MAX_CANDIDATE_PER_MATCH, mean that there's chances that a
-	 * user can join the match
+	 * List of matches that is either NOT_FORMED or FORMED but with number of competitors < MAX_CANDIDATE_PER_MATCH, mean that
+	 * there's chances that a user can join the match
 	 */
 	protected CacheWrapper<List> notFullWaitingMatches;
 	/**
-	 * List of matches that is FORMED and number of competitors
-	 * >=MAX_CANDIDATE_PER_MATCH
+	 * List of matches that is FORMED and number of competitors >=MAX_CANDIDATE_PER_MATCH
 	 */
 	protected CacheWrapper<List> fullWaitingMatches;
 
@@ -88,7 +84,7 @@ public class MatchOrganizer {
 	}
 
 	private boolean shouldStarted(Match match) {
-		return match.getPhase() == MatchPhase.FORMED && match.getStartedMoment() < TimeProvider.getCurrentTimeMilliseconds();
+		return match.getPhase() == MatchPhase.FORMED && match.getStartedMoment() < timeProvider.getCurrentTimeStamp();
 	}
 
 	private boolean canJoin(Match match) {
@@ -155,8 +151,8 @@ public class MatchOrganizer {
 	}
 
 	/**
-	 * Find an available match (match that doesn't have enough member) or create
-	 * a new match if necessary and assign member to the new created match
+	 * Find an available match (match that doesn't have enough member) or create a new match if necessary and assign member to the
+	 * new created match
 	 * 
 	 * @param candidate
 	 * @param notFullList
@@ -210,7 +206,7 @@ public class MatchOrganizer {
 	}
 
 	private void updateLastSeen(MatchCandidate candidate) {
-		candidate.setLastSeenMoment(TimeProvider.getCurrentTimeMilliseconds());
+		candidate.setLastSeenMoment(timeProvider.getCurrentTimeStamp());
 	}
 
 	private void recacheCandidate(MatchCandidate candidate) {
@@ -219,7 +215,7 @@ public class MatchOrganizer {
 	}
 
 	private boolean isDisconnected(MatchCandidate candidate) {
-		return candidate.getLastSeenMoment() + settings.getCandidateActivePeriod() < TimeProvider.getCurrentTimeMilliseconds();
+		return candidate.getLastSeenMoment() + settings.getCandidateActivePeriod() < timeProvider.getCurrentTimeStamp();
 	}
 
 	private MatchCandidate getMatchCandidate(Long userAutoId) {
@@ -235,17 +231,16 @@ public class MatchOrganizer {
 	private void recheckMatchPhase(Match match, List fullList, List notFullList) {
 		if (match.getPhase() == MatchPhase.NOT_FORMED && match.getCompetitors().size() >= settings.getMinCandidatePerMatch()) {
 			match.setPhase(MatchPhase.FORMED);
-			match.setFormedMoment(TimeProvider.getCurrentTimeMilliseconds());
-			match.setStartedMoment(TimeProvider.getCurrentTimeMilliseconds() + settings.getMatchCountDownTime());
+			match.setFormedMoment(timeProvider.getCurrentTimeStamp());
+			match.setStartedMoment(timeProvider.getCurrentTimeStamp() + settings.getMatchCountDownTime());
 			match.setEndedMoment(match.getStartedMoment() + settings.getMatchTime());
 		} else if (match.getPhase() == MatchPhase.FORMED) {
 			if (match.getCompetitors().size() < settings.getMinCandidatePerMatch()) {
 				match.setPhase(MatchPhase.NOT_FORMED);
-			} else if (match.getStartedMoment() <= TimeProvider.getCurrentTimeMilliseconds()) {
+			} else if (match.getStartedMoment() <= timeProvider.getCurrentTimeStamp()) {
 				startMatch(match, fullList, notFullList);
 			}
-		} else if (match.getPhase() == MatchPhase.PLAYING
-				&& match.getEndedMoment() <= TimeProvider.getCurrentTimeMilliseconds()) {
+		} else if (match.getPhase() == MatchPhase.PLAYING && match.getEndedMoment() <= timeProvider.getCurrentTimeStamp()) {
 			finishMatch(match);
 		}
 	}
@@ -276,7 +271,7 @@ public class MatchOrganizer {
 		match.addEvent(new MatchEvent(MatchEventType.FINISHED, new Date()));
 		for (MatchCompetitor competitor : match.getCompetitors()) {
 			if (competitor.getFinishedMoment() == 0)
-				competitor.setFinishedMoment(TimeProvider.getCurrentTimeMilliseconds());
+				competitor.setFinishedMoment(timeProvider.getCurrentTimeStamp());
 		}
 		rank(match);
 		prepareMatchForPersistence(match);
@@ -284,8 +279,7 @@ public class MatchOrganizer {
 	}
 
 	/**
-	 * Try to associate necessary entity of match so that persistence can
-	 * maintain a consistent link between entities in datastore
+	 * Try to associate necessary entity of match so that persistence can maintain a consistent link between entities in datastore
 	 * 
 	 * @param match
 	 */
@@ -401,8 +395,7 @@ public class MatchOrganizer {
 	}
 
 	/**
-	 * A Member trying to escape his current match. He may want to return to his
-	 * match later
+	 * A Member trying to escape his current match. He may want to return to his match later
 	 * 
 	 * @param userAutoId
 	 */
@@ -455,7 +448,7 @@ public class MatchOrganizer {
 				competitor.addAnswer(answer);
 
 			if (competitor.getPassedQuestionCount() == match.getQuestions().size()) {
-				competitor.setFinishedMoment(TimeProvider.getCurrentTimeMilliseconds());
+				competitor.setFinishedMoment(timeProvider.getCurrentTimeStamp());
 				checkMatchFinished(match);
 			}
 

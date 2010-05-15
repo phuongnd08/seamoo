@@ -5,10 +5,6 @@ import java.util.Date;
 public class TimeProvider {
 	public static final TimeProvider DEFAULT = new TimeProvider();
 
-	public static long getCurrentTimeMilliseconds() {
-		return System.currentTimeMillis();
-	}
-
 	public long getCurrentTimeStamp() {
 		return System.currentTimeMillis();
 	}

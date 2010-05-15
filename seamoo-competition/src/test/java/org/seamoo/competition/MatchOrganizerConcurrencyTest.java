@@ -115,7 +115,7 @@ public class MatchOrganizerConcurrencyTest {
 		@Override
 		public void unlock() {
 			// TODO Auto-generated method stub
-			System.out.println("unlock(" + key + "): nosleep (would=)"+lockTime);
+			System.out.println("unlock(" + key + "): nosleep (would=)" + lockTime);
 			lockMap.get(key).unlock();
 		}
 
@@ -299,7 +299,7 @@ public class MatchOrganizerConcurrencyTest {
 		Thread.sleep(50L);
 		thread2.start();
 		int sleepTime = 0;
-		long start = TimeProvider.getCurrentTimeMilliseconds();
+		long start = TimeProvider.DEFAULT.getCurrentTimeStamp();
 
 		while (true) {
 			if (m != null)
@@ -315,7 +315,7 @@ public class MatchOrganizerConcurrencyTest {
 			}
 		}
 
-		long end = TimeProvider.getCurrentTimeMilliseconds();
+		long end = TimeProvider.DEFAULT.getCurrentTimeStamp();
 		assertEquals(m.getCompetitors().get(0).getAnswers().size(), 1);
 	}
 

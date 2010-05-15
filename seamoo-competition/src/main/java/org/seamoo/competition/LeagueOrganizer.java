@@ -35,8 +35,8 @@ public class LeagueOrganizer {
 	LeagueMembershipDao leagueMembershipDao;
 	@Autowired
 	CacheWrapperFactory cacheWrapperFactory;
-	@Autowired
-	TimeProvider timeProvider;
+
+	TimeProvider timeProvider = TimeProvider.DEFAULT;
 
 	LeagueOrganizerSettings settings;
 

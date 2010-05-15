@@ -5,13 +5,13 @@ import org.seamoo.utils.TimeProvider;
 public class MockedTimeProvider extends TimeProvider {
 	private int currentMonth;
 	private int currentYear;
-	private long currentTimeStamp;
+	private long currentTimeStamp = -1;// does not mock timeStamp by default
 
 	public MockedTimeProvider() {
-
 	}
 
 	public MockedTimeProvider(int mockedYear, int mockedMonth) {
+		this();
 		this.setCurrentYear(mockedYear);
 		this.setCurrentMonth(mockedMonth);
 	}
@@ -31,6 +31,8 @@ public class MockedTimeProvider extends TimeProvider {
 	}
 
 	public long getCurrentTimeStamp() {
+		if (currentTimeStamp == -1)
+			return System.currentTimeMillis();
 		return currentTimeStamp;
 	}
 

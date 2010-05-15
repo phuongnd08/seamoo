@@ -27,6 +27,7 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
+import org.seamoo.test.MockedTimeProvider;
 import org.seamoo.utils.TimeProvider;
 import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.workingonit.gwtbridge.ServletUtils;
@@ -36,6 +37,7 @@ public class MatchServiceImplSteps {
 	MatchOrganizer mo;
 	Match currentMatch;
 	MemberDao memberDao;
+	MockedTimeProvider timeProvider;
 
 	@Given("A MatchOrganizer")
 	public void initMatchOrganizer() throws TimeoutException {
@@ -59,6 +61,8 @@ public class MatchServiceImplSteps {
 		service = new MatchServiceImpl();
 		service.leagueOrganizer = lo;
 		service.memberDao = memberDao;
+		timeProvider = new MockedTimeProvider();
+		service.timeProvider = timeProvider;
 	}
 
 	Map<Long, Member> members;
@@ -175,8 +179,7 @@ public class MatchServiceImplSteps {
 
 	@Given("Current Time is $stamp")
 	public void setUpCurrentTime(long stamp) {
-		PowerMockito.mockStatic(TimeProvider.class);
-		when(TimeProvider.getCurrentTimeMilliseconds()).thenReturn(stamp);
+		timeProvider.setCurrentTimeStamp(stamp);
 	}
 
 	@Then("State Buffered Questions has $number questions")

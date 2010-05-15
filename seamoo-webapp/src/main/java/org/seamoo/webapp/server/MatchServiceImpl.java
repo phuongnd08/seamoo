@@ -37,6 +37,7 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	MemberDao memberDao;
 	@Autowired
 	LeagueDao leagueDao;
+	TimeProvider timeProvider = TimeProvider.DEFAULT;
 
 	int BUFFERED_QUESTION_BLOCK = 5;
 	int BUFFERED_QUESTION_REFILL_THRESHOLD = 2;
@@ -81,9 +82,9 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 		}
 		// set the correct remaining time
 		if (match.getPhase() == MatchPhase.FORMED) {
-			matchState.setRemainingPeriod(match.getStartedMoment() - TimeProvider.getCurrentTimeMilliseconds());
+			matchState.setRemainingPeriod(match.getStartedMoment() - timeProvider.getCurrentTimeStamp());
 		} else if (match.getPhase() == MatchPhase.PLAYING) {
-			matchState.setRemainingPeriod(match.getEndedMoment() - TimeProvider.getCurrentTimeMilliseconds());
+			matchState.setRemainingPeriod(match.getEndedMoment() - timeProvider.getCurrentTimeStamp());
 		}
 		// set the correct phase for current member
 		if (match.getPhase() == MatchPhase.PLAYING && competitor.getFinishedMoment() != 0) {

@@ -32,6 +32,7 @@ import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
+import org.seamoo.test.MockedTimeProvider;
 import org.seamoo.utils.TimeProvider;
 import org.seamoo.utils.converter.Converter;
 
@@ -47,6 +48,7 @@ public class MatchOrganizerSteps {
 
 	MemberDao memberDao;
 	List<Member> members;
+	MockedTimeProvider timeProvider = new MockedTimeProvider();
 
 	@Given("A list of $number users")
 	public void initListOfUsers(int number) {
@@ -142,6 +144,7 @@ public class MatchOrganizerSteps {
 		organizer2.memberDao = memberDao;
 		organizer2.questionDao = questionDao;
 		organizer2.matchDao = matchDao;
+		organizer2.timeProvider = timeProvider;
 		organizer2.cacheWrapperFactory = new MemcacheWrapperFactoryImpl();
 	}
 
@@ -151,6 +154,7 @@ public class MatchOrganizerSteps {
 		organizer.memberDao = memberDao;
 		organizer.questionDao = questionDao;
 		organizer.matchDao = matchDao;
+		organizer.timeProvider = timeProvider;
 		organizer.cacheWrapperFactory = cacheWrapperFactory;
 	}
 
@@ -166,7 +170,7 @@ public class MatchOrganizerSteps {
 	@Given("Current Time is $hour:$minute:$second")
 	public void mockCurrentTime(int hour, int minute, int second) {
 		Date d = getDateFromHMS(hour, minute, second);
-		when(TimeProvider.getCurrentTimeMilliseconds()).thenReturn(d.getTime());
+		timeProvider.setCurrentTimeStamp(d.getTime());
 	}
 
 	Match match;

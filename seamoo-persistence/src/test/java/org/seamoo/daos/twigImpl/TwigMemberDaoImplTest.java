@@ -67,7 +67,7 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 		m.setDisplayName("Mr X");
 		MockedTimeProvider mtp = new MockedTimeProvider();
 		memberDao.timeProvider = mtp;
-		mtp.setCurrentTimeStamp(0);
+		mtp.setCurrentTimeStamp(1);
 		memberDao.persist(m);
 
 		TwigMemberDaoImpl anotherMemberDao = new TwigMemberDaoImpl();
@@ -78,7 +78,7 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 		reloaded.setDisplayName("Mr Y");
 		anotherMemberDao.persist(reloaded);
 		assertEquals(memberDao.findByKey(m.getAutoId()).getDisplayName(), "Mr X");
-		mtp.setCurrentTimeStamp(TwigMemberDaoImpl.CACHE_PERIOD + 1);
+		mtp.setCurrentTimeStamp(TwigMemberDaoImpl.CACHE_PERIOD + 2);
 		assertEquals(memberDao.findByKey(m.getAutoId()).getDisplayName(), "Mr Y");
 	}
 
@@ -89,7 +89,7 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 		m.setDisplayName("Mr X");
 		MockedTimeProvider mtp = new MockedTimeProvider();
 		memberDao.timeProvider = mtp;
-		mtp.setCurrentTimeStamp(0);
+		mtp.setCurrentTimeStamp(1);
 		memberDao.persist(m);
 
 		TwigMemberDaoImpl anotherMemberDao = new TwigMemberDaoImpl();
@@ -99,7 +99,7 @@ public class TwigMemberDaoImplTest extends LocalAppEngineTest {
 		reloaded.setDisplayName("Mr Y");
 		anotherMemberDao.persist(reloaded);
 		assertEquals(memberDao.findByOpenId("xxx").getDisplayName(), "Mr X");
-		mtp.setCurrentTimeStamp(TwigMemberDaoImpl.CACHE_PERIOD + 1);
+		mtp.setCurrentTimeStamp(TwigMemberDaoImpl.CACHE_PERIOD + 2);
 		assertEquals(memberDao.findByOpenId("xxx").getDisplayName(), "Mr Y");
 	}
 
