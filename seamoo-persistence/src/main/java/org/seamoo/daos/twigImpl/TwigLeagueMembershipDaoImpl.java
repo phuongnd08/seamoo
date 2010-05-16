@@ -14,8 +14,7 @@ import com.vercer.engine.persist.FindCommand.RootFindCommand;
 
 public class TwigLeagueMembershipDaoImpl extends TwigGenericDaoImpl<LeagueMembership, Long> implements LeagueMembershipDao {
 
-	@Autowired
-	TimeProvider timeProvider;
+	TimeProvider timeProvider = TimeProvider.DEFAULT;
 
 	@Override
 	public LeagueMembership findByMemberAndLeagueAndMoment(Long memberAutoId, Long leagueAutoId, int year, int month) {

@@ -8,11 +8,13 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<bean id="siteSettingDao" class="org.seamoo.daos.twigImpl.TwigSiteSettingDaoImpl" />
-	<bean id="subjectDao" class="org.seamoo.daos.twigImpl.TwigSubjectDaoImpl" />
-	<bean id="leagueDao" class="org.seamoo.daos.twigImpl.TwigLeagueDaoImpl" />
-	<bean id="memberDao" class="org.seamoo.daos.twigImpl.TwigMemberDaoImpl" />
-	<bean id="questionDao" class="org.seamoo.daos.twigImpl.question.TwigQuestionDaoImpl" />
-	<bean id="matchDao" class="org.seamoo.daos.twigImpl.matching.TwigMatchDaoImpl" />
-	<bean id="bundleDao" class="org.seamoo.daos.twigImpl.installation.TwigBundleDaoImpl" />
+	<bean class="org.seamoo.daos.twigImpl.TwigSiteSettingDaoImpl" />
+	<bean class="org.seamoo.daos.twigImpl.TwigSubjectDaoImpl" />
+	<bean class="org.seamoo.daos.twigImpl.TwigLeagueDaoImpl" />
+	<bean class="org.seamoo.daos.twigImpl.TwigMemberDaoImpl" />
+	<bean class="org.seamoo.daos.twigImpl.question.TwigQuestionDaoImpl" />
+	<bean class="org.seamoo.daos.twigImpl.matching.TwigMatchDaoImpl" />
+	<bean class="org.seamoo.daos.twigImpl.installation.TwigBundleDaoImpl" />
+	<bean class="org.seamoo.daos.twigImpl.TwigMemberQualificationDaoImpl" />
+	<bean class="org.seamoo.daos.twigImpl.TwigLeagueMembershipDaoImpl" />
 </beans>
