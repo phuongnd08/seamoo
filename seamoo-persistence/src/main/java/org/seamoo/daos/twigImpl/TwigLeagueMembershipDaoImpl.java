@@ -39,4 +39,10 @@ public class TwigLeagueMembershipDaoImpl extends TwigGenericDaoImpl<LeagueMember
 				FilterOperator.EQUAL, false).startFrom(startFrom).fetchResultsBy(count);
 		return Lists.newArrayList(fc.returnResultsNow());
 	}
+
+	@Override
+	public List<LeagueMembership> findMembershipAtCurrentMoment(Long memberAutoId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

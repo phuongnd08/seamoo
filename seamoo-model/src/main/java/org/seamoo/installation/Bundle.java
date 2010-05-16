@@ -17,6 +17,10 @@ public class Bundle {
 	private Long finished;
 	private boolean installed;
 
+	public Bundle() {
+
+	}
+
 	public Bundle(String name, Long finished, boolean installed) {
 		this.name = name;
 		this.finished = finished;

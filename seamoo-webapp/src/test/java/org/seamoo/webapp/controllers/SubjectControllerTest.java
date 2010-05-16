@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.SubjectDao;
 import org.seamoo.entities.League;
@@ -61,7 +63,8 @@ public class SubjectControllerTest {
 		when(subjectDao.findByKey(1L)).thenReturn(english);
 		List<League> l = new ArrayList<League>();
 		when(leagueDao.getEnabledBySubjectId(1L)).thenReturn(l);
-		ModelAndView mav = subjectController.view(1, "english");
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		ModelAndView mav = subjectController.view(request, 1, "english");
 		Map<String, Object> model = mav.getModel();
 		Subject subject = (Subject) model.get("subject");
 		assertEquals(subject, english);

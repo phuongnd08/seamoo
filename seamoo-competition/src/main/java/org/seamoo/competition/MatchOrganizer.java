@@ -26,6 +26,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class MatchOrganizer {
 
+	public static interface EventListener {
+		void finishMatch(Match match);
+	}
+
 	@Autowired
 	MemberDao memberDao;
 	@Autowired
@@ -36,6 +40,8 @@ public class MatchOrganizer {
 	CacheWrapperFactory cacheWrapperFactory;
 	@Autowired
 	TimeProvider timeProvider = TimeProvider.DEFAULT;
+
+	private List<EventListener> listeners;
 
 	MatchOrganizerSettings settings;
 	/**
@@ -70,6 +76,7 @@ public class MatchOrganizer {
 		initialized = false;
 		this.leagueId = leagueId;
 		this.settings = settings;
+		this.listeners = new ArrayList<EventListener>();
 	}
 
 	public static final String NOT_FULL_WAITING_MATCHES_KEY = "not-full-waiting-matches";
@@ -276,6 +283,8 @@ public class MatchOrganizer {
 		rank(match);
 		prepareMatchForPersistence(match);
 		matchDao.persist(match);
+		for (EventListener listener : listeners)
+			listener.finishMatch(match);
 	}
 
 	/**
@@ -488,6 +497,10 @@ public class MatchOrganizer {
 	public void ignoreQuestion(Long userAutoId, int questionOrder) throws TimeoutException {
 		initialize();
 		addMatchAnswer(userAutoId, questionOrder, new MatchAnswer(MatchAnswerType.IGNORED, null));
+	}
+
+	public void addEventListener(EventListener listener) {
+		listeners.add(listener);
 	}
 
 }

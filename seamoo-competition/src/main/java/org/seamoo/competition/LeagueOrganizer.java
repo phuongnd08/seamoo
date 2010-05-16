@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.seamoo.cache.CacheWrapperFactory;
+import org.seamoo.competition.MatchOrganizer.EventListener;
 import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.LeagueMembershipDao;
 import org.seamoo.daos.MemberDao;
@@ -42,6 +43,14 @@ public class LeagueOrganizer {
 
 	Map<Long, MatchOrganizer> organizers;
 
+	EventListener listener = new EventListener() {
+
+		@Override
+		public void finishMatch(Match match) {
+			updateLeagueMembershipScore(match);
+		}
+	};
+
 	public LeagueOrganizer() {
 		this(new LeagueOrganizerSettings());
 	}
@@ -60,15 +69,14 @@ public class LeagueOrganizer {
 			organizer.matchDao = matchDao;
 			organizer.questionDao = questionDao;
 			organizer.cacheWrapperFactory = cacheWrapperFactory;
+			organizer.addEventListener(listener);
 			organizers.put(leagueId, organizer);
 			return organizer;
 		}
 		return organizers.get(leagueId);
 	}
 
-	public boolean canMemberJoinLeague(Long memberAutoId, Long leagueAutoId) {
-		League league = leagueDao.findByKey(leagueAutoId);
-		MemberQualification mq = memberQualificationDao.findByMemberAndSubject(memberAutoId, league.getSubjectAutoId());
+	public boolean canMemberJoinLeague(MemberQualification mq, League league) {
 		if (league.getLevel() == 0 && mq == null)
 			return true;
 		if (mq == null)

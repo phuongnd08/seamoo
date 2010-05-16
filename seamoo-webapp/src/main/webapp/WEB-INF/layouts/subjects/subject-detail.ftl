@@ -1,22 +1,34 @@
 [#ftl/]
 [#import "/spring.ftl" as spring]
-[#macro leagueControl link title img joinable]
+[#assign urlFactory=statics["org.seamoo.webapp.client.shared.UrlFactory"]/]
+[#macro leagueControl league]
+	[#assign link="/leagues/${league.autoId}/${league.alias}"/]
 <div class="description-box">
 <table class="fw">
 <tr>
 	<td class="logo-cell">
 		<a href="${link}">
-			<img src="[@spring.url img/]" width="96" height="64"/>
+			<img src="[@spring.url league.logoUrl/]" width="96" height="64"/>
 		</a>
 	</td>
 	<td>
-		<div><a href="${link}">${title}</a></div>
-		<div>[#nested/]</div>
+		<div><a href="${link}">${league.name}</a></div>
+		<div>${league.description}</div>
 		<div>
-		[#if joinable]
-			<button>Tham gia</button>
+		[#if member?exists]
+			[#if joinable[league.autoId?string]]
+				[#if memberships[league.autoId?string]?exists]
+					[#assign ms=memberships[league.autoId?string]/]
+					<div>
+						Bạn hiện có <strong>${ms.accumulatedScore}</strong> điểm ở giải đấu này.   
+					</div>
+				[/#if]
+				<button>Tham gia</button>
+			[#else]
+				<em>Bạn không được tham giải đấu này</em>
+			[/#if]
 		[#else]
-			<em>Bạn chưa được quyền tham giải đấu này</em>
+			Vui lòng <a href="${urlFactory.getLogInUrl(urlFactory.getSubjectViewUrl(subject))}">đăng nhập</a> để tham gia 
 		[/#if]
 		</div>
 	</td>
@@ -25,8 +37,6 @@
 </div>
 [/#macro]
 [#list leagues as league]
-[@leagueControl link="/leagues/${league.autoId}/${league.alias}" title="${league.name}" img="${league.logoUrl}" joinable=true]
-${league.description}. Bạn đang có <strong>40</strong> điểm. 
-Bạn còn <strong>20</strong> ngày để tích lũy đủ <strong>300</strong> điểm để duy trì quyền tham gia <strong>Giải gà con</strong>
+[@leagueControl league]
 [/@leagueControl]
 [/#list]

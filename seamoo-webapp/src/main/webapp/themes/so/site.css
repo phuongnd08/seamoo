@@ -317,3 +317,7 @@ td.logo-cell {
 .competitor-rank-first {
 	color: green;
 }
+
+.big-button {
+	font-size: 200%;
+}

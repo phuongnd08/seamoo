@@ -1,6 +1,7 @@
 [#ftl/]
 [#import "/spring.ftl" as spring]
 [#import "/common.ftl" as common]
+[#assign urlFactory=statics["org.seamoo.webapp.client.shared.UrlFactory"]/]
 [#--
 matchItem
 display a row containing brief information of a match
@@ -36,8 +37,9 @@ display a row containing brief information of a match
 [/#macro]
 
 <div>
-<button class="fw">Tham gia &gt;&gt;</button>
+	<button class="big-button" type="button" onclick="window.location.replace('${urlFactory.getParticipateUrl(league)}')">Tham gia &gt;&gt;</button>
 </div>
+
 <br/>
 <h3>Các trận đấu đang diễn ra</h3>
 <br/>

@@ -29,4 +29,12 @@ public class UrlFactory {
 	public static String getSubjectViewUrl(Subject subject) {
 		return "/subjects/" + subject.getAutoId() + "/" + subject.getAlias();
 	}
+
+	public static String getParticipateUrl(League league) {
+		return "/matches/participate?leagueId=" + league.getAutoId();
+	}
+
+	public static String getLogInUrl(String returnUrl) {
+		return "/users/login?returnUrl=" + com.google.gwt.http.client.URL.encode(returnUrl);
+	}
 }

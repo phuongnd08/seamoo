@@ -31,6 +31,8 @@ public class LeagueOrganizerTest {
 	MemberQualificationDao memberQualificationDao;
 	LeagueDao leagueDao;
 
+	League zero = new League(), one = new League(), two = new League(), three = new League();
+
 	@BeforeMethod
 	public void setUp() {
 		leagueOrganizer = new LeagueOrganizer();
@@ -41,7 +43,6 @@ public class LeagueOrganizerTest {
 		leagueDao = mock(LeagueDao.class);
 		leagueOrganizer.leagueDao = leagueDao;
 
-		League zero = new League(), one = new League(), two = new League(), three = new League();
 		zero.setLevel(0);
 		zero.setSubjectAutoId(200L);
 		one.setLevel(1);
@@ -58,33 +59,30 @@ public class LeagueOrganizerTest {
 
 	@Test
 	public void firstSeenUserCanJoinLevelZeroButOtherLeague() {
-		when(memberQualificationDao.findByMemberAndSubject(1L, 200L)).thenReturn(null);
-		assertTrue(leagueOrganizer.canMemberJoinLeague(1L, 20L));
-		assertFalse(leagueOrganizer.canMemberJoinLeague(1L, 21L));
-		assertFalse(leagueOrganizer.canMemberJoinLeague(1L, 22L));
-		assertFalse(leagueOrganizer.canMemberJoinLeague(1L, 23L));
+		assertTrue(leagueOrganizer.canMemberJoinLeague(null, zero));
+		assertFalse(leagueOrganizer.canMemberJoinLeague(null, one));
+		assertFalse(leagueOrganizer.canMemberJoinLeague(null, two));
+		assertFalse(leagueOrganizer.canMemberJoinLeague(null, three));
 	}
 
 	@Test
 	public void unqualifiedUserCanJoinLevelZeroButOtherLeaguse() {
 		MemberQualification mq = new MemberQualification();
 		mq.setLevel(0);
-		when(memberQualificationDao.findByMemberAndSubject(1L, 200L)).thenReturn(mq);
-		assertTrue(leagueOrganizer.canMemberJoinLeague(1L, 20L));
-		assertFalse(leagueOrganizer.canMemberJoinLeague(1L, 21L));
-		assertFalse(leagueOrganizer.canMemberJoinLeague(1L, 22L));
-		assertFalse(leagueOrganizer.canMemberJoinLeague(1L, 23L));
+		assertTrue(leagueOrganizer.canMemberJoinLeague(mq, zero));
+		assertFalse(leagueOrganizer.canMemberJoinLeague(mq, one));
+		assertFalse(leagueOrganizer.canMemberJoinLeague(mq, two));
+		assertFalse(leagueOrganizer.canMemberJoinLeague(mq, three));
 	}
 
 	@Test
 	public void qualifiedForLevelTwoUserCanJoinLevelOneOrTwoButOtherLeagues() {
 		MemberQualification mq = new MemberQualification();
 		mq.setLevel(2);
-		when(memberQualificationDao.findByMemberAndSubject(1L, 200L)).thenReturn(mq);
-		assertFalse(leagueOrganizer.canMemberJoinLeague(1L, 20L));
-		assertTrue(leagueOrganizer.canMemberJoinLeague(1L, 21L));
-		assertTrue(leagueOrganizer.canMemberJoinLeague(1L, 22L));
-		assertFalse(leagueOrganizer.canMemberJoinLeague(1L, 23L));
+		assertFalse(leagueOrganizer.canMemberJoinLeague(mq, zero));
+		assertTrue(leagueOrganizer.canMemberJoinLeague(mq, one));
+		assertTrue(leagueOrganizer.canMemberJoinLeague(mq, two));
+		assertFalse(leagueOrganizer.canMemberJoinLeague(mq, three));
 	}
 
 	private MatchCompetitor getSampleCompetitor(long autoId, int rank) {

@@ -33,7 +33,6 @@ import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.test.MockedTimeProvider;
-import org.seamoo.utils.TimeProvider;
 import org.seamoo.utils.converter.Converter;
 
 public class MatchOrganizerSteps {
@@ -49,6 +48,7 @@ public class MatchOrganizerSteps {
 	MemberDao memberDao;
 	List<Member> members;
 	MockedTimeProvider timeProvider = new MockedTimeProvider();
+	MatchOrganizer.EventListener listener = mock(MatchOrganizer.EventListener.class);
 
 	@Given("A list of $number users")
 	public void initListOfUsers(int number) {
@@ -156,6 +156,7 @@ public class MatchOrganizerSteps {
 		organizer.matchDao = matchDao;
 		organizer.timeProvider = timeProvider;
 		organizer.cacheWrapperFactory = cacheWrapperFactory;
+		organizer.addEventListener(listener);
 	}
 
 	@Then("All Active Matches Are Loaded")
@@ -337,5 +338,10 @@ public class MatchOrganizerSteps {
 		CacheWrapper<MatchCandidate> candidateWrapper = cacheWrapperFactory.createCacheWrapper(MatchCandidate.class,
 				member.getAutoId().toString());
 		candidateWrapper.putObject(null);
+	}
+
+	@Then("event finishMatch is triggered")
+	public void assertEventFinishMatchTriggered() {
+		verify(listener).finishMatch((Match) any());
 	}
 }

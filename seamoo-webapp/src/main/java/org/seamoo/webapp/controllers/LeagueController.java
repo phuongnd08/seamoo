@@ -18,7 +18,7 @@ public class LeagueController {
 	@RequestMapping("/{leagueId}/{leagueAlias}")
 	public ModelAndView detail(@PathVariable("leagueId") long leagueId) {
 		ModelAndView mav = new ModelAndView("leagues.detail");
-		League l = leagueDao.findByKey(leagueId);
+		League l = leagueDao.findByKey(leagueId); 
 		mav.addObject("title", l.getName());
 		mav.addObject("nextLeague", leagueDao.findBySubjectIdAndLevel(l.getSubjectAutoId(), l.getLevel() + 1));
 		mav.addObject("league", l);

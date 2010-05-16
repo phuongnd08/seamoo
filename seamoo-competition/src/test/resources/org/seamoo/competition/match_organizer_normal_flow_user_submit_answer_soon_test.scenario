@@ -24,3 +24,4 @@ When 1st user request for Match
 Then Returned Match is 1st match
 And Returned Match Phase is FINISHED
 And 1st Match is persisted
+And event finishMatch is triggered
