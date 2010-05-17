@@ -2,7 +2,7 @@
 [#import "/spring.ftl" as spring]
 [#assign urlFactory=statics["org.seamoo.webapp.UrlFactory"]/]
 [#macro leagueControl league]
-	[#assign link="/leagues/${league.autoId}/${league.alias}"/]
+	[#assign link=urlFactory.getLeagueViewUrl(league)/]
 <div class="description-box">
 <table class="fw">
 <tr>
@@ -16,9 +16,9 @@
 		<div>${league.description}</div>
 		<div>
 		[#if member?exists]
-			[#if joinable[league.autoId?string]]
-				[#if memberships[league.autoId?string]?exists]
-					[#assign ms=memberships[league.autoId?string]/]
+			[#if joinable[league.autoId?c]]
+				[#if memberships[league.autoId?c]?exists]
+					[#assign ms=memberships[league.c?string]/]
 					<div>
 						Bạn hiện có <strong>${ms.accumulatedScore}</strong> điểm ở giải đấu này.   
 					</div>

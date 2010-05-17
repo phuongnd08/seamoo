@@ -1,5 +1,6 @@
 [#ftl]
 [#import "/spring.ftl" as spring/]
+[#assign urlFactory=statics["org.seamoo.webapp.UrlFactory"]/]
 [#--
  * optionBox
  *
@@ -21,7 +22,7 @@
 
 <div>
 [#list subjects as subject]
-[@optionBox link="/subjects/${subject.autoId}/${subject.alias}" title="${subject.name}" img="${subject.logoUrl}"]
+[@optionBox link="${urlFactory.getSubjectViewUrl(subject)}" title="${subject.name}" img="${subject.logoUrl}"]
 	${subject.description}
 [/@optionBox]
 [/#list]
