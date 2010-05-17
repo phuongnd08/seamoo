@@ -6,6 +6,7 @@ import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.LeagueMembershipDao;
 import org.seamoo.daos.MemberQualificationDao;
+import org.seamoo.daos.SubjectDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.MemberQualification;
@@ -22,6 +23,8 @@ public class LeagueController {
 
 	@Autowired
 	LeagueDao leagueDao;
+	@Autowired
+	SubjectDao subjectDao;
 	@Autowired
 	LeagueMembershipDao leagueMembershipDao;
 	@Autowired
@@ -45,6 +48,7 @@ public class LeagueController {
 						leagueMembershipDao.findByMemberAndLeagueAtCurrentMoment(member.getAutoId(), leagueId));
 		}
 		mav.addObject("league", l);
+		mav.addObject("subject", subjectDao.findByKey(l.getSubjectAutoId()));
 		return mav;
 	}
 }

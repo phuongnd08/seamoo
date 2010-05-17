@@ -5,9 +5,12 @@
 [#assign urlFactory=statics["org.seamoo.webapp.UrlFactory"]/]
 <div class="module">
 	<div class="description-box">
-		<img src="[@spring.url "${league.logoUrl}"/]" width="96" height="64" class="fl"/>
-				<p>${league.description}</p>
-		</table>
+		<p>
+			<img class="fl" width="96" height="64" src="[@spring.url league.logoUrl/]"/>
+			<a href='${urlFactory.getSubjectViewUrl(subject)}'>${subject.name}</a> 
+			&gt; <strong>${league.name}</strong>
+		</p>
+		<p>${league.description}</p>
 	</div>
 	[#if member?exists && joinable]
 		[#assign score=0]
