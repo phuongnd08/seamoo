@@ -1,6 +1,9 @@
 package org.seamoo.daos.twigImpl.matching;
 
+import static org.testng.Assert.*;
+
 import java.util.Date;
+import java.util.List;
 
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
@@ -11,7 +14,6 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchEventType;
 import org.seamoo.entities.question.Question;
 import org.seamoo.persistence.test.LocalAppEngineTest;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -62,7 +64,7 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 		m.addCompetitor(competitor);
 		daoImpl.persist(m);
 		Match reloadedM = daoImpl.findByKey(m.getAutoId());
-		Assert.assertEquals(reloadedM.getCompetitors().get(0).getAnswers().size(), 2);
+		assertEquals(reloadedM.getCompetitors().get(0).getAnswers().size(), 2);
 	}
 
 	// @Test
@@ -71,6 +73,36 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 		MatchCompetitor mc = new MatchCompetitor();
 		m.addCompetitor(mc);
 		daoImpl.persist(m);
-		Assert.assertNotNull(m.getCompetitors().get(0).getAnswers());
+		assertNotNull(m.getCompetitors().get(0).getAnswers());
+	}
+
+	@Test
+	public void getRecentMatchesShouldReturnSegmentedResultInRevertChronologicalOrder() {
+		Match[] ms = new Match[] { new Match(), new Match(), new Match(), new Match() };
+		ms[0].setEndedMoment(10);
+		ms[0].setLeagueAutoId(1L);
+		ms[1].setEndedMoment(50);
+		ms[1].setLeagueAutoId(1L);
+		ms[2].setEndedMoment(100);
+		ms[2].setLeagueAutoId(2L);
+		daoImpl.persist(ms);
+		List<Match> reloadedMs = daoImpl.getRecentMatchesByLeague(1L, 0, 2);
+		assertEquals(reloadedMs.size(), 2);
+		assertEquals(reloadedMs.get(0).getEndedMoment(), 50);
+		assertEquals(reloadedMs.get(1).getEndedMoment(), 10);
+	}
+
+	@Test
+	public void countByLeagueShouldReturnNumberOfMatchesWithinLeague() {
+		Match[] ms = new Match[] { new Match(), new Match(), new Match(), new Match() };
+		ms[0].setEndedMoment(10);
+		ms[0].setLeagueAutoId(1L);
+		ms[1].setEndedMoment(50);
+		ms[1].setLeagueAutoId(1L);
+		ms[2].setEndedMoment(100);
+		ms[2].setLeagueAutoId(2L);
+		daoImpl.persist(ms);
+		assertEquals(daoImpl.countByLeague(2L), 1);
+		assertEquals(daoImpl.countByLeague(1L), 2);
 	}
 }

@@ -2,6 +2,7 @@
 <suite name="client-test" verbose="1">
 	<test name="GWT-Tests">
 		<packages>
+			<package name="org.seamoo.webapp"></package>
 			<package name="org.seamoo.webapp.client"></package>
 			<package name="org.seamoo.webapp.client.user"></package>
 			<package name="org.seamoo.webapp.client.user.ui"></package>

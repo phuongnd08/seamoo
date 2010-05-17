@@ -8,4 +8,5 @@ public interface GenericDao<TEntity, TKey> {
 	public TEntity persist(TEntity entity);
 	public TEntity[] persist(TEntity[] entities);
 	public void delete(TEntity entity);
+	public long countAll();
 }

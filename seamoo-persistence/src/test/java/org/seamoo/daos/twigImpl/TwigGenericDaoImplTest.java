@@ -102,4 +102,14 @@ public class TwigGenericDaoImplTest extends LocalAppEngineTest {
 		daoImpl.persist(new ExampleModel[0]);
 
 	}
+
+	@Test
+	public void countAllShouldReturnNumberOfPersistedEntities() {
+		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
+		assertEquals(daoImpl.countAll(), 0);
+		daoImpl.persist(new ExampleModel());
+		assertEquals(daoImpl.countAll(), 1);
+		daoImpl.persist(new ExampleModel());
+		assertEquals(daoImpl.countAll(), 2);
+	}
 }

@@ -15,11 +15,19 @@
 	Display a pager 
 	Nested content will be used to generate a link
 --]
-[#macro pagingControl pages]
+[#macro pagingControl min max current]
+	[#assign pager=statics["org.seamoo.webapp.Pager"]/]
+	[#assign pages=pager.getPages(min, max, current)]
 	<div class="pager">
+	[#if (pages?first > min)]
+		<a title="đến trang ${current-1}" href="[#nested current-1/]<span class="page-numbers">trước</span></a>
+	[/#if]
 	[#list pages as page]
-		<a title="đến trang ${page}" href="[#nested page/]"><span class="page-numbers">${page}</span></a>
+		<a title="đến trang ${page}" href="[#nested page page/]"><span class="page-numbers">${page}</span></a>
 	[/#list]
+	[#if (pages?last < max)]
+		<a title="đến trang ${current+1}" href="[#nested current+1/]<span class="page-numbers">sau</span></a>
+	[/#if]
 	</div>
 [/#macro]
 

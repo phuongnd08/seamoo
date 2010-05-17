@@ -173,4 +173,9 @@ public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TE
 		}
 		return entities;
 	}
+	
+	@Override
+	public long countAll() {
+		return newOds().find().type(entityClass).countResultsNow();
+	}
 }

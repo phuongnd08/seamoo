@@ -9,6 +9,7 @@ import org.seamoo.utils.TimeProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.repackaged.com.google.common.collect.Lists;
 import com.vercer.engine.persist.FindCommand.RootFindCommand;
 
@@ -41,8 +42,21 @@ public class TwigLeagueMembershipDaoImpl extends TwigGenericDaoImpl<LeagueMember
 	}
 
 	@Override
-	public List<LeagueMembership> findMembershipAtCurrentMoment(Long memberAutoId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<LeagueMembership> getByLeagueAndRanking(Long leagueAutoId, long from, int count) {
+		RootFindCommand<LeagueMembership> fc = newOds().find().type(LeagueMembership.class).addFilter("leagueAutoId",
+				FilterOperator.EQUAL, leagueAutoId).addSort("accumulatedScore", SortDirection.DESCENDING).startFrom((int) from).fetchResultsBy(
+				count);
+		List<LeagueMembership> ms = Lists.newArrayList(fc.returnResultsNow());
+		if (ms.size() > count)
+			return ms.subList(0, count);
+		return ms;
 	}
+
+	@Override
+	public long countByLeague(Long leagueAutoId) {
+		RootFindCommand<LeagueMembership> fc = newOds().find().type(LeagueMembership.class).addFilter("leagueAutoId",
+				FilterOperator.EQUAL, leagueAutoId);
+		return fc.countResultsNow();
+	}
+
 }

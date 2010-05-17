@@ -113,7 +113,11 @@
 		</init-param>
 		<init-param>
 			<param-name>ContentType</param-name>
-			<param-value>text/html</param-value>
+			<param-value>text/html; charset=utf-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>DefaultEncoding</param-name>
+			<param-value>utf-8</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

@@ -3,6 +3,7 @@
 [#import "/common.ftl" as common/]
 [#assign timeProvider=statics["org.seamoo.utils.TimeProvider"].DEFAULT/] 
 [#assign urlFactory=statics["org.seamoo.webapp.UrlFactory"]/]
+[#assign pager=statics["org.seamoo.webapp.Pager"]/]
 <div class="module">
 	<div class="description-box">
 		<p>
@@ -34,30 +35,4 @@
 			</p>
 		</div>
 	[/#if]
-</div>
-
-[#--
-rankItem
-a macro for displaying a ranking item
---]
-[#macro rankItem no member score matches]
-	<tr><td>${no}</td><td><a href="/users/${member}">${member}</a></td><td class="tar">${score}</td><td class="tar">${matches}</td></tr>
-[/#macro]
-<div class="module">
-	<h3>Bảng xếp hạng</h3>
-	<div>
-	<table class="fw grid">
-	<tr><th>Hạng #</th><th>Thành viên</th><th>Điểm</th><th>Trận</th></tr>
-	[@rankItem no="1" member="mrcold" score="3900" matches="1000"/]
-	[@rankItem no="2" member="mica" score="3800" matches="1000"/]
-	[@rankItem no="3" member="bond" score="3450" matches="1000"/]
-	[@rankItem no="4" member="tanj" score="302" matches="100"/]
-	[@rankItem no="5" member="kiniko" score="295" matches="100"/]
-	[@rankItem no="6" member="mai_chee" score="290" matches="50"/]
-	[@rankItem no="7" member="kenya" score="293" matches="50"/]
-	[@rankItem no="8" member="char" score="290" matches="50"/]
-	[@rankItem no="9" member="nany" score="252" matches="50"/]
-	[@rankItem no="10" member="hen" score="230" matches="50"/]
-	</table>
-	</div>
 </div>

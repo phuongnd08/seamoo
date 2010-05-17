@@ -12,6 +12,7 @@ public class LeagueMembership {
 	private double accumulatedScore;
 	private LeagueResult result = LeagueResult.UNDETERMINED;
 	private boolean resultCalculated = false;
+	private int matchCount;
 
 	public void setAutoId(Long autoId) {
 		this.autoId = autoId;
@@ -75,5 +76,13 @@ public class LeagueMembership {
 
 	public boolean isResultCalculated() {
 		return resultCalculated;
+	}
+
+	public void setMatchCount(int matchCount) {
+		this.matchCount = matchCount;
+	}
+
+	public int getMatchCount() {
+		return matchCount;
 	}
 }

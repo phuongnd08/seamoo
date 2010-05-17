@@ -159,11 +159,6 @@ public class MatchOrganizerSteps {
 		organizer.addEventListener(listener);
 	}
 
-	@Then("All Active Matches Are Loaded")
-	public void assertActiveMatchesAreLoaded() {
-		verify(matchDao).getAllActiveMatches();
-	}
-
 	private Date getDateFromHMS(int hour, int minute, int second) {
 		return new Date(2010, 1, 1, hour, minute, second);
 	}

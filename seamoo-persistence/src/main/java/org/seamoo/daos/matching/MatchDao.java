@@ -7,6 +7,8 @@ import org.seamoo.entities.matching.Match;
 
 public interface MatchDao extends GenericDao<Match, Long> {
 
-	List<Match> getAllActiveMatches();
+	List<Match> getRecentMatchesByLeague(Long leagueAutoId, long from, int count);
+
+	long countByLeague(Long leagueAutoId);
 
 }

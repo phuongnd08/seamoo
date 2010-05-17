@@ -23,7 +23,7 @@
 						Bạn hiện có <strong>${ms.accumulatedScore}</strong> điểm ở giải đấu này.   
 					</div>
 				[/#if]
-				<button>Tham gia</button>
+				<button type="button" onclick="window.location.replace('${urlFactory.getParticipateUrl(league)}')">Tham gia</button>
 			[#else]
 				<em>Bạn không được tham giải đấu này</em>
 			[/#if]

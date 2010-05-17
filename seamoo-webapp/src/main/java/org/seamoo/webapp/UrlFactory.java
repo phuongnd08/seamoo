@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import org.seamoo.entities.League;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.Subject;
+import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchState;
 
 public class UrlFactory {
@@ -16,8 +17,8 @@ public class UrlFactory {
 		return "/users/" + user.getAutoId() + "/" + user.getAlias();
 	}
 
-	public final static String getMatchViewUrl(MatchState state) {
-		return "/matches/" + state.getMatchAutoId() + "/" + state.getMatchAlias();
+	public final static String getMatchViewUrl(Match match) {
+		return "/matches/" + match.getAutoId() + "/" + match.getAlias();
 	}
 
 	public final static String getRejoinableMatchViewUrl(MatchState state) {
@@ -38,5 +39,9 @@ public class UrlFactory {
 
 	public static String getLogInUrl(String returnUrl) {
 		return "/users/login?returnUrl=" + URLEncoder.encode(returnUrl);
+	}
+
+	public static String getPagedLeagueViewUrl(League league, long rankPage, long matchPage) {
+		return getLeagueViewUrl(league) + "?r=" + rankPage + "&m=" + matchPage;
 	}
 }

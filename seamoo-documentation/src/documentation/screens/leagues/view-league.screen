@@ -14,34 +14,22 @@
       <font/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="465" y="258" measuredWidth="502" measuredHeight="302">
-    <widgets xsi:type="model:Panel" width="497" height="29" measuredWidth="497" measuredHeight="29"/>
-    <widgets xsi:type="model:Label" x="10" y="3" text="*Cac tran dau dang dien ra*" measuredWidth="203" measuredHeight="25">
-      <font/>
-    </widgets>
-    <widgets xsi:type="model:Table" y="36" width="497" text="#,Details,&#xA;1,[mica] (5/20) vs [andy] (3/20) vs [hante] (3/20) vs [choi] (4/20),[Xem]&#xA;|2,[m0ld] (5/20) vs [tomabe] (3/20) vs [hen] (3/20) vs [char] (4/20),[Xem]&#xA;3,[nany] (5) vs [tomasky] (3) vs [holl] (3) vs [mai_chee] (4),[Xem]&#xA;|4,[kanu] (5) vs [mi] (3) vs [tachechang] (3) vs [lee_ngaa] (4),[Xem]&#xA;5,[hatexo] (5) vs [vian] (3) vs [phuc_map] (3) vs [bach_na] (4),[Xem]&#xA;|6,[fu] (5) vs [hotacheung] (3) vs [hung_b] (3) vs [girl_kute] (4),[Xem]&#xA;7,[solo] (5) vs [thate] (3) vs [kiniko] (3) vs [anjiruka] (4),[Xem]&#xA;|8,[mica] (5) vs [andy] (3) vs [hante] (3) vs [choi] (4),[Xem]&#xA;9,[m0ld] (5) vs [tomabe] (3) vs [hen] (3) vs [char] (4),[Xem]&#xA;|10,[nany] (5) vs [tomasky] (3) vs [holl] (3) vs [mai_chee] (4),[Xem]&#xA;" measuredWidth="497" measuredHeight="257"/>
-    <widgets xsi:type="model:LinkBar" x="242" y="277" text="&lt;prev,1,*2*,..,19,20,next>" measuredWidth="260" measuredHeight="25">
-      <font/>
-    </widgets>
+  <widgets xsi:type="model:Panel" x="465" y="264" width="497" height="29" measuredWidth="497" measuredHeight="29"/>
+  <widgets xsi:type="model:Label" x="475" y="267" text="*Cac tran dau da dien ra*" measuredWidth="184" measuredHeight="25">
+    <font/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="465" y="562" measuredWidth="502" measuredHeight="302">
-    <widgets xsi:type="model:Panel" width="497" height="29" measuredWidth="497" measuredHeight="29"/>
-    <widgets xsi:type="model:Label" x="10" y="3" text="*Cac tran dau da dien ra*" measuredWidth="184" measuredHeight="25">
-      <font/>
-    </widgets>
-    <widgets xsi:type="model:Table" y="36" width="497" text="#,Details,&#xA;1,[mica] (1st) vs [andy] (2nd) vs [hante] (3rd) vs [choi] (4th),[Xem]&#xA;|2,[m0ld] (1st) vs [tomabe] (2nd) vs [hen] (3rd) vs [char] (4th),[Xem]&#xA;3,[nany] (1st) vs [tomasky] (2nd) vs [holl] (3rd) vs [mai_chee] (4th),[Xem]&#xA;|4,[kanu] (1st) vs [mi] (2nd) vs [tachechang] (3rd) vs [lee_ngaa] (4th),[Xem]&#xA;5,[hatexo] (1st) vs [vian] (2nd) vs [phuc_map] (3rd) vs [bach_na] (4th),[Xem]&#xA;|6,[fu] (1st) vs [hotacheung] (2nd) vs [hung_b] (3rd) vs [girl_kute] (4th),[Xem]&#xA;7,[solo] (1st) vs [thate] (2nd) vs [kiniko] (3rd) vs [anjiruka] (4th),[Xem]&#xA;|8,[mica] (1st) vs [andy] (2nd) vs [hante] (3rd) vs [choi] (4th),[Xem]&#xA;9,[m0ld] (1st) vs [tomabe] (2nd) vs [hen] (3rd) vs [char] (4th),[Xem]&#xA;|10,[nany] (1st) vs [tomasky] (2nd) vs [holl] (3rd) vs [mai_chee] (4th),[Xem]&#xA;" measuredWidth="497" measuredHeight="257"/>
-    <widgets xsi:type="model:LinkBar" x="242" y="277" text="&lt;prev,1,*2*,..,19,20,next>" measuredWidth="260" measuredHeight="25">
-      <font/>
-    </widgets>
+  <widgets xsi:type="model:Table" x="465" y="300" width="497" text="#,Details,&#xA;1,[mica] (1st) vs [andy] (2nd) vs [hante] (3rd) vs [choi] (4th),[Xem]&#xA;|2,[m0ld] (1st) vs [tomabe] (2nd) vs [hen] (3rd) vs [char] (4th),[Xem]&#xA;3,[nany] (1st) vs [tomasky] (2nd) vs [holl] (3rd) vs [mai_chee] (4th),[Xem]&#xA;|4,[kanu] (1st) vs [mi] (2nd) vs [tachechang] (3rd) vs [lee_ngaa] (4th),[Xem]&#xA;5,[hatexo] (1st) vs [vian] (2nd) vs [phuc_map] (3rd) vs [bach_na] (4th),[Xem]&#xA;|6,[fu] (1st) vs [hotacheung] (2nd) vs [hung_b] (3rd) vs [girl_kute] (4th),[Xem]&#xA;7,[solo] (1st) vs [thate] (2nd) vs [kiniko] (3rd) vs [anjiruka] (4th),[Xem]&#xA;|8,[mica] (1st) vs [andy] (2nd) vs [hante] (3rd) vs [choi] (4th),[Xem]&#xA;9,[m0ld] (1st) vs [tomabe] (2nd) vs [hen] (3rd) vs [char] (4th),[Xem]&#xA;|10,[nany] (1st) vs [tomasky] (2nd) vs [holl] (3rd) vs [mai_chee] (4th),[Xem]&#xA;" measuredWidth="497" measuredHeight="257"/>
+  <widgets xsi:type="model:LinkBar" x="188" y="760" text="&lt;prev,1,*2*,..,19,20,next>" measuredWidth="260" measuredHeight="25">
+    <font/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" x="188" y="450" measuredWidth="261" measuredHeight="297">
-    <widgets xsi:type="model:Panel" width="261" height="29" measuredWidth="261" measuredHeight="29"/>
-    <widgets xsi:type="model:Label" x="10" y="3" text="*Xep hang*" measuredWidth="76" measuredHeight="25">
-      <font/>
-    </widgets>
-    <widgets xsi:type="model:Table" y="40" width="261" text="Rank#,Member,Score,Matches,Score/Match&#xA;1,[mrc0ld],395,100,3.95&#xA;|2,[mica],380,100,3.8&#xA;3,[bond],350,100, 3.5&#xA;|4,[tanj],345,100,3.45&#xA;5,[kiniko],340,100,3.4&#xA;|6,[mai_chee],330,100,3.3&#xA;7,[char],320,50, 6.4&#xA;|8,[kenya],210,50, 4.2&#xA;9,[nany],200,50,4&#xA;10,[hen],190,50,3.8" measuredWidth="261" measuredHeight="257"/>
+  <widgets xsi:type="model:Panel" x="188" y="450" width="261" height="29" measuredWidth="261" measuredHeight="29"/>
+  <widgets xsi:type="model:Label" x="198" y="453" text="*Xep hang*" measuredWidth="76" measuredHeight="25">
+    <font/>
   </widgets>
-  <widgets xsi:type="model:Button" x="465" y="226" width="496" text="Tham gia >>" measuredWidth="496" measuredHeight="27"/>
+  <widgets xsi:type="model:Table" x="188" y="490" width="261" text="Rank#,Member,Score,Matches,Score/Match&#xA;1,[mrc0ld],395,100,3.95&#xA;|2,[mica],380,100,3.8&#xA;3,[bond],350,100, 3.5&#xA;|4,[tanj],345,100,3.45&#xA;5,[kiniko],340,100,3.4&#xA;|6,[mai_chee],330,100,3.3&#xA;7,[char],320,50, 6.4&#xA;|8,[kenya],210,50, 4.2&#xA;9,[nany],200,50,4&#xA;10,[hen],190,50,3.8" measuredWidth="261" measuredHeight="257"/>
+  <widgets xsi:type="model:Button" x="465" y="226" width="136" text="Tham gia >>" measuredWidth="136" measuredHeight="27">
+    <font/>
+  </widgets>
   <widgets xsi:type="model:Label" x="200" y="160" text="[English] > League II" measuredWidth="418" measuredHeight="59">
     <font size="32"/>
   </widgets>

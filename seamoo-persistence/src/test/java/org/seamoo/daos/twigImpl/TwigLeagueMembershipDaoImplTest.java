@@ -54,4 +54,30 @@ public class TwigLeagueMembershipDaoImplTest extends LocalAppEngineTest {
 		assertTrue(reloaded.get(0).getAutoId() < reloaded.get(1).getAutoId());
 		assertTrue(reloaded.get(1).getAutoId() < reloaded.get(2).getAutoId());
 	}
+
+	@Test
+	public void getByRankingShouldReturnHighestRankedMemberFirst() {
+		TwigLeagueMembershipDaoImpl daoImpl = new TwigLeagueMembershipDaoImpl();
+		LeagueMembership[] lmses = new LeagueMembership[] { getSampleLMS(1L, 2L, 2010, 5), getSampleLMS(2L, 2L, 2010, 5),
+				getSampleLMS(3L, 4L, 2010, 5) };
+		lmses[0].setAccumulatedScore(5);
+		lmses[1].setAccumulatedScore(8);
+		lmses[2].setAccumulatedScore(12);
+		daoImpl.persist(lmses);
+		List<LeagueMembership> reloaded = daoImpl.getByLeagueAndRanking(2L, 0, 2);
+		assertEquals(reloaded.size(), 2);
+		assertEquals(reloaded.get(0).getMemberAutoId(), new Long(2L));
+		assertEquals(reloaded.get(1).getMemberAutoId(), new Long(1L));
+	}
+
+	@Test
+	public void countByLeagueShouldReturnNumberOfRankedMemberWithinLeague() {
+		TwigLeagueMembershipDaoImpl daoImpl = new TwigLeagueMembershipDaoImpl();
+		LeagueMembership[] lmses = new LeagueMembership[] { getSampleLMS(1L, 2L, 2010, 5), getSampleLMS(2L, 2L, 2010, 5),
+				getSampleLMS(3L, 4L, 2010, 5) };
+		daoImpl.persist(lmses);
+		assertEquals(daoImpl.countByLeague(2L), 2);
+		assertEquals(daoImpl.countByLeague(4L), 1);
+	}
+
 }
