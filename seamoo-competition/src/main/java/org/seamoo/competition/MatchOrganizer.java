@@ -282,9 +282,9 @@ public class MatchOrganizer {
 		}
 		rank(match);
 		prepareMatchForPersistence(match);
-		matchDao.persist(match);
 		for (EventListener listener : listeners)
 			listener.finishMatch(match);
+		matchDao.persist(match);
 	}
 
 	/**

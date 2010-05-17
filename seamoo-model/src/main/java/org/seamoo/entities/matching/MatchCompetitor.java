@@ -11,8 +11,7 @@ import com.google.gwt.user.client.rpc.GwtTransient;
 import com.vercer.engine.persist.annotation.Store;
 
 /**
- * Information about a member joining in the match, include member score, rank
- * in the match, the time member join the match
+ * Information about a member joining in the match, include member score, rank in the match, the time member join the match
  * 
  * @author phuongnd08
  * 
@@ -31,6 +30,8 @@ public class MatchCompetitor implements Serializable {
 	private double totalScore;
 
 	private int rank;
+
+	private double additionalAccumulatedScore;
 
 	private long finishedMoment;
 
@@ -143,5 +144,13 @@ public class MatchCompetitor implements Serializable {
 		if (member == null)
 			return "Competitor{null}";
 		return "Competitor{" + member.getDisplayName() + "}";
+	}
+
+	public void setAdditionalAccumulatedScore(double additionalAccumulatedScore) {
+		this.additionalAccumulatedScore = additionalAccumulatedScore;
+	}
+
+	public double getAdditionalAccumulatedScore() {
+		return additionalAccumulatedScore;
 	}
 }

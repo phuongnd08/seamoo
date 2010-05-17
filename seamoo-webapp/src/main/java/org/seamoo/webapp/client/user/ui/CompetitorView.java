@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.MatchCompetitor;
-import org.seamoo.webapp.client.shared.UrlFactory;
+import org.seamoo.webapp.client.shared.GwtUrlFactory;
 import org.seamoo.webapp.client.user.MatchBoard;
 
 import com.google.gwt.core.client.GWT;
@@ -45,10 +45,10 @@ public class CompetitorView extends Composite {
 
 	public void setCompetitor(MatchCompetitor competitor) {
 		Member m = competitor.getMember();
-		String avatarUrl = UrlFactory.getAvatarUrl(m.getEmailHash(), AVATAR_SIZE);
+		String avatarUrl = GwtUrlFactory.getAvatarUrl(m.getEmailHash(), AVATAR_SIZE);
 		imageAvatar.setUrl(avatarUrl);
 		anchorDisplayName.setText(m.getDisplayName());
-		anchorDisplayName.setHref(UrlFactory.getUserViewUrl(m));
+		anchorDisplayName.setHref(GwtUrlFactory.getUserViewUrl(m));
 		labelQuote.setText(m.getQuote());
 		barAnsweredQuestionsIndicator.setVisible(competitor.getPassedQuestionCount() > 0);
 		barAnsweredQuestionsIndicator.setProgress(competitor.getPassedQuestionCount());

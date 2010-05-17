@@ -97,6 +97,7 @@ public class LeagueOrganizer {
 					lms.setMonth(timeProvider.getCurrentMonth());
 				}
 				double additionScore = settings.getMaxScorePerMatch() * settings.getRankRatio(competitor.getRank());
+				competitor.setAdditionalAccumulatedScore(additionScore);
 				lms.setAccumulatedScore(lms.getAccumulatedScore() + additionScore);
 				leagueMembershipDao.persist(lms);
 			}

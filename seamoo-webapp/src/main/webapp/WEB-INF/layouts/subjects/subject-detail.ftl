@@ -1,6 +1,6 @@
 [#ftl/]
 [#import "/spring.ftl" as spring]
-[#assign urlFactory=statics["org.seamoo.webapp.client.shared.UrlFactory"]/]
+[#assign urlFactory=statics["org.seamoo.webapp.UrlFactory"]/]
 [#macro leagueControl league]
 	[#assign link="/leagues/${league.autoId}/${league.alias}"/]
 <div class="description-box">

@@ -1,7 +1,7 @@
 [#ftl/]
 [#import "/spring.ftl" as spring]
 [#import "/common.ftl" as common]
-[#assign urlFactory=statics["org.seamoo.webapp.client.shared.UrlFactory"]/]
+[#assign urlFactory=statics["org.seamoo.webapp.UrlFactory"]/]
 [#--
 matchItem
 display a row containing brief information of a match
@@ -37,7 +37,15 @@ display a row containing brief information of a match
 [/#macro]
 
 <div>
-	<button class="big-button" type="button" onclick="window.location.replace('${urlFactory.getParticipateUrl(league)}')">Tham gia &gt;&gt;</button>
+	[#if member?exists]
+		[#if joinable]
+			<button class="big-button" type="button" onclick="window.location.replace('${urlFactory.getParticipateUrl(league)}')">Tham gia &gt;&gt;</button>
+		[#else]
+			Bạn chưa được phép tham gia giải đấu này. Vui lòng bắt đầu ở giải đấu thấp hơn và tích luỹ điểm số để được thăng hạng
+		[/#if]
+	[#else]
+		Vui lòng <a href="${urlFactory.getLogInUrl(urlFactory.getLeagueViewUrl(league))}">đăng nhập</a> để có thể tham gia giải đấu
+	[/#if]
 </div>
 
 <br/>

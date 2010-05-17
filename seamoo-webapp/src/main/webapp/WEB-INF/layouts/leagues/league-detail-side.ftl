@@ -1,23 +1,36 @@
 [#ftl/]
 [#import "/spring.ftl" as spring/]
-[#import "/common.ftl" as common/] 
+[#import "/common.ftl" as common/]
+[#assign timeProvider=statics["org.seamoo.utils.TimeProvider"].DEFAULT/] 
+[#assign urlFactory=statics["org.seamoo.webapp.UrlFactory"]/]
 <div class="module">
 	<div class="description-box">
 		<img src="[@spring.url "${league.logoUrl}"/]" width="96" height="64" class="fl"/>
 				<p>${league.description}</p>
-				<p>Có <strong>300</strong> thanh vien hiện được phép tham gia giải đấu</p>
-				<p>Có <strong>35</strong> thành viên đang thi đấu</p>
 		</table>
 	</div>
-	<div class="description-box">
-		<p>
-		Ban dang co <strong>40</strong> diem.
-		[#if nextLeague?exists] 
-		Ban con <strong>20</strong> ngay de tich luy <strong>100</strong> diem de co the tru hang hoac tich luy du <strong>300</strong> diem de co the tham du
-		<a href="[@spring.url "/leagues/${nextLeague.autoId}/${nextLeague.alias}"/]">${nextLeague.name}</a>
+	[#if member?exists && joinable]
+		[#assign score=0]
+		[#if membership?exists]
+			[#assign score=membership.accumulatedScore]
 		[/#if]
-		</p>
-	</div>
+		<div class="description-box">
+			<p>Bạn hiện có <strong>${score}</strong> điểm. 
+			[#if (score<100)]
+				Bạn còn <strong>${timeProvider.getDaysTillEndOfMonth()}</strong> ngày để tích luỹ đủ <strong>100</strong> điểm 
+				để trụ hạng[#if nextLeague?exists] hoặc <strong>300</strong> điểm để thăng hạng lên <a href="${urlFactory.getLeagueViewUrl(nextLeague)}">${nextLeague.name}</a>[/#if].
+			[#elseif (nextLeague?exists)]
+				[#if (score<300)]
+					Bạn đã đủ điểm trụ hạng. [#if nextLeague?exists] Bạn còn <strong>${timeProvider.getDaysTillEndOfMonth()}</strong> ngày để tích luỹ đủ 300 điểm để thăng hạng lên <a href="${urlFactory.getLeagueViewUrl(nextLeague)}">${nextLeague.name}</a>[/#if].
+				[#else]
+					Bạn đã được suất thăng hạng. Bạn sẽ được thi đấu ở <a href="${urlFactory.getLeagueViewUrl(nextLeague)}">${nextLeague.name}</a> từ đầu tháng sau.
+				[/#if]
+			[#else]
+				Bạn đã trụ hạng.
+			[/#if] 
+			</p>
+		</div>
+	[/#if]
 </div>
 
 [#--

@@ -1,6 +1,7 @@
 [#ftl/]
 [#import "/common.ftl" as common/]
 [#import "/spring.ftl" as spring/]
+[#assign urlFactory=statics["org.seamoo.webapp.UrlFactory"]/]
 
 [#macro minuteAndSecond milliseconds]
 ${(milliseconds/1000/60)?string("0")}:${(milliseconds/1000 % 60)?string("00")}
@@ -22,7 +23,7 @@ ${(milliseconds/1000/60)?string("0")}:${(milliseconds/1000 % 60)?string("00")}
 				<div>● Sai <strong>${competitor.wrongCount}</strong></div>
 				<div>● Bỏ qua <strong>${competitor.ignoreCount}</strong></div>
 				<div>● Thời gian <strong>[@minuteAndSecond competitor.finishedMoment-match.startedMoment/]</strong></div>
-				<div>Tích luỹ <strong>+2</strong></div>
+				<div>Tích luỹ <strong>+${competitor.additionalAccumulatedScore}</strong></div>
 			</td>
 		</tr>
 	</table>
@@ -34,8 +35,8 @@ ${(milliseconds/1000/60)?string("0")}:${(milliseconds/1000 % 60)?string("00")}
 	<div class="description-box">
 		<p>
 			<img class="fl" width="96" height="64" src="[@spring.url league.logoUrl/]"/>
-			<a href='${statics["org.seamoo.webapp.client.shared.UrlFactory"].getSubjectViewUrl(subject)}'>${subject.name}</a> 
-			&gt; <a href='${statics["org.seamoo.webapp.client.shared.UrlFactory"].getLeagueViewUrl(league)}'>${league.name}</a>
+			<a href='${urlFactory.getSubjectViewUrl(subject)}'>${subject.name}</a> 
+			&gt; <a href='${urlFactory.getLeagueViewUrl(league)}'>${league.name}</a>
 		</p>
 	</div>
 	<h3>Giữa</h3>
