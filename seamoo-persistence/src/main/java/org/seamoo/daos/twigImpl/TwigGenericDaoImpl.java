@@ -7,9 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.seamoo.daos.GenericDao;
-import org.seamoo.entities.training.TrainingEntry;
 import org.seamoo.utils.TimeProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.common.collect.Lists;
@@ -101,7 +99,7 @@ public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TE
 		return null;
 	}
 
-	protected ObjectDatastore newOds() {
+	protected ObjectDatastore getOds() {
 		return objectDatastoreProvider.getObjectDataStore();
 	}
 
@@ -109,18 +107,20 @@ public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TE
 		if (cacheEnabled) {
 			removeFromCache(entity);
 		}
-		ObjectDatastore ods = newOds();
-		ods.associate(entity);
+		ObjectDatastore ods = getOds();
+		// ods.associate(entity);
 		ods.delete(entity);
 	}
 
 	public TEntity findByKey(TKey key) {
 		if (!cacheEnabled)
-			return newOds().load(entityClass, key);
+			return getOds().load(entityClass, key);
 		TEntity entity = getFromCache(KEY_FIELD_FOR_CACHE, key);
 		if (entity == null) {
-			entity = newOds().load(entityClass, key);
+			ObjectDatastore ods = getOds();
+			entity = ods.load(entityClass, key);
 			if (entity != null) {
+				ods.refresh(entity);
 				putToCache(entity);
 			}
 		}
@@ -128,7 +128,7 @@ public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TE
 	}
 
 	protected TEntity findByFieldWithoutCache(String field, Object fieldValue) {
-		RootFindCommand<TEntity> fc = newOds().find().type(entityClass).addFilter(field, FilterOperator.EQUAL, fieldValue);
+		RootFindCommand<TEntity> fc = getOds().find().type(entityClass).addFilter(field, FilterOperator.EQUAL, fieldValue);
 		if (fc.countResultsNow() == 0)
 			return null;
 		return fc.returnResultsNow().next();
@@ -141,6 +141,7 @@ public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TE
 		if (entity == null) {
 			entity = findByFieldWithoutCache(field, fieldValue);
 			if (entity != null) {
+				getOds().refresh(entity);
 				putToCache(entity);
 			}
 		}
@@ -149,11 +150,11 @@ public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TE
 
 	public List<TEntity> getAll() {
 		// TODO Auto-generated method stub
-		return Lists.newArrayList(newOds().find(entityClass));
+		return Lists.newArrayList(getOds().find(entityClass));
 	}
 
 	public TEntity persist(TEntity entity) {
-		ObjectDatastore ods = newOds();
+		ObjectDatastore ods = getOds();
 		ods.storeOrUpdate(entity);
 		ods.refresh(entity);
 		if (cacheEnabled)
@@ -163,7 +164,7 @@ public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TE
 
 	public TEntity[] persist(TEntity[] entities) {
 		if (entities.length != 0) {
-			ObjectDatastore ods = newOds();
+			ObjectDatastore ods = getOds();
 			ods.storeAll(Lists.newArrayList(entities));
 			for (TEntity e : entities) {
 				ods.refresh(e);
@@ -173,9 +174,15 @@ public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TE
 		}
 		return entities;
 	}
-	
+
 	@Override
 	public long countAll() {
-		return newOds().find().type(entityClass).countResultsNow();
+		return getOds().find().type(entityClass).countResultsNow();
+	}
+
+	@Override
+	public List<TEntity> getSubSet(long from, int count) {
+		RootFindCommand<TEntity> fc = getOds().find().type(entityClass).startFrom((int) from).fetchResultsBy(count);
+		return Lists.newArrayList(fc.returnResultsNow());
 	}
 }

@@ -15,7 +15,7 @@ public class TwigSubjectDaoImpl extends TwigGenericDaoImpl<Subject, Long> implem
 
 	public List<Subject> getEnabledSubjects() {
 		// TODO Auto-generated method stub
-		RootFindCommand<Subject> fc = newOds().find().type(Subject.class).addFilter("enabled", FilterOperator.EQUAL, true).addSort(
+		RootFindCommand<Subject> fc = getOds().find().type(Subject.class).addFilter("enabled", FilterOperator.EQUAL, true).addSort(
 				"addedTime", SortDirection.ASCENDING);
 		return Lists.newArrayList(fc.returnResultsNow());
 	}
@@ -23,7 +23,7 @@ public class TwigSubjectDaoImpl extends TwigGenericDaoImpl<Subject, Long> implem
 	@Override
 	public List<Subject> getAll() {
 		// TODO Auto-generated method stub
-		RootFindCommand<Subject> fc = newOds().find().type(Subject.class).addSort("addedTime", SortDirection.ASCENDING);
+		RootFindCommand<Subject> fc = getOds().find().type(Subject.class).addSort("addedTime", SortDirection.ASCENDING);
 		return Lists.newArrayList(fc.returnResultsNow());
 	}
 

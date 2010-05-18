@@ -19,7 +19,7 @@ public class TwigLeagueMembershipDaoImpl extends TwigGenericDaoImpl<LeagueMember
 
 	@Override
 	public LeagueMembership findByMemberAndLeagueAndMoment(Long memberAutoId, Long leagueAutoId, int year, int month) {
-		RootFindCommand<LeagueMembership> fc = newOds().find().type(LeagueMembership.class).addFilter("memberAutoId",
+		RootFindCommand<LeagueMembership> fc = getOds().find().type(LeagueMembership.class).addFilter("memberAutoId",
 				FilterOperator.EQUAL, memberAutoId).addFilter("leagueAutoId", FilterOperator.EQUAL, leagueAutoId).addFilter(
 				"year", FilterOperator.EQUAL, year).addFilter("month", FilterOperator.EQUAL, month);
 		if (fc.countResultsNow() == 0)
@@ -35,7 +35,7 @@ public class TwigLeagueMembershipDaoImpl extends TwigGenericDaoImpl<LeagueMember
 
 	@Override
 	public List<LeagueMembership> findUndeterminedByMinimumAutoIdAndMoment(int year, int month, int startFrom, int count) {
-		RootFindCommand<LeagueMembership> fc = newOds().find().type(LeagueMembership.class).addFilter("year",
+		RootFindCommand<LeagueMembership> fc = getOds().find().type(LeagueMembership.class).addFilter("year",
 				FilterOperator.EQUAL, year).addFilter("month", FilterOperator.EQUAL, month).addFilter("resultCalculated",
 				FilterOperator.EQUAL, false).startFrom(startFrom).fetchResultsBy(count);
 		return Lists.newArrayList(fc.returnResultsNow());
@@ -43,7 +43,7 @@ public class TwigLeagueMembershipDaoImpl extends TwigGenericDaoImpl<LeagueMember
 
 	@Override
 	public List<LeagueMembership> getByLeagueAndRanking(Long leagueAutoId, long from, int count) {
-		RootFindCommand<LeagueMembership> fc = newOds().find().type(LeagueMembership.class).addFilter("leagueAutoId",
+		RootFindCommand<LeagueMembership> fc = getOds().find().type(LeagueMembership.class).addFilter("leagueAutoId",
 				FilterOperator.EQUAL, leagueAutoId).addSort("accumulatedScore", SortDirection.DESCENDING).startFrom((int) from).fetchResultsBy(
 				count);
 		List<LeagueMembership> ms = Lists.newArrayList(fc.returnResultsNow());
@@ -54,7 +54,7 @@ public class TwigLeagueMembershipDaoImpl extends TwigGenericDaoImpl<LeagueMember
 
 	@Override
 	public long countByLeague(Long leagueAutoId) {
-		RootFindCommand<LeagueMembership> fc = newOds().find().type(LeagueMembership.class).addFilter("leagueAutoId",
+		RootFindCommand<LeagueMembership> fc = getOds().find().type(LeagueMembership.class).addFilter("leagueAutoId",
 				FilterOperator.EQUAL, leagueAutoId);
 		return fc.countResultsNow();
 	}

@@ -15,7 +15,7 @@ public class TwigMatchDaoImpl extends TwigGenericDaoImpl<Match, Long> implements
 
 	@Override
 	public List<Match> getRecentMatchesByLeague(Long leagueAutoId, long from, int count) {
-		RootFindCommand<Match> fc = newOds().find().type(Match.class).addFilter("leagueAutoId", FilterOperator.EQUAL,
+		RootFindCommand<Match> fc = getOds().find().type(Match.class).addFilter("leagueAutoId", FilterOperator.EQUAL,
 				leagueAutoId).addSort("endedMoment", SortDirection.DESCENDING).startFrom((int) from).fetchResultsBy(count);
 		List<Match> results = Lists.newArrayList(fc.returnResultsNow());
 		if (results.size() > count)
@@ -25,7 +25,7 @@ public class TwigMatchDaoImpl extends TwigGenericDaoImpl<Match, Long> implements
 
 	@Override
 	public long countByLeague(Long leagueAutoId) {
-		RootFindCommand<Match> fc = newOds().find().type(Match.class).addFilter("leagueAutoId", FilterOperator.EQUAL,
+		RootFindCommand<Match> fc = getOds().find().type(Match.class).addFilter("leagueAutoId", FilterOperator.EQUAL,
 				leagueAutoId);
 		return fc.countResultsNow();
 	}

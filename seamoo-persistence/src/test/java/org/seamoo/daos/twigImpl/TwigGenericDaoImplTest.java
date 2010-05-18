@@ -2,6 +2,8 @@ package org.seamoo.daos.twigImpl;
 
 import static org.testng.Assert.*;
 
+import java.util.List;
+
 import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.seamoo.persistence.test.jpa.model.ExampleModel;
 import org.testng.annotations.AfterMethod;
@@ -16,8 +18,6 @@ public class TwigGenericDaoImplTest extends LocalAppEngineTest {
 	}
 
 	public TwigGenericDaoImplTest() {
-		// TODO Auto-generated constructor stub
-		ObjectifyService.register(ExampleModel.class);
 	}
 
 	@Override
@@ -86,14 +86,13 @@ public class TwigGenericDaoImplTest extends LocalAppEngineTest {
 	}
 
 	@Test
-	public void deleteTransientEntityShouldBeOK() {
+	public void deleteEntityRemoveEntityFromDataStore() {
 		ExampleModel model = new ExampleModel();
 		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
 		daoImpl.persist(model);
-		ExampleModel transientModel = new ExampleModel();
-		transientModel.setAutoId(model.getAutoId());
-		daoImpl.delete(transientModel);
-		assertEquals(null, daoImpl.findByKey(model.getAutoId()));
+		long modelKey = model.getAutoId();
+		daoImpl.delete(model);
+		assertEquals(null, daoImpl.findByKey(modelKey));
 	}
 
 	@Test
@@ -111,5 +110,15 @@ public class TwigGenericDaoImplTest extends LocalAppEngineTest {
 		assertEquals(daoImpl.countAll(), 1);
 		daoImpl.persist(new ExampleModel());
 		assertEquals(daoImpl.countAll(), 2);
+	}
+
+	@Test
+	public void getSubSetReturnSubSet() {
+		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
+		ExampleModel[] models = new ExampleModel[] { new ExampleModel(), new ExampleModel(), new ExampleModel() };
+		daoImpl.persist(models);
+		List<ExampleModel> subSet = daoImpl.getSubSet(1, 2);
+		assertEquals(2, subSet.size());
+		assertEquals(subSet.get(0).getAutoId(), models[1].getAutoId());
 	}
 }

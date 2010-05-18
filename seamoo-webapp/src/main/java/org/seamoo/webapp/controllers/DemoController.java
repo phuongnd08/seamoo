@@ -1,7 +1,6 @@
 package org.seamoo.webapp.controllers;
 
 import java.io.BufferedReader;
-import java.io.DataInput;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,14 +18,15 @@ import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.SiteSettingDao;
 import org.seamoo.daos.SubjectDao;
 import org.seamoo.daos.installation.BundleDao;
+import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.Subject;
+import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.installation.Bundle;
-import org.seamoo.utils.AliasBuilder;
 import org.seamoo.utils.converter.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -57,6 +57,9 @@ public class DemoController {
 
 	@Autowired
 	BundleDao bundleDao;
+
+	@Autowired
+	MatchDao matchDao;
 
 	@RequestMapping("/install-leagues")
 	public void installLeagues(HttpServletResponse response) throws IOException {
@@ -272,5 +275,31 @@ public class DemoController {
 		}
 		q.addAndSetAsCurrentRevision(r);
 		return q;
+	}
+
+	static final int BATCH_SIZE = 50;
+
+	private void queueWipeoutJob() {
+		TaskOptions taskOptions = TaskOptions.Builder.url("/demo/wipe-out");
+		Queue q = QueueFactory.getDefaultQueue();
+		q.add(taskOptions);
+	}
+
+	@RequestMapping("/wipe-out")
+	public void wipeoutData(HttpServletResponse response) {
+		if (matchDao.countAll() > 0) {
+			List<Match> qs = matchDao.getSubSet(0, BATCH_SIZE);
+			for (Match q : qs)
+				matchDao.delete(q);
+			if (qs.size() == BATCH_SIZE)
+				queueWipeoutJob();
+
+		} else if (questionDao.countAll() > 0) {
+			List<Question> qs = questionDao.getSubSet(0, BATCH_SIZE);
+			for (Question q : qs)
+				questionDao.delete(q);
+			if (qs.size() == BATCH_SIZE)
+				queueWipeoutJob();
+		}
 	}
 }
