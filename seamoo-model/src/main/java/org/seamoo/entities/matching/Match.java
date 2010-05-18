@@ -31,6 +31,8 @@ public class Match implements Serializable {
 	private List<Question> questions;
 
 	private List<MatchCompetitor> competitors;
+	
+	private List<Long> memberAutoIds;
 
 	private List<MatchEvent> events;
 
@@ -46,6 +48,7 @@ public class Match implements Serializable {
 
 	public Match() {
 		competitors = new ArrayList<MatchCompetitor>();
+		memberAutoIds = new ArrayList<Long>();
 		events = new ArrayList<MatchEvent>();
 	}
 
@@ -99,10 +102,12 @@ public class Match implements Serializable {
 
 	public void addCompetitor(MatchCompetitor competitor) {
 		this.competitors.add(competitor);
+		this.memberAutoIds.add(competitor.getMember().getAutoId());
 	}
 
 	public void removeCompetitor(MatchCompetitor competitor) {
 		this.competitors.remove(competitor);
+		this.memberAutoIds.remove(competitor.getMember().getAutoId());
 	}
 
 	public List<MatchCompetitor> getCompetitors() {
@@ -158,5 +163,9 @@ public class Match implements Serializable {
 
 	public Long getLeagueAutoId() {
 		return leagueAutoId;
+	}
+
+	public List<Long> getMemberAutoIds() {
+		return memberAutoIds;
 	}
 }

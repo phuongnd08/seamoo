@@ -1,391 +1,62 @@
-từ thể hiện sự đồng ý|*yes|no|never|always
-từ thể hiện sự không đồng ý|*no|now|never|how
-số không (0) viết là|*zero|ow|no|more
-số một (1) viết là|*one|once|won|on
-số hai (2) viết là|*two|too|to|twice
-số ba (3) viết là|*three|tree|thrice|tea
-số bốn (4) viết là|*four|for|fuor|foul
-số năm (5) viết là|*five|fire|fevi|fiev
-số sáu (6) viết là|*six|sit|shix|xis
-số bảy (7) viết là|*seven|zesen|sezen|sevem
-số tám (8) viết là|*eight|eght|eighth|eihr
-số chín (9) viết là|*nine|neni|nice|nike
-số mười (10) viết là|*ten|tenth|tem|tent
-số mười một (11) viết là|*eleven|eliven|elevin|elleven
-sồ mười hai (12) viết là|*twelve|twenty|tweice|tweet
-số mười ba (13) viết là|*thirteen|thirty|thirt|thirdeen
-số mười bốn (14) viết là|*fourteen|forty|forth|forteen
-số mười lăm (15) viết là|*fifteen|fifty|fifthy|fiften
-số mười sáu (16) viết là|*sixteen|sixty|sixth|sixtheen
-số mười bảy (17) viết là|*seventeen|seventy|seventh|seventheen
-số mười tám (18) viết là|*eighteen|eighty|eighthy|eighth
-số mười chín (19) viết là|*nineteen|ninety|nineth|ninetheen
-số hai mươi (20) viết là|*twenty|twelve|twenthy|twenth
-số ba mươi (30) viết là|*thirty|thirteen|third|thirdy
-số bốn mươi (40) viết là|*forty|fourteen|forteen|forthy
-số năm mươi (50) viết là|*fifty|fivety|fiveteen|fifteen
-số sáu mươi (60) viết là|*sixty|sixteen|sixthy|sixth
-số bảy mươi (70) viết là|*seventy|seventeen|seventhy|seventheen
-số tám mươi (80) viết là|*eighty|eighteen|eighthy|eighth
-số chín mươi (90) viết là|*ninety|ninty|nineteen|ninthy
-số một trăm (100) viết là|*one hundred|one hendrud|one hunderd|one hunder
-số một nghìn (1000) viết là|*one thousand|one fousand|one thoosand|one thoosend
-số một triệu (1 000 000) viết là|*one million|one billion|one bililion|one milion
-số một tỉ (1 000 000 000) viết là|*one billion|one million|one bilion|one mililion
-số thứ một viết là|*first|fist|once|ounce
-số thứ hai viết là|*second|secon|twice|twin
-số thứ ba viết là|*third|thrice|three times|thrid
-số thứ tư viết là|*fourth|forth|four times|fourty
-số thứ năm viết là|*fifth|fifty|five times|fivth
-số thứ sáu viết là|*sixth|sixty|six times|shix
-ngày thứ hai viết là|*Monday|Monkey|Donkey|Tuesday
-ngày thứ ba viết là|*Tuesday|Third day|Choose day|Three day
-ngày thứ tư viết là|*Wednesday|Wedding Day|Weddy day|Wendesday
-ngày thứ năm viết là|*Thursday|Thirstday|Fifth day|Thirsty
-ngày thứ sáu viết là|*Friday|Fridey|Sixth day|Fryday
-ngày thứ bảy viết là|*Saturday|Saturate|Seventh day|Satarday
-ngày chủ nhật viết là|*Sunday|Sunshine|Shunday|Sundey
-tháng một viết là|*January|Zenuary|Janary|Jenuary
-tháng hai viết là|*February|Feduary|Febuary|Fedbuary
-tháng ba viết là|*March|Match|Maarch|Mar
-tháng tư viết là|*April|Apple|Aprul|Aprle
-tháng năm viết là|*May|Lucky|My|My month
-tháng sáu viết là|*June|Joon|Jume|Joom
-tháng bảy viết là|*July|Chunly|Junly|Joly
-tháng tám viết là|*August|Ogust|Autumn|Ongust
-tháng chín viết là|*September|Semtepber|Semtember|Septerber
-tháng mười viết là|*October|Oktober|Ocotber|Oberto
-tháng mười một viết là|*November|Novamber|Navamber|Navember
-tháng mười hai viết là|*December|Decamber|Dicember|Decepber
-đại từ dùng chỉ ngôi thứ ba, số ít, thường dùng cho đồ vật|*it|thing|she|he
-đại từ dùng chỉ ngôi thứ ba số nhiề|*they|we|them|us
-mạo từ dùng trước danh từ số ít chưa được định rõ|*a/an|the|this|that
-mạo từ dùng trước danh từ đã được định rõ|*the|these|this|that
-dạng hiện tại đơn của: I + to BE|*I am, I'm|I em, I'm|I is, I's|I are, I're
-dạng hiện tại đơn của: I + to BE + NOT|*I am not, I'm not|I am not, I amn't|I are not, I aren't|I is not, I isn't
-dạng hiện tại đơn của: you + to BE|*you are, you're|you is, you's|you were, you're|you was, you's
-dạng hiện tại đơn của: he + to BE|*he is, he's|he are, he're|he was, he's|he were, he're
-dạng hiện tại đơn của: she + to BE|*she is, she's|she are, she're|she was, she's|she were, she're
-dạng hiện tại đơn của: it + to BE|*it is, it's|it are, it're|it was, it's|it were, it're
-dạng hiện tại đơn của: we + to BE|*we are, we're|we is, we's|we were, we're|we am, we'm
-dạng hiện tại đơn của: they + to BE|*they are, they're|they is, they's|they were, they're|they was, they's
-động từ diễn tả sự sở hữu|*have|know|get|love
-dạng hiện tại đơn của: I + to HAVE|*I have|I has|I had|I'd
-dạng hiện tại đơn của: you + to HAVE|*you have|you has|you had|you'd
-dạng hiện tại đơn của: he + to HAVE|*he has|he have|he had|he'd
-dạng hiện tại đơn của: she + to HAVE|*she has|she have|she had|she'd
-dạng hiện tại đơn của: it + to HAVE|*it has|it have|it had|it'd
-dạng hiện tại đơn của: we+to HAVE|*we have|we has|we had|we'd
-dạng hiện tại đơn của: you+to HAVE|*you have|you has|you had|you'd
-dạng hiện tại đơn của: they+to HAVE|*they have|they has|they had|they'd
-đại từ dạng sở hữu của  ' I '|*my|me|mine
-đại từ dạng sở hữu của  'you'|*your|you|yours
-đại từ dạng sở hữu của  'he'|*his|him|he
-đại từ dạng sở hữu của  'she'|*her|she|hers
-đại từ dạng sở hữu của  'it'|*its|it|it's
-đại từ dạng sở hữu của  'we'|*our|us|ours
-đại từ dạng sở hữu của  'they'|*their|them|they|theys
-dạng bổ ngữ của ' I '|*me|my|mine
-dạng bổ ngữ của 'you'|*you|your|yours
-dạng bổ ngữ của 'he'|*him|his|he
-dạng bổ ngữ của 'she'|*her|she|hers
-dạng bổ ngữ của 'they'|*them|their|theirs
-dạng phản thân của  ' I '|*myself|mine|mineself|meself
-dạng phản thân của  'you'  (số ít)|*yourself|yourselves|youself
-dạng phản thân của  'he'|*himself|hisself|hiself|heself
-dạng phản thân của  'she'|*herself|sheself|hershelf
-dạng phản thân của  'it'|*itself|itselves|its own
-dạng phản thân của  'we'|*ourselves|ourself|weself|usselves
-dạng phản thân của  'you'  (số nhiều)|*yourselves|youselves|yourself|youself
-dạng phản thân của  'they'|*themselves|theyselves|theirselves|theirself
-dạng quá khứ của: I+BE|*I was|I am|I was be|I were
-dạng quá khứ của: you+BE|*you were|you was|you was be|you is
-dạng quá khứ của: he+BE|*he was|he is|he were|he were be
-dạng quá khứ của: we+BE|*we were|we are|we was|we was be
-dạng quá khứ của: they+BE|*they were|they was|they are|they were be
-từ 'và' trong 'tôi và bạn' viết là |*and|or|we
-từ 'ở chỗ này' viết là|*here|hear|there|this
-từ 'ở chỗ kia' viết là|*there|their|here|heir
-từ 'trong' (ví dụ: 'trong bếp') viết là|*in|out|on|off
-từ 'về phía' (trong 'đi về phía miền Trung') viết là|*to|direct|aim|at
-từ 'trên' (trong 'trên bàn') viết là|*on|under|in|out
-từ 'sau' (trong 'sau mười giờ') viết là|*after|before|out|behind
-từ 'trước' (trong 'trước nửa đêm) viết là|*before|after|in front of|front
-từ 'hoặc' (trong 'trên hoặc dưới') viết là|*or|and|in|neither
-từ 'thời gian' viết là|*time|tiem|thime|theme
-từ dùng để chỉ một thứ gì đó|*thing|he|she|think
-từ 'rất' (trong 'rất nóng') viết là|*very, so|many, lot|really, in fact
-từ 'với' (trong 'tôi đi với bạn') viết là|*with|company|in|to
-từ 'làm việc' viết là|*work|play|do|exercise
-từ 'lấy' (trong 'lấy một cốc nước') viết là|*take|marry|smurf|talk
-từ 'cho' (trong 'cái này cho bạn') viết là|*for|at|to|and
-từ 'đi' (trong 'họ đi về phía miền Trung') viết là|*go|come|fly|walk
-từ 'nếu' (trong 'nếu tôi là anh') viết là|*if|when|may be
-từ 'sử dụng' viết là|*use|take|do|work
-từ 'nhìn thấy' viết là|*see|look|sea|ocean
-từ 'trình diễn' viết là|*show|view|review|play
-từ 'người' viết là|*people|pupil|animal
-từ 'vài' (trong 'vài người') viết là|*some|many|much|a lot of
-từ 'thích' viết là|*like|want|need|know
-từ 'đến' (trong 'tôi đến nhà anh') viết là|*come|go|touch|move
-từ "thêm" (trong 'cho tôi thêm ít đường') viết là|*more|some|much|many
-từ "nhiều hơn" viết là|*more|mucher|so many
-từ "nhất" (trong 'người tài năng nhất')|*most|almost|extreme|first
-từ "mới" (trong 'cuốn sách mới')viết là|*new
-từ 'phần' (trong 'chia thành nhiều phần') viết là|*part|amount|quantity|role
-từ 'duy nhất' viết là|*only
-từ "nơi chốn" viết là|*place|palace|plase|pacel
-từ 'này' (trong "chỗ này") viết là|*this|that|these|those
-từ 'kia' (trong "chỗ kia") viết là|*that|this|these|those
-từ 'này' trong ("những người này") viết là|*these|those|this|that
-từ 'kia' trong ("những người kia") viết là|these|*those|this|that
-từ dùng để giới thiệu một mệnh đề phụ thuộc|*that|such|so|about 
-từ 'bên dưới' viết là|*under|over|above|low
-từ 'bên trên' viết là|*above, over|under, low|beside, aside
-từ 'về' (trong 'nói chuyện về anh') viết là|*about|to|at|on
-từ 'cái gì' (trong 'anh muốn cái gì) viết là|*what|where|how|when
-từ 'làm' viết là|*do|go|come|operate
-từ 'ai' (trong 'anh là ai') viết là|*who|how|when|where
-từ 'tại sao' viết là|*why|how|where|when
-từ 'ở đâu' viết là|*where|at|when|who
-từ 'vào lúc nào' viết là|*when|where|how|which
-từ 'bằng cách nào' viết là|*how|what|which
-từ 'cái nào' viết là|*which|where|when|how
-từ 'giống như nhau' viết là|*the same|a shame|a same|the shame
-từ 'loại đó' (trong 'nhưng người loại đó') viết là|*such|so|these|those
-từ 'tình trạng' viết là|*state|status|position
-từ 'vẫn' (trong 'vẫn còn sống') viết là|*still|untill|till|n'till
-từ 'thêm một lần nữa' viết là|*again|against|repeat
-từ 'ngược lại' (trong 'làm ngược lại những điều được căn dặn') viết là|*against|again|back|backward
-từ/cụm từ dùng khi bắt điện thoại|*hello|yes|talk|good morning
-từ 'tất cả' viết là|*all|every|most|any
-giới từ dùng để chỉ nơi chốn, điều kiện, có nghĩa là gần (trong 'gần bưu điện')|*at, near|there, here|at, on|close
-'vào lúc 3h chiều' viết là|*at three p.m.|to three p.m.|on three p.m.|about three a.m.
-'một lượng lớn' (trong 'một lượng lớn nước mưa') viết là|*much, a lot of|many, a lot of|much, a few of|many, a great number of
-từ 'rất' (trong rất nhiều, rất nóng) viết là|*too|many|lot|such
-để hỏi giá của một món đồ, có thể dùng|*how much is it?|can I buy it?|how many is it?|do you sell it?
-để thể hiện một thái độ lịch sự khi đưa một vật gì đó cho người khác, có thể dùng|*here you are|take it|it's your|for you
-từ 'bây giờ' viết là|*now|tomorrow|today|moment
-từ 'bằng' (trong 'tên trộm chui vô bằng đường cửa sổ') viết l|*through|though|by|on
-từ 'vào lúc đo' viết là|*then|now|here|this time
-từ 'suy nghĩ' viết là|*think|do|sleep|dream
-'anh ấy cao hơn bạn' viết là|*he is taller than you|he is tall than you|he is taller as you|he is taller to you
-'anh ấy cao bằng bạn' viết là|*he is as tall as you|he is tall to you|he is as tall to you|he is equal tall to you
-từ 'có thể' (trong 'tôi có thể bơi') viết là|*can|need|want|maybe
-từ 'nhận' (trong 'tôi nhận một vé xem phim')|*get|take|use|buy
-từ 'mỗi' (trong 'mỗi người') viết là|*each, every|one, any|each, all|one, every
-từ 'biết' viết là|*know|smell|sense|remember
-từ dùng khi nói về một việc xảy ra ở tương lai|*will, shall|did|was, were|would should
-'kể tôi nghe' viết là|*tell me|*say me|talk to me|say to me
-từ 'bên trên' viết là|*up|down|under|side
-từ 'bên dưới' viết là|*down|up|side|top
-từ 'khác' trong 'những người khác' viết là|*other|different|same|another
-'nó thuộc về tôi' viết là|*it's mine|it's me|it's mine|it's of me
-'nó thuộc về bạn' viết là|*it's yours|it's you|it's your|it's of you
-'nó thuộc về anh ấy' viết là|*it's his|it's him|it's he|it's of him
-'nó thuộc về cô ấy' viết là|*it's hers|it's she|it's her|it's of her
-'nó thuộc về chúng tôi' viết là|*it's ours|it's us|it's our|it's of us
-'nó thuộc về họ' viết là|*it's theirs|it's them|it's their|it's of them
-'được làm bởi tôi' viết là|*done by me|do by me|did by me|did to me
-từ 'cuốn sách' viết là|*book|notebook|paper|sheet
-từ 'ngày' (từ lúc mặt trời mọc đến lúc đêm đến) viết là|*day|date|morning|time
-từ 'bóng đèn' (loại toả nhiệt) viết là|*lamp|light|neon|fire
-từ 'ngôi nhà' viết là|*house|home|room|apartment
-từ 'trường học' viết là|*school|schol|schole|scholes
-từ 'cây' (loại lớn, cho gỗ) viết là|*tree|stick|bar|club
-từ 'lơn' (trong 'căn phòng lớn') viết là|*large|small|wide|thick
-từ 'cậu bé' viết là|*boy|son|man|guy
-từ 'cửa lớn' viết là|*door|windows|slot|place
-từ 'xin thứ lỗi cho tôi' viết là|*excuse me|give me|don't hate me
-từ 'bông hoa' viết là|*flower|tower|fower|fowler
-từ 'cô bé' viết là|*girl|daughter|women|chick
-từ 'tốt' (trong 'đồ tốt') viết là|*good|nice|well|pretty
-từ 'sống' (trong 'tôi sống ở thành phố') viết là|*live|life|lie|leave
-từ 'đọc' (trong 'đọc sách') viết là|*read|speak|pronounce|talk
-từ 'căn phòng' viết là|*room|house|apartment|rom
-từ 'cái bàn' viết là|*table|desktop|chair|discuss
-từ 'người phụ nữ' viết là|*woman|girl|chick|daughter
-từ 'viết' viết là|*write|read|touch|speak
-từ 'uống' viết là|*drink|drunken|thirsty|water
-từ 'ăn' viết là|*eat|win|take|beat
-từ 'ngắn' viết là|*short|sort|toss|narrow
-'tôi rất tiếc' viết là|*I'm sorry|Excuse me|Pardon me|I'm pitiful
-từ 'cảm ơn' viết là|*thank|nice|good|OK
-từ 'hôm nay' viết là|*today|present|now|yesterday
-từ 'ngày mai' viết là|*tomorrow|yesterday|next day|following day
-từ 'luôn luôn' (trong 'anh ấy luôn luôn về nhà vào cuối tuần') viết là|*always|often|usually|sometimes
-từ 'phố' viết là|*town|province|state|market
-từ 'thành phố' viết là|*city|province|state|market
-từ 'mỗi người' viết là|*everyone|every people|every human
-từ 'mỗi nơi' viết là|*everywhere|anywhere|somewhere|eachwhere
-từ 'thức ăn' viết là|*food|eat stuff|fod|flood
-từ 'người bạn' viết là|*friend|you|fiend|firiend|french
-từ 'nhà' (trong 'trở về nhà') viết là|*home|living place|department|house
-'trở về nhà' viết là|*to go home|to go house|to come house|to arrive home
-từ 'tạo ra' viết là|*make|perform|work|do
-từ 'tên gọi' viết là|*name|pen name|first name|middle name
-từ 'già' viết là|*old|new|young|weak
-từ 'sẵn sàng' viết là|*ready|already|good|almost
-từ 'con đường' viết là|*road|rock|path|mean
-từ 'chạy' viết là|*run|walk|crawl|step
-số nhiều của 'that' là|*those|these|thats|thates
-từ 'đồng ý' viết là|*agree|agere|agreen|degree
-từ 'bởi vì' viết là|*because|became|becase|behind
-'tôi buồn bởi tại vì anh' viết là|*I'm sad because of you|I'm sad because you|I'm sad since you|I'm sad to you
-từ 'điểm dừng' viết là|*end|final|finally|begin
-từ 'cho' viết là|*give|take|throw|send
-cách nói lịch sử của 'tôi muốn' là|*I would like to|I need|I'm thinking about|I want
-từ 'dài' viết là|*long|wide|thick|strong
-từ 'đứng' viết là|*stand|stay|steal|seat
-từ 'cũng khá nhiều' viết là|*quite a lot|quite sometimes|quite good|quite long
-từ 'khoảng chừng' (trong 'khoảng chừng 3 tháng') viết là|*about|from|probably|maybe
-từ 'cảm thấy' viết là|*feel|touch|smell|find
-từ 'cảm xúc' viết là|*feeling|feel|emotive|touch
-từ 'tự do' viết là|*free|freen|freend|fee
-từ 'nóng' viết là|*hot|smoke|heat|warm
-từ 'xinh' viết là|*pretty|pity|petty|pitiful
-từ 'nói' viết là|*say, tell|sing|soar|yell
-từ 'muốn' viết là|*want|need|think|touch
-từ 'bay' viết là|*fly|flight|travel|visit
-từ 'nghe' viết là|*hear|here|heart|health
-từ 'nhìn' viết là|*look|notice|warn|hear
-từ 'phải' (trong 'tôi phải đi ngay') viết là|*must|should|maybe|ought to
-từ 'không có gì' viết là|*nothing|anything|something|notthing
-từ 'vui lòng' viết là|*please|mind|fun|funny
-từ 'đặt' (trong 'đặt mọi thứ về lại chỗ cũ') viết l|*put|book|order|request
-tử 'câu' viết là|*sentence|sentential|sentense|sequence
-từ 'nên' (trong 'chúng ta nên đi dạo một lúc') viết là|*should, ought to|must, have to|should, need|need, want
-từ 'chính xác' (trong 'một tin tức chính xác')|*true|real|false|good
-từ 'thuộc nước Anh' viết là|*English|England|British|French
-từ 'tạm biệt' viết là|*good bye|good luck|good pye|good bie
-'bây giờ là mười giở đúng' viết là|*it's ten o'clock|it's ten exact|it's ten right|it's right ten
-từ 'vui chơi' viết là|*play|fly|plan|please
-từ 'ngồi' viết là|*sit|seat|stand|lie
-'đó là cách duy nhất' viết là|*it's the only way|it's the unique way|it's the only place|it's the only time
-từ 'di chuyển' viết là|*move|fly|turn|come
-'làm rất tốt' viết là|*do very well|do so good|do very good|do very nice
-từ 'xấu' (trong 'người xấu') viết là|*bad|ugly|sad|poor
-từ 'đẹp' viết là|*beautiful|ugly|betiful|baeutiful
-từ 'con cái' viết là|*child|son|daughter|baby
-từ 'con cái' (dạng số nhiều) viết là|*children|daugters|sons|babies
-tử 'buổi tối' viết là|*evening|night|sunset|noon
-từ 'gia đình' viết là|*family|farm|farmily|farmer
-từ 'người cha' viết là|*father|further|futher|farther
-từ 'người ông' viết là|*grandfather|granfather|grammy|daddy
-từ 'người bà' viết là|*grandmother|mummy|granmother|honey
-từ 'học' viết là|*learn|ask|question|find
-từ 'ánh sáng' viết là|*light|bright|brilliant|illustration
-từ 'một ít' (trong 'một ít tiền')viết là|*little|few|some|small
-từ 'người mẹ' viết là|*mother|modern|modem|grandmother
-từ 'vấn đề' viết là|*problem|procedure|property|process
-từ 'sạp hàng' viết là|*shop|soap|sop|market
-từ 'đi mua sắm' viết là|*go shopping|run shopping|walk shopping|lift shopping
-từ 'cuộc trò chuyện' viết là|*talk, conversation|conversation, talkative|talkperformance|talk place
-từ 'động vật' viết là|*animal|plant|creature|bacteria
-từ 'khó' viết là|*difficult|different|differ|hardship
-từ 'mặt đất' viết là|*earth|soil face|soil|forest
-từ 'dễ' viết là|*easy, simple|plain|essay|ease
-từ 'cho phép' viết là|*let, allow|give|permission|right
-từ 'yêu' (trong 'anh ấy yêu chim bồ câu') viết là|*love|want|need|prefer
-từ 'nghèo' viết là|*poor|unrich|rich|average
-từ 'dạy' viết là|*teach|study|tell|pass
-từ 'người dạy học' (cô giáo, thầy giáo) viết là|*teacher|teachman|teachor, teachess
-từ 'buổi sáng' viết là|*morning|night|noon|evening
-từ 'hỏi' viết là|*ask|tell|talk|wonder
-từ 'xe hơi' viết là|*car|bike|motor|engine
-từ 'con gái' (trong 'con gái của bạn tôi') viết là|*daughter|girl|chick|woman
-từ 'con chó' viết là|*dog|cat|hotdog|hotcat
-từ 'trống rỗng' viết là|*empty|nothing|clean|clear
-từ 'ngã' viết là|*fall|feel|fail|failure
-từ 'đầy' viết là|*full|filled|crowded|much
-từ 'đêm' viết là|*night|evening|noon|morning
-từ 'thú vị' (trong 'một buổi tối thú vị') viết là|*pleasant|plesant|please|pleasure
-từ 'mưa' viết là|*rain|train|rail|ren
-từ 'chị gái, em gái' viết là|*sister|sisscor|sitter
-từ 'con trai' (trong 'con trai của bạn tôi') viết là|*son|boy|man
-từ 'hiểu' viết là|*understand|know|overstand|onstand
-từ 'đến thăm' viết là|*visit|visa|viseat|vitsit
-từ 'mà không có' (trong 'họ đi chơi mà không có tiền') viết là|*without|with|within|withoff
-từ 'gặp mặt' viết là|*meet|visit|touch|face
-từ 'giường ngủ' viết là|*bed|bedroom|bedding|bad
-từ 'tối' (với ý nghĩa không có ánh sáng) viết là|*dark|night|evening|eve
-từ 'bác sĩ' viết là|*doctor|docter|dottor
-từ 'giờ' (tức là 60 phút) viết là|*hour|our|house|horse
-từ 'loại' (trong 'loại sản phẩm') viết là|*kind, sort|group|good|product
-từ 'cuối' (trong 'món cuối') viết là|*last|end|after|next
-từ 'giá cả' viết là|*price|money|payment|cost
-từ 'chi phí' viết là|*cost|price|money|amount
-từ 'ghi nhớ' viết là|*remember|resemble|remmember|forget
-từ 'giàu có' (tính từ) viết là|*rich|poor|wealth|richness
-từ 'mặt trời' viết là|*sun|mercury|earth|jupiter
-từ 'bơi' viết là|*swim|smiw|shwim|shim
-từ 'thường xuyên' viết là|*usually|some times|rarely|occasionally
-từ 'tuần' viết là|*week|weak|witch|which
-từ 'hôm qua' viết là|*yesterday|tomorrow|today|last day
-từ 'có nghĩa' viết là|*mean|have|know|call
-từ 'tháng' viết là|*month|monk|moth|nomth
-'kể từ thứ hai đến giờ' viết là|*since Monday|until Monday|to Monday|from Monday
-từ 'buổi chiều' viết là|*afternoon|evening|morning|night
-từ 'cái đẹp' (danh từ) viết là|*beauty|beautiful|pretty|nice
-in or into a space or time that separates|*between, (between me and you)
-(n) a seat with the back intended for one person|*chair
-(adj) loved and cherished|*dear
-to control, guide or direct a vehicle|*drive  (to drive a car)
-what other things (e.g. ... do you have in mind)|*what else
-somebody besides, also|*somebody else
-(adj) having no irregularities, smooth|*even
-(adj) well-known|*famous
-we should do something together|*let's do sth
-similar or similarly to|*like  (like new)
-(n) a relatively large natural stream of water|*river
-(n) a physical bigness or smallness|*size
-(adj) of greater that average height|*tall
-(adv) into a single mass, group|*together
-(n) a brother of one's mother or father|*uncle
-(adj) moderately hot|*warm
-(adj) having a sugary taste|*sweet
-very nearly|*almost, nearly
-to get by paying money|*buy
-(adj) having a low temperature|*cold
-(n) a large thick growth of trees|*forest  / wood
-(n) something, as a container for drinking, made of glass|*glass
-(n) a device used as an aid to vision|*glasses
-to come to pass|*happen
-(adj) coming immediately after in time, sequence|*next
-(adj) unhappy|*sad
-(n) a married woman|*wife
-(n) around 365 days|*year
-to request|*ask (for)
-(n) a domestic pet known for catching mice|*cat
-(adj) no longer living|*dead
-(n) the end of life|*death
-(n) a person driving a vehicle|*driver
-(n) physical or mental activity that develops fitness|*exercise
-to subject to physical or mental activity so as to develop fitness|*exercise
-(adv) to or at a considerable distance|*far
-(adj) extending far upward, tall|*high
-(n) a man who is married|*husband
-(adj) not high or tall|*low
-(n) currency officially exchangeable into goods and services|*money
-(adv) many times, frequently|*often
-(n) a mother and a father|*parents
-(n) a public road in a city or town|*street
-(adj) unpleasant to look at|*ugly
-(n) a meaningful speech sound, that can be represented by graphic symbols|*word
-(adv) at or to a long distance|*away  (away from the family)
-leave me alone|*go away
-(n) a motion picture|*cinema
-(adv) to or on a lower floor|*downstairs
-(n) a broad open piece of land|*field
-to attach from above as to swing freely|*hang
-a verb to indicate a measure of possibility|*may  (he may be late)
-(n) a unit of time equal to 1/60 of an hour|*minute
-to require or desire urgently|*need
-(n) a lack of something useful, necessary|*need
-(n) a writing instrument often with a metal pointing or supply of ink|*pen
-(n) a graphite writing instrument|*pencil
-(n) a relatively large body of salt water|*sea
-(n) a building for presenting dramatic plays or motion pictures|*theatre, theater
+'giữa tôi và anh' viết là|*between me and you|between I and you|in me and you|in I and you
+từ 'ghế tựa' viết là|*chair|seat|table|desk
+từ 'thân mến' viết là|*dear|friendly|likely|daer
+'lái ô tô' viết là|*drive a car|ride a car|control a car|run a car
+'còn gì nữa' viết là|*what else|which else|else|what more
+'một người khác nữa' viết là|*somebody else|some body more|some one more|some other one
+từ 'đều đặn' viết là|*even|draw|event
+từ 'nổi tiếng' (tính từ) viết là|*famous|fammous|fame|farmous
+'chúng ta cùng làm nó thôi' viết là|*let's do it|we do it together|let do it|let we do it
+từ 'trông giống như là' (giới từ) viết là|*like|look|love|see
+từ 'dòng sông' viết là|*river|kennel|sea|well
+từ 'kích cỡ' viết là|*size|zise|sin|scissor
+từ 'cao' viết là|*tall|wide|long|thick
+từ 'cùng nhau' viết là|*together|group|crowd|let
+từ 'chú' viết là|*uncle|aunt|nephew|niece
+từ 'ấm' viết là|*warm|hot|icy|smoke
+từ 'ngọt' viết là|*sweet|sweat|wet|swet
+từ 'gần như là' viết là|*almost|most|most of|all of
+từ 'mua' viết là|*buy|sold|sell|touch
+từ 'lạnh' viết là|*cold|cool|hot|warm
+từ 'rừng' viết là|*forest|tree|plan|grass
+từ 'cái cốc thuỷ tinh' viết là|*glass|cup|bowl
+từ 'kính đeo mắt' viết là|*glasses|glass|gas|gases
+từ 'xảy ra' viết là|*happen|come|wait|meet
+từ 'kế tiếp' viết là|*next|near|futher|further
+từ 'buồn' viết là|*sad|fun|bored|tired
+từ 'người vợ' viết là|*wife|husband|married|marriage
+từ 'năm' (365 ngày) viết là|*year|five|yeah|month
+từ 'yêu cầu' viết là|*ask|tell|say|response
+từ 'con mèo' viết là|*cat|mouse|mice|dog
+từ 'đã chết'(tính từ) viết là|*dead|death|die
+từ 'cái chết' (danh từ) viết là|*death|dead|die
+từ 'người lái ô tô' viết là|*driver|rider|runner|worker
+từ 'bài tập thể dục' (danh từ) viết là|*exercise|practice|test
+từ 'tập thể dục' (động từ) viết là|*exercise|practice|test
+từ 'xa' viết là|*far|near|close|long
+từ 'cao' viết là|*high|far|long|upward
+từ 'người chồng' viết là|*husband|wife|marriage|finacee
+từ 'thấp' viết là|*low|under|tall|short
+từ 'tiền' viết là|*money|monkey|current|exchange
+từ 'thường xuyên' viết là|*often|sometimes|several times|rarely
+từ 'cha mẹ' viết là|*parents|parentheses|parent|parenthesis
+từ 'đường công cộng' (trong thành phố) viết là|*street|road|way|path
+từ 'xấu' (vẻ bề ngoài) viết là|*ugly|bad|terrible|awful
+từ 'từ' viết là|*word|world|wodr|wordl
+từ 'cách xa' viết là|*away|long|near|close
+'để tôi một mình' viết là|*go away|let me alone|come away|don't come
+từ 'rạp phim' viết là|*cinema|movie|picture|motion
+từ 'tầng dưới' viết là|*downstairs|stair down|stair|understairs
+từ 'cánh đồng' viết là|*field|land|palace|place
+từ 'treo lên' viết là|*hang|attach|stick|associate
+'anh ấy có thể bị trễ' viết là|*he may be late|he want be late|he need be late|he is late
+từ 'phút' viết là|*minute|hour|second|time
+từ 'cần' viết là|*need|want|desire|wish
+từ 'nhu cầu' viết là|*need|want|wish
+từ 'cây viết' viết là|*pen|ink|paper|pager
+từ 'cây viết chì' viết là|*pencil|pen|ink|note
+từ 'biển' viết là|*sea|beach|coast
+từ 'rạp hát' viết là|*theater|cinema|picture|movie
 (adv) to or on upper floor|*upstairs
 (adj) being in the early period of life|*young
 (n) a surface or border of an object|*side  (on the other side)

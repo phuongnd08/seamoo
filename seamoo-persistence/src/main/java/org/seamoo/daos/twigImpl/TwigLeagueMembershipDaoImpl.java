@@ -38,7 +38,7 @@ public class TwigLeagueMembershipDaoImpl extends TwigGenericDaoImpl<LeagueMember
 		RootFindCommand<LeagueMembership> fc = getOds().find().type(LeagueMembership.class).addFilter("year",
 				FilterOperator.EQUAL, year).addFilter("month", FilterOperator.EQUAL, month).addFilter("resultCalculated",
 				FilterOperator.EQUAL, false).startFrom(startFrom).fetchResultsBy(count);
-		return Lists.newArrayList(fc.returnResultsNow());
+		return getSegmentedList(fc, count);
 	}
 
 	@Override
@@ -46,10 +46,7 @@ public class TwigLeagueMembershipDaoImpl extends TwigGenericDaoImpl<LeagueMember
 		RootFindCommand<LeagueMembership> fc = getOds().find().type(LeagueMembership.class).addFilter("leagueAutoId",
 				FilterOperator.EQUAL, leagueAutoId).addSort("accumulatedScore", SortDirection.DESCENDING).startFrom((int) from).fetchResultsBy(
 				count);
-		List<LeagueMembership> ms = Lists.newArrayList(fc.returnResultsNow());
-		if (ms.size() > count)
-			return ms.subList(0, count);
-		return ms;
+		return getSegmentedList(fc, count);
 	}
 
 	@Override

@@ -10,5 +10,9 @@ public interface MatchDao extends GenericDao<Match, Long> {
 	List<Match> getRecentMatchesByLeague(Long leagueAutoId, long from, int count);
 
 	long countByLeague(Long leagueAutoId);
+	
+	List<Match> getRecentMatchesBymember(Long memberAutoId, long from, int count);
+	
+	long countByMember(Long memberAutoId);
 
 }

@@ -1,14 +1,17 @@
 package org.seamoo.daos.twigImpl;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.seamoo.daos.GenericDao;
+import org.seamoo.entities.matching.Match;
 import org.seamoo.utils.TimeProvider;
 
+import com.google.appengine.api.datastore.QueryResultIterator;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.common.collect.Lists;
 import com.vercer.engine.persist.ObjectDatastore;
@@ -183,6 +186,19 @@ public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TE
 	@Override
 	public List<TEntity> getSubSet(long from, int count) {
 		RootFindCommand<TEntity> fc = getOds().find().type(entityClass).startFrom((int) from).fetchResultsBy(count);
-		return Lists.newArrayList(fc.returnResultsNow());
+		return getSegmentedList(fc, count);
+	}
+
+	protected List<TEntity> getSegmentedList(RootFindCommand<TEntity> fc, int count) {
+		List<TEntity> results = new ArrayList<TEntity>();
+		int fetched = 0;
+		QueryResultIterator<TEntity> qri = fc.returnResultsNow();
+		TEntity entity = null;
+		while (qri.hasNext() && fetched < count) {
+			entity = qri.next();
+			results.add(entity);
+			fetched++;
+		}
+		return results;
 	}
 }
