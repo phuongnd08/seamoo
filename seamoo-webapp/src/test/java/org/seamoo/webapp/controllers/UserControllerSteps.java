@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.entities.Member;
@@ -25,10 +27,32 @@ public class UserControllerSteps {
 	OpenIdUser user;
 
 	MemberDao memberDao;
+	Member savedMember;
 
 	@Given("A MemberDao")
 	public void initMemberDao() {
 		memberDao = mock(MemberDao.class);
+		resetMemberDao();
+	}
+
+	@Given("MemberDao is reset")
+	public void resetMemberDao() {
+		reset(memberDao);
+		doAnswer(new Answer() {
+
+			@Override
+			public Object answer(InvocationOnMock invocation) throws Throwable {
+				// TODO Auto-generated method stub
+				savedMember = (Member) invocation.getArguments()[0];
+				return null;
+			}
+
+		}).when(memberDao).persist((Member) any());
+	}
+
+	@Given("$number member exists")
+	public void initNumberOfMember(long number) {
+		when(memberDao.countAll()).thenReturn(number);
 	}
 
 	UserController controller;
@@ -134,5 +158,15 @@ public class UserControllerSteps {
 	@Then("Member is created")
 	public void assertMemberBeingCreated() {
 		verify(memberDao).persist((Member) any());
+	}
+
+	@Then("Member is not administrator")
+	public void assertSavedMemberIsNotAdministrator() {
+		assertFalse(savedMember.isAdministrator());
+	}
+
+	@Then("Member is administrator")
+	public void assertSavedMemberIsAdministrator() {
+		assertTrue(savedMember.isAdministrator());
 	}
 }

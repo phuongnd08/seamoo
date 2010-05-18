@@ -120,6 +120,7 @@ public class UserController {
 					}
 					if (member.getDisplayName() != null)
 						member.setAlias(AliasBuilder.toAlias(member.getDisplayName()));
+					member.setAdministrator(memberDao.countAll() == 0);
 					memberDao.persist(member);
 				}
 
@@ -139,8 +140,8 @@ public class UserController {
 	}
 
 	@RequestMapping("/login")
-	public ModelAndView login(HttpServletRequest request,
-			@RequestParam(value = "returnUrl", required = false) String returnUrl) throws Exception {
+	public ModelAndView login(HttpServletRequest request, @RequestParam(value = "returnUrl", required = false) String returnUrl)
+			throws Exception {
 		OpenIdUser user = RelyingParty.getInstance().discover(request);
 		if (user != null && user.isAuthenticated()) {
 			return new ModelAndView(getRedirectView(request, returnUrl));

@@ -43,9 +43,21 @@ When User is being seen first time
 Then User is being routed to "redirect:/leagues/2"
 Given Command is "create"
 Given returnUrl is null
+And 1 member exists
 When User is being seen first time
 Then Member is created
+And Member is not administrator
 And User is being routed to "redirect:/"
 Given returnUrl is "/leagues/2"
 When User is being seen first time
 Then User is being routed to "redirect:/leagues/2"
+!-- Test first-seen page: very first user of the system is administrator
+Given An authenticated OpenIdUser
+And MemberDao is reset
+And Method is "post"
+And returnUrl is null
+And Command is "create"
+And 0 member exists
+When User is being seen first time
+Then Member is created
+And Member is administrator
