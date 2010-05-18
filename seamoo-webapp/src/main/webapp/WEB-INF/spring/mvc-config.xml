@@ -50,34 +50,12 @@
 			</list>
 		</property>
 	</bean>
-
-
+	
 	<!--	 Declare a freemarker view resolver -->
 	<bean id="freeMarkerViewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="order" value="2" />
 		<property name="exposeSpringMacroHelpers" value="true" />
 	</bean>
-
-
-
-
-	<bean id="freemarkerConfigurer"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath" value="/" />
-		<property name="freemarkerSettings">
-			<props>
-				<prop key="datetime_format">dd MMM, yyyy</prop>
-				<prop key="number_format">0.######</prop>
-			</props>
-		</property>
-		<!--		<property name="freemarkerVariables">-->
-		<!--			<map>-->
-		<!--				<entry key="html_escape" value-ref="fmHtmlEscape" />-->
-		<!--			</map>-->
-		<!--		</property>-->
-	</bean>
-
-
 
 </beans>

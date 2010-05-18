@@ -101,7 +101,7 @@
 
 	<servlet>
 		<servlet-name>freemarker</servlet-name>
-		<servlet-class>freemarker.ext.servlet.FreemarkerServlet</servlet-class>
+		<servlet-class>org.seamoo.webapp.CustomizedFreemarkerServlet</servlet-class>
 
 		<init-param>
 			<param-name>TemplatePath</param-name>
