@@ -62,7 +62,7 @@
 		[@leagueItem no=992 period="Tháng 2, 2010" league="English &gt; Giải gà chọi" result="Trụ hạng (120)"/]
 		[@leagueItem no=991 period="Tháng 2, 2010" league="English &gt; Giải nghiệp dư" result="Thăng hạng (320)"/]
 	</table>
-	[@common.pagingControl "1,2,3,4,5"?split(",")/]
+	[@common.pagingControl min=1 max=5 current=1/]
 	<div class="cbt"></div>
 </div>
 <br/>
@@ -98,6 +98,6 @@
 		[@matchItem no=1012 moment="10 tháng 2, 2010 - 8:00" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
 		[@matchItem no=1011 moment="9 tháng 2, 2010 - 8:30" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
 	</table>
-	[@common.pagingControl "1,2,3,4,5"?split(",")/]
+	[@common.pagingControl min=1 max=5 current=1/]
 	<div class="cbt"></div>
 </div>

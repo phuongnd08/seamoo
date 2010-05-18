@@ -4,10 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.daos.LeagueDao;
+import org.seamoo.daos.MemberQualificationDao;
 import org.seamoo.daos.SubjectDao;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.Member;
+import org.seamoo.entities.MemberQualification;
 import org.seamoo.entities.Subject;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.webapp.filters.MemberInjectionFilter;
@@ -29,14 +31,24 @@ public class MatchController {
 	SubjectDao subjectDao;
 	@Autowired
 	LeagueOrganizer leagueOrganizer;
+	@Autowired
+	MemberQualificationDao memberQualificationDao;
 
 	@RequestMapping("/participate")
-	public ModelAndView participate(@RequestParam("leagueId") long leagueId) {
-		ModelAndView mav = new ModelAndView("matches.participate");
-		mav.addObject("title", "Tham gia giải đấu");
+	public ModelAndView participate(HttpServletRequest request, @RequestParam("leagueId") long leagueId) {
+		Member member = MemberInjectionFilter.getInjectedMember(request);
 		League league = leagueDao.findByKey(leagueId);
 		Subject subject = subjectDao.findByKey(league.getSubjectAutoId());
-		mav.addObject("league", league);
+		MemberQualification mq = memberQualificationDao.findByMemberAndSubject(member.getAutoId(), subject.getAutoId());
+		ModelAndView mav;
+		if (leagueOrganizer.canMemberJoinLeague(mq, league)) {
+			mav = new ModelAndView("matches.participate");
+			mav.addObject("title", "Tham gia giải đấu");
+			mav.addObject("league", league);
+		} else {
+			mav = new ModelAndView("matches.participate.forbidden");
+			mav.addObject("title", "Tham gia vượt cấp");
+		}
 		mav.addObject("subject", subject);
 		return mav;
 	}

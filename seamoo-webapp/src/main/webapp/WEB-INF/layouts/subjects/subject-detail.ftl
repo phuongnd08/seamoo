@@ -18,7 +18,7 @@
 		[#if member?exists]
 			[#if joinable[league.autoId?c]]
 				[#if memberships[league.autoId?c]?exists]
-					[#assign ms=memberships[league.c?string]/]
+					[#assign ms=memberships[league.autoId?c]/]
 					<div>
 						Bạn hiện có <strong>${ms.accumulatedScore}</strong> điểm ở giải đấu này.   
 					</div>

@@ -35,6 +35,11 @@
 			value="/WEB-INF/layouts/matches/match-participate.ftl" />
 		<put-attribute name="side" value="/WEB-INF/layouts/matches/match-participate-side.ftl"/>
 	</definition>
+	
+	<definition name="matches.participate.forbidden" extends="master-no-small">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/matches/match-participate-forbidden.ftl" />
+	</definition>
 
 	<definition name="users.list" extends="master-no-small">
 		<put-attribute name="body"
