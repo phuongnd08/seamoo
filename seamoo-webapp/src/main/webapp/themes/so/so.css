@@ -78,8 +78,8 @@ pre {
 	width: auto;
 	padding: 5px;
 	background-color: #c0c0c0;
-	width: 650px !           ie7;
-	padding-bottom: 20px !           ie7;
+	width: 650px !             ie7;
+	padding-bottom: 20px !             ie7;
 	max-height: 600px;
 }
 
@@ -307,7 +307,7 @@ p code {
 
 .accept-rate {
 	margin-left: 37px;
-	padding-top: 6px !           ie7;
+	padding-top: 6px !             ie7;
 	margin-top: 3px;
 	margin-bottom: 6px;
 }
@@ -964,12 +964,24 @@ a.comment-user.owner {
 	background-color: #f90;
 }
 
+.nav li.disabled {
+	background-color: silver;
+}
+
+.nav li.disabled:hover {
+	background-color: silver;
+}
+
 .nav a {
 	color: #fff;
 	display: block;
 	font-weight: bold;
 	padding: 6px 12px 6px 12px;
 	text-decoration: none;
+}
+
+.nav li.disabled a {
+	cursor: default;
 }
 
 #left-sidebar {
@@ -1834,9 +1846,10 @@ div.form-item-info {
 .tagged-ignored {
 	opacity: .5;
 	background-color: #fff;
-	filter: progid :           DXImageTransform.Microsoft.Alpha (         
-		 Opacity =   
-		       50 );
+	filter: progid :             DXImageTransform.Microsoft.Alpha (
+		         
+		  Opacity =    
+		        50 );
 }
 
 .tagged-ignored-hidden {

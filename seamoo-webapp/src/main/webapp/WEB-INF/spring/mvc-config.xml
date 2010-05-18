@@ -45,6 +45,7 @@
 		<property name="definitions">
 			<list>
 				<value>/WEB-INF/tiles-def/master.xml</value>
+				<value>/WEB-INF/tiles-def/home.xml</value>
 				<value>/WEB-INF/tiles-def/common.xml</value>
 				<value>/WEB-INF/tiles-def/admin.xml</value>
 			</list>

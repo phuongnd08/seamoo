@@ -29,17 +29,17 @@
 		<div class="nav">
 			<ul>
 				<li class="youarehere"><a href="[@spring.url "/subjects"/]">Thi đấu</a></li>
-				<li><a href="[@spring.url "/users"/]">Thành viên</a></li>
-				<li><a href="[@spring.url "/discussion"/]">Trao đổi</a></li>
-				<li><a href="[@spring.url "/reports"/]">Báo cáo</a></li>
-				<li><a href="[@spring.url "/questions/hot"/]">Câu hỏi nóng</a></li>
-				<li><a href="[@spring.url "/training/go"/]">Luyện tập</a></li>
+				<li class="disabled"><a href="[@spring.url "/users"/]" onclick="return false;">Thành viên</a></li>
+				<li class="disabled"><a href="[@spring.url "/discussion"/]" onclick="return false;">Trao đổi</a></li>
+				<li class="disabled"><a href="[@spring.url "/reports"/]" onclick="return false;">Báo cáo</a></li>
+				<li class="disabled"><a href="[@spring.url "/questions/hot"/]" onclick="return false;">Câu hỏi nóng</a></li>
+				<li class="disabled"><a href="[@spring.url "/training/go"/]" onclick="return false;">Luyện tập</a></li>
 			</ul>
 		</div>
 		<div class="nav" style="float: right;">
 			<ul>
-				<li style="margin-right: 0px;"><a
-					href="[@spring.url "/questions/create"/]">Đăng câu hỏi</a></li>
+				<li class="disabled" style="margin-right: 0px;"><a
+					href="[@spring.url "/questions/create"/]" onclick="return false;">Đăng câu hỏi</a></li>
 			</ul>
 		</div>
 		<div class="cbt"></div>

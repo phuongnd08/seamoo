@@ -1,0 +1,23 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+	<!-- Definitions for Tiles documentation   -->
+<tiles-definitions>
+
+	<definition name="home" extends="master-small-right">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/home/home.ftl" />
+	</definition>
+
+	<definition name="faq" extends="master-small-right">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/home/faq.ftl" />
+	</definition>
+
+	<definition name="about" extends="master-small-right">
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/home/about.ftl" />
+	</definition>
+
+</tiles-definitions>
