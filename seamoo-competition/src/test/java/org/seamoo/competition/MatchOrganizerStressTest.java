@@ -57,7 +57,6 @@ public class MatchOrganizerStressTest {
 
 		@Override
 		public T getObject() {
-			// TODO Auto-generated method stub
 			try {
 				Thread.sleep(SLEEP_UNIT);
 			} catch (InterruptedException e) {
@@ -69,13 +68,11 @@ public class MatchOrganizerStressTest {
 
 		@Override
 		public void lock(long timeout) throws TimeoutException {
-			// TODO Auto-generated method stub
 			long sleep = 0;
 			try {
 				if (!lockMap.get(key).tryLock(timeout, TimeUnit.MILLISECONDS))
 					throw new TimeoutException();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			this.locked = true;
@@ -84,11 +81,9 @@ public class MatchOrganizerStressTest {
 
 		@Override
 		public void putObject(T object) {
-			// TODO Auto-generated method stub
 			try {
 				Thread.sleep(SLEEP_UNIT * 3);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			this.map.put(key, object);
@@ -96,12 +91,15 @@ public class MatchOrganizerStressTest {
 
 		@Override
 		public void unlock() {
-			// TODO Auto-generated method stub
 			if (this.locked == true) {
 				this.locked = false;
 				this.lockMap.get(key).unlock();
 			} else
 				throw new IllegalStateException("Cannot unlock");
+		}
+
+		@Override
+		public void resetLock() {
 		}
 
 	}
@@ -118,7 +116,6 @@ public class MatchOrganizerStressTest {
 
 		@Override
 		public synchronized <T> CacheWrapper<T> createCacheWrapper(Class<T> clazz, String key) {
-			// TODO Auto-generated method stub
 			String realKey = clazz.getName() + "@" + key;
 			if (!this.lockMap.containsKey(realKey))
 				this.lockMap.put(realKey, new ReentrantLock());

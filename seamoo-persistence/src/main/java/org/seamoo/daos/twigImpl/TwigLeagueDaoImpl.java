@@ -1,5 +1,6 @@
 package org.seamoo.daos.twigImpl;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.seamoo.daos.LeagueDao;
@@ -10,6 +11,24 @@ import com.google.common.collect.Lists;
 import com.vercer.engine.persist.FindCommand.RootFindCommand;
 
 public class TwigLeagueDaoImpl extends TwigGenericDaoImpl<League, Long> implements LeagueDao {
+
+	static final int LEAGUE_CACHE_PERIOD = 60 * 60 * 1000;
+
+	public TwigLeagueDaoImpl() {
+		super(new HashSet<String>(), new FieldGetter<League>() {
+
+			@Override
+			public Object getField(League object, String field) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Object getKey(League object) {
+				return object.getAutoId();
+			}
+		}, LEAGUE_CACHE_PERIOD);
+	}
 
 	public List<League> getAllBySubjectId(Long subjectAutoId) {
 		RootFindCommand<League> fc = getOds().find().type(League.class).addFilter("subjectAutoId", FilterOperator.EQUAL,

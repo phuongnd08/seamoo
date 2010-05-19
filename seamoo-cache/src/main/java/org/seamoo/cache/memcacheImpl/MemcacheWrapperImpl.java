@@ -2,8 +2,6 @@ package org.seamoo.cache.memcacheImpl;
 
 import java.util.concurrent.TimeoutException;
 
-import javax.cache.Cache;
-
 import org.seamoo.cache.CacheWrapper;
 
 import com.google.appengine.api.memcache.MemcacheService;
@@ -62,6 +60,11 @@ public class MemcacheWrapperImpl<T> implements CacheWrapper<T> {
 			this.locked = false;
 		} else
 			throw new IllegalStateException("Lock has not been acquired");
+	}
+
+	@Override
+	public void resetLock() {
+		cacheService.put(keyLock, 0);
 	}
 
 }

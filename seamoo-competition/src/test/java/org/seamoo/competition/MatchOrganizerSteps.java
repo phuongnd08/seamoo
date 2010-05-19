@@ -140,7 +140,9 @@ public class MatchOrganizerSteps {
 
 	@When("Organizer of league 2 is created")
 	public void initLeague2MatchOrganizer() {
-		organizer2 = new MatchOrganizer(TEST_LEAGUE2_ID);
+		MatchOrganizerSettings settings = new  MatchOrganizerSettings();
+		settings.setCandidateActivePeriod(5000);//use 5000 for testing purpose
+		organizer2 = new MatchOrganizer(TEST_LEAGUE2_ID, settings);
 		organizer2.memberDao = memberDao;
 		organizer2.questionDao = questionDao;
 		organizer2.matchDao = matchDao;
@@ -150,7 +152,9 @@ public class MatchOrganizerSteps {
 
 	@When("Match Organizer is recreated")
 	public void reinstantiateMatchOrganizer() {
-		organizer = new MatchOrganizer(TEST_LEAGUE_ID);
+		MatchOrganizerSettings settings = new  MatchOrganizerSettings();
+		settings.setCandidateActivePeriod(5000);//use 5000 for testing purpose
+		organizer = new MatchOrganizer(TEST_LEAGUE_ID, settings);
 		organizer.memberDao = memberDao;
 		organizer.questionDao = questionDao;
 		organizer.matchDao = matchDao;

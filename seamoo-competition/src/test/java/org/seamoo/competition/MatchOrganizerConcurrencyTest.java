@@ -119,6 +119,12 @@ public class MatchOrganizerConcurrencyTest {
 			lockMap.get(key).unlock();
 		}
 
+		@Override
+		public void resetLock() {
+			// TODO Auto-generated method stub
+			
+		}
+
 	}
 
 	public static class LockTimeControllableCacheWrapperFactory implements CacheWrapperFactory {

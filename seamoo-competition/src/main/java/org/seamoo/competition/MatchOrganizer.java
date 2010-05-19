@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
+import org.quartz.simpl.InitThreadContextClassLoadHelper;
 import org.seamoo.cache.CacheWrapper;
 import org.seamoo.cache.CacheWrapperFactory;
 import org.seamoo.daos.MemberDao;
@@ -501,6 +502,14 @@ public class MatchOrganizer {
 
 	public void addEventListener(EventListener listener) {
 		listeners.add(listener);
+	}
+
+	public void resetLocks() {
+		initialize();
+		notFullWaitingMatches.resetLock();
+		notFullWaitingMatches.putObject(null);
+		fullWaitingMatches.resetLock();
+		fullWaitingMatches.putObject(null);
 	}
 
 }

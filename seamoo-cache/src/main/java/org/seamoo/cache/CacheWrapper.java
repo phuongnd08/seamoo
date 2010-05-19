@@ -7,6 +7,8 @@ public interface CacheWrapper<T> {
 	
 	public void unlock();
 	
+	public void resetLock();
+	
 	public T getObject();
 	
 	public void putObject(T object);

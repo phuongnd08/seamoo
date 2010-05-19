@@ -1,6 +1,7 @@
 package org.seamoo.webapp.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.daos.LeagueDao;
@@ -73,6 +74,11 @@ public class MatchController {
 		Member member = MemberInjectionFilter.getInjectedMember(request);
 		leagueOrganizer.getMatchOrganizer(leagueId).escapeCurrentMatch(member.getAutoId());
 		return "redirect:/matches/participate?leagueId=" + leagueId;
+	}
+	
+	@RequestMapping("/reset-locks")
+	public void resetLocks(HttpServletResponse response, @RequestParam("leagueId") long leagueId){
+		leagueOrganizer.getMatchOrganizer(leagueId).resetLocks();
 	}
 
 }
