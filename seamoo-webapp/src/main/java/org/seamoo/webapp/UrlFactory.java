@@ -44,4 +44,9 @@ public class UrlFactory {
 	public static String getPagedLeagueViewUrl(League league, long rankPage, long matchPage) {
 		return getLeagueViewUrl(league) + "?r=" + rankPage + "&m=" + matchPage;
 	}
+
+	public static String getPagedUserViewUrl(Member member, long matchPage, long membershipPage) {
+		return getUserViewUrl(member) + "?m=" + matchPage + "&ms=" + membershipPage;
+	}
+
 }

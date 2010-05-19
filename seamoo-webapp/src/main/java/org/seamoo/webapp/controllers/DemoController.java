@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -28,6 +29,7 @@ import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.installation.Bundle;
 import org.seamoo.utils.converter.Converter;
+import org.seamoo.webapp.Site;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
@@ -218,7 +220,7 @@ public class DemoController {
 		InputStream stream = null;
 		BufferedReader reader = null;
 		stream = loader.getResource(bundleName).getInputStream();
-		reader = new BufferedReader(new InputStreamReader(stream));
+		reader = new BufferedReader(new InputStreamReader(stream, Charset.forName(Site.DEFAULT_CHARSET)));
 		long passed = 0;
 		if (finished != null)
 			while (passed < finished && reader.ready()) {
@@ -226,9 +228,9 @@ public class DemoController {
 				passed++;
 			}
 		boolean done = false;
-		long currentMilliseconds = System.currentTimeMillis();
+		long startTime = System.currentTimeMillis();
 		newFinished[0] = passed;
-		while (System.currentTimeMillis() - currentMilliseconds < maxDuration) {
+		while (System.currentTimeMillis() - startTime < maxDuration) {
 			int i = 0;
 			List<Question> qs = new ArrayList<Question>();
 			while (i < QUESTION_BATCH_SIZE && reader.ready()) {

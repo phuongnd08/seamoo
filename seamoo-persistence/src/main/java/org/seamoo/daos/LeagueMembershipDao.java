@@ -10,4 +10,6 @@ public interface LeagueMembershipDao extends GenericDao<LeagueMembership, Long> 
 	List<LeagueMembership> findUndeterminedByMinimumAutoIdAndMoment(int year, int month, int startFrom, int count);
 	List<LeagueMembership> getByLeagueAndRanking(Long leagueAutoId, long from, int count);
 	long countByLeague(Long leagueAutoId);
+	long countByMember(Long memberAutoId);
+	List<LeagueMembership> getRecentByMember(Long memberAutoId, long from, int count);
 }

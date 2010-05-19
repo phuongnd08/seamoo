@@ -1,10 +1,11 @@
 [#ftl/]
 [#import "/common.ftl" as common/]
+[#assign urlFactory=statics["org.seamoo.webapp.UrlFactory"]/]
 <div class="description-box">
 <table class="fw">
 <tr>
 	<td class="hw">
-		[#if (member.autoId==user.autoId)]
+		[#if (member?exists && member.autoId==user.autoId)]
 		<div style="float: right; margin-top: 19px; margin-right: 4px;">
              <a href="/users/edit/${user.autoId?c}">sửa</a> 
         </div>
@@ -44,60 +45,82 @@
 </table>
 </div>  
 <br/>
-[#macro leagueItem no period league result]
-	<tr><td class="tar">${no?c}</td><td>${period}</td><td><a href="#">${league}</a></td><td>${result}</td></tr>
+[#macro membershipItem membership]
+	[#assign league=leagueMap[membership.leagueAutoId?string]/]
+	[#assign subject=subjectMap[league.subjectAutoId?string]/]
+	[#assign leagueResult=enums["org.seamoo.entities.LeagueResult"]/]
+	[#assign membershipFromIndex=membershipFromIndex+1/]
+	<tr>
+		<td class="tar">${membershipFromIndex}</td>
+		<td>${membership.year}-${membership.month}</td>
+		<td>
+			<a href="${urlFactory.getSubjectViewUrl(subject)}">${subject.name}</a> &gt;
+			<a href="${urlFactory.getLeagueViewUrl(league)}">${league.name}</a> 
+		</td>
+		<td>[#switch membership.result]
+		[#case leagueResult.UNDETERMINED]
+			Đang thi đấu
+		[#break]
+		[#case leagueResult.STAY]
+			Trụ hạng
+		[#break]
+		[#case leagueResult.UP_RELEGATED]
+			Thăng hạng
+		[#break]
+		[#case leagueResult.DOWN_RELEGATED]
+			Xuống hạng
+		[#break]
+		[/#switch]
+		</td>
+	</tr>
 [/#macro]
 <div class="description-box">
 	<h3>Các giải đấu đã tham gia</h3>
 	<table class="fw grid">
 		<tr><th class="tar">#</th><th>Giai đoạn</th><th>Giải đấu</th><th>Kết quả</th></tr>
-		[@leagueItem no=1000 period="Tháng 2, 2010" league="English &gt; Giải gà con" result="Đang thi đấu"/]
-		[@leagueItem no=999 period="Tháng 2, 2010" league="English &gt; Giải nghiệp dư" result="Thăng hạng (330)"/]
-		[@leagueItem no=998 period="Tháng 2, 2010" league="English &gt; Giải gà con" result="Tụt hạng (80)"/]
-		[@leagueItem no=997 period="Tháng 2, 2010" league="English &gt; Giải nghiệp dư" result="Thăng hạng (350)"/]
-		[@leagueItem no=996 period="Tháng 2, 2010" league="English &gt; Giải gà con" result="Tụt hạng (30)"/]
-		[@leagueItem no=995 period="Tháng 2, 2010" league="English &gt; Giải gà chọi" result="Tụt hạng (0)"/]
-		[@leagueItem no=994 period="Tháng 2, 2010" league="English &gt; Giải đại bàng" result="Tụt hạng (0)"/]
-		[@leagueItem no=993 period="Tháng 2, 2010" league="English &gt; Giải gà chọi" result="Thăng hạng (400)"/]
-		[@leagueItem no=992 period="Tháng 2, 2010" league="English &gt; Giải gà chọi" result="Trụ hạng (120)"/]
-		[@leagueItem no=991 period="Tháng 2, 2010" league="English &gt; Giải nghiệp dư" result="Thăng hạng (320)"/]
+		[#list memberships as membership]
+		[@membershipItem membership/]
+		[/#list]
 	</table>
-	[@common.pagingControl min=1 max=5 current=1/]
+	[@common.pagingControl min=1 max=membershipPageCount current=membershipPage;page]
+		${urlFactory.getPagedUserViewUrl(user, matchPage, page)}
+	[/@common.pagingControl]
 	<div class="cbt"></div>
 </div>
 <br/>
-[#macro matchItem no moment players result]
+[#macro matchItem match]
 	<tr>
-		<td class="tar">${no?c}</td><td>${moment}</td>
-		<td>
-			[#list players as player]
-				<a href="#">${player}</a>
-				[#if player_has_next]
-					&amp;
-				[/#if]
-			[/#list]
-		</td>
-		<td>${result}</td>
-		<td><a href="#">Xem</a></td>
+	<td>
+	[#assign count=0/]
+	[#list match.competitors as competitor]
+		[#assign count=count+1/]
+		<a href="${urlFactory.getUserViewUrl(competitor.member)}">${competitor.member.displayName}</a> 
+		([@compress single_line=true]
+			[#switch competitor.rank]
+			[#case 1] 1st
+			[#break/]
+			[#case 2] 2nd
+			[#break/]
+			[#case 3] 3rd
+			[#break/]
+			[#case 4] 4th
+			[#break/] 
+		[/#switch][/@compress])
+		[#if competitor_has_next] vs [/#if]
+	[/#list]
+	</td>
+	<td><a href="${urlFactory.getMatchViewUrl(match)}">Xem</a></td>
 	</tr>
 [/#macro]
 <div class="description-box">
 	<h3>Các trận đấu đã tham gia</h3>
 	<table class="fw grid">
-		<tr>
-			<th class="tar">#</th><th>Thời điểm</th><th>Đấu với</th><th>Kết quả</th><th></th>
-		</tr>
-		[@matchItem no=1020 moment="12 tháng 2, 2010 - 8:30" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
-		[@matchItem no=1019 moment="12 tháng 2, 2010 - 8:25" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
-		[@matchItem no=1018 moment="12 tháng 2, 2010 - 8:20" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
-		[@matchItem no=1017 moment="11 tháng 2, 2010 - 8:30" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
-		[@matchItem no=1016 moment="11 tháng 2, 2010 - 8:25" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
-		[@matchItem no=1015 moment="11 tháng 2, 2010 - 8:15" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
-		[@matchItem no=1014 moment="10 tháng 2, 2010 - 8:30" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
-		[@matchItem no=1013 moment="10 tháng 2, 2010 - 8:15" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
-		[@matchItem no=1012 moment="10 tháng 2, 2010 - 8:00" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
-		[@matchItem no=1011 moment="9 tháng 2, 2010 - 8:30" players="thinh_pro,azazu,xuka"?split(",") result="1st"/]
+		[#list matches as match]
+			[@matchItem match/]
+		[/#list]
 	</table>
-	[@common.pagingControl min=1 max=5 current=1/]
+	[@common.pagingControl min=1 max=matchPageCount current=matchPage;page]
+		${urlFactory.getPagedUserViewUrl(user, page, membershipPage)}
+	[/@common.pagingControl]
 	<div class="cbt"></div>
 </div>

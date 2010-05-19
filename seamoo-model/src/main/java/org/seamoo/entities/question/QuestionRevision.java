@@ -6,13 +6,13 @@ import javax.persistence.Id;
 
 import org.seamoo.entities.Member;
 
+import com.vercer.engine.persist.annotation.Key;
+
 public abstract class QuestionRevision implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2192950758622290277L;
-	@Id
-	private Long autoId;
 	private Member creator;
 	private int revisionNumber;
 	private String editSummary;
@@ -39,14 +39,6 @@ public abstract class QuestionRevision implements Serializable {
 
 	public String getEditSummary() {
 		return editSummary;
-	}
-
-	public void setAutoId(Long autoId) {
-		this.autoId = autoId;
-	}
-
-	public Long getAutoId() {
-		return autoId;
 	}
 	
 	public abstract String getCorrectAnswer();

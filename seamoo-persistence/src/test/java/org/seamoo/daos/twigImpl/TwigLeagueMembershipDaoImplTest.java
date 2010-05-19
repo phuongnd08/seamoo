@@ -80,4 +80,28 @@ public class TwigLeagueMembershipDaoImplTest extends LocalAppEngineTest {
 		assertEquals(daoImpl.countByLeague(4L), 1);
 	}
 
+	
+	@Test
+	public void countByMemberShouldReturnNumberOfMembershipMemberHas() {
+		TwigLeagueMembershipDaoImpl daoImpl = new TwigLeagueMembershipDaoImpl();
+		LeagueMembership[] lmses = new LeagueMembership[] { getSampleLMS(1L, 2L, 2010, 5), getSampleLMS(2L, 2L, 2010, 5),
+				getSampleLMS(1L, 4L, 2010, 5) };
+		daoImpl.persist(lmses);
+		assertEquals(daoImpl.countByMember(1L), 2);
+		assertEquals(daoImpl.countByMember(2L), 1);
+	}
+	
+	@Test
+	public void getRecentByMemberShouldReturnRecentMembershipFirst() {
+		TwigLeagueMembershipDaoImpl daoImpl = new TwigLeagueMembershipDaoImpl();
+		LeagueMembership[] lmses = new LeagueMembership[] { getSampleLMS(1L, 2L, 2010, 5), getSampleLMS(1L, 2L, 2011, 5),
+				getSampleLMS(1L, 4L, 2010, 6), getSampleLMS(1L, 4L, 2000, 6) };
+		daoImpl.persist(lmses);
+		List<LeagueMembership> reloaded = daoImpl.getRecentByMember(1L, 0, 3);
+		assertEquals(reloaded.size(), 3);
+		assertEquals(reloaded.get(0).getYear(), 2011);
+		assertEquals(reloaded.get(0).getMonth(), 5);
+	}
+
+
 }

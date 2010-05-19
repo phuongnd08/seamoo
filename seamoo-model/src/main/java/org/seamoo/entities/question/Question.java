@@ -8,6 +8,8 @@ import org.seamoo.entities.League;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.Votable;
 
+import com.vercer.engine.persist.annotation.Child;
+
 public class Question extends Votable {
 	/**
 	 * 
@@ -21,6 +23,8 @@ public class Question extends Votable {
 	// from last revision
 
 	private QuestionRevision currentRevision;
+	
+	@Child
 	private List<QuestionRevision> revisions;
 
 	private Long leagueAutoId;
@@ -107,8 +111,7 @@ public class Question extends Votable {
 	}
 
 	/**
-	 * Return 1-scale score of an answer If question is of multiple choices,
-	 * then answer should be 1-based
+	 * Return 1-scale score of an answer If question is of multiple choices, then answer should be 1-based
 	 * 
 	 * @param answer
 	 * @return

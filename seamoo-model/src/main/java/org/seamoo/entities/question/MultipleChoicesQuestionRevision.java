@@ -3,12 +3,16 @@ package org.seamoo.entities.question;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vercer.engine.persist.annotation.Child;
+import com.vercer.engine.persist.annotation.Embed;
+
 public class MultipleChoicesQuestionRevision extends QuestionRevision {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3124942569355863301L;
 	private String content;
+	@Embed
 	private List<QuestionChoice> choices;
 
 	public MultipleChoicesQuestionRevision() {

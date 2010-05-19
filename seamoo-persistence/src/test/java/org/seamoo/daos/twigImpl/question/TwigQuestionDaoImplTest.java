@@ -9,6 +9,7 @@ import java.util.TreeSet;
 
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.seamoo.daos.twigImpl.ObjectDatastoreProvider;
+import org.seamoo.daos.twigImpl.TwigGenericDaoImpl;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
@@ -132,4 +133,28 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 		assertEquals("xxx", rReloaded.getChoices().get(0).getContent());
 		assertEquals(true, rReloaded.getChoices().get(0).isCorrect());
 	}
+
+	private static class TwigMCQRDao extends TwigGenericDaoImpl<MultipleChoicesQuestionRevision, String> {
+
+	}
+
+	private static class TwigQuestionChoiceDao extends TwigGenericDaoImpl<QuestionChoice, Long> {
+
+	}
+
+	//@Test
+	public void removeMultipleChoicesQuestionGetRidOfChildData() {
+		Question q = new Question();
+		MultipleChoicesQuestionRevision r = new MultipleChoicesQuestionRevision();
+		r.setContent("hello");
+		r.addChoice(new QuestionChoice("xxx", true));
+		q.addAndSetAsCurrentRevision(r);
+		daoImpl.persist(q);
+		daoImpl.delete(q);
+		TwigMCQRDao mcqrDao = new TwigMCQRDao();
+		TwigQuestionChoiceDao qcDao = new TwigQuestionChoiceDao();
+		assertEquals(mcqrDao.countAll(), 0);
+		assertEquals(qcDao.countAll(), 0);
+	}
+
 }

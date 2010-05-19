@@ -5,17 +5,27 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.seamoo.daos.LeagueDao;
+import org.seamoo.daos.LeagueMembershipDao;
 import org.seamoo.daos.MemberDao;
+import org.seamoo.daos.SubjectDao;
+import org.seamoo.daos.matching.MatchDao;
+import org.seamoo.entities.League;
+import org.seamoo.entities.LeagueMembership;
 import org.seamoo.entities.Member;
+import org.seamoo.entities.Subject;
 import org.seamoo.utils.AliasBuilder;
 import org.seamoo.utils.EmailExtractor;
 import org.seamoo.utils.HashBuilder;
 import org.seamoo.utils.converter.Converter;
+import org.seamoo.webapp.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +46,14 @@ import com.dyuproject.util.http.UrlEncodedParameterMap;
 public class UserController {
 	@Autowired
 	MemberDao memberDao;
+	@Autowired
+	LeagueDao leagueDao;
+	@Autowired
+	SubjectDao subjectDao;
+	@Autowired
+	MatchDao matchDao;
+	@Autowired
+	LeagueMembershipDao leagueMembershipDao;
 	public static final String OPEN_ID_INFO_FIELD = "info";
 	public static final String OPEN_ID_INFO_EMAIL_FIELD = "email";
 	public static final String OPEN_ID_INFO_COUNTRY_FIELD = "country";
@@ -163,23 +181,54 @@ public class UserController {
 			return String.format("redirect:%s", "/");
 	}
 
-	// @RequestMapping("/{userId}/{userName}")
-	// public ModelAndView viewProfile(@PathVariable("userId") long userId,
-	// @PathVariable("userName") String userName){
-	// return viewProfileTab(userId, userName, "profile");
-	// }
-	@RequestMapping("/{userId}/{userAlias}")
-	public ModelAndView viewProfileTab(@PathVariable("userId") long userId, @PathVariable("userAlias") String userAlias,
-			@RequestParam(value = "tab", required = false) String tab) {
+	static final int MATCH_PER_PAGE = 10;
+	static final int MEMBERSHIP_PER_PAGE = 10;
+
+	@RequestMapping("/{memberAutoId}/{memberAlias}")
+	public ModelAndView viewProfileTab(@PathVariable("memberAutoId") long memberAutoId,
+			@PathVariable("memberAlias") String memberAlias, @RequestParam(value = "tab", required = false) String tab,
+			@RequestParam(value = "m", required = false, defaultValue = "1") long matchPage,
+			@RequestParam(value = "ms", required = false, defaultValue = "1") long membershipPage) {
 		ModelAndView mav = null;
 		if (tab != null && tab.equals("discussion")) {
 			mav = new ModelAndView("user.discussion");
 			mav.addObject("title", "Discussion");
 		} else {
 			mav = new ModelAndView("user.view");
-			Member m = memberDao.findByKey(userId);
+			Member m = memberDao.findByKey(memberAutoId);
 			mav.addObject("user", m);
 			mav.addObject("title", "View Profile - " + m.getDisplayName());
+			long matchCount = matchDao.countByMember(memberAutoId);
+			long msCount = leagueMembershipDao.countByMember(memberAutoId);
+			long matchPageCount = Pager.getPageCount(matchCount, MATCH_PER_PAGE);
+			long msPageCount = Pager.getPageCount(msCount, MEMBERSHIP_PER_PAGE);
+			Map<String, League> leagueMap = new HashMap<String, League>();
+			Map<String, Subject> subjectMap = new HashMap<String, Subject>();
+			mav.addObject("matches", matchDao.getRecentMatchesBymember(memberAutoId, Pager.getFromForPage(matchPage,
+					MATCH_PER_PAGE), MATCH_PER_PAGE));
+			mav.addObject("matchPage", matchPage);
+
+			long membershipFromIndex = Pager.getFromForPage(membershipPage, MEMBERSHIP_PER_PAGE);
+			List<LeagueMembership> memberships = leagueMembershipDao.getRecentByMember(memberAutoId, membershipFromIndex,
+					MEMBERSHIP_PER_PAGE);
+			for (LeagueMembership ms : memberships) {
+				if (!leagueMap.containsKey(ms.getLeagueAutoId().toString())) {
+					League l = leagueDao.findByKey(ms.getLeagueAutoId());
+					leagueMap.put(l.getAutoId().toString(), l);
+					if (!subjectMap.containsKey(l.getSubjectAutoId().toString())) {
+						Subject s = subjectDao.findByKey(l.getSubjectAutoId());
+						subjectMap.put(s.getAutoId().toString(), s);
+					}
+				}
+			}
+			mav.addObject("memberships", memberships);
+			mav.addObject("membershipPage", membershipPage);
+			mav.addObject("membershipPageCount", msPageCount);
+			mav.addObject("matchPageCount", matchPageCount);
+			mav.addObject("memberAutoId", memberAutoId);
+			mav.addObject("leagueMap", leagueMap);
+			mav.addObject("subjectMap", subjectMap);
+			mav.addObject("membershipFromIndex", membershipFromIndex);
 		}
 		return mav;
 	}
