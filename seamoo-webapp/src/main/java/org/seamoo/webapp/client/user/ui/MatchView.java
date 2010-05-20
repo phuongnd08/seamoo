@@ -268,7 +268,6 @@ public class MatchView extends Composite implements Display {
 
 	@Override
 	public void addEvents(List<MatchEvent> events) {
-		// TODO Auto-generated method stub
 		for (MatchEvent event : events) {
 			eventIndex++;
 			tableMatchEvents.setHTML(eventIndex, 0, eventToHTML(event));
@@ -277,7 +276,12 @@ public class MatchView extends Composite implements Display {
 
 	@Override
 	public Widget getSideWidget() {
-		// TODO Auto-generated method stub
 		return panelIndicator;
+	}
+
+	@Override
+	public void resetEvents() {
+		eventIndex = -1;
+		tableMatchEvents.clear();
 	}
 }

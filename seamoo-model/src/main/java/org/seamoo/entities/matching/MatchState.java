@@ -49,6 +49,7 @@ public class MatchState implements Serializable {
 	private List<MatchCompetitor> competitors;
 	private MatchPhase phase;
 	private int completedQuestionsCount;
+	private boolean reset;
 
 	public MatchState() {
 		bufferedQuestions = new ArrayList<Question>();
@@ -156,5 +157,17 @@ public class MatchState implements Serializable {
 
 	public long getLeagueAutoId() {
 		return leagueAutoId;
+	}
+
+	public void setReset(boolean reset) {
+		this.reset = reset;
+	}
+
+	/**
+	 * Return whether the match state is requested with incorrect parameter (often mean the match is reset without client aware of that)
+	 * @return
+	 */
+	public boolean isReset() {
+		return reset;
 	}
 }

@@ -106,7 +106,8 @@ public class MatchServiceImplSteps {
 
 	@Given("Match has $number events")
 	public void setUpMatchEvents(int number) {
-		for (int i = currentMatch.getEvents().size(); i < number; i++) {
+		currentMatch.getEvents().clear();
+		for (int i = 0; i < number; i++) {
 			currentMatch.addEvent(new MatchEvent());
 		}
 	}
@@ -211,4 +212,11 @@ public class MatchServiceImplSteps {
 	public void assertMatchStateAlias(String alias) {
 		assertEquals(matchState.getMatchAlias(), alias);
 	}
+
+	@Then("State is reset")
+	public void assertStateReset() {
+		assertTrue(matchState.isReset());
+		assertEquals(0, matchState.getBufferedEventsFrom());
+	}
+	
 }

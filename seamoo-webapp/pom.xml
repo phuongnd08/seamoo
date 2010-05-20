@@ -295,8 +295,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<logLevel>INFO</logLevel>
-
 					<!-- match -Dgae.port -->
 					<port>${gae.port}</port>
 					<debugPort>${gae.debugPort}</debugPort>
@@ -316,9 +314,7 @@
 					<server>com.google.appengine.tools.development.gwt.AppEngineLauncher
 					</server>
 
-					<runTarget>/welcome.html</runTarget>
-					<style>DETAILED</style>
-					<!--					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>-->
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
 					<!--
 						this parameter is VERY important with automatic mode - has to
 						match the version in your declared deps
@@ -487,6 +483,8 @@
 			environment
 		-->
 		<gwt.style>DETAILED</gwt.style>
+		<gwt.logLevel>ALL</gwt.logLevel>
+
 	</properties>
 
 	<profiles>
@@ -503,6 +501,7 @@
 
 				<!-- Produce pretty JS during GWT compilation for test environment -->
 				<gwt.style>PRETTY</gwt.style>
+				<gwt.logLevel>ALL</gwt.logLevel>
 			</properties>
 		</profile>
 
@@ -520,7 +519,6 @@
 					<value>true</value>
 				</property>
 			</activation>
-
 			<properties>
 				<!--
 					During release, set application version in appengine-web.xml to 2
@@ -532,6 +530,7 @@
 					environment
 				-->
 				<gwt.style>OBFUSCATED</gwt.style>
+				<gwt.logLevel>ERROR</gwt.logLevel>
 			</properties>
 		</profile>
 		<profile>

@@ -92,9 +92,13 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 		} else
 			matchState.setPhase(match.getPhase());
 		// assign buffered events
-		assert bufferredEventsCount <= match.getEvents().size();
-		matchState.setBufferedEvents(new ArrayList<MatchEvent>(match.getEvents().subList(bufferredEventsCount,
-				match.getEvents().size())));
+		// assert bufferredEventsCount <= match.getEvents().size();
+		if (match.getEvents().size() < bufferredEventsCount) {
+			matchState.setBufferedEvents(match.getEvents());
+			matchState.setReset(true);
+		} else
+			matchState.setBufferedEvents(new ArrayList<MatchEvent>(match.getEvents().subList(bufferredEventsCount,
+					match.getEvents().size())));
 		matchState.setMatchAutoId(match.getAutoId() != null ? match.getAutoId().longValue() : 0);
 		matchState.setLeagueAutoId(match.getLeagueAutoId());
 		matchState.setMatchAlias(match.getAlias());

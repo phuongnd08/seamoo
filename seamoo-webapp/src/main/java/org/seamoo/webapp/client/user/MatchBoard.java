@@ -18,6 +18,7 @@ import org.seamoo.webapp.client.user.ui.MatchView;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Dictionary;
+import com.google.gwt.i18n.rebind.ClearStaticData;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -42,6 +43,8 @@ public class MatchBoard {
 
 		public void setQuestion(Question question);
 
+		public void resetEvents();
+
 		public void addEvents(List<MatchEvent> events);
 
 		public void setTotalQuestion(int total);
@@ -53,8 +56,8 @@ public class MatchBoard {
 		public void addEventListener(EventListener listener);
 
 		/**
-		 * Get the side widget that controlled by the presenter but actually put
-		 * in the side This is used to simplify testing (really?)
+		 * Get the side widget that controlled by the presenter but actually put in the side This is used to simplify testing
+		 * (really?)
 		 * 
 		 * @return
 		 */
@@ -75,8 +78,7 @@ public class MatchBoard {
 			public void submitAnswer(Display display, String answer) {
 				// Server use 1-based order, but currentQuestionOrder is 0-based
 				trySubmitAnswer(currentQuestionOrder + 1, answer, 0/*
-																	 * no failed
-																	 * yet
+																	 * no failed yet
 																	 */);
 				nextQuestion();
 			}
@@ -243,6 +245,13 @@ public class MatchBoard {
 				return;
 			}
 			display.setTotalQuestion(currentMatchState.getQuestionsCount());
+			if (state.isReset()) {
+				// reset the view
+				bufferedQuestions.clear();
+				display.resetEvents();
+				this.currentQuestionOrder = -1;
+				this.showNoQuestion();
+			}
 			if (state.getBufferedQuestions() != null) {
 				List<Question> qs = state.getBufferedQuestions();
 				int from = state.getBufferedFrom();

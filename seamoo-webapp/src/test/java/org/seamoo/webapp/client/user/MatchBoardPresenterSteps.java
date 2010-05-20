@@ -113,15 +113,16 @@ public class MatchBoardPresenterSteps {
 		PowerMockito.mockStatic(MessageBox.class);
 		when(
 				MessageBox.showPopupPanel(anyString(), (String[]) any(), (String[]) any(),
-						(org.seamoo.webapp.client.shared.ui.MessageBox.EventListener) any())).thenAnswer(new Answer<PopupPanel>() {
+						(org.seamoo.webapp.client.shared.ui.MessageBox.EventListener) any())).thenAnswer(
+				new Answer<PopupPanel>() {
 
-			@Override
-			public PopupPanel answer(InvocationOnMock invocation) throws Throwable {
-				// TODO Auto-generated method stub
-				messageBoxListener = (org.seamoo.webapp.client.shared.ui.MessageBox.EventListener) invocation.getArguments()[3];
-				return null;
-			}
-		});
+					@Override
+					public PopupPanel answer(InvocationOnMock invocation) throws Throwable {
+						// TODO Auto-generated method stub
+						messageBoxListener = (org.seamoo.webapp.client.shared.ui.MessageBox.EventListener) invocation.getArguments()[3];
+						return null;
+					}
+				});
 	}
 
 	@When("\"$name\" is selected from DialogBox")
@@ -465,5 +466,20 @@ public class MatchBoardPresenterSteps {
 	@Then("Service submit an escape")
 	public void assertServiceSubmitEscape() {
 		verify(serviceAsync).escapeCurrentMatch(eq(matchState.getLeagueAutoId()), (AsyncCallback) any());
+	}
+
+	@Given("Current match is reset")
+	public void setCurrentMatchAsReset() {
+		matchState.setReset(true);
+	}
+
+	@Then("Display resets its events")
+	public void assertDisplayResetEvents() {
+		verify(display).resetEvents();
+	}
+
+	@Then("Display is not viewing any question")
+	public void assertDisplayNotViewingAnyQuestion() {
+		verify(display).setQuestion(null);
 	}
 }
