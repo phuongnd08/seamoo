@@ -19,6 +19,9 @@
 		[#case enums["org.seamoo.entities.matching.MatchEventType"].JOINED]
 		<strong>${event.member.displayName}</strong> joined
 		[#break/]
+		[#case enums["org.seamoo.entities.matching.MatchEventType"].LEFT]
+		<strong>${event.member.displayName}</strong> left
+		[#break/]
 		[#case enums["org.seamoo.entities.matching.MatchEventType"].FINISHED]
 		<strong>${event.member.displayName}</strong> left
 		[#break/]

@@ -18,7 +18,7 @@
 		[#include "skeleton-header.ftl"/]
 		<div id="content-wrapper">
 			<div id="content-header">
-			<h2><a href="#" class="question-hyperlink">${title}</a></h2>
+			<h2><a href="#" class="question-hyperlink" onclick="window.location.reload(); return false;">${title}</a></h2>
 			</div>
 			[@tiles.importAttribute/]
 			[@tiles.insertAttribute	name="content"]
