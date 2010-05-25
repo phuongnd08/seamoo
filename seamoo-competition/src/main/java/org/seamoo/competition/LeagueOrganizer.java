@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.seamoo.cache.CacheWrapperFactory;
+import org.seamoo.cache.RemoteObjectFactory;
 import org.seamoo.competition.MatchOrganizer.EventListener;
 import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.LeagueMembershipDao;
@@ -35,7 +35,7 @@ public class LeagueOrganizer {
 	@Autowired
 	LeagueMembershipDao leagueMembershipDao;
 	@Autowired
-	CacheWrapperFactory cacheWrapperFactory;
+	RemoteObjectFactory cacheWrapperFactory;
 
 	TimeProvider timeProvider = TimeProvider.DEFAULT;
 
@@ -87,11 +87,11 @@ public class LeagueOrganizer {
 	public void updateLeagueMembershipScore(Match rankedMatch) {
 		for (MatchCompetitor competitor : rankedMatch.getCompetitors()) {
 			if (competitor.getTotalScore() > settings.getMinMatchScoreForAccumulation()) {
-				LeagueMembership lms = leagueMembershipDao.findByMemberAndLeagueAtCurrentMoment(
-						competitor.getMember().getAutoId(), rankedMatch.getLeagueAutoId());
+				LeagueMembership lms = leagueMembershipDao.findByMemberAndLeagueAtCurrentMoment(competitor.getMemberAutoId(),
+						rankedMatch.getLeagueAutoId());
 				if (lms == null) {
 					lms = new LeagueMembership();
-					lms.setMemberAutoId(competitor.getMember().getAutoId());
+					lms.setMemberAutoId(competitor.getMemberAutoId());
 					lms.setLeagueAutoId(rankedMatch.getLeagueAutoId());
 					lms.setYear(timeProvider.getCurrentYear());
 					lms.setMonth(timeProvider.getCurrentMonth());

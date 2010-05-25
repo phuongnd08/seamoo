@@ -41,22 +41,16 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 		super.tearDown();
 	}
 
-	
-	
-	private MatchCompetitor competitorFromMemberAutoId(Long autoId){
-		Member m = new Member();
-		m.setAutoId(autoId);
+	private MatchCompetitor competitorFromMemberAutoId(Long autoId) {
 		MatchCompetitor mc = new MatchCompetitor();
-		mc.setMember(m);
+		mc.setMemberAutoId(autoId);
 		return mc;
 	}
-	
-	
+
 	@Test
-	public void persistMatchWithQuestionAndEventAndCompetitorsAndAnswersShouldBeOK() {
+	public void persistMatchWithQuestionIdsAndCompetitorsAndAnswersShouldBeOK() {
 		Match m = new Match();
-		m.setQuestions(Lists.newArrayList(new Question[] { new Question() }));
-		m.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, new Date(), new Member(), 1));
+		m.setQuestionIds(Lists.newArrayList(new Long[] { 1L }));
 		MatchCompetitor competitor = competitorFromMemberAutoId(1L);
 		competitor.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, "1"));
 		competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, "1"));
@@ -67,8 +61,7 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 	@Test
 	public void matchCompetitorsAndAnswersShouldBePersisted() {
 		Match m = new Match();
-		m.setQuestions(Lists.newArrayList(new Question[] { new Question() }));
-		m.addEvent(new MatchEvent(MatchEventType.ANSWER_QUESTION, new Date(), new Member(), 1));
+		m.setQuestionIds(Lists.newArrayList(new Long[] { 1L }));
 		MatchCompetitor competitor = competitorFromMemberAutoId(1L);
 		competitor.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, "1"));
 		competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, "1"));
@@ -118,42 +111,42 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 	}
 
 	@Test
-	public void countByMemberShouldRetunrNumberOfMatchesContainsMember(){
+	public void countByMemberShouldRetunrNumberOfMatchesContainsMember() {
 		Match[] ms = new Match[] { new Match(), new Match(), new Match(), new Match() };
 		MatchCompetitor c1 = competitorFromMemberAutoId(1L);
 		MatchCompetitor c2 = competitorFromMemberAutoId(2L);
 		ms[0].addCompetitor(c1);
 		ms[0].addCompetitor(c2);
-		
+
 		ms[1].addCompetitor(c1);
-		
+
 		ms[2].addCompetitor(c2);
 
 		daoImpl.persist(ms);
 		assertEquals(daoImpl.countByMember(1L), 2);
 		assertEquals(daoImpl.countByMember(2L), 2);
 	}
-	
+
 	@Test
-	public void getByMemberShouldReturnMatchesContainsMember(){
+	public void getByMemberShouldReturnMatchesContainsMember() {
 		Match[] ms = new Match[] { new Match(), new Match(), new Match(), new Match() };
 		MatchCompetitor c1 = competitorFromMemberAutoId(1L);
 		MatchCompetitor c2 = competitorFromMemberAutoId(2L);
 		ms[0].addCompetitor(c1);
 		ms[0].setEndedMoment(0);
 		ms[0].addCompetitor(c2);
-		
+
 		ms[1].addCompetitor(c1);
 		ms[1].setEndedMoment(10);
-		
+
 		ms[2].addCompetitor(c2);
 		ms[2].setEndedMoment(20);
-		
+
 		ms[3].addCompetitor(c1);
 		ms[3].setEndedMoment(30);
 
 		daoImpl.persist(ms);
-		
+
 		List<Match> reloaded = daoImpl.getRecentMatchesBymember(1L, 0, 2);
 		assertEquals(reloaded.size(), 2);
 		assertEquals(reloaded.get(0).getAutoId(), ms[3].getAutoId());

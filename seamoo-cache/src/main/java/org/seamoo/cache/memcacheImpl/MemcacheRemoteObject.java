@@ -2,18 +2,18 @@ package org.seamoo.cache.memcacheImpl;
 
 import java.util.concurrent.TimeoutException;
 
-import org.seamoo.cache.CacheWrapper;
+import org.seamoo.cache.RemoteObject;
 
 import com.google.appengine.api.memcache.MemcacheService;
 
-public class MemcacheWrapperImpl<T> implements CacheWrapper<T> {
+public class MemcacheRemoteObject<T> implements RemoteObject<T> {
 
-	private String key;
-	private String keyLock;
-	MemcacheService cacheService;
+	protected String key;
+	protected String keyLock;
+	protected MemcacheService cacheService;
 	private boolean locked;
 
-	public MemcacheWrapperImpl(String key, MemcacheService cacheService) {
+	public MemcacheRemoteObject(String key, MemcacheService cacheService) {
 		this.key = key;
 		this.keyLock = key + "@lock";
 		this.cacheService = cacheService;
@@ -25,7 +25,8 @@ public class MemcacheWrapperImpl<T> implements CacheWrapper<T> {
 		return (T) cacheService.get(key);
 	}
 
-	public void lock(long timeout) throws TimeoutException {
+	@Override
+	public boolean tryLock(long timeout) {
 		long v = cacheService.increment(this.keyLock, 1L, 0L);
 		long sleepTime = 0;
 		while (v != 1 && sleepTime < timeout) {
@@ -40,9 +41,15 @@ public class MemcacheWrapperImpl<T> implements CacheWrapper<T> {
 		}
 		if (v != 1) {
 			cacheService.increment(this.keyLock, -1L);
-			throw new TimeoutException();
+			return false;
 		}
 		this.locked = true;
+		return true;
+	}
+
+	public void lock(long timeout) throws TimeoutException {
+		if (!tryLock(timeout))
+			throw new TimeoutException();
 	}
 
 	public void putObject(T object) {
@@ -67,4 +74,14 @@ public class MemcacheWrapperImpl<T> implements CacheWrapper<T> {
 		cacheService.put(keyLock, 0);
 	}
 
+	@Override
+	public boolean isLocked() {
+		Long value = (Long) cacheService.get(this.keyLock);
+		if (value == null)
+			return false;
+		return value > 0;
+		//we may use value==1 here, however, there will be situation when the isLocked executed in the middle
+		//of a tryLock, in which the operation try to acquire a lock over a locked object, thus, the value may > 1.
+		//In this situation, certainly the object remains locked
+	}
 }

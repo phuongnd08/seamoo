@@ -17,7 +17,7 @@ import com.google.common.collect.Lists;
 import com.vercer.engine.persist.ObjectDatastore;
 import com.vercer.engine.persist.FindCommand.RootFindCommand;
 
-public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TKey> {
+public class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TKey> {
 
 	protected static interface FieldGetter<T extends Object> {
 		public Object getField(T object, String field);
@@ -200,5 +200,13 @@ public abstract class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TE
 			fetched++;
 		}
 		return results;
+	}
+
+	@Override
+	public List<TEntity> findAllByKeys(List<TKey> keys) {
+		List<TEntity> result = new ArrayList<TEntity>();
+		for (TKey key : keys)
+			result.add(findByKey(key));
+		return result;
 	}
 }

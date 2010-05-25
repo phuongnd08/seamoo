@@ -88,7 +88,8 @@ public class LeagueController {
 		Map<String, Member> memberMap = new HashMap<String, Member>();
 		for (Match match : matches) {
 			for (MatchCompetitor competitor : match.getCompetitors())
-				memberMap.put(competitor.getMember().getAutoId().toString(), competitor.getMember());
+				if (!memberMap.containsKey(competitor.getMemberAutoId()))
+					memberMap.put(competitor.getMemberAutoId().toString(), memberDao.findByKey(competitor.getMemberAutoId()));
 		}
 		for (LeagueMembership rank : ranks) {
 			if (!memberMap.containsKey(rank.getMemberAutoId().toString())) {

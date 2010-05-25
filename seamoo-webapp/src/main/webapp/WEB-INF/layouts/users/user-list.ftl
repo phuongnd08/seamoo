@@ -41,5 +41,5 @@
 [@userInfo "Ken"/]
 [@userInfo "Jeff"/]
 <div class="cbt"></div>
-[@common.pagingControl "1,2,3,4,5"?split(",")/]
+[@common.pagingControl min=1 max=5 current=1/]
 <div class="cbt"/>

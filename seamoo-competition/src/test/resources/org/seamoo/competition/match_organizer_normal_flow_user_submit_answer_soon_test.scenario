@@ -1,5 +1,4 @@
-Given There is no active match
-And A list of 10 users
+Given A list of 10 users
 And A Match Dao
 And 20 questions that have correct choices on #1 
 And A Question Dao
@@ -11,9 +10,7 @@ Given Current Time is 10:00:01
 When 2nd user request for Match
 Then Returned Match is 1st match 
 Then Returned Match Phase is FORMED
-Given 1st user last signal is 10:00:10
-And 2nd user last signal is 10:00:10
-And Current Time is 10:00:11
+Given Current Time is 10:00:11
 When 1st user request for Match
 Then Returned Match is 1st match
 Then Returned Match Phase is PLAYING

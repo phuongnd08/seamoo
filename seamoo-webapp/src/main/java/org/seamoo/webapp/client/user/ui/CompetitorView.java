@@ -43,8 +43,7 @@ public class CompetitorView extends Composite {
 
 	public static final int AVATAR_SIZE = 32;
 
-	public void setCompetitor(MatchCompetitor competitor) {
-		Member m = competitor.getMember();
+	public void setCompetitor(MatchCompetitor competitor, Member m) {
 		String avatarUrl = GwtUrlFactory.getAvatarUrl(m.getEmailHash(), AVATAR_SIZE);
 		imageAvatar.setUrl(avatarUrl);
 		anchorDisplayName.setText(m.getDisplayName());

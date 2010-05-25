@@ -142,7 +142,7 @@ public class MatchView extends Composite implements Display {
 			refreshCompetitorQuestionCount();
 		}
 		for (int j = 0; j < competitors.size(); j++) {
-			competitorViews.get(j).setCompetitor(competitors.get(j));
+			competitorViews.get(j).setCompetitor(competitors.get(j), null);
 		}
 	}
 

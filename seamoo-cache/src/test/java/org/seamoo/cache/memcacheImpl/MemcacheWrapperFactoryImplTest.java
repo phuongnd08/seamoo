@@ -13,8 +13,8 @@ import java.util.concurrent.TimeoutException;
 
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.seamoo.cache.CacheWrapper;
-import org.seamoo.cache.CacheWrapperFactory;
+import org.seamoo.cache.RemoteObject;
+import org.seamoo.cache.RemoteObjectFactory;
 import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -28,14 +28,14 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
  */
 public class MemcacheWrapperFactoryImplTest extends LocalAppEngineTest {
 
-	CacheWrapperFactory factory;
+	RemoteObjectFactory factory;
 
 	@Override
 	@BeforeMethod
 	public void setUp() {
 		// TODO Auto-generated method stub
 		super.setUp();
-		factory = new MemcacheWrapperFactoryImpl();
+		factory = new MemcacheRemoteObjectFactoryImpl();
 	}
 
 	@Override
@@ -47,8 +47,8 @@ public class MemcacheWrapperFactoryImplTest extends LocalAppEngineTest {
 
 	@Test
 	public void getAterPutShouldProduceConsistentObject() {
-		CacheWrapperFactory factory = new MemcacheWrapperFactoryImpl();
-		CacheWrapper<List> cachedList = factory.createCacheWrapper(List.class, "xxx");
+		RemoteObjectFactory factory = new MemcacheRemoteObjectFactoryImpl();
+		RemoteObject<List> cachedList = factory.createRemoteObject(List.class, "xxx");
 		assertNull(cachedList.getObject());
 		List<Long> list = new ArrayList<Long>();
 		list.add(1L);
@@ -61,25 +61,25 @@ public class MemcacheWrapperFactoryImplTest extends LocalAppEngineTest {
 
 	@Test
 	public void firstLockShouldBeFine() throws TimeoutException {
-		CacheWrapperFactory factory = new MemcacheWrapperFactoryImpl();
-		CacheWrapper<Object> wrapper1 = factory.createCacheWrapper(Object.class, "wow");
+		RemoteObjectFactory factory = new MemcacheRemoteObjectFactoryImpl();
+		RemoteObject<Object> wrapper1 = factory.createRemoteObject(Object.class, "wow");
 		wrapper1.lock(1000L);
 	}
 
 	@Test(expectedExceptions = TimeoutException.class)
 	public void lockAfterLockShouldBeTimeout() throws TimeoutException {
-		CacheWrapperFactory factory = new MemcacheWrapperFactoryImpl();
-		CacheWrapper<Object> wrapper1 = factory.createCacheWrapper(Object.class, "wow");
-		CacheWrapper<Object> wrapper2 = factory.createCacheWrapper(Object.class, "wow");
+		RemoteObjectFactory factory = new MemcacheRemoteObjectFactoryImpl();
+		RemoteObject<Object> wrapper1 = factory.createRemoteObject(Object.class, "wow");
+		RemoteObject<Object> wrapper2 = factory.createRemoteObject(Object.class, "wow");
 		wrapper1.lock(1000L);
 		wrapper2.lock(300L);
 	}
 
 	@Test
 	public void lockAfterUnlockShouldBeFine() throws TimeoutException {
-		CacheWrapperFactory factory = new MemcacheWrapperFactoryImpl();
-		CacheWrapper<Object> wrapper1 = factory.createCacheWrapper(Object.class, "wow");
-		CacheWrapper<Object> wrapper2 = factory.createCacheWrapper(Object.class, "wow");
+		RemoteObjectFactory factory = new MemcacheRemoteObjectFactoryImpl();
+		RemoteObject<Object> wrapper1 = factory.createRemoteObject(Object.class, "wow");
+		RemoteObject<Object> wrapper2 = factory.createRemoteObject(Object.class, "wow");
 		wrapper1.lock(1000L);
 		wrapper1.unlock();
 		wrapper2.lock(300L);
@@ -87,8 +87,8 @@ public class MemcacheWrapperFactoryImplTest extends LocalAppEngineTest {
 
 	@Test(expectedExceptions = { IllegalStateException.class })
 	public void unlockTwiceShouldThrowInvalidOperationException() throws TimeoutException {
-		CacheWrapperFactory factory = new MemcacheWrapperFactoryImpl();
-		CacheWrapper<Object> wrapper1 = factory.createCacheWrapper(Object.class, "wow");
+		RemoteObjectFactory factory = new MemcacheRemoteObjectFactoryImpl();
+		RemoteObject<Object> wrapper1 = factory.createRemoteObject(Object.class, "wow");
 		wrapper1.lock(1000L);
 		wrapper1.unlock();
 		wrapper1.unlock();
@@ -96,8 +96,8 @@ public class MemcacheWrapperFactoryImplTest extends LocalAppEngineTest {
 
 	@Test(expectedExceptions = { IllegalStateException.class })
 	public void unlockWithoutLockShouldThrowInvalidOperationException() throws TimeoutException {
-		CacheWrapperFactory factory = new MemcacheWrapperFactoryImpl();
-		CacheWrapper<Object> wrapper1 = factory.createCacheWrapper(Object.class, "wow");
+		RemoteObjectFactory factory = new MemcacheRemoteObjectFactoryImpl();
+		RemoteObject<Object> wrapper1 = factory.createRemoteObject(Object.class, "wow");
 		wrapper1.unlock();
 	}
 
@@ -111,12 +111,12 @@ public class MemcacheWrapperFactoryImplTest extends LocalAppEngineTest {
 
 	@Test
 	public void differentKindsWithSameKeyShouldReturnDifferentValues() {
-		CacheWrapperFactory factory = new MemcacheWrapperFactoryImpl();
-		CacheWrapper<T1> wrapper1 = factory.createCacheWrapper(T1.class, "wow");
+		RemoteObjectFactory factory = new MemcacheRemoteObjectFactoryImpl();
+		RemoteObject<T1> wrapper1 = factory.createRemoteObject(T1.class, "wow");
 		T1 t1 = new T1();
 		t1.t1Field = "Hello";
 		wrapper1.putObject(t1);
-		CacheWrapper<T2> wrapper2 = factory.createCacheWrapper(T2.class, "wow");
+		RemoteObject<T2> wrapper2 = factory.createRemoteObject(T2.class, "wow");
 		T2 t2 = new T2();
 		t2.t2Field = "Bonjure";
 		wrapper2.putObject(t2);
@@ -126,9 +126,9 @@ public class MemcacheWrapperFactoryImplTest extends LocalAppEngineTest {
 
 	@Test
 	public void failedUnlockShouldNotContaminateCache() throws TimeoutException {
-		CacheWrapperFactory factory = new MemcacheWrapperFactoryImpl();
-		CacheWrapper<T1> wrapper1 = factory.createCacheWrapper(T1.class, "wow");
-		CacheWrapper<T1> wrapper2 = factory.createCacheWrapper(T1.class, "wow");
+		RemoteObjectFactory factory = new MemcacheRemoteObjectFactoryImpl();
+		RemoteObject<T1> wrapper1 = factory.createRemoteObject(T1.class, "wow");
+		RemoteObject<T1> wrapper2 = factory.createRemoteObject(T1.class, "wow");
 		wrapper1.lock(1000L);
 		try {
 			wrapper2.lock(100L);

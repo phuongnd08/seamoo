@@ -15,8 +15,10 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.seamoo.cache.CacheWrapper;
-import org.seamoo.cache.CacheWrapperFactory;
+import org.seamoo.cache.RemoteCompositeObject;
+import org.seamoo.cache.RemoteCounter;
+import org.seamoo.cache.RemoteObject;
+import org.seamoo.cache.RemoteObjectFactory;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
@@ -39,7 +41,7 @@ public class MatchOrganizerConcurrencyTest {
 
 	private static long MAX_TEST_TIME = 200000;
 
-	public static class LockTimeControllableCacheWrapper<T> implements CacheWrapper<T> {
+	public static class LockTimeControllableCacheWrapper<T> implements RemoteObject<T> {
 
 		private boolean locked;
 		private String key;
@@ -80,23 +82,26 @@ public class MatchOrganizerConcurrencyTest {
 		}
 
 		@Override
-		public void lock(long timeout) throws TimeoutException {
-			// TODO Auto-generated method stub
-			long sleep = 0;
+		public boolean tryLock(long timeout) {
 			try {
-				if (!lockMap.get(this.key).tryLock(timeout, TimeUnit.MILLISECONDS))
-					throw new TimeoutException();
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				throw new RuntimeException(e1);
-			}
-			try {
-				System.out.println("lock(" + key + "): sleep=" + lockTime);
-				Thread.sleep(lockTime);
+				boolean canLock = lockMap.get(this.key).tryLock(timeout, TimeUnit.MILLISECONDS);
+				if (canLock) {
+					Thread.sleep(lockTime);
+					return true;
+				} else
+					return false;
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			}
+		}
+
+		@Override
+		public void lock(long timeout) throws TimeoutException {
+			if (!tryLock(timeout))
+				throw new TimeoutException();
+			System.out.println("lock(" + key + "): sleep=" + lockTime);
 		}
 
 		@Override
@@ -122,12 +127,18 @@ public class MatchOrganizerConcurrencyTest {
 		@Override
 		public void resetLock() {
 			// TODO Auto-generated method stub
-			
+
+		}
+
+		@Override
+		public boolean isLocked() {
+			// TODO Auto-generated method stub
+			return false;
 		}
 
 	}
 
-	public static class LockTimeControllableCacheWrapperFactory implements CacheWrapperFactory {
+	public static class LockTimeControllableCacheWrapperFactory implements RemoteObjectFactory {
 		Map<String, Object> map;
 		Map<String, Lock> lockMap;
 		long lockTime = 100;
@@ -140,7 +151,7 @@ public class MatchOrganizerConcurrencyTest {
 		}
 
 		@Override
-		public synchronized <T> CacheWrapper<T> createCacheWrapper(Class<T> clazz, String key) {
+		public synchronized <T> RemoteObject<T> createRemoteObject(Class<T> clazz, String key) {
 			// TODO Auto-generated method stub
 			String realKey = clazz.getName() + "@" + key;
 			if (!this.lockMap.containsKey(realKey))
@@ -148,6 +159,17 @@ public class MatchOrganizerConcurrencyTest {
 			return new LockTimeControllableCacheWrapper<T>(realKey, map, lockMap, this);
 		}
 
+		@Override
+		public RemoteCounter createRemoteCounter(String category, String key, long $default) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public RemoteCompositeObject createRemoteCompositeObject(String category, String key) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 
 	interface DoAfterMatchFormed {
@@ -169,15 +191,10 @@ public class MatchOrganizerConcurrencyTest {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					try {
-						m = organizer.getMatchForUser(memberId);
-					} catch (TimeoutException e) {
-						// TODO Auto-generated catch block
-						throw new RuntimeException(e);
-					}
+					m = organizer.getMatchForUser(memberId);
 				} while (m.getPhase() != MatchPhase.PLAYING);
 				// Submit answer
-				System.out.println("Typical job done. Received " + m.getQuestions().size() + " questions for User#" + memberId);
+				System.out.println("Typical job done. Received " + m.getQuestionIds().size() + " questions for User#" + memberId);
 				doAfter.perform(organizer, memberId);
 			}
 		});
@@ -293,12 +310,7 @@ public class MatchOrganizerConcurrencyTest {
 				cacheFactory.lockTime = 102;
 				cacheFactory.getTime = 2;
 				cacheFactory.putTime = 202;
-				try {
-					m = organizer.getMatchForUser(memberId);
-				} catch (TimeoutException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				m = organizer.getMatchForUser(memberId);
 			}
 		});
 		thread1.start();

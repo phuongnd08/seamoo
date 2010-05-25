@@ -1,6 +1,4 @@
-!-- There is no match yet
-Given There is no active match
-And A list of 10 users
+Given A list of 10 users
 And A Match Dao
 And 20 questions that have correct choices on #1 
 And A Question Dao

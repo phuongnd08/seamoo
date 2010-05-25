@@ -121,9 +121,6 @@ public class MatchViewSteps {
 		List<MatchCompetitor> competitors = new ArrayList<MatchCompetitor>();
 		for (String player : players) {
 			MatchCompetitor competitor = new MatchCompetitor();
-			Member member = new Member();
-			member.setDisplayName(player);
-			competitor.setMember(member);
 			competitors.add(competitor);
 		}
 		matchView.setCompetitors(competitors);

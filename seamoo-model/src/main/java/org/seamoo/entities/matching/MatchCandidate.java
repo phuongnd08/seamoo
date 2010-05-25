@@ -8,30 +8,24 @@ public class MatchCandidate implements Serializable {
 	 */
 	private static final long serialVersionUID = -6934095741107742969L;
 	private Long memberAutoId;
-	private long lastSeenMoment;
-	private String currentMatchUUID;
-
+	private Long remoteMatchKey;
+	private int remoteCompetitorSlot;
 	public void setMemberAutoId(Long memberAutoId) {
 		this.memberAutoId = memberAutoId;
 	}
-
 	public Long getMemberAutoId() {
 		return memberAutoId;
 	}
-
-	public void setCurrentMatchUUID(String currentMatchUUID) {
-		this.currentMatchUUID = currentMatchUUID;
+	public void setRemoteMatchKey(Long remoteMatchKey) {
+		this.remoteMatchKey = remoteMatchKey;
 	}
-
-	public String getCurrentMatchUUID() {
-		return currentMatchUUID;
+	public Long getRemoteMatchKey() {
+		return remoteMatchKey;
 	}
-
-	public void setLastSeenMoment(long lastSeenMoment) {
-		this.lastSeenMoment = lastSeenMoment;
+	public void setRemoteCompetitorSlot(int remoteCompetitorSlot) {
+		this.remoteCompetitorSlot = remoteCompetitorSlot;
 	}
-
-	public long getLastSeenMoment() {
-		return lastSeenMoment;
+	public int getRemoteCompetitorSlot() {
+		return remoteCompetitorSlot;
 	}
 }

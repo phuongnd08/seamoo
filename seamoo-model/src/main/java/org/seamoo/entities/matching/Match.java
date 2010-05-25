@@ -6,9 +6,9 @@ import java.util.List;
 
 import javax.persistence.Id;
 
-import org.seamoo.entities.Member;
 import org.seamoo.entities.question.Question;
 
+import com.vercer.engine.persist.annotation.Embed;
 import com.vercer.engine.persist.annotation.Key;
 import com.vercer.engine.persist.annotation.Store;
 
@@ -28,20 +28,18 @@ public class Match implements Serializable {
 
 	private long endedMoment;
 
-	private List<Question> questions;
+	private List<Long> questionIds;
 
+	@Embed
 	private List<MatchCompetitor> competitors;
-	
-	private List<Long> memberAutoIds;
 
-	private List<MatchEvent> events;
+	private List<Long> memberAutoIds;
 
 	private MatchPhase phase;
 
 	private Long leagueAutoId;
 
-	@Store(false)
-	private String temporalUUID;
+	private String alias;
 
 	@Store(false)
 	private String description;
@@ -49,7 +47,6 @@ public class Match implements Serializable {
 	public Match() {
 		competitors = new ArrayList<MatchCompetitor>();
 		memberAutoIds = new ArrayList<Long>();
-		events = new ArrayList<MatchEvent>();
 	}
 
 	public void setAutoId(Long autoId) {
@@ -58,14 +55,6 @@ public class Match implements Serializable {
 
 	public Long getAutoId() {
 		return autoId;
-	}
-
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}
-
-	public List<Question> getQuestions() {
-		return questions;
 	}
 
 	public void setPhase(MatchPhase phase) {
@@ -102,12 +91,12 @@ public class Match implements Serializable {
 
 	public void addCompetitor(MatchCompetitor competitor) {
 		this.competitors.add(competitor);
-		this.memberAutoIds.add(competitor.getMember().getAutoId());
+		memberAutoIds.add(competitor.getMemberAutoId());
 	}
 
 	public void removeCompetitor(MatchCompetitor competitor) {
+		memberAutoIds.remove(competitor.getMemberAutoId());
 		this.competitors.remove(competitor);
-		this.memberAutoIds.remove(competitor.getMember().getAutoId());
 	}
 
 	public List<MatchCompetitor> getCompetitors() {
@@ -116,37 +105,9 @@ public class Match implements Serializable {
 
 	public MatchCompetitor getCompetitorForMember(Long memberAutoId) {
 		for (MatchCompetitor competitor : competitors)
-			if (competitor.getMember().getAutoId().equals(memberAutoId))
+			if (competitor.getMemberAutoId().equals(memberAutoId))
 				return competitor;
 		return null;
-	}
-
-	public void addEvent(MatchEvent event) {
-		this.events.add(event);
-	}
-
-	public List<MatchEvent> getEvents() {
-		return events;
-	}
-
-	public String getAlias() {
-		String alias = "";
-		for (int i = 0; i < competitors.size(); i++) {
-			alias += competitors.get(i).getAlias();
-			if (i < competitors.size() - 1)
-				alias += "-";
-		}
-		if (alias.length() > 50)
-			alias = alias.substring(0, 50);
-		return alias;
-	}
-
-	public void setTemporalUUID(String temporalUUID) {
-		this.temporalUUID = temporalUUID;
-	}
-
-	public String getTemporalUUID() {
-		return temporalUUID;
 	}
 
 	public void setDescription(String description) {
@@ -167,5 +128,21 @@ public class Match implements Serializable {
 
 	public List<Long> getMemberAutoIds() {
 		return memberAutoIds;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setQuestionIds(List<Long> questionIds) {
+		this.questionIds = questionIds;
+	}
+
+	public List<Long> getQuestionIds() {
+		return questionIds;
 	}
 }

@@ -86,10 +86,8 @@ public class LeagueOrganizerTest {
 	}
 
 	private MatchCompetitor getSampleCompetitor(long autoId, int rank) {
-		Member member = new Member();
-		member.setAutoId(autoId);
 		MatchCompetitor competitor = new MatchCompetitor();
-		competitor.setMember(member);
+		competitor.setMemberAutoId(autoId);
 		competitor.setRank(rank);
 		competitor.setTotalScore(20);
 		return competitor;

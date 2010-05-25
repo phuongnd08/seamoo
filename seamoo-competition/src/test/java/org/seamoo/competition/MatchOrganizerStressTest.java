@@ -15,8 +15,10 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.seamoo.cache.CacheWrapper;
-import org.seamoo.cache.CacheWrapperFactory;
+import org.seamoo.cache.RemoteCompositeObject;
+import org.seamoo.cache.RemoteCounter;
+import org.seamoo.cache.RemoteObject;
+import org.seamoo.cache.RemoteObjectFactory;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
@@ -36,9 +38,9 @@ public class MatchOrganizerStressTest {
 
 	private static long MAX_TEST_TIME = 10000;
 
-	private static int SIMULTANEOUS_USERS_COUNT = 15;
+	private static int SIMULTANEOUS_USERS_COUNT = 100;
 
-	public static class CountableCacheWrapper<T> implements CacheWrapper<T> {
+	public static class CountableCacheWrapper<T> implements RemoteObject<T> {
 
 		protected long lockCount;
 		protected long lockTryTime;
@@ -67,14 +69,19 @@ public class MatchOrganizerStressTest {
 		}
 
 		@Override
-		public void lock(long timeout) throws TimeoutException {
-			long sleep = 0;
+		public boolean tryLock(long timeout) {
 			try {
-				if (!lockMap.get(key).tryLock(timeout, TimeUnit.MILLISECONDS))
-					throw new TimeoutException();
+				return lockMap.get(key).tryLock(timeout, TimeUnit.MILLISECONDS);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+				return false;
 			}
+		}
+
+		@Override
+		public void lock(long timeout) throws TimeoutException {
+			if (!tryLock(timeout))
+				throw new TimeoutException();
 			this.locked = true;
 			this.lockCount++;
 		}
@@ -102,9 +109,15 @@ public class MatchOrganizerStressTest {
 		public void resetLock() {
 		}
 
+		@Override
+		public boolean isLocked() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
 	}
 
-	public static class CountableCacheWrapperFactory implements CacheWrapperFactory {
+	public static class CountableCacheWrapperFactory implements RemoteObjectFactory {
 
 		Map<String, Object> map;
 		Map<String, Lock> lockMap;
@@ -115,11 +128,23 @@ public class MatchOrganizerStressTest {
 		}
 
 		@Override
-		public synchronized <T> CacheWrapper<T> createCacheWrapper(Class<T> clazz, String key) {
+		public synchronized <T> RemoteObject<T> createRemoteObject(Class<T> clazz, String key) {
 			String realKey = clazz.getName() + "@" + key;
 			if (!this.lockMap.containsKey(realKey))
 				this.lockMap.put(realKey, new ReentrantLock());
 			return new CountableCacheWrapper<T>(realKey, map, lockMap);
+		}
+
+		@Override
+		public RemoteCounter createRemoteCounter(String category, String key, long $default) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public RemoteCompositeObject createRemoteCompositeObject(String category, String key) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 
@@ -137,18 +162,12 @@ public class MatchOrganizerStressTest {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					try {
-						m = organizer.getMatchForUser(memberId);
-					} catch (TimeoutException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						throw new RuntimeException(e);
-					}
+					m = organizer.getMatchForUser(memberId);
 				} while (m.getPhase() != MatchPhase.PLAYING);
 
 				// Submit answer
-				System.out.println("Received " + m.getQuestions().size() + " questions");
-				for (int i = 0; i < m.getQuestions().size(); i++) {
+				System.out.println("Received " + m.getQuestionIds().size() + " questions");
+				for (int i = 0; i < m.getQuestionIds().size(); i++) {
 					try {
 						Thread.sleep(30 * SLEEP_UNIT);
 					} catch (InterruptedException e) {
@@ -173,13 +192,7 @@ public class MatchOrganizerStressTest {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					try {
-						m = organizer.getMatchForUser(memberId);
-					} catch (TimeoutException e) {
-						// TODO Auto-generated catch block
-						System.err.println(e);
-						throw new RuntimeException(e);
-					}
+					m = organizer.getMatchForUser(memberId);
 				} while (m.getPhase() != MatchPhase.FINISHED);
 
 				incFinishedUser(memberId);
@@ -270,17 +283,5 @@ public class MatchOrganizerStressTest {
 				}
 			}
 		}
-
-		long end = TimeProvider.DEFAULT.getCurrentTimeStamp();
-
-		CountableCacheWrapper<List> fullWaitingMatches = (CountableCacheWrapper<List>) organizer.fullWaitingMatches;
-		CountableCacheWrapper<List> notFullWaitingMatches = (CountableCacheWrapper<List>) organizer.notFullWaitingMatches;
-
-		System.out.println("notFullWaitingMatches.lockCount = " + notFullWaitingMatches.lockCount);
-		System.out.println("notFullWaitingMatches.lockTryTime = " + notFullWaitingMatches.lockTryTime);
-		System.out.println("end-start = " + (end - start));
-		System.out.println("expected match time = " + (settings.getMatchCountDownTime() + settings.getMatchTime()));
-		if (notFullWaitingMatches.lockCount > 200)
-			fail("Expect <=300 lockCount on notFullWaitingMatches but got " + notFullWaitingMatches.lockCount);
 	}
 }

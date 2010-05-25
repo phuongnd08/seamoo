@@ -8,6 +8,7 @@ import java.util.List;
 import org.seamoo.entities.Member;
 
 import com.google.gwt.user.client.rpc.GwtTransient;
+import com.vercer.engine.persist.annotation.Embed;
 import com.vercer.engine.persist.annotation.Store;
 
 /**
@@ -22,10 +23,7 @@ public class MatchCompetitor implements Serializable {
 	 */
 	private static final long serialVersionUID = 1680471706907193985L;
 
-	private Member member;
-
-	@GwtTransient
-	private Date participatedTime;
+	private Long memberAutoId;
 
 	private double totalScore;
 
@@ -42,22 +40,6 @@ public class MatchCompetitor implements Serializable {
 
 	public MatchCompetitor() {
 		answers = new ArrayList<MatchAnswer>();
-	}
-
-	public void setParticipatedTime(Date participatedTime) {
-		this.participatedTime = participatedTime;
-	}
-
-	public Date getParticipatedTime() {
-		return participatedTime;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
-	public Member getMember() {
-		return member;
 	}
 
 	public void setTotalScore(double totalScore) {
@@ -102,12 +84,6 @@ public class MatchCompetitor implements Serializable {
 		return finishedMoment;
 	}
 
-	public String getAlias() {
-		if (member == null)
-			return null;
-		return member.getDisplayName();
-	}
-
 	public int getCorrectCount() {
 		int count = 0;
 		if (answers != null)
@@ -140,10 +116,7 @@ public class MatchCompetitor implements Serializable {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		if (member == null)
-			return "Competitor{null}";
-		return "Competitor{" + member.getDisplayName() + "}";
+		return "Competitor{" + memberAutoId + "}";
 	}
 
 	public void setAdditionalAccumulatedScore(double additionalAccumulatedScore) {
@@ -152,5 +125,13 @@ public class MatchCompetitor implements Serializable {
 
 	public double getAdditionalAccumulatedScore() {
 		return additionalAccumulatedScore;
+	}
+
+	public void setMemberAutoId(Long memberAutoId) {
+		this.memberAutoId = memberAutoId;
+	}
+
+	public Long getMemberAutoId() {
+		return memberAutoId;
 	}
 }

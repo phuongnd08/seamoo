@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-import org.quartz.simpl.InitThreadContextClassLoadHelper;
-import org.seamoo.cache.CacheWrapper;
-import org.seamoo.cache.CacheWrapperFactory;
+import org.seamoo.cache.RemoteCompositeObject;
+import org.seamoo.cache.RemoteCounter;
+import org.seamoo.cache.RemoteObject;
+import org.seamoo.cache.RemoteObjectFactory;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
@@ -19,11 +21,12 @@ import org.seamoo.entities.matching.MatchAnswer;
 import org.seamoo.entities.matching.MatchAnswerType;
 import org.seamoo.entities.matching.MatchCandidate;
 import org.seamoo.entities.matching.MatchCompetitor;
-import org.seamoo.entities.matching.MatchEvent;
-import org.seamoo.entities.matching.MatchEventType;
 import org.seamoo.entities.matching.MatchPhase;
+import org.seamoo.entities.question.Question;
 import org.seamoo.utils.TimeProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.google.appengine.repackaged.com.google.common.collect.Lists;
 
 public class MatchOrganizer {
 
@@ -38,32 +41,41 @@ public class MatchOrganizer {
 	@Autowired
 	QuestionDao questionDao;
 	@Autowired
-	CacheWrapperFactory cacheWrapperFactory;
+	RemoteObjectFactory cacheWrapperFactory;
 	@Autowired
 	TimeProvider timeProvider = TimeProvider.DEFAULT;
 
 	private List<EventListener> listeners;
+	private RemoteCounter globalCompetitorSlotCounter;
 
 	MatchOrganizerSettings settings;
+
 	/**
 	 * Candidates for match
 	 */
-	/**
-	 * List of matches that is either NOT_FORMED or FORMED but with number of competitors < MAX_CANDIDATE_PER_MATCH, mean that
-	 * there's chances that a user can join the match
-	 */
-	protected CacheWrapper<List> notFullWaitingMatches;
-	/**
-	 * List of matches that is FORMED and number of competitors >=MAX_CANDIDATE_PER_MATCH
-	 */
-	protected CacheWrapper<List> fullWaitingMatches;
+	public static final String REMOTE_MAP_KEY_PREFIX = "RemoteMap";
+	Map<Long, RemoteMatch> remoteMatchMap;
 
-	private CacheWrapper<Match> getMatchWrapperByUUID(String uuid) {
-		return cacheWrapperFactory.createCacheWrapper(Match.class, uuid);
+	private RemoteMatch getRemoteMatch(long key) {
+		synchronized (remoteMatchMap) {
+			RemoteMatch m = remoteMatchMap.get(key);
+			if (m == null) {
+				RemoteCompositeObject rco = cacheWrapperFactory.createRemoteCompositeObject(REMOTE_MAP_KEY_PREFIX,
+						String.valueOf(key));
+				m = new RemoteMatch(rco);
+				m.setKey(key);
+				remoteMatchMap.put(key, m);
+			}
+			return m;
+		}
 	}
 
-	private CacheWrapper<MatchCandidate> getCandidateWrapperByAutoId(Long autoId) {
-		return cacheWrapperFactory.createCacheWrapper(MatchCandidate.class, autoId.toString());
+	private RemoteObject<MatchCandidate> getCandidateRemoteObject(Long memberAutoId) {
+		return cacheWrapperFactory.createRemoteObject(MatchCandidate.class, memberAutoId.toString());
+	}
+
+	private long nextGlobalCompetitorSlot() {
+		return globalCompetitorSlotCounter.inc();
 	}
 
 	boolean initialized;
@@ -80,189 +92,57 @@ public class MatchOrganizer {
 		this.listeners = new ArrayList<EventListener>();
 	}
 
-	public static final String NOT_FULL_WAITING_MATCHES_KEY = "not-full-waiting-matches";
-	public static final String FULL_WAITING_MATCHES_KEY = "full-waiting-matches";
+	public static final String MATCH_ORGANIZER_COUNTER_CATEGORY = "match-organizer-counter";
+	public static final String COMPETITOR_SLOT_COUNTER_KEY = "competitor-slot";
+	public static final long COMPETITOR_SLOT_COUNTER_INITIAL = 0;
 
 	protected synchronized void initialize() {
 		if (initialized)
 			return;
-		notFullWaitingMatches = cacheWrapperFactory.createCacheWrapper(List.class, NOT_FULL_WAITING_MATCHES_KEY + "@" + leagueId);
-		fullWaitingMatches = cacheWrapperFactory.createCacheWrapper(List.class, FULL_WAITING_MATCHES_KEY + "@" + leagueId);
+		globalCompetitorSlotCounter = cacheWrapperFactory.createRemoteCounter(MATCH_ORGANIZER_COUNTER_CATEGORY,
+				COMPETITOR_SLOT_COUNTER_KEY, COMPETITOR_SLOT_COUNTER_INITIAL);
+		remoteMatchMap = new HashMap<Long, RemoteMatch>();
 		initialized = true;
 	}
 
-	private boolean shouldStarted(Match match) {
-		return match.getPhase() == MatchPhase.FORMED && match.getStartedMoment() < timeProvider.getCurrentTimeStamp();
+	private boolean isStarted(RemoteMatch match) {
+		return match.getReadyMoment() + settings.getMatchCountDownTime() <= timeProvider.getCurrentTimeStamp();
 	}
 
-	private boolean canJoin(Match match) {
-		return match.getCompetitors().size() < settings.getMaxCandidatePerMatch();
+	private boolean isFinishedMatch(RemoteMatch match) {
+		return match.getFinishedMoment() != 0
+				|| match.getReadyMoment() + settings.getMatchCountDownTime() + settings.getMatchTime() <= timeProvider.getCurrentTimeStamp();
 	}
 
-	/**
-	 * Get rid of disconnected candidate
-	 * 
-	 * @param match
-	 */
-	private boolean isMatchFull(Match match) {
-		return match.getCompetitors().size() == settings.getMaxCandidatePerMatch();
-	}
-
-	protected static interface DoWhileListsLockedRunner {
-		/**
-		 * Perform a neccessary action while two waiting lists are locked.
-		 * 
-		 * @param fullList
-		 * @param notFullList
-		 * @return true if either list is modified. false if neither is modified
-		 */
-		boolean perform(List fullList, List notFullList);
-	}
-
-	protected synchronized void doWhileListsLocked(DoWhileListsLockedRunner runner) throws TimeoutException {
-		fullWaitingMatches.lock(settings.getMaxLockWaitTime());
-		notFullWaitingMatches.lock(settings.getMaxLockWaitTime());
-		try {
-			List fullList = fullWaitingMatches.getObject();
-			if (fullList == null)
-				fullList = new ArrayList();
-			List notFullList = notFullWaitingMatches.getObject();
-			if (notFullList == null)
-				notFullList = new ArrayList();
-			if (runner.perform(fullList, notFullList)) {
-				fullWaitingMatches.putObject(fullList);
-				notFullWaitingMatches.putObject(notFullList);
-			}
-		} finally {
-			// always guarantee that lock will be released
-			notFullWaitingMatches.unlock();
-			fullWaitingMatches.unlock();
-		}
-	}
-
-	private void recheckCompetitors(final Match match, List fullList, List notFullList) {
-		boolean isMatchFullBeforeCheck = isMatchFull(match);
-		for (int i = match.getCompetitors().size() - 1; i >= 0; i--) {
-			MatchCompetitor competitor = match.getCompetitors().get(i);
-			MatchCandidate candidate = getMatchCandidate(competitor.getMember().getAutoId());
-			if (competitor.getFinishedMoment() == 0 && isDisconnected(candidate)) {
-				System.err.println("Discard disconnected user " + candidate.getMemberAutoId());
-				match.addEvent(new MatchEvent(MatchEventType.LEFT, new Date(), competitor.getMember()));
-				match.getCompetitors().remove(i);
-			}
-		}
-		if (isMatchFullBeforeCheck && !isMatchFull(match)) {
-			// TODO Auto-generated method stub
-			fullList.remove(match.getTemporalUUID());
-			notFullList.add(match.getTemporalUUID());
-		}
-	}
-
-	/**
-	 * Find an available match (match that doesn't have enough member) or create a new match if necessary and assign member to the
-	 * new created match
-	 * 
-	 * @param candidate
-	 * @param notFullList
-	 * @param fullList
-	 * @return
-	 * @throws TimeoutException
-	 */
-	private Match findAndAssignAvailableMatch(final MatchCandidate candidate, List fullList, List notFullList) {
-		CacheWrapper<Match> matchWrapper = null;
-		Match match = null;
-		while (notFullList.size() > 0) {
-			matchWrapper = getMatchWrapperByUUID((String) notFullList.get(0));
-			match = matchWrapper.getObject();
-
-			if (match == null) {
-				// Cache of the match is corrupted
-				notFullList.remove(0);
-			} else if (shouldStarted(match)) {
-				notFullList.remove(0);
-				match = null;
-			} else {
-				recheckCompetitors(match, fullList, notFullList);
-				break;
-			}
-		}
-		if (match == null) {
-			match = createNewMatch();
-			notFullList.add(match.getTemporalUUID());
-			matchWrapper = getMatchWrapperByUUID(match.getTemporalUUID());
-		}
+	private RemoteMatch assignMatch(MatchCandidate candidate) {
+		long competitorSlotId = nextGlobalCompetitorSlot();
+		long matchId = competitorSlotId % 4 == 0 ? competitorSlotId / 4 : (competitorSlotId / 4) + 1;
+		RemoteMatch match = getRemoteMatch(matchId);
+		int competitorSlot = match.acquireCompetitorSlot();
 		MatchCompetitor competitor = new MatchCompetitor();
-		competitor.setMember(memberDao.findByKey(candidate.getMemberAutoId()));
-		match.addCompetitor(competitor);
-		match.addEvent(new MatchEvent(MatchEventType.JOINED, new Date(), competitor.getMember()));
-
-		if (isMatchFull(match)) {
-			fullList.add(match.getTemporalUUID());
-			notFullList.remove(match.getTemporalUUID());
+		competitor.setMemberAutoId(candidate.getMemberAutoId());
+		RemoteObject<MatchCompetitor> remoteCompetitor = match.getCompetitorSlot(competitorSlot);
+		remoteCompetitor.putObject(competitor);
+		candidate.setRemoteCompetitorSlot(competitorSlot);
+		if (competitorSlot == 1) {
+			List<Question> questions = questionDao.getRandomQuestions(leagueId, settings.getQuestionPerMatch());
+			List<Long> questionIds = new ArrayList<Long>();
+			for (Question q : questions)
+				questionIds.add(q.getAutoId());
+			match.setQuestionIds(questionIds.toArray(new Long[settings.getQuestionPerMatch()]));
+		} else if (competitorSlot == 2) {
+			match.setReadyMoment(timeProvider.getCurrentTimeStamp());
+		} else {
+			if (isStarted(match))
+				// Match is already started, return null so that user may request for another match
+				return null;
 		}
-
 		return match;
 	}
 
-	private Match createNewMatch() {
-		Match match = EntityFactory.newMatch();
-		match.setPhase(MatchPhase.NOT_FORMED);
-		match.setQuestions(questionDao.getRandomQuestions(leagueId, settings.getQuestionPerMatch()));
-		match.setTemporalUUID(UUID.randomUUID().toString());
-		match.setLeagueAutoId(leagueId);
-		return match;
-	}
-
-	private void updateLastSeen(MatchCandidate candidate) {
-		candidate.setLastSeenMoment(timeProvider.getCurrentTimeStamp());
-	}
-
-	private void recacheCandidate(MatchCandidate candidate) {
-		CacheWrapper<MatchCandidate> candidateWrapper = getCandidateWrapperByAutoId(candidate.getMemberAutoId());
-		candidateWrapper.putObject(candidate);
-	}
-
-	private boolean isDisconnected(MatchCandidate candidate) {
-		return candidate.getLastSeenMoment() + settings.getCandidateActivePeriod() < timeProvider.getCurrentTimeStamp();
-	}
-
-	private MatchCandidate getMatchCandidate(Long userAutoId) {
-		CacheWrapper<MatchCandidate> candidateWrapper = getCandidateWrapperByAutoId(userAutoId);
-		MatchCandidate candidate = candidateWrapper.getObject();
-		if (candidate == null) {
-			candidate = new MatchCandidate();
-			candidate.setMemberAutoId(userAutoId);
-		}
-		return candidate;
-	}
-
-	private void recheckMatchPhase(Match match, List fullList, List notFullList) {
-		if (match.getPhase() == MatchPhase.NOT_FORMED && match.getCompetitors().size() >= settings.getMinCandidatePerMatch()) {
-			match.setPhase(MatchPhase.FORMED);
-			match.setFormedMoment(timeProvider.getCurrentTimeStamp());
-			match.setStartedMoment(timeProvider.getCurrentTimeStamp() + settings.getMatchCountDownTime());
-			match.setEndedMoment(match.getStartedMoment() + settings.getMatchTime());
-		} else if (match.getPhase() == MatchPhase.FORMED) {
-			if (match.getCompetitors().size() < settings.getMinCandidatePerMatch()) {
-				match.setPhase(MatchPhase.NOT_FORMED);
-			} else if (match.getStartedMoment() <= timeProvider.getCurrentTimeStamp()) {
-				startMatch(match, fullList, notFullList);
-			}
-		} else if (match.getPhase() == MatchPhase.PLAYING && match.getEndedMoment() <= timeProvider.getCurrentTimeStamp()) {
-			finishMatch(match);
-		}
-	}
-
-	private void startMatch(Match match, List fullList, List notFullList) {
-		// TODO Auto-generated method stub
-		match.setPhase(MatchPhase.PLAYING);
-		match.addEvent(new MatchEvent(MatchEventType.STARTED, new Date()));
-		if (!notFullList.remove(match.getTemporalUUID()))
-			fullList.remove(match.getTemporalUUID());
-	}
-
-	private void checkMatchFinished(Match match) {
-		for (MatchCompetitor competitor : match.getCompetitors()) {
+	private void checkMatchFinished(RemoteMatch match) {
+		for (Object o : match.getCompetitors()) {
+			MatchCompetitor competitor = (MatchCompetitor) o;
 			if (competitor.getFinishedMoment() == 0)
 				return;
 		}
@@ -274,9 +154,10 @@ public class MatchOrganizer {
 	 * 
 	 * @param match
 	 */
-	private void finishMatch(Match match) {
-		match.setPhase(MatchPhase.FINISHED);
-		match.addEvent(new MatchEvent(MatchEventType.FINISHED, new Date()));
+	private void finishMatch(RemoteMatch remoteMatch) {
+		long currentTimeStamp = timeProvider.getCurrentTimeStamp();
+		Match match = toMatch(remoteMatch);
+		match.setEndedMoment(currentTimeStamp);
 		for (MatchCompetitor competitor : match.getCompetitors()) {
 			if (competitor.getFinishedMoment() == 0)
 				competitor.setFinishedMoment(timeProvider.getCurrentTimeStamp());
@@ -286,6 +167,8 @@ public class MatchOrganizer {
 		for (EventListener listener : listeners)
 			listener.finishMatch(match);
 		matchDao.persist(match);
+		remoteMatch.setDbKey(match.getAutoId());
+		remoteMatch.setFinishedMoment(currentTimeStamp);
 	}
 
 	/**
@@ -330,78 +213,54 @@ public class MatchOrganizer {
 	 * @return
 	 * @throws TimeoutException
 	 */
-	public Match getMatchForUser(final Long userAutoId) throws TimeoutException {
+	public Match getMatchForUser(final Long userAutoId) {
 		initialize();
-		final MatchCandidate candidate = getMatchCandidate(userAutoId);
-		if (isDisconnected(candidate))
-			candidate.setCurrentMatchUUID(null);
-		updateLastSeen(candidate);
-		final Match[] matches = new Match[1];
-
-		CacheWrapper<Match> matchWrapper = null;
-		if (candidate.getCurrentMatchUUID() != null && !isDisconnected(candidate)) {
-			matchWrapper = getMatchWrapperByUUID(candidate.getCurrentMatchUUID());
-			matches[0] = matchWrapper.getObject();
+		RemoteObject<MatchCandidate> candidateWrapper = getCandidateRemoteObject(userAutoId);
+		MatchCandidate candidate = candidateWrapper.getObject();
+		if (candidate == null) {
+			candidate = new MatchCandidate();
+			candidate.setMemberAutoId(userAutoId);
 		}
 
-		if (matches[0] != null) {
-			matchWrapper.lock(settings.getMaxLockWaitTime());
-			matches[0] = matchWrapper.getObject();
-			// re-get the match after lock to ensure consistency
-			System.out.println("Match lock acquired: check phase for match of player #" + userAutoId);
-			String s = "";
-			for (int i = 0; i < matches[0].getCompetitors().size(); i++) {
-				MatchCompetitor c = matches[0].getCompetitors().get(i);
-				s += "(#" + c.getMember().getAutoId() + ":" + c.getPassedQuestionCount() + ") ";
+		RemoteMatch remoteMatch = null;
+		if (candidate.getRemoteMatchKey() != null) {
+			remoteMatch = getRemoteMatch(candidate.getRemoteMatchKey());
+		}
+		while (remoteMatch == null) {
+			remoteMatch = assignMatch(candidate);
+			if (remoteMatch != null) {
+				candidate.setRemoteMatchKey(remoteMatch.getKey());
+				candidateWrapper.putObject(candidate);
 			}
-			System.out.println(s);
-			if (matches[0].getPhase() == MatchPhase.NOT_FORMED || matches[0].getPhase() == MatchPhase.FORMED) {
-				doWhileListsLocked(new DoWhileListsLockedRunner() {
+		}
+		return toMatch(remoteMatch);
+	}
 
-					@Override
-					public boolean perform(List fullList, List notFullList) {
-						recheckCompetitors(matches[0], fullList, notFullList);
-						recheckMatchPhase(matches[0], fullList, notFullList);
-						return true;
-					}
-				});
-			} else {
-				// there is no need to manipulate the list, save some round trip
-				// to memcache
-				recheckMatchPhase(matches[0], null, null);
-			}
-			matchWrapper.putObject(matches[0]);
-			matchWrapper.unlock();
-			System.out.println("Match lock released");
-		} else {
-			// Deal with both situation: When user is not allocated a match or
-			// when
-			// cache of match is corrupted
-			doWhileListsLocked(new DoWhileListsLockedRunner() {
+	private Match toMatch(RemoteMatch remoteMatch) {
+		Match match = new Match();
+		long readyMoment = remoteMatch.getReadyMoment();
+		match.setFormedMoment(readyMoment);
+		match.setStartedMoment(readyMoment + settings.getMatchCountDownTime());
+		match.setEndedMoment(match.getStartedMoment() + settings.getMatchTime());
+		if (readyMoment != 0) {
+			if (match.getStartedMoment() > timeProvider.getCurrentTimeStamp()) {
+				match.setPhase(MatchPhase.FORMED);
+			} else if (match.getEndedMoment() > timeProvider.getCurrentTimeStamp() && remoteMatch.getFinishedMoment() == 0) {
+				match.setPhase(MatchPhase.PLAYING);
+			} else
+				match.setPhase(MatchPhase.FINISHED);
+		} else
+			match.setPhase(MatchPhase.NOT_FORMED);
 
-				@Override
-				public boolean perform(List fullList, List notFullList) {
-					matches[0] = findAndAssignAvailableMatch(candidate, fullList, notFullList);
-					candidate.setCurrentMatchUUID(matches[0].getTemporalUUID());
-					CacheWrapper<Match> localMatchWrapper = getMatchWrapperByUUID(matches[0].getTemporalUUID());
-					try {
-						localMatchWrapper.lock(settings.getMaxLockWaitTime());
-						System.out.println("Match lock acquired: Allocate match for User#" + userAutoId);
-					} catch (TimeoutException e) {
-						// TODO Auto-generated catch block
-						throw new RuntimeException(e);
-					}
-					recheckMatchPhase(matches[0], fullList, notFullList);
-					localMatchWrapper.putObject(matches[0]);
-					localMatchWrapper.unlock();
-					System.out.println("Match lock released");
-					return true;
-				}
-			});
+		for (Object c : remoteMatch.getCompetitors()) {
+			match.addCompetitor((MatchCompetitor) c);
 		}
 
-		recacheCandidate(candidate);
-		return matches[0];
+		match.setDescription("Match #" + remoteMatch.getKey().toString());// expose match information for testing
+
+		match.setQuestionIds(Lists.newArrayList(remoteMatch.getQuestionIds()));
+
+		return match;
 	}
 
 	/**
@@ -411,65 +270,57 @@ public class MatchOrganizer {
 	 */
 	public void escapeCurrentMatch(Long userAutoId) {
 		initialize();
-		CacheWrapper<MatchCandidate> candidateWrapper = getCandidateWrapperByAutoId(userAutoId);
+		RemoteObject<MatchCandidate> candidateWrapper = getCandidateRemoteObject(userAutoId);
 		candidateWrapper.putObject(null);
 	}
 
-	private void addMatchAnswer(Long userAutoId, int questionOrder, MatchAnswer answer) throws TimeoutException {
-		MatchCandidate candidate = getMatchCandidate(userAutoId);
+	private void addMatchAnswer(Long memberAutoId, int questionOrder, MatchAnswer answer) {
+		RemoteObject<MatchCandidate> remoteCandidate = getCandidateRemoteObject(memberAutoId);
+		MatchCandidate candidate = remoteCandidate.getObject();
 		answer.setSubmittedTime(new Date());
-		if (candidate.getCurrentMatchUUID() == null || isDisconnected(candidate)) {
-			System.err.println("Cannot find a suitable match for user. Answer discarded");
-			return;
-		}
-		CacheWrapper<Match> matchWrapper = getMatchWrapperByUUID(candidate.getCurrentMatchUUID());
-		matchWrapper.lock(settings.getMaxLockWaitTime());
-		System.out.println("Match lock acquired: add answer of User#" + userAutoId + " on Question#" + questionOrder);
-		try {
-			Match match = matchWrapper.getObject();
-			if (match == null) {
-				System.err.println("Cannot find match associated with user. Probably cache is corrupted. Answer discarded");
-				return;
+		RemoteMatch remoteMatch = getRemoteMatch(candidate.getRemoteMatchKey());
+		RemoteObject<MatchCompetitor> remoteCompetitor = remoteMatch.getCompetitorSlot(candidate.getRemoteCompetitorSlot());
+		if (remoteCompetitor.tryLock(settings.getMaxLockWaitTime())) {
+			boolean competitorDone = false;
+			try {
+				MatchCompetitor competitor = remoteCompetitor.getObject();
+				if (answer.getType().equals(MatchAnswerType.SUBMITTED)) {
+					Question q = questionDao.findByKey(remoteMatch.getQuestionIds()[questionOrder - 1]);
+					double score = q.getScore(answer.getContent());
+					answer.setScore(score);
+					answer.setCorrect(score > 0);
+				}
+
+				competitor.setTotalScore(competitor.getTotalScore() + answer.getScore());
+				List<MatchAnswer> answers = competitor.getAnswers();
+				int insertPos = questionOrder - 1;
+				if (answers.size() < insertPos) {
+					for (int i = answers.size(); i < insertPos; i++)
+						competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, null));
+				}
+				if (insertPos < answers.size()) {
+					answers.set(insertPos, answer);
+				} else
+					competitor.addAnswer(answer);
+
+				if (competitor.getPassedQuestionCount() == settings.getQuestionPerMatch()) {
+					competitor.setFinishedMoment(timeProvider.getCurrentTimeStamp());
+					competitorDone = true;
+				}
+				remoteCompetitor.putObject(competitor);
+			} finally {
+				remoteCompetitor.unlock();
 			}
 
-			List<MatchCompetitor> competitors = match.getCompetitors();
-			MatchCompetitor competitor = match.getCompetitorForMember(candidate.getMemberAutoId());
-			if (competitor == null)
-				throw new RuntimeException("Competitor disappeared mysteriously");
-			switch (answer.getType()) {
-			case IGNORED:
-				break;
-			case SUBMITTED:
-				double score = match.getQuestions().get(questionOrder - 1).getScore(answer.getContent());
-				answer.setScore(score);
-				answer.setCorrect(score > 0);
-				break;
+			if (competitorDone) {
+				if (remoteMatch.tryLockMatch()) {
+					checkMatchFinished(remoteMatch);
+					remoteMatch.unlockMatch();
+				}
 			}
-
-			List<MatchAnswer> answers = competitor.getAnswers();
-			int insertPos = questionOrder - 1;
-			if (answers.size() < insertPos) {
-				for (int i = answers.size(); i < insertPos; i++)
-					competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, null));
-			}
-			if (insertPos < answers.size()) {
-				System.err.println("Late received answer at " + questionOrder + " discarded");
-			} else
-				competitor.addAnswer(answer);
-
-			if (competitor.getPassedQuestionCount() == match.getQuestions().size()) {
-				competitor.setFinishedMoment(timeProvider.getCurrentTimeStamp());
-				checkMatchFinished(match);
-			}
-
-			matchWrapper.putObject(match);
-
-			updateLastSeen(candidate);
-			recacheCandidate(candidate);
-		} finally {
-			matchWrapper.unlock();
-			System.out.println("Match lock released");
-		}
+		} else
+			throw new RuntimeException("Cannot acquire competitor lock for competitor#" + candidate.getRemoteCompetitorSlot()
+					+ " on match#" + remoteMatch.getKey());
 	}
 
 	/**
@@ -505,11 +356,6 @@ public class MatchOrganizer {
 	}
 
 	public void resetLocks() {
-		initialize();
-		notFullWaitingMatches.resetLock();
-		notFullWaitingMatches.putObject(null);
-		fullWaitingMatches.resetLock();
-		fullWaitingMatches.putObject(null);
 	}
 
 }

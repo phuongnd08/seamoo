@@ -8,6 +8,7 @@ import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.competition.MatchOrganizer;
 import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.MemberDao;
+import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
@@ -37,6 +38,9 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	MemberDao memberDao;
 	@Autowired
 	LeagueDao leagueDao;
+	@Autowired
+	QuestionDao questionDao;
+
 	TimeProvider timeProvider = TimeProvider.DEFAULT;
 
 	int BUFFERED_QUESTION_BLOCK = 5;
@@ -55,17 +59,11 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 		}
 		MatchOrganizer matchOrganizer = leagueOrganizer.getMatchOrganizer(leagueId);
 		Match match;
-		try {
-			match = matchOrganizer.getMatchForUser(member.getAutoId());
-		} catch (TimeoutException e1) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e1);
-		}
-		// make sure not change on match during the process of generating
-		// RPC object
+		match = matchOrganizer.getMatchForUser(member.getAutoId());
+
 		MatchState matchState = new MatchState();
 		matchState.setCompetitors(match.getCompetitors());
-		matchState.setQuestionsCount(match.getQuestions().size());
+		matchState.setQuestionsCount(match.getQuestionIds().size());
 		MatchCompetitor competitor = match.getCompetitorForMember(member.getAutoId());
 		matchState.setCompletedQuestionsCount(competitor.getPassedQuestionCount());
 		// assign buffered questions when user is in the middle of the match
@@ -76,7 +74,7 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 					&& bufferedQuestionsCount - competitor.getPassedQuestionCount() <= BUFFERED_QUESTION_REFILL_THRESHOLD) {
 				matchState.setBufferedQuestionsFrom(bufferedQuestionsCount);
 				List<Question> bufferedQuestions = getOptimalQuestionBuffer(bufferedQuestionsCount,
-						competitor.getPassedQuestionCount(), match.getQuestions());
+						competitor.getPassedQuestionCount(), questionDao.findAllByKeys(match.getQuestionIds()));
 				matchState.getBufferedQuestions().addAll(bufferedQuestions);
 			}
 		}
@@ -91,14 +89,7 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 			matchState.setPhase(MatchPhase.YOU_FINISHED);
 		} else
 			matchState.setPhase(match.getPhase());
-		// assign buffered events
-		// assert bufferredEventsCount <= match.getEvents().size();
-		if (match.getEvents().size() < bufferredEventsCount) {
-			matchState.setBufferedEvents(match.getEvents());
-			matchState.setReset(true);
-		} else
-			matchState.setBufferedEvents(new ArrayList<MatchEvent>(match.getEvents().subList(bufferredEventsCount,
-					match.getEvents().size())));
+
 		matchState.setMatchAutoId(match.getAutoId() != null ? match.getAutoId().longValue() : 0);
 		matchState.setLeagueAutoId(match.getLeagueAutoId());
 		matchState.setMatchAlias(match.getAlias());

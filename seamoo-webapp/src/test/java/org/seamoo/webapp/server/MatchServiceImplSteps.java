@@ -16,7 +16,7 @@ import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
 import org.powermock.api.mockito.PowerMockito;
-import org.seamoo.cache.CacheWrapper;
+import org.seamoo.cache.RemoteObject;
 import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.competition.MatchOrganizer;
 import org.seamoo.daos.MemberDao;
@@ -98,18 +98,10 @@ public class MatchServiceImplSteps {
 
 	@Given("Match has $number questions")
 	public void setUpMatchQuestions(int number) {
-		List<Question> qs = new ArrayList<Question>();
+		List<Long> qsIds = new ArrayList<Long>();
 		for (int i = 0; i < number; i++)
-			qs.add(new Question());
-		currentMatch.setQuestions(qs);
-	}
-
-	@Given("Match has $number events")
-	public void setUpMatchEvents(int number) {
-		currentMatch.getEvents().clear();
-		for (int i = 0; i < number; i++) {
-			currentMatch.addEvent(new MatchEvent());
-		}
+			qsIds.add(new Long(i));
+		currentMatch.setQuestionIds(qsIds);
 	}
 
 	int bufferedQuestionsCount = 0, bufferedEventsCount = 0;
@@ -138,7 +130,7 @@ public class MatchServiceImplSteps {
 	public void setUpMatchCompetitors(int number, List<Long> list) {
 		for (Long id : list) {
 			MatchCompetitor competitor = new MatchCompetitor();
-			competitor.setMember(members.get(id));
+			competitor.setMemberAutoId(id);
 			currentMatch.addCompetitor(competitor);
 		}
 	}
@@ -218,5 +210,5 @@ public class MatchServiceImplSteps {
 		assertTrue(matchState.isReset());
 		assertEquals(0, matchState.getBufferedEventsFrom());
 	}
-	
+
 }
