@@ -68,7 +68,6 @@ public class MatchCompetitor implements Serializable {
 
 	public void addAnswer(MatchAnswer answer) {
 		answers.add(answer);
-		totalScore += answer.getScore();
 		passedQuestionCount++;
 	}
 

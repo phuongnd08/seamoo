@@ -5,20 +5,12 @@ import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.seamoo.cache.RemoteCompositeObject;
-import org.seamoo.cache.RemoteCounter;
-import org.seamoo.cache.RemoteObject;
-import org.seamoo.cache.RemoteObjectFactory;
+import org.seamoo.competition.FakeCacheContainer.FakeRemoteObjectFactory;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
@@ -36,117 +28,9 @@ public class MatchOrganizerStressTest {
 
 	private static long SLEEP_UNIT = 1;
 
-	private static long MAX_TEST_TIME = 10000;
+	private static long MAX_TEST_TIME = 1000000;
 
 	private static int SIMULTANEOUS_USERS_COUNT = 100;
-
-	public static class CountableCacheWrapper<T> implements RemoteObject<T> {
-
-		protected long lockCount;
-		protected long lockTryTime;
-		private boolean locked;
-		private String key;
-		private Map<String, Object> map;
-		Map<String, Lock> lockMap;
-
-		public CountableCacheWrapper(String key, Map<String, Object> map, Map<String, Lock> lockMap) {
-			lockCount = 0;
-			lockTryTime = 0;
-			this.key = key;
-			this.map = map;
-			this.lockMap = lockMap;
-		}
-
-		@Override
-		public T getObject() {
-			try {
-				Thread.sleep(SLEEP_UNIT);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return (T) map.get(this.key);
-		}
-
-		@Override
-		public boolean tryLock(long timeout) {
-			try {
-				return lockMap.get(key).tryLock(timeout, TimeUnit.MILLISECONDS);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				return false;
-			}
-		}
-
-		@Override
-		public void lock(long timeout) throws TimeoutException {
-			if (!tryLock(timeout))
-				throw new TimeoutException();
-			this.locked = true;
-			this.lockCount++;
-		}
-
-		@Override
-		public void putObject(T object) {
-			try {
-				Thread.sleep(SLEEP_UNIT * 3);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			this.map.put(key, object);
-		}
-
-		@Override
-		public void unlock() {
-			if (this.locked == true) {
-				this.locked = false;
-				this.lockMap.get(key).unlock();
-			} else
-				throw new IllegalStateException("Cannot unlock");
-		}
-
-		@Override
-		public void resetLock() {
-		}
-
-		@Override
-		public boolean isLocked() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-	}
-
-	public static class CountableCacheWrapperFactory implements RemoteObjectFactory {
-
-		Map<String, Object> map;
-		Map<String, Lock> lockMap;
-
-		public CountableCacheWrapperFactory() {
-			this.map = new HashMap<String, Object>();
-			this.lockMap = new HashMap<String, Lock>();
-		}
-
-		@Override
-		public synchronized <T> RemoteObject<T> createRemoteObject(Class<T> clazz, String key) {
-			String realKey = clazz.getName() + "@" + key;
-			if (!this.lockMap.containsKey(realKey))
-				this.lockMap.put(realKey, new ReentrantLock());
-			return new CountableCacheWrapper<T>(realKey, map, lockMap);
-		}
-
-		@Override
-		public RemoteCounter createRemoteCounter(String category, String key, long $default) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public RemoteCompositeObject createRemoteCompositeObject(String category, String key) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	}
 
 	private Thread getTypicalMemberActionThread(final MatchOrganizer organizer, final Long memberId) {
 		Thread t = new Thread(new Runnable() {
@@ -224,7 +108,7 @@ public class MatchOrganizerStressTest {
 		// purpose
 		MatchOrganizer organizer = new MatchOrganizer(1L, settings);
 		organizer.matchDao = mock(MatchDao.class);
-		organizer.cacheWrapperFactory = new CountableCacheWrapperFactory();
+		organizer.cacheWrapperFactory = new FakeRemoteObjectFactory();
 		organizer.memberDao = mock(MemberDao.class);
 		when(organizer.memberDao.findByKey(anyLong())).thenAnswer(new Answer<Member>() {
 
@@ -239,7 +123,7 @@ public class MatchOrganizerStressTest {
 			}
 		});
 		organizer.questionDao = mock(QuestionDao.class);
-		List<Question> questions = new ArrayList<Question>();
+		final List<Question> questions = new ArrayList<Question>();
 		for (int i = 0; i < 20; i++) {
 			Question q = new Question();
 			q.setType(QuestionType.MULTIPLE_CHOICES);
@@ -247,9 +131,19 @@ public class MatchOrganizerStressTest {
 			rev.addChoice(new QuestionChoice());
 			q.addAndSetAsCurrentRevision(rev);
 			questions.add(q);
+			q.setAutoId(new Long(i + 1));
 		}
 
 		when(organizer.questionDao.getRandomQuestions(anyLong(), eq(20))).thenReturn(questions);
+
+		when(organizer.questionDao.findByKey(anyLong())).thenAnswer(new Answer<Question>() {
+
+			@Override
+			public Question answer(InvocationOnMock invocation) throws Throwable {
+				Long key = (Long) invocation.getArguments()[0];
+				return questions.get((int) (key - 1));
+			}
+		});
 
 		Thread[] threads = new Thread[SIMULTANEOUS_USERS_COUNT];
 		for (int i = 0; i < threads.length; i++) {

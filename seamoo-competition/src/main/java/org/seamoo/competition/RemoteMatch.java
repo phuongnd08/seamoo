@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.seamoo.cache.RemoteCompositeObject;
 import org.seamoo.cache.RemoteObject;
-import org.seamoo.cache.memcacheImpl.MemcacheRemoteCompositeObject;
-import org.seamoo.cache.memcacheImpl.MemcacheRemoteObject;
+import org.seamoo.cache.memcacheImpl.MemcacheRemoteCompositeObjectImpl;
+import org.seamoo.cache.memcacheImpl.MemcacheRemoteObjectImpl;
 import org.seamoo.entities.matching.MatchCompetitor;
 
 import com.google.appengine.api.memcache.MemcacheService;
@@ -51,7 +51,7 @@ public class RemoteMatch {
 		List<Object> results = new ArrayList<Object>();
 		long count = getCompetitorCount();
 		for (int i = 1; i <= count; i++) {
-			RemoteObject ro = getCompetitorSlot(i);
+			RemoteObject ro = getRemoteCompetitor(i);
 			Object o = ro.getObject();
 			if (o == null)
 				break;
@@ -64,7 +64,7 @@ public class RemoteMatch {
 		return COMPETITORS_SUBKEY + "@" + slot;
 	}
 
-	public RemoteObject<MatchCompetitor> getCompetitorSlot(int slot) {
+	public RemoteObject<MatchCompetitor> getRemoteCompetitor(int slot) {
 		return mixin.getSubRemoteObject(getCompetitorSlotKey(slot));
 	}
 

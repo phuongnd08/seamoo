@@ -5,9 +5,9 @@ import org.seamoo.cache.RemoteObject;
 
 import com.google.appengine.api.memcache.MemcacheService;
 
-public class MemcacheRemoteCompositeObject extends MemcacheRemoteObject implements RemoteCompositeObject {
+public class MemcacheRemoteCompositeObjectImpl extends MemcacheRemoteObjectImpl implements RemoteCompositeObject {
 
-	public MemcacheRemoteCompositeObject(String key, MemcacheService cacheService) {
+	public MemcacheRemoteCompositeObjectImpl(String key, MemcacheService cacheService) {
 		super(key, cacheService);
 	}
 
@@ -40,7 +40,7 @@ public class MemcacheRemoteCompositeObject extends MemcacheRemoteObject implemen
 	@Override
 	public RemoteObject getSubRemoteObject(String subKey) {
 		// TODO Auto-generated method stub
-		return new MemcacheRemoteObject(getFullKey(subKey), cacheService);
+		return new MemcacheRemoteObjectImpl(getFullKey(subKey), cacheService);
 	}
 
 }

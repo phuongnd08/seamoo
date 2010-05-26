@@ -53,15 +53,18 @@ public class MatchOrganizer {
 	/**
 	 * Candidates for match
 	 */
-	public static final String REMOTE_MAP_KEY_PREFIX = "RemoteMap";
+	public static final String MATCH_ORGANIZER_MASTER_KEY_PREFIX = "match-organizer";
+	private String masterKey;
+	public static final String REMOTE_MATCH_KEY_GROUP = "remote-match@";
+	public static final String REMOTE_CANDIDATE_KEY_GROUP = "remote-candidate@";
 	Map<Long, RemoteMatch> remoteMatchMap;
 
 	private RemoteMatch getRemoteMatch(long key) {
 		synchronized (remoteMatchMap) {
 			RemoteMatch m = remoteMatchMap.get(key);
 			if (m == null) {
-				RemoteCompositeObject rco = cacheWrapperFactory.createRemoteCompositeObject(REMOTE_MAP_KEY_PREFIX,
-						String.valueOf(key));
+				RemoteCompositeObject rco = cacheWrapperFactory.createRemoteCompositeObject(masterKey, REMOTE_MATCH_KEY_GROUP
+						+ key);
 				m = new RemoteMatch(rco);
 				m.setKey(key);
 				remoteMatchMap.put(key, m);
@@ -71,7 +74,8 @@ public class MatchOrganizer {
 	}
 
 	private RemoteObject<MatchCandidate> getCandidateRemoteObject(Long memberAutoId) {
-		return cacheWrapperFactory.createRemoteObject(MatchCandidate.class, memberAutoId.toString());
+		return cacheWrapperFactory.createRemoteObject(MatchCandidate.class, masterKey + "@" + REMOTE_CANDIDATE_KEY_GROUP
+				+ memberAutoId.toString());
 	}
 
 	private long nextGlobalCompetitorSlot() {
@@ -87,26 +91,27 @@ public class MatchOrganizer {
 
 	public MatchOrganizer(Long leagueId, MatchOrganizerSettings settings) {
 		initialized = false;
+		this.masterKey = MATCH_ORGANIZER_MASTER_KEY_PREFIX + "@" + leagueId;
 		this.leagueId = leagueId;
 		this.settings = settings;
 		this.listeners = new ArrayList<EventListener>();
 	}
 
-	public static final String MATCH_ORGANIZER_COUNTER_CATEGORY = "match-organizer-counter";
-	public static final String COMPETITOR_SLOT_COUNTER_KEY = "competitor-slot";
+	public static final String COMPETITOR_SLOT_COUNTER_KEY = "competitor-slot-counter";
 	public static final long COMPETITOR_SLOT_COUNTER_INITIAL = 0;
 
 	protected synchronized void initialize() {
 		if (initialized)
 			return;
-		globalCompetitorSlotCounter = cacheWrapperFactory.createRemoteCounter(MATCH_ORGANIZER_COUNTER_CATEGORY,
-				COMPETITOR_SLOT_COUNTER_KEY, COMPETITOR_SLOT_COUNTER_INITIAL);
+		globalCompetitorSlotCounter = cacheWrapperFactory.createRemoteCounter(masterKey, COMPETITOR_SLOT_COUNTER_KEY,
+				COMPETITOR_SLOT_COUNTER_INITIAL);
 		remoteMatchMap = new HashMap<Long, RemoteMatch>();
 		initialized = true;
 	}
 
 	private boolean isStarted(RemoteMatch match) {
-		return match.getReadyMoment() + settings.getMatchCountDownTime() <= timeProvider.getCurrentTimeStamp();
+		return match.getReadyMoment() != 0
+				&& (match.getReadyMoment() + settings.getMatchCountDownTime() <= timeProvider.getCurrentTimeStamp());
 	}
 
 	private boolean isFinishedMatch(RemoteMatch match) {
@@ -118,10 +123,12 @@ public class MatchOrganizer {
 		long competitorSlotId = nextGlobalCompetitorSlot();
 		long matchId = competitorSlotId % 4 == 0 ? competitorSlotId / 4 : (competitorSlotId / 4) + 1;
 		RemoteMatch match = getRemoteMatch(matchId);
+		if (isStarted(match))
+			return null;
 		int competitorSlot = match.acquireCompetitorSlot();
 		MatchCompetitor competitor = new MatchCompetitor();
 		competitor.setMemberAutoId(candidate.getMemberAutoId());
-		RemoteObject<MatchCompetitor> remoteCompetitor = match.getCompetitorSlot(competitorSlot);
+		RemoteObject<MatchCompetitor> remoteCompetitor = match.getRemoteCompetitor(competitorSlot);
 		remoteCompetitor.putObject(competitor);
 		candidate.setRemoteCompetitorSlot(competitorSlot);
 		if (competitorSlot == 1) {
@@ -132,11 +139,8 @@ public class MatchOrganizer {
 			match.setQuestionIds(questionIds.toArray(new Long[settings.getQuestionPerMatch()]));
 		} else if (competitorSlot == 2) {
 			match.setReadyMoment(timeProvider.getCurrentTimeStamp());
-		} else {
-			if (isStarted(match))
-				// Match is already started, return null so that user may request for another match
-				return null;
 		}
+
 		return match;
 	}
 
@@ -156,19 +160,27 @@ public class MatchOrganizer {
 	 */
 	private void finishMatch(RemoteMatch remoteMatch) {
 		long currentTimeStamp = timeProvider.getCurrentTimeStamp();
-		Match match = toMatch(remoteMatch);
-		match.setEndedMoment(currentTimeStamp);
-		for (MatchCompetitor competitor : match.getCompetitors()) {
+		List<MatchCompetitor> competitors = new ArrayList<MatchCompetitor>();
+		List<RemoteObject<MatchCompetitor>> remoteCompetitors = new ArrayList<RemoteObject<MatchCompetitor>>();
+		for (int i = 0; i < remoteMatch.getCompetitorCount(); i++) {
+			RemoteObject<MatchCompetitor> remoteCompetitor = remoteMatch.getRemoteCompetitor(i + 1);
+			remoteCompetitors.add(remoteCompetitor);
+			competitors.add(remoteCompetitor.getObject());
+		}
+		remoteMatch.setFinishedMoment(currentTimeStamp);
+		for (MatchCompetitor competitor : competitors) {
 			if (competitor.getFinishedMoment() == 0)
 				competitor.setFinishedMoment(timeProvider.getCurrentTimeStamp());
 		}
-		rank(match);
-		prepareMatchForPersistence(match);
+		rank(competitors);
+		for (int i = 0; i < competitors.size(); i++) {
+			remoteCompetitors.get(i).putObject(competitors.get(i));
+		}
+		Match match = toMatch(remoteMatch);
 		for (EventListener listener : listeners)
 			listener.finishMatch(match);
 		matchDao.persist(match);
 		remoteMatch.setDbKey(match.getAutoId());
-		remoteMatch.setFinishedMoment(currentTimeStamp);
 	}
 
 	/**
@@ -181,10 +193,10 @@ public class MatchOrganizer {
 		// re-link all objects before persisting them
 	}
 
-	private void rank(Match match) {
+	private void rank(List<MatchCompetitor> competitors) {
 		// TODO Auto-generated method stub
-		List<MatchCompetitor> competitors = new ArrayList<MatchCompetitor>(match.getCompetitors());
-		Collections.sort(competitors, new Comparator<MatchCompetitor>() {
+		List<MatchCompetitor> copies = new ArrayList<MatchCompetitor>(competitors);
+		Collections.sort(copies, new Comparator<MatchCompetitor>() {
 
 			@Override
 			public int compare(MatchCompetitor c1, MatchCompetitor c2) {
@@ -201,8 +213,8 @@ public class MatchOrganizer {
 				return result;
 			}
 		});
-		for (int i = 0; i < competitors.size(); i++) {
-			competitors.get(i).setRank(i + 1);
+		for (int i = 0; i < copies.size(); i++) {
+			copies.get(i).setRank(i + 1);
 		}
 	}
 
@@ -279,7 +291,7 @@ public class MatchOrganizer {
 		MatchCandidate candidate = remoteCandidate.getObject();
 		answer.setSubmittedTime(new Date());
 		RemoteMatch remoteMatch = getRemoteMatch(candidate.getRemoteMatchKey());
-		RemoteObject<MatchCompetitor> remoteCompetitor = remoteMatch.getCompetitorSlot(candidate.getRemoteCompetitorSlot());
+		RemoteObject<MatchCompetitor> remoteCompetitor = remoteMatch.getRemoteCompetitor(candidate.getRemoteCompetitorSlot());
 		if (remoteCompetitor.tryLock(settings.getMaxLockWaitTime())) {
 			boolean competitorDone = false;
 			try {

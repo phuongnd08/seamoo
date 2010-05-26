@@ -6,14 +6,14 @@ import org.seamoo.cache.RemoteObject;
 
 import com.google.appengine.api.memcache.MemcacheService;
 
-public class MemcacheRemoteObject<T> implements RemoteObject<T> {
+public class MemcacheRemoteObjectImpl<T> implements RemoteObject<T> {
 
 	protected String key;
 	protected String keyLock;
 	protected MemcacheService cacheService;
 	private boolean locked;
 
-	public MemcacheRemoteObject(String key, MemcacheService cacheService) {
+	public MemcacheRemoteObjectImpl(String key, MemcacheService cacheService) {
 		this.key = key;
 		this.keyLock = key + "@lock";
 		this.cacheService = cacheService;
@@ -67,11 +67,6 @@ public class MemcacheRemoteObject<T> implements RemoteObject<T> {
 			this.locked = false;
 		} else
 			throw new IllegalStateException("Lock has not been acquired");
-	}
-
-	@Override
-	public void resetLock() {
-		cacheService.put(keyLock, 0);
 	}
 
 	@Override

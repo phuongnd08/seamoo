@@ -18,7 +18,7 @@ public class MemcacheRemoteObjectFactoryImpl implements RemoteObjectFactory {
 
 	public <T> RemoteObject<T> createRemoteObject(Class<T> clazz, String key) {
 		String kindAwareKey = clazz.getCanonicalName() + "@" + key;
-		return new MemcacheRemoteObject<T>(kindAwareKey, cacheService);
+		return new MemcacheRemoteObjectImpl<T>(kindAwareKey, cacheService);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class MemcacheRemoteObjectFactoryImpl implements RemoteObjectFactory {
 	@Override
 	public RemoteCompositeObject createRemoteCompositeObject(String category, String key) {
 		String categoryAwareKey = category + "@" + key;
-		return new MemcacheRemoteCompositeObject(categoryAwareKey, cacheService);
+		return new MemcacheRemoteCompositeObjectImpl(categoryAwareKey, cacheService);
 	}
 
 }

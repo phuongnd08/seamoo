@@ -6,36 +6,27 @@ And Match Are Observered with buffer of 10 objects
 When Organizer is created
 Given Current Time is 10:00:00
 When 1st user request for Match
-Then 1st Match is created
 And Question Dao is requested for 20 random questions
 And Returned Match is 1st match
-And Returned Match has 1 event
 And Returned Match is assigned with 20 questions
 And Returned Match Phase is NOT_FORMED
 Given Current Time is 10:00:01
 When 1st user request for Match
 Then Returned Match Phase is NOT_FORMED
-And Returned Match has 1 event
 When 2nd user request for Match
 Then Returned Match is 1st match
 And Returned Match Phase is FORMED
 And Returned Match has 2 players
-And Returned Match has 2 event
 !-- 3rd user can join this match
 Given Current Time is 10:00:05
 When 3rd user request for Match
 Then Returned Match is 1st match
 And Returned Match has 3 players
-And Returned Match has 3 events
 !-- Count down is over, then match is started
 Given Current Time is 10:00:11
-And 1st user last signal is 10:00:06
-And 2nd user last signal is 10:00:06
-And 3rd user last signal is 10:00:06
 When 1st user request for Match
 Then Returned Match is 1st match
 And Returned Match Phase is PLAYING
-And Returned Match has 4 events
 !-- User submit answers to match
 When 1st user submit #1 for question 1-1
 Then 1st user has 1 answer
@@ -45,9 +36,6 @@ When 1st user submit #1 for question 2-2
 Then 1st user has 3 answers
 !-- The match is timed out
 Given Current Time is 10:02:12
-And 1st user last signal is 10:02:07
-And 2nd user last signal is 10:02:07
-And 3rd user last signal is 10:02:07
 When 1st user request for Match
 Then Returned Match is 1st match
 And Returned Match Phase is FINISHED
@@ -55,5 +43,3 @@ When 2nd user request for Match
 Then Returned Match is 1st match
 When 3rd user request for Match
 Then Returned Match is 1st match
-And Returned Match has 5 events
-!--   

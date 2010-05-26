@@ -35,6 +35,10 @@ import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.test.MockedTimeProvider;
 import org.seamoo.utils.converter.Converter;
 
+import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
+import com.google.appengine.tools.development.testing.LocalMemcacheServiceTestConfig;
+import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+
 public class MatchOrganizerSteps {
 	List<Match> activeMatches;
 	public static final long TEST_LEAGUE_ID = 1L;
@@ -296,13 +300,10 @@ public class MatchOrganizerSteps {
 		assertNotSame(competitor.getFinishedMoment(), 0L);
 	}
 
-	@Given("Cache of $position match candidate corrupted")
-	public void corruptMatchCandidateCache(String position) {
-		int pos = positionToNumber(position) - 1;
-		Member member = members.get(pos);
-		RemoteObject<MatchCandidate> candidateWrapper = cacheWrapperFactory.createRemoteObject(MatchCandidate.class,
-				member.getAutoId().toString());
-		candidateWrapper.putObject(null);
+	@Given("Cache is corrupted")
+	public void corruptCache() {
+		LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalMemcacheServiceTestConfig(), new LocalDatastoreServiceTestConfig());
+		helper.setUp();
 	}
 
 	@Then("event finishMatch is triggered")

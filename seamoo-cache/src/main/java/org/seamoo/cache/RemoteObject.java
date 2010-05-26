@@ -9,8 +9,6 @@ public interface RemoteObject<T> {
 
 	void unlock();
 
-	void resetLock();
-
 	boolean isLocked();
 
 	T getObject();

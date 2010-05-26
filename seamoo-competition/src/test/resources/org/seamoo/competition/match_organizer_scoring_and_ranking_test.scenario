@@ -10,10 +10,7 @@ And 2nd user request for Match
 And 3rd user request for Match
 Then Returned Match is 1st match
 And Returned Match Phase is FORMED
-Given 1st user last signal is 10:00:9
-And 2nd user last signal is 10:00:9
-And 3rd user last signal is 10:00:9
-And Current Time is 10:00:10
+Given Current Time is 10:00:10
 When 1st user request for Match
 !-- Match started
 Then Returned Match is 1st match

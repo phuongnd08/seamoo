@@ -7,7 +7,6 @@ When Organizer is created
 Given Current Time is 10:00:00
 When 1st user request for Match
 And 2nd user request for Match
-Then 1st Match is created
 And Returned Match is 1st match
 And Returned Match Phase is FORMED
 Given Current Time is 10:00:05
@@ -17,12 +16,8 @@ When 4th user request for Match
 Then Returned Match is 1st match
 And Returned Match has 4 players
 When 5th user request for Match
-Then 2nd Match is created
 And Returned Match is 2nd match
 And Returned Match Phase is NOT_FORMED
-!-- Also keep 1st & 2nd user in touch
-When 1st user request for Match
-And 2nd user request for Match
 Given Current Time is 10:00:08
 When 6th user request for Match
 Then Returned Match is 2nd match
