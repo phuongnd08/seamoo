@@ -7,5 +7,5 @@ And A Match Service Async
 !-- The match is started
 And User is not logged in
 When Presenter initialize
-Then Service get the current match information with receivedQuestion=0 & receivedEvent=0
+Then Service get the current match information with receivedQuestion=0
 And Page is reloaded

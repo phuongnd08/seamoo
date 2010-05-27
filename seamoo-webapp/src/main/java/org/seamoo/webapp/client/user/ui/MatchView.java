@@ -64,10 +64,6 @@ public class MatchView extends Composite implements Display {
 	@UiField
 	Button buttonIgnore;
 	@UiField
-	HTMLPanel panelEvents;
-	@UiField
-	FlexTable tableMatchEvents;
-	@UiField
 	Button buttonRematch;
 	@UiField
 	HTMLPanel panelLeaveMatch;
@@ -267,21 +263,8 @@ public class MatchView extends Composite implements Display {
 	}
 
 	@Override
-	public void addEvents(List<MatchEvent> events) {
-		for (MatchEvent event : events) {
-			eventIndex++;
-			tableMatchEvents.setHTML(eventIndex, 0, eventToHTML(event));
-		}
-	}
-
-	@Override
 	public Widget getSideWidget() {
 		return panelIndicator;
 	}
 
-	@Override
-	public void resetEvents() {
-		eventIndex = -1;
-		tableMatchEvents.clear();
-	}
 }

@@ -28,7 +28,7 @@ public class MatchOrganizerStressTest {
 
 	private static long SLEEP_UNIT = 1;
 
-	private static long MAX_TEST_TIME = 20000;
+	private static long MAX_TEST_TIME = 25000;
 
 	private static int SIMULTANEOUS_USERS_COUNT = 100;
 

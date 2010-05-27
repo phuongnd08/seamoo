@@ -1,12 +1,13 @@
 Given A MatchOrganizer
 And A MemberDao
+And A QuestionDao
 And A MatchServiceImpl
 And There are 4 Members 1,2,3,4
 And Match have 4 Members 1,2,3,4
 And Current Member is Member@1
 And Match Phase is NOT_FORMED
 And Match has 20 questions
-And Match has 20 events 
+And Match alias is "user1-user2-user3-user4"
 When Member@1 request for Match State
 Then State Phase is NOT_FORMED
 And State matchAutoId is 0
@@ -15,35 +16,27 @@ And Match Formed Time is 0
 And Current Time is 0
 And Match Started Time is 9000
 And Current Member has 0 buffered questions
-And Current Member has 0 buffered events
 When Member@1 request for Match State
 Then State Phase is FORMED
 And State Remaining Time is 9000
 And State Buffered Questions has 0 questions
-And State Buffered Events has 20 events
 Given Match Phase is PLAYING
-And Match has 25 events
 And Current Time is 9000
 And Match Ended Time is 29000
-And Current Member has 20 buffered events
 When Member@1 request for Match State
 Then State Phase is PLAYING
 And State Remaining Time is 20000
 And State Buffered Questions has 5 questions
-And State Buffered Events has 5 events
 !-- Member reload match data after a broken connection
 Given Match Phase is PLAYING
-And Match has 25 events
 And Current Time is 9000
 And Match Ended Time is 29000
-And Current Member has 0 buffered events
 And Current Member has 0 buffered questions
 And Member@1 has answered 4 questions
 When Member@1 request for Match State
 Then State Phase is PLAYING
 And State Completed Questions Count is 4
 And State Buffered Questions has 10 questions
-And State Buffered Events has 25 events
 Given Member@1 finished the match
 When Member@1 request for Match State
 Then State Phase is YOU_FINISHED
@@ -53,17 +46,3 @@ When Member@1 request for Match State
 And State matchAutoId is 5
 And State alias is "user1-user2-user3-user4"
 Then State Phase is FINISHED
-!-- Member try to load match data but he is kicked out
-Given Match Phase is FORMED
-And Match has 1 events
-And Current Time is 9000
-And Match Ended Time is 29000
-And Current Member has 5 buffered events
-And Current Member has 5 buffered questions
-And Member@1 has answered 0 questions
-When Member@1 request for Match State
-Then State Phase is FORMED
-And State is reset
-And State Completed Questions Count is 0
-And State Buffered Questions has 0 questions
-And State Buffered Events has 1 events

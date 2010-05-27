@@ -8,13 +8,11 @@ And A Match Player Presenter
 And Current match is started with remaining periods of 20000 milliseconds and number of questions of 10
 And Current match has 2 players 
 And Current user has answered 4 questions
-And 12 events from 0 is associated to match
 When Presenter initialize
-Then Service get the current match information with receivedQuestion=0 & receivedEvent=0
+Then Service get the current match information with receivedQuestion=0
 And Display is switched to PLAYING mode
 And Display shows 2 players
 And Display is viewing 5st question
-And Display added 12 events
 And Display remaining time is assigned to 20
 And Display question index is assigned to 5
 And Display total question is assigned to 10

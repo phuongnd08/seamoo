@@ -11,7 +11,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("../services/user-match")
 @GwtRemoteService("user-match")
 public interface MatchService extends RemoteService {
-	MatchState getMatchState(Long leagueId, int bufferedQuestionsCount, int bufferedEventsCount) throws NotLoggedInException;
+	MatchState getMatchState(Long leagueId, int bufferedQuestionsCount) throws NotLoggedInException;
 
 	void submitAnswer(Long leagueId, int questionOrder, String answer);
 

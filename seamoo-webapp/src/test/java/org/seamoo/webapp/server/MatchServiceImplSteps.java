@@ -16,27 +16,28 @@ import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
 import org.powermock.api.mockito.PowerMockito;
-import org.seamoo.cache.RemoteObject;
 import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.competition.MatchOrganizer;
 import org.seamoo.daos.MemberDao;
+import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchCompetitor;
-import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
 import org.seamoo.test.MockedTimeProvider;
-import org.seamoo.utils.TimeProvider;
 import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.workingonit.gwtbridge.ServletUtils;
+
+import com.google.common.collect.Lists;
 
 public class MatchServiceImplSteps {
 	LeagueOrganizer lo;
 	MatchOrganizer mo;
 	Match currentMatch;
 	MemberDao memberDao;
+	QuestionDao questionDao;
 	MockedTimeProvider timeProvider;
 
 	@Given("A MatchOrganizer")
@@ -54,6 +55,12 @@ public class MatchServiceImplSteps {
 		memberDao = mock(MemberDao.class);
 	}
 
+	@Given("A QuestionDao")
+	public void initQuestionDao() {
+		questionDao = mock(QuestionDao.class);
+		when(questionDao.findAllByKeys((List<Long>) any())).thenReturn(Lists.newArrayList(new Question[20]));
+	}
+
 	MatchServiceImpl service;
 
 	@Given("A MatchServiceImpl")
@@ -63,6 +70,7 @@ public class MatchServiceImplSteps {
 		service.memberDao = memberDao;
 		timeProvider = new MockedTimeProvider();
 		service.timeProvider = timeProvider;
+		service.questionDao = questionDao;
 	}
 
 	Map<Long, Member> members;
@@ -104,13 +112,13 @@ public class MatchServiceImplSteps {
 		currentMatch.setQuestionIds(qsIds);
 	}
 
-	int bufferedQuestionsCount = 0, bufferedEventsCount = 0;
+	int bufferedQuestionsCount = 0;
 	MatchState matchState;
 
 	@When("Member@$id request for Match State")
 	public void requestMatchState(Long id) throws NotLoggedInException {
 		setUpCurrentMember(members.get(id));
-		matchState = service.getMatchState(1L, bufferedQuestionsCount, bufferedEventsCount);
+		matchState = service.getMatchState(1L, bufferedQuestionsCount);
 	}
 
 	private void setUpCurrentMember(Member member) {
@@ -160,11 +168,6 @@ public class MatchServiceImplSteps {
 		currentMatch.getCompetitorForMember(members.get(id).getAutoId()).setPassedQuestionCount(number);
 	}
 
-	@Given("Current Member has $count buffered events")
-	public void setUpCurrentMemberBufferedEvents(int count) {
-		bufferedEventsCount = count;
-	}
-
 	@Given("Member@$id finished the match")
 	public void setUpMemberFinishedMatch(Long id) {
 		currentMatch.getCompetitorForMember(members.get(id).getAutoId()).setFinishedMoment(1L);
@@ -178,11 +181,6 @@ public class MatchServiceImplSteps {
 	@Then("State Buffered Questions has $number questions")
 	public void assertNumberOfBufferedQuestionsOfMatchState(int number) {
 		assertEquals(matchState.getBufferedQuestions().size(), number);
-	}
-
-	@Then("State Buffered Events has $number events")
-	public void assertNumberOfBufferedEventsOfMatchState(int number) {
-		assertEquals(matchState.getBufferedEvents().size(), number);
 	}
 
 	@Then("State Completed Questions Count is $number")
@@ -205,10 +203,8 @@ public class MatchServiceImplSteps {
 		assertEquals(matchState.getMatchAlias(), alias);
 	}
 
-	@Then("State is reset")
-	public void assertStateReset() {
-		assertTrue(matchState.isReset());
-		assertEquals(0, matchState.getBufferedEventsFrom());
+	@Given("Match alias is \"$alias\"")
+	public void setMatchAlias(String alias) {
+		currentMatch.setAlias(alias);
 	}
-
 }

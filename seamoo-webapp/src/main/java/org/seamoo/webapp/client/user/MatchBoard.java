@@ -43,10 +43,6 @@ public class MatchBoard {
 
 		public void setQuestion(Question question);
 
-		public void resetEvents();
-
-		public void addEvents(List<MatchEvent> events);
-
 		public void setTotalQuestion(int total);
 
 		public void setQuestionIndex(int index);
@@ -181,7 +177,6 @@ public class MatchBoard {
 		}
 
 		List<Question> bufferedQuestions;
-		List<MatchEvent> bufferedEvents;
 
 		public void initialize(MatchServiceAsync service, final Display display, Long leagueAutoId) {
 			// TODO Auto-generated method stub
@@ -190,7 +185,6 @@ public class MatchBoard {
 			this.leagueAutoId = leagueAutoId;
 			display.addEventListener(listener);
 			bufferedQuestions = new ArrayList<Question>();
-			bufferedEvents = new ArrayList<MatchEvent>();
 			refreshMatchState();
 		}
 
@@ -201,7 +195,7 @@ public class MatchBoard {
 				return;
 			refreshingMatchState = true;
 			Log.info("Refresh Match State");
-			service.getMatchState(leagueAutoId, bufferedQuestions.size(), bufferedEvents.size(), new AsyncCallback<MatchState>() {
+			service.getMatchState(leagueAutoId, bufferedQuestions.size(), new AsyncCallback<MatchState>() {
 
 				@Override
 				public void onSuccess(MatchState state) {
@@ -245,13 +239,6 @@ public class MatchBoard {
 				return;
 			}
 			display.setTotalQuestion(currentMatchState.getQuestionsCount());
-			if (state.isReset()) {
-				// reset the view
-				bufferedQuestions.clear();
-				display.resetEvents();
-				this.currentQuestionOrder = -1;
-				this.showNoQuestion();
-			}
 			if (state.getBufferedQuestions() != null) {
 				List<Question> qs = state.getBufferedQuestions();
 				int from = state.getBufferedFrom();
@@ -268,10 +255,6 @@ public class MatchBoard {
 					assert bufferedQuestions.size() == from + i : "Given bufferedFrom is miss-matched with expected index";
 					bufferedQuestions.add(qs.get(i));
 				}
-			}
-			if (state.getBufferedEvents() != null) {
-				bufferedEvents.addAll(state.getBufferedEvents());
-				display.addEvents(state.getBufferedEvents());
 			}
 			if (state.getPhase() == MatchPhase.PLAYING) {
 				if (currentQuestionOrder == -1) {

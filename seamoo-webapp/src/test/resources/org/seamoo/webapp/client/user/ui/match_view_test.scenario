@@ -46,12 +46,3 @@ When View Phase is switched to YOU_FINISHED
 Then panelQuestion is invisible
 And panelYouFinished is visible
 And panelMatchWaiting is invisible
-Given Event#0 phuongnd08 join Match
-Given Event#1 phuongnd08 submit answer for question #1
-Given Event#2 phuongnd08 ignore question #2
-Given Event#3 phuongnd08 left Match
-When Events are added to View
-Then tableMatchEvents shows "<strong>phuongnd08</strong> joined match"
-And tableMatchEvents shows "<strong>phuongnd08</strong> answered question #1"
-And tableMatchEvents shows "<strong>phuongnd08</strong> ignored question #2"
-And tableMatchEvents shows "<strong>phuongnd08</strong> left match"

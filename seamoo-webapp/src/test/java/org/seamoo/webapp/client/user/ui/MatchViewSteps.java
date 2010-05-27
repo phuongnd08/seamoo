@@ -307,14 +307,4 @@ public class MatchViewSteps {
 		MatchEvent e = new MatchEvent(MatchEventType.LEFT, new Date(), memberFromDisplayName(displayName));
 		events.add(e);
 	}
-
-	@When("Events are added to View")
-	public void addEventsToView() {
-		matchView.addEvents(events);
-	}
-
-	@Then("tableMatchEvents shows \"$text\"")
-	public void assertMatchEventShown(String text) {
-		verify(matchView.tableMatchEvents).setHTML(anyInt(), anyInt(), eq(text));
-	}
 }

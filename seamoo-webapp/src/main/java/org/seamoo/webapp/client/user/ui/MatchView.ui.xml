@@ -42,10 +42,5 @@
 			<gwt:FlexTable ui:field="tableChoices" styleName="fw"></gwt:FlexTable>
 			<gwt:Button ui:field="buttonIgnore">Bỏ qua&gt;&gt;</gwt:Button>
 		</gwt:HTMLPanel>
-		<gwt:HTMLPanel styleName="description-box" ui:field="panelEvents">
-			<h3>Diễn biến</h3>
-			<gwt:FlexTable ui:field="tableMatchEvents" styleName="fw">
-			</gwt:FlexTable>
-		</gwt:HTMLPanel>
 	</gwt:HTMLPanel>
 </ui:UiBinder>

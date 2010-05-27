@@ -7,8 +7,8 @@ import java.util.List;
 import org.seamoo.entities.question.Question;
 
 /**
- * Contain all information used to re-produce the match state of a player. Won't
- * be persisted. Will be calculated based on Match & MatchCompetitor information
+ * Contain all information used to re-produce the match state of a player. Won't be persisted. Will be calculated based on Match &
+ * MatchCompetitor information
  * 
  * @author phuongnd08
  * 
@@ -28,15 +28,12 @@ public class MatchState implements Serializable {
 	private int questionsCount;
 
 	/**
-	 * The number of periods after that the player should recheck for match
-	 * state
+	 * The number of periods after that the player should recheck for match state
 	 */
 	private long refreshPeriod = DEFAULT_REFRESH_PERIOD;
 	/**
-	 * The number of periods after that the current phase will end If the
-	 * current phase is FORMED then this is the number of period before the
-	 * match begin If the current phase is PLAYING then this is the number of
-	 * period before the match end
+	 * The number of periods after that the current phase will end If the current phase is FORMED then this is the number of
+	 * period before the match begin If the current phase is PLAYING then this is the number of period before the match end
 	 */
 	private long remainingPeriod;
 	/**
@@ -44,12 +41,9 @@ public class MatchState implements Serializable {
 	 */
 	private int bufferedQuestionsFrom;
 	private List<Question> bufferedQuestions;
-	private int bufferedEventsFrom;
-	private List<MatchEvent> bufferedEvents;
 	private List<MatchCompetitor> competitors;
 	private MatchPhase phase;
 	private int completedQuestionsCount;
-	private boolean reset;
 
 	public MatchState() {
 		bufferedQuestions = new ArrayList<Question>();
@@ -127,22 +121,6 @@ public class MatchState implements Serializable {
 		return completedQuestionsCount;
 	}
 
-	public void setBufferedEventsFrom(int bufferedEventsFrom) {
-		this.bufferedEventsFrom = bufferedEventsFrom;
-	}
-
-	public int getBufferedEventsFrom() {
-		return bufferedEventsFrom;
-	}
-
-	public void setBufferedEvents(List<MatchEvent> bufferedEvents) {
-		this.bufferedEvents = bufferedEvents;
-	}
-
-	public List<MatchEvent> getBufferedEvents() {
-		return bufferedEvents;
-	}
-
 	public void setMatchAlias(String matchAlias) {
 		this.matchAlias = matchAlias;
 	}
@@ -157,17 +135,5 @@ public class MatchState implements Serializable {
 
 	public long getLeagueAutoId() {
 		return leagueAutoId;
-	}
-
-	public void setReset(boolean reset) {
-		this.reset = reset;
-	}
-
-	/**
-	 * Return whether the match state is requested with incorrect parameter (often mean the match is reset without client aware of that)
-	 * @return
-	 */
-	public boolean isReset() {
-		return reset;
 	}
 }

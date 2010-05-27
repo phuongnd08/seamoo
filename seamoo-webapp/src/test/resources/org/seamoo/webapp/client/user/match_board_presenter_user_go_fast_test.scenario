@@ -8,7 +8,7 @@ And A Match Service Async
 And Current match is started with remaining periods of 30000 milliseconds and number of questions of 10
 And 5 questions from 0 is associated to match
 When Presenter initialize
-Then Service get the current match information with receivedQuestion=0 & receivedEvent=0
+Then Service get the current match information with receivedQuestion=0
 And Display is switched to PLAYING mode
 Given Service forgets its interaction
 And 5 questions from 5 is associated to match 
@@ -18,7 +18,7 @@ When Timer is fired on schedule
 !-- Fast-forward first 5 questions
 And User ignore 5 questions
 Then Service get current match information 1 time
-Then Service get the current match information with receivedQuestion=5 & receivedEvent=0
+Then Service get the current match information with receivedQuestion=5
 And Display is viewing no question
 When Answer to query for match state is returned
 Then Display is viewing 6th question

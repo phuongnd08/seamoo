@@ -138,14 +138,14 @@ public class MatchBoardPresenterSteps {
 			@Override
 			public Object answer(InvocationOnMock invocation) throws Throwable {
 				// TODO Auto-generated method stub
-				AsyncCallback<MatchState> callback = (AsyncCallback<MatchState>) invocation.getArguments()[3];
+				AsyncCallback<MatchState> callback = (AsyncCallback<MatchState>) invocation.getArguments()[2];
 				if (!notLoggedIn)
 					callback.onSuccess(matchState);
 				else
 					callback.onFailure(new NotLoggedInException());
 				return null;
 			}
-		}).when(serviceAsync).getMatchState(anyLong(), anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
+		}).when(serviceAsync).getMatchState(anyLong(), anyInt(), (AsyncCallback<MatchState>) any());
 
 		doAnswer(new Answer() {
 
@@ -172,10 +172,10 @@ public class MatchBoardPresenterSteps {
 			@Override
 			public Object answer(InvocationOnMock invocation) throws Throwable {
 				// TODO Auto-generated method stub
-				postPonedCallback = (AsyncCallback<MatchState>) invocation.getArguments()[3];
+				postPonedCallback = (AsyncCallback<MatchState>) invocation.getArguments()[2];
 				return null;
 			}
-		}).when(serviceAsync).getMatchState(anyLong(), anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
+		}).when(serviceAsync).getMatchState(anyLong(), anyInt(), (AsyncCallback<MatchState>) any());
 	}
 
 	@When("Answer to query for match state is returned")
@@ -231,7 +231,6 @@ public class MatchBoardPresenterSteps {
 	@Given("Current user has answered $number questions")
 	public void setUpCurrentUserCompletedQuestions(int number) {
 		matchState.setCompletedQuestionsCount(number);
-		matchState.setBufferedEventsFrom(0);
 		matchState.setBufferedQuestions(Arrays.asList(questions));
 	}
 
@@ -240,9 +239,9 @@ public class MatchBoardPresenterSteps {
 		presenter.initialize(serviceAsync, display, TEST_LEAGUE_AUTOID);
 	}
 
-	@Then("Service get the current match information with receivedQuestion=$receivedQuestion & receivedEvent=$receivedEvent")
-	public void assertServiceGetCurrentMatchInformation(int receivedQuestion, int receivedEvent) {
-		verify(serviceAsync).getMatchState(eq(1L), eq(receivedQuestion), eq(receivedEvent), (AsyncCallback<MatchState>) any());
+	@Then("Service get the current match information with receivedQuestion=$receivedQuestion")
+	public void assertServiceGetCurrentMatchInformation(int receivedQuestion) {
+		verify(serviceAsync).getMatchState(eq(1L), eq(receivedQuestion), (AsyncCallback<MatchState>) any());
 	}
 
 	@Then("Display is switched to $mode mode")
@@ -308,15 +307,6 @@ public class MatchBoardPresenterSteps {
 			subList.add(questions[index + i]);
 		matchState.setBufferedQuestions(subList);
 		matchState.setBufferedQuestionsFrom(index);
-	}
-
-	@Given("$number events from $index is associated to match")
-	public void setUpBufferedEvents(int number, int index) {
-		List<MatchEvent> subList = new ArrayList<MatchEvent>();
-		for (int i = 0; i < number; i++)
-			subList.add(new MatchEvent());
-		matchState.setBufferedEvents(subList);
-		matchState.setBufferedEventsFrom(index);
 	}
 
 	private int positionToNumber(String position) {
@@ -398,7 +388,7 @@ public class MatchBoardPresenterSteps {
 
 	@Then("Service doesn't get the current match information")
 	public void assertServiceDoesNotGetMatchState() {
-		verify(serviceAsync, never()).getMatchState(anyLong(), anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
+		verify(serviceAsync, never()).getMatchState(anyLong(), anyInt(), (AsyncCallback<MatchState>) any());
 	}
 
 	@Then("Timer is not rescheduled")
@@ -416,19 +406,6 @@ public class MatchBoardPresenterSteps {
 	public void assertPageNotRedirect() {
 		PowerMockito.verifyStatic(never());
 		Window.Location.replace(anyString());
-	}
-
-	@Then("Display added $number events")
-	public void assertEventsAddedToDisplay(final int number) {
-		verify(display).addEvents(argThat(new ArgumentMatcher<List<MatchEvent>>() {
-
-			@Override
-			public boolean matches(Object argument) {
-				// TODO Auto-generated method stub
-				List<MatchEvent> lists = (List<MatchEvent>) argument;
-				return lists.size() == number;
-			}
-		}));
 	}
 
 	@Then("Display remaining time is assigned to $remainingTime")
@@ -449,7 +426,7 @@ public class MatchBoardPresenterSteps {
 	@Then("Service get current match information $count times")
 	@Alias("Service get current match information $count time")
 	public void assertServiceGetMatchStateTimes(int count) {
-		verify(serviceAsync, times(count)).getMatchState(anyLong(), anyInt(), anyInt(), (AsyncCallback<MatchState>) any());
+		verify(serviceAsync, times(count)).getMatchState(anyLong(), anyInt(), (AsyncCallback<MatchState>) any());
 	}
 
 	@Given("User is not logged in")
@@ -467,17 +444,6 @@ public class MatchBoardPresenterSteps {
 	public void assertServiceSubmitEscape() {
 		verify(serviceAsync).escapeCurrentMatch(eq(matchState.getLeagueAutoId()), (AsyncCallback) any());
 	}
-
-	@Given("Current match is reset")
-	public void setCurrentMatchAsReset() {
-		matchState.setReset(true);
-	}
-
-	@Then("Display resets its events")
-	public void assertDisplayResetEvents() {
-		verify(display).resetEvents();
-	}
-
 	@Then("Display is not viewing any question")
 	public void assertDisplayNotViewingAnyQuestion() {
 		verify(display).setQuestion(null);

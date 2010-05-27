@@ -51,7 +51,7 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	}
 
 	@Override
-	public MatchState getMatchState(Long leagueId, int bufferedQuestionsCount, int bufferredEventsCount)
+	public MatchState getMatchState(Long leagueId, int bufferedQuestionsCount)
 			throws NotLoggedInException {
 		Member member = getInjectedMember();
 		if (member == null) {
