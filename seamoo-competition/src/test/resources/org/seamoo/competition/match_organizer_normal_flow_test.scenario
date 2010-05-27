@@ -35,12 +35,15 @@ When 1st user submit #1 for question 3-3
 Then 1st user has 3 answers
 When 1st user submit #1 for question 2-2
 Then 1st user has 3 answers
-!-- The match is timed out
+!-- The match is timed out -> persisted
 Given Current Time is 10:02:12
 When 1st user request for Match
-Then Returned Match is 1st match
+Then 1st Match is persisted
+And Returned Match is 1st match
 And Returned Match Phase is FINISHED
+Given matchDao forgot its interaction
 When 2nd user request for Match
+Then 1st Match is not persisted
 Then Returned Match is 1st match
 When 3rd user request for Match
 Then Returned Match is 1st match

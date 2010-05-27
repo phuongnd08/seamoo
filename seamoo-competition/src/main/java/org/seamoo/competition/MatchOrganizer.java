@@ -109,14 +109,25 @@ public class MatchOrganizer {
 		initialized = true;
 	}
 
-	private boolean isStarted(RemoteMatch match) {
-		return match.getReadyMoment() != 0
-				&& (match.getReadyMoment() + settings.getMatchCountDownTime() <= timeProvider.getCurrentTimeStamp());
+	private boolean isStarted(RemoteMatch remoteMatch) {
+		long rm = remoteMatch.getReadyMoment();
+		return rm != 0 && (rm + settings.getMatchCountDownTime() <= timeProvider.getCurrentTimeStamp());
 	}
 
-	private boolean isFinishedMatch(RemoteMatch match) {
-		return match.getFinishedMoment() != 0
-				|| match.getReadyMoment() + settings.getMatchCountDownTime() + settings.getMatchTime() <= timeProvider.getCurrentTimeStamp();
+	private boolean isFinishedMatch(RemoteMatch remoteMatch) {
+		return remoteMatch.getFinishedMoment() != 0;
+	}
+
+	/**
+	 * Return whether the match should be persisted
+	 * 
+	 * @param remoteMatch
+	 * @return
+	 */
+	private boolean shouldFinishMatch(RemoteMatch remoteMatch) {
+		long rm = remoteMatch.getReadyMoment();
+		return rm != 0 && (rm + settings.getMatchCountDownTime() + settings.getMatchTime() <= timeProvider.getCurrentTimeStamp())
+				&& remoteMatch.getDbKey() == null;
 	}
 
 	private RemoteMatch assignMatch(MatchCandidate candidate) {
@@ -158,7 +169,7 @@ public class MatchOrganizer {
 	 * 
 	 * @param match
 	 */
-	private void finishMatch(RemoteMatch remoteMatch) {
+	private Match finishMatch(RemoteMatch remoteMatch) {
 		long currentTimeStamp = timeProvider.getCurrentTimeStamp();
 		List<MatchCompetitor> competitors = new ArrayList<MatchCompetitor>();
 		List<RemoteObject<MatchCompetitor>> remoteCompetitors = new ArrayList<RemoteObject<MatchCompetitor>>();
@@ -181,6 +192,7 @@ public class MatchOrganizer {
 			listener.finishMatch(match);
 		matchDao.persist(match);
 		remoteMatch.setDbKey(match.getAutoId());
+		return match;
 	}
 
 	/**
@@ -245,7 +257,23 @@ public class MatchOrganizer {
 				candidateWrapper.putObject(candidate);
 			}
 		}
-		return toMatch(remoteMatch);
+		Match cachedMatch = null;
+		if (shouldFinishMatch(remoteMatch)) {
+			cachedMatch = tryFinishMatch(remoteMatch);
+		}
+		return cachedMatch != null ? cachedMatch : toMatch(remoteMatch);
+	}
+
+	private Match tryFinishMatch(RemoteMatch remoteMatch) {
+		Match cachedMatch = null;
+		if (remoteMatch.tryLockMatch()) {
+			if (remoteMatch.getDbKey() == null) {
+				// double check the dbKey
+				cachedMatch = finishMatch(remoteMatch);
+				remoteMatch.unlockMatch();
+			}
+		}
+		return cachedMatch;
 	}
 
 	private Match toMatch(RemoteMatch remoteMatch) {
@@ -328,7 +356,9 @@ public class MatchOrganizer {
 
 			if (competitorDone) {
 				if (remoteMatch.tryLockMatch()) {
-					checkMatchFinished(remoteMatch);
+					if (remoteMatch.getDbKey() == null) {
+						checkMatchFinished(remoteMatch);
+					}
 					remoteMatch.unlockMatch();
 				}
 			}

@@ -109,6 +109,15 @@ public class MatchOrganizerSteps {
 	@Given("A Match Dao")
 	public void setUpMatchDao() {
 		matchDao = mock(MatchDao.class);
+		doAnswer(new Answer() {
+
+			@Override
+			public Object answer(InvocationOnMock invocation) throws Throwable {
+				Match m = (Match) invocation.getArguments()[0];
+				m.setAutoId(1L);
+				return null;
+			}
+		}).when(matchDao).persist((Match) any());
 	}
 
 	List<Match> bufferedMatches;
@@ -265,6 +274,25 @@ public class MatchOrganizerSteps {
 		}));
 	}
 
+	@Then("$position Match is not persisted")
+	public void assertMatchNotPersisted(String position) {
+		final int pos = positionToNumber(position);
+		verify(matchDao, never()).persist(argThat(new ArgumentMatcher<Match>() {
+
+			@Override
+			public boolean matches(Object argument) {
+				// TODO Auto-generated method stub
+				Match m = (Match) argument;
+				return m.getDescription().equals("Match #" + pos);
+			}
+		}));
+	}
+
+	@Given("matchDao forgot its interaction")
+	public void resetMatchDao() {
+		reset(matchDao);
+	}
+
 	@Then("$position user score is $score")
 	public void assertScore(String position, double score) throws TimeoutException {
 		int pos = positionToNumber(position) - 1;
@@ -302,7 +330,8 @@ public class MatchOrganizerSteps {
 
 	@Given("Cache is corrupted")
 	public void corruptCache() {
-		LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalMemcacheServiceTestConfig(), new LocalDatastoreServiceTestConfig());
+		LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalMemcacheServiceTestConfig(),
+				new LocalDatastoreServiceTestConfig());
 		helper.setUp();
 	}
 

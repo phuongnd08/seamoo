@@ -13,7 +13,6 @@ public class MatchOrganizerNormalFlowUserSubmitAnswerSoonTest extends PowerMocke
 	@Override
 	@Test
 	public void runScenario() throws Throwable {
-		// TODO Auto-generated method stub
 		super.runScenario();
 	}
 }
