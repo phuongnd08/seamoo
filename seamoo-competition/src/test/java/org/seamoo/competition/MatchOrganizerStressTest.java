@@ -10,7 +10,7 @@ import java.util.concurrent.TimeoutException;
 
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.seamoo.competition.FakeCacheContainer.FakeRemoteObjectFactory;
+import org.seamoo.competition.FakeRemoteObjectContainer.FakeRemoteObjectFactory;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
@@ -28,7 +28,7 @@ public class MatchOrganizerStressTest {
 
 	private static long SLEEP_UNIT = 1;
 
-	private static long MAX_TEST_TIME = 1000000;
+	private static long MAX_TEST_TIME = 15000;
 
 	private static int SIMULTANEOUS_USERS_COUNT = 100;
 
@@ -94,7 +94,7 @@ public class MatchOrganizerStressTest {
 	}
 
 	@Test
-	public void matchOrganizerShouldNotLockTooMuch() throws InterruptedException {
+	public void matchOrganizerShouldPerformFast() throws InterruptedException {
 		MatchOrganizerSettings settings = new MatchOrganizerSettings();
 		settings.setMatchCountDownTime(100 * SLEEP_UNIT);
 		settings.setMatchTime(120 * 10 * SLEEP_UNIT);
@@ -144,6 +144,15 @@ public class MatchOrganizerStressTest {
 				return questions.get((int) (key - 1));
 			}
 		});
+		doAnswer(new Answer() {
+
+			@Override
+			public Object answer(InvocationOnMock invocation) throws Throwable {
+				Match m = (Match) invocation.getArguments()[0];
+				m.setAutoId(1L);
+				return null;
+			}
+		}).when(organizer.matchDao).persist((Match) any());
 
 		Thread[] threads = new Thread[SIMULTANEOUS_USERS_COUNT];
 		for (int i = 0; i < threads.length; i++) {

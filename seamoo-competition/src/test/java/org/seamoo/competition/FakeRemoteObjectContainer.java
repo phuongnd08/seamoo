@@ -13,7 +13,7 @@ import org.seamoo.cache.RemoteObject;
 import org.seamoo.cache.RemoteObjectFactory;
 import org.seamoo.test.ObjectSerializer;
 
-public class FakeCacheContainer {
+public class FakeRemoteObjectContainer {
 	public static class FakeRemoteObject<T> implements RemoteObject<T> {
 
 		protected boolean locked;
@@ -39,12 +39,10 @@ public class FakeCacheContainer {
 
 		@Override
 		public T getObject() {
-			// TODO Auto-generated method stub
-			System.out.println("getObject(" + key + "): sleep=" + getTime);
+			//System.out.println("getObject(" + key + "): sleep=" + getTime);
 			try {
 				Thread.sleep(getTime);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			Object o = map.get(this.key);
@@ -68,7 +66,6 @@ public class FakeCacheContainer {
 				} else
 					return false;
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			}
@@ -83,7 +80,6 @@ public class FakeCacheContainer {
 
 		@Override
 		public void putObject(T object) {
-			// TODO Auto-generated method stub
 			try {
 				System.out.println("putObject(" + key + "): sleep=" + putTime);
 				Thread.sleep(putTime);
@@ -201,8 +197,8 @@ public class FakeCacheContainer {
 	public static class FakeRemoteObjectFactory implements RemoteObjectFactory {
 		Map<String, Object> map;
 		Map<String, Lock> lockMap;
-		long lockTime = 100;
-		long putTime = 1;
+		long lockTime = 1;
+		long putTime = 2;
 		long getTime = 1;
 
 		public FakeRemoteObjectFactory() {
@@ -211,7 +207,7 @@ public class FakeCacheContainer {
 		}
 
 		@Override
-		public synchronized <T> RemoteObject<T> createRemoteObject(Class<T> clazz, String key) {
+		public <T> RemoteObject<T> createRemoteObject(Class<T> clazz, String key) {
 			// TODO Auto-generated method stub
 			String realKey = clazz.getName() + "@" + key;
 			synchronized (lockMap) {

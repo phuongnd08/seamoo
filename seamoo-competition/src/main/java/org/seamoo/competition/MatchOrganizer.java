@@ -270,7 +270,9 @@ public class MatchOrganizer {
 
 		match.setDescription("Match #" + remoteMatch.getKey().toString());// expose match information for testing
 
-		match.setQuestionIds(Lists.newArrayList(remoteMatch.getQuestionIds()));
+		Long[] questionIds = remoteMatch.getQuestionIds();
+		if (questionIds != null)
+			match.setQuestionIds(Lists.newArrayList(questionIds));
 
 		return match;
 	}
