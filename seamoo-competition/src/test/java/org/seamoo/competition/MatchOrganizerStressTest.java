@@ -28,7 +28,7 @@ public class MatchOrganizerStressTest {
 
 	private static long SLEEP_UNIT = 1;
 
-	private static long MAX_TEST_TIME = 25000;
+	private static long MAX_TEST_TIME = 30000;
 
 	private static int SIMULTANEOUS_USERS_COUNT = 100;
 
@@ -44,6 +44,7 @@ public class MatchOrganizerStressTest {
 						Thread.sleep(30 * SLEEP_UNIT);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
+						System.out.println("Interupted while waiting for match to be formed: Member#" + memberId);
 						e.printStackTrace();
 					}
 					m = organizer.getMatchForUser(memberId);
@@ -74,6 +75,7 @@ public class MatchOrganizerStressTest {
 						Thread.sleep(30 * SLEEP_UNIT);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
+						System.out.println("Interupted while waiting for match to be finished: Member#" + memberId);
 						e.printStackTrace();
 					}
 					m = organizer.getMatchForUser(memberId);
@@ -90,7 +92,7 @@ public class MatchOrganizerStressTest {
 
 	private synchronized void incFinishedUser(long userId) {
 		finishedUser++;
-		System.out.println("User #" + userId + " finished");
+		System.out.println("finishedUser=" + finishedUser + " Member #" + userId);
 	}
 
 	@Test
@@ -178,9 +180,12 @@ public class MatchOrganizerStressTest {
 				Thread.sleep(SLEEP_UNIT * 10);
 				sleepTime += SLEEP_UNIT * 10;
 				if (sleepTime >= MAX_TEST_TIME) {
+					System.out.println("Time out: finishedUser =" + finishedUser);
 					for (int i = 0; i < threads.length; i++) {
-						if (threads[i].isAlive())
+						if (threads[i].isAlive()) {
+							System.out.println("Thread #" + i + " is alive. Interupt it!");
 							threads[i].interrupt();
+						}
 					}
 					fail("Test Timeout");
 				}

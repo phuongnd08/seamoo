@@ -47,17 +47,17 @@ public class RemoteMatch {
 		return mixin.get(Long.class, COMPETITORS_COUNT_SUBKEY, new Long(0));
 	}
 
-	public Object[] getCompetitors() {
-		List<Object> results = new ArrayList<Object>();
+	public MatchCompetitor[] getCompetitors() {
+		List<MatchCompetitor> results = new ArrayList<MatchCompetitor>();
 		long count = getCompetitorCount();
 		for (int i = 1; i <= count; i++) {
-			RemoteObject ro = getRemoteCompetitor(i);
-			Object o = ro.getObject();
+			RemoteObject<MatchCompetitor> ro = getRemoteCompetitor(i);
+			MatchCompetitor o = ro.getObject();
 			if (o == null)
 				break;
 			results.add(o);
 		}
-		return results.toArray(new Object[results.size()]);
+		return results.toArray(new MatchCompetitor[results.size()]);
 	}
 
 	private String getCompetitorSlotKey(int slot) {

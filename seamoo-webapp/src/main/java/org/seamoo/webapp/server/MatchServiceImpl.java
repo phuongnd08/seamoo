@@ -1,7 +1,7 @@
 package org.seamoo.webapp.server;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 import org.seamoo.competition.LeagueOrganizer;
@@ -13,10 +13,10 @@ import org.seamoo.entities.League;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchCompetitor;
-import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
+import org.seamoo.utils.ListBuilder;
 import org.seamoo.utils.TimeProvider;
 import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.seamoo.webapp.client.user.MatchService;
@@ -51,8 +51,7 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 	}
 
 	@Override
-	public MatchState getMatchState(Long leagueId, int bufferedQuestionsCount)
-			throws NotLoggedInException {
+	public MatchState getMatchState(Long leagueId, int bufferedQuestionsCount) throws NotLoggedInException {
 		Member member = getInjectedMember();
 		if (member == null) {
 			throw new NotLoggedInException();
@@ -73,8 +72,10 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 			if (bufferedQuestionsCount < matchState.getQuestionsCount()
 					&& bufferedQuestionsCount - competitor.getPassedQuestionCount() <= BUFFERED_QUESTION_REFILL_THRESHOLD) {
 				matchState.setBufferedQuestionsFrom(bufferedQuestionsCount);
+				Map<Long, Question> questionsMap = questionDao.findAllByKeys(match.getQuestionIds());
+				List<Question> allQuestions = ListBuilder.extractList(questionsMap, match.getQuestionIds());
 				List<Question> bufferedQuestions = getOptimalQuestionBuffer(bufferedQuestionsCount,
-						competitor.getPassedQuestionCount(), questionDao.findAllByKeys(match.getQuestionIds()));
+						competitor.getPassedQuestionCount(), allQuestions);
 				matchState.getBufferedQuestions().addAll(bufferedQuestions);
 			}
 		}
@@ -93,6 +94,7 @@ public class MatchServiceImpl extends RemoteServiceServlet implements MatchServi
 		matchState.setMatchAutoId(match.getAutoId() != null ? match.getAutoId().longValue() : 0);
 		matchState.setLeagueAutoId(match.getLeagueAutoId());
 		matchState.setMatchAlias(match.getAlias());
+		matchState.setMembersMap(memberDao.findAllByKeys(match.getMemberAutoIds()));
 		return matchState;
 	}
 

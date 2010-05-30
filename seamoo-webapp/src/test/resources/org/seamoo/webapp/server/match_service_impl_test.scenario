@@ -16,6 +16,7 @@ And Match Formed Time is 0
 And Current Time is 0
 And Match Started Time is 9000
 And Current Member has 0 buffered questions
+And State contains map of 4 members
 When Member@1 request for Match State
 Then State Phase is FORMED
 And State Remaining Time is 9000

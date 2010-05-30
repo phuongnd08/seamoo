@@ -2,6 +2,7 @@ package org.seamoo.daos.twigImpl;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -203,10 +204,7 @@ public class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TK
 	}
 
 	@Override
-	public List<TEntity> findAllByKeys(List<TKey> keys) {
-		List<TEntity> result = new ArrayList<TEntity>();
-		for (TKey key : keys)
-			result.add(findByKey(key));
-		return result;
+	public Map<TKey, TEntity> findAllByKeys(List<TKey> keys) {
+		return getOds().loadAll(entityClass, keys);
 	}
 }

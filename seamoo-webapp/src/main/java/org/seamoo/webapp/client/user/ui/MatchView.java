@@ -2,6 +2,7 @@ package org.seamoo.webapp.client.user.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.MatchCompetitor;
@@ -18,12 +19,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
@@ -124,7 +123,7 @@ public class MatchView extends Composite implements Display {
 	}
 
 	@Override
-	public void setCompetitors(List<MatchCompetitor> competitors) {
+	public void setCompetitors(List<MatchCompetitor> competitors, Map<Long, Member> membersMap) {
 		if (tableMatchPlayers.getRowCount() != competitors.size()) {
 			tableMatchPlayers.clear();
 			for (int i = 0; i < competitors.size(); i++) {
@@ -138,7 +137,7 @@ public class MatchView extends Composite implements Display {
 			refreshCompetitorQuestionCount();
 		}
 		for (int j = 0; j < competitors.size(); j++) {
-			competitorViews.get(j).setCompetitor(competitors.get(j), null);
+			competitorViews.get(j).setCompetitor(competitors.get(j), membersMap.get(competitors.get(j).getMemberAutoId()));
 		}
 	}
 

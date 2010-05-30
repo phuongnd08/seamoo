@@ -11,6 +11,7 @@ And Question Dao is requested for 20 random questions
 And Returned Match is 1st match
 And Returned Match is assigned with 20 questions
 And Returned Match Phase is NOT_FORMED
+And Returned Match League Id is 1
 Given Current Time is 10:00:01
 When 1st user request for Match
 Then Returned Match Phase is NOT_FORMED
@@ -18,6 +19,8 @@ When 2nd user request for Match
 Then Returned Match is 1st match
 And Returned Match Phase is FORMED
 And Returned Match has 2 players
+!-- Match should not be persisted too soon
+And Returned Match has no AutoId
 !-- 3rd user can join this match
 Given Current Time is 10:00:05
 When 3rd user request for Match
@@ -40,10 +43,14 @@ Given Current Time is 10:02:12
 When 1st user request for Match
 Then 1st Match is persisted
 And Returned Match is 1st match
+And Returned Match AutoId is 1
 And Returned Match Phase is FINISHED
+!-- Match alias assigned on persisted
+And Returned Match Alias is "user1-user2-user3"
 Given matchDao forgot its interaction
 When 2nd user request for Match
 Then 1st Match is not persisted
 Then Returned Match is 1st match
+And Returned Match AutoId is 1
 When 3rd user request for Match
 Then Returned Match is 1st match

@@ -121,4 +121,17 @@ public class TwigGenericDaoImplTest extends LocalAppEngineTest {
 		assertEquals(2, subSet.size());
 		assertEquals(subSet.get(0).getAutoId(), models[1].getAutoId());
 	}
+
+	@Test
+	public void transientFieldIsStillStored() {
+		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
+		daoImpl.objectDatastoreProvider = new ObjectDatastoreProvider();
+		ExampleModel model = new ExampleModel();
+		model.setTransientField("xxx");
+		daoImpl.persist(model);
+		TestModelDAOImpl newDaoImpl = new TestModelDAOImpl();
+		newDaoImpl.objectDatastoreProvider = new ObjectDatastoreProvider();
+		ExampleModel reloadedModel = newDaoImpl.findByKey(model.getAutoId());
+		assertEquals(reloadedModel.getTransientField(), "xxx");
+	}
 }

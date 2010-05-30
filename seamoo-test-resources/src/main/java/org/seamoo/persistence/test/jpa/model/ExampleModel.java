@@ -1,14 +1,14 @@
 package org.seamoo.persistence.test.jpa.model;
 
-import javax.persistence.Id;
-
 import com.vercer.engine.persist.annotation.Key;
+import com.vercer.engine.persist.annotation.Store;
 
 public class ExampleModel {
-	@Id
 	@Key
-	Long autoId;
-	String field;
+	private Long autoId;
+	private String field;
+	@Store(true)
+	private transient String transientField;
 
 	public void setAutoId(Long autoId) {
 		this.autoId = autoId;
@@ -24,5 +24,13 @@ public class ExampleModel {
 
 	public String getField() {
 		return field;
+	}
+
+	public void setTransientField(String transientField) {
+		this.transientField = transientField;
+	}
+
+	public String getTransientField() {
+		return transientField;
 	}
 }

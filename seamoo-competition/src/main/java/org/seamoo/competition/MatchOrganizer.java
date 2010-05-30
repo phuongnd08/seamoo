@@ -132,6 +132,7 @@ public class MatchOrganizer {
 
 	private RemoteMatch assignMatch(MatchCandidate candidate) {
 		long competitorSlotId = nextGlobalCompetitorSlot();
+		System.out.println("Acquired competitorSlotId=" + competitorSlotId);
 		long matchId = competitorSlotId % 4 == 0 ? competitorSlotId / 4 : (competitorSlotId / 4) + 1;
 		RemoteMatch match = getRemoteMatch(matchId);
 		if (isStarted(match))
@@ -255,7 +256,8 @@ public class MatchOrganizer {
 			if (remoteMatch != null) {
 				candidate.setRemoteMatchKey(remoteMatch.getKey());
 				candidateWrapper.putObject(candidate);
-			}
+			} else
+				System.out.println("Acquired null remoteMatch. Retry");
 		}
 		Match cachedMatch = null;
 		if (shouldFinishMatch(remoteMatch)) {
@@ -292,9 +294,17 @@ public class MatchOrganizer {
 		} else
 			match.setPhase(MatchPhase.NOT_FORMED);
 
-		for (Object c : remoteMatch.getCompetitors()) {
-			match.addCompetitor((MatchCompetitor) c);
+		String alias = "";
+		MatchCompetitor[] competitors = remoteMatch.getCompetitors();
+		for (int i = 0; i < competitors.length; i++) {
+			MatchCompetitor c = competitors[i];
+			match.addCompetitor(c);
+			alias += memberDao.findByKey(c.getMemberAutoId()).getAlias();
+			if (i < competitors.length - 1)
+				alias += "-";
+
 		}
+		match.setAlias(alias);
 
 		match.setDescription("Match #" + remoteMatch.getKey().toString());// expose match information for testing
 
@@ -302,6 +312,8 @@ public class MatchOrganizer {
 		if (questionIds != null)
 			match.setQuestionIds(Lists.newArrayList(questionIds));
 
+		match.setLeagueAutoId(this.leagueId);
+		match.setAutoId(remoteMatch.getDbKey());
 		return match;
 	}
 

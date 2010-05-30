@@ -1,13 +1,14 @@
 package org.seamoo.daos;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GenericDao<TEntity, TKey> {
 	List<TEntity> getAll();
 
 	TEntity findByKey(TKey key);
 
-	List<TEntity> findAllByKeys(List<TKey> keys);
+	Map<TKey, TEntity> findAllByKeys(List<TKey> keys);
 
 	TEntity persist(TEntity entity);
 

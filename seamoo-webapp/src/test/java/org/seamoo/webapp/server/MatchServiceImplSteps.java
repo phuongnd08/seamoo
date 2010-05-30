@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.competition.MatchOrganizer;
@@ -53,12 +55,23 @@ public class MatchServiceImplSteps {
 	@Given("A MemberDao")
 	public void initMemberDao() {
 		memberDao = mock(MemberDao.class);
+		when(memberDao.findAllByKeys((List<Long>) any())).thenAnswer(new Answer<Map<Long, Member>>() {
+
+			@Override
+			public Map<Long, Member> answer(InvocationOnMock invocation) throws Throwable {
+				List<Long> ids = (List<Long>) invocation.getArguments()[0];
+				Map<Long, Member> members = new HashMap<Long, Member>();
+				for (Long id : ids)
+					members.put(id, new Member());
+				return members;
+			}
+		});
 	}
 
 	@Given("A QuestionDao")
 	public void initQuestionDao() {
 		questionDao = mock(QuestionDao.class);
-		when(questionDao.findAllByKeys((List<Long>) any())).thenReturn(Lists.newArrayList(new Question[20]));
+		when(questionDao.findAllByKeys((List<Long>) any())).thenReturn(new HashMap<Long, Question>());
 	}
 
 	MatchServiceImpl service;
@@ -206,5 +219,10 @@ public class MatchServiceImplSteps {
 	@Given("Match alias is \"$alias\"")
 	public void setMatchAlias(String alias) {
 		currentMatch.setAlias(alias);
+	}
+
+	@Then("State contains map of $num members")
+	public void assertStateContainMembersMap(int num) {
+		assertEquals(matchState.getMembersMap().size(), 4);
 	}
 }

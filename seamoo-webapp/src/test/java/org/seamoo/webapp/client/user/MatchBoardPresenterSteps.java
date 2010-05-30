@@ -7,6 +7,7 @@ import static org.testng.Assert.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.jbehave.scenario.annotations.Alias;
 import org.jbehave.scenario.annotations.Aliases;
@@ -18,8 +19,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.seamoo.entities.League;
+import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.MatchCompetitor;
-import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
@@ -33,7 +34,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.PopupPanel;
 
 public class MatchBoardPresenterSteps {
@@ -289,7 +289,7 @@ public class MatchBoardPresenterSteps {
 				List<MatchCompetitor> competitors = (List<MatchCompetitor>) argument;
 				return competitors.size() == number;
 			}
-		}));
+		}), (Map<Long, Member>) any());
 	}
 
 	@Given("Current match is started with remaining periods of $remaining milliseconds and number of questions of $questionCount")
@@ -444,6 +444,7 @@ public class MatchBoardPresenterSteps {
 	public void assertServiceSubmitEscape() {
 		verify(serviceAsync).escapeCurrentMatch(eq(matchState.getLeagueAutoId()), (AsyncCallback) any());
 	}
+
 	@Then("Display is not viewing any question")
 	public void assertDisplayNotViewingAnyQuestion() {
 		verify(display).setQuestion(null);

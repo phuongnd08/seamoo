@@ -20,7 +20,6 @@ public class TwigMemberDaoImpl extends TwigGenericDaoImpl<Member, Long> implemen
 
 			@Override
 			public Object getField(Member object, String field) {
-				// TODO Auto-generated method stub
 				if (field.equals("openId"))
 					return object.getOpenId();
 				else
@@ -29,7 +28,6 @@ public class TwigMemberDaoImpl extends TwigGenericDaoImpl<Member, Long> implemen
 
 			@Override
 			public Object getKey(Member object) {
-				// TODO Auto-generated method stub
 				return object.getAutoId();
 			}
 		}, CACHE_PERIOD);

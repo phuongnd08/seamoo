@@ -56,6 +56,7 @@ public class MatchOrganizerSteps {
 			Member member = new Member();
 			member.setAutoId(new Long(i + 1));
 			member.setDisplayName("User #" + (i + 1));
+			member.setAlias("user" + (i + 1));
 			members.add(member);
 		}
 		memberDao = mock(MemberDao.class);
@@ -338,5 +339,25 @@ public class MatchOrganizerSteps {
 	@Then("event finishMatch is triggered")
 	public void assertEventFinishMatchTriggered() {
 		verify(listener).finishMatch((Match) any());
+	}
+
+	@Then("Returned Match League Id is $num")
+	public void assertMatchLeagueAutoId(long num) {
+		assertEquals(match.getLeagueAutoId(), new Long(num));
+	}
+
+	@Then("Returned Match AutoId is $id")
+	public void assertMatchAutoId(long id) {
+		assertEquals(match.getAutoId(), new Long(id));
+	}
+
+	@Then("Returned Match has no AutoId")
+	public void assertMatchHasNoAutoId() {
+		assertNull(match.getAutoId());
+	}
+
+	@Then("Returned Match Alias is \"$alias\"")
+	public void assertMatchAlias(String alias) {
+		assertEquals(match.getAlias(), alias);
 	}
 }

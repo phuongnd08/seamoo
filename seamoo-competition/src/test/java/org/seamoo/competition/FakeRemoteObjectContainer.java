@@ -14,6 +14,7 @@ import org.seamoo.cache.RemoteObjectFactory;
 import org.seamoo.test.ObjectSerializer;
 
 public class FakeRemoteObjectContainer {
+	public static final boolean LOGGING = false;
 	public static class FakeRemoteObject<T> implements RemoteObject<T> {
 
 		protected boolean locked;
@@ -39,7 +40,7 @@ public class FakeRemoteObjectContainer {
 
 		@Override
 		public T getObject() {
-			//System.out.println("getObject(" + key + "): sleep=" + getTime);
+			if (LOGGING)System.out.println("getObject(" + key + "): sleep=" + getTime);
 			try {
 				Thread.sleep(getTime);
 			} catch (InterruptedException e) {
@@ -75,16 +76,15 @@ public class FakeRemoteObjectContainer {
 		public void lock(long timeout) throws TimeoutException {
 			if (!tryLock(timeout))
 				throw new TimeoutException();
-			System.out.println("lock(" + key + "): sleep=" + lockTime);
+			if (LOGGING)System.out.println("lock(" + key + "): sleep=" + lockTime);
 		}
 
 		@Override
 		public void putObject(T object) {
 			try {
-				System.out.println("putObject(" + key + "): sleep=" + putTime);
+				if (LOGGING)System.out.println("putObject(" + key + "): sleep=" + putTime);
 				Thread.sleep(putTime);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			this.map.put(key, object);
@@ -92,8 +92,7 @@ public class FakeRemoteObjectContainer {
 
 		@Override
 		public void unlock() {
-			// TODO Auto-generated method stub
-			System.out.println("unlock(" + key + "): nosleep (would=)" + lockTime);
+			if (LOGGING)System.out.println("unlock(" + key + "): nosleep (would=)" + lockTime);
 			lockMap.get(key).unlock();
 			this.locked = false;
 		}
@@ -208,7 +207,6 @@ public class FakeRemoteObjectContainer {
 
 		@Override
 		public <T> RemoteObject<T> createRemoteObject(Class<T> clazz, String key) {
-			// TODO Auto-generated method stub
 			String realKey = clazz.getName() + "@" + key;
 			synchronized (lockMap) {
 				if (!this.lockMap.containsKey(realKey))

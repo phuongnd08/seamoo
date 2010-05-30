@@ -2,15 +2,16 @@ package org.seamoo.webapp.client.user;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.seamoo.entities.League;
+import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.MatchCompetitor;
-import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
-import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.seamoo.webapp.client.shared.GwtUrlFactory;
+import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.seamoo.webapp.client.shared.ui.MessageBox;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
 import org.seamoo.webapp.client.user.ui.MatchView;
@@ -18,7 +19,6 @@ import org.seamoo.webapp.client.user.ui.MatchView;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Dictionary;
-import com.google.gwt.i18n.rebind.ClearStaticData;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -39,7 +39,7 @@ public class MatchBoard {
 
 		public void setPhase(MatchPhase phase);
 
-		public void setCompetitors(List<MatchCompetitor> competitors);
+		public void setCompetitors(List<MatchCompetitor> competitors, Map<Long, Member> membersMap);
 
 		public void setQuestion(Question question);
 
@@ -263,7 +263,7 @@ public class MatchBoard {
 					nextQuestion();
 			}
 
-			display.setCompetitors(state.getCompetitors());
+			display.setCompetitors(state.getCompetitors(), state.getMembersMap());
 			this.setRemainingPeriod(state.getRemainingPeriod());
 			rescheduleRefreshTimer();
 

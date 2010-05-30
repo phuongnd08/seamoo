@@ -3,7 +3,9 @@ package org.seamoo.entities.matching;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.seamoo.entities.Member;
 import org.seamoo.entities.question.Question;
 
 /**
@@ -42,6 +44,7 @@ public class MatchState implements Serializable {
 	private int bufferedQuestionsFrom;
 	private List<Question> bufferedQuestions;
 	private List<MatchCompetitor> competitors;
+	private Map<Long, Member> membersMap;
 	private MatchPhase phase;
 	private int completedQuestionsCount;
 
@@ -136,4 +139,13 @@ public class MatchState implements Serializable {
 	public long getLeagueAutoId() {
 		return leagueAutoId;
 	}
+
+	public void setMembersMap(Map<Long, Member> membersMap) {
+		this.membersMap = membersMap;
+	}
+
+	public Map<Long, Member> getMembersMap() {
+		return membersMap;
+	}
+
 }

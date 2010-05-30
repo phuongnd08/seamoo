@@ -9,7 +9,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jbehave.scenario.annotations.Alias;
 import org.jbehave.scenario.annotations.Given;
@@ -119,11 +121,16 @@ public class MatchViewSteps {
 	@When("View Players is assigned to $players")
 	public void assignMatchCompetitors(List<String> players) {
 		List<MatchCompetitor> competitors = new ArrayList<MatchCompetitor>();
+		Map<Long, Member> membersMap = new HashMap<Long, Member>();
+		Long memberId = 0L;
 		for (String player : players) {
+			memberId++;
 			MatchCompetitor competitor = new MatchCompetitor();
+			competitor.setMemberAutoId(memberId);
+			membersMap.put(memberId, new Member());
 			competitors.add(competitor);
 		}
-		matchView.setCompetitors(competitors);
+		matchView.setCompetitors(competitors, membersMap);
 	}
 
 	@When("View Phase is switched to $phase")
