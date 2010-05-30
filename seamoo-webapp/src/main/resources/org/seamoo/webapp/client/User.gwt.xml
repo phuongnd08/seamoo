@@ -19,7 +19,4 @@
 	<source path="user" />
 	<source path="shared" />
 	<entry-point class="org.seamoo.webapp.client.user.UserLoader" />
-	<!-- Temporary only compile for firefox browser -->
-	<set-property name="user.agent" value="gecko1_8" />
-
 </module>

@@ -7,15 +7,6 @@
 </div>
 [/#if]
 
-<div class="description-box">
-	<h3>Diễn biến</h3>
-	<table class="fw">
-		[#list match.events as event]
-			[@matchX.eventItem event/]
-		[/#list]
-	</table>
-</div>
-
 [#macro questionItem no content]
 	<tr class="row-${no%2+1}"><td>${no}</td><td colspan="3"><u>${content}</u></td></tr>
 [/#macro]
@@ -51,7 +42,8 @@
 			<th class="number-column"></th><th></th><th style="width: 50px;"></th><th class="answer-review-grade-column"></th>
 		</tr>
 		[#assign count=0/]
-		[#list match.questions as question]
+		[#list match.questionIds as questionId]
+			[#assign question=questionsMap[questionId?string]/]
 			[#assign count=count+1/]
 			[@questionItem no=count content="${question.currentRevision.content}"/]
 			[#list match.competitors as competitor]
@@ -62,8 +54,9 @@
 					[#else]
 						[#assign displayTime=""]
 					[/#if]
+					[#assign member = membersMap[competitor.memberAutoId?string]/]
 					[#if (answer.type==enums["org.seamoo.entities.matching.MatchAnswerType"].SUBMITTED)]
-						[@answerItem no=count author=competitor.member.displayName moment="${displayTime}" content=question.currentRevision.getTranslatedAnswer(answer.content)]
+						[@answerItem no=count author=member.displayName moment="${displayTime}" content=question.currentRevision.getTranslatedAnswer(answer.content)]
 							[#if answer.correct]
 								[@icon type="correct"/]
 							[#else]
@@ -71,7 +64,7 @@
 							[/#if]
 						[/@answerItem]
 					[#else]
-						[@answerItem no=count author=competitor.member.displayName moment="${displayTime}" content=""]
+						[@answerItem no=count author=member.displayName moment="${displayTime}" content=""]
 							[@icon type="ignore"/]
 						[/@answerItem]
 					

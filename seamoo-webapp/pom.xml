@@ -244,6 +244,13 @@
 
 	<build>
 		<outputDirectory>war/WEB-INF/classes</outputDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
 		<plugins>
 
 			<plugin>
@@ -291,10 +298,18 @@
 							<goal>compile</goal>
 							<!--							<goal>generateAsync</goal>-->
 							<!--							<goal>test</goal>-->
+
 						</goals>
+						<configuration>
+							<modules>
+								<module>${gwt.modules.admin}</module>
+								<module>${gwt.modules.user}</module>
+							</modules>
+						</configuration>
 					</execution>
 				</executions>
 				<configuration>
+
 					<!-- match -Dgae.port -->
 					<port>${gae.port}</port>
 					<debugPort>${gae.debugPort}</debugPort>
@@ -375,6 +390,21 @@
 								</exec>
 								<!-- remove the output from disk -->
 								<delete file="${basedir}/target/install-leagues.txt" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					
+					<execution>
+						<id>check-gwt-compiler-settings</id>
+						<phase>process-resources</phase>
+						<configuration>
+							<tasks>
+								<echo>Admin module = ${gwt.modules.admin}</echo>
+								<echo>User module = ${gwt.modules.user}</echo>
+								<echo>leagues.english.eggs.id = ${leagues.english.eggs.id}</echo>
 							</tasks>
 						</configuration>
 						<goals>
@@ -485,6 +515,12 @@
 		<gwt.style>DETAILED</gwt.style>
 		<gwt.logLevel>ALL</gwt.logLevel>
 
+		<leagues.english.eggs.id>4</leagues.english.eggs.id>
+		<!-- Normally, only produce js for Firefox -->
+		<gwt.modules.admin>org.seamoo.webapp.client.AdminFirefox
+		</gwt.modules.admin>
+		<gwt.modules.user>org.seamoo.webapp.client.UserFirefox
+		</gwt.modules.user>
 	</properties>
 
 	<profiles>
@@ -521,9 +557,10 @@
 			</activation>
 			<properties>
 				<!--
-					During release, set application version in appengine-web.xml to 2
+					During release, set application version in appengine-web.xml to
+					alpha-3
 				-->
-				<gae.application.version>alpha-2</gae.application.version>
+				<gae.application.version>alpha-3</gae.application.version>
 
 				<!--
 					Produce compressed JS during GWT compilation for production
@@ -531,6 +568,11 @@
 				-->
 				<gwt.style>OBFUSCATED</gwt.style>
 				<gwt.logLevel>ERROR</gwt.logLevel>
+				<leagues.english.eggs.id>78001</leagues.english.eggs.id>
+				<!-- On release, produce js for many browsers -->
+				<gwt.modules.admin>org.seamoo.webapp.client.Admin
+				</gwt.modules.admin>
+				<gwt.modules.user>org.seamoo.webapp.client.User</gwt.modules.user>
 			</properties>
 		</profile>
 		<profile>

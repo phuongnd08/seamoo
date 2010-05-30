@@ -12,7 +12,8 @@ display a row containing brief information of a match
 [#assign count=0/]
 [#list match.competitors as competitor]
 	[#assign count=count+1/]
-	<a href="${urlFactory.getUserViewUrl(competitor.member)}">${competitor.member.displayName}</a> 
+	[#assign member=membersMap[competitor.memberAutoId?string]/]
+	<a href="${urlFactory.getUserViewUrl(member)}">${member.displayName}</a> 
 	([@compress single_line=true]
 		[#switch competitor.rank]
 		[#case 1] 1st
@@ -51,7 +52,7 @@ a macro for displaying a ranking item
 --]
 [#macro rankItem rank rankIndex]
 	<tr>
-		[#assign member=memberMap[rank.memberAutoId?c]/]
+		[#assign member=membersMap[rank.memberAutoId?c]/]
 		<td>${rankIndex}</td>
 		<td><a href="${urlFactory.getUserViewUrl(member)}">${member.displayName}</a></td><td class="tar">${rank.accumulatedScore}</td><td class="tar">${rank.matchCount}</td></tr>
 [/#macro]

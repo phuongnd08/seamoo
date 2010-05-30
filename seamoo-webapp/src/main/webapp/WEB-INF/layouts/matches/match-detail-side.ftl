@@ -7,27 +7,28 @@
 ${(milliseconds/1000/60)?string("0")}:${(milliseconds/1000 % 60)?string("00")}
 [/#macro]
 [#macro competitorInfo competitor]
-<div class="user-info">
-	<table class="fw">
-		<tr>
-			<td class="user-gravatar32">
-				[@common.avatar emailHash=competitor.member.emailHash size=32/]
-			</td>
-			<td class="user-details">
-				<div class="competitor-rank[#if competitor.rank==1] competitor-rank-first[/#if]">${competitor.rank}</div>
-				<div><a href="[@spring.url "/users/${competitor.member.autoId}/${competitor.member.alias}"/]">${competitor.member.displayName}</a></div>
-				<div><span class="reputation-score">12k</span> ● <span class="user-level">10</span></div>
-				<div><em>${(competitor.member.quote!"")?html}</em></div>
-				<div>Tổng điểm <strong>${competitor.totalScore}</strong></div>
-				<div>● Đúng <strong>${competitor.correctCount}</strong></div>
-				<div>● Sai <strong>${competitor.wrongCount}</strong></div>
-				<div>● Bỏ qua <strong>${competitor.ignoreCount}</strong></div>
-				<div>● Thời gian <strong>[@minuteAndSecond competitor.finishedMoment-match.startedMoment/]</strong></div>
-				<div>Tích luỹ <strong>+${competitor.additionalAccumulatedScore}</strong></div>
-			</td>
-		</tr>
-	</table>
-</div>
+	[#assign member=membersMap[competitor.memberAutoId?string]/]
+	<div class="user-info">
+		<table class="fw">
+			<tr>
+				<td class="user-gravatar32">
+					[@common.avatar emailHash=member.emailHash size=32/]
+				</td>
+				<td class="user-details">
+					<div class="competitor-rank[#if competitor.rank==1] competitor-rank-first[/#if]">${competitor.rank}</div>
+					<div><a href="[@spring.url "/users/${member.autoId}/${member.alias}"/]">${member.displayName}</a></div>
+					<div><span class="reputation-score">12k</span> ● <span class="user-level">10</span></div>
+					<div><em>${(member.quote!"")?html}</em></div>
+					<div>Tổng điểm <strong>${competitor.totalScore}</strong></div>
+					<div>● Đúng <strong>${competitor.correctCount}</strong></div>
+					<div>● Sai <strong>${competitor.wrongCount}</strong></div>
+					<div>● Bỏ qua <strong>${competitor.ignoreCount}</strong></div>
+					<div>● Thời gian <strong>[@minuteAndSecond competitor.finishedMoment-match.startedMoment/]</strong></div>
+					<div>Tích luỹ <strong>+${competitor.additionalAccumulatedScore}</strong></div>
+				</td>
+			</tr>
+		</table>
+	</div>
 [/#macro]
 
 <div class="module">

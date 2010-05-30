@@ -2,14 +2,13 @@ package org.seamoo.daos.twigImpl;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.seamoo.daos.GenericDao;
-import org.seamoo.entities.matching.Match;
 import org.seamoo.utils.TimeProvider;
 
 import com.google.appengine.api.datastore.QueryResultIterator;
@@ -204,7 +203,7 @@ public class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TK
 	}
 
 	@Override
-	public Map<TKey, TEntity> findAllByKeys(List<TKey> keys) {
+	public Map<TKey, TEntity> findAllByKeys(Collection<TKey> keys) {
 		return getOds().loadAll(entityClass, keys);
 	}
 }

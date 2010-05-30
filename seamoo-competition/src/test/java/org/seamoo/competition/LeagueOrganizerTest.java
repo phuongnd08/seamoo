@@ -134,7 +134,7 @@ public class LeagueOrganizerTest {
 	}
 
 	@Test
-	public void unqualifiedCompetitorWillNotBeUpdatedOnUpdatingUsingRankedMatch() {
+	public void unqualifiedCompetitorWillAlsoBeUpdatedOnUpdatingUsingRankedMatch() {
 		LeagueMembership lms = new LeagueMembership();
 		lms.setAccumulatedScore(20);
 		when(leagueMembershipDao.findByMemberAndLeagueAtCurrentMoment(1L, 20L)).thenReturn(lms);
@@ -142,7 +142,7 @@ public class LeagueOrganizerTest {
 		Match m = getSampleMatch(20L);
 		m.getCompetitorForMember(1L).setTotalScore(13);
 		leagueOrganizer.updateLeagueMembershipScore(m);
-		verify(leagueMembershipDao, never()).persist(lms);
+		verify(leagueMembershipDao).persist(lms);
 	}
 
 	private LeagueMembership getSampleLeagueMembership(Long memberAutoId, Long subjectAutoId, Long leagueAutoId,

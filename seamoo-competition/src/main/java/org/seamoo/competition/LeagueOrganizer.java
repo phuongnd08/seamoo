@@ -86,22 +86,23 @@ public class LeagueOrganizer {
 
 	public void updateLeagueMembershipScore(Match rankedMatch) {
 		for (MatchCompetitor competitor : rankedMatch.getCompetitors()) {
-			if (competitor.getTotalScore() > settings.getMinMatchScoreForAccumulation()) {
-				LeagueMembership lms = leagueMembershipDao.findByMemberAndLeagueAtCurrentMoment(competitor.getMemberAutoId(),
-						rankedMatch.getLeagueAutoId());
-				if (lms == null) {
-					lms = new LeagueMembership();
-					lms.setMemberAutoId(competitor.getMemberAutoId());
-					lms.setLeagueAutoId(rankedMatch.getLeagueAutoId());
-					lms.setYear(timeProvider.getCurrentYear());
-					lms.setMonth(timeProvider.getCurrentMonth());
-				}
-				double additionScore = settings.getMaxScorePerMatch() * settings.getRankRatio(competitor.getRank());
-				competitor.setAdditionalAccumulatedScore(additionScore);
-				lms.setAccumulatedScore(lms.getAccumulatedScore() + additionScore);
-				lms.setMatchCount(lms.getMatchCount() + 1);
-				leagueMembershipDao.persist(lms);
+			LeagueMembership lms = leagueMembershipDao.findByMemberAndLeagueAtCurrentMoment(competitor.getMemberAutoId(),
+					rankedMatch.getLeagueAutoId());
+			if (lms == null) {
+				lms = new LeagueMembership();
+				lms.setMemberAutoId(competitor.getMemberAutoId());
+				lms.setLeagueAutoId(rankedMatch.getLeagueAutoId());
+				lms.setYear(timeProvider.getCurrentYear());
+				lms.setMonth(timeProvider.getCurrentMonth());
 			}
+			double additionScore = 0;
+			if (competitor.getTotalScore() > settings.getMinMatchScoreForAccumulation()) {
+				additionScore = settings.getMaxScorePerMatch() * settings.getRankRatio(competitor.getRank());
+			}
+			competitor.setAdditionalAccumulatedScore(additionScore);
+			lms.setAccumulatedScore(lms.getAccumulatedScore() + additionScore);
+			lms.setMatchCount(lms.getMatchCount() + 1);
+			leagueMembershipDao.persist(lms);
 		}
 	}
 

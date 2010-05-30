@@ -1,18 +1,24 @@
 package org.seamoo.webapp.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.seamoo.competition.LeagueOrganizer;
 import org.seamoo.daos.LeagueDao;
+import org.seamoo.daos.MemberDao;
 import org.seamoo.daos.MemberQualificationDao;
 import org.seamoo.daos.SubjectDao;
 import org.seamoo.daos.matching.MatchDao;
+import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.MemberQualification;
 import org.seamoo.entities.Subject;
 import org.seamoo.entities.matching.Match;
+import org.seamoo.utils.MapBuilder;
 import org.seamoo.webapp.filters.MemberInjectionFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +36,10 @@ public class MatchController {
 	LeagueDao leagueDao;
 	@Autowired
 	SubjectDao subjectDao;
+	@Autowired
+	MemberDao memberDao;
+	@Autowired
+	QuestionDao questionDao;
 	@Autowired
 	LeagueOrganizer leagueOrganizer;
 	@Autowired
@@ -66,6 +76,9 @@ public class MatchController {
 		mav.addObject("league", league);
 		mav.addObject("subject", subject);
 		mav.addObject("rejoin", rejoin.equals("yes"));
+		// produce string-key maps because freemarker doesn't understand long-key maps
+		mav.addObject("membersMap", MapBuilder.toFreeMarkerMap(memberDao.findAllByKeys(match.getMemberAutoIds())));
+		mav.addObject("questionsMap", MapBuilder.toFreeMarkerMap(questionDao.findAllByKeys(match.getQuestionIds())));
 		return mav;
 	}
 
@@ -75,9 +88,9 @@ public class MatchController {
 		leagueOrganizer.getMatchOrganizer(leagueId).escapeCurrentMatch(member.getAutoId());
 		return "redirect:/matches/participate?leagueId=" + leagueId;
 	}
-	
+
 	@RequestMapping("/reset-locks")
-	public void resetLocks(HttpServletResponse response, @RequestParam("leagueId") long leagueId){
+	public void resetLocks(HttpServletResponse response, @RequestParam("leagueId") long leagueId) {
 		leagueOrganizer.getMatchOrganizer(leagueId).resetLocks();
 	}
 

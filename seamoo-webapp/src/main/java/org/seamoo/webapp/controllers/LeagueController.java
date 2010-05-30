@@ -19,6 +19,7 @@ import org.seamoo.entities.Member;
 import org.seamoo.entities.MemberQualification;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchCompetitor;
+import org.seamoo.utils.MapBuilder;
 import org.seamoo.webapp.Pager;
 import org.seamoo.webapp.filters.MemberInjectionFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,18 +86,18 @@ public class LeagueController {
 
 		Map<Long, Boolean> requiredMember = new HashMap<Long, Boolean>();
 
-		Map<String, Member> memberMap = new HashMap<String, Member>();
 		for (Match match : matches) {
 			for (MatchCompetitor competitor : match.getCompetitors())
-				if (!memberMap.containsKey(competitor.getMemberAutoId()))
-					memberMap.put(competitor.getMemberAutoId().toString(), memberDao.findByKey(competitor.getMemberAutoId()));
+				if (!requiredMember.containsKey(competitor.getMemberAutoId()))
+					requiredMember.put(competitor.getMemberAutoId(), true);
 		}
 		for (LeagueMembership rank : ranks) {
-			if (!memberMap.containsKey(rank.getMemberAutoId().toString())) {
-				memberMap.put(rank.getMemberAutoId().toString(), memberDao.findByKey(rank.getMemberAutoId()));
+			if (!requiredMember.containsKey(rank.getMemberAutoId())) {
+				requiredMember.put(rank.getMemberAutoId(), true);
 			}
 		}
-		mav.addObject("memberMap", memberMap);
+
+		mav.addObject("membersMap", MapBuilder.toFreeMarkerMap(memberDao.findAllByKeys(requiredMember.keySet())));
 		return mav;
 	}
 }
