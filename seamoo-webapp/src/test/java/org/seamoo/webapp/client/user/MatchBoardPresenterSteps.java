@@ -369,6 +369,15 @@ public class MatchBoardPresenterSteps {
 		matchState.setMatchAlias("user1-user2");
 		matchState.setPhase(MatchPhase.FINISHED);
 	}
+	
+	@Given("Current match is finished with zero id")
+	public void setUpFinishedZeroIdMatch(){
+		matchState = new MatchState();
+		matchState.setMatchAutoId(0L);
+		matchState.setMatchAlias("user1-user2");
+		matchState.setPhase(MatchPhase.FINISHED);		
+	}
+
 
 	@Then("Page is redirected to \"$url\"")
 	public void assertPageRedirection(String url) {
@@ -449,4 +458,5 @@ public class MatchBoardPresenterSteps {
 	public void assertDisplayNotViewingAnyQuestion() {
 		verify(display).setQuestion(null);
 	}
+	
 }

@@ -1,0 +1,13 @@
+!-- User finish soon flow
+Given Refresh period is 1000 milliseconds
+And 10 questions to use in match
+And A Match Player Display
+And A Match Service Async
+And A Match Player Presenter
+!-- Try to check for match finished again - this time the match is finished
+Given Current match is finished with zero id
+And Current match has 2 players 
+And Current user has answered 4 questions
+When Presenter initialize
+Then Service get the current match information with receivedQuestion=0
+And Page is not redirected

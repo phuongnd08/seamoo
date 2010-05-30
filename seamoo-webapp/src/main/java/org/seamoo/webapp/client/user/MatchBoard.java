@@ -234,7 +234,7 @@ public class MatchBoard {
 			// TODO Auto-generated method stub
 			currentMatchState = state;
 			display.setPhase(state.getPhase());
-			if (state.getPhase() == MatchPhase.FINISHED) {
+			if (state.getPhase() == MatchPhase.FINISHED && state.getMatchAutoId() != 0) {
 				Window.Location.replace(GwtUrlFactory.getRejoinableMatchViewUrl(state));
 				return;
 			}
