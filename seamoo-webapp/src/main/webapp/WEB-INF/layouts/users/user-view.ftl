@@ -46,8 +46,8 @@
 </div>  
 <br/>
 [#macro membershipItem membership]
-	[#assign league=leagueMap[membership.leagueAutoId?string]/]
-	[#assign subject=subjectMap[league.subjectAutoId?string]/]
+	[#assign league=leaguesMap[membership.leagueAutoId?string]/]
+	[#assign subject=subjectsMap[league.subjectAutoId?string]/]
 	[#assign leagueResult=enums["org.seamoo.entities.LeagueResult"]/]
 	[#assign membershipFromIndex=membershipFromIndex+1/]
 	<tr>
@@ -94,7 +94,8 @@
 	[#assign count=0/]
 	[#list match.competitors as competitor]
 		[#assign count=count+1/]
-		<a href="${urlFactory.getUserViewUrl(competitor.member)}">${competitor.member.displayName}</a> 
+		[#assign member=membersMap[competitor.memberAutoId?string]/]
+		<a href="${urlFactory.getUserViewUrl(member)}">${member.displayName}</a> 
 		([@compress single_line=true]
 			[#switch competitor.rank]
 			[#case 1] 1st

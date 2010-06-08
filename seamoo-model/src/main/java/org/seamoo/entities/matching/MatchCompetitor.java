@@ -8,6 +8,7 @@ import java.util.List;
 import org.seamoo.entities.Member;
 
 import com.google.gwt.user.client.rpc.GwtTransient;
+import com.vercer.engine.persist.annotation.Activate;
 import com.vercer.engine.persist.annotation.Embed;
 import com.vercer.engine.persist.annotation.Store;
 
@@ -36,6 +37,7 @@ public class MatchCompetitor implements Serializable {
 	private int passedQuestionCount;
 
 	@GwtTransient
+	@Activate(0)
 	private List<MatchAnswer> answers;
 
 	public MatchCompetitor() {

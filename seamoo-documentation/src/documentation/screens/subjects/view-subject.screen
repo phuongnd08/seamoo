@@ -12,19 +12,25 @@
   <widgets xsi:type="model:Text" x="196" y="350" width="243" height="47" text="Linh vuc hien dang co _120_ thanh vien tham gia tranh tai. Nguoi dang dan dau la _mrc0ld_" measuredWidth="243" measuredHeight="47">
     <font/>
   </widgets>
-  <widgets xsi:type="model:Panel" x="472" y="232" width="489" measuredWidth="489" measuredHeight="100" background="#e5e5e5"/>
-  <widgets xsi:type="model:Image" x="482" y="242" measuredWidth="64" measuredHeight="48" src="../images/funny-baby.jpg"/>
-  <widgets xsi:type="model:Text" x="552" y="242" width="399" height="67" text="[Amateur League]&#xA;Giai dau danh cho nhung nguoi lan dau tham du&#xA;Ban dang co _40_ diem. Ban con *20* ngay de tich luy *300* diem de co the thang hang len *League II*" measuredWidth="399" measuredHeight="67">
-    <font/>
+  <widgets xsi:type="model:WidgetGroup" x="472" y="232" measuredWidth="489" measuredHeight="100">
+    <widgets xsi:type="model:Panel" width="489" measuredWidth="489" measuredHeight="100" background="#e5e5e5"/>
+    <widgets xsi:type="model:Image" x="10" y="10" measuredWidth="64" measuredHeight="48" src="../images/funny-baby.jpg"/>
+    <widgets xsi:type="model:Text" x="80" y="10" width="399" height="67" text="[Amateur League]&#xA;Giai dau danh cho nhung nguoi lan dau tham du&#xA;Ban dang co _40_ diem. Ban con *20* ngay de tich luy *300* diem de co the thang hang len *League II*" measuredWidth="399" measuredHeight="67">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Button" x="78" y="71" text="Tham gia" measuredWidth="81" measuredHeight="27">
+      <font/>
+    </widgets>
   </widgets>
-  <widgets xsi:type="model:Button" x="550" y="303" text="Tham gia" measuredWidth="81" measuredHeight="27"/>
   <widgets xsi:type="model:WidgetGroup" x="472" y="340" measuredWidth="489" measuredHeight="145">
     <widgets xsi:type="model:Panel" width="489" height="145" measuredWidth="489" measuredHeight="145" background="#e5e5e5"/>
     <widgets xsi:type="model:Image" x="10" y="10" width="63" height="45" measuredWidth="63" measuredHeight="45" src="../images/england_flag_02.gif"/>
     <widgets xsi:type="model:Text" x="80" y="10" width="399" height="95" text="[League II]&#xA;Giai dau ban chuyen nghiep, danh cho nhung thanh vien da the hien duoc minh o Amateur League&#xA;Ban dang co _40_ diem. Ban con *20* ngay de tich luy *100* diem de co the tru hang hoac tich luy du *300* diem de co the tham du League I" measuredWidth="399" measuredHeight="95">
       <font/>
     </widgets>
-    <widgets xsi:type="model:Button" x="80" y="110" text="Tham gia" measuredWidth="81" measuredHeight="27"/>
+    <widgets xsi:type="model:Button" x="80" y="110" text="Tham gia" measuredWidth="81" measuredHeight="27">
+      <font/>
+    </widgets>
     <widgets xsi:type="model:TextField" x="24" y="21" text="2nd" measuredWidth="34" measuredHeight="25"/>
   </widgets>
   <widgets xsi:type="model:WidgetGroup" x="472" y="494" measuredWidth="489" measuredHeight="78">

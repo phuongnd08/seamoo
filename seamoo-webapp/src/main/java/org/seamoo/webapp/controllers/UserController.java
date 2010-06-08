@@ -20,10 +20,12 @@ import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.LeagueMembership;
 import org.seamoo.entities.Member;
-import org.seamoo.entities.Subject;
+import org.seamoo.entities.matching.Match;
+import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.utils.AliasBuilder;
 import org.seamoo.utils.EmailExtractor;
 import org.seamoo.utils.HashBuilder;
+import org.seamoo.utils.MapBuilder;
 import org.seamoo.utils.converter.Converter;
 import org.seamoo.webapp.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -202,32 +204,38 @@ public class UserController {
 			long msCount = leagueMembershipDao.countByMember(memberAutoId);
 			long matchPageCount = Pager.getPageCount(matchCount, MATCH_PER_PAGE);
 			long msPageCount = Pager.getPageCount(msCount, MEMBERSHIP_PER_PAGE);
-			Map<String, League> leagueMap = new HashMap<String, League>();
-			Map<String, Subject> subjectMap = new HashMap<String, Subject>();
-			mav.addObject("matches", matchDao.getRecentMatchesBymember(memberAutoId, Pager.getFromForPage(matchPage,
-					MATCH_PER_PAGE), MATCH_PER_PAGE));
+			List<Match> matches = matchDao.getRecentMatchesBymember(memberAutoId,
+					Pager.getFromForPage(matchPage, MATCH_PER_PAGE), MATCH_PER_PAGE);
+			mav.addObject("matches", matches);
 			mav.addObject("matchPage", matchPage);
-
 			long membershipFromIndex = Pager.getFromForPage(membershipPage, MEMBERSHIP_PER_PAGE);
+
+			Map<Long, Boolean> requiredLeagues = new HashMap<Long, Boolean>();
+
 			List<LeagueMembership> memberships = leagueMembershipDao.getRecentByMember(memberAutoId, membershipFromIndex,
 					MEMBERSHIP_PER_PAGE);
 			for (LeagueMembership ms : memberships) {
-				if (!leagueMap.containsKey(ms.getLeagueAutoId().toString())) {
-					League l = leagueDao.findByKey(ms.getLeagueAutoId());
-					leagueMap.put(l.getAutoId().toString(), l);
-					if (!subjectMap.containsKey(l.getSubjectAutoId().toString())) {
-						Subject s = subjectDao.findByKey(l.getSubjectAutoId());
-						subjectMap.put(s.getAutoId().toString(), s);
-					}
-				}
+				requiredLeagues.put(ms.getLeagueAutoId(), true);
 			}
+			Map<Long, League> leaguesMap = leagueDao.findAllByKeys(requiredLeagues.keySet());
+			Map<Long, Boolean> requiredSubjects = new HashMap<Long, Boolean>();
+			for (Long leagueId : leaguesMap.keySet())
+				requiredSubjects.put(leaguesMap.get(leagueId).getSubjectAutoId(), true);
+
+			Map<Long, Boolean> requiredMembers = new HashMap<Long, Boolean>();
+			for (Match ma : matches) {
+				for (MatchCompetitor c : ma.getCompetitors())
+					requiredMembers.put(c.getMemberAutoId(), true);
+			}
+
 			mav.addObject("memberships", memberships);
 			mav.addObject("membershipPage", membershipPage);
 			mav.addObject("membershipPageCount", msPageCount);
 			mav.addObject("matchPageCount", matchPageCount);
 			mav.addObject("memberAutoId", memberAutoId);
-			mav.addObject("leagueMap", leagueMap);
-			mav.addObject("subjectMap", subjectMap);
+			mav.addObject("leaguesMap", MapBuilder.toFreeMarkerMap(leaguesMap));
+			mav.addObject("subjectsMap", MapBuilder.toFreeMarkerMap(subjectDao.findAllByKeys(requiredSubjects.keySet())));
+			mav.addObject("membersMap", MapBuilder.toFreeMarkerMap(memberDao.findAllByKeys(requiredMembers.keySet())));
 			mav.addObject("membershipFromIndex", membershipFromIndex);
 		}
 		return mav;

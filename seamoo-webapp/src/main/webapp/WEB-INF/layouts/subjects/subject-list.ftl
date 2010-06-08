@@ -26,4 +26,5 @@
 	${subject.description}
 [/@optionBox]
 [/#list]
+</div>
 <div class="cbt"></div>

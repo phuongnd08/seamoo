@@ -15,7 +15,7 @@ public class HomeController {
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("home");
 		mav.addObject("subjects", subjectDao.getEnabledSubjects());
-		mav.addObject("title", "Home");
+		mav.addObject("title", "Sàn đấu trí");
 		return mav;
 	}
 

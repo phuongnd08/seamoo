@@ -5,6 +5,7 @@ import static org.testng.Assert.*;
 import java.util.Date;
 import java.util.List;
 
+import org.seamoo.daos.twigImpl.ObjectDatastoreProvider;
 import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchAnswer;
@@ -14,6 +15,7 @@ import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchEventType;
 import org.seamoo.entities.question.Question;
 import org.seamoo.persistence.test.LocalAppEngineTest;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -151,5 +153,37 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 		assertEquals(reloaded.size(), 2);
 		assertEquals(reloaded.get(0).getAutoId(), ms[3].getAutoId());
 		assertEquals(reloaded.get(1).getAutoId(), ms[1].getAutoId());
+	}
+
+	@Test
+	public void matchAnswersLoadedUsingSingleFind() {
+		Match m = new Match();
+		MatchCompetitor c = new MatchCompetitor();
+		c.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, "xxx"));
+		m.addCompetitor(c);
+		daoImpl.persist(m);
+
+		TwigMatchDaoImpl newDaoImpl = new TwigMatchDaoImpl();
+		ReflectionTestUtils.setField(newDaoImpl, "objectDatastoreProvider", new ObjectDatastoreProvider(), null);
+		Match reloadedMatch = newDaoImpl.findByKey(m.getAutoId());
+		MatchCompetitor reloadedCompetitor = reloadedMatch.getCompetitors().get(0);
+		assertEquals(reloadedCompetitor.getAnswers().size(), 1);
+		assertEquals(reloadedCompetitor.getAnswers().get(0).getContent(), "xxx");
+	}
+
+	@Test
+	public void matchAnswersNotLoadedUsingBulkLoad() {
+		Match m = new Match();
+		MatchCompetitor c = new MatchCompetitor();
+		c.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, "xxx"));
+		m.addCompetitor(c);
+		daoImpl.persist(m);
+
+		TwigMatchDaoImpl newDaoImpl = new TwigMatchDaoImpl();
+		ReflectionTestUtils.setField(newDaoImpl, "objectDatastoreProvider", new ObjectDatastoreProvider(), null);
+		Match reloadedMatch = newDaoImpl.getAll().get(0);
+		MatchCompetitor reloadedCompetitor = reloadedMatch.getCompetitors().get(0);
+		assertEquals(reloadedCompetitor.getAnswers().size(), 1);
+		assertNull(reloadedCompetitor.getAnswers().get(0).getContent());
 	}
 }

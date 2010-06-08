@@ -11,10 +11,18 @@ import com.google.appengine.api.datastore.QueryResultIterator;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.repackaged.com.google.common.collect.Lists;
+import com.vercer.engine.persist.ObjectDatastore;
 import com.vercer.engine.persist.FindCommand.RootFindCommand;
 
 public class TwigMatchDaoImpl extends TwigGenericDaoImpl<Match, Long> implements MatchDao {
 
+//	@Override
+//	public Match findByKey(Long key) {
+//		ObjectDatastore ods =  getOds();
+//		ods.setActivationDepth(Integer.MAX_VALUE);
+//		return ods.load(Match.class, key);
+//	}
+	
 	@Override
 	public List<Match> getRecentMatchesByLeague(Long leagueAutoId, long from, int count) {
 		RootFindCommand<Match> fc = getOds().find().type(Match.class).addFilter("leagueAutoId", FilterOperator.EQUAL,

@@ -8,6 +8,7 @@
 	<definition name="home" extends="master-small-right">
 		<put-attribute name="body"
 			value="/WEB-INF/layouts/home/home.ftl" />
+		<put-attribute name="side" value="/WEB-INF/layouts/home/home-side.ftl"/>
 	</definition>
 
 	<definition name="faq" extends="master-small-right">

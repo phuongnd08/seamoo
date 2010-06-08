@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" x="328" y="185" measuredWidth="803" measuredHeight="1023">
+    <screen href="../master/master-not-logged-in.screen#/"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="344" y="368" measuredWidth="257" measuredHeight="100">
+    <widgets xsi:type="model:Panel" width="257" measuredWidth="257" measuredHeight="100" background="#e5e5e5"/>
+    <widgets xsi:type="model:Image" x="10" y="10" measuredWidth="64" measuredHeight="48" src="../images/funny-baby.jpg"/>
+    <widgets xsi:type="model:Text" x="80" y="10" width="177" height="63" text="[English]&#xA;The hien kien thuc anh ngu cua ban" measuredWidth="177" measuredHeight="63">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" x="624" y="368" measuredWidth="257" measuredHeight="100">
+    <widgets xsi:type="model:Panel" width="257" measuredWidth="257" measuredHeight="100" background="#e5e5e5"/>
+    <widgets xsi:type="model:Image" x="10" y="10" measuredWidth="64" measuredHeight="48" src="../images/funny-baby.jpg"/>
+    <widgets xsi:type="model:Text" x="80" y="10" width="177" height="63" text="[English]&#xA;The hien kien thuc anh ngu cua ban" measuredWidth="177" measuredHeight="63">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Text" x="352" y="328" text="Bạn có thực sự giỏi về Tiếng Anh hay Toán học? Sao không thử đấu trí với người khác ở những lĩnh vực sau đây?" measuredWidth="723" measuredHeight="17">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" x="352" y="274" text="SeaMoo: Sàn đấu trí" measuredWidth="436" measuredHeight="59">
+    <font size="32"/>
+  </widgets>
+  <widgets xsi:type="model:Text" x="350" y="486" width="754" height="194" text="Nếu như bạn cảm thấy khó khăn hay mệt mỏi trong việc duy trì cảm hứng học tập của mình, thì SeaMoo chính là nơi dành cho bạn&#xA;Lần đầu tiên, một sân chơi thực sự dành cho học sinh, sinh viên. Nơi đây, chúng tôi tin rằng cảm giác chiến thắng sau mỗi trận đấu, cảm giác tự tin khi chinh phục được những giải đấu từ dễ đến khó ở mỗi lĩnh vực sẽ là động lực hoàn hảo giúp bạn giữ được sự tập trung cho con đường học vấn của mình " measuredWidth="754" measuredHeight="194">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font/>
+</model:Screen>
