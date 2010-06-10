@@ -1,46 +1,34 @@
 package org.seamoo.lookup;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
-import javax.persistence.Transient;
 
-import com.google.appengine.api.datastore.Blob;
 import com.vercer.engine.persist.annotation.Key;
-import com.vercer.engine.persist.annotation.Store;
 
 public class NumericBag {
 	@Id
 	@Key
 	private Long autoId;
 	/**
-	 * A string used to classify different type of bag, oftenly the class name
-	 * of entity with an extra number
+	 * A string used to classify different type of bag, oftenly the class name of entity with an extra number
 	 */
 
 	private String classifier;
 
-	private Blob keyBlob;
+	private List<Long> heads = new ArrayList<Long>();
 
-	@Transient
-	@Store(false)
-	private List<Long> keyList;
+	private List<Long> tails = new ArrayList<Long>();
 
-	@Store(false)
-	@Transient
-	private ByteArrayOutputStream keyBAOS;
-	@Store(false)
-	@Transient
-	private DataOutputStream keyDOS;
+	/**
+	 * Store the index associated with each heads
+	 */
+	private List<Long> indices = new ArrayList<Long>();
+
+	private int size = 0;
 
 	public NumericBag() {
-		keyBlob = new Blob(new byte[0]);
 	}
 
 	public NumericBag(String classifier) {
@@ -64,60 +52,144 @@ public class NumericBag {
 		return classifier;
 	}
 
-	protected void prepareBlobOutputStream() {
-		if (keyBAOS == null) {
-			try {
-				keyBAOS = new ByteArrayOutputStream();
-				keyDOS = new DataOutputStream(keyBAOS);
-				keyDOS.write(keyBlob.getBytes());
-			} catch (IOException ex) {
-				throw new RuntimeException(ex);
-			}
+	public List<Long> getRandomSet(int size) {
+		return null;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	private void insertSegment(int index, Long number) {
+		heads.add(index, number);
+		tails.add(index, number);
+		if (index == indices.size()) {
+			indices.add(index, new Long(size));
+		} else {
+			indices.add(index, indices.get(index));
+			alter(index + 1, indices.size() - 1, +1L, indices);
 		}
 	}
 
-	private void rewriteKeyBlob() {
-		try {
-			keyBAOS = new ByteArrayOutputStream(0);
-			keyDOS = new DataOutputStream(keyBAOS);
-			for (Long l : keyList)
-				keyDOS.writeLong(l);
-			keyBlob = new Blob(keyBAOS.toByteArray());
-		} catch (IOException ex) {
-			throw new RuntimeException(ex);
-		}
-	}
+	public void addNumber(Long number) {
+		if (size == 0) {
+			insertSegment(0, number);
+		} else {
+			int segmentIndex = find(number, heads);
+			if (segmentIndex == heads.size()) {
+				if (tails.get(tails.size() - 1) >= number)
+					return;
+				if (tails.get(tails.size() - 1) == number - 1)
+					tails.set(tails.size() - 1, number);
+				else
+					insertSegment(segmentIndex, number);
+			} else {
+				if (heads.get(segmentIndex) == number)
+					return;
+				if (tails.get(segmentIndex) >= number)
+					return;
 
-	public void addKey(Long key) {
-		getKeyList().add(key);
-		prepareBlobOutputStream();
-		try {
-			keyDOS.writeLong(key);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e);
-		}
-		keyBlob = new Blob(keyBAOS.toByteArray());
-	}
+				if (tails.get(segmentIndex) == number - 1) {
+					tails.set(segmentIndex, number);
+					if (segmentIndex < heads.size() - 1) {// reduce the number of segments in case the number can help connect to
+						// separated segments
+						if (heads.get(segmentIndex + 1) == number + 1) {
+							heads.remove(segmentIndex + 1);
+							tails.remove(segmentIndex);
+							indices.remove(segmentIndex + 1);
+						}
+					}
 
-	public void removeKey(Long key) {
-		getKeyList().remove(key);
-		rewriteKeyBlob();
-	}
-
-	public List<Long> getKeyList() {
-		if (keyList == null) {
-			keyList = new ArrayList<Long>();
-			try {
-				ByteArrayInputStream byteInputStream = new ByteArrayInputStream(keyBlob.getBytes());
-				DataInputStream inputStream = new DataInputStream(byteInputStream);
-				while (inputStream.available() > 0) {
-					keyList.add(inputStream.readLong());
+					alter(segmentIndex + 1, heads.size() - 1, +1L, heads);
+				} else {
+					insertSegment(segmentIndex + 1, number);
 				}
-			} catch (IOException ex) {
-				throw new RuntimeException(ex);
 			}
 		}
-		return keyList;
+		size++;
 	}
+
+	public void removeNumber(Long number) {
+		if (size == 0)
+			return;
+		int segmentIndex = find(number, heads);
+		if (segmentIndex >= heads.size()) {
+			if (tails.get(segmentIndex - 1) >= number)
+				segmentIndex -= 1;
+			else
+				return;
+		}
+		if (tails.get(segmentIndex) < number)
+			return;
+		if (tails.get(segmentIndex) == number) {
+			tails.set(segmentIndex, number - 1);
+			if (number - 1 < heads.get(segmentIndex)) {
+				heads.remove(segmentIndex);
+				tails.remove(segmentIndex);
+				indices.remove(segmentIndex);
+				segmentIndex--;
+			}
+		} else if (heads.get(segmentIndex) == number) {
+			heads.set(segmentIndex, number + 1);
+			if (number + 1 > tails.get(segmentIndex)) {
+				heads.remove(segmentIndex);
+				tails.remove(segmentIndex);
+				indices.remove(segmentIndex);
+				segmentIndex--;
+			}
+		} else if (tails.get(segmentIndex) > number && number > heads.get(segmentIndex)) {
+			heads.add(segmentIndex + 1, number + 1);
+			tails.add(segmentIndex, number - 1);
+			indices.add(segmentIndex + 1, indices.get(segmentIndex) + number - heads.get(segmentIndex));
+			segmentIndex++;
+		} else
+			return;// number does not belong to any segment
+		size--;
+		alter(segmentIndex + 1, indices.size() - 1, -1L, indices);
+	}
+
+	public Long get(int index) {
+		if (index >= size || index < 0)
+			return null;
+		int segmentIndex = find(new Long(index), indices);
+		if (segmentIndex == indices.size())
+			segmentIndex--;
+		return heads.get(segmentIndex) + index - indices.get(segmentIndex);
+	}
+
+	/**
+	 * Return the index of segment that the number is equal or bigger than the number at the post but smaller than the next
+	 * 
+	 * @param number
+	 * @return
+	 */
+	private int find(long number, List<Long> list) {
+		return findRecursive(number, 0, list.size() - 1, list);
+	}
+
+	private int findRecursive(long number, int from, int to, List<Long> list) {
+		if (from >= to - 1) {
+			if (list.get(to).longValue() < number)
+				return to + 1;
+			if (list.get(to).longValue() == number)
+				return to;
+			if (list.get(from).longValue() > number)
+				return from - 1;
+			return from;
+		}
+		int i = (from + to) / 2;
+		long middle = list.get(i);
+		if (middle > number)
+			return findRecursive(number, from, i, list);
+		if (middle == number)
+			return i;
+		return findRecursive(number, i, to, list);
+
+	}
+
+	private void alter(int from, int to, Long delta, List<Long> list) {
+		for (int i = from; i <= to; i++)
+			list.set(i, list.get(i) + delta);
+	}
+
 }

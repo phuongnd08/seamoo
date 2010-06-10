@@ -46,7 +46,7 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 		Question q = super.persist(entity);
 		if (shouldAddKey) {
 			NumericBag bag = getNumericBagByLeagueId(entity.getLeagueAutoId());
-			bag.addKey(q.getAutoId());
+			bag.addNumber(q.getAutoId());
 			numericBagDao.persist(bag);
 		}
 		return q;
@@ -64,7 +64,7 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 		Question[] qs = super.persist(entities);
 		for (int i = 0; i < qs.length; i++) {
 			if (shouldAddKey[i])
-				getNumericBagByLeagueId(qs[i].getLeagueAutoId()).addKey(qs[i].getAutoId());
+				getNumericBagByLeagueId(qs[i].getLeagueAutoId()).addNumber(qs[i].getAutoId());
 		}
 
 		for (Long leagueId : shouldPersistKeyBag.keySet())
@@ -74,14 +74,14 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 
 	public List<Question> getRandomQuestions(Long leagueId, int number) {
 		NumericBag autoIdBag = getNumericBagByLeagueId(leagueId);
-		int totalSize = autoIdBag.getKeyList().size();
+		int totalSize = autoIdBag.getSize();
 		if (number > totalSize) {
 			throw new IllegalArgumentException(String.format("%d exceeds the number of available questions", number));
 		}
 		Set<Long> pickedAutoIds = new HashSet<Long>();
 		int pickedSize = 0;
 		while (pickedAutoIds.size() < number) {
-			Long value = autoIdBag.getKeyList().get(rndGenerator.nextInt(totalSize));
+			Long value = autoIdBag.get(rndGenerator.nextInt(totalSize));
 			if (!pickedAutoIds.contains(value)) {
 				pickedAutoIds.add(value);
 				pickedSize++;
@@ -99,7 +99,7 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 	public void delete(Question entity) {
 		// TODO Auto-generated method stub
 		NumericBag autoIdBag = getNumericBagByLeagueId(entity.getLeagueAutoId());
-		autoIdBag.removeKey(entity.getAutoId());
+		autoIdBag.removeNumber(entity.getAutoId());
 		super.delete(entity);
 		numericBagDao.persist(autoIdBag);
 	}
