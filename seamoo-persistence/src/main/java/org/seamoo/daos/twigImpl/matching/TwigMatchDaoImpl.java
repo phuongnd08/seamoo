@@ -5,7 +5,6 @@ import java.util.List;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.twigImpl.TwigGenericDaoImpl;
 import org.seamoo.entities.matching.Match;
-import org.seamoo.entities.matching.MatchCompetitor;
 
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
