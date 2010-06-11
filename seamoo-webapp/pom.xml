@@ -560,7 +560,7 @@
 					During release, set application version in appengine-web.xml to
 					alpha-3
 				-->
-				<gae.application.version>alpha-3</gae.application.version>
+				<gae.application.version>alpha-4</gae.application.version>
 
 				<!--
 					Produce compressed JS during GWT compilation for production

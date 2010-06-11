@@ -8,8 +8,7 @@ public class TwigSiteSettingDaoImpl extends TwigGenericDaoImpl<SiteSetting, Stri
 	public void assignSetting(String key, String value) {
 		// TODO Auto-generated method stub
 		try {
-			SiteSetting s = null;
-			s = findByKey(key);
+			SiteSetting s = findByKey(key);
 			if (s == null)
 				s = new SiteSetting(key, value);
 			else

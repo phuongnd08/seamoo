@@ -105,12 +105,13 @@ public class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TK
 	protected ObjectDatastore getOds() {
 		return objectDatastoreProvider.getObjectDataStore();
 	}
-	
+
 	/**
 	 * Return eager Ods that will eagerly activate all field of object depend on the depth set
+	 * 
 	 * @return
 	 */
-	protected ObjectDatastore getEagerOds(){
+	protected ObjectDatastore getEagerOds() {
 		return objectDatastoreProvider.getEagerObjectDatastore();
 	}
 
@@ -119,7 +120,7 @@ public class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TK
 			removeFromCache(entity);
 		}
 		ObjectDatastore ods = getOds();
-		// ods.associate(entity);
+		ods.associate(entity);
 		ods.delete(entity);
 	}
 
@@ -139,9 +140,6 @@ public class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TK
 	protected TEntity findByKeyWithoutCache(TKey key) {
 		ObjectDatastore ods = getOds();
 		TEntity entity = ods.load(entityClass, key);
-		if (entity != null) {
-			ods.refresh(entity);
-		}
 		return entity;
 	}
 
@@ -159,7 +157,6 @@ public class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TK
 		if (entity == null) {
 			entity = findByFieldWithoutCache(field, fieldValue);
 			if (entity != null) {
-				getOds().refresh(entity);
 				putToCache(entity);
 			}
 		}
