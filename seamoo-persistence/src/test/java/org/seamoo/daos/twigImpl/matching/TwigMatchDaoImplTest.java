@@ -2,24 +2,21 @@ package org.seamoo.daos.twigImpl.matching;
 
 import static org.testng.Assert.*;
 
-import java.util.Date;
 import java.util.List;
 
 import org.seamoo.daos.twigImpl.ObjectDatastoreProvider;
-import org.seamoo.entities.Member;
 import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchAnswer;
 import org.seamoo.entities.matching.MatchAnswerType;
 import org.seamoo.entities.matching.MatchCompetitor;
-import org.seamoo.entities.matching.MatchEvent;
-import org.seamoo.entities.matching.MatchEventType;
-import org.seamoo.entities.question.Question;
 import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.google.apphosting.api.ApiProxy;
+import com.google.apphosting.api.ApiProxy.Delegate;
 import com.google.inject.internal.Lists;
 
 public class TwigMatchDaoImplTest extends LocalAppEngineTest {
@@ -173,17 +170,20 @@ public class TwigMatchDaoImplTest extends LocalAppEngineTest {
 
 	@Test
 	public void matchAnswersNotLoadedUsingBulkLoad() {
+		Delegate backup = ApiProxy.getDelegate();
 		Match m = new Match();
 		MatchCompetitor c = new MatchCompetitor();
 		c.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, "xxx"));
 		m.addCompetitor(c);
 		daoImpl.persist(m);
 
+		ApiProxy.setDelegate(new LoggingApiProxyDelegate(ApiProxy.getDelegate())); 
 		TwigMatchDaoImpl newDaoImpl = new TwigMatchDaoImpl();
 		ReflectionTestUtils.setField(newDaoImpl, "objectDatastoreProvider", new ObjectDatastoreProvider(), null);
 		Match reloadedMatch = newDaoImpl.getAll().get(0);
 		MatchCompetitor reloadedCompetitor = reloadedMatch.getCompetitors().get(0);
 		assertEquals(reloadedCompetitor.getAnswers().size(), 1);
 		assertNull(reloadedCompetitor.getAnswers().get(0).getContent());
+		ApiProxy.setDelegate(backup);
 	}
 }
