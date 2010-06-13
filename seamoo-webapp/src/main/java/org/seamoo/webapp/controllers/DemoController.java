@@ -1,10 +1,6 @@
 package org.seamoo.webapp.controllers;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -28,11 +24,11 @@ import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.installation.Bundle;
+import org.seamoo.utils.ResourceIterator;
+import org.seamoo.utils.ResourceIteratorProvider;
+import org.seamoo.utils.TimeProvider;
 import org.seamoo.utils.converter.Converter;
-import org.seamoo.webapp.Site;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,6 +58,12 @@ public class DemoController {
 
 	@Autowired
 	MatchDao matchDao;
+	
+	@Autowired
+	ResourceIteratorProvider resourceIteratorProvider;
+	
+	@Autowired
+	TimeProvider timeProvider;
 
 	@RequestMapping("/install-leagues")
 	public void installLeagues(HttpServletResponse response) throws IOException {
@@ -161,80 +163,76 @@ public class DemoController {
 		return leagues;
 	}
 
-	final int QUESTION_NUMBER = 130;
-	final String QUESTION_RESOURCE_PATH = "classpath:BasicEnglish.QnA";
-	final String DATA_INDEX_PATH = "classpath:data.index";
-	final long MAX_DURATION = 22000;// only run an installation for 22 seconds
+	public static final String DATA_INDEX_PATH = "classpath:data.index";
+	public static final long MAX_DURATION = 22000;// only run an installation for 22 seconds
 
 	@RequestMapping("/install-questions")
-	private void installQuestions(HttpServletResponse response,
+	public void installQuestions(HttpServletResponse response,
 			@RequestParam(required = false, value = "bundleName") String bundleName,
 			@RequestParam(required = false, value = "finished") Long finished,
 			@RequestParam(required = false, value = "leagueId") Long leagueId) throws IOException {
 
+		internalInstallQuestions(bundleName, finished, leagueId, QueueFactory.getDefaultQueue());
+	}
+
+	void internalInstallQuestions(String bundleName, Long finished, Long leagueId, Queue taskQueue)
+			throws IOException {
 		if (bundleName != null) {
 			Long[] newFinished = new Long[1];
 			boolean done = installPackage(bundleName, finished, newFinished, MAX_DURATION, leagueDao.findByKey(leagueId));
 			if (done) {
 				Bundle p = new Bundle(bundleName, newFinished[0], true);
 				bundleDao.persist(p);
+				TaskOptions taskOptions = TaskOptions.Builder.url("/demo/install-questions");
+
+				taskQueue.add(taskOptions);
 			} else {
 				TaskOptions taskOptions = TaskOptions.Builder.url("/demo/install-questions").param("bundleName", bundleName).param(
 						"finished", newFinished[0].toString()).param("leagueId", leagueId.toString());
 
-				Queue q = QueueFactory.getDefaultQueue();
-				q.add(taskOptions);
+				taskQueue.add(taskOptions);
 			}
 		} else {
-			List<Bundle> allInstalledBundles = bundleDao.getAll();
+			List<Bundle> bundles = bundleDao.getAll();
 			Set<String> allInstalledBundlesName = new HashSet<String>();
-			for (Bundle b : allInstalledBundles)
+			for (Bundle b : bundles)
 				allInstalledBundlesName.add(b.getName());
-			ResourceLoader loader = new DefaultResourceLoader();
-			InputStream stream = loader.getResource(DATA_INDEX_PATH).getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-			while (reader.ready()) {
-				String s = reader.readLine();
+			ResourceIterator<String> ri = resourceIteratorProvider.getIterator(DATA_INDEX_PATH);
+			for (String s : ri) {
 				String[] data = s.split("\\|");
 				String buName = data[0];
 				Long leId = Converter.toLong(data[1]);
-				if (!allInstalledBundles.contains(buName)) {
+				if (!allInstalledBundlesName.contains(buName)) {
 					TaskOptions taskOptions = TaskOptions.Builder.url("/demo/install-questions").param("bundleName", buName).param(
 							"finished", "0").param("leagueId", leId.toString());
 
-					Queue q = QueueFactory.getDefaultQueue();
-					q.add(taskOptions);
+					taskQueue.add(taskOptions);
 					break;
 				}
 			}
-			reader.close();
-			stream.close();
+			ri.close();
 		}
 	}
 
-	long QUESTION_BATCH_SIZE = 20;
+	public final static long QUESTION_INSTALLATION_BATCH_SIZE = 20;
 
 	private boolean installPackage(String bundleName, Long finished, Long[] newFinished, long maxDuration, League league)
 			throws IOException {
-		ResourceLoader loader = new DefaultResourceLoader();
-		InputStream stream = null;
-		BufferedReader reader = null;
-		stream = loader.getResource(bundleName).getInputStream();
-		reader = new BufferedReader(new InputStreamReader(stream, Charset.forName(Site.DEFAULT_CHARSET)));
+		ResourceIterator<String> ri = resourceIteratorProvider.getIterator(bundleName);
 		long passed = 0;
 		if (finished != null)
-			while (passed < finished && reader.ready()) {
-				reader.readLine();
+			while (passed < finished && ri.hasNext()) {
+				ri.next();
 				passed++;
 			}
 		boolean done = false;
-		long startTime = System.currentTimeMillis();
+		long startTime = timeProvider.getCurrentTimeStamp();
 		newFinished[0] = passed;
-		while (System.currentTimeMillis() - startTime < maxDuration) {
+		while (timeProvider.getCurrentTimeStamp() - startTime < maxDuration) {
 			int i = 0;
 			List<Question> qs = new ArrayList<Question>();
-			while (i < QUESTION_BATCH_SIZE && reader.ready()) {
-				String s = reader.readLine();
+			while (i < QUESTION_INSTALLATION_BATCH_SIZE && ri.hasNext()) {
+				String s = ri.next();
 				String[] data = s.split("\\|");
 				String question = data[0];
 				String[] choices = Arrays.copyOfRange(data, 1, data.length);
@@ -243,13 +241,12 @@ public class DemoController {
 			}
 			questionDao.persist(qs.toArray(new Question[qs.size()]));
 			newFinished[0] += qs.size();
-			if (!reader.ready()) {// end of stream
+			if (!ri.hasNext()) {// end of stream
 				done = true;
 				break;
 			}
 		}
-		reader.close();
-		stream.close();
+		ri.close();
 		return done;
 	}
 
@@ -279,7 +276,7 @@ public class DemoController {
 		return q;
 	}
 
-	static final int BATCH_SIZE = 50;
+	static final int WIPE_OUT_BATCH_SIZE = 50;
 
 	private void queueWipeoutJob() {
 		TaskOptions taskOptions = TaskOptions.Builder.url("/demo/wipe-out");
@@ -290,17 +287,17 @@ public class DemoController {
 	@RequestMapping("/wipe-out")
 	public void wipeoutData(HttpServletResponse response) {
 		if (matchDao.countAll() > 0) {
-			List<Match> qs = matchDao.getSubSet(0, BATCH_SIZE);
+			List<Match> qs = matchDao.getSubSet(0, WIPE_OUT_BATCH_SIZE);
 			for (Match q : qs)
 				matchDao.delete(q);
-			if (qs.size() == BATCH_SIZE)
+			if (qs.size() == WIPE_OUT_BATCH_SIZE)
 				queueWipeoutJob();
 
 		} else if (questionDao.countAll() > 0) {
-			List<Question> qs = questionDao.getSubSet(0, BATCH_SIZE);
+			List<Question> qs = questionDao.getSubSet(0, WIPE_OUT_BATCH_SIZE);
 			for (Question q : qs)
 				questionDao.delete(q);
-			if (qs.size() == BATCH_SIZE)
+			if (qs.size() == WIPE_OUT_BATCH_SIZE)
 				queueWipeoutJob();
 		}
 	}
