@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.persistence.Id;
 
+import com.google.appengine.api.datastore.Blob;
 import com.vercer.engine.persist.annotation.Key;
+import com.vercer.engine.persist.annotation.Type;
 
 public class NumericBag {
 	@Id
@@ -17,8 +19,10 @@ public class NumericBag {
 
 	private String classifier;
 
+	@Type(Blob.class)
 	private List<Long> heads = new ArrayList<Long>();
 
+	@Type(Blob.class)
 	private List<Long> tails = new ArrayList<Long>();
 
 	/**
@@ -27,6 +31,8 @@ public class NumericBag {
 	private List<Long> indices = new ArrayList<Long>();
 
 	private int size = 0;
+	
+	private long lastUpdatedTimestamp;
 
 	public NumericBag() {
 	}
@@ -113,6 +119,7 @@ public class NumericBag {
 		if (size == 0)
 			return;
 		int segmentIndex = find(number, heads);
+		if (segmentIndex==-1) return;// number is smaller than any element in the bag
 		if (segmentIndex >= heads.size()) {
 			if (tails.get(segmentIndex - 1) >= number)
 				segmentIndex -= 1;
@@ -190,6 +197,32 @@ public class NumericBag {
 	private void alter(int from, int to, Long delta, List<Long> list) {
 		for (int i = from; i <= to; i++)
 			list.set(i, list.get(i) + delta);
+	}
+
+	/**
+	 * Return an array contains all number in bag in asc order. Used for test purpose only
+	 * 
+	 * @param bag
+	 * @return
+	 */
+	public Object[] toArray() {
+		int size = this.getSize();
+		Object[] result = new Object[size];
+		for (int i = 0; i < size; i++)
+			result[i] = this.get(i);
+		return result;
+	}
+
+	public static String getUniformClassifier(Class<?> clazz, Object key) {
+		return clazz.getCanonicalName() + "@" + key;
+	}
+
+	public void setLastUpdatedTimestamp(long lastUpdatedTimestamp) {
+		this.lastUpdatedTimestamp = lastUpdatedTimestamp;
+	}
+
+	public long getLastUpdatedTimestamp() {
+		return lastUpdatedTimestamp;
 	}
 
 }

@@ -111,32 +111,32 @@ public class NumericBagTest {
 		numericBag.removeNumber(3L);
 	}
 
+	
+	@Test
+	public void removeElementThatSmallerThanAnyElementInBagShouldBeOk() {
+		numericBag.addNumber(11L);
+		numericBag.removeNumber(9L);
+	}
+
 	@Test
 	public void addRemoveAlternativelyShouldMaintainTheBag() {
 		numericBag.addNumber(1L);
-		assertEquals(toArray(numericBag), new Object[] { 1L });
+		assertEquals(numericBag.toArray(), new Object[] { 1L });
 		numericBag.addNumber(2L);
-		assertEquals(toArray(numericBag), new Object[] { 1L, 2L });
+		assertEquals(numericBag.toArray(), new Object[] { 1L, 2L });
 		numericBag.addNumber(4L);
-		assertEquals(toArray(numericBag), new Object[] { 1L, 2L, 4L });
+		assertEquals(numericBag.toArray(), new Object[] { 1L, 2L, 4L });
 		numericBag.addNumber(3L);
-		assertEquals(toArray(numericBag), new Object[] { 1L, 2L, 3L, 4L });
+		assertEquals(numericBag.toArray(), new Object[] { 1L, 2L, 3L, 4L });
 		numericBag.removeNumber(3L);
-		assertEquals(toArray(numericBag), new Object[] { 1L, 2L, 4L });
+		assertEquals(numericBag.toArray(), new Object[] { 1L, 2L, 4L });
 		numericBag.removeNumber(2L);
-		assertEquals(toArray(numericBag), new Object[] { 1L, 4L });
+		assertEquals(numericBag.toArray(), new Object[] { 1L, 4L });
 		numericBag.removeNumber(1L);
-		assertEquals(toArray(numericBag), new Object[] { 4L });
+		assertEquals(numericBag.toArray(), new Object[] { 4L });
 		numericBag.removeNumber(4L);
-		assertEquals(toArray(numericBag), new Object[] {});
+		assertEquals(numericBag.toArray(), new Object[] {});
 	}
 
-	private static Object[] toArray(NumericBag bag) {
-		int size = bag.getSize();
-		Object[] result = new Object[size];
-		for (int i = 0; i < size; i++)
-			result[i] = bag.get(i);
-		return result;
-	}
-
+	
 }

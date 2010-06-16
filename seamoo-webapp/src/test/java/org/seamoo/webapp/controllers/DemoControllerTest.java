@@ -103,32 +103,24 @@ public class DemoControllerTest {
 
 		assertNotNull(ts[0]);
 		assertEquals("/demo/install-questions", ts[0].getUrl());
-		List params = getParams(ts[0]);
+		List params = TaskQueueHelper.getParams(ts[0]);
 		int expectedParamSize = 0;
 		if (bundleNameOut != null) {
 			expectedParamSize++;
-			assertParam(params.get(expectedParamSize - 1), "bundleName", bundleNameOut);
+			TaskQueueHelper.assertParam(params.get(expectedParamSize - 1), "bundleName", bundleNameOut);
 		}
 		
 		if (finishedOut != null){
 			expectedParamSize++;
-			assertParam(params.get(expectedParamSize-1), "finished", finishedOut.toString());
+			TaskQueueHelper.assertParam(params.get(expectedParamSize-1), "finished", finishedOut.toString());
 		}
 		if (leagueIdOut!=null){
 			expectedParamSize++;
-			assertParam(params.get(expectedParamSize-1), "leagueId", leagueIdOut.toString());	
+			TaskQueueHelper. assertParam(params.get(expectedParamSize-1), "leagueId", leagueIdOut.toString());	
 		}
 		assertEquals(expectedParamSize, params.size());
 	}
 
-	List getParams(TaskOptions options) {
-		return (List) ReflectionTestUtils.invokeGetterMethod(options, "params");
-	}
-
-	void assertParam(Object param, String name, String value) {
-		assertEquals(ReflectionTestUtils.getField(param, "name"), name);
-		assertEquals(ReflectionTestUtils.getField(param, "value"), value);
-	}
 	
 	@Test
 	public void unfinishedInstallShouldQueueNewTaskOnTheSameBundle() throws IOException {
