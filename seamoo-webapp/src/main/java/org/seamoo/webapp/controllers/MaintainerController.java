@@ -64,7 +64,7 @@ public class MaintainerController {
 		}
 		do {
 			List<QuestionEvent> events = questionEventDao.getAllByMinimumTimeStamp(leagueId,
-					numericBag.getLastUpdatedTimestamp(), QUESTION_INDEX_BATCH_SIZE);
+					numericBag.getLastUpdatedTimestamp(), 0, QUESTION_INDEX_BATCH_SIZE);
 			for (QuestionEvent event : events) {
 				switch (event.getType()) {
 				case CREATE:
