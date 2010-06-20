@@ -8,6 +8,10 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+	<bean class="org.seamoo.utils.TimeProvider" />
+	<bean class="org.seamoo.utils.ResourceIteratorProvider" />
+
+	<bean class="org.seamoo.daos.twigImpl.lookup.TwigNumericBagDaoImpl" />
 	<bean class="org.seamoo.daos.twigImpl.TwigSiteSettingDaoImpl" />
 	<bean class="org.seamoo.daos.twigImpl.TwigSubjectDaoImpl" />
 	<bean class="org.seamoo.daos.twigImpl.TwigLeagueDaoImpl" />
@@ -17,4 +21,7 @@
 	<bean class="org.seamoo.daos.twigImpl.installation.TwigBundleDaoImpl" />
 	<bean class="org.seamoo.daos.twigImpl.TwigMemberQualificationDaoImpl" />
 	<bean class="org.seamoo.daos.twigImpl.TwigLeagueMembershipDaoImpl" />
+
+	<bean class="org.seamoo.cache.memcacheImpl.MemcacheRemoteObjectFactoryImpl" />
+
 </beans>
