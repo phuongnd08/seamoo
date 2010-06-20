@@ -72,10 +72,12 @@ public class MatchOrganizerSteps {
 	}
 
 	List<Question> questions;
+	List<Long> questionKeys;
 
 	@Given("$number questions that have correct choices on #$correct")
 	public void setUpQuestions(int number, int correct) {
 		questions = new ArrayList<Question>();
+		questionKeys = new ArrayList<Long>();
 		for (int i = 0; i < number; i++) {
 			MultipleChoicesQuestionRevision revision = new MultipleChoicesQuestionRevision();
 			for (int j = 0; j < 4; j++) {
@@ -86,6 +88,7 @@ public class MatchOrganizerSteps {
 			q.setCurrentRevision(revision);
 			q.setAutoId(new Long(i + 1));
 			questions.add(q);
+			questionKeys.add(q.getAutoId());
 		}
 	}
 
@@ -94,7 +97,7 @@ public class MatchOrganizerSteps {
 	@Given("A Question Dao")
 	public void setUpQuestionDao() {
 		questionDao = mock(QuestionDao.class);
-		when(questionDao.getRandomQuestions(anyLong(), eq(20))).thenReturn(questions);
+		when(questionDao.getRandomQuestionKeys(anyLong(), eq(20))).thenReturn(questionKeys);
 		when(questionDao.findByKey(anyLong())).thenAnswer(new Answer<Question>() {
 
 			@Override
@@ -248,12 +251,12 @@ public class MatchOrganizerSteps {
 
 	@Then("Question Dao is requested for $number random questions")
 	public void assertRandomQuestionsRequested(int number) {
-		verify(questionDao, times(1)).getRandomQuestions(anyLong(), eq(number));
+		verify(questionDao, times(1)).getRandomQuestionKeys(anyLong(), eq(number));
 	}
 
 	@Then("Question Dao is requested for $number random questions on league $leagueId")
 	public void assertRandomQuestionsRequested(int number, long leagueId) {
-		verify(questionDao, times(1)).getRandomQuestions(eq(leagueId), eq(number));
+		verify(questionDao, times(1)).getRandomQuestionKeys(eq(leagueId), eq(number));
 	}
 
 	@Then("Returned Match is assigned with $number questions")

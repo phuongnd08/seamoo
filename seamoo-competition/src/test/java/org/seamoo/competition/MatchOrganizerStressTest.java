@@ -126,6 +126,7 @@ public class MatchOrganizerStressTest {
 		});
 		organizer.questionDao = mock(QuestionDao.class);
 		final List<Question> questions = new ArrayList<Question>();
+		final List<Long> questionKeys = new ArrayList<Long>();
 		for (int i = 0; i < 20; i++) {
 			Question q = new Question();
 			q.setType(QuestionType.MULTIPLE_CHOICES);
@@ -134,9 +135,10 @@ public class MatchOrganizerStressTest {
 			q.addAndSetAsCurrentRevision(rev);
 			questions.add(q);
 			q.setAutoId(new Long(i + 1));
+			questionKeys.add(q.getAutoId());
 		}
 
-		when(organizer.questionDao.getRandomQuestions(anyLong(), eq(20))).thenReturn(questions);
+		when(organizer.questionDao.getRandomQuestionKeys(anyLong(), eq(20))).thenReturn(questionKeys);
 
 		when(organizer.questionDao.findByKey(anyLong())).thenAnswer(new Answer<Question>() {
 

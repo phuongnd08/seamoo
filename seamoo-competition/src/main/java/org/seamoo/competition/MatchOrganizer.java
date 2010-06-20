@@ -144,11 +144,8 @@ public class MatchOrganizer {
 		remoteCompetitor.putObject(competitor);
 		candidate.setRemoteCompetitorSlot(competitorSlot);
 		if (competitorSlot == 1) {
-			List<Question> questions = questionDao.getRandomQuestions(leagueId, settings.getQuestionPerMatch());
-			List<Long> questionIds = new ArrayList<Long>();
-			for (Question q : questions)
-				questionIds.add(q.getAutoId());
-			match.setQuestionIds(questionIds.toArray(new Long[settings.getQuestionPerMatch()]));
+			List<Long> questionIds = questionDao.getRandomQuestionKeys(leagueId, settings.getQuestionPerMatch());
+			match.setQuestionIds(questionIds.toArray(new Long[questionIds.size()]));
 		} else if (competitorSlot == 2) {
 			match.setReadyMoment(timeProvider.getCurrentTimeStamp());
 		}
