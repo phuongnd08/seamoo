@@ -13,9 +13,10 @@ public class QuestionEvent {
 	public QuestionEvent() {
 	}
 
-	public QuestionEvent(QuestionEventType type, Long questionAutoId) {
+	public QuestionEvent(QuestionEventType type, Long questionAutoId, long timeStamp) {
 		this.type = type;
 		this.questionAutoId = questionAutoId;
+		this.timeStamp = timeStamp;
 	}
 
 	public void setTimeStamp(long timeStamp) {

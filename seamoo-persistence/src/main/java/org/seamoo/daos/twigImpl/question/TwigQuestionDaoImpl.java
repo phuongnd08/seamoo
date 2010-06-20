@@ -10,51 +10,63 @@ import java.util.Set;
 
 import org.seamoo.daos.lookup.NumericBagDao;
 import org.seamoo.daos.question.QuestionDao;
+import org.seamoo.daos.speed.QuestionEventDao;
 import org.seamoo.daos.twigImpl.TwigGenericDaoImpl;
 import org.seamoo.daos.twigImpl.lookup.TwigNumericBagDaoImpl;
 import org.seamoo.entities.question.Question;
 import org.seamoo.lookup.NumericBag;
+import org.seamoo.speed.QuestionEvent;
+import org.seamoo.speed.QuestionEventType;
+import org.seamoo.utils.TimeProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> implements QuestionDao {
 
 	private Random rndGenerator = new Random();
-	private NumericBagDao numericBagDao;
+	@Autowired
+	NumericBagDao numericBagDao;
+	@Autowired
+	QuestionEventDao questionEventDao;
+	@Autowired
+	TimeProvider timeProvider;
+
+	public static final long NUMERIC_BAG_CACHE_TIME = 60 * 1000;
 	private final String classifierPrefix = Question.class.getCanonicalName();
 	private Map<Long, NumericBag> bagByLeagueId;
+	private Map<Long, Long> bagLastUpdated;
 
-	private NumericBag getNumericBagByLeagueId(Long leagueId) {
-		if (!bagByLeagueId.containsKey(leagueId)) {
+	private synchronized NumericBag getNumericBagByLeagueId(Long leagueId) {
+		if (!bagByLeagueId.containsKey(leagueId)
+				|| bagLastUpdated.get(leagueId) + NUMERIC_BAG_CACHE_TIME <= timeProvider.getCurrentTimeStamp()) {
 			String cfier = classifierPrefix + "@" + leagueId;
 			NumericBag b = numericBagDao.findByClassifier(cfier);
 			if (b == null)
 				b = new NumericBag(cfier);
 			bagByLeagueId.put(leagueId, b);
+			bagLastUpdated.put(leagueId, timeProvider.getCurrentTimeStamp());
 			return b;
 		}
 		return bagByLeagueId.get(leagueId);
 	}
 
 	public TwigQuestionDaoImpl() {
-		numericBagDao = new TwigNumericBagDaoImpl();
 		bagByLeagueId = new HashMap<Long, NumericBag>();
+		bagLastUpdated = new HashMap<Long, Long>();
 	}
 
 	@Override
 	public Question persist(Question entity) {
-		// TODO Auto-generated method stub
 		boolean shouldAddKey = entity.getAutoId() == null;
 		Question q = super.persist(entity);
 		if (shouldAddKey) {
-			NumericBag bag = getNumericBagByLeagueId(entity.getLeagueAutoId());
-			bag.addNumber(q.getAutoId());
-			numericBagDao.persist(bag);
+			QuestionEvent qe = new QuestionEvent(QuestionEventType.CREATE, q.getAutoId(), timeProvider.getCurrentTimeStamp());
+			questionEventDao.persist(qe);
 		}
 		return q;
 	}
 
 	@Override
 	public Question[] persist(Question[] entities) {
-		// TODO Auto-generated method stub
 		boolean[] shouldAddKey = new boolean[entities.length];
 		Map<Long, Boolean> shouldPersistKeyBag = new HashMap<Long, Boolean>();
 		for (int i = 0; i < entities.length; i++) {
@@ -62,17 +74,19 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 			shouldPersistKeyBag.put(entities[i].getLeagueAutoId(), shouldAddKey[i]);
 		}
 		Question[] qs = super.persist(entities);
+		List<QuestionEvent> qes = new ArrayList<QuestionEvent>();
 		for (int i = 0; i < qs.length; i++) {
 			if (shouldAddKey[i])
-				getNumericBagByLeagueId(qs[i].getLeagueAutoId()).addNumber(qs[i].getAutoId());
+				qes.add(new QuestionEvent(QuestionEventType.CREATE, qs[i].getAutoId(), timeProvider.getCurrentTimeStamp()));
 		}
 
-		for (Long leagueId : shouldPersistKeyBag.keySet())
-			numericBagDao.persist(getNumericBagByLeagueId(leagueId));
+		if (qes.size() > 0)
+			questionEventDao.persist(qes.toArray(new QuestionEvent[qes.size()]));
+
 		return qs;
 	}
 
-	public List<Question> getRandomQuestions(Long leagueId, int number) {
+	public List<Long> getRandomQuestionKeys(Long leagueId, int number) {
 		NumericBag autoIdBag = getNumericBagByLeagueId(leagueId);
 		int totalSize = autoIdBag.getSize();
 		if (number > totalSize) {
@@ -87,21 +101,13 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 				pickedSize++;
 			}
 		}
-
-		List<Question> result = new ArrayList<Question>();
-
-		for (Long autoId : pickedAutoIds)
-			result.add(getOds().load(Question.class, autoId));
-		return result;
+		return new ArrayList<Long>(pickedAutoIds);
 	}
 
 	@Override
 	public void delete(Question entity) {
-		// TODO Auto-generated method stub
-		NumericBag autoIdBag = getNumericBagByLeagueId(entity.getLeagueAutoId());
-		autoIdBag.removeNumber(entity.getAutoId());
 		super.delete(entity);
-		numericBagDao.persist(autoIdBag);
+		QuestionEvent qe = new QuestionEvent(QuestionEventType.DELETE, entity.getAutoId(), timeProvider.getCurrentTimeStamp());
+		questionEventDao.persist(qe);
 	}
-
 }

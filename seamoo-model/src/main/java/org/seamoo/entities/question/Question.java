@@ -23,7 +23,7 @@ public class Question extends Votable {
 	// from last revision
 
 	private QuestionRevision currentRevision;
-	
+
 	@Child
 	private List<QuestionRevision> revisions;
 
@@ -66,6 +66,9 @@ public class Question extends Votable {
 	}
 
 	public void addAndSetAsCurrentRevision(QuestionRevision revision) {
+		// Deal with BigTable store empty collection as null
+		if (this.revisions == null)
+			this.revisions = new ArrayList<QuestionRevision>();
 		this.revisions.add(revision);
 		this.setCurrentRevision(revision);
 	}

@@ -134,4 +134,5 @@ public class TwigGenericDaoImplTest extends LocalAppEngineTest {
 		ExampleModel reloadedModel = newDaoImpl.findByKey(model.getAutoId());
 		assertEquals(reloadedModel.getTransientField(), "xxx");
 	}
+	
 }

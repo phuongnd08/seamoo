@@ -8,7 +8,7 @@ public interface GenericDao<TEntity, TKey> {
 	List<TEntity> getAll();
 
 	TEntity findByKey(TKey key);
-
+	
 	Map<TKey, TEntity> findAllByKeys(Collection<TKey> keys);
 
 	TEntity persist(TEntity entity);
