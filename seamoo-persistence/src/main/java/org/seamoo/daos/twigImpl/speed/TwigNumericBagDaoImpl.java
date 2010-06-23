@@ -1,6 +1,6 @@
-package org.seamoo.daos.twigImpl.lookup;
+package org.seamoo.daos.twigImpl.speed;
 
-import org.seamoo.daos.lookup.NumericBagDao;
+import org.seamoo.daos.speed.NumericBagDao;
 import org.seamoo.daos.twigImpl.TwigGenericDaoImpl;
 import org.seamoo.lookup.NumericBag;
 import org.seamoo.utils.SetBuilder;

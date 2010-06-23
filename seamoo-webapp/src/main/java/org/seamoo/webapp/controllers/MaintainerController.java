@@ -3,8 +3,8 @@ package org.seamoo.webapp.controllers;
 import java.util.List;
 
 import org.seamoo.daos.LeagueDao;
-import org.seamoo.daos.lookup.NumericBagDao;
 import org.seamoo.daos.question.QuestionDao;
+import org.seamoo.daos.speed.NumericBagDao;
 import org.seamoo.daos.speed.QuestionEventDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.question.Question;
@@ -63,8 +63,8 @@ public class MaintainerController {
 			numericBag.setClassifier(NumericBag.getUniformClassifier(Question.class, leagueId));
 		}
 		do {
-			List<QuestionEvent> events = questionEventDao.getAllByMinimumTimeStamp(leagueId,
-					numericBag.getLastUpdatedTimestamp(), 0, QUESTION_INDEX_BATCH_SIZE);
+			List<QuestionEvent> events = questionEventDao.getByMinimumTimeStamp(leagueId, numericBag.getLastUpdatedTimestamp(),
+					numericBag.getNumberOfRecentSameTimestamp(), QUESTION_INDEX_BATCH_SIZE);
 			for (QuestionEvent event : events) {
 				switch (event.getType()) {
 				case CREATE:
@@ -74,7 +74,12 @@ public class MaintainerController {
 					numericBag.removeNumber(event.getQuestionAutoId());
 					break;
 				}
-				numericBag.setLastUpdatedTimestamp(Math.max(numericBag.getLastUpdatedTimestamp(), event.getTimeStamp()));
+				if (numericBag.getLastUpdatedTimestamp() == event.getTimeStamp())
+					numericBag.setNumberOfRecentSameTimestamp(numericBag.getNumberOfRecentSameTimestamp() + 1);
+				else {
+					numericBag.setLastUpdatedTimestamp(event.getTimeStamp());
+					numericBag.setNumberOfRecentSameTimestamp(1);
+				}
 			}
 			if (events.size() < QUESTION_INDEX_BATCH_SIZE)
 				break;

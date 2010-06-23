@@ -1,11 +1,12 @@
-package org.seamoo.daos.twigImpl.lookup;
+package org.seamoo.daos.twigImpl.speed;
 
 import static org.testng.Assert.*;
 
 import java.util.ArrayList;
 
-import org.seamoo.daos.lookup.NumericBagDao;
+import org.seamoo.daos.speed.NumericBagDao;
 import org.seamoo.daos.twigImpl.ObjectDatastoreProvider;
+import org.seamoo.daos.twigImpl.speed.TwigNumericBagDaoImpl;
 import org.seamoo.lookup.NumericBag;
 import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.springframework.test.util.ReflectionTestUtils;

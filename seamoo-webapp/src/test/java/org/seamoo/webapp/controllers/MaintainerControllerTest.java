@@ -11,7 +11,7 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.seamoo.daos.LeagueDao;
-import org.seamoo.daos.lookup.NumericBagDao;
+import org.seamoo.daos.speed.NumericBagDao;
 import org.seamoo.daos.speed.QuestionEventDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.question.Question;
@@ -71,7 +71,7 @@ public class MaintainerControllerTest {
 
 	@Test
 	public void maintainQuestionIndexForLeagueShouldPerformOperationWithinSafeTimeLimit() {
-		when(questionEventDao.getAllByMinimumTimeStamp(eq(1L), anyLong(), 0, anyInt())).thenAnswer(new Answer<List>() {
+		when(questionEventDao.getByMinimumTimeStamp(eq(1L), anyLong(), eq(0), anyInt())).thenAnswer(new Answer<List>() {
 			int times = 0;
 			long questionAutoId = 0;
 
@@ -81,39 +81,41 @@ public class MaintainerControllerTest {
 				if (times == 2) {
 					timeProvider.setCurrentTimeStamp(1 + MaintainerController.MAX_QUESTION_INDEX_REFRESH_PERIOD);
 				}
-				int count = (Integer) invocation.getArguments()[2];
+				int count = (Integer) invocation.getArguments()[3];
 				List result = new ArrayList();
 				questionAutoId++;
 				for (int i = 0; i < count; i++)
-					result.add(new QuestionEvent(QuestionEventType.CREATE, questionAutoId, 1));
+					result.add(new QuestionEvent(QuestionEventType.CREATE, questionAutoId, 1L, 1));
 				return result;
 			}
 		});
 		timeProvider.setCurrentTimeStamp(1);
 		controller.refreshLeagueQuestionIndexes(1L);
-		verify(questionEventDao, times(2)).getAllByMinimumTimeStamp(eq(1L), anyLong(), 0, anyInt());
+		verify(questionEventDao).getByMinimumTimeStamp(1L, 0, 0, 50);
+		verify(questionEventDao).getByMinimumTimeStamp(1L, 1, 50, 50);
 	}
 
 	@Test
 	public void maintainQuestionIndexForLeagueShouldStopAsSoonAsNumberOfQuestionEventRunOut() {
-		when(questionEventDao.getAllByMinimumTimeStamp(eq(1L), anyLong(), 0, anyInt())).thenAnswer(new Answer<List>() {
+		when(questionEventDao.getByMinimumTimeStamp(eq(1L), anyLong(), anyInt(), anyInt())).thenAnswer(new Answer<List>() {
 			int times = 0;
 			long questionAutoId = 0;
 
 			@Override
 			public List answer(InvocationOnMock invocation) throws Throwable {
 				times++;
-				int count = (Integer) invocation.getArguments()[2];
+				int count = (Integer) invocation.getArguments()[3];
 				List result = new ArrayList();
 				questionAutoId++;
 				for (int i = 0; i < (times == 2 ? count - 1 : count); i++)
-					result.add(new QuestionEvent(QuestionEventType.CREATE, questionAutoId, 1));
+					result.add(new QuestionEvent(QuestionEventType.CREATE, questionAutoId, 1L, 1));
 				return result;
 			}
 		});
 		timeProvider.setCurrentTimeStamp(1);
 		controller.refreshLeagueQuestionIndexes(1L);
-		verify(questionEventDao, times(2)).getAllByMinimumTimeStamp(eq(1L), anyLong(), 0, anyInt());
+		verify(questionEventDao).getByMinimumTimeStamp(1L, 0, 0, 50);
+		verify(questionEventDao).getByMinimumTimeStamp(1L, 1, 50, 50);
 	}
 
 	@Test
@@ -122,25 +124,26 @@ public class MaintainerControllerTest {
 		for (int i = 0; i < 10; i++)
 			bag.addNumber(new Long(i + 1));
 		when(numericBagDao.findByClassifier(Question.class.getCanonicalName() + "@" + 1L)).thenReturn(bag);
-		QuestionEvent e1 = new QuestionEvent(QuestionEventType.CREATE, 11L, 1);
-		e1.setTimeStamp(120L);
-		QuestionEvent e2 = new QuestionEvent(QuestionEventType.DELETE, 9L, 2);
-		e2.setTimeStamp(100L);
+		QuestionEvent e1 = new QuestionEvent(QuestionEventType.CREATE, 11L, 1L, 1);
+		e1.setTimeStamp(100L);
+		QuestionEvent e2 = new QuestionEvent(QuestionEventType.DELETE, 9L, 1L, 2);
+		e2.setTimeStamp(120L);
 		List events = Lists.newArrayList(e1, e2);
-		when(questionEventDao.getAllByMinimumTimeStamp(eq(1L), anyLong(), 0, anyInt())).thenReturn(events);
+		when(questionEventDao.getByMinimumTimeStamp(eq(1L), anyLong(), eq(0), anyInt())).thenReturn(events);
 		controller.refreshLeagueQuestionIndexes(1L);
 		assertEquals(new Object[] { 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 10L, 11L }, bag.toArray());
 		verify(numericBagDao, times(1)).persist(bag);
 		assertEquals(120L, bag.getLastUpdatedTimestamp());
+		assertEquals(1, bag.getNumberOfRecentSameTimestamp());
 	}
 
 	@Test
 	public void maintainQuestionIndexForLeageCreateNumericBagIfNotExist() {
 		when(numericBagDao.findByClassifier(anyString())).thenReturn(null);
-		QuestionEvent e1 = new QuestionEvent(QuestionEventType.CREATE, 11L, 1);
-		QuestionEvent e2 = new QuestionEvent(QuestionEventType.DELETE, 9L, 2);
+		QuestionEvent e1 = new QuestionEvent(QuestionEventType.CREATE, 11L, 1L, 1);
+		QuestionEvent e2 = new QuestionEvent(QuestionEventType.DELETE, 9L, 1L, 2);
 		List events = Lists.newArrayList(e1, e2);
-		when(questionEventDao.getAllByMinimumTimeStamp(eq(1L), anyLong(), 0, anyInt())).thenReturn(events);
+		when(questionEventDao.getByMinimumTimeStamp(eq(1L), anyLong(), eq(0), anyInt())).thenReturn(events);
 		controller.refreshLeagueQuestionIndexes(1L);
 		verify(numericBagDao, times(1)).persist(argThat(new ArgumentMatcher<NumericBag>() {
 

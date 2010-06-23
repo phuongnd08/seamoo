@@ -1,4 +1,4 @@
-package org.seamoo.daos.lookup;
+package org.seamoo.daos.speed;
 
 import java.util.List;
 

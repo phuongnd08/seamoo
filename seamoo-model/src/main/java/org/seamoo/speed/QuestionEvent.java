@@ -13,9 +13,10 @@ public class QuestionEvent {
 	public QuestionEvent() {
 	}
 
-	public QuestionEvent(QuestionEventType type, Long questionAutoId, long timeStamp) {
+	public QuestionEvent(QuestionEventType type, Long questionAutoId, Long leagueAutoId, long timeStamp) {
 		this.type = type;
 		this.questionAutoId = questionAutoId;
+		this.leagueAutoId = leagueAutoId;
 		this.timeStamp = timeStamp;
 	}
 

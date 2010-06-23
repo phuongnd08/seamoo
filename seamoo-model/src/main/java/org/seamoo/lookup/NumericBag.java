@@ -31,8 +31,10 @@ public class NumericBag {
 	private List<Long> indices = new ArrayList<Long>();
 
 	private int size = 0;
-	
+
 	private long lastUpdatedTimestamp;
+
+	private int numberOfRecentSameTimestamp;
 
 	public NumericBag() {
 	}
@@ -119,7 +121,8 @@ public class NumericBag {
 		if (size == 0)
 			return;
 		int segmentIndex = find(number, heads);
-		if (segmentIndex==-1) return;// number is smaller than any element in the bag
+		if (segmentIndex == -1)
+			return;// number is smaller than any element in the bag
 		if (segmentIndex >= heads.size()) {
 			if (tails.get(segmentIndex - 1) >= number)
 				segmentIndex -= 1;
@@ -223,6 +226,14 @@ public class NumericBag {
 
 	public long getLastUpdatedTimestamp() {
 		return lastUpdatedTimestamp;
+	}
+
+	public void setNumberOfRecentSameTimestamp(int numberOfRecentSameTimestamp) {
+		this.numberOfRecentSameTimestamp = numberOfRecentSameTimestamp;
+	}
+
+	public int getNumberOfRecentSameTimestamp() {
+		return numberOfRecentSameTimestamp;
 	}
 
 }

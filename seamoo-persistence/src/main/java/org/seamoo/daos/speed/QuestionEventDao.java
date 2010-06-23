@@ -15,5 +15,5 @@ public interface QuestionEventDao extends GenericDao<QuestionEvent, Long>{
 	 * @param count
 	 * @return
 	 */
-	List<QuestionEvent> getAllByMinimumTimeStamp(Long leagueAutoId, long minimumTimeStamp, int skip, int count); 
+	List<QuestionEvent> getByMinimumTimeStamp(Long leagueAutoId, long minimumTimeStamp, int skip, int count); 
 }

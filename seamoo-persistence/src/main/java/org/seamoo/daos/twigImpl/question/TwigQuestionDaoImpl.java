@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import org.seamoo.daos.lookup.NumericBagDao;
 import org.seamoo.daos.question.QuestionDao;
+import org.seamoo.daos.speed.NumericBagDao;
 import org.seamoo.daos.speed.QuestionEventDao;
 import org.seamoo.daos.twigImpl.TwigGenericDaoImpl;
-import org.seamoo.daos.twigImpl.lookup.TwigNumericBagDaoImpl;
+import org.seamoo.daos.twigImpl.speed.TwigNumericBagDaoImpl;
 import org.seamoo.entities.question.Question;
 import org.seamoo.lookup.NumericBag;
 import org.seamoo.speed.QuestionEvent;
@@ -59,7 +59,7 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 		boolean shouldAddKey = entity.getAutoId() == null;
 		Question q = super.persist(entity);
 		if (shouldAddKey) {
-			QuestionEvent qe = new QuestionEvent(QuestionEventType.CREATE, q.getAutoId(), timeProvider.getCurrentTimeStamp());
+			QuestionEvent qe = new QuestionEvent(QuestionEventType.CREATE, q.getAutoId(), 1L, timeProvider.getCurrentTimeStamp());
 			questionEventDao.persist(qe);
 		}
 		return q;
@@ -77,7 +77,7 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 		List<QuestionEvent> qes = new ArrayList<QuestionEvent>();
 		for (int i = 0; i < qs.length; i++) {
 			if (shouldAddKey[i])
-				qes.add(new QuestionEvent(QuestionEventType.CREATE, qs[i].getAutoId(), timeProvider.getCurrentTimeStamp()));
+				qes.add(new QuestionEvent(QuestionEventType.CREATE, qs[i].getAutoId(), 1L, timeProvider.getCurrentTimeStamp()));
 		}
 
 		if (qes.size() > 0)
@@ -107,7 +107,7 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 	@Override
 	public void delete(Question entity) {
 		super.delete(entity);
-		QuestionEvent qe = new QuestionEvent(QuestionEventType.DELETE, entity.getAutoId(), timeProvider.getCurrentTimeStamp());
+		QuestionEvent qe = new QuestionEvent(QuestionEventType.DELETE, entity.getAutoId(), 1L, timeProvider.getCurrentTimeStamp());
 		questionEventDao.persist(qe);
 	}
 }
