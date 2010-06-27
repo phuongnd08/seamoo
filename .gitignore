@@ -1,9 +1,9 @@
-#Donot commit temporary files
+# Donot commit temporary files
 *~
 *#
 *~?
 *~??
-#Donot commit backup files
+# Donot commit backup files
 *.bak
 /*/war/WEB-INF/lib/
 /*/war/WEB-INF/classes/
@@ -16,3 +16,7 @@ seamoo-*/target/
 test-output/
 .metadata/
 *.gwt.rpc
+# Do not commit log file
+rails_openid/log/
+# Do not commit db file
+rails_openid/db/

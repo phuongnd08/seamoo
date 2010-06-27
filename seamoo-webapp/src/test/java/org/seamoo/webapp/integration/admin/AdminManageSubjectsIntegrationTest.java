@@ -1,4 +1,4 @@
-package org.seamoo.webapp.integration;
+package org.seamoo.webapp.integration.admin;
 
 public class AdminManageSubjectsIntegrationTest {
 

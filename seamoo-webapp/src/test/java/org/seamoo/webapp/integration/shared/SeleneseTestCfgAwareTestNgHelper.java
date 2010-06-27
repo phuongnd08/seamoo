@@ -11,7 +11,19 @@ public class SeleneseTestCfgAwareTestNgHelper extends SeleneseTestNgHelper {
 	@Override
 	@Parameters( { "selenium.url", "selenium.browser" })
 	public void setUp(@Optional String url, @Optional String browserString) throws Exception {
-		super.setUp(TestConfig.getServerBase(), "*firefox");
+		super.setUp(TestCfg.getServerBase(), "*firefox");
+		installSamplesOnce();
+	}
+
+	static boolean sampleInstalled = false;
+
+	@BeforeTest
+	public void installSamplesOnce() throws InterruptedException {
+		if (!sampleInstalled && selenium != null) {
+			selenium.open("/demo/install-samples");
+			selenium.waitForPageToLoad("30000");
+			sampleInstalled = true;
+		}
 	}
 
 }

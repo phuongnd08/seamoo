@@ -61,13 +61,20 @@ public class Member implements Serializable {
 	@GwtTransient
 	private double spammerScore;
 
-
 	public Member() {
 
 	}
 
 	public Member(String openId) {
 		this.openId = openId;
+	}
+
+	public Member(String openId, String displayName, String alias,String emailHash, boolean administrator) {
+		this.openId = openId;
+		this.displayName = displayName;
+		this.alias = alias;
+		this.emailHash = emailHash;
+		this.administrator = administrator;
 	}
 
 	public void setOpenId(String openId) {

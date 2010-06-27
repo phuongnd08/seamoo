@@ -12,17 +12,24 @@ import java.util.Set;
 import javax.servlet.http.HttpServletResponse;
 
 import org.seamoo.daos.LeagueDao;
+import org.seamoo.daos.MemberDao;
 import org.seamoo.daos.SiteSettingDao;
 import org.seamoo.daos.SubjectDao;
 import org.seamoo.daos.installation.BundleDao;
 import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.League;
+import org.seamoo.entities.Member;
 import org.seamoo.entities.Subject;
+import org.seamoo.entities.matching.Match;
+import org.seamoo.entities.matching.MatchAnswer;
+import org.seamoo.entities.matching.MatchAnswerType;
+import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.installation.Bundle;
+import org.seamoo.utils.HashBuilder;
 import org.seamoo.utils.ResourceIterator;
 import org.seamoo.utils.ResourceIteratorProvider;
 import org.seamoo.utils.TimeProvider;
@@ -44,10 +51,13 @@ public class DemoController {
 	SiteSettingDao siteSettingDao;
 
 	@Autowired
-	SubjectDao subjectDAO;
+	SubjectDao subjectDao;
 
 	@Autowired
 	LeagueDao leagueDao;
+
+	@Autowired
+	MemberDao memberDao;
 
 	@Autowired
 	QuestionDao questionDao;
@@ -79,14 +89,70 @@ public class DemoController {
 		}
 	}
 
+	@RequestMapping("/install-samples")
 	public void installSamples(HttpServletResponse response) throws IOException {
 		response.setContentType("text/html");
-		boolean sampleInstalled = Converter.toBoolean(siteSettingDao.getSetting("sampleInstalled"));
-		if (!sampleInstalled) {
+		boolean samplesInstalled = Converter.toBoolean(siteSettingDao.getSetting("samplesInstalled"));
+		if (!samplesInstalled) {
+			response.getWriter().println("Start installing samples<br/>");
+			Subject sampleSubject = new Subject("Sample Subject", "/images/subjects/sample.png", "Sample subject for testing",
+					true, new Date());
+			subjectDao.persist(sampleSubject);
+			League sampleLeague = new League("Sample League", "sample-league", "/images/leagues/sample.png",
+					"Sample league for testing", 0, true, new Date());
+			sampleLeague.setSubjectAutoId(sampleSubject.getAutoId());
+			leagueDao.persist(sampleLeague);
+			Member[] sampleMembers = new Member[] {
+					new Member("http://localhost:3000/user/phuongnd08", "Phuong Nguyen", "phuongnd08",
+							HashBuilder.getMD5Hash("phuongnd08@seamoo.com"), false),
+					new Member("http://localhost:3000/user/mrcold", "Mr Cold", "mrcold",
+							HashBuilder.getMD5Hash("mrcold@seamoo.com"), true),
+					new Member("http://localhost:3000/user/stranger", "Stranger", "stranger",
+							HashBuilder.getMD5Hash("stranger@seamoo.com"), false) };
+			memberDao.persist(sampleMembers);
+			installPackage("classpath:sample_questions.data", 0L, new Long[1], MAX_DURATION, sampleLeague);
+
+			// Get a list of first 2 sample questions
+			List<Question> questions = questionDao.getSubSet(0, 20);
+			List<Long> questionIds = new ArrayList<Long>();
+			for (Question q : questions)
+				questionIds.add(q.getAutoId());
+			// Generate 2 sample matches
+			for (int i = 0; i < 2; i++) {
+				Match sampleMatch = new Match();
+				sampleMatch.setLeagueAutoId(sampleLeague.getAutoId());
+				sampleMatch.setQuestionIds(questionIds);
+				switch (i) {
+				case 0:
+					sampleMatch.addCompetitor(generateCompetitor(sampleMembers[0]));
+					sampleMatch.addCompetitor(generateCompetitor(sampleMembers[1]));
+					sampleMatch.setAlias("phuongnd08-mrcold");
+					break;
+				case 1:
+					sampleMatch.addCompetitor(generateCompetitor(sampleMembers[1]));
+					sampleMatch.addCompetitor(generateCompetitor(sampleMembers[2]));
+					sampleMatch.setAlias("mrcold-stranger");
+					break;
+				}
+				matchDao.persist(sampleMatch);
+			}
+			siteSettingDao.assignSetting("samplesInstalled", Converter.toString(true));
+			response.getWriter().println("Done!<br/>");
 
 		} else {
 			response.getWriter().println("Error: Sample Installed");
 		}
+	}
+
+	private MatchCompetitor generateCompetitor(Member member) {
+		MatchCompetitor competitor = new MatchCompetitor();
+		competitor.setMemberAutoId(member.getAutoId());
+		for (int i = 0; i < 20; i++)
+			if (i % 2 == 0)
+				competitor.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, String.valueOf((i / 2) % 2)));
+			else
+				competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, null));
+		return competitor;
 	}
 
 	private Subject[] internalInstallSubjects() {
@@ -97,7 +163,7 @@ public class DemoController {
 		Subject history = new Subject("Lịch sử", "/images/subjects/history.png", "Thể hiện sự am tường lịch sử của bạn", false,
 				new Date());
 		Subject[] subjects = new Subject[] { english, maths, history };
-		subjectDAO.persist(subjects);
+		subjectDao.persist(subjects);
 		return subjects;
 	}
 

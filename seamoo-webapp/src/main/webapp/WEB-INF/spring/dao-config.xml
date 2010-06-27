@@ -10,7 +10,7 @@
 
 	<bean class="org.seamoo.utils.TimeProvider" />
 	<bean class="org.seamoo.utils.ResourceIteratorProvider" />
-	<bean class="org.seamoo.webapp.DefaultOpenIdConsumer" />
+	<bean class="org.seamoo.webapp.DefaultOpenIdConsumerImpl" />
 
 	<bean class="org.seamoo.daos.twigImpl.speed.TwigQuestionEventDaoImpl" />
 	<bean class="org.seamoo.daos.twigImpl.speed.TwigNumericBagDaoImpl" />

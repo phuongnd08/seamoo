@@ -3,6 +3,7 @@
 	<test name="GWT-Tests">
 		<packages>
 			<package name="org.seamoo.webapp.integration"></package>
+			<package name="org.seamoo.webapp.integration.user"></package>
 			<package name="org.seamoo.webapp.integration.admin"></package>
 		</packages>
 	</test>

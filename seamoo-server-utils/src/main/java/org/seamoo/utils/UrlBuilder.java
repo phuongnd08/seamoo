@@ -39,4 +39,16 @@ public class UrlBuilder {
 			return baseUrl;
 		return String.format("%s?%s", baseUrl, getQueryString(params));
 	}
+
+	public static String appendQueryParameter(String baseUrl, String queryString, String extQueryString) {
+		if (queryString != null && !queryString.equals("")) {
+			return String.format("%s?%s&%s", baseUrl, queryString, extQueryString);
+		} else
+			return String.format("%s?%s", baseUrl, extQueryString);
+	}
+
+	public static String appendQueryParameter(String baseUrl, String queryString, UrlParameter extParameter) {
+		return appendQueryParameter(baseUrl, queryString, extParameter.toString());
+	}
+
 }

@@ -6,11 +6,11 @@ import java.util.Properties;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 
-public final class TestConfig {
+public final class TestCfg {
 
 	protected static Properties testProperties;
 
-	private TestConfig() {
+	private TestCfg() {
 	}
 
 	public static String getServerBase() {
