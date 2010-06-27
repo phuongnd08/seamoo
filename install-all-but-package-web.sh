@@ -1,0 +1,30 @@
+#!/bin/bash
+cd seamoo-server-utils/
+mvn install
+cd ..
+cd seamoo-model/
+mvn install
+cd ..
+cd seamoo-test-resources/
+mvn install
+cd ..
+cd seamoo-persistence/
+mvn install
+cd ..
+cd seamoo-cache/
+mvn install
+cd ..
+cd seamoo-training/
+mvn install
+cd ..
+cd seamoo-competition/
+mvn install
+cd ..
+cd seamoo-theme/
+mvn install
+cd ..
+cd seamoo-gwt-bridge/
+mvn install
+cd ..
+cd seamoo-webapp/
+mvn package -Dmaven.test.skip=true -Dgwt.compiler.skip=true
