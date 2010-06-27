@@ -360,17 +360,6 @@
 							<goal>runAsync</goal>
 						</goals>
 					</execution>
-					<execution>
-						<id>stop</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-						<configuration>
-							<!-- Wait for 2 seconds (FUNNY) -->
-							<seconds>2</seconds>
-						</configuration>
-					</execution>
 				</executions>
 			</plugin>
 
@@ -378,31 +367,6 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.1</version>
 				<executions>
-
-					<execution>
-						<id>generate-database</id>
-						<phase>pre-integration-test</phase>
-						<configuration>
-							<tasks>
-								<!-- invoke a request to a page that will install sample -->
-
-								<exec dir="${basedir}/target" executable="wget"
-									failonerror="true">
-									<arg
-										line="http://localhost:${gae.testPort}/demo/install-leagues -O install-leagues.txt" />
-								</exec>
-								<exec dir="${basedir}/target" executable="cat" failonerror="true">
-									<arg line="install-leagues.txt" />
-								</exec>
-								<!-- remove the output from disk -->
-								<delete file="${basedir}/target/install-leagues.txt" />
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-
 					<execution>
 						<id>check-gwt-compiler-settings</id>
 						<phase>process-resources</phase>
