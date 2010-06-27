@@ -189,6 +189,7 @@
 			<scope>test</scope>
 		</dependency>
 
+
 		<dependency>
 			<groupId>com.dyuproject</groupId>
 			<artifactId>dyuproject-util</artifactId>
@@ -197,6 +198,11 @@
 		<dependency>
 			<groupId>com.dyuproject</groupId>
 			<artifactId>dyuproject-openid</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openid4java</groupId>
+			<artifactId>openid4java-consumer</artifactId>
 		</dependency>
 
 		<dependency>
@@ -396,7 +402,7 @@
 							<goal>run</goal>
 						</goals>
 					</execution>
-					
+
 					<execution>
 						<id>check-gwt-compiler-settings</id>
 						<phase>process-resources</phase>

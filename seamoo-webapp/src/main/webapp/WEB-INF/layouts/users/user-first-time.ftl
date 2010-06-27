@@ -2,7 +2,7 @@
 [#import "/common.ftl" as common/]
 [#import "/spring.ftl" as spring/]
     <p>OpenID này chưa được lưu trữ trong dữ liệu của [@common.siteName/]:</p>
-    <p style="font-size: 150%;" class="openid-identifier">${openid_user.claimedId}</p>
+    <p style="font-size: 150%;" class="openid-identifier">${identifier}</p>
     <p>Bạn có muốn tạo một tài khoản [@common.siteName/] mới với Open ID này?</p>
 
     <div>

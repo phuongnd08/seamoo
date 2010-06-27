@@ -27,12 +27,8 @@
 		<filter-name>openid-filter</filter-name>
 		<filter-class>org.seamoo.webapp.filters.OpenIdAuthenticationFilter</filter-class>
 		<init-param>
-			<param-name>forwardUri</param-name>
+			<param-name>loginUri</param-name>
 			<param-value>/users/login</param-value> <!-- login page when user is not authenticated-->
-		</init-param>
-		<init-param>
-			<param-name>forwardUriHandler</param-name>
-			<param-value>org.seamoo.webapp.filters.RedirectUriHandler</param-value>
 		</init-param>
 	</filter>
 

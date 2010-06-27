@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.openid4java.discovery.Identifier;
 import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.LeagueMembershipDao;
 import org.seamoo.daos.MemberDao;
@@ -26,7 +28,10 @@ import org.seamoo.utils.AliasBuilder;
 import org.seamoo.utils.EmailExtractor;
 import org.seamoo.utils.HashBuilder;
 import org.seamoo.utils.MapBuilder;
+import org.seamoo.utils.UrlBuilder;
+import org.seamoo.utils.UrlParameter;
 import org.seamoo.utils.converter.Converter;
+import org.seamoo.webapp.OpenIdConsumer;
 import org.seamoo.webapp.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,13 +40,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.dyuproject.openid.Constants;
-import com.dyuproject.openid.OpenIdUser;
-import com.dyuproject.openid.RelyingParty;
-import com.dyuproject.openid.ext.AxSchemaExtension;
-import com.dyuproject.openid.ext.SRegExtension;
-import com.dyuproject.util.http.UrlEncodedParameterMap;
 
 @Controller
 @RequestMapping("/users")
@@ -56,54 +54,17 @@ public class UserController {
 	MatchDao matchDao;
 	@Autowired
 	LeagueMembershipDao leagueMembershipDao;
+	@Autowired
+	OpenIdConsumer openIdConsumer;
 	public static final String OPEN_ID_INFO_FIELD = "info";
 	public static final String OPEN_ID_INFO_EMAIL_FIELD = "email";
 	public static final String OPEN_ID_INFO_COUNTRY_FIELD = "country";
 	public static final String OPEN_ID_INFO_LANGUAGE_FIELD = "language";
-	static {
-		RelyingParty.getInstance().addListener(
-				new AxSchemaExtension().addExchange(OPEN_ID_INFO_EMAIL_FIELD).addExchange(OPEN_ID_INFO_COUNTRY_FIELD).addExchange(
-						OPEN_ID_INFO_LANGUAGE_FIELD)).addListener(
-				new SRegExtension().addExchange(OPEN_ID_INFO_EMAIL_FIELD).addExchange(OPEN_ID_INFO_COUNTRY_FIELD).addExchange(
-						OPEN_ID_INFO_LANGUAGE_FIELD)).addListener(new RelyingParty.Listener() {
-			public void onDiscovery(OpenIdUser user, HttpServletRequest request) {
-
-			}
-
-			public void onPreAuthenticate(OpenIdUser user, HttpServletRequest request, UrlEncodedParameterMap params) {
-				if ("true".equals(request.getParameter("popup"))) {
-					String returnTo = params.get(Constants.OPENID_TRUST_ROOT) + request.getContextPath() + "/popup_verify.html";
-					params.put(Constants.OPENID_RETURN_TO, returnTo);
-					params.put(Constants.OPENID_REALM, returnTo);
-					params.put("openid.ns.ui", "http://specs.openid.net/extensions/ui/1.0");
-					params.put("openid.ui.mode", "popup");
-				}
-			}
-
-			public void onAuthenticate(OpenIdUser user, HttpServletRequest request) {
-				Map<String, String> sreg = SRegExtension.remove(user);
-				Map<String, String> axschema = AxSchemaExtension.remove(user);
-				if (sreg != null && !sreg.isEmpty()) {
-					System.err.println("sreg: " + sreg);
-					user.setAttribute(OPEN_ID_INFO_EMAIL_FIELD, sreg);
-				} else if (axschema != null && !axschema.isEmpty()) {
-					System.err.println("axschema: " + axschema);
-					user.setAttribute(OPEN_ID_INFO_FIELD, axschema);
-				} else {
-					System.err.println("identity: " + user.getIdentity());
-				}
-			}
-
-			public void onAccess(OpenIdUser user, HttpServletRequest request) {
-
-			}
-		});
-	}
 
 	private static String getRedirectView(HttpServletRequest request, String url) {
 		String workingUrl;
 		try {
-			workingUrl = url != null && !url.equals("") ? URLDecoder.decode(url, "utf-8") : request.getContextPath() + "/";
+			workingUrl = (url != null && !url.equals("")) ? URLDecoder.decode(url, "utf-8") : request.getContextPath() + "/";
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			workingUrl = request.getContextPath() + "/";
@@ -114,9 +75,10 @@ public class UserController {
 	@RequestMapping(value = "/first-seen", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView welcomeFirstTime(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "returnUrl", required = false) String returnUrl,
+			@RequestParam(value = "email", required = false) String email,
 			@RequestParam(value = "cmd", required = false) String cmd) throws Exception {
-		OpenIdUser user = RelyingParty.getInstance().discover(request);
-		Member member = memberDao.findByOpenId(user.getClaimedId());
+		Identifier identifier = (Identifier) request.getSession().getAttribute("identifier");
+		Member member = memberDao.findByOpenId(identifier.getIdentifier());
 		if (member != null) {
 			return new ModelAndView(getRedirectView(request, returnUrl));
 		}
@@ -124,31 +86,27 @@ public class UserController {
 		if (request.getMethod().equalsIgnoreCase("post")) {
 			if ("cancel".equals(cmd) || "create".equals(cmd)) {
 				if (cmd.equals("cancel"))
-					RelyingParty.getInstance().invalidate(request, response);
+					request.getSession().invalidate();
 				else /* cmd.equals("create") */{
 					member = new Member();
-					member.setOpenId(user.getClaimedId());
+					member.setOpenId(identifier.getIdentifier());
 					member.setJoiningDate(new Date());
-					Map<String, String> infoMap = (Map<String, String>) user.getAttribute(OPEN_ID_INFO_FIELD);
-					if (infoMap != null) {
-						String email = infoMap.get(OPEN_ID_INFO_EMAIL_FIELD);
-						member.setEmail(email);
-						if (email != null) {
-							member.setEmailHash(HashBuilder.getMD5Hash(email));
-							member.setDisplayName(EmailExtractor.extractName(email));
-						}
+					member.setEmail(email);
+					if (email != null) {
+						member.setEmailHash(HashBuilder.getMD5Hash(email));
+						member.setDisplayName(EmailExtractor.extractName(email));
 					}
 					if (member.getDisplayName() != null)
 						member.setAlias(AliasBuilder.toAlias(member.getDisplayName()));
 					member.setAdministrator(memberDao.countAll() == 0);
 					memberDao.persist(member);
 				}
-
 				return new ModelAndView(getRedirectView(request, returnUrl));
 			}
 		}
 		ModelAndView mav = new ModelAndView("users.first-time");
 		mav.addObject("title", "Xác nhận Open ID");
+		mav.addObject("identifier", identifier.getIdentifier());
 		return mav;
 	}
 
@@ -160,23 +118,39 @@ public class UserController {
 	}
 
 	@RequestMapping("/login")
-	public ModelAndView login(HttpServletRequest request, @RequestParam(value = "returnUrl", required = false) String returnUrl)
-			throws Exception {
-		OpenIdUser user = RelyingParty.getInstance().discover(request);
-		if (user != null && user.isAuthenticated()) {
-			return new ModelAndView(getRedirectView(request, returnUrl));
-		} else {
-			ModelAndView mav = new ModelAndView("users.login");
-			mav.addObject("title", "Đăng nhập với Open ID của bạn");
-			mav.addObject("returnUrl", returnUrl);
-			return mav;
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "is_return", required = false, defaultValue = "false") boolean isReturn,
+			@RequestParam(value = "returnUrl", required = false) String returnUrl,
+			@RequestParam(value = "openid_identifier", required = false) String openidIdentifier) throws Exception {
+		if (isReturn) {
+			Identifier identifier = openIdConsumer.verifyResponse(request);
+			if (identifier != null) {
+				request.getSession().setAttribute("identifier", identifier);
+				if (memberDao.findByOpenId(identifier.getIdentifier()) != null)
+					return new ModelAndView(getRedirectView(request, returnUrl));
+				List<UrlParameter> params = new ArrayList<UrlParameter>();
+				if (returnUrl != null)
+					params.add(new UrlParameter("returnUrl", returnUrl));
+				String email = (String) request.getAttribute("email");
+				if (email != null)
+					params.add(new UrlParameter("email", email));
+				String redirectUrl = UrlBuilder.getQueryUrl("/users/first-seen", params);
+				return new ModelAndView(getRedirectView(request, redirectUrl));
+			}
+		} else if (openidIdentifier != null) {
+			openIdConsumer.authRequest(openidIdentifier, request, response);
+			return null;
 		}
+		ModelAndView mav = new ModelAndView("users.login");
+		mav.addObject("title", "Đăng nhập với Open ID của bạn");
+		mav.addObject("returnUrl", returnUrl);
+		return mav;
 	}
 
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "returnUrl", required = false) String returnUrl) throws IOException {
-		RelyingParty.getInstance().invalidate(request, response);
+		request.getSession().invalidate();
 		if (returnUrl != null && !returnUrl.trim().equals(""))
 			return String.format("redirect:%s", returnUrl);
 		else

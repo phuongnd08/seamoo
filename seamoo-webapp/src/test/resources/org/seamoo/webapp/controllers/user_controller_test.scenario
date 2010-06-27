@@ -1,25 +1,37 @@
 !-- Test login page
 Given A MemberDao
+And An OpenIdConsumer
 And A UserController
-And An RelyingParty
-And An authenticated OpenIdUser
 And An HttpServletRequest
+And An HttpServletResponse
+And A Returned login transaction
+And An Identifier
 And returnUrl is null
+Given Member is not on the System
+Given email is "phuongnd08@gmail.com"
 When User is logging in
-Then User is being routed to "redirect:/"
+Then Identifier is assigned to session
+Then User is being routed to "redirect:/users/first-seen?email=phuongnd08@gmail.com"
+Given email is null 
+And Session forgot its interaction
+When User is logging in
+Then Identifier is assigned to session
+Then User is being routed to "redirect:/users/first-seen"
 Given returnUrl is "/leagues/2"
 When User is logging in
-Then User is being routed to "redirect:/leagues/2"
-Given A null OpenIdUser
+Then User is being routed to "redirect:/users/first-seen?returnUrl=/leagues/2"
+Given email is "phuongnd08@gmail.com"
 When User is logging in
-Then User is being routed to "users.login"
-And Key "returnUrl" with value "/leagues/2" is passed to view
-Given An unauthenticated OpenIdUser
+Then User is being routed to "redirect:/users/first-seen?returnUrl=/leagues/2&email=phuongnd08@gmail.com"
+Given Member is on the System
+When User is logging in
+Then User is being routed to "redirect:/leagues/2"
+Given An empty Identifier
 When User is logging in
 Then User is being routed to "users.login"
 And Key "returnUrl" with value "/leagues/2" is passed to view
 !-- Test first-seen page
-Given An authenticated OpenIdUser
+Given A Session with assigned Identifier
 And Method is "get"
 And returnUrl is null
 And Member is on the System
@@ -35,7 +47,7 @@ Given Method is "post"
 And returnUrl is null
 And Command is "cancel"
 When User is being seen first time
-Then RelyingParty is invalidated
+Then Session is invalidated
 And User is being routed to "redirect:/"
 Given returnUrl is "/leagues/2"
 And Command is "cancel"
@@ -52,7 +64,7 @@ Given returnUrl is "/leagues/2"
 When User is being seen first time
 Then User is being routed to "redirect:/leagues/2"
 !-- Test first-seen page: very first user of the system is administrator
-Given An authenticated OpenIdUser
+Given An Identifier
 And MemberDao is reset
 And Method is "post"
 And returnUrl is null

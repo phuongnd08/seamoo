@@ -9,22 +9,22 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.powermock.api.mockito.PowerMockito;
+import org.openid4java.discovery.Identifier;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.entities.Member;
+import org.seamoo.webapp.OpenIdConsumer;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dyuproject.openid.OpenIdUser;
-import com.dyuproject.openid.RelyingParty;
-
 public class UserControllerSteps {
-	OpenIdUser user;
+	Identifier identifier;
+	OpenIdConsumer openIdConsumer;
 
 	MemberDao memberDao;
 	Member savedMember;
@@ -33,6 +33,11 @@ public class UserControllerSteps {
 	public void initMemberDao() {
 		memberDao = mock(MemberDao.class);
 		resetMemberDao();
+	}
+
+	@Given("An OpenIdConsumer")
+	public void initOpenIdConsumer() {
+		openIdConsumer = mock(OpenIdConsumer.class);
 	}
 
 	@Given("MemberDao is reset")
@@ -61,36 +66,41 @@ public class UserControllerSteps {
 	public void initUserController() {
 		controller = new UserController();
 		controller.memberDao = memberDao;
+		controller.openIdConsumer = openIdConsumer;
 	}
 
-	RelyingParty relyingParty;
-
-	@Given("An RelyingParty")
-	public void initRelyingParty() {
-		relyingParty = mock(RelyingParty.class);
-		PowerMockito.mockStatic(RelyingParty.class);
-		when(RelyingParty.getInstance()).thenReturn(relyingParty);
+	@Given("An Identifier")
+	public void initIdentifier() throws Exception {
+		Identifier identifier = mock(Identifier.class);
+		when(openIdConsumer.verifyResponse((HttpServletRequest) any())).thenReturn(identifier);
 	}
 
-	@Given("An $authenticacity OpenIdUser")
-	public void initOpenIdUser(String authenticacity) throws Exception {
-		user = mock(OpenIdUser.class);
-		when(user.isAuthenticated()).thenReturn(authenticacity.equals("authenticated"));
-		when(relyingParty.discover((HttpServletRequest) any())).thenReturn(user);
-	}
-
-	@Given("A null OpenIdUser")
+	@Given("An empty Identifier")
 	public void initNullOpenIdUser() throws Exception {
-		user = null;
-		when(relyingParty.discover((HttpServletRequest) any())).thenReturn(user);
+		identifier = null;
+		when(openIdConsumer.verifyResponse((HttpServletRequest) any())).thenReturn(identifier);
 	}
 
 	HttpServletRequest request;
+	HttpSession session;
+	HttpServletResponse response;
 
 	@Given("An HttpServletRequest")
 	public void initHttpServletRequest() {
 		request = mock(HttpServletRequest.class);
+		session = mock(HttpSession.class);
 		when(request.getContextPath()).thenReturn("");
+		when(request.getSession()).thenReturn(session);
+	}
+
+	@Given("An HttpServletResponse")
+	public void initHttpServletResponse() {
+		response = mock(HttpServletResponse.class);
+	}
+
+	@Given("Session forgot its interaction")
+	public void resetSession() {
+		reset(session);
 	}
 
 	String returnUrl;
@@ -107,9 +117,31 @@ public class UserControllerSteps {
 
 	ModelAndView mav;
 
+	boolean isReturned = false;
+
+	@Given("A Returned login transaction")
+	public void setUpLoginReturn() {
+		isReturned = true;
+	}
+
+	@Given("No Returned login transaction")
+	public void setUpNoLoginReturn() {
+		isReturned = false;
+	}
+
+	@Given("email is \"$email\"")
+	public void setUpEmail(String email) {
+		when(request.getAttribute("email")).thenReturn(email);
+	}
+
+	@Given("email is null")
+	public void setUpNullEmail() {
+		when(request.getAttribute("email")).thenReturn(null);
+	}
+
 	@When("User is logging in")
 	public void login() throws Exception {
-		mav = controller.login(request, returnUrl);
+		mav = controller.login(request, response, isReturned, returnUrl, null);
 	}
 
 	@Then("User is being routed to \"$view\"")
@@ -147,12 +179,17 @@ public class UserControllerSteps {
 
 	@When("User is being seen first time")
 	public void welcomeFirstTime() throws Exception {
-		mav = controller.welcomeFirstTime(request, mock(HttpServletResponse.class), returnUrl, command);
+		mav = controller.welcomeFirstTime(request, response, returnUrl, null, command);
 	}
 
-	@Then("RelyingParty is invalidated")
+	@Then("Identifier is assigned to session")
+	public void assertIdentifierAssignedToSession() {
+		verify(session).setAttribute(eq("identifier"), any());
+	}
+
+	@Then("Session is invalidated")
 	public void assertRelyingPartyBeingInvalidated() throws IOException {
-		verify(relyingParty).invalidate((HttpServletRequest) any(), (HttpServletResponse) any());
+		verify(session).invalidate();
 	}
 
 	@Then("Member is created")
@@ -168,5 +205,11 @@ public class UserControllerSteps {
 	@Then("Member is administrator")
 	public void assertSavedMemberIsAdministrator() {
 		assertTrue(savedMember.isAdministrator());
+	}
+	
+	@Given("A Session with assigned Identifier")
+	public void setUpSessionWithIdentifier(){
+		Identifier identifier = mock(Identifier.class);
+		when(session.getAttribute("identifier")).thenReturn(identifier);
 	}
 }
