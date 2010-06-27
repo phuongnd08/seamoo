@@ -1,6 +1,7 @@
 package org.seamoo.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Id;
 
@@ -29,6 +30,8 @@ public class League implements Serializable {
 
 	private boolean enabled;
 
+	private Date addedTime;
+
 	public League() {
 
 	}
@@ -40,6 +43,12 @@ public class League implements Serializable {
 		this.description = description;
 		this.level = level;
 		this.enabled = enabled;
+	}
+
+	public League(String name, String alias, String logoUrl, String description, int level, boolean enabled, Date addedTime) {
+		this(null, name, logoUrl, description, level, enabled);
+		this.alias = alias;
+		this.setAddedTime(addedTime);
 	}
 
 	public void setSubjectAutoId(Long subjectAutoId) {
@@ -104,5 +113,13 @@ public class League implements Serializable {
 
 	public void setAlias(String alias) {
 		this.alias = alias;
+	}
+
+	public void setAddedTime(Date addedTime) {
+		this.addedTime = addedTime;
+	}
+
+	public Date getAddedTime() {
+		return addedTime;
 	}
 }

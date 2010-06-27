@@ -34,12 +34,17 @@ public class Subject implements Serializable {
 
 	}
 
-	public Subject(Long autoId, String name, String avatarUrl, String description, boolean enabled) {
+	public Subject(Long autoId, String name, String logoUrl, String description, boolean enabled) {
 		this.autoId = autoId;
 		this.name = name;
-		this.logoUrl = avatarUrl;
+		this.logoUrl = logoUrl;
 		this.description = description;
 		this.enabled = enabled;
+	}
+
+	public Subject(String name, String logoUrl, String description, boolean enabled, Date addedTime) {
+		this(null, name, logoUrl, description, enabled);
+		this.addedTime = addedTime;
 	}
 
 	public void setName(String name) {

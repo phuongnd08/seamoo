@@ -19,7 +19,6 @@ import org.seamoo.daos.matching.MatchDao;
 import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.League;
 import org.seamoo.entities.Subject;
-import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
@@ -58,103 +57,59 @@ public class DemoController {
 
 	@Autowired
 	MatchDao matchDao;
-	
+
 	@Autowired
 	ResourceIteratorProvider resourceIteratorProvider;
-	
+
 	@Autowired
 	TimeProvider timeProvider;
 
 	@RequestMapping("/install-leagues")
 	public void installLeagues(HttpServletResponse response) throws IOException {
 		response.setContentType("text/html");
-		boolean sampleInstalled = Converter.toBoolean(siteSettingDao.getSetting("sampleInstalled"));
-		if (!sampleInstalled) {
+		boolean leaguesInstalled = Converter.toBoolean(siteSettingDao.getSetting("leaguesInstalled"));
+		if (!leaguesInstalled) {
 			response.getWriter().println("Leagues is being installed<br/>");
 			Subject[] subjects = internalInstallSubjects();
 			League[] leagues = internalInstallLeagues(subjects[0]);
-			siteSettingDao.assignSetting("sampleInstalled", Converter.toString(true));
+			siteSettingDao.assignSetting("leaguesInstalled", Converter.toString(true));
 			response.getWriter().println("Install done!<br/>");
+		} else {
+			response.getWriter().println("Error: League Installed");
+		}
+	}
+
+	public void installSamples(HttpServletResponse response) throws IOException {
+		response.setContentType("text/html");
+		boolean sampleInstalled = Converter.toBoolean(siteSettingDao.getSetting("sampleInstalled"));
+		if (!sampleInstalled) {
+
 		} else {
 			response.getWriter().println("Error: Sample Installed");
 		}
 	}
 
 	private Subject[] internalInstallSubjects() {
-		Subject english = new Subject();
-		{
-			english.setName("English");
-			english.setDescription("Thể hiện kĩ năng Anh ngữ của bạn về từ vựng, ngữ pháp và phát âm");
-			english.setLogoUrl("/images/subjects/english.png");
-			english.setEnabled(true);
-			english.setAddedTime(new Date());
-		}
-
-		Subject maths = new Subject();
-		{
-			maths.setName("Toán học");
-			maths.setDescription("Thể hiện sự hiểu biết cùng khả năng suy luận toán học của bạn");
-			maths.setLogoUrl("/images/subjects/math.png");
-			maths.setEnabled(true);
-			maths.setAddedTime(new Date());
-		}
-
-		Subject history = new Subject();
-		{
-			history.setName("Lịch sử");
-			history.setDescription("Thể hiện sự am tường lịch sử của bạn");
-			history.setLogoUrl("/images/subjects/history.png");
-			history.setEnabled(false);
-			history.setAddedTime(new Date());
-		}
-
+		Subject english = new Subject("English", "/images/subjects/english.png",
+				"Thể hiện kĩ năng Anh ngữ của bạn về từ vựng, ngữ pháp và phát âm", true, new Date());
+		Subject maths = new Subject("Toán học", "/images/subjects/math.png",
+				"Thể hiện sự hiểu biết cùng khả năng suy luận toán học của bạn", true, new Date());
+		Subject history = new Subject("Lịch sử", "/images/subjects/history.png", "Thể hiện sự am tường lịch sử của bạn", false,
+				new Date());
 		Subject[] subjects = new Subject[] { english, maths, history };
 		subjectDAO.persist(subjects);
 		return subjects;
 	}
 
 	private League[] internalInstallLeagues(Subject subject) {
-		League englishAmateur = new League();
-		{
-			englishAmateur.setName("Giải nghiệp dư");
-			englishAmateur.setAlias("giai-nghiep-du");
-			englishAmateur.setDescription("Dành cho những người lần đầu tham gia ");
-			englishAmateur.setLogoUrl("/images/leagues/eng-amateur.png");
-			englishAmateur.setLevel(0);
-			englishAmateur.setEnabled(true);
-		}
-
-		League englishChick = new League();
-		{
-			englishChick.setName("Giải gà con");
-			englishChick.setAlias("giai-ga-con");
-			englishChick.setDescription("Dành cho những đấu thủ đã thể hiện được mình ở Giải nghiệp dư ");
-			englishChick.setLogoUrl("/images/leagues/eng-league-2.png");
-			englishChick.setLevel(1);
-			englishChick.setEnabled(true);
-
-		}
-
-		League englishCock = new League();
-		{
-			englishCock.setName("Giải gà chọi");
-			englishCock.setAlias("giai-ga-choi");
-			englishCock.setDescription("Dành cho những đấu thủ đẳng cấp ");
-			englishCock.setLogoUrl("/images/leagues/eng-league-1.png");
-			englishCock.setLevel(2);
-			englishCock.setEnabled(true);
-
-		}
-
-		League englishEagle = new League();
-		{
-			englishEagle.setName("Giải đại bàng");
-			englishEagle.setAlias("giai-dai-bang");
-			englishEagle.setDescription("Dành cho những đấu thủ đẳng cấp cao");
-			englishEagle.setLogoUrl("/images/leagues/eng-pro-league.png");
-			englishEagle.setLevel(3);
-			englishEagle.setEnabled(true);
-		}
+		League englishAmateur = new League("Giải nghiệp dư", "giai-nghiep-du", "/images/leagues/eng-amateur.png",
+				"Dành cho những người lần đầu tham gia ", 0, true, new Date());
+		League englishChick = new League("Giải gà con", "giai-ga-con", "/images/leagues/eng-league-2.png",
+				"Dành cho những đấu thủ đã thể hiện được mình ở Giải nghiệp dư ", 1, true, new Date());
+		League englishCock = new League("Giải gà chọi", "giai-ga-choi", "/images/leagues/eng-league-1.png",
+				"Dành cho những đấu thủ đẳng cấp ", 2, true, new Date());
+		League englishEagle = new League("Giải đại bàng", "giai-dai-bang", "/images/leagues/eng-pro-league.png",
+				"Dành cho những đấu thủ đẳng cấp cao", 3, true, new Date());
 		League[] leagues = new League[] { englishAmateur, englishChick, englishCock, englishEagle };
 		for (League l : leagues) {
 			l.setSubjectAutoId(subject.getAutoId());
@@ -175,8 +130,7 @@ public class DemoController {
 		internalInstallQuestions(bundleName, finished, leagueId, QueueFactory.getDefaultQueue());
 	}
 
-	void internalInstallQuestions(String bundleName, Long finished, Long leagueId, Queue taskQueue)
-			throws IOException {
+	void internalInstallQuestions(String bundleName, Long finished, Long leagueId, Queue taskQueue) throws IOException {
 		if (bundleName != null) {
 			Long[] newFinished = new Long[1];
 			boolean done = installPackage(bundleName, finished, newFinished, MAX_DURATION, leagueDao.findByKey(leagueId));
@@ -276,29 +230,4 @@ public class DemoController {
 		return q;
 	}
 
-	static final int WIPE_OUT_BATCH_SIZE = 50;
-
-	private void queueWipeoutJob() {
-		TaskOptions taskOptions = TaskOptions.Builder.url("/demo/wipe-out");
-		Queue q = QueueFactory.getDefaultQueue();
-		q.add(taskOptions);
-	}
-
-	@RequestMapping("/wipe-out")
-	public void wipeoutData(HttpServletResponse response) {
-		if (matchDao.countAll() > 0) {
-			List<Match> qs = matchDao.getSubSet(0, WIPE_OUT_BATCH_SIZE);
-			for (Match q : qs)
-				matchDao.delete(q);
-			if (qs.size() == WIPE_OUT_BATCH_SIZE)
-				queueWipeoutJob();
-
-		} else if (questionDao.countAll() > 0) {
-			List<Question> qs = questionDao.getSubSet(0, WIPE_OUT_BATCH_SIZE);
-			for (Question q : qs)
-				questionDao.delete(q);
-			if (qs.size() == WIPE_OUT_BATCH_SIZE)
-				queueWipeoutJob();
-		}
-	}
 }
