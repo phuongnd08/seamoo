@@ -3,6 +3,7 @@ package org.seamoo.webapp.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -117,6 +118,7 @@ public class DemoController {
 			List<Long> questionIds = new ArrayList<Long>();
 			for (Question q : questions)
 				questionIds.add(q.getAutoId());
+			Collections.sort(questionIds);
 			// Generate 2 sample matches
 			for (int i = 0; i < 2; i++) {
 				Match sampleMatch = new Match();
@@ -148,9 +150,10 @@ public class DemoController {
 		MatchCompetitor competitor = new MatchCompetitor();
 		competitor.setMemberAutoId(member.getAutoId());
 		for (int i = 0; i < 20; i++)
-			if (i % 2 == 0)
-				competitor.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, String.valueOf((i / 2) % 2)));
-			else
+			if (i % 2 == 0) {
+				int answer = ((i / 2) % 2) + 1;
+				competitor.addAnswer(new MatchAnswer(MatchAnswerType.SUBMITTED, String.valueOf(answer)));
+			} else
 				competitor.addAnswer(new MatchAnswer(MatchAnswerType.IGNORED, null));
 		return competitor;
 	}
