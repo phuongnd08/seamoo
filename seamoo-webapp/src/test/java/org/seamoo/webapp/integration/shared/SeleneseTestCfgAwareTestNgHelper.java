@@ -5,6 +5,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import com.thoughtworks.selenium.SeleneseTestNgHelper;
+import com.thoughtworks.selenium.Selenium;
 
 public class SeleneseTestCfgAwareTestNgHelper extends SeleneseTestNgHelper {
 	@BeforeTest
@@ -28,9 +29,9 @@ public class SeleneseTestCfgAwareTestNgHelper extends SeleneseTestNgHelper {
 	
 	public void logOut() {
 		// clear cookie on the open id provider page
-		selenium.open("http://localhost:3000/");
-		selenium.waitForPageToLoad("30000");
-		selenium.deleteAllVisibleCookies();
+		selenium.open("http://localhost:3000/login/logout");
+		// selenium.waitForPageToLoad("30000");
+		// selenium.deleteAllVisibleCookies();
 		// clear cookie on the current site
 		selenium.open("/");
 		selenium.waitForPageToLoad("30000");
@@ -38,12 +39,16 @@ public class SeleneseTestCfgAwareTestNgHelper extends SeleneseTestNgHelper {
 	}
 	
 	public void loginAs(String user){
+		Selenium selenium = this.selenium;
+		this.selenium = null;
 		selenium.type("openid_identifier", "http://localhost:3000");
 		selenium.click("openid_submit");
 		selenium.waitForPageToLoad("30000");
 		selenium.type("id_to_send", user);
 		selenium.click("yes");
 		selenium.waitForPageToLoad("30000");
+		this.selenium = selenium;
+		System.out.println("Logged In");
 	}
 
 }

@@ -7,10 +7,12 @@ public class AutoLogOutSeleneseTest extends SeleneseTestCfgAwareTestNgHelper {
 	@BeforeMethod
 	public void setUpForAutoLogOutTest() {
 		logOut();
+		System.out.println("Logged Out");
 	}
 
 	@AfterMethod
 	public void tearDownForAutoLogOutTest() {
 		logOut();
+		System.out.println("Logged Out");
 	}
 }
