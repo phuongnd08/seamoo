@@ -7,9 +7,6 @@ import com.vercer.engine.persist.annotation.Child;
 import com.vercer.engine.persist.annotation.Embed;
 
 public class MultipleChoicesQuestionRevision extends QuestionRevision {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3124942569355863301L;
 	private String content;
 	@Embed

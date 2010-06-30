@@ -8,6 +8,8 @@ import java.lang.reflect.Field;
 import org.mockito.MockSettings;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.seamoo.webapp.client.shared.ListenerMixin;
+import org.seamoo.webapp.client.user.ui.QuestionRevisionView;
 
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -20,8 +22,8 @@ import com.google.gwt.user.client.ui.Widget;
 public class GwtUiMocker {
 
 	/*
-	 * Mock field of object annotated with UiField and return a Widget that can
-	 * be used for object (probably another Widget) to wrap around
+	 * Mock field of object annotated with UiField and return a Widget that can be used for object (probably another Widget) to
+	 * wrap around
 	 */
 	public static <T> T mockUiField(Object control, Class<T> clazz) {
 		for (Field field : control.getClass().getDeclaredFields()) {
@@ -47,6 +49,7 @@ public class GwtUiMocker {
 		boolean hasText = HasText.class.isAssignableFrom(clazz);
 		boolean hasValue = HasValue.class.isAssignableFrom(clazz);
 		boolean clickable = HasClickHandlers.class.isAssignableFrom(clazz);
+		boolean isQuestionView = QuestionRevisionView.class.isAssignableFrom(clazz);
 		MockSettings mockSettings = withSettings();
 		if (clickable) {
 			mockSettings.extraInterfaces(MockedClickable.class);
@@ -62,6 +65,8 @@ public class GwtUiMocker {
 			mockTextAccessor(helper, (HasText) widget);
 		if (hasValue)
 			mockValueAccessor(helper, (HasValue) widget);
+		if (isQuestionView)
+			mockListenerMixin(helper, (QuestionRevisionView) widget);
 		return widget;
 	}
 
@@ -175,5 +180,17 @@ public class GwtUiMocker {
 			}
 		}).when(widgetAsClickable).click();
 
+	}
+
+	private static void mockListenerMixin(final MockedWidgetHelper helper, QuestionRevisionView widget) {
+		when(widget.getListenerMixin()).thenAnswer(new Answer<ListenerMixin>() {
+
+			@Override
+			public ListenerMixin answer(InvocationOnMock invocation) throws Throwable {
+				return (ListenerMixin) helper.getField("listenerMixin");
+			}
+		});
+
+		helper.setField("listenerMixin", new ListenerMixin());
 	}
 }

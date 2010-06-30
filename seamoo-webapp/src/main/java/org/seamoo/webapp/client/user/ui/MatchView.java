@@ -11,6 +11,8 @@ import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
+import org.seamoo.webapp.client.shared.ListenerMixin;
+import org.seamoo.webapp.client.shared.ListenerMixin.Caller;
 import org.seamoo.webapp.client.shared.ui.UiObjectFactory;
 import org.seamoo.webapp.client.user.MatchBoard;
 import org.seamoo.webapp.client.user.MatchBoard.Display;
@@ -56,10 +58,12 @@ public class MatchView extends Composite implements Display {
 	HTMLPanel panelQuestion;
 	@UiField
 	Label labelQuestionIndex;
+
 	@UiField
-	Label labelQuestion;
+	MultipleChoiceQuestionView multipleChoiceQuestionView;
 	@UiField
-	FlexTable tableChoices;
+	FollowPatternQuestionView followPatternQuestionView;
+
 	@UiField
 	Button buttonIgnore;
 	@UiField
@@ -69,51 +73,58 @@ public class MatchView extends Composite implements Display {
 	@UiField
 	Button buttonLeaveMatch;
 
-	List<MatchBoard.Display.EventListener> listeners;
+	ListenerMixin<MatchBoard.Display.EventListener> listenerMixin;
 	List<CompetitorView> competitorViews;
+
+	private QuestionRevisionView.Listener getQuestionRevisionViewListener() {
+		final MatchView me = this;
+		return new QuestionRevisionView.Listener() {
+
+			@Override
+			public void submitAnswer(final String answer) {
+				listenerMixin.each(new Caller<EventListener>() {
+
+					@Override
+					public void perform(EventListener listener) {
+						listener.submitAnswer(me, answer);
+					}
+
+				});
+			}
+		};
+	}
 
 	public MatchView() {
 		initWidget(binder.createAndBindUi(this));
-		listeners = new ArrayList<EventListener>();
-		competitorViews = new ArrayList<CompetitorView>();
+		listenerMixin = new ListenerMixin<MatchBoard.Display.EventListener>();
 		final MatchView me = this;
-		buttonIgnore.addClickHandler(new ClickHandler() {
-
+		multipleChoiceQuestionView.getListenerMixin().add(getQuestionRevisionViewListener());
+		followPatternQuestionView.getListenerMixin().add(getQuestionRevisionViewListener());
+		competitorViews = new ArrayList<CompetitorView>();
+		buttonIgnore.addClickHandler(listenerMixin.getClickHandler(new Caller<EventListener>() {
 			@Override
-			public void onClick(ClickEvent arg0) {
-				for (EventListener l : listeners) {
-					l.ignoreQuestion(me);
-				}
+			public void perform(EventListener c) {
+				c.ignoreQuestion(me);
 			}
-		});
+		}));
 
-		buttonRematch.addClickHandler(new ClickHandler() {
-
+		buttonRematch.addClickHandler(listenerMixin.getClickHandler(new Caller<EventListener>() {
 			@Override
-			public void onClick(ClickEvent arg0) {
-				for (EventListener l : listeners)
-					l.rematch(me);
+			public void perform(EventListener c) {
+				c.rematch(me);
 			}
-		});
+		}));
 
-		buttonLeaveMatch.addClickHandler(new ClickHandler() {
-
+		buttonLeaveMatch.addClickHandler(listenerMixin.getClickHandler(new Caller<EventListener>() {
 			@Override
-			public void onClick(ClickEvent clickevent) {
-				for (EventListener l : listeners)
-					l.leaveMatch(me);
+			public void perform(EventListener c) {
+				c.leaveMatch(me);
 			}
-		});
+		}));
 
 		// Some panel is invisible by default
 		panelQuestion.setVisible(false);
 		panelIndicator.setVisible(false);
-	}
-
-	@Override
-	public void addEventListener(EventListener listener) {
-		// TODO Auto-generated method stub
-		listeners.add(listener);
 	}
 
 	private void refreshCompetitorQuestionCount() {
@@ -167,37 +178,18 @@ public class MatchView extends Composite implements Display {
 		panelQuestion.setVisible(question != null);
 		if (question != null) {
 			MultipleChoicesQuestionRevision revision = (MultipleChoicesQuestionRevision) question.getCurrentRevision();
-			labelQuestion.setText(revision.getContent());
-			tableChoices.clear();
-			int i = 0;
-			for (QuestionChoice choice : revision.getChoices()) {
-				tableChoices.setWidget(i, 0, createChoiceButton(choice.getContent(), i + 1));
-				// answer for multiple choice
-				// should be in 1-based form
-				i++;
-			}
+			multipleChoiceQuestionView.setQuestionRevision(revision);
 		}
 	}
 
-	private Button createChoiceButton(String choice, final int index) {
-		Button b = UiObjectFactory.newButton();
-		b.setText(choice);
-		b.addClickHandler(new ClickHandler() {
-
+	private void submitAnswer(final String answer) {
+		final MatchView me = this;
+		listenerMixin.each(new Caller<EventListener>() {
 			@Override
-			public void onClick(ClickEvent arg0) {
-				// TODO Auto-generated method stub
-				submitAnswer(String.valueOf(index));
+			public void perform(EventListener c) {
+				c.submitAnswer(me, answer);
 			}
-
 		});
-		return b;
-	}
-
-	private void submitAnswer(String answer) {
-		// TODO Auto-generated method stub
-		for (EventListener l : listeners)
-			l.submitAnswer(this, answer);
 	}
 
 	int questionIndex = 0, questionTotal = 0;
@@ -264,6 +256,11 @@ public class MatchView extends Composite implements Display {
 	@Override
 	public Widget getSideWidget() {
 		return panelIndicator;
+	}
+
+	@Override
+	public ListenerMixin<EventListener> getListenerMixin() {
+		return listenerMixin;
 	}
 
 }

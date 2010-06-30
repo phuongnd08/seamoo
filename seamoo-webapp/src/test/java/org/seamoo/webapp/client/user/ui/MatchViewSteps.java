@@ -30,12 +30,14 @@ import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.utils.converter.Converter;
+import org.seamoo.webapp.client.shared.ListenerMixin.Caller;
 import org.seamoo.webapp.client.shared.ui.UiObjectFactory;
 import org.seamoo.webapp.client.uimocker.GwtUiMocker;
 import org.seamoo.webapp.client.uimocker.MockedClickable;
 import org.seamoo.webapp.client.user.MatchBoard;
 import org.seamoo.webapp.client.user.MatchBoard.Display;
 import org.seamoo.webapp.client.user.ui.MatchView.MatchViewUiBinder;
+import org.seamoo.webapp.client.user.ui.QuestionRevisionView.Listener;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
@@ -84,17 +86,8 @@ public class MatchViewSteps {
 			}
 		});
 		matchView = new MatchView();
-		matchView.addEventListener(listener);
+		matchView.getListenerMixin().add(listener);
 		tableChoicesButtons = new ArrayList<Button>();
-		doAnswer(new Answer() {
-
-			@Override
-			public Object answer(InvocationOnMock invocation) throws Throwable {
-				// TODO Auto-generated method stub
-				tableChoicesButtons.add((Button) invocation.getArguments()[2]);
-				return null;
-			}
-		}).when(matchView.tableChoices).setWidget(anyInt(), anyInt(), (Widget) any());
 	}
 
 	MultipleChoicesQuestionRevision questionRev = null;
@@ -254,17 +247,9 @@ public class MatchViewSteps {
 
 		@Override
 		public boolean matches(Object argument) {
-			// TODO Auto-generated method stub
 			if (!(argument instanceof Button))
 				return false;
 			return ((Button) argument).getText().equals(text);
-		}
-	}
-
-	@Then("$number buttons of text $choices are added to panelChoices")
-	public void assertButtonAdded(List<String> choices) {
-		for (String choice : choices) {
-			verify(matchView.tableChoices).setWidget(anyInt(), anyInt(), argThat(new ButtonMatcher(choice)));
 		}
 	}
 
@@ -313,5 +298,15 @@ public class MatchViewSteps {
 	public void createLeftEvent(int index, String displayName) {
 		MatchEvent e = new MatchEvent(MatchEventType.LEFT, new Date(), memberFromDisplayName(displayName));
 		events.add(e);
+	}
+	
+	@When("multiple choice view propagate answer=$answer")
+	public void propagateAnswerFromMultipleChoiceView(final String answer){
+		matchView.multipleChoiceQuestionView.getListenerMixin().each(new Caller<Listener>() {
+			@Override
+			public void perform(Listener c) {
+				c.submitAnswer(answer);
+			}
+		});
 	}
 }

@@ -16,7 +16,6 @@ public class MatchViewTest extends PowerMockedGwtBddScenario {
 	@Override
 	@Test
 	public void runScenario() throws Throwable {
-		// TODO Auto-generated method stub
 		super.runScenario();
 	}
 

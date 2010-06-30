@@ -11,6 +11,7 @@ import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.Question;
 import org.seamoo.webapp.client.shared.GwtUrlFactory;
+import org.seamoo.webapp.client.shared.ListenerMixin;
 import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.seamoo.webapp.client.shared.ui.MessageBox;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
@@ -49,7 +50,7 @@ public class MatchBoard {
 
 		public void setRemainingTime(long seconds);
 
-		public void addEventListener(EventListener listener);
+		public ListenerMixin<EventListener> getListenerMixin();
 
 		/**
 		 * Get the side widget that controlled by the presenter but actually put in the side This is used to simplify testing
@@ -88,14 +89,14 @@ public class MatchBoard {
 
 			@Override
 			public void rematch(Display display) {
-				service.escapeCurrentMatch(leagueAutoId, new AsyncCallback() {
+				service.escapeCurrentMatch(leagueAutoId, new AsyncCallback<League>() {
 
 					@Override
 					public void onFailure(Throwable arg0) {
 					}
 
 					@Override
-					public void onSuccess(Object arg0) {
+					public void onSuccess(League arg0) {
 						Window.Location.reload();
 					}
 				});
@@ -183,7 +184,7 @@ public class MatchBoard {
 			this.service = service;
 			this.display = display;
 			this.leagueAutoId = leagueAutoId;
-			display.addEventListener(listener);
+			display.getListenerMixin().add(listener);
 			bufferedQuestions = new ArrayList<Question>();
 			refreshMatchState();
 		}

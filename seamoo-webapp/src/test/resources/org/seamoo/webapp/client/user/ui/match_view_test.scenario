@@ -27,9 +27,7 @@ And text of labelQuestionIndex is "1/20"
 And text of labelCountDownType is "Thời gian còn lại"
 When View Question is assigned to Initialized Question
 Then panelQuestion is visible
-Then text of labelQuestion is "After 1 is ..."
-And 4 buttons of text 1,2,3,4 are added to panelChoices
-When User click 1st button of panelChoices
+When multiple choice view propagate answer=1
 Then submit event is triggered with answer=1
 When buttonIgnore is clicked
 Then ignore event is triggered

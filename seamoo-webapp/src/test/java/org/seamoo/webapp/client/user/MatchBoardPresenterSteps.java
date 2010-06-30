@@ -26,6 +26,7 @@ import org.seamoo.entities.matching.MatchState;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.utils.converter.Converter;
+import org.seamoo.webapp.client.shared.ListenerMixin;
 import org.seamoo.webapp.client.shared.NotLoggedInException;
 import org.seamoo.webapp.client.shared.ui.MessageBox;
 import org.seamoo.webapp.client.user.MatchBoard.Display.EventListener;
@@ -64,6 +65,8 @@ public class MatchBoardPresenterSteps {
 	@Given("Display forgets its interaction")
 	public void restubDisplay() {
 		reset(display);
+		ListenerMixin mixin = mock(ListenerMixin.class);
+		when(display.getListenerMixin()).thenReturn(mixin);
 		doAnswer(new Answer() {
 
 			@Override
@@ -75,7 +78,7 @@ public class MatchBoardPresenterSteps {
 					throw new RuntimeException("listener assigned twice");
 				return null;
 			}
-		}).when(display).addEventListener((EventListener) any());
+		}).when(mixin).add(any());
 
 		doAnswer(new Answer() {
 
