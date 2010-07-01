@@ -35,7 +35,7 @@ public class MatchView extends Composite implements Display {
 	public interface MatchViewUiBinder extends UiBinder<Widget, MatchView> {
 	}
 
-	private static final MatchViewUiBinder binder = GWT.create(MatchViewUiBinder.class);
+	private final MatchViewUiBinder binder = GWT.create(MatchViewUiBinder.class);
 	@UiField
 	HTMLPanel panelIndicator;
 	@UiField
@@ -60,7 +60,7 @@ public class MatchView extends Composite implements Display {
 	Label labelQuestionIndex;
 
 	@UiField
-	MultipleChoiceQuestionView multipleChoiceQuestionView;
+	MultipleChoicesQuestionView multipleChoiceQuestionView;
 	@UiField
 	FollowPatternQuestionView followPatternQuestionView;
 

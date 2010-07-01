@@ -39,7 +39,7 @@
 				Câu hỏi
 				<gwt:Label ui:field="labelQuestionIndex"></gwt:Label>
 			</h3>
-			<sm:MultipleChoiceQuestionView ui:field="multipleChoiceQuestionView"/>
+			<sm:MultipleChoicesQuestionView ui:field="multipleChoiceQuestionView"/>
 			<sm:FollowPatternQuestionView ui:field="followPatternQuestionView"/>
 			<gwt:Button ui:field="buttonIgnore">Bỏ qua&gt;&gt;</gwt:Button>
 		</gwt:HTMLPanel>

@@ -1,8 +1,6 @@
 Given A Match Event Listener
 And A Match View
 And A Question
-And Question Text is "After 1 is ..."
-And Question Choices are 1,2,3,4
 When View Phase is switched to NOT_FORMED
 Then panelMatchWaiting is visible
 And panelYouFinished is invisible

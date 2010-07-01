@@ -16,12 +16,12 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class MultipleChoiceQuestionView extends Composite implements QuestionRevisionView {
+public class MultipleChoicesQuestionView extends Composite implements QuestionRevisionView {
 
-	public interface MultipleChoiceQuestionViewUiBinder extends UiBinder<Widget, MultipleChoiceQuestionView> {
+	public interface MultipleChoicesQuestionViewUiBinder extends UiBinder<Widget, MultipleChoicesQuestionView> {
 	}
 
-	private static final MultipleChoiceQuestionViewUiBinder binder = GWT.create(MultipleChoiceQuestionViewUiBinder.class);
+	private final MultipleChoicesQuestionViewUiBinder binder = GWT.create(MultipleChoicesQuestionViewUiBinder.class);
 	@UiField
 	Label labelQuestion;
 	@UiField
@@ -29,7 +29,7 @@ public class MultipleChoiceQuestionView extends Composite implements QuestionRev
 
 	ListenerMixin<QuestionRevisionView.Listener> listenerMixin;
 
-	public MultipleChoiceQuestionView() {
+	public MultipleChoicesQuestionView() {
 		initWidget(binder.createAndBindUi(this));
 		listenerMixin = new ListenerMixin<QuestionRevisionView.Listener>();
 	}

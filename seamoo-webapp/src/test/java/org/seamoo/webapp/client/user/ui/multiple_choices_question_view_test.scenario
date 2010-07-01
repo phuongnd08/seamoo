@@ -1,0 +1,9 @@
+Given A Mutiple Choice Question View
+And A Multiple Choice Question Revision
+And Revision Content is "After 1 is ..."
+And Revision Choices are 1,2,3,4
+When Revision is bound to View
+Then text of labelQuestion is "After 1 is ..."
+And 4 buttons of text 1,2,3,4 are added to panelChoices
+When User click 1st button of panelChoices
+Then submit event is triggered with answer=1

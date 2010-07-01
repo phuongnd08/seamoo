@@ -10,7 +10,6 @@ public class UiObjectFactory {
 	}
 
 	public static CompetitorView newCompetitorView() {
-		// TODO Auto-generated method stub
 		return new CompetitorView();
 	}
 }

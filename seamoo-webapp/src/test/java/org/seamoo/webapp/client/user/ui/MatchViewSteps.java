@@ -68,14 +68,6 @@ public class MatchViewSteps {
 		});
 
 		PowerMockito.mockStatic(UiObjectFactory.class);
-		when(UiObjectFactory.newButton()).thenAnswer(new Answer<Button>() {
-
-			@Override
-			public Button answer(InvocationOnMock invocation) throws Throwable {
-				// TODO Auto-generated method stub
-				return GwtUiMocker.getMockedWidget(Button.class);
-			}
-		});
 
 		when(UiObjectFactory.newCompetitorView()).thenAnswer(new Answer<CompetitorView>() {
 
@@ -97,18 +89,6 @@ public class MatchViewSteps {
 		question = new Question();
 		questionRev = new MultipleChoicesQuestionRevision();
 		question.addAndSetAsCurrentRevision(questionRev);
-	}
-
-	@Given("Question Text is \"$text\"")
-	public void initQuestionText(String text) {
-		questionRev.setContent(text);
-	}
-
-	@Given("Question Choices are $choices")
-	public void initQuestionChoices(List<String> choices) {
-		for (String choice : choices) {
-			questionRev.addChoice(new QuestionChoice(choice, false));
-		}
 	}
 
 	@When("View Players is assigned to $players")
@@ -257,12 +237,6 @@ public class MatchViewSteps {
 		return Converter.toInt(position.charAt(0));
 	}
 
-	@When("User click $position button of panelChoices")
-	public void clickChoiceButton(String position) {
-		int pos = positionToNumber(position) - 1;
-		((MockedClickable) tableChoicesButtons.get(pos)).click();
-	}
-
 	private Member memberFromDisplayName(String displayName) {
 		Member m = new Member();
 		m.setDisplayName(displayName);
@@ -299,9 +273,9 @@ public class MatchViewSteps {
 		MatchEvent e = new MatchEvent(MatchEventType.LEFT, new Date(), memberFromDisplayName(displayName));
 		events.add(e);
 	}
-	
+
 	@When("multiple choice view propagate answer=$answer")
-	public void propagateAnswerFromMultipleChoiceView(final String answer){
+	public void propagateAnswerFromMultipleChoiceView(final String answer) {
 		matchView.multipleChoiceQuestionView.getListenerMixin().each(new Caller<Listener>() {
 			@Override
 			public void perform(Listener c) {
