@@ -15,12 +15,15 @@ import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.installation.BundleDao;
 import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.entities.League;
+import org.seamoo.entities.question.FollowPatternQuestionRevision;
+import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
+import org.seamoo.entities.question.Question;
+import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.installation.Bundle;
 import org.seamoo.test.MockedTimeProvider;
 import org.seamoo.utils.AbstractResourceIterator;
 import org.seamoo.utils.ResourceIterator;
 import org.seamoo.utils.ResourceIteratorProvider;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -85,8 +88,6 @@ public class DemoControllerTest {
 		};
 	}
 
-	
-
 	private void assertControllerOutcome(String bundleNameIn, Long finishedIn, Long leagueIdIn, String bundleNameOut,
 			Long finishedOut, Long leagueIdOut) throws IOException {
 		Queue queue = mock(Queue.class);
@@ -109,19 +110,18 @@ public class DemoControllerTest {
 			expectedParamSize++;
 			TaskQueueHelper.assertParam(params.get(expectedParamSize - 1), "bundleName", bundleNameOut);
 		}
-		
-		if (finishedOut != null){
+
+		if (finishedOut != null) {
 			expectedParamSize++;
-			TaskQueueHelper.assertParam(params.get(expectedParamSize-1), "finished", finishedOut.toString());
+			TaskQueueHelper.assertParam(params.get(expectedParamSize - 1), "finished", finishedOut.toString());
 		}
-		if (leagueIdOut!=null){
+		if (leagueIdOut != null) {
 			expectedParamSize++;
-			TaskQueueHelper. assertParam(params.get(expectedParamSize-1), "leagueId", leagueIdOut.toString());	
+			TaskQueueHelper.assertParam(params.get(expectedParamSize - 1), "leagueId", leagueIdOut.toString());
 		}
 		assertEquals(expectedParamSize, params.size());
 	}
 
-	
 	@Test
 	public void unfinishedInstallShouldQueueNewTaskOnTheSameBundle() throws IOException {
 		ResourceIterator<String> ri = mock(ResourceIterator.class);
@@ -191,7 +191,6 @@ public class DemoControllerTest {
 		assertControllerOutcome(null, null, null, "resource_x", 0L, 1L);
 	}
 
-
 	@Test
 	public void checkShouldQueueInstallTaskOnSecondBundleIfFirstBundleIsDone() throws IOException {
 		when(riProvider.getIterator(DemoController.DATA_INDEX_PATH)).thenReturn(getArrayIterator("resource_x|1", "resource_y|1"));
@@ -200,5 +199,30 @@ public class DemoControllerTest {
 		b.setName("resource_x");
 		when(bundleDao.getAll()).thenReturn(Lists.newArrayList(b));
 		assertControllerOutcome(null, null, null, "resource_y", 0L, 1L);
+	}
+
+	@Test
+	public void createQuestionShouldReturnMultipleChoiceQuestionForQuestionWithMoreThanOneChoices() {
+		League l = new League();
+		l.setAutoId(7L);
+		Question q = controller.createQuestion(l, "What is a greeting", new String[] { "*Hello", "Good Morning" });
+		MultipleChoicesQuestionRevision r = (MultipleChoicesQuestionRevision) q.getCurrentRevision();
+		assertEquals(q.getLeagueAutoId().longValue(), 7L);
+		assertNotNull(r);
+		assertEquals(r.getContent(), "What is a greeting");
+		assertEqualsNoOrder(r.getChoices().toArray(), new Object[]{new QuestionChoice("Hello", true),new QuestionChoice("Good Morning", false)});
+	}
+
+	@Test
+	public void createQuestionShouldReturnFollowPatternQuestionForQuestionWithOneChoice() {
+		League l = new League();
+		l.setAutoId(7L);
+		Question q = controller.createQuestion(l, "What is a greeting", new String[] { "*He[l]lo" });
+		FollowPatternQuestionRevision r = (FollowPatternQuestionRevision) q.getCurrentRevision();
+		assertEquals(q.getLeagueAutoId().longValue(), 7L);
+		assertNotNull(r);
+		assertEquals(r.getContent(), "What is a greeting");
+		assertNotNull(r);
+		assertEquals("He[l]lo", r.getPattern());
 	}
 }

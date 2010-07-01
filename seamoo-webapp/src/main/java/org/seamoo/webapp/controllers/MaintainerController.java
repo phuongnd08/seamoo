@@ -2,6 +2,8 @@ package org.seamoo.webapp.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.daos.speed.NumericBagDao;
@@ -12,13 +14,16 @@ import org.seamoo.lookup.NumericBag;
 import org.seamoo.speed.QuestionEvent;
 import org.seamoo.utils.TimeProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.appengine.api.labs.taskqueue.Queue;
 import com.google.appengine.api.labs.taskqueue.QueueFactory;
 import com.google.appengine.api.labs.taskqueue.TaskOptions;
 
+@Controller
 @RequestMapping("/maintain")
 public class MaintainerController {
 	@Autowired
@@ -40,8 +45,11 @@ public class MaintainerController {
 	public final static int QUESTION_INDEX_BATCH_SIZE = 50;
 
 	@RequestMapping("/refresh-question-indexes")
-	public void refreshQuestionIndexes() {
+	public ModelAndView refreshQuestionIndexes() {
 		internalRefreshQuestionIndexes(QueueFactory.getDefaultQueue());
+		ModelAndView mav = new ModelAndView("basic.dumb");
+		mav.addObject("msg", "Refresh tasks queued");
+		return mav;
 	}
 
 	void internalRefreshQuestionIndexes(Queue taskQueue) {
@@ -54,13 +62,13 @@ public class MaintainerController {
 	}
 
 	@RequestMapping("/refresh-league-question-index")
-	public void refreshLeagueQuestionIndexes(@RequestParam("leagueId") Long leagueId) {
+	public ModelAndView refreshLeagueQuestionIndexes(@RequestParam("leagueId") Long leagueId) {
 		long startTime = timeProvider.getCurrentTimeStamp();
-		String classifier = NumericBag.getUniformClassifier(Question.class, leagueId);
+		String classifier = NumericBag.getUniformClassifier(League.class, leagueId);
 		NumericBag numericBag = numericBagDao.findByClassifier(classifier);
 		if (numericBag == null) {
 			numericBag = new NumericBag();
-			numericBag.setClassifier(NumericBag.getUniformClassifier(Question.class, leagueId));
+			numericBag.setClassifier(NumericBag.getUniformClassifier(League.class, leagueId));
 		}
 		do {
 			List<QuestionEvent> events = questionEventDao.getByMinimumTimeStamp(leagueId, numericBag.getLastUpdatedTimestamp(),
@@ -85,5 +93,9 @@ public class MaintainerController {
 				break;
 		} while (startTime + MAX_QUESTION_INDEX_REFRESH_PERIOD > timeProvider.getCurrentTimeStamp());
 		numericBagDao.persist(numericBag);
+		
+		ModelAndView mav = new ModelAndView("basic.dumb");
+		mav.addObject("msg", String.format("Question indexes of league#%d updated", leagueId));
+		return mav;
 	}
 }

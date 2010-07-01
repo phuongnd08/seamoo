@@ -123,7 +123,7 @@ public class MaintainerControllerTest {
 		NumericBag bag = new NumericBag();
 		for (int i = 0; i < 10; i++)
 			bag.addNumber(new Long(i + 1));
-		when(numericBagDao.findByClassifier(Question.class.getCanonicalName() + "@" + 1L)).thenReturn(bag);
+		when(numericBagDao.findByClassifier(League.class.getCanonicalName() + "@" + 1L)).thenReturn(bag);
 		QuestionEvent e1 = new QuestionEvent(QuestionEventType.CREATE, 11L, 1L, 1);
 		e1.setTimeStamp(100L);
 		QuestionEvent e2 = new QuestionEvent(QuestionEventType.DELETE, 9L, 1L, 2);
@@ -152,7 +152,7 @@ public class MaintainerControllerTest {
 				NumericBag bag = (NumericBag) argument;
 				assertEquals(new Object[] { 11L }, bag.toArray());
 
-				return bag.getClassifier().equals(Question.class.getCanonicalName() + "@" + 1L);
+				return bag.getClassifier().equals(League.class.getCanonicalName() + "@" + 1L);
 			}
 		}));
 	}

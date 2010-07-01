@@ -26,6 +26,7 @@ import org.seamoo.entities.matching.Match;
 import org.seamoo.entities.matching.MatchAnswer;
 import org.seamoo.entities.matching.MatchAnswerType;
 import org.seamoo.entities.matching.MatchCompetitor;
+import org.seamoo.entities.question.FollowPatternQuestionRevision;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
@@ -39,6 +40,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.appengine.api.labs.taskqueue.Queue;
 import com.google.appengine.api.labs.taskqueue.QueueFactory;
@@ -76,26 +78,29 @@ public class DemoController {
 	TimeProvider timeProvider;
 
 	@RequestMapping("/install-leagues")
-	public void installLeagues(HttpServletResponse response) throws IOException {
-		response.setContentType("text/html");
+	public ModelAndView installLeagues() throws IOException {
+		String msg = "";
 		boolean leaguesInstalled = Converter.toBoolean(siteSettingDao.getSetting("leaguesInstalled"));
 		if (!leaguesInstalled) {
-			response.getWriter().println("Leagues is being installed<br/>");
+			msg = "Leagues is being installed<br/>";
 			Subject[] subjects = internalInstallSubjects();
 			League[] leagues = internalInstallLeagues(subjects[0]);
 			siteSettingDao.assignSetting("leaguesInstalled", Converter.toString(true));
-			response.getWriter().println("Install done!<br/>");
+			msg += "Install done!<br/>";
 		} else {
-			response.getWriter().println("Error: League Installed");
+			msg = "Error: League Installed";
 		}
+		ModelAndView mav = new ModelAndView("basic.dumb");
+		mav.addObject("msg", msg);
+		return mav;
 	}
 
 	@RequestMapping("/install-samples")
-	public void installSamples(HttpServletResponse response) throws IOException {
-		response.setContentType("text/html");
+	public ModelAndView installSamples() throws IOException {
+		String msg = "";
 		boolean samplesInstalled = Converter.toBoolean(siteSettingDao.getSetting("samplesInstalled"));
 		if (!samplesInstalled) {
-			response.getWriter().println("Start installing samples<br/>");
+			msg = "Start installing samples<br/>";
 			Subject sampleSubject = new Subject("Sample Subject", "/images/subjects/sample.png", "Sample subject for testing",
 					true, new Date());
 			subjectDao.persist(sampleSubject);
@@ -139,11 +144,15 @@ public class DemoController {
 				matchDao.persist(sampleMatch);
 			}
 			siteSettingDao.assignSetting("samplesInstalled", Converter.toString(true));
-			response.getWriter().println("Done!<br/>");
+			msg += "Done!<br/>";
 
 		} else {
-			response.getWriter().println("Error: Sample Installed");
+			msg += "Error: Sample Installed";
 		}
+
+		ModelAndView mav = new ModelAndView("basic.dumb");
+		mav.addObject("msg", msg);
+		return mav;
 	}
 
 	private MatchCompetitor generateCompetitor(Member member) {
@@ -191,12 +200,15 @@ public class DemoController {
 	public static final long MAX_DURATION = 22000;// only run an installation for 22 seconds
 
 	@RequestMapping("/install-questions")
-	public void installQuestions(HttpServletResponse response,
-			@RequestParam(required = false, value = "bundleName") String bundleName,
+	public ModelAndView installQuestions(@RequestParam(required = false, value = "bundleName") String bundleName,
 			@RequestParam(required = false, value = "finished") Long finished,
 			@RequestParam(required = false, value = "leagueId") Long leagueId) throws IOException {
 
 		internalInstallQuestions(bundleName, finished, leagueId, QueueFactory.getDefaultQueue());
+		ModelAndView mav = new ModelAndView("basic.dumb");
+		mav.addObject("msg", "Some questions installed.");
+		return mav;
+
 	}
 
 	void internalInstallQuestions(String bundleName, Long finished, Long leagueId, Queue taskQueue) throws IOException {
@@ -275,28 +287,36 @@ public class DemoController {
 
 	Random rndGenerator = new Random();
 
-	private Question createQuestion(League league, String question, String[] choices) {
-		// TODO Auto-generated method stub
+	Question createQuestion(League league, String question, String[] choices) {
 		Question q = new Question();
 		q.setLeagueAutoId(league.getAutoId());
-		MultipleChoicesQuestionRevision r = new MultipleChoicesQuestionRevision();
-		r.setContent(question);
-		List<String> lists = new ArrayList<String>();
-		for (String s : choices)
-			lists.add(s);
-		while (lists.size() > 0) {
-			// pick a random choice
-			int index = rndGenerator.nextInt(lists.size());
-			String choice = lists.get(index);
-			lists.remove(index);
-			// add it to the question
-			QuestionChoice c = new QuestionChoice();
-			c.setCorrect(choice.startsWith("*"));
-			c.setContent(choice.substring(c.isCorrect() ? 1 : 0));
-			r.addChoice(c);
+		if (choices.length == 1) {
+			FollowPatternQuestionRevision r = new FollowPatternQuestionRevision();
+			r.setContent(question);
+			String pattern = choices[0];
+			if (pattern.startsWith("*"))
+				pattern = pattern.substring(1);
+			r.setPattern(pattern);
+			q.addAndSetAsCurrentRevision(r);
+		} else {
+			MultipleChoicesQuestionRevision r = new MultipleChoicesQuestionRevision();
+			r.setContent(question);
+			List<String> lists = new ArrayList<String>();
+			for (String s : choices)
+				lists.add(s);
+			while (lists.size() > 0) {
+				// pick a random choice
+				int index = rndGenerator.nextInt(lists.size());
+				String choice = lists.get(index);
+				lists.remove(index);
+				// add it to the question
+				QuestionChoice c = new QuestionChoice();
+				c.setCorrect(choice.startsWith("*"));
+				c.setContent(choice.substring(c.isCorrect() ? 1 : 0));
+				r.addChoice(c);
+			}
+			q.addAndSetAsCurrentRevision(r);
 		}
-		q.addAndSetAsCurrentRevision(r);
 		return q;
 	}
-
 }

@@ -12,7 +12,7 @@ import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.daos.speed.NumericBagDao;
 import org.seamoo.daos.speed.QuestionEventDao;
 import org.seamoo.daos.twigImpl.TwigGenericDaoImpl;
-import org.seamoo.daos.twigImpl.speed.TwigNumericBagDaoImpl;
+import org.seamoo.entities.League;
 import org.seamoo.entities.question.Question;
 import org.seamoo.lookup.NumericBag;
 import org.seamoo.speed.QuestionEvent;
@@ -31,7 +31,7 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 	TimeProvider timeProvider;
 
 	public static final long NUMERIC_BAG_CACHE_TIME = 60 * 1000;
-	private final String classifierPrefix = Question.class.getCanonicalName();
+	private final String classifierPrefix = League.class.getCanonicalName();
 	private Map<Long, NumericBag> bagByLeagueId;
 	private Map<Long, Long> bagLastUpdated;
 
@@ -59,7 +59,8 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 		boolean shouldAddKey = entity.getAutoId() == null;
 		Question q = super.persist(entity);
 		if (shouldAddKey) {
-			QuestionEvent qe = new QuestionEvent(QuestionEventType.CREATE, q.getAutoId(), 1L, timeProvider.getCurrentTimeStamp());
+			QuestionEvent qe = new QuestionEvent(QuestionEventType.CREATE, q.getAutoId(), q.getLeagueAutoId(),
+					timeProvider.getCurrentTimeStamp());
 			questionEventDao.persist(qe);
 		}
 		return q;
@@ -77,7 +78,8 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 		List<QuestionEvent> qes = new ArrayList<QuestionEvent>();
 		for (int i = 0; i < qs.length; i++) {
 			if (shouldAddKey[i])
-				qes.add(new QuestionEvent(QuestionEventType.CREATE, qs[i].getAutoId(), 1L, timeProvider.getCurrentTimeStamp()));
+				qes.add(new QuestionEvent(QuestionEventType.CREATE, qs[i].getAutoId(), qs[i].getLeagueAutoId(),
+						timeProvider.getCurrentTimeStamp()));
 		}
 
 		if (qes.size() > 0)

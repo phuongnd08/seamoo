@@ -11,11 +11,11 @@ import java.util.TreeSet;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.seamoo.daos.question.QuestionDao;
 import org.seamoo.daos.speed.NumericBagDao;
 import org.seamoo.daos.speed.QuestionEventDao;
 import org.seamoo.daos.twigImpl.ObjectDatastoreProvider;
 import org.seamoo.daos.twigImpl.TwigGenericDaoImpl;
+import org.seamoo.entities.League;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
@@ -106,7 +106,7 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 			originalQuestionId[i] = q.getAutoId();
 			numericBag.addNumber(q.getAutoId());
 		}
-		when(numericBagDao.findByClassifier(NumericBag.getUniformClassifier(Question.class, leagueId))).thenReturn(numericBag);
+		when(numericBagDao.findByClassifier(NumericBag.getUniformClassifier(League.class, leagueId))).thenReturn(numericBag);
 	}
 
 	@Test
@@ -166,11 +166,13 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 	public void createNewQuestionShouldGenerateCreateQuestionEventOfCurrentTimeStamp() {
 		timeProvider.setCurrentTimeStamp(100);
 		Question q = new Question();
+		q.setLeagueAutoId(5L);
 		twigQuestionDao.persist(q);
 		assertEquals(generatedQuestionEvents.size(), 1);
 		assertEquals(generatedQuestionEvents.get(0).getType(), QuestionEventType.CREATE);
 		assertEquals(generatedQuestionEvents.get(0).getTimeStamp(), 100);
 		assertEquals(generatedQuestionEvents.get(0).getQuestionAutoId().longValue(), 1);
+		assertEquals(generatedQuestionEvents.get(0).getLeagueAutoId().longValue(), 5L);
 	}
 
 	@Test
@@ -185,12 +187,16 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 	@Test
 	public void createMultipleQuestionsShouldGenerateMultipleQuestionEvents() {
 		timeProvider.setCurrentTimeStamp(100);
-		twigQuestionDao.persist(new Question[] { new Question(), new Question() });
+		Question q1 = new Question(), q2 = new Question();
+		q1.setLeagueAutoId(5L);
+		q2.setLeagueAutoId(6L);
+		twigQuestionDao.persist(new Question[] { q1, q2 });
 		assertEquals(generatedQuestionEvents.size(), 2);
 		for (int i = 0; i < 2; i++) {
 			assertEquals(generatedQuestionEvents.get(i).getType(), QuestionEventType.CREATE);
 			assertEquals(generatedQuestionEvents.get(i).getTimeStamp(), 100);
 			assertEquals(generatedQuestionEvents.get(i).getQuestionAutoId().longValue(), i + 1);
+			assertEquals(generatedQuestionEvents.get(i).getLeagueAutoId().longValue(), i == 0 ? 5L : 6L);
 		}
 
 	}
@@ -214,10 +220,10 @@ public class TwigQuestionDaoImplTest extends LocalAppEngineTest {
 		n1.addNumber(1L);
 		NumericBag n2 = new NumericBag();
 		n2.addNumber(2L);
-		when(numericBagDao.findByClassifier(NumericBag.getUniformClassifier(Question.class, 1L))).thenReturn(n1);
+		when(numericBagDao.findByClassifier(NumericBag.getUniformClassifier(League.class, 1L))).thenReturn(n1);
 		assertEquals(twigQuestionDao.getRandomQuestionKeys(1L, 1).toArray(), new Object[] { 1L });
 		timeProvider.setCurrentTimeStamp(100 + 59000);
-		when(numericBagDao.findByClassifier(NumericBag.getUniformClassifier(Question.class, 1L))).thenReturn(n2);
+		when(numericBagDao.findByClassifier(NumericBag.getUniformClassifier(League.class, 1L))).thenReturn(n2);
 		assertEquals(twigQuestionDao.getRandomQuestionKeys(1L, 1).toArray(), new Object[] { 1L });
 		timeProvider.setCurrentTimeStamp(100 + 60000);
 		assertEquals(twigQuestionDao.getRandomQuestionKeys(1L, 1).toArray(), new Object[] { 2L });

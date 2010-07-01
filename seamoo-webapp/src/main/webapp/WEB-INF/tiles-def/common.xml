@@ -5,11 +5,14 @@
 	<!-- Definitions for Tiles documentation   -->
 <tiles-definitions>
 
+	<definition name="basic.dumb" template="/WEB-INF/layouts/basic/dumb.ftl">
+	</definition>
+	
 	<definition name="subjects.list" extends="master-no-small">
 		<put-attribute name="body"
 			value="/WEB-INF/layouts/subjects/subject-list.ftl" />
-		<!--<put-attribute name="body" value="Fuck You" />-->
 	</definition>
+	
 	<definition name="subjects.detail" extends="master-small-left">
 		<put-attribute name="body"
 			value="/WEB-INF/layouts/subjects/subject-detail.ftl" />
@@ -33,9 +36,10 @@
 	<definition name="matches.participate" extends="master-small-left">
 		<put-attribute name="body"
 			value="/WEB-INF/layouts/matches/match-participate.ftl" />
-		<put-attribute name="side" value="/WEB-INF/layouts/matches/match-participate-side.ftl"/>
+		<put-attribute name="side"
+			value="/WEB-INF/layouts/matches/match-participate-side.ftl" />
 	</definition>
-	
+
 	<definition name="matches.participate.forbidden" extends="master-no-small">
 		<put-attribute name="body"
 			value="/WEB-INF/layouts/matches/match-participate-forbidden.ftl" />
@@ -80,7 +84,8 @@
 	<definition name="questions.create" extends="master-small-right">
 		<put-attribute name="body"
 			value="/WEB-INF/layouts/questions/question-create.ftl" />
-		<put-attribute name="side" value="/WEB-INF/layouts/questions/question-create-side.ftl"/>
+		<put-attribute name="side"
+			value="/WEB-INF/layouts/questions/question-create-side.ftl" />
 	</definition>
 	<definition name="questions.edit" extends="master-no-small">
 		<put-attribute name="body"
@@ -101,7 +106,8 @@
 
 
 	<definition name="reports.list" extends="master-no-small">
-		<put-attribute name="body" value="/WEB-INF/layouts/reports/report-list.ftl" />
+		<put-attribute name="body"
+			value="/WEB-INF/layouts/reports/report-list.ftl" />
 	</definition>
 	<definition name="reports.detail" extends="master-no-small">
 		<put-attribute name="body"

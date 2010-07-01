@@ -2,7 +2,7 @@ package org.seamoo.entities.question;
 
 import java.io.Serializable;
 
-public class QuestionChoice implements Serializable{
+public class QuestionChoice implements Serializable {
 	/**
 	 * 
 	 */
@@ -32,5 +32,13 @@ public class QuestionChoice implements Serializable{
 
 	public boolean isCorrect() {
 		return correct;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || !(obj instanceof QuestionChoice))
+			return false;
+		QuestionChoice choice = (QuestionChoice) obj;
+		return this.content.equals(choice.getContent()) && this.correct == choice.isCorrect();
 	}
 }

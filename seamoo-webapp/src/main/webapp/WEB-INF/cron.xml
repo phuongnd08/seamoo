@@ -1,0 +1,7 @@
+<cronentries>
+	<cron>
+		<url>/maintain/refresh-question-indexes</url>
+		<description>Refresh Question Indexes (Numeric Bags)</description>
+		<schedule>every minute</schedule>
+	</cron>
+</cronentries>
