@@ -261,6 +261,13 @@
 				<directory>src/test/resources</directory>
 				<filtering>true</filtering>
 			</testResource>
+			<testResource>
+				<directory>src/test/java</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>*/*.scenario</include>
+				</includes>
+			</testResource>
 		</testResources>
 
 		<plugins>
@@ -497,6 +504,8 @@
 		</gwt.modules.admin>
 		<gwt.modules.user>org.seamoo.webapp.client.UserFirefox
 		</gwt.modules.user>
+		<!--  Skip gwt compiler by default. Only enable gwt compiler if explicitly specified -->
+		<gwt.compiler.skip>true</gwt.compiler.skip>
 	</properties>
 
 	<profiles>
