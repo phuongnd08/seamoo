@@ -227,8 +227,8 @@ EOS
     # it.
     sreg_data = {
       'nickname' => session[:username],
-      'fullname' => 'Mayor McCheese',
-      'email' => 'mayor@example.com'
+      'fullname' => "#{session[:username].capitalize} McCheese",
+      'email' => "#{session[:username]}@example.com"
     }
 
     sregresp = OpenID::SReg::Response.extract_response(sregreq, sreg_data)
