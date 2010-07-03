@@ -321,3 +321,19 @@ td.logo-cell {
 .big-button {
 	font-size: 200%;
 }
+
+.guiding_untyped,.guiding_wrong,.guiding_right {
+	font-size: 150%;
+}
+
+.guiding_untyped {
+	color: #888888;
+}
+
+.guiding_wrong {
+	color: red;
+}
+
+.guiding_right {
+	color: lime;
+}

@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 
 public class MockedWidgetHelper {
 	private Map<String, List<Object>> handlersMap;
@@ -17,12 +19,11 @@ public class MockedWidgetHelper {
 		fieldMap.put("visible", true);
 	}
 
-	private void addHandler(String name, Object handler) {
+	public void addHandler(String name, Object handler) {
 		if (!handlersMap.containsKey(name)) {
 			handlersMap.put(name, new ArrayList<Object>());
 		}
 		handlersMap.get(name).add(handler);
-		// initialize some default field
 	}
 
 	public void addClickHandler(ClickHandler handler) {
@@ -33,6 +34,22 @@ public class MockedWidgetHelper {
 		if (handlersMap.containsKey("click")) {
 			for (Object handler : handlersMap.get("click")) {
 				((ClickHandler) handler).onClick(null);
+			}
+		}
+	}
+
+	public void change() {
+		if (handlersMap.containsKey("change")) {
+			for (Object handler : handlersMap.get("change")) {
+				((ChangeHandler) handler).onChange(null);
+			}
+		}
+	}
+
+	public void keyDown() {
+		if (handlersMap.containsKey("keyDown")) {
+			for (Object handler : handlersMap.get("keyDown")) {
+				((KeyDownHandler) handler).onKeyDown(null);
 			}
 		}
 	}

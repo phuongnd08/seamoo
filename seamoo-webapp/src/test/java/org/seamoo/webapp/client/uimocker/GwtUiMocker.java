@@ -4,6 +4,8 @@ import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.mockito.MockSettings;
 import org.mockito.invocation.InvocationOnMock;
@@ -11,7 +13,9 @@ import org.mockito.stubbing.Answer;
 import org.seamoo.webapp.client.shared.ListenerMixin;
 import org.seamoo.webapp.client.user.ui.QuestionRevisionView;
 
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HasText;
@@ -50,10 +54,17 @@ public class GwtUiMocker {
 		boolean hasValue = HasValue.class.isAssignableFrom(clazz);
 		boolean clickable = HasClickHandlers.class.isAssignableFrom(clazz);
 		boolean isQuestionView = QuestionRevisionView.class.isAssignableFrom(clazz);
+		boolean hasChangeHandlers = HasChangeHandlers.class.isAssignableFrom(clazz);
 		MockSettings mockSettings = withSettings();
+		List<Class<?>> clazzes = new ArrayList<Class<?>>();
 		if (clickable) {
-			mockSettings.extraInterfaces(MockedClickable.class);
+			clazzes.add(MockedClickable.class);
 		}
+		if (hasChangeHandlers) {
+			clazzes.add(MockedChangeable.class);
+		}
+		if (clazzes.size() > 0)
+			mockSettings.extraInterfaces(clazzes.toArray(new Class<?>[clazzes.size()]));
 		T widget = mock(clazz, mockSettings);
 		final MockedWidgetHelper helper = new MockedWidgetHelper();
 		mockVisibleAccessor(helper, (Widget) widget);
@@ -67,6 +78,8 @@ public class GwtUiMocker {
 			mockValueAccessor(helper, (HasValue) widget);
 		if (isQuestionView)
 			mockListenerMixin(helper, (QuestionRevisionView) widget);
+		if (hasChangeHandlers)
+			mockChangeHandlers(helper, (HasChangeHandlers) widget);
 		return widget;
 	}
 
@@ -159,10 +172,8 @@ public class GwtUiMocker {
 
 	private static void mockClickHandler(final MockedWidgetHelper helper, HasClickHandlers widget) {
 		doAnswer(new Answer() {
-
 			@Override
 			public Object answer(InvocationOnMock invocation) throws Throwable {
-				// TODO Auto-generated method stub
 				helper.addClickHandler((ClickHandler) invocation.getArguments()[0]);
 				return null;
 			}
@@ -171,15 +182,33 @@ public class GwtUiMocker {
 		MockedClickable widgetAsClickable = (MockedClickable) widget;
 
 		doAnswer(new Answer() {
-
 			@Override
 			public Object answer(InvocationOnMock invocation) throws Throwable {
-				// TODO Auto-generated method stub
 				helper.click();
 				return null;
 			}
 		}).when(widgetAsClickable).click();
+	}
 
+	private static void mockChangeHandlers(final MockedWidgetHelper helper, HasChangeHandlers widget) {
+		doAnswer(new Answer() {
+			@Override
+			public Object answer(InvocationOnMock invocation) throws Throwable {
+				helper.addHandler("change", invocation.getArguments()[0]);
+				return null;
+			}
+
+		}).when(widget).addChangeHandler((ChangeHandler) any());
+
+		MockedChangeable widgetAsChangeable = (MockedChangeable) widget;
+
+		doAnswer(new Answer() {
+			@Override
+			public Object answer(InvocationOnMock invocation) throws Throwable {
+				helper.change();
+				return null;
+			}
+		}).when(widgetAsChangeable).change();
 	}
 
 	private static void mockListenerMixin(final MockedWidgetHelper helper, QuestionRevisionView widget) {

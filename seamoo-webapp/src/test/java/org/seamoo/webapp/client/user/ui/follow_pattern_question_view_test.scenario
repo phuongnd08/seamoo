@@ -1,0 +1,21 @@
+Given A Follow Pattern Question View
+And A Follow Pattern Question Revision
+And Revision Content is "After 1 is ..."
+And Revision Guiding Pattern is ---x --
+When Revision is bound to View
+Then text of labelQuestion is "After 1 is ..."
+And untyped span of text -,-,-,x,&nbsp;,-,- are added to tableGuidingPattern
+When answer is set to 'abcx'
+Then right span of text -,-,-,x are added to tableGuidingPattern
+And untyped span of text  &nbsp;,-,- are added to tableGuidingPattern
+When answer is set to 'abcd'
+Then right span of text -,-,- are added to tableGuidingPattern
+And wrong span of text x are added to tableGuidingPattern
+And untyped span of text &nbsp;,-,- are added to tableGuidingPattern
+When answer is set to 'abcdefg h'
+Then right span of text -,-,- are added to tableGuidingPattern
+And wrong span of text x,e are added to tableGuidingPattern
+And right span of text -,- are added to tableGuidingPattern
+And wrong span of text _,h are added to tableGuidingPattern
+When User click submit button
+Then submit event is triggered with answer=abcdefg h

@@ -6,8 +6,8 @@ public class FollowPatternQuestionRevision extends QuestionRevision {
 
 	private static final long serialVersionUID = 4983811647766685866L;
 	private String content;
-	private String pattern;
 	@GwtTransient
+	private String pattern;
 	private String guidingPattern;
 
 	@Override
