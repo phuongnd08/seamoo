@@ -17,7 +17,6 @@ import org.jbehave.scenario.annotations.Alias;
 import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
-import org.mockito.ArgumentMatcher;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
@@ -26,9 +25,9 @@ import org.seamoo.entities.matching.MatchCompetitor;
 import org.seamoo.entities.matching.MatchEvent;
 import org.seamoo.entities.matching.MatchEventType;
 import org.seamoo.entities.matching.MatchPhase;
+import org.seamoo.entities.question.FollowPatternQuestionRevision;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
-import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.utils.converter.Converter;
 import org.seamoo.webapp.client.shared.ListenerMixin.Caller;
 import org.seamoo.webapp.client.shared.ui.UiObjectFactory;
@@ -80,15 +79,6 @@ public class MatchViewSteps {
 		matchView = new MatchView();
 		matchView.getListenerMixin().add(listener);
 		tableChoicesButtons = new ArrayList<Button>();
-	}
-
-	MultipleChoicesQuestionRevision questionRev = null;
-
-	@Given("A Question")
-	public void initQuestion() {
-		question = new Question();
-		questionRev = new MultipleChoicesQuestionRevision();
-		question.addAndSetAsCurrentRevision(questionRev);
 	}
 
 	@When("View Players is assigned to $players")
@@ -205,33 +195,32 @@ public class MatchViewSteps {
 		matchView.setTotalQuestion(total);
 	}
 
-	@When("View Question is assigned to $alias")
+	@When("View Question is assigned to $value")
 	public void setQuestionToView(String alias) {
 		Question q = null;
 		if (alias.equals("Null"))
 			q = null;
-		else if (alias.equals("Initialized Question"))
-			q = question;
+		else if (alias.equals("Multiple Choices Question"))
+			q = getMultipleChoicesQuestion();
+		else if (alias.equals("Follow Pattern Question"))
+			q = getFollowPatternQuestion();
 		else
 			throw new RuntimeException("Do not support question=" + alias);
 		matchView.setQuestion(q);
 	}
 
-	private class ButtonMatcher extends ArgumentMatcher<Widget> {
-
-		String text;
-
-		public ButtonMatcher(String text) {
-			this.text = text;
-		}
-
-		@Override
-		public boolean matches(Object argument) {
-			if (!(argument instanceof Button))
-				return false;
-			return ((Button) argument).getText().equals(text);
-		}
+	private Question getMultipleChoicesQuestion() {
+		Question question = new Question();
+		question.addAndSetAsCurrentRevision(new MultipleChoicesQuestionRevision());
+		return question;
 	}
+
+	private Question getFollowPatternQuestion() {
+		Question question = new Question();
+		question.addAndSetAsCurrentRevision(new FollowPatternQuestionRevision());
+		return question;
+	}
+
 
 	private int positionToNumber(String position) {
 		return Converter.toInt(position.charAt(0));
@@ -276,7 +265,17 @@ public class MatchViewSteps {
 
 	@When("multiple choice view propagate answer=$answer")
 	public void propagateAnswerFromMultipleChoiceView(final String answer) {
-		matchView.multipleChoiceQuestionView.getListenerMixin().each(new Caller<Listener>() {
+		matchView.multipleChoicesQuestionView.getListenerMixin().each(new Caller<Listener>() {
+			@Override
+			public void perform(Listener c) {
+				c.submitAnswer(answer);
+			}
+		});
+	}
+	
+	@When("follow pattern view propagate answer=$answer")
+	public void propagateAnswerFromFollowPatternView(final String answer) {
+		matchView.followPatternQuestionView.getListenerMixin().each(new Caller<Listener>() {
 			@Override
 			public void perform(Listener c) {
 				c.submitAnswer(answer);

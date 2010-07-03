@@ -1,18 +1,14 @@
 package org.seamoo.webapp.client.user.ui;
 
 import org.seamoo.entities.question.FollowPatternQuestionRevision;
-import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
-import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.entities.question.QuestionRevision;
 import org.seamoo.webapp.client.shared.ListenerMixin;
-import org.seamoo.webapp.client.shared.ListenerMixin.Caller;
-import org.seamoo.webapp.client.shared.ui.UiObjectFactory;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -25,7 +21,7 @@ public class FollowPatternQuestionView extends Composite implements QuestionRevi
 	@UiField
 	Label labelQuestion;
 	@UiField
-	Label labelGuidingPattern;
+	FlexTable tableGuidingPattern;
 	@UiField
 	TextBox textboxAnswer;
 
@@ -37,24 +33,21 @@ public class FollowPatternQuestionView extends Composite implements QuestionRevi
 	}
 
 	public static final int AVATAR_SIZE = 32;
+	public static final String GUIDING_UNTYPED_STYLE_NAME = "guiding_untyped";
+	public static final String GUIDING_WRONG_STYLE_NAME = "guiding_wrong";
+	public static final String GUIDING_RIGHT_STYLE_NAME = "guiding_right";
 
 	public void setQuestionRevision(QuestionRevision revision) {
 		FollowPatternQuestionRevision fpRevision = (FollowPatternQuestionRevision) revision;
 		labelQuestion.setText(fpRevision.getContent());
-		labelGuidingPattern.setText(fpRevision.getPattern());
+		setGuidingPattern(fpRevision.getGuidingPattern());
 	}
 
-	private Button createChoiceButton(String choice, final int index) {
-		Button b = UiObjectFactory.newButton();
-		b.setText(choice);
-		b.addClickHandler(listenerMixin.getClickHandler(new Caller<QuestionRevisionView.Listener>() {
-
-			@Override
-			public void perform(QuestionRevisionView.Listener c) {
-				c.submitAnswer(String.valueOf(index));
-			}
-		})); 
-		return b;
+	private void setGuidingPattern(String guidingPattern) {
+		tableGuidingPattern.clear();
+		for (int i = 0; i < guidingPattern.length(); i++) {
+			tableGuidingPattern.setHTML(0, i, "<span class='" + GUIDING_UNTYPED_STYLE_NAME + "'>" + i + "</span>");
+		}
 	}
 
 	@Override

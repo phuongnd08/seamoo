@@ -1,6 +1,5 @@
 Given A Match Event Listener
 And A Match View
-And A Question
 When View Phase is switched to NOT_FORMED
 Then panelMatchWaiting is visible
 And panelYouFinished is invisible
@@ -23,10 +22,18 @@ And View Remaining Seconds is assigned to 110
 Then text of labelCountDown is "01:50"
 And text of labelQuestionIndex is "1/20"
 And text of labelCountDownType is "Thời gian còn lại"
-When View Question is assigned to Initialized Question
+When View Question is assigned to Multiple Choices Question
 Then panelQuestion is visible
+And multipleChoicesQuestionView is visible
+And followPatternQuestionView is invisible
+When View Question is assigned to Follow Pattern Question
+Then panelQuestion is visible
+And followPatternQuestionView is visible
+And multipleChoicesQuestionView is invisible
 When multiple choice view propagate answer=1
 Then submit event is triggered with answer=1
+When follow pattern view propagate answer=hello
+Then submit event is triggered with answer=hello
 When buttonIgnore is clicked
 Then ignore event is triggered
 When buttonRematch is clicked

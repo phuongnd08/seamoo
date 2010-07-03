@@ -11,6 +11,7 @@ import org.seamoo.entities.matching.MatchPhase;
 import org.seamoo.entities.question.MultipleChoicesQuestionRevision;
 import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
+import org.seamoo.entities.question.QuestionRevision;
 import org.seamoo.webapp.client.shared.ListenerMixin;
 import org.seamoo.webapp.client.shared.ListenerMixin.Caller;
 import org.seamoo.webapp.client.shared.ui.UiObjectFactory;
@@ -60,7 +61,7 @@ public class MatchView extends Composite implements Display {
 	Label labelQuestionIndex;
 
 	@UiField
-	MultipleChoicesQuestionView multipleChoiceQuestionView;
+	MultipleChoicesQuestionView multipleChoicesQuestionView;
 	@UiField
 	FollowPatternQuestionView followPatternQuestionView;
 
@@ -98,7 +99,7 @@ public class MatchView extends Composite implements Display {
 		initWidget(binder.createAndBindUi(this));
 		listenerMixin = new ListenerMixin<MatchBoard.Display.EventListener>();
 		final MatchView me = this;
-		multipleChoiceQuestionView.getListenerMixin().add(getQuestionRevisionViewListener());
+		multipleChoicesQuestionView.getListenerMixin().add(getQuestionRevisionViewListener());
 		followPatternQuestionView.getListenerMixin().add(getQuestionRevisionViewListener());
 		competitorViews = new ArrayList<CompetitorView>();
 		buttonIgnore.addClickHandler(listenerMixin.getClickHandler(new Caller<EventListener>() {
@@ -177,8 +178,16 @@ public class MatchView extends Composite implements Display {
 		// TODO Auto-generated method stub
 		panelQuestion.setVisible(question != null);
 		if (question != null) {
-			MultipleChoicesQuestionRevision revision = (MultipleChoicesQuestionRevision) question.getCurrentRevision();
-			multipleChoiceQuestionView.setQuestionRevision(revision);
+			QuestionRevision revision = question.getCurrentRevision();
+			if (revision instanceof MultipleChoicesQuestionRevision) {
+				multipleChoicesQuestionView.setQuestionRevision(revision);
+				followPatternQuestionView.setVisible(false);
+				multipleChoicesQuestionView.setVisible(true);
+			} else {
+				followPatternQuestionView.setQuestionRevision(revision);
+				followPatternQuestionView.setVisible(true);
+				multipleChoicesQuestionView.setVisible(false);
+			}
 		}
 	}
 

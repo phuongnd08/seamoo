@@ -11,12 +11,12 @@
 			<tbody>
 				<tr>
 					<td>
-						<gwt:Label ui:field="labelGuidingPattern"></gwt:Label>
+						<gwt:FlexTable ui:field="labelGuidingTable"></gwt:FlexTable>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<gwt:TextBox ui:field="textboxAnswer"></gwt:TextBox>
+						<gwt:TextBox ui:field="textboxAnswer" styleName="follow_pattern_input"></gwt:TextBox>
 					</td>
 				</tr>
 			</tbody>

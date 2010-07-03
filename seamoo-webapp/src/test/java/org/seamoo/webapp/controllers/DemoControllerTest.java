@@ -224,5 +224,6 @@ public class DemoControllerTest {
 		assertEquals(r.getContent(), "What is a greeting");
 		assertNotNull(r);
 		assertEquals("He[l]lo", r.getPattern());
+		assertEquals("--l--", r.getGuidingPattern());
 	}
 }

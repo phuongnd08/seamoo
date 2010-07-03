@@ -1,10 +1,14 @@
 package org.seamoo.entities.question;
 
+import com.google.gwt.user.client.rpc.GwtTransient;
+
 public class FollowPatternQuestionRevision extends QuestionRevision {
 
 	private static final long serialVersionUID = 4983811647766685866L;
 	private String content;
 	private String pattern;
+	@GwtTransient
+	private String guidingPattern;
 
 	@Override
 	public String getCorrectAnswer() {
@@ -37,6 +41,14 @@ public class FollowPatternQuestionRevision extends QuestionRevision {
 
 	public String getContent() {
 		return content;
+	}
+
+	public void setGuidingPattern(String guidingPattern) {
+		this.guidingPattern = guidingPattern;
+	}
+
+	public String getGuidingPattern() {
+		return guidingPattern;
 	}
 
 }

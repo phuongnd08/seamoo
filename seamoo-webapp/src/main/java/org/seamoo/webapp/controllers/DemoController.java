@@ -32,6 +32,7 @@ import org.seamoo.entities.question.Question;
 import org.seamoo.entities.question.QuestionChoice;
 import org.seamoo.installation.Bundle;
 import org.seamoo.utils.HashBuilder;
+import org.seamoo.utils.PatternExtractor;
 import org.seamoo.utils.ResourceIterator;
 import org.seamoo.utils.ResourceIteratorProvider;
 import org.seamoo.utils.TimeProvider;
@@ -297,6 +298,7 @@ public class DemoController {
 			if (pattern.startsWith("*"))
 				pattern = pattern.substring(1);
 			r.setPattern(pattern);
+			r.setGuidingPattern(PatternExtractor.getGuidingPattern(pattern));
 			q.addAndSetAsCurrentRevision(r);
 		} else {
 			MultipleChoicesQuestionRevision r = new MultipleChoicesQuestionRevision();
