@@ -265,7 +265,7 @@
 				<directory>src/test/java</directory>
 				<filtering>false</filtering>
 				<includes>
-					<include>*/*.scenario</include>
+					<include>**/*.scenario</include>
 				</includes>
 			</testResource>
 		</testResources>
