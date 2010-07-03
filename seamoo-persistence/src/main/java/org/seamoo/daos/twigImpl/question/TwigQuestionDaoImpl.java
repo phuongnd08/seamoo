@@ -94,16 +94,18 @@ public class TwigQuestionDaoImpl extends TwigGenericDaoImpl<Question, Long> impl
 		if (number > totalSize) {
 			throw new IllegalArgumentException(String.format("%d exceeds the number of available questions", number));
 		}
-		Set<Long> pickedAutoIds = new HashSet<Long>();
+		Set<Long> pickedAutoIdSet = new HashSet<Long>();
+		List<Long> pickedAutoIdList = new ArrayList<Long>();
 		int pickedSize = 0;
-		while (pickedAutoIds.size() < number) {
+		while (pickedAutoIdSet.size() < number) {
 			Long value = autoIdBag.get(rndGenerator.nextInt(totalSize));
-			if (!pickedAutoIds.contains(value)) {
-				pickedAutoIds.add(value);
+			if (!pickedAutoIdSet.contains(value)) {
+				pickedAutoIdSet.add(value);
+				pickedAutoIdList.add(value);
 				pickedSize++;
 			}
 		}
-		return new ArrayList<Long>(pickedAutoIds);
+		return pickedAutoIdList;
 	}
 
 	@Override
