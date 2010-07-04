@@ -514,7 +514,7 @@
 		<log4j.version>1.2.14</log4j.version>
 		<tiles.version>2.1.4</tiles.version>
 		<freemarker.version>2.3.16</freemarker.version>
-		<twig-persist.version>1.0.2</twig-persist.version>
+		<twig-persist.version>1.0.3</twig-persist.version>
 		<objectify.version>2.1</objectify.version>
 		<google.collections.version>1.0</google.collections.version>
 		<commons.collections.version>3.2.1</commons.collections.version>

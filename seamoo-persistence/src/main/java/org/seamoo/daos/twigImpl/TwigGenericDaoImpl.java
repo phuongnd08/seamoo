@@ -171,7 +171,6 @@ public class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TK
 	public TEntity persist(TEntity entity) {
 		ObjectDatastore ods = getOds();
 		ods.storeOrUpdate(entity);
-		ods.refresh(entity);
 		if (cacheEnabled)
 			putToCache(entity);
 		return entity;
@@ -182,7 +181,6 @@ public class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TK
 			ObjectDatastore ods = getOds();
 			ods.storeAll(Lists.newArrayList(entities));
 			for (TEntity e : entities) {
-				ods.refresh(e);
 				if (cacheEnabled)
 					putToCache(e);
 			}
