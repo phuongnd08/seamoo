@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.openid4java.discovery.Identifier;
 import org.seamoo.utils.UrlBuilder;
 
-import com.dyuproject.openid.RelyingParty;
-
 public class OpenIdAuthenticationFilter implements Filter {
 
 	protected String loginUri;

@@ -189,25 +189,9 @@
 			<scope>test</scope>
 		</dependency>
 
-
-		<dependency>
-			<groupId>com.dyuproject</groupId>
-			<artifactId>dyuproject-util</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.dyuproject</groupId>
-			<artifactId>dyuproject-openid</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.openid4java</groupId>
 			<artifactId>openid4java-consumer</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jetty-util</artifactId>
 		</dependency>
 
 		<dependency>
@@ -504,7 +488,10 @@
 		</gwt.modules.admin>
 		<gwt.modules.user>org.seamoo.webapp.client.UserFirefox
 		</gwt.modules.user>
-		<!--  Skip gwt compiler by default. Only enable gwt compiler if explicitly specified -->
+		<!--
+			Skip gwt compiler by default. Only enable gwt compiler if explicitly
+			specified
+		-->
 		<gwt.compiler.skip>true</gwt.compiler.skip>
 	</properties>
 
@@ -543,9 +530,9 @@
 			<properties>
 				<!--
 					During release, set application version in appengine-web.xml to
-					alpha-3
+					alpha-5
 				-->
-				<gae.application.version>alpha-4</gae.application.version>
+				<gae.application.version>alpha-5</gae.application.version>
 
 				<!--
 					Produce compressed JS during GWT compilation for production
@@ -553,11 +540,12 @@
 				-->
 				<gwt.style>OBFUSCATED</gwt.style>
 				<gwt.logLevel>ERROR</gwt.logLevel>
-				<leagues.english.eggs.id>78001</leagues.english.eggs.id>
+				<leagues.english.eggs.id>388001</leagues.english.eggs.id>
 				<!-- On release, produce js for many browsers -->
 				<gwt.modules.admin>org.seamoo.webapp.client.Admin
 				</gwt.modules.admin>
 				<gwt.modules.user>org.seamoo.webapp.client.User</gwt.modules.user>
+				<gwt.compiler.skip>false</gwt.compiler.skip>
 			</properties>
 		</profile>
 		<profile>

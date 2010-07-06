@@ -1,0 +1,7 @@
+<datastore-indexes autoGenerate="true">
+	<datastore-index kind="org_seamoo_speed_QuestionEvent"
+		ancestor="false" source="manual">
+		<property name="leagueAutoId" direction="asc" />
+		<property name="timeStamp" direction="asc" />
+	</datastore-index>
+</datastore-indexes>
