@@ -31,4 +31,19 @@ public class MatchPageIntegrationTest extends AutoLogOutSeleneseTest {
 		verifyTrue(selenium.isTextPresent("Phuong Nguyen : yes"));
 		verifyTrue(selenium.isTextPresent("Mr Cold : yes"));
 	}
+	
+	@Test
+	public void anonymousUserCanNotViewMatchDetails() throws InterruptedException {
+		loadFirstMatchPage();
+		verifyEquals(selenium.getTitle(), "Đăng nhập với Open ID của bạn - SeaMoo");
+	}
+
+	@Test
+	public void unparticipatedUserCanNotViewAnswerDetails() throws InterruptedException {
+		loadFirstMatchPage();
+		loginAs("stranger");
+		verifyEquals(selenium.getTitle(), "Xem trận đấu - SeaMoo");
+		verifyTrue(selenium.isTextPresent("Chỉ có những người tham gia trận đấu mới được xem thông tin chi tiết"));
+	}
+
 }

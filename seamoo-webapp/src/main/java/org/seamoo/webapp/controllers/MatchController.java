@@ -65,8 +65,10 @@ public class MatchController {
 	}
 
 	@RequestMapping("/{matchId}/{matchDescription}")
-	public ModelAndView view(@PathVariable("matchId") long matchId, @PathVariable("matchDescription") String matchDescription,
+	public ModelAndView view(HttpServletRequest request, @PathVariable("matchId") long matchId,
+			@PathVariable("matchDescription") String matchDescription,
 			@RequestParam(required = false, defaultValue = "no", value = "rejoin") String rejoin) {
+		Member member = MemberInjectionFilter.getInjectedMember(request);
 		ModelAndView mav = new ModelAndView("matches.detail");
 		mav.addObject("title", "Xem trận đấu");
 		Match match = matchDao.findByKey(matchId);
@@ -76,6 +78,7 @@ public class MatchController {
 		mav.addObject("league", league);
 		mav.addObject("subject", subject);
 		mav.addObject("rejoin", rejoin.equals("yes"));
+		mav.addObject("userPlayedMatch", match.getCompetitorForMember(member.getAutoId()) != null);
 		// produce string-key maps because freemarker doesn't understand long-key maps
 		mav.addObject("membersMap", MapBuilder.toFreeMarkerMap(memberDao.findAllByKeys(match.getMemberAutoIds())));
 		mav.addObject("questionsMap", MapBuilder.toFreeMarkerMap(questionDao.findAllByKeys(match.getQuestionIds())));

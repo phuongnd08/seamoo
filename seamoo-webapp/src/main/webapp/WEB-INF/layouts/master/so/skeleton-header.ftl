@@ -2,7 +2,7 @@
 [#import "/spring.ftl" as spring/]
 <div id="header">
 	<div id="hlogo"><a href="[@spring.url "/"/]"><img
-		src="${themeRoot}/images/logo.png" alt="Stack Overflow" height="78"
+		src="${themeRoot}/images/logo.png" alt="SeaMoo" height="78"
 		width="255"></a>
 	</div>
 	<div id="topbar">
