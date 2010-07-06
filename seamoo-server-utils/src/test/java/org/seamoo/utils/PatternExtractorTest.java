@@ -11,5 +11,6 @@ public class PatternExtractorTest {
 		assertEquals(PatternExtractor.getGuidingPattern("ab[x]cd"), "--x--");
 		assertEquals(PatternExtractor.getGuidingPattern("a[u]b[xy]cd"), "-u-xy--");
 		assertEquals(PatternExtractor.getGuidingPattern("[a]xbcd"), "a----");
+		assertEquals(PatternExtractor.getGuidingPattern("[a]x bcd"), "a- ---");
 	}
 }
