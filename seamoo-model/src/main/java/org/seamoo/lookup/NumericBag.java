@@ -28,6 +28,7 @@ public class NumericBag {
 	/**
 	 * Store the index associated with each heads
 	 */
+	@Type(Blob.class)
 	private List<Long> indices = new ArrayList<Long>();
 
 	private int size = 0;
