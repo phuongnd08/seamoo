@@ -1,7 +1,6 @@
 package org.seamoo.webapp.integration.user;
 
 import org.seamoo.webapp.integration.shared.AutoLogOutSeleneseTest;
-import org.seamoo.webapp.integration.shared.SeleneseTestCfgAwareTestNgHelper;
 import org.testng.annotations.Test;
 
 public class HomePageIntegrationTest extends AutoLogOutSeleneseTest {
