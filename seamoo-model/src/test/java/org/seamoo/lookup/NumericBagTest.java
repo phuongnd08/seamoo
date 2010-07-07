@@ -3,7 +3,6 @@ package org.seamoo.lookup;
 import static org.testng.Assert.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.test.util.ReflectionTestUtils;
 import org.testng.annotations.BeforeMethod;
@@ -111,7 +110,6 @@ public class NumericBagTest {
 		numericBag.removeNumber(3L);
 	}
 
-	
 	@Test
 	public void removeElementThatSmallerThanAnyElementInBagShouldBeOk() {
 		numericBag.addNumber(11L);
@@ -138,5 +136,29 @@ public class NumericBagTest {
 		assertEquals(numericBag.toArray(), new Object[] {});
 	}
 
+	@Test
+	public void addNumberThatIsSmallerThanTheRestShouldBeOkay() {
+		numericBag.addNumber(3L);
+		numericBag.addNumber(4L);
+		numericBag.addNumber(1L);
+		assertAllBagCollections(numericBag, new Object[] { 1L, 3L }, new Object[] { 1L, 4L }, new Object[] { 0L, 1L });
+	}
 	
+	@Test
+	public void addSpecialNumber() {
+		numericBag.addNumber(3L);
+		numericBag.addNumber(4L);
+		numericBag.addNumber(7L);
+		numericBag.addNumber(8L);
+		numericBag.addNumber(5L);
+		assertAllBagCollections(numericBag, new Object[] { 3L, 7L }, new Object[] { 5L, 8L }, new Object[] { 0L, 3L });
+	}
+
+	@Test
+	public void removeNumberThatIsSmallerThanTheRestShouldBeOkay() {
+		numericBag.addNumber(3L);
+		numericBag.addNumber(4L);
+		numericBag.removeNumber(1L);
+		assertAllBagCollections(numericBag, new Object[] { 3L }, new Object[] { 4L }, new Object[] { 0L });
+	}
 }

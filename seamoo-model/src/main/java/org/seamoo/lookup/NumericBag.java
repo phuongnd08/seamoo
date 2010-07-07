@@ -92,6 +92,13 @@ public class NumericBag {
 					tails.set(tails.size() - 1, number);
 				else
 					insertSegment(segmentIndex, number);
+			} else if (segmentIndex == -1) {
+				if (number == heads.get(0) - 1) {
+					heads.set(0, number);
+					alter(1, heads.size() - 1, +1L, indices);
+				} else {
+					insertSegment(0, number);
+				}
 			} else {
 				if (heads.get(segmentIndex) == number)
 					return;
@@ -109,7 +116,7 @@ public class NumericBag {
 						}
 					}
 
-					alter(segmentIndex + 1, heads.size() - 1, +1L, heads);
+					alter(segmentIndex + 1, indices.size() - 1, +1L, indices);
 				} else {
 					insertSegment(segmentIndex + 1, number);
 				}
