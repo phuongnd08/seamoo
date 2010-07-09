@@ -2,7 +2,9 @@ package org.seamoo.daos.twigImpl;
 
 import static org.testng.Assert.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.seamoo.persistence.test.LocalAppEngineTest;
 import org.seamoo.persistence.test.jpa.model.ExampleModel;
@@ -134,5 +136,23 @@ public class TwigGenericDaoImplTest extends LocalAppEngineTest {
 		ExampleModel reloadedModel = newDaoImpl.findByKey(model.getAutoId());
 		assertEquals(reloadedModel.getTransientField(), "xxx");
 	}
-	
+
+	@Test
+	public void findAllByKeysReturnCorrespondingItems() {
+		ExampleModel[] testModels = new ExampleModel[] { new ExampleModel(), new ExampleModel() };
+		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
+		daoImpl.persist(testModels);
+		Map<Long, ExampleModel> reloadedModels = daoImpl.findAllByKeys(Arrays.asList(testModels[1].getAutoId(),
+				testModels[0].getAutoId()));
+		assertEquals(2, reloadedModels.get(2L).getAutoId());
+		assertEquals(1, reloadedModels.get(1L).getAutoId());
+	}
+
+	@Test
+	public void findAllByNullKeysReturnEmptyMap() {
+		TestModelDAOImpl daoImpl = new TestModelDAOImpl();
+		assertNotNull(daoImpl.findAllByKeys(null));
+		assertEquals(daoImpl.findAllByKeys(null).size(), 0);
+	}
+
 }

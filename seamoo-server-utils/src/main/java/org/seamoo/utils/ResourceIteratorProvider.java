@@ -12,7 +12,7 @@ public class ResourceIteratorProvider {
 	public ResourceIterator<String> getIterator(String resourceName) throws IOException {
 		final ResourceLoader loader = new DefaultResourceLoader();
 		final InputStream stream = loader.getResource(resourceName).getInputStream();
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "utf-8"));
 
 		ResourceIterator<String> r = new AbstractResourceIterator<String>() {
 

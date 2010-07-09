@@ -214,6 +214,8 @@ public class TwigGenericDaoImpl<TEntity, TKey> implements GenericDao<TEntity, TK
 
 	@Override
 	public Map<TKey, TEntity> findAllByKeys(Collection<TKey> keys) {
+		if (keys == null)
+			return new HashMap<TKey, TEntity>();
 		return getOds().loadAll(entityClass, keys);
 	}
 }
