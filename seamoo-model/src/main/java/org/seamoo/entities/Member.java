@@ -14,6 +14,9 @@ public class Member implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 9128570735254847132L;
+	private static final long MILLS_PER_DAY = 1000 * 60 * 60 * 24;
+	private static final long MILLS_PER_YEAR = MILLS_PER_DAY * 365;
+
 	private String openId;
 	@Id
 	@Key
@@ -28,6 +31,12 @@ public class Member implements Serializable {
 	private String emailHash;
 
 	private Date dateOfBirth;
+
+	public String getAge() {
+		if (dateOfBirth == null)
+			return "";
+		return String.valueOf((new Date().getTime() - dateOfBirth.getTime()) / MILLS_PER_YEAR);
+	}
 
 	@Store(true)
 	transient private Date joiningDate;
@@ -69,7 +78,7 @@ public class Member implements Serializable {
 		this.openId = openId;
 	}
 
-	public Member(String openId, String displayName, String alias,String emailHash, boolean administrator) {
+	public Member(String openId, String displayName, String alias, String emailHash, boolean administrator) {
 		this.openId = openId;
 		this.displayName = displayName;
 		this.alias = alias;

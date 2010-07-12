@@ -22,14 +22,14 @@
 					</p>
 					<p>
 						<table class="fw">
-							<tr><td>Tuổi</td><td>25</td></tr>
+							<tr><td>Tuổi</td><td>${user.age}</td></tr>
 							[#--<tr><td>Thấy lần cuối</td><td>10 phút trước</td></tr>--]
 							<tr>
 								<td>Website</td>
 								<td>[#if (user.website?exists && user.website!="")]<a href="${user.website}">${user.website}</a>[/#if]</td>
 							</tr>
-							<tr><td>Danh tiếng</td><td>12k</td></tr>
-							<tr><td>Cấp</td><td>10</td></tr>
+							<tr><td>Danh tiếng</td><td></td></tr>
+							<tr><td>Cấp</td><td></td></tr>
 						</table>
 					</p>
 				</td>
