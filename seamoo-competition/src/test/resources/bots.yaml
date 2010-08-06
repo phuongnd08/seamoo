@@ -1,0 +1,10 @@
+apollo:
+  displayName: z Apollo
+  openId: http://seamoo.com/bot/apollo
+  correctness: .75
+  speed: 20
+demeter:
+  displayName: z Demeter
+  openId: http://seamoo.com/bot/demeter
+  correctness: .65
+  speed: 30

@@ -30,7 +30,11 @@ public class Member implements Serializable {
 
 	private String emailHash;
 
+	@GwtTransient
 	private Date dateOfBirth;
+	
+	@GwtTransient
+	private boolean bot;
 
 	public String getAge() {
 		if (dateOfBirth == null)
@@ -250,5 +254,13 @@ public class Member implements Serializable {
 
 	public double getSpammerScore() {
 		return spammerScore;
+	}
+
+	public void setBot(boolean bot) {
+		this.bot = bot;
+	}
+
+	public boolean isBot() {
+		return bot;
 	}
 }

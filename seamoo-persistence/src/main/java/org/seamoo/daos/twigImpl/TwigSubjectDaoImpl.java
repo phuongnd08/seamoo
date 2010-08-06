@@ -4,14 +4,11 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.seamoo.daos.SubjectDao;
-import org.seamoo.daos.twigImpl.TwigGenericDaoImpl.FieldGetter;
-import org.seamoo.entities.League;
 import org.seamoo.entities.Subject;
 
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.common.collect.Lists;
-import com.googlecode.objectify.Query;
 import com.vercer.engine.persist.FindCommand.RootFindCommand;
 
 public class TwigSubjectDaoImpl extends TwigGenericDaoImpl<Subject, Long> implements SubjectDao {

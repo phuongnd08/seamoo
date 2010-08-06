@@ -21,6 +21,7 @@ public class RemoteMatch {
 	public static final String COMPETITORS_COUNT_SUBKEY = COMPETITORS_SUBKEY + "@count";
 	public static final String DB_AUTOID_SUBKEY = "dbAutoId";
 	public static final String QUESTION_IDS_SUBKEY = "questionIds";
+	public static final String FIRST_REQUESTED_MOMENT_SUBKEY = "firstRequestedMoment";
 
 	private Long key;
 
@@ -36,6 +37,14 @@ public class RemoteMatch {
 
 	public void setReadyMoment(long moment) {
 		mixin.put(READY_MOMENT_SUBKEY, new Long(moment));
+	}
+
+	public long getFirstRequestedMoment() {
+		return mixin.get(Long.class, FIRST_REQUESTED_MOMENT_SUBKEY, new Long(0));
+	}
+
+	public void setFirstRequestedMoment(long moment) {
+		mixin.put(FIRST_REQUESTED_MOMENT_SUBKEY, new Long(moment));
 	}
 
 	public int acquireCompetitorSlot() {

@@ -44,6 +44,7 @@ public class MatchOrganizer {
 	RemoteObjectFactory cacheWrapperFactory;
 	@Autowired
 	TimeProvider timeProvider = TimeProvider.DEFAULT;
+	BotManager botManager;
 
 	private List<EventListener> listeners;
 	private RemoteCounter globalCompetitorSlotCounter;
@@ -112,10 +113,6 @@ public class MatchOrganizer {
 	private boolean isStarted(RemoteMatch remoteMatch) {
 		long rm = remoteMatch.getReadyMoment();
 		return rm != 0 && (rm + settings.getMatchCountDownTime() <= timeProvider.getCurrentTimeStamp());
-	}
-
-	private boolean isFinishedMatch(RemoteMatch remoteMatch) {
-		return remoteMatch.getFinishedMoment() != 0;
 	}
 
 	/**
@@ -191,16 +188,6 @@ public class MatchOrganizer {
 		matchDao.persist(match);
 		remoteMatch.setDbKey(match.getAutoId());
 		return match;
-	}
-
-	/**
-	 * Try to associate necessary entity of match so that persistence can maintain a consistent link between entities in datastore
-	 * 
-	 * @param match
-	 */
-	private void prepareMatchForPersistence(Match match) {
-		// Would not need to do anything since Twig-persist is smart enought to
-		// re-link all objects before persisting them
 	}
 
 	private void rank(List<MatchCompetitor> competitors) {

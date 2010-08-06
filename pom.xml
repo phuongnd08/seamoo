@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                       http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                        http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.seamoo</groupId>
 	<artifactId>seamoo-parent</artifactId>
@@ -35,7 +35,7 @@
 			<name>MVN Search</name>
 			<url>
 				http://mvnsearch.org/maven2/
-	        </url>
+            </url>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
@@ -97,13 +97,26 @@
 		</repository>
 
 		<repository>
-			<id>objectify-appengine</id>
-			<url>http://objectify-appengine.googlecode.com/svn/maven</url>
+			<id>scala-tools releases</id>
+			<name>Scala-Tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>scala-tools.org</id>
+			<name>Scala-Tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -165,7 +178,6 @@
 						</dependency>
 					</dependencies>
 				</plugin>
-
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -184,9 +196,9 @@
 				<version>${gae.version}</version>
 			</dependency>
 
-			<!-- 
-          GWT dependencies
-        -->
+			<!--
+              GWT dependencies
+            -->
 			<dependency>
 				<groupId>com.google.gwt</groupId>
 				<artifactId>gwt-servlet</artifactId>
@@ -402,7 +414,7 @@
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-all</artifactId>
-				<version>${mockito.version}</version>
+				<version>1.8.5</version>
 				<scope>test</scope>
 			</dependency>
 
@@ -462,12 +474,6 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.googlecode.objectify</groupId>
-				<artifactId>objectify</artifactId>
-				<version>${objectify.version}</version>
-			</dependency>
-
-			<dependency>
 				<groupId>commons-collections</groupId>
 				<artifactId>commons-collections</artifactId>
 				<version>${commons.collections.version}</version>
@@ -482,6 +488,16 @@
 				<groupId>com.google.collections</groupId>
 				<artifactId>google-collections</artifactId>
 				<version>${google.collections.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.yaml</groupId>
+				<artifactId>snakeyaml</artifactId>
+				<version>1.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.scala-tools.testing</groupId>
+				<artifactId>specs_2.8.0</artifactId>
+				<version>1.6.5</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -500,7 +516,6 @@
 		<testng.version>5.11</testng.version>
 		<jbehave.version>2.5</jbehave.version>
 		<jmockit.version>0.997</jmockit.version>
-		<mockito.version>1.8.4</mockito.version>
 		<powermock.version>1.3.7</powermock.version>
 		<reflections.version>0.9.5-RC1</reflections.version>
 		<htmlunit.version>2.7</htmlunit.version>
@@ -515,7 +530,6 @@
 		<tiles.version>2.1.4</tiles.version>
 		<freemarker.version>2.3.16</freemarker.version>
 		<twig-persist.version>1.0.3</twig-persist.version>
-		<objectify.version>2.1</objectify.version>
 		<google.collections.version>1.0</google.collections.version>
 		<commons.collections.version>3.2.1</commons.collections.version>
 		<!--
@@ -529,8 +543,7 @@
 		<gwt.incubator.version>2.0.1</gwt.incubator.version>
 		<gwt.log.version>3.0.1</gwt.log.version>
 		<urlrewrite.filter.version>3.1.0</urlrewrite.filter.version>
-		<jug.version>2.0.0</jug.version>
 		<openid4java.version>0.9.6-SNAPSHOT</openid4java.version>
+		<scala.version>2.8.0.RC7</scala.version>
 	</properties>
 </project>
-

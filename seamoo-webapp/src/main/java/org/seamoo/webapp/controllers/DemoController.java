@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.seamoo.daos.LeagueDao;
 import org.seamoo.daos.MemberDao;
 import org.seamoo.daos.SiteSettingDao;
@@ -93,6 +91,13 @@ public class DemoController {
 		}
 		ModelAndView mav = new ModelAndView("basic.dumb");
 		mav.addObject("msg", msg);
+		return mav;
+	}
+	
+	@RequestMapping("/showoff")
+	public ModelAndView showOff() throws IOException {
+		ModelAndView mav = new ModelAndView("basic.dumb");
+		mav.addObject("msg", org.seamoo.scala.ScalaPower.showMyPower(100));
 		return mav;
 	}
 

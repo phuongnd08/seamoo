@@ -12,8 +12,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.googlecode.objectify.ObjectifyService;
-
 public class TwigGenericDaoImplTest extends LocalAppEngineTest {
 
 	private class TestModelDAOImpl extends TwigGenericDaoImpl<ExampleModel, Long> {

@@ -23,6 +23,6 @@ public class PowerMockedGaeBddScenario extends PowerMockedBddScenario {
 
 	@AfterMethod
 	public void testDownGaeEvn() {
-		helper.tearDown();
+		// helper.tearDown();
 	}
 }

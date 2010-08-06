@@ -200,6 +200,11 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>scala-example</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>seamoo-persistence</artifactId>
 			<version>${project.version}</version>

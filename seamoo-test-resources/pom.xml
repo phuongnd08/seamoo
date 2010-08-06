@@ -64,11 +64,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.googlecode.objectify</groupId>
-			<artifactId>objectify</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>com.vercer.engine.persist</groupId>
 			<artifactId>twig-persist</artifactId>
 		</dependency>
@@ -78,7 +73,5 @@
 			<artifactId>seamoo-server-utils</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 	</dependencies>
-
 </project>

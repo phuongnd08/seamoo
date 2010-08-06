@@ -1,0 +1,25 @@
+-
+  name: z Apollo
+  openId: http://seamoo.com/bot/acrade
+  correctness: .75
+  speed: 20
+  leagueAutoId: ${leagues.english.eggs.id}
+-
+  name: z Demeter
+  openId: http://seamoo.com/bot/ken
+  correctness: .65
+  speed: 30
+  leagueAutoId: ${leagues.english.eggs.id}
+
+-
+  name: z Athena
+  openId: http://seamoo.com/bot/acrade
+  correctness: .75
+  speed: 20
+  leagueAutoId: ${leagues.english.eggs.id}
+-
+  name: alpha Ken
+  openId: http://seamoo.com/bot/ken
+  correctness: .65
+  speed: 30
+  leagueAutoId: ${leagues.english.eggs.id}
